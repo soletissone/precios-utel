@@ -169,14 +169,19 @@ td{padding:9px 14px;color:var(--tx);vertical-align:middle}
             <option value="norte">Norte (+10%)</option>
           </select>
         </div>
-        <div class="fg"><label>Titulaciuión</label>
-          <select id="ltit" onchange="rL()">
-            <option value="no">Sin titulaciuión</option>
-            <option value="si">Con titulaciuión</option>
-          </select>
-        </div>
+
         <div class="fg"><label>Nivel detectado</label>
           <div id="lnivel-badge" style="padding:8px 0"></div>
+        </div>
+      </div>
+      <div class="rules">
+        <div class="rules-title">&#9432; Reglas de combinación</div>
+        <div class="rules-list">
+          <div class="rule-item"><span class="rule-dot">•</span><span>Voxy siempre incluido — no se puede agregar otro inglés</span></div>
+          <div class="rule-item"><span class="rule-dot">•</span><span>Solo <strong>1 idioma adicional</strong> por plan (Cambridge o Duolingo)</span></div>
+          <div class="rule-item"><span class="rule-dot">•</span><span>Máximo <strong>2 certificaciones</strong> por plan</span></div>
+          <div class="rule-item"><span class="rule-dot">•</span><span>Si se agrega <strong>Coursera</strong>, bloquea todas las demás certificaciones y plataformas</span></div>
+          <div class="rule-item"><span class="rule-dot">•</span><span>Programas de <strong>Ingeniería</strong> incluyen U-Camp automáticamente</span></div>
         </div>
       </div>
       <div class="ib" id="li"></div>
@@ -207,14 +212,18 @@ td{padding:9px 14px;color:var(--tx);vertical-align:middle}
             <option value="rmkt">RMKT</option>
           </select>
         </div>
-        <div class="fg"><label>Titulaciuión</label>
-          <select id="mtit" onchange="rM()">
-            <option value="no">Sin titulaciuión</option>
-            <option value="si">Con titulaciuión (+$305)</option>
-          </select>
-        </div>
+
         <div class="fg"><label>Nivel detectado</label>
           <div id="mnivel-badge" style="padding:8px 0"></div>
+        </div>
+      </div>
+      <div class="rules">
+        <div class="rules-title">&#9432; Reglas de combinación</div>
+        <div class="rules-list">
+          <div class="rule-item"><span class="rule-dot">•</span><span>Voxy siempre incluido — no se puede agregar otro inglés</span></div>
+          <div class="rule-item"><span class="rule-dot">•</span><span>Solo <strong>1 idioma adicional</strong> por plan (Cambridge o Duolingo)</span></div>
+          <div class="rule-item"><span class="rule-dot">•</span><span>Máximo <strong>1 certificación</strong> por plan</span></div>
+          <div class="rule-item"><span class="rule-dot">•</span><span>Maestría <strong>Online</strong> incluye Coursera — bloquea demás certificaciones</span></div>
         </div>
       </div>
       <div class="ib" id="mi"></div>
@@ -239,14 +248,16 @@ td{padding:9px 14px;color:var(--tx);vertical-align:middle}
             <option value="rmkt">RMKT</option>
           </select>
         </div>
-        <div class="fg"><label>Diploma Master</label>
-          <select id="stit" onchange="rS()">
-            <option value="no">Sin Diploma</option>
-            <option value="si">Con Diploma (+$220)</option>
-          </select>
-        </div>
+
         <div class="fg"><label>Nivel detectado</label>
           <div id="snivel-badge" style="padding:8px 0"></div>
+        </div>
+      </div>
+      <div class="rules">
+        <div class="rules-title">&#9432; Reglas de combinación</div>
+        <div class="rules-list">
+          <div class="rule-item"><span class="rule-dot">•</span><span>Voxy y Sesión ejecutiva siempre incluidos</span></div>
+          <div class="rule-item"><span class="rule-dot">•</span><span>Máximo <strong>1 certificación</strong> por plan</span></div>
         </div>
       </div>
       <div class="ib" id="si2"></div>
@@ -271,14 +282,17 @@ td{padding:9px 14px;color:var(--tx);vertical-align:middle}
             <option value="rmkt">RMKT</option>
           </select>
         </div>
-        <div class="fg"><label>Titulaciuión</label>
-          <select id="dtit" onchange="rD()">
-            <option value="no">Sin titulaciuión</option>
-            <option value="si">Con titulaciuión (+$305)</option>
-          </select>
-        </div>
+
         <div class="fg"><label>Nivel detectado</label>
           <div id="dnivel-badge" style="padding:8px 0"></div>
+        </div>
+      </div>
+      <div class="rules">
+        <div class="rules-title">&#9432; Reglas de combinación</div>
+        <div class="rules-list">
+          <div class="rule-item"><span class="rule-dot">•</span><span>Voxy, Welbe y Coursera siempre incluidos</span></div>
+          <div class="rule-item"><span class="rule-dot">•</span><span>Solo <strong>1 idioma adicional</strong> por plan</span></div>
+          <div class="rule-item"><span class="rule-dot">•</span><span>Coursera incluido bloquea demás certificaciones y plataformas</span></div>
         </div>
       </div>
       <div class="ib" id="di"></div>
@@ -736,7 +750,7 @@ var ACCS_DEF = {
     ]},
     {cat:'Accesorios opcionales', items:[
       {id:'diploma',  name:'Diploma Master',          price:220},
-      {id:'welbe',    name:'Welbe',                   price:65},
+      {id:'welbe',    name:'Welbe',                   price:0, included:true},
       {id:'utelx',    name:'Utel X',                  price:165},
       {id:'ugen',     name:'U Gen\u00e9rico',         price:110},
       {id:'cambridge',name:'Cambridge',               price:220},
@@ -1086,7 +1100,7 @@ function rL(){
   var progName=progSel.value;
   var nivel=getNivelFromSel('lprog');
   var lead=document.getElementById('llead').value;
-  var tit=document.getElementById('ltit').value==='si';
+  var tit=false;
   var mod=document.getElementById('lmod').value;
 
   // Auto-select U-Camp for Ingeniería programs
@@ -1118,7 +1132,6 @@ function rL(){
   var lk=(lead==='sur'||lead==='norte')?lead:lead;
   document.getElementById('li').innerHTML=NB[nivel]+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+LBG[lead];
   buildTotal('lic-total',e.p[2],'lic');
-  renderRules('lic-acc-panel', 'lic');
   buildAccPanel('lic-acc-panel','lic',ACCS_DEF.lic,'rL');
   mkInc('lic-inc',INC_BASE_LIC);
 }
@@ -1128,7 +1141,7 @@ function rM(){
   var progName=progSel.value;
   var nivel=getNivelFromSel('mprog');
   var lead=document.getElementById('mlead').value;
-  var tit=document.getElementById('mtit').value==='si';
+  var tit=false;
   var mod=document.getElementById('mmod').value;
 
   // Maestría Online siempre trae Coursera incluido — marcarlo automático
@@ -1149,7 +1162,6 @@ function rM(){
   for(var _i=0;_i<maeCats.length;_i++) for(var _j=0;_j<maeCats[_i].items.length;_j++) {
     if(maeCats[_i].items[_j].id==='coursera') maeCats[_i].items[_j].included = (mmod2==='online');
   }
-  renderRules('mae-acc-panel', 'mae');
   buildAccPanel('mae-acc-panel','mae',maeCats,'rM');
   mkInc('mae-inc',INC_BASE_MAE);
 }
@@ -1159,14 +1171,13 @@ function rS(){
   var progName=progSel.value;
   var nivel=getNivelFromSel('sprog');
   var lead=document.getElementById('slead').value;
-  var tit=document.getElementById('stit').value==='si';
+  var tit=false;
   var acc=getAccTotal('ms');
   var e=getEntry('master',nivel,lead,tit);
   if(!e)return;
   ft('sb',e.p,e.pkg,e.esc,acc);fb('sbi',e.b,LISTA);
   document.getElementById('si2').innerHTML=NB[nivel]+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+LBG[lead];
   buildTotal('ms-total',e.p[4],'ms');
-  renderRules('ms-acc-panel', 'ms');
   buildAccPanel('ms-acc-panel','ms',ACCS_DEF.ms,'rS');
   mkInc('ms-inc',INC_BASE_MS);
 }
@@ -1176,14 +1187,13 @@ function rD(){
   var progName=progSel.value;
   var nivel=getNivelFromSel('dprog');
   var lead=document.getElementById('dlead').value;
-  var tit=document.getElementById('dtit').value==='si';
+  var tit=false;
   var acc=getAccTotal('doc');
   var e=getEntry('doctorado',nivel,lead,tit);
   if(!e)return;
   ft('db',e.p,e.pkg,e.esc,acc);fb('dbi',e.b,LISTA);
   document.getElementById('di').innerHTML=NB[nivel]+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+LBG[lead];
   buildTotal('doc-total',e.p[4],'doc');
-  renderRules('doc-acc-panel', 'doc');
   buildAccPanel('doc-acc-panel','doc',ACCS_DEF.doc,'rD');
   mkInc('doc-inc',INC_BASE_DOC);
 }
