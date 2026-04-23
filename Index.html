@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UTEL — Matriz de Precios</title>
+<style>
+:root{--bg:#f4f5f7;--sf:#fff;--s2:#f0f1f4;--bd:rgba(0,0,0,.09);--ac:#6c5ce7;--ac2:#5541d7;--tx:#1a1a2e;--mu:#6b7280;--hot:#dc2626;--warm:#d97706;--cold:#2563eb;--gr:#16a34a}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+/* LOGIN */
+#ls{min-height:100vh;display:flex;align-items:center;justify-content:center}
+.lb{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:48px 40px;width:100%;max-width:360px;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.07)}
+.ll{font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--ac);text-transform:uppercase;margin-bottom:8px}
+.lt{font-size:22px;font-weight:600;margin-bottom:4px}
+.ls2{font-size:13px;color:var(--mu);margin-bottom:32px}
+.lb input{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:12px 16px;font-size:15px;color:var(--tx);outline:none;margin-bottom:12px;letter-spacing:.15em;text-align:center}
+.lb input:focus{border-color:var(--ac)}
+.lb button{width:100%;background:var(--ac);color:#fff;border:none;border-radius:8px;padding:12px;font-size:15px;font-weight:600;cursor:pointer;transition:opacity .15s}
+.lb button:hover{opacity:.85}
+.le{font-size:12px;color:var(--hot);margin-top:10px;min-height:18px}
+.la{font-size:11px;color:var(--mu);margin-top:8px}
+/* APP */
+#app{display:none}
+header{background:var(--sf);border-bottom:1px solid var(--bd);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.logo{font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--ac);text-transform:uppercase}
+.ht{font-size:14px;font-weight:500}
+.out{font-size:12px;color:var(--mu);background:none;border:1px solid var(--bd);border-radius:6px;padding:5px 12px;cursor:pointer}
+.out:hover{color:var(--tx)}
+.main{padding:24px;max-width:980px;margin:0 auto}
+/* TABS */
+.tabs{display:flex;gap:4px;margin-bottom:16px;background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:4px;overflow-x:auto}
+.tab{flex:1;text-align:center;padding:8px 6px;font-size:12px;font-weight:500;color:var(--mu);cursor:pointer;border-radius:7px;transition:all .15s;white-space:nowrap;min-width:80px}
+.tab.active{background:var(--ac);color:#fff}
+.tab:hover:not(.active){background:var(--s2);color:var(--tx)}
+.sec{display:none}.sec.active{display:block}
+/* FILTERS */
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:14px}
+.fg label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);display:block;margin-bottom:5px}
+.fg select{width:100%;background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:8px 10px;font-size:13px;color:var(--tx);outline:none;cursor:pointer}
+.fg select:focus{border-color:var(--ac)}
+/* BADGES */
+.ib{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:10px;font-size:12px;color:var(--mu)}
+.badge{display:inline-block;font-size:11px;font-weight:600;padding:3px 10px;border-radius:999px}
+.b-hot{background:rgba(220,38,38,.1);color:var(--hot)}
+.b-warm{background:rgba(217,119,6,.1);color:var(--warm)}
+.b-cold{background:rgba(37,99,235,.1);color:var(--cold)}
+.b-sur{background:rgba(22,163,74,.1);color:var(--gr)}
+.b-norte{background:rgba(108,92,231,.1);color:var(--ac)}
+.b-mod{background:rgba(108,92,231,.08);color:var(--ac2);border:1px solid rgba(108,92,231,.2)}
+.b-alto{background:rgba(220,38,38,.08);color:#991b1b;border:1px solid rgba(220,38,38,.2)}
+.b-medio{background:rgba(217,119,6,.08);color:#92400e;border:1px solid rgba(217,119,6,.2)}
+.b-bajo{background:rgba(22,163,74,.08);color:#166534;border:1px solid rgba(22,163,74,.2)}
+/* TABLE */
+.tw{overflow-x:auto;border-radius:10px;border:1px solid var(--bd)}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:460px}
+thead th{background:var(--s2);padding:10px 14px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);border-bottom:1px solid var(--bd)}
+tbody tr{border-bottom:1px solid var(--bd);transition:background .1s}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:#f8f8fb}
+td{padding:9px 14px;color:var(--tx);vertical-align:middle}
+.tm{color:var(--mu);font-size:12px}
+.tp{font-weight:600;font-size:15px;font-variant-numeric:tabular-nums;color:var(--ac2)}
+.tp-acc{font-weight:600;font-size:15px;font-variant-numeric:tabular-nums;color:var(--gr)}
+.tc{font-size:11px;color:var(--mu);font-family:monospace}
+.bi{margin-top:12px;font-size:12px;color:var(--mu);background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:10px 14px;display:flex;gap:20px;flex-wrap:wrap}
+.bi strong{color:var(--tx)}
+/* ACCESORIOS PANEL */
+.acc-panel{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.acc-panel-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mu);margin-bottom:12px}
+.acc-cats{display:flex;flex-direction:column;gap:10px}
+.acc-cat-label{font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.acc-items{display:flex;flex-wrap:wrap;gap:8px}
+.acc-chip{display:flex;align-items:center;gap:6px;padding:5px 10px 5px 8px;border-radius:8px;border:1.5px solid var(--bd);background:var(--s2);cursor:pointer;transition:all .15s;user-select:none;font-size:13px}
+.acc-chip:hover{border-color:var(--ac);background:#eeecfd}
+.acc-chip.selected{border-color:var(--ac);background:#eeecfd;color:var(--ac2)}
+.acc-chip input{display:none}
+.acc-chip .chip-check{width:16px;height:16px;border-radius:4px;border:1.5px solid var(--bd);background:var(--sf);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:all .15s;font-size:10px}
+.acc-chip.selected .chip-check{background:var(--ac);border-color:var(--ac);color:#fff}
+.acc-chip .chip-name{font-weight:500}
+.acc-chip .chip-price{font-size:11px;color:var(--mu)}
+.acc-chip.selected .chip-price{color:var(--ac)}
+.acc-chip.na{opacity:.4;cursor:not-allowed}
+/* TOTAL PANEL */
+.total-panel{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin-top:14px}
+.total-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mu);margin-bottom:10px}
+.total-rows{display:flex;flex-direction:column;gap:6px}
+.total-row{display:flex;justify-content:space-between;align-items:center;font-size:13px}
+.total-row.header{font-weight:500;color:var(--tx)}
+.total-row.acc-line{color:var(--mu)}
+.total-row.separator{border-top:1px solid var(--bd);padding-top:6px;margin-top:2px;font-weight:600;font-size:15px;color:var(--tx)}
+.total-row .val{font-variant-numeric:tabular-nums;font-weight:500}
+.total-row.separator .val{color:var(--ac2);font-weight:700;font-size:17px}
+/* INCLUDES */
+.inc{margin-top:14px;background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:14px 16px}
+.inc-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mu);margin-bottom:10px}
+.inc-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:10px}
+.inc-item{display:flex;align-items:flex-start;gap:8px}
+.ic{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;margin-top:1px;font-weight:700}
+.ic-in{background:rgba(22,163,74,.12);color:var(--gr)}
+.ic-op{background:rgba(217,119,6,.12);color:var(--warm)}
+.inc-name{font-size:13px;font-weight:500;color:var(--tx);line-height:1.3}
+.inc-desc{font-size:12px;color:var(--mu);line-height:1.3}
+/* PAGOS UNICOS */
+.pu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(195px,1fr));gap:12px;margin-bottom:14px}
+.pu-card{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:14px 16px}
+.pu-lbl{font-size:11px;color:var(--mu);font-weight:600;text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px}
+.pu-lista{font-size:12px;color:var(--mu);margin-bottom:2px}
+.pu-precio{font-size:20px;font-weight:600;color:var(--ac2);font-variant-numeric:tabular-nums}
+.wm{text-align:center;margin-top:32px;font-size:11px;color:rgba(0,0,0,.15);letter-spacing:.1em}
+</style>
+</head>
+<body>
+
+<div id="ls">
+  <div class="lb">
+    <div class="ll">UTEL</div>
+    <div class="lt">Matriz de Precios</div>
+    <div class="ls2">Acceso restringido — Equipo de ventas</div>
+    <input type="password" id="pi" placeholder="Contraseña" onkeydown="if(event.key==='Enter')tryLogin()" autocomplete="off"/>
+    <button onclick="tryLogin()">Ingresar</button>
+    <div class="le" id="em"></div>
+    <div class="la" id="am"></div>
+  </div>
+</div>
+
+<div id="app">
+  <header>
+    <span class="logo">UTEL</span>
+    <span class="ht">Matriz de Precios · Abril 2026</span>
+    <button class="out" onclick="logout()">Salir</button>
+  </header>
+  <div class="main">
+
+    <div class="tabs">
+      <div class="tab active" onclick="sw('lic')">Licenciaturas</div>
+      <div class="tab" onclick="sw('mae')">Maestrías</div>
+      <div class="tab" onclick="sw('ms')">Master UTEL</div>
+      <div class="tab" onclick="sw('doc')">Doctorado</div>
+      <div class="tab" onclick="sw('pu')">Pagos Únicos</div>
+    </div>
+
+    <div class="sec active" id="sec-lic">
+      <div class="filters">
+        <div class="fg"><label>Programa</label>
+          <select id="lprog" onchange="updateNivelBadge('lprog','lnivel-badge');rL()"></select>
+        </div>
+        <div class="fg"><label>Modalidad</label>
+          <select id="lmod" onchange="rL()">
+            <option value="online">Online (Mayor)</option>
+            <option value="ejecutiva">Ejecutiva</option>
+            <option value="joven">Utel Joven</option>
+            <option value="hibrida">Híbrida</option>
+          </select>
+        </div>
+        <div class="fg"><label>Lead</label>
+          <select id="llead" onchange="rL()">
+            <option value="hot">Hot Lead</option>
+            <option value="rmkt30">RMKT +30 días</option>
+            <option value="rmkt60">RMKT +60 días</option>
+            <option value="sur">Sur (−10%)</option>
+            <option value="norte">Norte (+10%)</option>
+          </select>
+        </div>
+        <div class="fg"><label>Titulaciuión</label>
+          <select id="ltit" onchange="rL()">
+            <option value="no">Sin titulaciuión</option>
+            <option value="si">Con titulaciuión</option>
+          </select>
+        </div>
+        <div class="fg"><label>Nivel detectado</label>
+          <div id="lnivel-badge" style="padding:8px 0"></div>
+        </div>
+      </div>
+      <div class="ib" id="li"></div>
+      <div class="tw"><table>
+        <thead><tr><th>Mes</th><th>Cuota base</th><th>+ Accesorios</th><th>Total</th><th>Paquete</th><th>Escalonado</th></tr></thead>
+        <tbody id="lb"></tbody>
+      </table></div>
+      <div class="bi" id="lbi"></div>
+      <div class="acc-panel" id="lic-acc-panel"></div>
+      <div class="total-panel" id="lic-total"></div>
+      <div class="inc" id="lic-inc"></div>
+    </div>
+
+    <div class="sec" id="sec-mae">
+      <div class="filters">
+        <div class="fg"><label>Programa</label>
+          <select id="mprog" onchange="updateNivelBadge('mprog','mnivel-badge');rM()"></select>
+        </div>
+        <div class="fg"><label>Modalidad</label>
+          <select id="mmod" onchange="rM()">
+            <option value="online">Online</option>
+            <option value="ejecutiva">Ejecutiva</option>
+          </select>
+        </div>
+        <div class="fg"><label>Lead</label>
+          <select id="mlead" onchange="rM()">
+            <option value="hot">Hot Lead</option>
+            <option value="rmkt">RMKT</option>
+          </select>
+        </div>
+        <div class="fg"><label>Titulaciuión</label>
+          <select id="mtit" onchange="rM()">
+            <option value="no">Sin titulaciuión</option>
+            <option value="si">Con titulaciuión (+$305)</option>
+          </select>
+        </div>
+        <div class="fg"><label>Nivel detectado</label>
+          <div id="mnivel-badge" style="padding:8px 0"></div>
+        </div>
+      </div>
+      <div class="ib" id="mi"></div>
+      <div class="tw"><table>
+        <thead><tr><th>Mes</th><th>Cuota base</th><th>+ Accesorios</th><th>Total</th><th>Paquete</th><th>Escalonado</th></tr></thead>
+        <tbody id="mb"></tbody>
+      </table></div>
+      <div class="bi" id="mbi"></div>
+      <div class="acc-panel" id="mae-acc-panel"></div>
+      <div class="total-panel" id="mae-total"></div>
+      <div class="inc" id="mae-inc"></div>
+    </div>
+
+    <div class="sec" id="sec-ms">
+      <div class="filters">
+        <div class="fg"><label>Programa</label>
+          <select id="sprog" onchange="updateNivelBadge('sprog','snivel-badge');rS()"></select>
+        </div>
+        <div class="fg"><label>Lead</label>
+          <select id="slead" onchange="rS()">
+            <option value="hot">Hot Lead</option>
+            <option value="rmkt">RMKT</option>
+          </select>
+        </div>
+        <div class="fg"><label>Diploma Master</label>
+          <select id="stit" onchange="rS()">
+            <option value="no">Sin Diploma</option>
+            <option value="si">Con Diploma (+$220)</option>
+          </select>
+        </div>
+        <div class="fg"><label>Nivel detectado</label>
+          <div id="snivel-badge" style="padding:8px 0"></div>
+        </div>
+      </div>
+      <div class="ib" id="si2"></div>
+      <div class="tw"><table>
+        <thead><tr><th>Mes</th><th>Cuota base</th><th>+ Accesorios</th><th>Total</th><th>Paquete</th><th>Escalonado</th></tr></thead>
+        <tbody id="sb"></tbody>
+      </table></div>
+      <div class="bi" id="sbi"></div>
+      <div class="acc-panel" id="ms-acc-panel"></div>
+      <div class="total-panel" id="ms-total"></div>
+      <div class="inc" id="ms-inc"></div>
+    </div>
+
+    <div class="sec" id="sec-doc">
+      <div class="filters">
+        <div class="fg"><label>Programa</label>
+          <select id="dprog" onchange="updateNivelBadge('dprog','dnivel-badge');rD()"></select>
+        </div>
+        <div class="fg"><label>Lead</label>
+          <select id="dlead" onchange="rD()">
+            <option value="hot">Hot Lead</option>
+            <option value="rmkt">RMKT</option>
+          </select>
+        </div>
+        <div class="fg"><label>Titulaciuión</label>
+          <select id="dtit" onchange="rD()">
+            <option value="no">Sin titulaciuión</option>
+            <option value="si">Con titulaciuión (+$305)</option>
+          </select>
+        </div>
+        <div class="fg"><label>Nivel detectado</label>
+          <div id="dnivel-badge" style="padding:8px 0"></div>
+        </div>
+      </div>
+      <div class="ib" id="di"></div>
+      <div class="tw"><table>
+        <thead><tr><th>Mes</th><th>Cuota base</th><th>+ Accesorios</th><th>Total</th><th>Paquete</th><th>Escalonado</th></tr></thead>
+        <tbody id="db"></tbody>
+      </table></div>
+      <div class="bi" id="dbi"></div>
+      <div class="acc-panel" id="doc-acc-panel"></div>
+      <div class="total-panel" id="doc-total"></div>
+      <div class="inc" id="doc-inc"></div>
+    </div>
+
+    <div class="sec" id="sec-pu">
+      <p style="font-size:13px;color:var(--mu);margin-bottom:14px">Precios pago único vigentes Abril 2026. Incluyen Asistencia, Voxy y Título.</p>
+      <div class="pu-grid" id="pug"></div>
+    </div>
+
+    <div class="wm">CONFIDENCIAL — Solo para uso interno del equipo de ventas UTEL</div>
+
+  </div>
+</div>
+
+<script>
+/* ── AUTH ── */
+var PWD='UTEL2026', MAX=5, LK=600000;
+function ga(){var d=JSON.parse(localStorage.getItem('ua')||'{}');if(d.l&&Date.now()<d.l)return{c:MAX,l:d.l};if(d.l){localStorage.removeItem('ua');return{c:0}}return{c:d.c||0}}
+function rf(){var d=ga(),n=(d.c||0)+1,o={c:n};if(n>=MAX)o.l=Date.now()+LK;localStorage.setItem('ua',JSON.stringify(o));return n}
+function tryLogin(){
+  var a=ga();
+  if(a.l){document.getElementById('em').textContent='Bloqueado '+Math.ceil((a.l-Date.now())/60000)+' min.';return}
+  var p=document.getElementById('pi').value.trim();
+  if(!p)return;
+  if(p===PWD){
+    localStorage.removeItem('ua');sessionStorage.setItem('ok','1');
+    document.getElementById('ls').style.display='none';
+    document.getElementById('app').style.display='block';
+    init();
+  } else {
+    var n=rf(),r=MAX-n;
+    document.getElementById('em').textContent='Contrase\u00f1a incorrecta.';
+    document.getElementById('am').textContent=r>0?r+' intento'+(r>1?'s':'')+' restante'+(r>1?'s':''):'Bloqueado 10 min.';
+    document.getElementById('pi').value='';
+  }
+}
+function logout(){sessionStorage.removeItem('ok');document.getElementById('app').style.display='none';document.getElementById('ls').style.display='flex';document.getElementById('pi').value=''}
+window.addEventListener('load',function(){
+  var a=ga();
+  if(a.l)document.getElementById('em').textContent='Bloqueado '+Math.ceil((a.l-Date.now())/60000)+' min.';
+  if(sessionStorage.getItem('ok')==='1'){document.getElementById('ls').style.display='none';document.getElementById('app').style.display='block';init();}
+});
+
+/* ── TABS ── */
+function sw(id){
+  document.querySelectorAll('.tab').forEach(function(t,i){t.classList.toggle('active',['lic','mae','ms','doc','pu'][i]===id)});
+  document.querySelectorAll('.sec').forEach(function(s){s.classList.toggle('active',s.id==='sec-'+id)});
+}
+
+/* ── CATALOG ── */
+var CATALOG = {"DOCTORADO": [{"p": "ADMINISTRACIÓN ESTRATÉGICA EMPRESARIAL", "v": "medio"}, {"p": "CIBERSEGURIDAD Y GESTIÓN DE RIESGOS DIGITALES", "v": "unico"}, {"p": "CIENCIA DE DATOS E INTELIGENCIA ARTIFICIAL", "v": "unico"}, {"p": "DERECHO", "v": "bajo"}, {"p": "DESARROLLO HUMANO", "v": "bajo"}, {"p": "EDUCACIÓN", "v": "alto"}, {"p": "FINANZAS", "v": "medio"}, {"p": "GESTIÓN E INNOVACIÓN TECNOLÓGICA", "v": "medio"}], "LICENCIATURA": [{"p": "ADMINISTRACIÓN", "v": "medio"}, {"p": "ADMINISTRACIÓN DE EMPRESAS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE EMPRESAS TURÍSTICAS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE RECURSOS HUMANOS", "v": "bajo"}, {"p": "ADMINISTRACIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN", "v": "medio"}, {"p": "ADMINISTRACIÓN DE VENTAS", "v": "medio"}, {"p": "ADMINISTRACIÓN Y FINANZAS", "v": "medio"}, {"p": "AGRONEGOCIOS", "v": "medio"}, {"p": "ARQUITECTURA", "v": "unico"}, {"p": "ARTE DIGITAL Y MULTIMEDIA", "v": "medio"}, {"p": "CIBERSEGURIDAD Y RIESGOS EN INTELIGENCIA ARTIFICIAL", "v": "alto"}, {"p": "CIENCIAS POLÍTICAS Y ADMINISTRACIÓN PÚBLICA", "v": "medio"}, {"p": "COMUNICACIÓN", "v": "medio"}, {"p": "COMUNICACIÓN CORPORATIVA", "v": "medio"}, {"p": "COMUNICACIÓN DIGITAL", "v": "medio"}, {"p": "COMUNICACIÓN ORGANIZACIONAL", "v": "medio"}, {"p": "CONTADURÍA PÚBLICA", "v": "medio"}, {"p": "CONTADURÍA Y FINANZAS", "v": "medio"}, {"p": "CRIMINOLOGÍA Y CRIMINALÍSTICA", "v": "bajo"}, {"p": "DERECHO", "v": "alto"}, {"p": "DERECHO EMPRESARIAL", "v": "medio"}, {"p": "DERECHO INTERNACIONAL", "v": "medio"}, {"p": "DESARROLLO SUSTENTABLE Y ECOTURISMO", "v": "medio"}, {"p": "DIRECCIÓN DE ARTE", "v": "medio"}, {"p": "DISEÑO Y ANIMACIÓN DIGITAL", "v": "medio"}, {"p": "ECONOMÍA Y FINANZAS", "v": "medio"}, {"p": "EMPRENDIMIENTO", "v": "medio"}, {"p": "FINANZAS Y ESTRATEGIA FISCAL", "v": "medio"}, {"p": "INGENIERÍA AMBIENTAL", "v": "alto"}, {"p": "INGENIERÍA EN DESARROLLO DE SOFTWARE", "v": "medio"}, {"p": "INGENIERÍA EN ENERGÍAS RENOVABLES", "v": "medio"}, {"p": "INGENIERÍA EN LOGÍSTICA Y TRANSPORTE", "v": "medio"}, {"p": "INGENIERÍA EN SISTEMAS COMPUTACIONALES", "v": "alto"}, {"p": "INGENIERÍA EN TECNOLOGÍA DE VIDEOJUEGOS Y REALIDAD VIRTUAL", "v": "alto"}, {"p": "INGENIERÍA INDUSTRIAL", "v": "alto"}, {"p": "INGENIERÍA INDUSTRIAL Y ADMINISTRACIÓN", "v": "medio"}, {"p": "INGENIERÍA ROBÓTICA", "v": "unico"}, {"p": "INTELIGENCIA ARTIFICIAL", "v": "medio"}, {"p": "MARKETING Y PUBLICIDAD", "v": "medio"}, {"p": "MEDIOS DIGITALES", "v": "medio"}, {"p": "MERCADOTECNIA", "v": "medio"}, {"p": "NEGOCIOS INTERNACIONALES", "v": "medio"}, {"p": "PEDAGOGÍA", "v": "bajo"}, {"p": "PSICOLOGÍA", "v": "bajo"}, {"p": "PSICOLOGÍA ORGANIZACIONAL", "v": "medio"}, {"p": "SEGURIDAD INFORMÁTICA", "v": "medio"}, {"p": "TECNOLOGÍA EDUCATIVA", "v": "medio"}, {"p": "UNICA", "v": "unico"}, {"p": "UVE", "v": "unico"}], "MAESTRÍA": [{"p": "ADMINISTRACIÓN DE INSTITUCIONES EDUCATIVAS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS - MBA", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS DEPORTIVOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS-IEBS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE RECURSOS HUMANOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN", "v": "medio"}, {"p": "ADMINISTRACIÓN EN MERCADOTECNIA ESTRATÉGICA", "v": "medio"}, {"p": "ADMINISTRACIÓN PÚBLICA", "v": "medio"}, {"p": "ADMINISTRACIÓN Y DIRECCIÓN COMERCIAL DE EMPRESAS TURÍSTICAS", "v": "medio"}, {"p": "ALTA DIRECCIÓN Y GOBIERNO CORPORATIVO", "v": "medio"}, {"p": "ARQUITECTURA DE SOFTWARE", "v": "unico"}, {"p": "CIBERSEGURIDAD", "v": "medio"}, {"p": "CIENCIA DE DATOS PARA NEGOCIOS", "v": "medio"}, {"p": "CIENCIAS COMPUTACIONALES Y TELECOMUNICACIONES", "v": "medio"}, {"p": "COACHING INTEGRAL Y ORGANIZACIONAL", "v": "medio"}, {"p": "COMERCIO INTERNACIONAL", "v": "medio"}, {"p": "CONCIENCIA PLENA APLICADA", "v": "alto"}, {"p": "DERECHO PROCESAL CONSTITUCIONAL", "v": "medio"}, {"p": "DERECHO PROCESAL CONSTITUCIONAL (MODALIDAD EJECUTIVA)", "v": "medio"}, {"p": "DERECHO PROCESAL PENAL", "v": "medio"}, {"p": "DERECHO PROCESAL Y JUICIOS ORALES", "v": "alto"}, {"p": "DERECHOS HUMANOS", "v": "medio"}, {"p": "DESARROLLO SUSTENTABLE Y GESTIÓN AMBIENTAL", "v": "medio"}, {"p": "DIRECCIÓN DE EMPRESA TURÍSTICAS", "v": "medio"}, {"p": "DIRECCIÓN DE EMPRESAS TURÍSTICAS", "v": "medio"}, {"p": "DIRECCIÓN DE NEGOCIOS DE ALIMENTOS Y BEBIDAS", "v": "medio"}, {"p": "DIRECCIÓN DE PROYECTOS DE INNOVACIÓN", "v": "medio"}, {"p": "DIRECCIÓN DE VENTAS", "v": "medio"}, {"p": "DIRECCIÓN E INGENIERÍA DE SOFTWARE", "v": "medio"}, {"p": "DISEÑO PARA MEDIOS DIGITALES", "v": "medio"}, {"p": "EDUCACIÓN", "v": "medio"}, {"p": "EDUCACIÓN Y DOCENCIA", "v": "bajo"}, {"p": "ENERGÍAS RENOVABLES Y EFICIENCIA ENERGÉTICA", "v": "medio"}, {"p": "ENERGÍAS RENOVABLES Y PROYECTOS ENERGÉTICOS", "v": "medio"}, {"p": "FINANZAS", "v": "medio"}, {"p": "GESTIÓN DIRECTIVA DE INSTITUCIONES EN SALUD", "v": "alto"}, {"p": "GESTIÓN DIRECTIVA DE SALUD", "v": "medio"}, {"p": "GESTIÓN DIRECTIVA EN SALUD", "v": "medio"}, {"p": "GESTIÓN ESTRATÉGICA DEL CAPITAL HUMANO", "v": "medio"}, {"p": "GESTIÓN ORGANIZACIONAL POSITIVA", "v": "medio"}, {"p": "IMPUESTOS", "v": "medio"}, {"p": "INGENIERÍA Y TECNOLOGÍA AMBIENTAL", "v": "bajo"}, {"p": "INNOVACIÓN EDUCATIVA Y DISEÑO INSTRUCCIONAL", "v": "alto"}, {"p": "INTERVENCIÓN PSICOLÓGICA Y SALUD MENTAL", "v": "medio"}, {"p": "LOGÍSTICA TRANSPORTE Y DISTRIBUCIÓN INTERNACIONAL", "v": "medio"}, {"p": "LOGÍSTICA Y CADENA DE SUMINISTRO", "v": "medio"}, {"p": "LOGÍSTICA Y CADENA DE SUMINISTROS", "v": "medio"}, {"p": "MAESTRÍA ESPECIALIZADO EN COMERCIO INTERNACIONAL", "v": "medio"}, {"p": "MAESTRÍA ESPECIALIZADO EN NUTRICIÓN", "v": "medio"}, {"p": "MARKETING DIGITAL Y E-COMMERCE", "v": "medio"}, {"p": "MERCADOTECNIA DIGITAL Y COMERCIO ELECTRÓNICO", "v": "medio"}, {"p": "MERCADOTECNIA POLÍTICA", "v": "medio"}, {"p": "PROJECT MANAGEMENT", "v": "medio"}, {"p": "PSICOLOGÍA TRANSPERSONAL", "v": "medio"}, {"p": "RESPONSABILIDAD SOCIAL", "v": "medio"}, {"p": "TECNOLOGÍA EDUCATIVA", "v": "bajo"}, {"p": "TURISMO Y REVENUE MANAGEMENT HOTELERO", "v": "medio"}], "MASTER": [{"p": "ADMINISTRACIÓN DE INSTITUCIONES EDUCATIVAS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS - MBA", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS DEPORTIVOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS-IEBS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE RECURSOS HUMANOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN", "v": "medio"}, {"p": "ADMINISTRACIÓN EN MERCADOTECNIA ESTRATÉGICA", "v": "medio"}, {"p": "ADMINISTRACIÓN PÚBLICA", "v": "medio"}, {"p": "ADMINISTRACIÓN Y DIRECCIÓN COMERCIAL DE EMPRESAS TURÍSTICAS", "v": "medio"}, {"p": "ALTA DIRECCIÓN Y GOBIERNO CORPORATIVO", "v": "medio"}, {"p": "ARQUITECTURA DE SOFTWARE", "v": "unico"}, {"p": "CIBERSEGURIDAD", "v": "medio"}, {"p": "CIENCIA DE DATOS PARA NEGOCIOS", "v": "medio"}, {"p": "CIENCIAS COMPUTACIONALES Y TELECOMUNICACIONES", "v": "medio"}, {"p": "COACHING INTEGRAL Y ORGANIZACIONAL", "v": "medio"}, {"p": "COMERCIO INTERNACIONAL", "v": "medio"}, {"p": "CONCIENCIA PLENA APLICADA", "v": "alto"}, {"p": "DERECHO PROCESAL CONSTITUCIONAL", "v": "medio"}, {"p": "DERECHO PROCESAL CONSTITUCIONAL (MODALIDAD EJECUTIVA)", "v": "medio"}, {"p": "DERECHO PROCESAL PENAL", "v": "medio"}, {"p": "DERECHO PROCESAL Y JUICIOS ORALES", "v": "alto"}, {"p": "DERECHOS HUMANOS", "v": "medio"}, {"p": "DESARROLLO SUSTENTABLE Y GESTIÓN AMBIENTAL", "v": "medio"}, {"p": "DIRECCIÓN DE EMPRESA TURÍSTICAS", "v": "medio"}, {"p": "DIRECCIÓN DE EMPRESAS TURÍSTICAS", "v": "medio"}, {"p": "DIRECCIÓN DE NEGOCIOS DE ALIMENTOS Y BEBIDAS", "v": "medio"}, {"p": "DIRECCIÓN DE PROYECTOS DE INNOVACIÓN", "v": "medio"}, {"p": "DIRECCIÓN DE VENTAS", "v": "medio"}, {"p": "DIRECCIÓN E INGENIERÍA DE SOFTWARE", "v": "medio"}, {"p": "DISEÑO PARA MEDIOS DIGITALES", "v": "medio"}, {"p": "EDUCACIÓN", "v": "medio"}, {"p": "EDUCACIÓN Y DOCENCIA", "v": "bajo"}, {"p": "ENERGÍAS RENOVABLES Y EFICIENCIA ENERGÉTICA", "v": "medio"}, {"p": "ENERGÍAS RENOVABLES Y PROYECTOS ENERGÉTICOS", "v": "medio"}, {"p": "FINANZAS", "v": "medio"}, {"p": "GESTIÓN DIRECTIVA DE INSTITUCIONES EN SALUD", "v": "alto"}, {"p": "GESTIÓN DIRECTIVA DE SALUD", "v": "medio"}, {"p": "GESTIÓN DIRECTIVA EN SALUD", "v": "medio"}, {"p": "GESTIÓN ESTRATÉGICA DEL CAPITAL HUMANO", "v": "medio"}, {"p": "GESTIÓN ORGANIZACIONAL POSITIVA", "v": "medio"}, {"p": "IMPUESTOS", "v": "medio"}, {"p": "INGENIERÍA Y TECNOLOGÍA AMBIENTAL", "v": "bajo"}, {"p": "INNOVACIÓN EDUCATIVA Y DISEÑO INSTRUCCIONAL", "v": "alto"}, {"p": "INTERVENCIÓN PSICOLÓGICA Y SALUD MENTAL", "v": "medio"}, {"p": "LOGÍSTICA TRANSPORTE Y DISTRIBUCIÓN INTERNACIONAL", "v": "medio"}, {"p": "LOGÍSTICA Y CADENA DE SUMINISTRO", "v": "medio"}, {"p": "LOGÍSTICA Y CADENA DE SUMINISTROS", "v": "medio"}, {"p": "MAESTRÍA ESPECIALIZADO EN COMERCIO INTERNACIONAL", "v": "medio"}, {"p": "MAESTRÍA ESPECIALIZADO EN NUTRICIÓN", "v": "medio"}, {"p": "MARKETING DIGITAL Y E-COMMERCE", "v": "medio"}, {"p": "MERCADOTECNIA DIGITAL Y COMERCIO ELECTRÓNICO", "v": "medio"}, {"p": "MERCADOTECNIA POLÍTICA", "v": "medio"}, {"p": "PROJECT MANAGEMENT", "v": "medio"}, {"p": "PSICOLOGÍA TRANSPERSONAL", "v": "medio"}, {"p": "RESPONSABILIDAD SOCIAL", "v": "medio"}, {"p": "TECNOLOGÍA EDUCATIVA", "v": "bajo"}, {"p": "TURISMO Y REVENUE MANAGEMENT HOTELERO", "v": "medio"}], "EDUCACIÓN_CONTINUA": [{"p": "DIPLOMADO", "v": "unico"}]};
+
+/* ── HELPERS ── */
+function fmt(n){return '$'+Math.round(n).toLocaleString('es-AR')}
+var LISTA=7233;
+var LBG={hot:'<span class="badge b-hot">Hot Lead</span>',rmkt30:'<span class="badge b-warm">RMKT +30</span>',rmkt60:'<span class="badge b-cold">RMKT +60</span>',rmkt:'<span class="badge b-warm">RMKT</span>',sur:'<span class="badge b-sur">Sur -10%</span>',norte:'<span class="badge b-norte">Norte +10%</span>'};
+var NB={alto:'<span class="badge b-alto">Pricing Alto</span>',medio:'<span class="badge b-medio">Pricing Medio</span>',bajo:'<span class="badge b-bajo">Pricing Bajo</span>',unico:'<span class="badge b-mod">Precio \u00danico</span>'};
+
+function populatePrograms(selId, nivelKey, autoNivelId) {
+  var sel = document.getElementById(selId);
+  var cur = sel.value;
+  sel.innerHTML = '';
+  var progs = CATALOG[nivelKey] || [];
+  for (var i=0; i<progs.length; i++) {
+    var opt = document.createElement('option');
+    opt.value = progs[i].p;
+    opt.setAttribute('data-nivel', progs[i].v);
+    opt.textContent = progs[i].p.charAt(0) + progs[i].p.slice(1).toLowerCase();
+    sel.appendChild(opt);
+  }
+  if (cur) {
+    sel.value = cur;
+    if (!sel.value) sel.selectedIndex = 0;
+  }
+  updateNivelBadge(selId, autoNivelId);
+}
+
+function updateNivelBadge(selId, badgeId) {
+  var sel = document.getElementById(selId);
+  var opt = sel.options[sel.selectedIndex];
+  var nivel = opt ? opt.getAttribute('data-nivel') : 'medio';
+  document.getElementById(badgeId).innerHTML = NB[nivel] || NB['medio'];
+  return nivel;
+}
+
+function ft(id, prices, pkg, esc, accTotal){
+  var tb=document.getElementById(id);tb.innerHTML='';
+  var acc=accTotal||0;
+  var now=new Date();
+  var mes=now.getMonth()+1; // 1-12
+  // Show: mes 1, mes 2, current month (if >2), and a few around it
+  // Actually: just show all unique price points as a compact summary
+  // Group consecutive equal prices
+  var shown=[];
+  // Always show mes 1 and mes 2 (intro prices)
+  shown.push({label:'Mes 1',p:prices[0]});
+  if(prices[1]!==prices[0]) shown.push({label:'Mes 2',p:prices[1]});
+  // Then the stable price (mes 3+)
+  if(prices[2]!==prices[1]) shown.push({label:'Mes 3 en adelante',p:prices[2]});
+  // Current month row highlighted
+  var curP=prices[Math.min(mes-1,prices.length-1)];
+  for(var i=0;i<shown.length;i++){
+    var s=shown[i];
+    var isCur=(s.p===curP && s.label!=='Mes 1' && s.label!=='Mes 2');
+    var tr=document.createElement('tr');
+    if(isCur) tr.style.background='rgba(108,92,231,0.06)';
+    tr.innerHTML='<td class="tm">'+s.label+(isCur?' <span class="badge b-mod" style="font-size:10px">mes actual</span>':'')+'</td><td class="tp">'+fmt(s.p)+'</td><td class="tp-acc">'+(acc>0?'+'+fmt(acc):'\u2014')+'</td><td class="tp">'+fmt(s.p+acc)+'</td><td class="tc">'+pkg+'</td><td class="tc">'+esc+'</td>';
+    tb.appendChild(tr);
+  }
+}
+function fb(id,b,l){document.getElementById(id).innerHTML='<span>Beca: <strong>'+(b*100).toFixed(1)+'%</strong></span><span>Lista: <strong>'+fmt(l)+'</strong></span>'}
+
+
+var PROG = {
+
+  /* ── LICENCIATURAS ONLINE (Mayor) ── */
+  'online_general': {
+    label: 'Lic. Online — General',
+    tipo: 'lic',
+    niveles: {
+      alto: {
+        hot:   {sin:{pkg:'P2.LI.INT.',esc:'P14.INT2M',p:[699,799,2100,2100,2100,2100,2100,2100,2100,2100,2100,2100],b:.710},
+                con:{pkg:'P2.LI.INT.',esc:'P16.INT2M',p:[699,799,2295,2295,2295,2295,2295,2295,2295,2295,2295,2295],b:.683}},
+        rmkt30:{sin:{pkg:'P3.LI.INT.',esc:'P14.INT2M',p:[699,799,1974,1974,1974,1974,1974,1974,1974,1974,1974,1974],b:.727},
+                con:{pkg:'P3.LI.INT.',esc:'P16.INT2M',p:[699,799,2169,2169,2169,2169,2169,2169,2169,2169,2169,2169],b:.700}},
+        rmkt60:{sin:{pkg:'P4.LI.INT.',esc:'P14.INT2M',p:[699,799,1932,1932,1932,1932,1932,1932,1932,1932,1932,1932],b:.733},
+                con:{pkg:'P4.LI.INT.',esc:'P16.INT2M',p:[699,799,2127,2127,2127,2127,2127,2127,2127,2127,2127,2127],b:.706}},
+        sur:   {sin:{pkg:'—',esc:'—',p:[629,719,1989,1989,1989,1989,1989,1989,1989,1989,1989,1989],b:.725},
+                con:{pkg:'—',esc:'—',p:[629,719,2184,2184,2184,2184,2184,2184,2184,2184,2184,2184],b:.698}},
+        norte: {sin:{pkg:'—',esc:'—',p:[769,879,2431,2431,2431,2431,2431,2431,2431,2431,2431,2431],b:.664},
+                con:{pkg:'—',esc:'—',p:[769,879,2626,2626,2626,2626,2626,2626,2626,2626,2626,2626],b:.637}},
+      },
+      medio: {
+        hot:   {sin:{pkg:'P5.LI.INT.',esc:'P14.INT2M',p:[699,799,1890,1890,1890,1890,1890,1890,1890,1890,1890,1890],b:.739},
+                con:{pkg:'P5.LI.INT.',esc:'P16.INT2M',p:[699,799,2085,2085,2085,2085,2085,2085,2085,2085,2085,2085],b:.712}},
+        rmkt30:{sin:{pkg:'P6.LI.INT.',esc:'P14.INT2M',p:[699,799,1777,1777,1777,1777,1777,1777,1777,1777,1777,1777],b:.754},
+                con:{pkg:'P6.LI.INT.',esc:'P16.INT2M',p:[699,799,1972,1972,1972,1972,1972,1972,1972,1972,1972,1972],b:.727}},
+        rmkt60:{sin:{pkg:'P7.LI.INT.',esc:'P14.INT2M',p:[699,799,1735,1735,1735,1735,1735,1735,1735,1735,1735,1735],b:.760},
+                con:{pkg:'P7.LI.INT.',esc:'P16.INT2M',p:[699,799,1930,1930,1930,1930,1930,1930,1930,1930,1930,1930],b:.733}},
+        sur:   {sin:{pkg:'P7.SUR.LI.INT.',esc:'—',p:[629,719,1800,1800,1800,1800,1800,1800,1800,1800,1800,1800],b:.751},
+                con:{pkg:'—',esc:'—',p:[629,719,1994,1994,1994,1994,1994,1994,1994,1994,1994,1994],b:.724}},
+        norte: {sin:{pkg:'P7.NOR.LI.INT.',esc:'—',p:[769,879,2200,2200,2200,2200,2200,2200,2200,2200,2200,2200],b:.696},
+                con:{pkg:'—',esc:'—',p:[769,879,2394,2394,2394,2394,2394,2394,2394,2394,2394,2394],b:.669}},
+      },
+      bajo: {
+        hot:   {sin:{pkg:'P8.LI.INT.',esc:'P14.INT2M',p:[699,799,1700,1700,1700,1700,1700,1700,1700,1700,1700,1700],b:.765},
+                con:{pkg:'P8.LI.INT.',esc:'P16.INT2M',p:[699,799,1895,1895,1895,1895,1895,1895,1895,1895,1895,1895],b:.738}},
+        rmkt30:{sin:{pkg:'P9.LI.INT.',esc:'P14.INT2M',p:[699,799,1598,1598,1598,1598,1598,1598,1598,1598,1598,1598],b:.779},
+                con:{pkg:'P9.LI.INT.',esc:'P16.INT2M',p:[699,799,1793,1793,1793,1793,1793,1793,1793,1793,1793,1793],b:.752}},
+        rmkt60:{sin:{pkg:'P10.LI.INT.',esc:'P14.INT2M',p:[699,799,1556,1556,1556,1556,1556,1556,1556,1556,1556,1556],b:.785},
+                con:{pkg:'P10.LI.INT.',esc:'P16.INT2M',p:[699,799,1751,1751,1751,1751,1751,1751,1751,1751,1751,1751],b:.758}},
+        sur:   {sin:{pkg:'—',esc:'—',p:[629,719,1620,1620,1620,1620,1620,1620,1620,1620,1620,1620],b:.776},
+                con:{pkg:'—',esc:'—',p:[629,719,1815,1815,1815,1815,1815,1815,1815,1815,1815,1815],b:.749}},
+        norte: {sin:{pkg:'—',esc:'—',p:[769,879,1870,1870,1870,1870,1870,1870,1870,1870,1870,1870],b:.741},
+                con:{pkg:'—',esc:'—',p:[769,879,2085,2085,2085,2085,2085,2085,2085,2085,2085,2085],b:.712}},
+      }
+    }
+  },
+
+  /* ── INGENIERÍA ── */
+  'ingenieria': {
+    label: 'Ing. Online',
+    tipo: 'lic',
+    niveles: {
+      alto: {
+        hot:   {sin:{pkg:'P2.LI.INT.',esc:'P14.INT2M',p:[699,799,2100,2100,2100,2100,2100,2100,2100,2100,2100,2100],b:.710},con:{pkg:'P2.LI.INT.',esc:'P16.INT2M',p:[699,799,2295,2295,2295,2295,2295,2295,2295,2295,2295,2295],b:.683}},
+        rmkt30:{sin:{pkg:'P3.LI.INT.',esc:'P14.INT2M',p:[699,799,1974,1974,1974,1974,1974,1974,1974,1974,1974,1974],b:.727},con:{pkg:'P3.LI.INT.',esc:'P16.INT2M',p:[699,799,2169,2169,2169,2169,2169,2169,2169,2169,2169,2169],b:.700}},
+        rmkt60:{sin:{pkg:'P4.LI.INT.',esc:'P14.INT2M',p:[699,799,1932,1932,1932,1932,1932,1932,1932,1932,1932,1932],b:.733},con:{pkg:'P4.LI.INT.',esc:'P16.INT2M',p:[699,799,2127,2127,2127,2127,2127,2127,2127,2127,2127,2127],b:.706}},
+        sur:   {sin:{pkg:'—',esc:'—',p:[629,719,1989,1989,1989,1989,1989,1989,1989,1989,1989,1989],b:.725},con:{pkg:'—',esc:'—',p:[629,719,2184,2184,2184,2184,2184,2184,2184,2184,2184,2184],b:.698}},
+        norte: {sin:{pkg:'—',esc:'—',p:[769,879,2431,2431,2431,2431,2431,2431,2431,2431,2431,2431],b:.664},con:{pkg:'—',esc:'—',p:[769,879,2626,2626,2626,2626,2626,2626,2626,2626,2626,2626],b:.637}},
+      },
+      medio: {
+        hot:   {sin:{pkg:'—',esc:'P2.COM3M',p:[699,799,1944,1944,1944,1944,1944,1944,1944,1944,1944,1944],b:.731},con:{pkg:'—',esc:'P2.COM3M',p:[699,799,2138,2138,2138,2138,2138,2138,2138,2138,2138,2138],b:.704}},
+        rmkt30:{sin:{pkg:'—',esc:'P2.COM3M',p:[699,799,1833,1833,1833,1833,1833,1833,1833,1833,1833,1833],b:.747},con:{pkg:'—',esc:'P2.COM3M',p:[699,799,2027,2027,2027,2027,2027,2027,2027,2027,2027,2027],b:.720}},
+        rmkt60:{sin:{pkg:'—',esc:'—',p:[699,799,1833,1833,1833,1833,1833,1833,1833,1833,1833,1833],b:.747},con:{pkg:'—',esc:'—',p:[699,799,2027,2027,2027,2027,2027,2027,2027,2027,2027,2027],b:.720}},
+        sur:   {sin:{pkg:'—',esc:'—',p:[629,719,1800,1800,1800,1800,1800,1800,1800,1800,1800,1800],b:.751},con:{pkg:'—',esc:'—',p:[629,719,1994,1994,1994,1994,1994,1994,1994,1994,1994,1994],b:.724}},
+        norte: {sin:{pkg:'—',esc:'—',p:[769,879,2200,2200,2200,2200,2200,2200,2200,2200,2200,2200],b:.696},con:{pkg:'—',esc:'—',p:[769,879,2394,2394,2394,2394,2394,2394,2394,2394,2394,2394],b:.669}},
+      },
+      bajo: {
+        hot:   {sin:{pkg:'—',esc:'—',p:[699,799,1700,1700,1700,1700,1700,1700,1700,1700,1700,1700],b:.765},con:{pkg:'—',esc:'—',p:[699,799,1895,1895,1895,1895,1895,1895,1895,1895,1895,1895],b:.738}},
+        rmkt30:{sin:{pkg:'—',esc:'—',p:[699,799,1598,1598,1598,1598,1598,1598,1598,1598,1598,1598],b:.779},con:{pkg:'—',esc:'—',p:[699,799,1793,1793,1793,1793,1793,1793,1793,1793,1793,1793],b:.752}},
+        rmkt60:{sin:{pkg:'—',esc:'—',p:[699,799,1556,1556,1556,1556,1556,1556,1556,1556,1556,1556],b:.785},con:{pkg:'—',esc:'—',p:[699,799,1751,1751,1751,1751,1751,1751,1751,1751,1751,1751],b:.758}},
+        sur:   {sin:{pkg:'—',esc:'—',p:[629,719,1629,1629,1629,1629,1629,1629,1629,1629,1629,1629],b:.775},con:{pkg:'—',esc:'—',p:[629,719,1824,1824,1824,1824,1824,1824,1824,1824,1824,1824],b:.748}},
+        norte: {sin:{pkg:'—',esc:'—',p:[769,879,1991,1991,1991,1991,1991,1991,1991,1991,1991,1991],b:.725},con:{pkg:'—',esc:'—',p:[769,879,2186,2186,2186,2186,2186,2186,2186,2186,2186,2186],b:.698}},
+      }
+    }
+  },
+
+  /* ── ARQUITECTURA ── */
+  'arquitectura': {
+    label: 'Arquitectura',
+    tipo: 'lic',
+    niveles: {
+      alto: {
+        hot:   {sin:{pkg:'P11.LI.INT.',esc:'P50.INT2M',p:[1300,1300,2500,2500,2500,2500,2500,2500,2500,2500,2500,2500],b:.654},con:{pkg:'P11.LI.INT.',esc:'P51.INT2M',p:[1300,1300,2695,2695,2695,2695,2695,2695,2695,2695,2695,2695],b:.627}},
+        rmkt30:{sin:{pkg:'P12.LI.INT.',esc:'P50.INT2M',p:[1300,1300,2350,2350,2350,2350,2350,2350,2350,2350,2350,2350],b:.675},con:{pkg:'P12.LI.INT.',esc:'P51.INT2M',p:[1300,1300,2545,2545,2545,2545,2545,2545,2545,2545,2545,2545],b:.648}},
+        rmkt60:{sin:{pkg:'P13.LI.INT.',esc:'P50.INT2M',p:[1300,1300,2300,2300,2300,2300,2300,2300,2300,2300,2300,2300],b:.682},con:{pkg:'P13.LI.INT.',esc:'P51.INT2M',p:[1300,1300,2495,2495,2495,2495,2495,2495,2495,2495,2495,2495],b:.655}},
+        sur:   {sin:{pkg:'—',esc:'—',p:[1170,1170,2250,2250,2250,2250,2250,2250,2250,2250,2250,2250],b:.689},con:{pkg:'—',esc:'—',p:[1170,1170,2445,2445,2445,2445,2445,2445,2445,2445,2445,2445],b:.662}},
+        norte: {sin:{pkg:'—',esc:'—',p:[1430,1430,2750,2750,2750,2750,2750,2750,2750,2750,2750,2750],b:.620},con:{pkg:'—',esc:'—',p:[1430,1430,2945,2945,2945,2945,2945,2945,2945,2945,2945,2945],b:.593}},
+      },
+      medio: {
+        hot:   {sin:{pkg:'P11.LI.INT.',esc:'P50.INT2M',p:[1300,1300,2500,2500,2500,2500,2500,2500,2500,2500,2500,2500],b:.654},con:{pkg:'P11.LI.INT.',esc:'P51.INT2M',p:[1300,1300,2695,2695,2695,2695,2695,2695,2695,2695,2695,2695],b:.627}},
+        rmkt30:{sin:{pkg:'P12.LI.INT.',esc:'P50.INT2M',p:[1300,1300,2350,2350,2350,2350,2350,2350,2350,2350,2350,2350],b:.675},con:{pkg:'P12.LI.INT.',esc:'P51.INT2M',p:[1300,1300,2545,2545,2545,2545,2545,2545,2545,2545,2545,2545],b:.648}},
+        rmkt60:{sin:{pkg:'P13.LI.INT.',esc:'P50.INT2M',p:[1300,1300,2300,2300,2300,2300,2300,2300,2300,2300,2300,2300],b:.682},con:{pkg:'P13.LI.INT.',esc:'P51.INT2M',p:[1300,1300,2495,2495,2495,2495,2495,2495,2495,2495,2495,2495],b:.655}},
+        sur:   {sin:{pkg:'—',esc:'—',p:[1170,1170,2250,2250,2250,2250,2250,2250,2250,2250,2250,2250],b:.689},con:{pkg:'—',esc:'—',p:[1170,1170,2445,2445,2445,2445,2445,2445,2445,2445,2445,2445],b:.662}},
+        norte: {sin:{pkg:'—',esc:'—',p:[1430,1430,2750,2750,2750,2750,2750,2750,2750,2750,2750,2750],b:.620},con:{pkg:'—',esc:'—',p:[1430,1430,2945,2945,2945,2945,2945,2945,2945,2945,2945,2945],b:.593}},
+      },
+      bajo: {
+        hot:   {sin:{pkg:'P11.LI.INT.',esc:'P50.INT2M',p:[1300,1300,2500,2500,2500,2500,2500,2500,2500,2500,2500,2500],b:.654},con:{pkg:'P11.LI.INT.',esc:'P51.INT2M',p:[1300,1300,2695,2695,2695,2695,2695,2695,2695,2695,2695,2695],b:.627}},
+        rmkt30:{sin:{pkg:'P12.LI.INT.',esc:'P50.INT2M',p:[1300,1300,2350,2350,2350,2350,2350,2350,2350,2350,2350,2350],b:.675},con:{pkg:'P12.LI.INT.',esc:'P51.INT2M',p:[1300,1300,2545,2545,2545,2545,2545,2545,2545,2545,2545,2545],b:.648}},
+        rmkt60:{sin:{pkg:'P13.LI.INT.',esc:'P50.INT2M',p:[1300,1300,2300,2300,2300,2300,2300,2300,2300,2300,2300,2300],b:.682},con:{pkg:'P13.LI.INT.',esc:'P51.INT2M',p:[1300,1300,2495,2495,2495,2495,2495,2495,2495,2495,2495,2495],b:.655}},
+        sur:   {sin:{pkg:'—',esc:'—',p:[1170,1170,2250,2250,2250,2250,2250,2250,2250,2250,2250,2250],b:.689},con:{pkg:'—',esc:'—',p:[1170,1170,2445,2445,2445,2445,2445,2445,2445,2445,2445,2445],b:.662}},
+        norte: {sin:{pkg:'—',esc:'—',p:[1430,1430,2750,2750,2750,2750,2750,2750,2750,2750,2750,2750],b:.620},con:{pkg:'—',esc:'—',p:[1430,1430,2945,2945,2945,2945,2945,2945,2945,2945,2945,2945],b:.593}},
+      }
+    }
+  },
+
+  /* ── EJECUTIVA ── */
+  'ejecutiva': {
+    label: 'Lic. Ejecutiva',
+    tipo: 'lic',
+    niveles: {
+      alto: {
+        hot:   {sin:{pkg:'P2.LIEJE.INT.',esc:'P14.INT2M',p:[699,799,2265,2265,2265,2265,2265,2265,2265,2265,2265,2265],b:.687},con:{pkg:'P2.LIEJE.INT.',esc:'P16.INT2M',p:[699,799,2460,2460,2460,2460,2460,2460,2460,2460,2460,2460],b:.660}},
+        rmkt30:{sin:{pkg:'P3.LIEJE.INT.',esc:'P14.INT2M',p:[699,799,2139,2139,2139,2139,2139,2139,2139,2139,2139,2139],b:.704},con:{pkg:'P3.LIEJE.INT.',esc:'P16.INT2M',p:[699,799,2334,2334,2334,2334,2334,2334,2334,2334,2334,2334],b:.677}},
+        rmkt60:{sin:{pkg:'P4.LIEJE.INT.',esc:'P14.INT2M',p:[699,799,2097,2097,2097,2097,2097,2097,2097,2097,2097,2097],b:.710},con:{pkg:'P4.LIEJE.INT.',esc:'P16.INT2M',p:[699,799,2292,2292,2292,2292,2292,2292,2292,2292,2292,2292],b:.683}},
+        sur:   {sin:{pkg:'—',esc:'—',p:[629,719,2154,2154,2154,2154,2154,2154,2154,2154,2154,2154],b:.702},con:{pkg:'—',esc:'—',p:[629,719,2349,2349,2349,2349,2349,2349,2349,2349,2349,2349],b:.675}},
+        norte: {sin:{pkg:'—',esc:'—',p:[769,879,2596,2596,2596,2596,2596,2596,2596,2596,2596,2596],b:.641},con:{pkg:'—',esc:'—',p:[769,879,2791,2791,2791,2791,2791,2791,2791,2791,2791,2791],b:.614}},
+      },
+      medio: {
+        hot:   {sin:{pkg:'—',esc:'—',p:[699,799,2139,2139,2139,2139,2139,2139,2139,2139,2139,2139],b:.704},con:{pkg:'—',esc:'—',p:[699,799,2334,2334,2334,2334,2334,2334,2334,2334,2334,2334],b:.677}},
+        rmkt30:{sin:{pkg:'—',esc:'—',p:[699,799,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009],b:.722},con:{pkg:'—',esc:'—',p:[699,799,2204,2204,2204,2204,2204,2204,2204,2204,2204,2204],b:.695}},
+        rmkt60:{sin:{pkg:'—',esc:'—',p:[699,799,1967,1967,1967,1967,1967,1967,1967,1967,1967,1967],b:.728},con:{pkg:'—',esc:'—',p:[699,799,2162,2162,2162,2162,2162,2162,2162,2162,2162,2162],b:.701}},
+        sur:   {sin:{pkg:'—',esc:'—',p:[629,719,1914,1914,1914,1914,1914,1914,1914,1914,1914,1914],b:.735},con:{pkg:'—',esc:'—',p:[629,719,2109,2109,2109,2109,2109,2109,2109,2109,2109,2109],b:.708}},
+        norte: {sin:{pkg:'—',esc:'—',p:[769,879,2356,2356,2356,2356,2356,2356,2356,2356,2356,2356],b:.674},con:{pkg:'—',esc:'—',p:[769,879,2551,2551,2551,2551,2551,2551,2551,2551,2551,2551],b:.647}},
+      },
+      bajo: {
+        hot:   {sin:{pkg:'—',esc:'—',p:[699,799,2135,2135,2135,2135,2135,2135,2135,2135,2135,2135],b:.705},con:{pkg:'—',esc:'—',p:[699,799,2330,2330,2330,2330,2330,2330,2330,2330,2330,2330],b:.678}},
+        rmkt30:{sin:{pkg:'—',esc:'—',p:[699,799,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009],b:.722},con:{pkg:'—',esc:'—',p:[699,799,2204,2204,2204,2204,2204,2204,2204,2204,2204,2204],b:.695}},
+        rmkt60:{sin:{pkg:'—',esc:'—',p:[699,799,1967,1967,1967,1967,1967,1967,1967,1967,1967,1967],b:.728},con:{pkg:'—',esc:'—',p:[699,799,2162,2162,2162,2162,2162,2162,2162,2162,2162,2162],b:.701}},
+        sur:   {sin:{pkg:'—',esc:'—',p:[629,719,1914,1914,1914,1914,1914,1914,1914,1914,1914,1914],b:.735},con:{pkg:'—',esc:'—',p:[629,719,2109,2109,2109,2109,2109,2109,2109,2109,2109,2109],b:.708}},
+        norte: {sin:{pkg:'—',esc:'—',p:[769,879,2356,2356,2356,2356,2356,2356,2356,2356,2356,2356],b:.674},con:{pkg:'—',esc:'—',p:[769,879,2551,2551,2551,2551,2551,2551,2551,2551,2551,2551],b:.647}},
+      }
+    }
+  },
+
+  /* ── UTEL JOVEN ── */
+  'joven': {
+    label: 'Utel Joven',
+    tipo: 'lic',
+    niveles: {
+      alto: {
+        hot:   {sin:{pkg:'—',esc:'P29.INT2M',p:[699,799,2265,2265,2265,2265,2265,2265,2265,2265,2265,2265],b:.687},con:{pkg:'—',esc:'P15.INT2M',p:[699,799,2460,2460,2460,2460,2460,2460,2460,2460,2460,2460],b:.660}},
+        rmkt30:{sin:{pkg:'—',esc:'P29.INT2M',p:[699,799,2139,2139,2139,2139,2139,2139,2139,2139,2139,2139],b:.704},con:{pkg:'—',esc:'P15.INT2M',p:[699,799,2334,2334,2334,2334,2334,2334,2334,2334,2334,2334],b:.677}},
+        rmkt60:{sin:{pkg:'—',esc:'P29.INT2M',p:[699,799,2097,2097,2097,2097,2097,2097,2097,2097,2097,2097],b:.710},con:{pkg:'—',esc:'P15.INT2M',p:[699,799,2292,2292,2292,2292,2292,2292,2292,2292,2292,2292],b:.683}},
+        sur:   {sin:{pkg:'—',esc:'—',p:[629,719,2154,2154,2154,2154,2154,2154,2154,2154,2154,2154],b:.702},con:{pkg:'—',esc:'—',p:[629,719,2349,2349,2349,2349,2349,2349,2349,2349,2349,2349],b:.675}},
+        norte: {sin:{pkg:'—',esc:'—',p:[769,879,2596,2596,2596,2596,2596,2596,2596,2596,2596,2596],b:.641},con:{pkg:'—',esc:'—',p:[769,879,2791,2791,2791,2791,2791,2791,2791,2791,2791,2791],b:.614}},
+      },
+      medio: {
+        hot:   {sin:{pkg:'—',esc:'—',p:[699,799,2139,2139,2139,2139,2139,2139,2139,2139,2139,2139],b:.704},con:{pkg:'—',esc:'—',p:[699,799,2334,2334,2334,2334,2334,2334,2334,2334,2334,2334],b:.677}},
+        rmkt30:{sin:{pkg:'—',esc:'—',p:[699,799,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009],b:.722},con:{pkg:'—',esc:'—',p:[699,799,2204,2204,2204,2204,2204,2204,2204,2204,2204,2204],b:.695}},
+        rmkt60:{sin:{pkg:'—',esc:'—',p:[699,799,1967,1967,1967,1967,1967,1967,1967,1967,1967,1967],b:.728},con:{pkg:'—',esc:'—',p:[699,799,2162,2162,2162,2162,2162,2162,2162,2162,2162,2162],b:.701}},
+        sur:   {sin:{pkg:'—',esc:'—',p:[629,719,1914,1914,1914,1914,1914,1914,1914,1914,1914,1914],b:.735},con:{pkg:'—',esc:'—',p:[629,719,2109,2109,2109,2109,2109,2109,2109,2109,2109,2109],b:.708}},
+        norte: {sin:{pkg:'—',esc:'—',p:[769,879,2356,2356,2356,2356,2356,2356,2356,2356,2356,2356],b:.674},con:{pkg:'—',esc:'—',p:[769,879,2551,2551,2551,2551,2551,2551,2551,2551,2551,2551],b:.647}},
+      },
+      bajo: {
+        hot:   {sin:{pkg:'—',esc:'—',p:[699,799,2135,2135,2135,2135,2135,2135,2135,2135,2135,2135],b:.705},con:{pkg:'—',esc:'—',p:[699,799,2330,2330,2330,2330,2330,2330,2330,2330,2330,2330],b:.678}},
+        rmkt30:{sin:{pkg:'—',esc:'—',p:[699,799,2009,2009,2009,2009,2009,2009,2009,2009,2009,2009],b:.722},con:{pkg:'—',esc:'—',p:[699,799,2204,2204,2204,2204,2204,2204,2204,2204,2204,2204],b:.695}},
+        rmkt60:{sin:{pkg:'—',esc:'—',p:[699,799,1967,1967,1967,1967,1967,1967,1967,1967,1967,1967],b:.728},con:{pkg:'—',esc:'—',p:[699,799,2162,2162,2162,2162,2162,2162,2162,2162,2162,2162],b:.701}},
+        sur:   {sin:{pkg:'—',esc:'—',p:[629,719,1914,1914,1914,1914,1914,1914,1914,1914,1914,1914],b:.735},con:{pkg:'—',esc:'—',p:[629,719,2109,2109,2109,2109,2109,2109,2109,2109,2109,2109],b:.708}},
+        norte: {sin:{pkg:'—',esc:'—',p:[769,879,2356,2356,2356,2356,2356,2356,2356,2356,2356,2356],b:.674},con:{pkg:'—',esc:'—',p:[769,879,2551,2551,2551,2551,2551,2551,2551,2551,2551,2551],b:.647}},
+      }
+    }
+  },
+
+  /* ── HÍBRIDA ── */
+  'hibrida': {
+    label: 'Lic. Híbrida',
+    tipo: 'lic',
+    niveles: {
+      alto: {
+        hot:   {sin:{pkg:'—',esc:'P37.INT2M',p:[699,799,2540,2540,2540,2540,2540,2540,2540,2540,2540,2540],b:.649},con:{pkg:'—',esc:'P56.INT2M',p:[769,799,2735,2735,2735,2735,2735,2735,2735,2735,2735,2735],b:.622}},
+        rmkt30:{sin:{pkg:'—',esc:'P37.INT2M',p:[699,799,2414,2414,2414,2414,2414,2414,2414,2414,2414,2414],b:.666},con:{pkg:'—',esc:'P56.INT2M',p:[699,799,2609,2609,2609,2609,2609,2609,2609,2609,2609,2609],b:.639}},
+        rmkt60:{sin:{pkg:'—',esc:'P37.INT2M',p:[699,799,2372,2372,2372,2372,2372,2372,2372,2372,2372,2372],b:.672},con:{pkg:'—',esc:'P56.INT2M',p:[699,799,2567,2567,2567,2567,2567,2567,2567,2567,2567,2567],b:.645}},
+        sur:   {sin:{pkg:'—',esc:'—',p:[683,719,2429,2429,2429,2429,2429,2429,2429,2429,2429,2429],b:.664},con:{pkg:'—',esc:'—',p:[881,908,2624,2624,2624,2624,2624,2624,2624,2624,2624,2624],b:.637}},
+        norte: {sin:{pkg:'—',esc:'—',p:[835,879,2871,2871,2871,2871,2871,2871,2871,2871,2871,2871],b:.603},con:{pkg:'—',esc:'—',p:[1077,1110,3066,3066,3066,3066,3066,3066,3066,3066,3066,3066],b:.576}},
+      },
+      medio: {
+        hot:   {sin:{pkg:'—',esc:'—',p:[699,799,2414,2414,2414,2414,2414,2414,2414,2414,2414,2414],b:.666},con:{pkg:'—',esc:'—',p:[699,799,2609,2609,2609,2609,2609,2609,2609,2609,2609,2609],b:.639}},
+        rmkt30:{sin:{pkg:'—',esc:'—',p:[699,799,2288,2288,2288,2288,2288,2288,2288,2288,2288,2288],b:.684},con:{pkg:'—',esc:'—',p:[699,799,2483,2483,2483,2483,2483,2483,2483,2483,2483,2483],b:.657}},
+        rmkt60:{sin:{pkg:'—',esc:'—',p:[699,799,2246,2246,2246,2246,2246,2246,2246,2246,2246,2246],b:.690},con:{pkg:'—',esc:'—',p:[699,799,2441,2441,2441,2441,2441,2441,2441,2441,2441,2441],b:.663}},
+        sur:   {sin:{pkg:'—',esc:'—',p:[629,719,2154,2154,2154,2154,2154,2154,2154,2154,2154,2154],b:.702},con:{pkg:'—',esc:'—',p:[629,719,2349,2349,2349,2349,2349,2349,2349,2349,2349,2349],b:.675}},
+        norte: {sin:{pkg:'—',esc:'—',p:[769,879,2656,2656,2656,2656,2656,2656,2656,2656,2656,2656],b:.633},con:{pkg:'—',esc:'—',p:[769,879,2851,2851,2851,2851,2851,2851,2851,2851,2851,2851],b:.606}},
+      },
+      bajo: {
+        hot:   {sin:{pkg:'—',esc:'—',p:[699,799,2372,2372,2372,2372,2372,2372,2372,2372,2372,2372],b:.672},con:{pkg:'—',esc:'—',p:[699,799,2567,2567,2567,2567,2567,2567,2567,2567,2567,2567],b:.645}},
+        rmkt30:{sin:{pkg:'—',esc:'—',p:[699,799,2246,2246,2246,2246,2246,2246,2246,2246,2246,2246],b:.690},con:{pkg:'—',esc:'—',p:[699,799,2441,2441,2441,2441,2441,2441,2441,2441,2441,2441],b:.663}},
+        rmkt60:{sin:{pkg:'—',esc:'—',p:[699,799,2204,2204,2204,2204,2204,2204,2204,2204,2204,2204],b:.695},con:{pkg:'—',esc:'—',p:[699,799,2399,2399,2399,2399,2399,2399,2399,2399,2399,2399],b:.668}},
+        sur:   {sin:{pkg:'—',esc:'—',p:[629,719,2121,2121,2121,2121,2121,2121,2121,2121,2121,2121],b:.707},con:{pkg:'—',esc:'—',p:[629,719,2316,2316,2316,2316,2316,2316,2316,2316,2316,2316],b:.680}},
+        norte: {sin:{pkg:'—',esc:'—',p:[769,879,2541,2541,2541,2541,2541,2541,2541,2541,2541,2541],b:.649},con:{pkg:'—',esc:'—',p:[769,879,2736,2736,2736,2736,2736,2736,2736,2736,2736,2736],b:.622}},
+      }
+    }
+  },
+
+  /* ── MAESTRÍA ONLINE ── */
+  'mae_online': {
+    label: 'Maestría Online',
+    tipo: 'mae',
+    niveles: {
+      alto: {
+        hot:   {sin:{pkg:'P6.MA.',esc:'P7.MAE2M',p:[750,1660,2650,2650,2650,2650,2650,2650,2650,2650,2650,2650],b:.634},con:{pkg:'P6.MA.',esc:'P8.MAE2M',p:[750,1660,2955,2955,2955,2955,2955,2955,2955,2955,2955,2955],b:.591}},
+        rmkt:  {sin:{pkg:'P7.MA.',esc:'P7.MAE2M',p:[750,1660,2491,2491,2491,2491,2491,2491,2491,2491,2491,2491],b:.656},con:{pkg:'P7.MA.',esc:'P8.MAE2M',p:[750,1660,2796,2796,2796,2796,2796,2796,2796,2796,2796,2796],b:.613}},
+      },
+      medio: {
+        hot:   {sin:{pkg:'P6.MA.',esc:'P7.MAE2M',p:[750,1660,2491,2491,2491,2491,2491,2491,2491,2491,2491,2491],b:.656},con:{pkg:'P6.MA.',esc:'P8.MAE2M',p:[750,1660,2796,2796,2796,2796,2796,2796,2796,2796,2796,2796],b:.613}},
+        rmkt:  {sin:{pkg:'P7.MA.',esc:'P7.MAE2M',p:[750,1660,2350,2350,2350,2350,2350,2350,2350,2350,2350,2350],b:.675},con:{pkg:'P7.MA.',esc:'P8.MAE2M',p:[750,1660,2655,2655,2655,2655,2655,2655,2655,2655,2655,2655],b:.632}},
+      },
+      bajo: {
+        hot:   {sin:{pkg:'P6.MA.',esc:'P7.MAE2M',p:[750,1660,2350,2350,2350,2350,2350,2350,2350,2350,2350,2350],b:.675},con:{pkg:'P6.MA.',esc:'P8.MAE2M',p:[750,1660,2650,2650,2650,2650,2650,2650,2650,2650,2650,2650],b:.634}},
+        rmkt:  {sin:{pkg:'P7.MA.',esc:'P7.MAE2M',p:[750,1660,2200,2200,2200,2200,2200,2200,2200,2200,2200,2200],b:.696},con:{pkg:'P7.MA.',esc:'P8.MAE2M',p:[750,1660,2500,2500,2500,2500,2500,2500,2500,2500,2500,2500],b:.654}},
+      }
+    }
+  },
+
+  /* ── MAESTRÍA EJECUTIVA ── */
+  'mae_ejecutiva': {
+    label: 'Maestría Ejecutiva',
+    tipo: 'mae',
+    niveles: {
+      alto: {
+        hot:   {sin:{pkg:'P5.MAEJE.',esc:'P14.MAE2M',p:[750,1660,2715,2715,2715,2715,2715,2715,2715,2715,2715,2715],b:.625},con:{pkg:'P5.MAEJE.',esc:'P15.MAE2M',p:[750,1660,3020,3020,3020,3020,3020,3020,3020,3020,3020,3020],b:.582}},
+        rmkt:  {sin:{pkg:'P6.MAEJE.',esc:'P14.MAE2M',p:[750,1660,2556,2556,2556,2556,2556,2556,2556,2556,2556,2556],b:.647},con:{pkg:'P6.MAEJE.',esc:'P15.MAE2M',p:[750,1660,2861,2861,2861,2861,2861,2861,2861,2861,2861,2861],b:.604}},
+      },
+      medio: {
+        hot:   {sin:{pkg:'P5.MAEJE.',esc:'P14.MAE2M',p:[750,1660,2556,2556,2556,2556,2556,2556,2556,2556,2556,2556],b:.647},con:{pkg:'P5.MAEJE.',esc:'P15.MAE2M',p:[750,1660,2861,2861,2861,2861,2861,2861,2861,2861,2861,2861],b:.604}},
+        rmkt:  {sin:{pkg:'P6.MAEJE.',esc:'P14.MAE2M',p:[750,1660,2400,2400,2400,2400,2400,2400,2400,2400,2400,2400],b:.668},con:{pkg:'P6.MAEJE.',esc:'P15.MAE2M',p:[750,1660,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700],b:.627}},
+      },
+      bajo: {
+        hot:   {sin:{pkg:'P5.MAEJE.',esc:'P14.MAE2M',p:[750,1660,2400,2400,2400,2400,2400,2400,2400,2400,2400,2400],b:.668},con:{pkg:'P5.MAEJE.',esc:'P15.MAE2M',p:[750,1660,2700,2700,2700,2700,2700,2700,2700,2700,2700,2700],b:.627}},
+        rmkt:  {sin:{pkg:'P6.MAEJE.',esc:'P14.MAE2M',p:[750,1660,2250,2250,2250,2250,2250,2250,2250,2250,2250,2250],b:.689},con:{pkg:'P6.MAEJE.',esc:'P15.MAE2M',p:[750,1660,2550,2550,2550,2550,2550,2550,2550,2550,2550,2550],b:.647}},
+      }
+    }
+  },
+
+  /* ── MASTER UTEL ── */
+  'master': {
+    label: 'Master UTEL',
+    tipo: 'ms',
+    niveles: {
+      alto: {
+        hot:  {sin:{pkg:'P7.MS.',esc:'P76.MAS4M',p:[850,1307,1805,2054,2590,2590,2590,2590,2590,2590,2590,2590],b:.642},con:{pkg:'P7.MS.',esc:'P113.MAS4M',p:[850,1307,1805,2054,2810,2810,2810,2810,2810,2810,2810,2810],b:.611}},
+        rmkt: {sin:{pkg:'P8.MS.',esc:'P76.MAS4M',p:[850,1307,1805,2054,2435,2435,2435,2435,2435,2435,2435,2435],b:.663},con:{pkg:'P8.MS.',esc:'P113.MAS4M',p:[850,1307,1805,2054,2655,2655,2655,2655,2655,2655,2655,2655],b:.633}},
+      },
+      medio: {
+        hot:  {sin:{pkg:'P7.MS.',esc:'P76.MAS4M',p:[850,1307,1805,2054,2435,2435,2435,2435,2435,2435,2435,2435],b:.663},con:{pkg:'P7.MS.',esc:'P113.MAS4M',p:[850,1307,1805,2054,2655,2655,2655,2655,2655,2655,2655,2655],b:.633}},
+        rmkt: {sin:{pkg:'P8.MS.',esc:'P76.MAS4M',p:[850,1307,1805,2054,2290,2290,2290,2290,2290,2290,2290,2290],b:.683},con:{pkg:'P8.MS.',esc:'P113.MAS4M',p:[850,1307,1805,2054,2510,2510,2510,2510,2510,2510,2510,2510],b:.653}},
+      },
+      bajo: {
+        hot:  {sin:{pkg:'P7.MS.',esc:'P76.MAS4M',p:[850,1307,1805,2054,2290,2290,2290,2290,2290,2290,2290,2290],b:.683},con:{pkg:'P7.MS.',esc:'P113.MAS4M',p:[850,1307,1805,2054,2510,2510,2510,2510,2510,2510,2510,2510],b:.653}},
+        rmkt: {sin:{pkg:'P8.MS.',esc:'P76.MAS4M',p:[850,1307,1805,2054,2150,2150,2150,2150,2150,2150,2150,2150],b:.703},con:{pkg:'P8.MS.',esc:'P113.MAS4M',p:[850,1307,1805,2054,2370,2370,2370,2370,2370,2370,2370,2370],b:.672}},
+      }
+    }
+  },
+
+  /* ── DOCTORADO ── */
+  'doctorado': {
+    label: 'Doctorado Online',
+    tipo: 'doc',
+    niveles: {
+      alto: {
+        hot:  {sin:{pkg:'P6.DO.4.10.26',esc:'DOC17.4M',p:[1067,1445,3125,3125,5488,5488,5488,5488,5488,5488,5488,5488],b:.241},con:{pkg:'P6.DO.4.10.26',esc:'DOC15.4M',p:[1067,1445,3125,3125,5793,5793,5793,5793,5793,5793,5793,5793],b:.199}},
+        rmkt: {sin:{pkg:'P7.DO.4.10.26',esc:'DOC17.4M',p:[1067,1445,3125,3125,5159,5159,5159,5159,5159,5159,5159,5159],b:.287},con:{pkg:'P7.DO.4.10.26',esc:'DOC15.4M',p:[1067,1445,3125,3125,5464,5464,5464,5464,5464,5464,5464,5464],b:.245}},
+      },
+      medio: {
+        hot:  {sin:{pkg:'P6.DO.4.10.26',esc:'DOC17.4M',p:[1067,1445,3125,3125,5159,5159,5159,5159,5159,5159,5159,5159],b:.287},con:{pkg:'P6.DO.4.10.26',esc:'DOC15.4M',p:[1067,1445,3125,3125,5464,5464,5464,5464,5464,5464,5464,5464],b:.245}},
+        rmkt: {sin:{pkg:'P7.DO.4.10.26',esc:'DOC17.4M',p:[1067,1445,3125,3125,4850,4850,4850,4850,4850,4850,4850,4850],b:.330},con:{pkg:'P7.DO.4.10.26',esc:'DOC15.4M',p:[1067,1445,3125,3125,5155,5155,5155,5155,5155,5155,5155,5155],b:.288}},
+      },
+      bajo: {
+        hot:  {sin:{pkg:'P6.DO.4.10.26',esc:'DOC17.4M',p:[1067,1445,3125,3125,4850,4850,4850,4850,4850,4850,4850,4850],b:.330},con:{pkg:'P6.DO.4.10.26',esc:'DOC15.4M',p:[1067,1445,3125,3125,5155,5155,5155,5155,5155,5155,5155,5155],b:.288}},
+        rmkt: {sin:{pkg:'P7.DO.4.10.26',esc:'DOC17.4M',p:[1067,1445,3125,3125,4550,4550,4550,4550,4550,4550,4550,4550],b:.371},con:{pkg:'P7.DO.4.10.26',esc:'DOC15.4M',p:[1067,1445,3125,3125,4855,4855,4855,4855,4855,4855,4855,4855],b:.329}},
+      }
+    }
+  }
+};
+
+/* ── ACCESORIOS por tipo ── */
+var ACCS_DEF = {
+  lic: [
+    {cat:'Incluido en el paquete', items:[
+      {id:'voxy',   name:'Ingl\u00e9s Voxy',   price:0, included:true},
+      {id:'welbe',  name:'Welbe',               price:0, included:true},
+      {id:'asist',  name:'Asistencia BI',       price:0, included:true}
+    ]},
+    {cat:'Accesorios opcionales', items:[
+      {id:'tit',      name:'Titulaciui\u00f3n',    price:195},
+      {id:'tit50',    name:'T\u00edtulo 50%',        price:165},
+      {id:'welbep',   name:'Welbe Premium',           price:75},
+      {id:'ucamp',    name:'U-Camp',                  price:110},
+      {id:'seseje',   name:'Sesi\u00f3n Ejecutiva',  price:165},
+      {id:'college',  name:'Utel College',            price:165},
+      {id:'utelx',    name:'Utel X',                  price:165},
+      {id:'ugen',     name:'U Gen\u00e9rico',         price:110},
+      {id:'cambridge',name:'Cambridge',               price:165},
+      {id:'duolingo', name:'Duolingo',                price:195},
+      {id:'coursera', name:'Coursera',                price:220},
+      {id:'facebook', name:'Facebook',                price:195},
+      {id:'microsoft',name:'Microsoft',               price:195},
+      {id:'tableau',  name:'Tableau',                 price:195},
+      {id:'gcloud',   name:'Google Cloud',            price:195},
+      {id:'gads',     name:'Google Ads',              price:195},
+      {id:'legal',    name:'Legaltech',               price:195}
+    ]}
+  ],
+  mae: [
+    {cat:'Incluido en el paquete', items:[
+      {id:'voxy',    name:'Ingl\u00e9s Voxy',   price:0, included:true},
+      {id:'welbe',   name:'Welbe',               price:0, included:true},
+      {id:'coursera',name:'Coursera',            price:0, included:true},
+      {id:'asist',   name:'Asistencia Plus',     price:0, included:true}
+    ]},
+    {cat:'Accesorios opcionales', items:[
+      {id:'tit',      name:'Titulaciui\u00f3n',    price:305},
+      {id:'tit50',    name:'T\u00edtulo 50%',        price:275},
+      {id:'welbep',   name:'Welbe Premium',           price:75},
+      {id:'seseje',   name:'Sesi\u00f3n Ejecutiva',  price:165},
+      {id:'hibrida',  name:'H\u00edbrida',           price:495},
+      {id:'utelx',    name:'Utel X',                  price:165},
+      {id:'ugen',     name:'U Gen\u00e9rico',         price:110},
+      {id:'cambridge',name:'Cambridge',               price:220},
+      {id:'duolingo', name:'Duolingo',                price:195},
+      {id:'facebook', name:'Facebook',                price:195},
+      {id:'microsoft',name:'Microsoft',               price:195},
+      {id:'tableau',  name:'Tableau',                 price:195},
+      {id:'gcloud',   name:'Google Cloud',            price:195},
+      {id:'gads',     name:'Google Ads',              price:195},
+      {id:'legal',    name:'Legaltech',               price:195}
+    ]}
+  ],
+  ms: [
+    {cat:'Incluido en el paquete', items:[
+      {id:'voxy',   name:'Ingl\u00e9s Voxy',      price:0, included:true},
+      {id:'seseje', name:'Sesi\u00f3n ejecutiva',  price:0, included:true},
+      {id:'asist',  name:'Asistencia Plus',         price:0, included:true}
+    ]},
+    {cat:'Accesorios opcionales', items:[
+      {id:'diploma',  name:'Diploma Master',          price:220},
+      {id:'welbe',    name:'Welbe',                   price:65},
+      {id:'utelx',    name:'Utel X',                  price:165},
+      {id:'ugen',     name:'U Gen\u00e9rico',         price:110},
+      {id:'cambridge',name:'Cambridge',               price:220},
+      {id:'gads',     name:'Google Ads',              price:195},
+      {id:'microsoft',name:'Microsoft',               price:195}
+    ]}
+  ],
+  doc: [
+    {cat:'Incluido en el paquete', items:[
+      {id:'voxy',    name:'Ingl\u00e9s Voxy',   price:0, included:true},
+      {id:'welbe',   name:'Welbe',               price:0, included:true},
+      {id:'coursera',name:'Coursera',            price:0, included:true},
+      {id:'asist',   name:'Asistencia Plus',     price:0, included:true}
+    ]},
+    {cat:'Accesorios opcionales', items:[
+      {id:'tit',      name:'Titulaciui\u00f3n',    price:305},
+      {id:'utelx',    name:'Utel X',                price:165},
+      {id:'ugen',     name:'U Gen\u00e9rico',       price:110},
+      {id:'cambridge',name:'Cambridge',             price:220},
+      {id:'facebook', name:'Facebook',              price:195},
+      {id:'microsoft',name:'Microsoft',             price:195},
+      {id:'gads',     name:'Google Ads',            price:195}
+    ]}
+  ]
+};
+
+var SEL = {lic:{},mae:{},ms:{},doc:{}};
+
+function getAccTotal(sec){
+  var cats=ACCS_DEF[sec]||ACCS_DEF.lic, total=0;
+  for(var i=0;i<cats.length;i++) for(var j=0;j<cats[i].items.length;j++){var it=cats[i].items[j];if(SEL[sec][it.id]&&it.price>0)total+=it.price;}
+  return total;
+}
+
+function buildAccPanel(panelId, sectionKey, cats, renderFnName) {
+  var panel = document.getElementById(panelId);
+  var html = '<div class="acc-panel-title">Agregar accesorios</div><div class="acc-cats">';
+  for (var ci = 0; ci < cats.length; ci++) {
+    var cat = cats[ci];
+    html += '<div><div class="acc-cat-label">' + cat.cat + '</div><div class="acc-items">';
+    for (var ii = 0; ii < cat.items.length; ii++) {
+      var item = cat.items[ii];
+      var sel = SEL[sectionKey][item.id] || false;
+      var inc = item.included || false;
+      var active = sel || inc;
+      var cls = "acc-chip" + (active ? " selected" : "");
+      var priceLabel = inc ? "Incluido" : (item.price === 0 ? "$0" : fmt(item.price) + "/mes");
+      var clickable = (!inc && item.price > 0);
+      html += '<div class="' + cls + '"';
+      if (clickable) html += ' onclick="toggleAcc(\'' + sectionKey + '\',\'' + item.id + '\',' + item.price + ',\'' + panelId + '\',\'' + renderFnName + '\')"  style="cursor:pointer"';
+      html += '>';
+      html += '<div class="chip-check">' + (active ? '&#10003;' : '') + '</div>';
+      html += '<span class="chip-name">' + item.name + '</span>';
+      html += '<span class="chip-price">' + priceLabel + '</span>';
+      html += '</div>';
+    }
+    html += '</div></div>';
+  }
+  html += '</div>';
+  panel.innerHTML = html;
+}
+
+function toggleAcc(sec, id, price, panelId, fnName) {
+  SEL[sec][id] = !SEL[sec][id];
+  var fns = {rL:rL, rM:rM, rS:rS, rD:rD};
+  if (fns[fnName]) fns[fnName]();
+}
+
+function buildTotal(totalId, basePrice, sec) {
+  var cats = ACCS_DEF[sec] || ACCS_DEF.lic;
+  var rows = '<div class="total-rows">';
+  rows += '<div class="total-row header"><span>Cuota base (mes 3+)</span><span class="val">' + fmt(basePrice) + '</span></div>';
+  var accTotal = 0;
+  for (var i = 0; i < cats.length; i++) {
+    for (var j = 0; j < cats[i].items.length; j++) {
+      var it = cats[i].items[j];
+      if (SEL[sec][it.id] && it.price > 0) {
+        accTotal += it.price;
+        rows += '<div class="total-row acc-line"><span>+ ' + it.name + '</span><span class="val">' + fmt(it.price) + '</span></div>';
+      }
+    }
+  }
+  rows += '<div class="total-row separator"><span>Total cuota mensual</span><span class="val">' + fmt(basePrice + accTotal) + '</span></div>';
+  rows += '</div>';
+  document.getElementById(totalId).innerHTML = '<div class="total-title">Resumen del plan</div>' + rows;
+}
+
+/* ── INCLUDES ── */
+function mkInc(id, items) {
+  var html = '<div class="inc-title">Qu\u00e9 incluye</div><div class="inc-grid">';
+  for (var i = 0; i < items.length; i++) {
+    var it = items[i];
+    html += '<div class="inc-item"><div class="ic ' + (it.opt ? 'ic-op' : 'ic-in') + '">' + (it.opt ? '+' : '&#10003;') + '</div>';
+    html += '<div><div class="inc-name">' + it.name + '</div><div class="inc-desc">' + it.desc + '</div></div></div>';
+  }
+  html += '</div>';
+  document.getElementById(id).innerHTML = html;
+}
+
+var INC_LIC=[{name:'5% desc. domiciliaci\u00f3n',desc:'Al domiciliar el pago'},{name:'Asistencia BI',desc:'Seguimiento acad\u00e9mico $65/mes'},{name:'Ingl\u00e9s Voxy',desc:'Plataforma de idiomas incluida'},{name:'Welbe',desc:'Bienestar y salud mental $65/mes'},{name:'Titulaciui\u00f3n',desc:'$195 opcional',opt:true},{name:'U-Camp',desc:'$110 opcional',opt:true},{name:'Utel X',desc:'$165 opcional',opt:true}];
+var INC_MAE=[{name:'5% desc. domiciliaci\u00f3n',desc:'Al domiciliar el pago'},{name:'Asistencia Plus',desc:'$65/mes'},{name:'Ingl\u00e9s Voxy',desc:'Incluido'},{name:'Welbe',desc:'$65/mes'},{name:'Coursera',desc:'$220/mes'},{name:'Titulaci\u00f3n',desc:'$305 opcional',opt:true}];
+var INC_MS=[{name:'5% desc. domiciliaci\u00f3n',desc:'Al domiciliar el pago'},{name:'Asistencia Plus',desc:'$65/mes'},{name:'Ingl\u00e9s Voxy',desc:'Incluido'},{name:'Sesi\u00f3n ejecutiva',desc:'$165/mes'},{name:'Diploma Master',desc:'$220 opcional',opt:true}];
+var INC_DOC=[{name:'5% desc. domiciliaci\u00f3n',desc:'Al domiciliar el pago'},{name:'Asistencia Plus',desc:'$65/mes'},{name:'Ingl\u00e9s Voxy',desc:'Incluido'},{name:'Welbe',desc:'$65/mes'},{name:'Coursera',desc:'$220/mes'},{name:'Titulaci\u00f3n doctoral',desc:'$305 opcional',opt:true}];
+
+/* ── RENDER PRINCIPAL ── */
+function getEntry(progKey, nivel, lead, tit) {
+  var prog = PROG[progKey];
+  if (!prog) return null;
+  var nData = prog.niveles[nivel] || prog.niveles.alto;
+  var lData = nData[lead] || nData.hot;
+  return tit ? lData.con : lData.sin;
+}
+
+function getCurrentSec() {
+  return document.querySelector('.sec.active');
+}
+
+function renderProg(secId, progSelId, nivelSelId, leadSelId, titSelId, tbodyId, infoId, becaId, accPanelId, totalId, incId, incItems, accType) {
+  var progKey = document.getElementById(progSelId).value;
+  var nivel   = document.getElementById(nivelSelId).value;
+  var lead    = document.getElementById(leadSelId).value;
+  var tit     = document.getElementById(titSelId).value === 'si';
+  var acc     = getAccTotal(accType);
+  var e       = getEntry(progKey, nivel, lead, tit);
+  if (!e) return;
+  ft(tbodyId, e.p, e.pkg, e.esc, acc);
+  fb(becaId, e.b, LISTA);
+  var prog = PROG[progKey];
+  document.getElementById(infoId).innerHTML = NB[nivel] + ' <span class="badge b-mod">' + prog.label + '</span>' + LBG[lead];
+  buildTotal(totalId, e.p[2], accType);
+  buildAccPanel(accPanelId, accType, ACCS_DEF[accType], accType === 'lic' ? 'rL' : accType === 'mae' ? 'rM' : accType === 'ms' ? 'rS' : 'rD');
+  mkInc(incId, incItems);
+}
+
+function rL(){ renderProg('sec-lic','lprog','lnivel','llead','ltit','lb','li','lbi','lic-acc-panel','lic-total','lic-inc',INC_LIC,'lic'); }
+function rM(){ renderProg('sec-mae','mprog','mnivel','mlead','mtit','mb','mi','mbi','mae-acc-panel','mae-total','mae-inc',INC_MAE,'mae'); }
+function rS(){ renderProg('sec-ms','sprog','snivel','slead','stit','sb','si2','sbi','ms-acc-panel','ms-total','ms-inc',INC_MS,'ms'); }
+function rD(){ renderProg('sec-doc','dprog','dnivel','dlead','dtit','db','di','dbi','doc-acc-panel','doc-total','doc-inc',INC_DOC,'doc'); }
+
+function rPU(){
+  var items=[{l:'Lic Online \u2014 Mayor',lista:200530,pago:74300},{l:'Lic Online \u2014 Ejecutivas',lista:200530,pago:82200},{l:'Lic Online \u2014 Joven',lista:200530,pago:82200},{l:'Lic Online \u2014 H\u00edbrida',lista:200530,pago:87900},{l:'Lic Derecho \u2014 Mayor',lista:231010,pago:83000},{l:'Lic Derecho \u2014 Ejecutivas',lista:231010,pago:91900},{l:'Lic Derecho \u2014 Joven',lista:231010,pago:91900},{l:'Lic Derecho \u2014 H\u00edbrida',lista:231010,pago:97400},{l:'Maestr\u00eda 18M \u2014 Mayor',lista:136980,pago:47700},{l:'Maestr\u00eda 24M \u2014 Mayor',lista:136980,pago:63600},{l:'Maestr\u00eda 18M \u2014 Ejecutivas',lista:136980,pago:49800},{l:'Maestr\u00eda 24M \u2014 Ejecutivas',lista:136980,pago:66400},{l:'Maestr\u00eda 18M \u2014 H\u00edbrida',lista:136980,pago:55800},{l:'Maestr\u00eda 24M \u2014 H\u00edbrida',lista:136980,pago:74400},{l:'Doctorado Online',lista:216900,pago:106400},{l:'PSI UVE Online',lista:null,pago:76100}];
+  var g=document.getElementById('pug'); g.innerHTML='';
+  for(var i=0;i<items.length;i++){var it=items[i];var d=document.createElement('div');d.className='pu-card';d.innerHTML='<div class="pu-lbl">'+it.l+'</div>'+(it.lista?'<div class="pu-lista">Lista: '+fmt(it.lista)+'</div>':'')+'<div class="pu-precio">'+fmt(it.pago)+'</div>';g.appendChild(d);}
+}
+
+function init(){rL();rM();rS();rD();rPU();}
+
+
+var ACCS_DEF = {
+  lic: [
+    {cat:'Accesorio', items:[{id:'tit',name:'Titulaci\u00f3n',price:195},{id:'tit50',name:'T\u00edtulo 50%',price:165},{id:'welbe',name:'Welbe',price:65},{id:'welbep',name:'Welbe Premium',price:75},{id:'asist',name:'Asistencia Plus',price:65,included:true}]},
+    {cat:'Experiencia', items:[{id:'seseje',name:'Sesi\u00f3n Ejecutiva',price:165},{id:'ucamp',name:'U-Camp',price:110},{id:'college',name:'Utel College',price:165}]},
+    {cat:'Plataforma', items:[{id:'utelx',name:'Utel X',price:165},{id:'ugen',name:'U Gen\u00e9rico',price:110}]},
+    {cat:'Idioma', items:[{id:'cambridge',name:'Cambridge',price:165},{id:'voxy',name:'Voxy',price:0,included:true},{id:'duolingo',name:'Duolingo',price:195}]},
+    {cat:'Certificaci\u00f3n', items:[{id:'coursera',name:'Coursera',price:220},{id:'facebook',name:'Facebook',price:195},{id:'microsoft',name:'Microsoft',price:195},{id:'tableau',name:'Tableau',price:195},{id:'gcloud',name:'Google Cloud',price:195},{id:'gads',name:'Google Ads',price:195},{id:'legal',name:'Legaltech',price:195}]}
+  ],
+  mae: [
+    {cat:'Accesorio', items:[{id:'tit',name:'Titulaci\u00f3n',price:305},{id:'tit50',name:'T\u00edtulo 50%',price:275},{id:'welbe',name:'Welbe',price:65},{id:'welbep',name:'Welbe Premium',price:75},{id:'asist',name:'Asistencia Plus',price:65,included:true}]},
+    {cat:'Experiencia', items:[{id:'seseje',name:'Sesi\u00f3n Ejecutiva',price:165},{id:'hibrida',name:'H\u00edbrida',price:495}]},
+    {cat:'Plataforma', items:[{id:'utelx',name:'Utel X',price:165},{id:'ugen',name:'U Gen\u00e9rico',price:110}]},
+    {cat:'Idioma', items:[{id:'cambridge',name:'Cambridge',price:220},{id:'voxy',name:'Voxy',price:0,included:true},{id:'duolingo',name:'Duolingo',price:195}]},
+    {cat:'Certificaci\u00f3n', items:[{id:'coursera',name:'Coursera',price:220},{id:'facebook',name:'Facebook',price:195},{id:'microsoft',name:'Microsoft',price:195},{id:'tableau',name:'Tableau',price:195},{id:'gcloud',name:'Google Cloud',price:195},{id:'gads',name:'Google Ads',price:195},{id:'legal',name:'Legaltech',price:195}]}
+  ],
+  ms: [
+    {cat:'Accesorio', items:[{id:'diploma',name:'Diploma Master',price:220},{id:'welbe',name:'Welbe',price:65},{id:'asist',name:'Asistencia Plus',price:65,included:true}]},
+    {cat:'Plataforma', items:[{id:'utelx',name:'Utel X',price:165},{id:'ugen',name:'U Gen\u00e9rico',price:110}]},
+    {cat:'Idioma', items:[{id:'cambridge',name:'Cambridge',price:220},{id:'voxy',name:'Voxy',price:0,included:true}]},
+    {cat:'Certificaci\u00f3n', items:[{id:'gads',name:'Google Ads',price:195},{id:'microsoft',name:'Microsoft',price:195}]}
+  ],
+  doc: [
+    {cat:'Accesorio', items:[{id:'tit',name:'Titulaci\u00f3n',price:305},{id:'welbe',name:'Welbe',price:65},{id:'asist',name:'Asistencia Plus',price:65,included:true}]},
+    {cat:'Plataforma', items:[{id:'utelx',name:'Utel X',price:165},{id:'ugen',name:'U Gen\u00e9rico',price:110}]},
+    {cat:'Idioma', items:[{id:'cambridge',name:'Cambridge',price:220},{id:'voxy',name:'Voxy',price:0,included:true},{id:'coursera',name:'Coursera',price:220}]},
+    {cat:'Certificaci\u00f3n', items:[{id:'facebook',name:'Facebook',price:195},{id:'microsoft',name:'Microsoft',price:195},{id:'gads',name:'Google Ads',price:195}]}
+  ]
+};
+
+
+var SEL = {lic:{},mae:{},ms:{},doc:{}};
+
+function getAccTotal(sec){
+  var cats=ACCS_DEF[sec]||ACCS_DEF.lic,total=0;
+  for(var i=0;i<cats.length;i++) for(var j=0;j<cats[i].items.length;j++){var it=cats[i].items[j];if(SEL[sec][it.id]&&it.price>0)total+=it.price;}
+  return total;
+}
+
+function buildAccPanel(panelId, sectionKey, cats, renderFnName) {
+  var panel = document.getElementById(panelId);
+  var html = '<div class="acc-panel-title">Agregar accesorios (se suma al precio)</div><div class="acc-cats">';
+  for (var ci=0; ci<cats.length; ci++) {
+    var cat=cats[ci];
+    html += '<div><div class="acc-cat-label">'+cat.cat+'</div><div class="acc-items">';
+    for (var ii=0; ii<cat.items.length; ii++) {
+      var item=cat.items[ii];
+      var sel=SEL[sectionKey][item.id]||false;
+      var inc=item.included||false;
+      var active=sel||inc;
+      var cls='acc-chip'+(active?' selected':'');
+      var priceLabel=inc?'Incluido':(item.price===0?'$0':fmt(item.price)+'/mes');
+      var clickable=(!inc&&item.price>0);
+      html+='<div class="'+cls+'"';
+      if(clickable)html+=' onclick="toggleAcc(\'' + sectionKey + '\',\'' + item.id + '\',' + item.price + ',\'' + panelId + '\',\'' + renderFnName + '\')" style="cursor:pointer"';
+      html+='>';
+      html+='<div class="chip-check">'+(active?'&#10003;':'')+'</div>';
+      html+='<span class="chip-name">'+item.name+'</span>';
+      html+='<span class="chip-price">'+priceLabel+'</span>';
+      html+='</div>';
+    }
+    html+='</div></div>';
+  }
+  html+='</div>';
+  panel.innerHTML=html;
+}
+
+function toggleAcc(sec,id,price,panelId,fnName){
+  SEL[sec][id]=!SEL[sec][id];
+  var fns={rL:rL,rM:rM,rS:rS,rD:rD};
+  if(fns[fnName])fns[fnName]();
+}
+
+function buildTotal(totalId,basePrice,sec){
+  var cats=ACCS_DEF[sec]||ACCS_DEF.lic;
+  var rows='<div class="total-rows">';
+  rows+='<div class="total-row header"><span>Cuota base (mes 3+)</span><span class="val">'+fmt(basePrice)+'</span></div>';
+  var accTotal=0;
+  for(var i=0;i<cats.length;i++){
+    for(var j=0;j<cats[i].items.length;j++){
+      var it=cats[i].items[j];
+      if(SEL[sec][it.id]&&it.price>0){
+        accTotal+=it.price;
+        rows+='<div class="total-row acc-line"><span>+ '+it.name+'</span><span class="val">'+fmt(it.price)+'</span></div>';
+      }
+    }
+  }
+  rows+='<div class="total-row separator"><span>Total cuota mensual</span><span class="val">'+fmt(basePrice+accTotal)+'</span></div>';
+  rows+='</div>';
+  document.getElementById(totalId).innerHTML='<div class="total-title">Resumen del plan</div>'+rows;
+}
+
+/* ── INCLUDES — solo lo que tiene el paquete base ── */
+var INC_BASE_LIC = ['5% desc. domiciliaci\u00f3n','Asistencia BI','Ingl\u00e9s Voxy','Welbe'];
+var INC_BASE_MAE = ['5% desc. domiciliaci\u00f3n','Asistencia Plus','Ingl\u00e9s Voxy','Welbe','Coursera'];
+var INC_BASE_MS  = ['5% desc. domiciliaci\u00f3n','Asistencia Plus','Ingl\u00e9s Voxy','Sesi\u00f3n ejecutiva'];
+var INC_BASE_DOC = ['5% desc. domiciliaci\u00f3n','Asistencia Plus','Ingl\u00e9s Voxy','Welbe','Coursera'];
+
+function mkInc(id, items) {
+  var html='<div class="inc-title">Incluido en el paquete base</div><div class="inc-grid">';
+  for(var i=0;i<items.length;i++){
+    html+='<div class="inc-item"><div class="ic ic-in">&#10003;</div>';
+    html+='<div class="inc-name">'+items[i]+'</div></div>';
+  }
+  html+='</div>';
+  document.getElementById(id).innerHTML=html;
+}
+
+/* ── RENDER ── */
+function getEntry(progKey, nivel, lead, tit) {
+  var prog=PROG[progKey];
+  if(!prog)return null;
+  var nData=prog.niveles[nivel]||prog.niveles.alto;
+  var lData=nData[lead]||nData.hot;
+  return tit?lData.con:lData.sin;
+}
+
+function getNivelFromSel(selId) {
+  var sel=document.getElementById(selId);
+  var opt=sel.options[sel.selectedIndex];
+  return opt?opt.getAttribute('data-nivel'):'medio';
+}
+
+// Map catalog nivel to PROG key
+function getPROGKey(catalogNivel, catalogProg) {
+  // licenciatura mapping
+  var p = catalogProg.toUpperCase();
+  if (catalogNivel === 'LICENCIATURA') {
+    if (p.indexOf('ARQUITECTURA')>=0) return 'arquitectura';
+    if (p.indexOf('INGENIERÍA')>=0 || p.indexOf('INGENIERIA')>=0) return 'ingenieria';
+    return 'online_general';
+  }
+  if (catalogNivel === 'MAESTRÍA') return 'mae_online';
+  if (catalogNivel === 'MASTER') return 'master';
+  if (catalogNivel === 'DOCTORADO') return 'doctorado';
+  return 'online_general';
+}
+
+function rL(){
+  var progSel=document.getElementById('lprog');
+  var progName=progSel.value;
+  var nivel=getNivelFromSel('lprog');
+  var lead=document.getElementById('llead').value;
+  var tit=document.getElementById('ltit').value==='si';
+  var mod=document.getElementById('lmod').value;
+  var acc=getAccTotal('lic');
+
+  // Determine PROG key based on modalidad + program name
+  var progKey;
+  if(mod==='ejecutiva') progKey='ejecutiva';
+  else if(mod==='joven') progKey='joven';
+  else if(mod==='hibrida') progKey='hibrida';
+  else if(progName.indexOf('ARQUITECTURA')>=0) progKey='arquitectura';
+  else if(progName.indexOf('INGENIER')>=0) progKey='ingenieria';
+  else progKey='online_general';
+
+  var e=getEntry(progKey,nivel,lead,tit);
+  if(!e)return;
+
+  ft('lb',e.p,e.pkg,e.esc,acc);
+  fb('lbi',e.b,LISTA);
+  var lk=(lead==='sur'||lead==='norte')?lead:lead;
+  document.getElementById('li').innerHTML=NB[nivel]+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+LBG[lead];
+  buildTotal('lic-total',e.p[2],'lic');
+  buildAccPanel('lic-acc-panel','lic',ACCS_DEF.lic,'rL');
+  mkInc('lic-inc',INC_BASE_LIC);
+}
+
+function rM(){
+  var progSel=document.getElementById('mprog');
+  var progName=progSel.value;
+  var nivel=getNivelFromSel('mprog');
+  var lead=document.getElementById('mlead').value;
+  var tit=document.getElementById('mtit').value==='si';
+  var mod=document.getElementById('mmod').value;
+  var acc=getAccTotal('mae');
+  var progKey=mod==='ejecutiva'?'mae_ejecutiva':'mae_online';
+  var e=getEntry(progKey,nivel,lead,tit);
+  if(!e)return;
+  ft('mb',e.p,e.pkg,e.esc,acc);fb('mbi',e.b,LISTA);
+  document.getElementById('mi').innerHTML=NB[nivel]+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+LBG[lead];
+  buildTotal('mae-total',e.p[2],'mae');
+  buildAccPanel('mae-acc-panel','mae',ACCS_DEF.mae,'rM');
+  mkInc('mae-inc',INC_BASE_MAE);
+}
+
+function rS(){
+  var progSel=document.getElementById('sprog');
+  var progName=progSel.value;
+  var nivel=getNivelFromSel('sprog');
+  var lead=document.getElementById('slead').value;
+  var tit=document.getElementById('stit').value==='si';
+  var acc=getAccTotal('ms');
+  var e=getEntry('master',nivel,lead,tit);
+  if(!e)return;
+  ft('sb',e.p,e.pkg,e.esc,acc);fb('sbi',e.b,LISTA);
+  document.getElementById('si2').innerHTML=NB[nivel]+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+LBG[lead];
+  buildTotal('ms-total',e.p[4],'ms');
+  buildAccPanel('ms-acc-panel','ms',ACCS_DEF.ms,'rS');
+  mkInc('ms-inc',INC_BASE_MS);
+}
+
+function rD(){
+  var progSel=document.getElementById('dprog');
+  var progName=progSel.value;
+  var nivel=getNivelFromSel('dprog');
+  var lead=document.getElementById('dlead').value;
+  var tit=document.getElementById('dtit').value==='si';
+  var acc=getAccTotal('doc');
+  var e=getEntry('doctorado',nivel,lead,tit);
+  if(!e)return;
+  ft('db',e.p,e.pkg,e.esc,acc);fb('dbi',e.b,LISTA);
+  document.getElementById('di').innerHTML=NB[nivel]+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+LBG[lead];
+  buildTotal('doc-total',e.p[4],'doc');
+  buildAccPanel('doc-acc-panel','doc',ACCS_DEF.doc,'rD');
+  mkInc('doc-inc',INC_BASE_DOC);
+}
+
+function rPU(){
+  var items=[{l:'Lic Online \u2014 Mayor',lista:200530,pago:74300},{l:'Lic Online \u2014 Ejecutivas',lista:200530,pago:82200},{l:'Lic Online \u2014 Joven',lista:200530,pago:82200},{l:'Lic Online \u2014 H\u00edbrida',lista:200530,pago:87900},{l:'Lic Derecho \u2014 Mayor',lista:231010,pago:83000},{l:'Lic Derecho \u2014 Ejecutivas',lista:231010,pago:91900},{l:'Lic Derecho \u2014 Joven',lista:231010,pago:91900},{l:'Lic Derecho \u2014 H\u00edbrida',lista:231010,pago:97400},{l:'Maestr\u00eda 18M \u2014 Mayor',lista:136980,pago:47700},{l:'Maestr\u00eda 24M \u2014 Mayor',lista:136980,pago:63600},{l:'Maestr\u00eda 18M \u2014 Ejecutivas',lista:136980,pago:49800},{l:'Maestr\u00eda 24M \u2014 Ejecutivas',lista:136980,pago:66400},{l:'Maestr\u00eda 18M \u2014 H\u00edbrida',lista:136980,pago:55800},{l:'Maestr\u00eda 24M \u2014 H\u00edbrida',lista:136980,pago:74400},{l:'Doctorado Online',lista:216900,pago:106400},{l:'PSI UVE Online',lista:null,pago:76100}];
+  var g=document.getElementById('pug');g.innerHTML='';
+  for(var i=0;i<items.length;i++){var it=items[i];var d=document.createElement('div');d.className='pu-card';d.innerHTML='<div class="pu-lbl">'+it.l+'</div>'+(it.lista?'<div class="pu-lista">Lista: '+fmt(it.lista)+'</div>':'')+'<div class="pu-precio">'+fmt(it.pago)+'</div>';g.appendChild(d);}
+}
+
+function init(){
+  populatePrograms('lprog','LICENCIATURA','lnivel-badge');
+  populatePrograms('mprog','MAESTRÍA','mnivel-badge');
+  populatePrograms('sprog','MASTER','snivel-badge');
+  populatePrograms('dprog','DOCTORADO','dnivel-badge');
+  rL();rM();rS();rD();rPU();
+}
+</script>
+</body>
+</html>
