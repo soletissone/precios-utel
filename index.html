@@ -165,19 +165,25 @@ td{padding:9px 14px;color:var(--tx);vertical-align:middle}
             <option value="hot">Hot Lead</option>
             <option value="rmkt30">RMKT +30 días</option>
             <option value="rmkt60">RMKT +60 días</option>
+
+          </select>
+        </div>
+        <div class="fg"><label>Zona</label>
+          <select id="lzona" onchange="rL()">
+            <option value="std">Estándar</option>
             <option value="sur">Sur (−10%)</option>
             <option value="norte">Norte (+10%)</option>
           </select>
         </div>
-
         <div class="fg"><label>Nivel detectado</label>
           <div id="lnivel-badge" style="padding:8px 0"></div>
         </div>
       </div>
+</div>
+
       <div class="rules">
         <div class="rules-title">&#9432; Reglas de combinación</div>
         <div class="rules-list">
-          <div class="rule-item"><span class="rule-dot">•</span><span>Voxy siempre incluido — no se puede agregar otro inglés</span></div>
           <div class="rule-item"><span class="rule-dot">•</span><span>Solo <strong>1 idioma adicional</strong> por plan (Cambridge o Duolingo)</span></div>
           <div class="rule-item"><span class="rule-dot">•</span><span>Máximo <strong>2 certificaciones</strong> por plan</span></div>
           <div class="rule-item"><span class="rule-dot">•</span><span>Si se agrega <strong>Coursera</strong>, bloquea todas las demás certificaciones y plataformas</span></div>
@@ -212,15 +218,23 @@ td{padding:9px 14px;color:var(--tx);vertical-align:middle}
             <option value="rmkt">RMKT</option>
           </select>
         </div>
+        <div class="fg"><label>Zona</label>
+          <select id="mzona" onchange="rM()">
+            <option value="std">Estándar</option>
+            <option value="sur">Sur (−10%)</option>
+            <option value="norte">Norte (+10%)</option>
+          </select>
+        </div>
 
         <div class="fg"><label>Nivel detectado</label>
           <div id="mnivel-badge" style="padding:8px 0"></div>
         </div>
       </div>
+</div>
+
       <div class="rules">
         <div class="rules-title">&#9432; Reglas de combinación</div>
         <div class="rules-list">
-          <div class="rule-item"><span class="rule-dot">•</span><span>Voxy siempre incluido — no se puede agregar otro inglés</span></div>
           <div class="rule-item"><span class="rule-dot">•</span><span>Solo <strong>1 idioma adicional</strong> por plan (Cambridge o Duolingo)</span></div>
           <div class="rule-item"><span class="rule-dot">•</span><span>Máximo <strong>1 certificación</strong> por plan</span></div>
           <div class="rule-item"><span class="rule-dot">•</span><span>Maestría <strong>Online</strong> incluye Coursera — bloquea demás certificaciones</span></div>
@@ -253,10 +267,12 @@ td{padding:9px 14px;color:var(--tx);vertical-align:middle}
           <div id="snivel-badge" style="padding:8px 0"></div>
         </div>
       </div>
+</div>
+
       <div class="rules">
         <div class="rules-title">&#9432; Reglas de combinación</div>
         <div class="rules-list">
-          <div class="rule-item"><span class="rule-dot">•</span><span>Voxy y Sesión ejecutiva siempre incluidos</span></div>
+          <div class="rule-item"><span class="rule-dot">•</span><span>Solo <strong>1 idioma adicional</strong> por plan (Cambridge o Duolingo)</span></div>
           <div class="rule-item"><span class="rule-dot">•</span><span>Máximo <strong>1 certificación</strong> por plan</span></div>
         </div>
       </div>
@@ -287,11 +303,13 @@ td{padding:9px 14px;color:var(--tx);vertical-align:middle}
           <div id="dnivel-badge" style="padding:8px 0"></div>
         </div>
       </div>
+</div>
+
       <div class="rules">
         <div class="rules-title">&#9432; Reglas de combinación</div>
         <div class="rules-list">
-          <div class="rule-item"><span class="rule-dot">•</span><span>Voxy, Welbe y Coursera siempre incluidos</span></div>
-          <div class="rule-item"><span class="rule-dot">•</span><span>Solo <strong>1 idioma adicional</strong> por plan</span></div>
+          <div class="rule-item"><span class="rule-dot">•</span><span>Solo <strong>1 idioma adicional</strong> por plan (Cambridge o Duolingo)</span></div>
+          <div class="rule-item"><span class="rule-dot">•</span><span>Máximo <strong>1 certificación</strong> por plan</span></div>
           <div class="rule-item"><span class="rule-dot">•</span><span>Coursera incluido bloquea demás certificaciones y plataformas</span></div>
         </div>
       </div>
@@ -785,22 +803,6 @@ function getAccTotal(sec){
   return total;
 }
 
-function renderRules(panelId, sec) {
-  var maxCerts = (sec==='lic') ? 2 : 1;
-  var rules = [
-    'Voxy incluido — no se puede agregar otro inglés',
-    'Solo 1 idioma adicional (Cambridge o Duolingo)',
-    'Máx. '+maxCerts+' certificación'+(maxCerts>1?'es':'')+' por plan',
-  ];
-  if (sec==='mae' || sec==='doc') rules.push('Maestrías Online incluyen Coursera — bloquea otras certificaciones');
-  if (sec==='lic') rules.push('Programas de Ingeniería incluyen U-Camp automáticamente');
-  var html = '<div class="rules"><div class="rules-title">&#9432; Reglas de combinación</div><div class="rules-list">';
-  for(var i=0;i<rules.length;i++) html+='<div class="rule-item"><span class="rule-dot">•</span><span>'+rules[i]+'</span></div>';
-  html+='</div></div>';
-  // Prepend to panel
-  var panel = document.getElementById(panelId);
-  panel.innerHTML = html;
-}
 
 function hasCourseraActive(sectionKey, cats) {
   for (var i=0; i<cats.length; i++) {
@@ -825,52 +827,50 @@ function countSelected(sectionKey, ids) {
 function buildAccPanel(panelId, sectionKey, cats, renderFnName) {
   var panel = document.getElementById(panelId);
   var courseraActive = hasCourseraActive(sectionKey, cats);
-  var maxCerts = (sectionKey==='lic') ? 2 : 1; // lic=2, mae/ms/doc=1
+  var maxCerts = (sectionKey==='lic') ? 2 : 1;
   var certCount = countSelected(sectionKey, CERT_IDS);
   var idiomCount = countSelected(sectionKey, IDIOM_IDS);
-  var maxIdioms = 1;
 
   var html = '<div class="acc-cats">';
   for (var ci=0; ci<cats.length; ci++) {
-    var cat=cats[ci];
-    html += '<div><div class="acc-cat-label">'+cat.cat+'</div><div class="acc-items">';
+    var cat = cats[ci];
+    html += '<div><div class="acc-cat-label">' + cat.cat + '</div><div class="acc-items">';
     for (var ii=0; ii<cat.items.length; ii++) {
-      var item=cat.items[ii];
-      var sel=SEL[sectionKey][item.id]||false;
-      var inc=item.included||false;
-      var active=sel||inc;
+      var item = cat.items[ii];
+      var inc = item.included === true;
+      var sel = SEL[sectionKey][item.id] === true;
+      var active = inc || sel;
 
-      // Determine if blocked
       var blocked = false;
       var blockReason = '';
-
-      if (inc) {
-        // included items are always shown active, never blocked for clicking
-        blocked = false;
-      } else if (courseraActive && item.id!=='coursera' && (CERT_IDS.indexOf(item.id)>=0 || PLAT_IDS.indexOf(item.id)>=0)) {
-        blocked = true; blockReason = 'No compatible con Coursera';
-      } else if (CERT_IDS.indexOf(item.id)>=0 && !sel && certCount>=maxCerts) {
-        blocked = true; blockReason = 'Máx. '+maxCerts+' certificación'+(maxCerts>1?'es':'');
-      } else if (IDIOM_IDS.indexOf(item.id)>=0 && !sel && idiomCount>=maxIdioms) {
-        blocked = true; blockReason = 'Solo 1 idioma adicional';
+      if (!active) {
+        if (courseraActive && item.id !== 'coursera' && (CERT_IDS.indexOf(item.id) >= 0 || PLAT_IDS.indexOf(item.id) >= 0)) {
+          blocked = true; blockReason = 'No compatible con Coursera';
+        } else if (CERT_IDS.indexOf(item.id) >= 0 && certCount >= maxCerts) {
+          blocked = true; blockReason = 'Máx. ' + maxCerts + ' certificación' + (maxCerts > 1 ? 'es' : '');
+        } else if (IDIOM_IDS.indexOf(item.id) >= 0 && idiomCount >= 1) {
+          blocked = true; blockReason = 'Solo 1 idioma adicional';
+        }
       }
 
-      var cls='acc-chip'+(active?' selected':'')+(blocked?' na':'');
-      var priceLabel = inc ? 'Incluido' : (blocked ? blockReason : fmt(item.price)+'/mes');
-      var clickable = (!blocked && !inc && item.price>0);
+      var cls = 'acc-chip' + (active ? ' selected' : '') + (blocked ? ' na' : '');
+      var priceLabel = inc ? 'Incluido' : (blocked ? blockReason : fmt(item.price) + '/mes');
+      var clickable = !inc && !blocked && item.price > 0;
 
-      html+='<div class="'+cls+'"';
-      if(clickable) html+=' onclick="toggleAcc(\'' + sectionKey + '\',\'' + item.id + '\',' + item.price + ',\'' + panelId + '\',\'' + renderFnName + '\') style="cursor:pointer"';
-      html+='>';
-      html+='<div class="chip-check">'+(active?'&#10003;':(blocked?'&#x2715;':''))+'</div>';
-      html+='<span class="chip-name">'+item.name+'</span>';
-      html+='<span class="chip-price">'+priceLabel+'</span>';
-      html+='</div>';
+      html += '<div class="' + cls + '"';
+      if (clickable) {
+        html += ' data-sec="' + sectionKey + '" data-id="' + item.id + '" data-price="' + item.price + '" data-panel="' + panelId + '" data-fn="' + renderFnName + '" onclick="chipClick(this)" style="cursor:pointer"';
+      }
+      html += '>';
+      html += '<div class="chip-check">' + (active ? '&#10003;' : (blocked ? '&#x2715;' : '')) + '</div>';
+      html += '<span class="chip-name">' + item.name + '</span>';
+      html += '<span class="chip-price">' + priceLabel + '</span>';
+      html += '</div>';
     }
-    html+='</div></div>';
+    html += '</div></div>';
   }
-  html+='</div>';
-  panel.innerHTML=html;
+  html += '</div>';
+  panel.innerHTML = html;
 }
 function toggleAcc(sec, id, price, panelId, fnName) {
   SEL[sec][id] = !SEL[sec][id];
@@ -1024,6 +1024,14 @@ function buildAccPanel(panelId, sectionKey, cats, renderFnName) {
   panel.innerHTML=html;
 }
 
+function chipClick(el) {
+  var sec = el.getAttribute('data-sec');
+  var id = el.getAttribute('data-id');
+  var price = parseInt(el.getAttribute('data-price'));
+  var panelId = el.getAttribute('data-panel');
+  var fnName = el.getAttribute('data-fn');
+  toggleAcc(sec, id, price, panelId, fnName);
+}
 function toggleAcc(sec,id,price,panelId,fnName){
   SEL[sec][id]=!SEL[sec][id];
   var fns={rL:rL,rM:rM,rS:rS,rD:rD};
@@ -1100,6 +1108,8 @@ function rL(){
   var progName=progSel.value;
   var nivel=getNivelFromSel('lprog');
   var lead=document.getElementById('llead').value;
+  var zona=document.getElementById('lzona')?document.getElementById('lzona').value:'std';
+  if(zona!=='std') lead=zona;
   var tit=false;
   var mod=document.getElementById('lmod').value;
 
