@@ -339,7 +339,7 @@ function tryLogin(){
   if(!p)return;
   if(p===PWD){
     localStorage.removeItem('ua');
-    localStorage.setItem('ok','1');
+    localStorage.setItem('ok', Date.now() + 28800000); // 8 horas
     g('ls').style.display='none';
     g('app').style.display='block';
     init();
@@ -359,7 +359,8 @@ function logout(){
 window.addEventListener('load',function(){
   var a=ga();
   if(a.l)g('em').textContent='Bloqueado '+Math.ceil((a.l-Date.now())/60000)+' min.';
-  if(localStorage.getItem('ok')==='1'){
+  var _ok=parseInt(localStorage.getItem('ok')||'0');
+  if(_ok && Date.now()<_ok){
     g('ls').style.display='none';
     g('app').style.display='block';
     init();
