@@ -108,6 +108,13 @@ td{padding:9px 14px;color:var(--tx);vertical-align:middle}
 .pu-lista{font-size:12px;color:var(--mu);margin-bottom:2px}
 .pu-precio{font-size:20px;font-weight:600;color:var(--ac2);font-variant-numeric:tabular-nums}
 .wm{text-align:center;margin-top:32px;font-size:11px;color:rgba(0,0,0,.15);letter-spacing:.1em}
+.rules{background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:12px 16px;margin-bottom:14px}
+.rules-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:#92400e;margin-bottom:8px}
+.rules-list{display:flex;flex-direction:column;gap:5px}
+.rule-item{font-size:12px;color:#78350f;display:flex;gap:6px;align-items:flex-start}
+.rule-dot{flex-shrink:0;margin-top:1px}
+.acc-chip.na .chip-check{color:#dc2626}
+.acc-chip.na{opacity:.5}
 </style>
 </head>
 <body>
@@ -511,24 +518,26 @@ var PROG = {
         norte: {sin:{pkg:'—',esc:'—',p:[699,799,2596,2596,2596,2596,2596,2596,2596,2596,2596,2596],b:.641},con:{pkg:'—',esc:'—',p:[699,799,2791,2791,2791,2791,2791,2791,2791,2791,2791,2791],b:.614}},
       },
       medio: {
-        hot:   {sin:{pkg:'—',esc:'—',p:[699,799,2055,2055,2055,2055,2055,2055,2055,2055,2055,2055],b:.716},con:{pkg:'—',esc:'—',p:[699,799,2250,2250,2250,2250,2250,2250,2250,2250,2250,2250],b:.689}},
-        rmkt30:{sin:{pkg:'—',esc:'—',p:[699,799,1942,1942,1942,1942,1942,1942,1942,1942,1942,1942],b:.731},con:{pkg:'—',esc:'—',p:[699,799,2137,2137,2137,2137,2137,2137,2137,2137,2137,2137],b:.704}},
-        rmkt60:{sin:{pkg:'—',esc:'—',p:[699,799,1904,1904,1904,1904,1904,1904,1904,1904,1904,1904],b:.737},con:{pkg:'—',esc:'—',p:[699,799,2099,2099,2099,2099,2099,2099,2099,2099,2099,2099],b:.710}},
+        hot:   {sin:{pkg:'P5.LIEJE.INT.',esc:'P14.INT2M',p:[699,799,2055,2055,2055,2055,2055,2055,2055,2055,2055,2055],b:.716},con:{pkg:'P5.LIEJE.INT.',esc:'P16.INT2M',p:[699,799,2250,2250,2250,2250,2250,2250,2250,2250,2250,2250],b:.689}},
+        rmkt30:{sin:{pkg:'P6.LIEJE.INT.',esc:'P14.INT2M',p:[699,799,1942,1942,1942,1942,1942,1942,1942,1942,1942,1942],b:.731},con:{pkg:'P6.LIEJE.INT.',esc:'P16.INT2M',p:[699,799,2137,2137,2137,2137,2137,2137,2137,2137,2137,2137],b:.704}},
+        rmkt60:{sin:{pkg:'—',esc:'P14.INT2M',p:[699,799,1904,1904,1904,1904,1904,1904,1904,1904,1904,1904],b:.737},con:{pkg:'—',esc:'P16.INT2M',p:[699,799,2099,2099,2099,2099,2099,2099,2099,2099,2099,2099],b:.710}},
         sur:   {sin:{pkg:'—',esc:'—',p:[699,799,1965,1965,1965,1965,1965,1965,1965,1965,1965,1965],b:.728},con:{pkg:'—',esc:'—',p:[699,799,2160,2160,2160,2160,2160,2160,2160,2160,2160,2160],b:.701}},
         norte: {sin:{pkg:'—',esc:'—',p:[699,799,2365,2365,2365,2365,2365,2365,2365,2365,2365,2365],b:.673},con:{pkg:'—',esc:'—',p:[699,799,2560,2560,2560,2560,2560,2560,2560,2560,2560,2560],b:.646}},
       },
       bajo: {
-        hot:   {sin:{pkg:'—',esc:'—',p:[799,1865,1865,1865,1865,1865,1865,1865,1865,1865,1865,1865],b:.742},con:{pkg:'—',esc:'—',p:[799,1865,2060,2060,2060,2060,2060,2060,2060,2060,2060,2060],b:.715}},
-        rmkt30:{sin:{pkg:'—',esc:'—',p:[799,1865,1763,1763,1763,1763,1763,1763,1763,1763,1763,1763],b:.756},con:{pkg:'—',esc:'—',p:[799,1865,1958,1958,1958,1958,1958,1958,1958,1958,1958,1958],b:.729}},
-        rmkt60:{sin:{pkg:'—',esc:'—',p:[799,1865,1729,1729,1729,1729,1729,1729,1729,1729,1729,1729],b:.761},con:{pkg:'—',esc:'—',p:[799,1865,1924,1924,1924,1924,1924,1924,1924,1924,1924,1924],b:.734}},
-        sur:   {sin:{pkg:'—',esc:'—',p:[799,1865,1794,1794,1794,1794,1794,1794,1794,1794,1794,1794],b:.752},con:{pkg:'—',esc:'—',p:[799,1865,1989,1989,1989,1989,1989,1989,1989,1989,1989,1989],b:.725}},
-        norte: {sin:{pkg:'—',esc:'—',p:[799,1865,2156,2156,2156,2156,2156,2156,2156,2156,2156,2156],b:.702},con:{pkg:'—',esc:'—',p:[799,1865,2351,2351,2351,2351,2351,2351,2351,2351,2351,2351],b:.675}},
+        hot:   {sin:{pkg:'P8.LIEJE.INT.',esc:'P14.INT2M',p:[699,799,1865,1865,1865,1865,1865,1865,1865,1865,1865,1865],b:.742},con:{pkg:'P8.LIEJE.INT.',esc:'P16.INT2M',p:[699,799,2060,2060,2060,2060,2060,2060,2060,2060,2060,2060],b:.715}},
+        rmkt30:{sin:{pkg:'P9.LIEJE.INT.',esc:'P14.INT2M',p:[699,799,1763,1763,1763,1763,1763,1763,1763,1763,1763,1763],b:.756},con:{pkg:'P9.LIEJE.INT.',esc:'P16.INT2M',p:[699,799,1958,1958,1958,1958,1958,1958,1958,1958,1958,1958],b:.729}},
+        rmkt60:{sin:{pkg:'—',esc:'P14.INT2M',p:[699,799,1729,1729,1729,1729,1729,1729,1729,1729,1729,1729],b:.761},con:{pkg:'—',esc:'P16.INT2M',p:[699,799,1924,1924,1924,1924,1924,1924,1924,1924,1924,1924],b:.734}},
+        sur:   {sin:{pkg:'—',esc:'—',p:[699,799,1794,1794,1794,1794,1794,1794,1794,1794,1794,1794],b:.752},con:{pkg:'—',esc:'—',p:[699,799,1989,1989,1989,1989,1989,1989,1989,1989,1989,1989],b:.725}},
+        norte: {sin:{pkg:'—',esc:'—',p:[699,799,2156,2156,2156,2156,2156,2156,2156,2156,2156,2156],b:.702},con:{pkg:'—',esc:'—',p:[699,799,2351,2351,2351,2351,2351,2351,2351,2351,2351,2351],b:.675}},
       }
     }
-  },
+  }
 
   /* ── UTEL JOVEN ── */
-  'joven': {
+,
+
+    'joven': {
     label: 'Utel Joven',
     tipo: 'lic',
     niveles: {
@@ -762,6 +771,23 @@ function getAccTotal(sec){
   return total;
 }
 
+function renderRules(panelId, sec) {
+  var maxCerts = (sec==='lic') ? 2 : 1;
+  var rules = [
+    'Voxy incluido — no se puede agregar otro inglés',
+    'Solo 1 idioma adicional (Cambridge o Duolingo)',
+    'Máx. '+maxCerts+' certificación'+(maxCerts>1?'es':'')+' por plan',
+  ];
+  if (sec==='mae' || sec==='doc') rules.push('Maestrías Online incluyen Coursera — bloquea otras certificaciones');
+  if (sec==='lic') rules.push('Programas de Ingeniería incluyen U-Camp automáticamente');
+  var html = '<div class="rules"><div class="rules-title">&#9432; Reglas de combinación</div><div class="rules-list">';
+  for(var i=0;i<rules.length;i++) html+='<div class="rule-item"><span class="rule-dot">•</span><span>'+rules[i]+'</span></div>';
+  html+='</div></div>';
+  // Prepend to panel
+  var panel = document.getElementById(panelId);
+  panel.innerHTML = html;
+}
+
 function hasCourseraActive(sectionKey, cats) {
   for (var i=0; i<cats.length; i++) {
     for (var j=0; j<cats[i].items.length; j++) {
@@ -772,12 +798,25 @@ function hasCourseraActive(sectionKey, cats) {
   return false;
 }
 
-var CERT_PLAT_IDS = ['facebook','microsoft','tableau','gcloud','gads','legal','cambridge','duolingo','utelx','ugen','coursera'];
+var CERT_IDS  = ['facebook','microsoft','tableau','gcloud','gads','legal','coursera'];
+var PLAT_IDS  = ['utelx','ugen'];
+var IDIOM_IDS = ['cambridge','duolingo']; // voxy excluded (always included)
+
+function countSelected(sectionKey, ids) {
+  var n=0;
+  for(var i=0;i<ids.length;i++) if(SEL[sectionKey][ids[i]]) n++;
+  return n;
+}
 
 function buildAccPanel(panelId, sectionKey, cats, renderFnName) {
   var panel = document.getElementById(panelId);
   var courseraActive = hasCourseraActive(sectionKey, cats);
-  var html = '<div class="acc-panel-title">Agregar accesorios</div><div class="acc-cats">';
+  var maxCerts = (sectionKey==='lic') ? 2 : 1; // lic=2, mae/ms/doc=1
+  var certCount = countSelected(sectionKey, CERT_IDS);
+  var idiomCount = countSelected(sectionKey, IDIOM_IDS);
+  var maxIdioms = 1;
+
+  var html = '<div class="acc-cats">';
   for (var ci=0; ci<cats.length; ci++) {
     var cat=cats[ci];
     html += '<div><div class="acc-cat-label">'+cat.cat+'</div><div class="acc-items">';
@@ -786,10 +825,26 @@ function buildAccPanel(panelId, sectionKey, cats, renderFnName) {
       var sel=SEL[sectionKey][item.id]||false;
       var inc=item.included||false;
       var active=sel||inc;
-      var blocked = !active && (inc || (courseraActive && item.id!=='coursera' && CERT_PLAT_IDS.indexOf(item.id)>=0));
+
+      // Determine if blocked
+      var blocked = false;
+      var blockReason = '';
+
+      if (inc) {
+        // included items are always shown active, never blocked for clicking
+        blocked = false;
+      } else if (courseraActive && item.id!=='coursera' && (CERT_IDS.indexOf(item.id)>=0 || PLAT_IDS.indexOf(item.id)>=0)) {
+        blocked = true; blockReason = 'No compatible con Coursera';
+      } else if (CERT_IDS.indexOf(item.id)>=0 && !sel && certCount>=maxCerts) {
+        blocked = true; blockReason = 'Máx. '+maxCerts+' certificación'+(maxCerts>1?'es':'');
+      } else if (IDIOM_IDS.indexOf(item.id)>=0 && !sel && idiomCount>=maxIdioms) {
+        blocked = true; blockReason = 'Solo 1 idioma adicional';
+      }
+
       var cls='acc-chip'+(active?' selected':'')+(blocked?' na':'');
-      var priceLabel=inc?'Incluido':(blocked?'No compatible':fmt(item.price)+'/mes');
-      var clickable=(!blocked&&!inc&&item.price>0);
+      var priceLabel = inc ? 'Incluido' : (blocked ? blockReason : fmt(item.price)+'/mes');
+      var clickable = (!blocked && !inc && item.price>0);
+
       html+='<div class="'+cls+'"';
       if(clickable) html+=' onclick="toggleAcc(\'' + sectionKey + '\',\'' + item.id + '\',' + item.price + ',\'' + panelId + '\',\'' + renderFnName + '\') style="cursor:pointer"';
       html+='>';
@@ -1063,6 +1118,7 @@ function rL(){
   var lk=(lead==='sur'||lead==='norte')?lead:lead;
   document.getElementById('li').innerHTML=NB[nivel]+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+LBG[lead];
   buildTotal('lic-total',e.p[2],'lic');
+  renderRules('lic-acc-panel', 'lic');
   buildAccPanel('lic-acc-panel','lic',ACCS_DEF.lic,'rL');
   mkInc('lic-inc',INC_BASE_LIC);
 }
@@ -1074,6 +1130,12 @@ function rM(){
   var lead=document.getElementById('mlead').value;
   var tit=document.getElementById('mtit').value==='si';
   var mod=document.getElementById('mmod').value;
+
+  // Maestría Online siempre trae Coursera incluido — marcarlo automático
+  if(mod==='online') {
+    SEL['mae']['coursera'] = false; // ya viene como included:true en ACCS_DEF
+  }
+
   var acc=getAccTotal('mae');
   var progKey=mod==='ejecutiva'?'mae_ejecutiva':'mae_online';
   var e=getEntry(progKey,nivel,lead,tit);
@@ -1081,7 +1143,14 @@ function rM(){
   ft('mb',e.p,e.pkg,e.esc,acc);fb('mbi',e.b,LISTA);
   document.getElementById('mi').innerHTML=NB[nivel]+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+LBG[lead];
   buildTotal('mae-total',e.p[2],'mae');
-  buildAccPanel('mae-acc-panel','mae',ACCS_DEF.mae,'rM');
+  // For Maestría: coursera included only in Online modality
+  var mmod2 = document.getElementById('mmod') ? document.getElementById('mmod').value : 'online';
+  var maeCats = JSON.parse(JSON.stringify(ACCS_DEF.mae));
+  for(var _i=0;_i<maeCats.length;_i++) for(var _j=0;_j<maeCats[_i].items.length;_j++) {
+    if(maeCats[_i].items[_j].id==='coursera') maeCats[_i].items[_j].included = (mmod2==='online');
+  }
+  renderRules('mae-acc-panel', 'mae');
+  buildAccPanel('mae-acc-panel','mae',maeCats,'rM');
   mkInc('mae-inc',INC_BASE_MAE);
 }
 
@@ -1097,6 +1166,7 @@ function rS(){
   ft('sb',e.p,e.pkg,e.esc,acc);fb('sbi',e.b,LISTA);
   document.getElementById('si2').innerHTML=NB[nivel]+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+LBG[lead];
   buildTotal('ms-total',e.p[4],'ms');
+  renderRules('ms-acc-panel', 'ms');
   buildAccPanel('ms-acc-panel','ms',ACCS_DEF.ms,'rS');
   mkInc('ms-inc',INC_BASE_MS);
 }
@@ -1113,6 +1183,7 @@ function rD(){
   ft('db',e.p,e.pkg,e.esc,acc);fb('dbi',e.b,LISTA);
   document.getElementById('di').innerHTML=NB[nivel]+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+LBG[lead];
   buildTotal('doc-total',e.p[4],'doc');
+  renderRules('doc-acc-panel', 'doc');
   buildAccPanel('doc-acc-panel','doc',ACCS_DEF.doc,'rD');
   mkInc('doc-inc',INC_BASE_DOC);
 }
