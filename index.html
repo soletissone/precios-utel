@@ -555,6 +555,8 @@ var PROG={
       rmkt:{pkg:'P13.MA.',esc:'P7.MAE2M',p:[750,1660,2632,2632,2632,2632,2632,2632,2632,2632,2632,2632],b:.636}
     }
   }},
+  uve:'special',
+  unica:'special',
   doc_especial:{niveles:{
     alto:{
       hot: {pkg:'P12.DO.4.10.26',esc:'DOC17.4M',p:[1067,1445,3125,3125,5600,5600,5600,5600,5600,5600,5600,5600],b:.226},
@@ -732,7 +734,7 @@ var ACCS = {
       {cat:'Accesorio', items:[
         {id:'tit',    name:'Titulación',       price:195},
         {id:'tit50',  name:'Título 50%',        price:165},
-        {id:'welbep', name:'Welbe Premium',     price:75}
+        {id:'welbep', name:'Welbe Premium (+$10 upgrade)',     price:10}
       ]},
       {cat:'Experiencia', items:[
         {id:'ucamp',   name:'U-Camp',           price:110},
@@ -775,7 +777,7 @@ var ACCS = {
       {cat:'Accesorio', items:[
         {id:'tit',    name:'Titulación',        price:305},
         {id:'tit50',  name:'Título 50%',        price:275},
-        {id:'welbep', name:'Welbe Premium',     price:75}
+        {id:'welbep', name:'Welbe Premium (+$10 upgrade)',     price:10}
       ]},
       {cat:'Experiencia', items:[
         {id:'seseje',  name:'Sesión Ejecutiva', price:165},
@@ -996,6 +998,28 @@ function renderTotal(panelId, basePrice, sec, isOnline){
 /* ═══════════════════════════════════════
    RENDER SECCIONES
 ═══════════════════════════════════════ */
+function renderMultiVariant(tbodyId, variants){
+  var tb=g(tbodyId); tb.innerHTML='';
+  variants.forEach(function(v){
+    // Show mes1, mes2 if different, mes3+
+    var rows=[];
+    rows.push({mes:'Mes 1 — '+v.label, p:v.p[0]});
+    if(v.p[1]!==v.p[0]) rows.push({mes:'Mes 2', p:v.p[1]});
+    rows.push({mes:'Mes 3+ <span class="badge b-mod" style="font-size:9px">mes actual</span>', p:v.p[2]});
+    rows.forEach(function(row,i){
+      var tr=document.createElement('tr');
+      if(i===0) tr.style.borderTop='2px solid var(--bd)';
+      tr.innerHTML='<td class="tm">'+row.mes+'</td>'
+        +'<td class="tp">'+fmt(row.p)+'</td>'
+        +'<td class="tp-acc">—</td>'
+        +'<td class="tp">'+fmt(row.p)+'</td>'
+        +'<td class="tc">'+v.pkg+'</td>'
+        +'<td class="tc">'+v.esc+'</td>';
+      tb.appendChild(tr);
+    });
+  });
+}
+
 function rL(){
   var progSel=g('lprog'); if(!progSel||!progSel.value)return;
   var progName=progSel.value;
@@ -1021,9 +1045,34 @@ function rL(){
   else progKey='online_general';
 
   if(nivel==='unico'){
-    g('lb').innerHTML='<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--mu)">Programa de precio único — ver pestaña Pagos Únicos</td></tr>';
-    g('lbi').innerHTML='';g('li').innerHTML=NB['unico'];
-    g('lic-acc').innerHTML='';g('lic-total').innerHTML='';return;
+    var uName=progName.toUpperCase();
+    if(uName==='UVE'){
+      // UVE: 2 variantes escalonadas
+      var rows=[
+        {label:'Escalonado Alto',p:[700,1400,2725,2725,2725,2725,2725,2725,2725,2725,2725,2725],pkg:'ESC.UVE.ALTO',esc:'—'},
+        {label:'Escalonado Bajo',p:[599,1400,2725,2725,2725,2725,2725,2725,2725,2725,2725,2725],pkg:'ESC.UVE.BAJO',esc:'—'}
+      ];
+      renderMultiVariant('lb', rows);
+      g('lbi').innerHTML='<span>Incluye: Asistencia, Voxy, 5% domiciliación</span>';
+      g('li').innerHTML=NB['unico']+' <span class="badge b-mod">UVE</span>';
+      g('lic-acc').innerHTML=''; g('lic-total').innerHTML=''; return;
+    } else if(uName==='UNICA'){
+      // UNICA: 3 variantes
+      var rows=[
+        {label:'Escalonado Alto',p:[735,1470,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810],pkg:'ESC1.LIC.UNICA.VOXY.',esc:'—'},
+        {label:'Escalonado Bajo',p:[629,1470,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810],pkg:'ESC2.LIC.UNICA.VOXY.',esc:'—'},
+        {label:'Flat (cuota fija)',p:[2810,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810],pkg:'LIC.UNICA.VOXY.',esc:'—'},
+        {label:'Flat + Titulaciuión',p:[3360,3360,3360,3360,3360,3360,3360,3360,3360,3360,3360,3360],pkg:'LIC.UNICA.VOXY.TIT.',esc:'—'}
+      ];
+      renderMultiVariant('lb', rows);
+      g('lbi').innerHTML='<span>Incluye: Voxy</span>';
+      g('li').innerHTML=NB['unico']+' <span class="badge b-mod">UNICA</span>';
+      g('lic-acc').innerHTML=''; g('lic-total').innerHTML=''; return;
+    } else {
+      g('lb').innerHTML='<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--mu)">Ver pestaña Pagos Únicos</td></tr>';
+      g('lbi').innerHTML='';g('li').innerHTML=NB['unico'];
+      g('lic-acc').innerHTML='';g('lic-total').innerHTML='';return;
+    }
   }
 
   var e=getPrice(progKey,nivel,lead);
