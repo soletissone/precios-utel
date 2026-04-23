@@ -2,16 +2,6 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<script>
-(function(){
-  var v='1.1';
-  var url=new URL(window.location.href);
-  if(url.searchParams.get('v')!==v){
-    url.searchParams.set('v',v);
-    window.location.replace(url.toString());
-  }
-})();
-</script>
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UTEL — Matriz de Precios v1.1</title>
@@ -338,6 +328,9 @@ td{padding:9px 14px;color:var(--tx);vertical-align:middle}
 </div>
 
 <script>
+/* ── CACHE BUSTER ── */
+(function(){var v='1.1';var url=new URL(window.location.href);if(url.searchParams.get('v')!==v){url.searchParams.set('v',v);window.location.replace(url.toString());}})();
+
 /* ── AUTH ── */
 var PWD='UTEL2026', MAX=5, LK=600000;
 function ga(){var d=JSON.parse(localStorage.getItem('ua')||'{}');if(d.l&&Date.now()<d.l)return{c:MAX,l:d.l};if(d.l){localStorage.removeItem('ua');return{c:0}}return{c:d.c||0}}
@@ -954,10 +947,95 @@ function renderProg(secId, progSelId, nivelSelId, leadSelId, titSelId, tbodyId, 
   buildAccPanel(accPanelId, accType, ACCS_DEF[accType], accType === 'lic' ? 'rL' : accType === 'mae' ? 'rM' : accType === 'ms' ? 'rS' : 'rD');
 }
 
-function rL(){ renderProg('sec-lic','lprog','lnivel','llead','ltit','lb','li','lbi','lic-acc-panel','lic-total','lic-inc',INC_LIC,'lic'); }
-function rM(){ renderProg('sec-mae','mprog','mnivel','mlead','mtit','mb','mi','mbi','mae-acc-panel','mae-total','mae-inc',INC_MAE,'mae'); }
-function rS(){ renderProg('sec-ms','sprog','snivel','slead','stit','sb','si2','sbi','ms-acc-panel','ms-total','ms-inc',INC_MS,'ms'); }
-function rD(){ renderProg('sec-doc','dprog','dnivel','dlead','dtit','db','di','dbi','doc-acc-panel','doc-total','doc-inc',INC_DOC,'doc'); }
+
+function rL(){
+  var progSel=document.getElementById('lprog');
+  if(!progSel||!progSel.value)return;
+  var progName=progSel.value;
+  var nivel=getNivelFromSel('lprog');
+  var lead=document.getElementById('llead').value;
+  var zona=document.getElementById('lzona')?document.getElementById('lzona').value:'std';
+  if(zona!=='std') lead=zona;
+  var tit=false;
+  var mod=document.getElementById('lmod').value;
+  var isIngenieria=progName.toUpperCase().indexOf('INGENIER')>=0;
+  if(isIngenieria&&!SEL['lic']['ucamp_auto']){SEL['lic']['ucamp']=true;SEL['lic']['ucamp_auto']=true;}
+  else if(!isIngenieria&&SEL['lic']['ucamp_auto']){SEL['lic']['ucamp']=false;SEL['lic']['ucamp_auto']=false;}
+  var acc=getAccTotal('lic');
+  var progKey;
+  if(mod==='ejecutiva')progKey='ejecutiva';
+  else if(mod==='joven')progKey='joven';
+  else if(mod==='hibrida')progKey='hibrida';
+  else if(progName.indexOf('ARQUITECTURA')>=0)progKey='arquitectura';
+  else if(progName.indexOf('INGENIER')>=0)progKey='ingenieria';
+  else progKey='online_general';
+  var e=getEntry(progKey,nivel,lead,tit);
+  if(!e)return;
+  ft('lb',e.p,e.pkg,e.esc,acc);
+  fb('lbi',e.b,LISTA);
+  document.getElementById('li').innerHTML=NB[nivel]+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+LBG[lead];
+  buildTotal('lic-total',e.p[2],'lic');
+  buildAccPanel('lic-acc-panel','lic',ACCS_DEF.lic,'rL');
+}
+
+function rM(){
+  var progSel=document.getElementById('mprog');
+  if(!progSel||!progSel.value)return;
+  var progName=progSel.value;
+  var nivel=getNivelFromSel('mprog');
+  var lead=document.getElementById('mlead').value;
+  var zona=document.getElementById('mzona')?document.getElementById('mzona').value:'std';
+  if(zona!=='std') lead=zona;
+  var tit=false;
+  var mod=document.getElementById('mmod').value;
+  var acc=getAccTotal('mae');
+  var progKey=mod==='ejecutiva'?'mae_ejecutiva':'mae_online';
+  var e=getEntry(progKey,nivel,lead,tit);
+  if(!e)return;
+  var maeCats=JSON.parse(JSON.stringify(ACCS_DEF.mae));
+  for(var _i=0;_i<maeCats.length;_i++)for(var _j=0;_j<maeCats[_i].items.length;_j++){
+    if(maeCats[_i].items[_j].id==='coursera')maeCats[_i].items[_j].included=(mod==='online');
+  }
+  ft('mb',e.p,e.pkg,e.esc,acc);
+  fb('mbi',e.b,LISTA);
+  document.getElementById('mi').innerHTML=NB[nivel]+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+LBG[lead];
+  buildTotal('mae-total',e.p[2],'mae');
+  buildAccPanel('mae-acc-panel','mae',maeCats,'rM');
+}
+
+function rS(){
+  var progSel=document.getElementById('sprog');
+  if(!progSel||!progSel.value)return;
+  var progName=progSel.value;
+  var nivel=getNivelFromSel('sprog');
+  var lead=document.getElementById('slead').value;
+  var tit=false;
+  var acc=getAccTotal('ms');
+  var e=getEntry('master',nivel,lead,tit);
+  if(!e)return;
+  ft('sb',e.p,e.pkg,e.esc,acc);
+  fb('sbi',e.b,LISTA);
+  document.getElementById('si2').innerHTML=NB[nivel]+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+LBG[lead];
+  buildTotal('ms-total',e.p[4],'ms');
+  buildAccPanel('ms-acc-panel','ms',ACCS_DEF.ms,'rS');
+}
+
+function rD(){
+  var progSel=document.getElementById('dprog');
+  if(!progSel||!progSel.value)return;
+  var progName=progSel.value;
+  var nivel=getNivelFromSel('dprog');
+  var lead=document.getElementById('dlead').value;
+  var tit=false;
+  var acc=getAccTotal('doc');
+  var e=getEntry('doctorado',nivel,lead,tit);
+  if(!e)return;
+  ft('db',e.p,e.pkg,e.esc,acc);
+  fb('dbi',e.b,LISTA);
+  document.getElementById('di').innerHTML=NB[nivel]+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+LBG[lead];
+  buildTotal('doc-total',e.p[4],'doc');
+  buildAccPanel('doc-acc-panel','doc',ACCS_DEF.doc,'rD');
+}
 
 function rPU(){
   var items=[{l:'Lic Online \u2014 Mayor',lista:200530,pago:74300},{l:'Lic Online \u2014 Ejecutivas',lista:200530,pago:82200},{l:'Lic Online \u2014 Joven',lista:200530,pago:82200},{l:'Lic Online \u2014 H\u00edbrida',lista:200530,pago:87900},{l:'Lic Derecho \u2014 Mayor',lista:231010,pago:83000},{l:'Lic Derecho \u2014 Ejecutivas',lista:231010,pago:91900},{l:'Lic Derecho \u2014 Joven',lista:231010,pago:91900},{l:'Lic Derecho \u2014 H\u00edbrida',lista:231010,pago:97400},{l:'Maestr\u00eda 18M \u2014 Mayor',lista:136980,pago:47700},{l:'Maestr\u00eda 24M \u2014 Mayor',lista:136980,pago:63600},{l:'Maestr\u00eda 18M \u2014 Ejecutivas',lista:136980,pago:49800},{l:'Maestr\u00eda 24M \u2014 Ejecutivas',lista:136980,pago:66400},{l:'Maestr\u00eda 18M \u2014 H\u00edbrida',lista:136980,pago:55800},{l:'Maestr\u00eda 24M \u2014 H\u00edbrida',lista:136980,pago:74400},{l:'Doctorado Online',lista:216900,pago:106400},{l:'PSI UVE Online',lista:null,pago:76100}];
@@ -965,7 +1043,13 @@ function rPU(){
   for(var i=0;i<items.length;i++){var it=items[i];var d=document.createElement('div');d.className='pu-card';d.innerHTML='<div class="pu-lbl">'+it.l+'</div>'+(it.lista?'<div class="pu-lista">Lista: '+fmt(it.lista)+'</div>':'')+'<div class="pu-precio">'+fmt(it.pago)+'</div>';g.appendChild(d);}
 }
 
-function init(){rL();rM();rS();rD();rPU();}
+function init(){
+  populatePrograms('lprog','LICENCIATURA','lnivel-badge');
+  populatePrograms('mprog','MAESTRÍA','mnivel-badge');
+  populatePrograms('sprog','MASTER','snivel-badge');
+  populatePrograms('dprog','DOCTORADO','dnivel-badge');
+  rL();rM();rS();rD();rPU();
+}
 
 </script>
 </body>
