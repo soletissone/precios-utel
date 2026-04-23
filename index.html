@@ -340,6 +340,7 @@ function tryLogin(){
   if(p===PWD){
     localStorage.removeItem('ua');
     localStorage.setItem('ok', Date.now() + 28800000); // 8 horas
+    localStorage.setItem('ver', '1.2');
     g('ls').style.display='none';
     g('app').style.display='block';
     init();
@@ -360,6 +361,9 @@ window.addEventListener('load',function(){
   var a=ga();
   if(a.l)g('em').textContent='Bloqueado '+Math.ceil((a.l-Date.now())/60000)+' min.';
   var _ok=parseInt(localStorage.getItem('ok')||'0');
+  var _ver=localStorage.getItem('ver');
+  // Si la versión cambió, forzar re-login
+  if(_ver!=='1.2') { localStorage.removeItem('ok'); _ok=0; }
   if(_ok && Date.now()<_ok){
     g('ls').style.display='none';
     g('app').style.display='block';
