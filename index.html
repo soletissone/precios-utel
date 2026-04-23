@@ -2,11 +2,23 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
+<script>
+(function(){
+  var v='1.1';
+  var url=new URL(window.location.href);
+  if(url.searchParams.get('v')!==v){
+    url.searchParams.set('v',v);
+    window.location.replace(url.toString());
+  }
+})();
+</script>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>UTEL — Matriz de Precios v1.0</title>
+<title>UTEL — Matriz de Precios v1.1</title>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
+<meta name="version" content="1.1">
 <style>
 :root{--bg:#f4f5f7;--sf:#fff;--s2:#f0f1f4;--bd:rgba(0,0,0,.09);--ac:#6c5ce7;--ac2:#5541d7;--tx:#1a1a2e;--mu:#6b7280;--hot:#dc2626;--warm:#d97706;--cold:#2563eb;--gr:#16a34a}
 *{box-sizing:border-box;margin:0;padding:0}
@@ -137,7 +149,7 @@ td{padding:9px 14px;color:var(--tx);vertical-align:middle}
 <div id="app">
   <header>
     <span class="logo">UTEL</span>
-    <span class="ht">Matriz de Precios · Abril 2026 <span style="font-size:10px;color:var(--mu);font-weight:400">v1.0</span></span>
+    <span class="ht">Matriz de Precios · Abril 2026 <span style="font-size:10px;color:var(--mu);font-weight:400">v1.1</span></span>
     <button class="out" onclick="logout()">Salir</button>
   </header>
   <div class="main">
@@ -955,238 +967,6 @@ function rPU(){
 
 function init(){rL();rM();rS();rD();rPU();}
 
-
-
-
-var SEL = {lic:{},mae:{},ms:{},doc:{}};
-
-function getAccTotal(sec){
-  var cats=ACCS_DEF[sec]||ACCS_DEF.lic,total=0;
-  for(var i=0;i<cats.length;i++) for(var j=0;j<cats[i].items.length;j++){var it=cats[i].items[j];if(SEL[sec][it.id]&&it.price>0)total+=it.price;}
-  return total;
-}
-
-function buildAccPanel(panelId, sectionKey, cats, renderFnName) {
-  var panel = document.getElementById(panelId);
-  var html = '<div class="acc-panel-title">Agregar accesorios (se suma al precio)</div><div class="acc-cats">';
-  for (var ci=0; ci<cats.length; ci++) {
-    var cat=cats[ci];
-    html += '<div><div class="acc-cat-label">'+cat.cat+'</div><div class="acc-items">';
-    for (var ii=0; ii<cat.items.length; ii++) {
-      var item=cat.items[ii];
-      var sel=SEL[sectionKey][item.id]||false;
-      var inc=item.included||false;
-      var active=sel||inc;
-      var cls='acc-chip'+(active?' selected':'');
-      var priceLabel=inc?'Incluido':(item.price===0?'$0':fmt(item.price)+'/mes');
-      var clickable=(!inc&&item.price>0);
-      html+='<div class="'+cls+'"';
-      if(clickable)html+=' onclick="toggleAcc(\'' + sectionKey + '\',\'' + item.id + '\',' + item.price + ',\'' + panelId + '\',\'' + renderFnName + '\')" style="cursor:pointer"';
-      html+='>';
-      html+='<div class="chip-check">'+(active?'&#10003;':'')+'</div>';
-      html+='<span class="chip-name">'+item.name+'</span>';
-      html+='<span class="chip-price">'+priceLabel+'</span>';
-      html+='</div>';
-    }
-    html+='</div></div>';
-  }
-  html+='</div>';
-  panel.innerHTML=html;
-}
-
-function chipClick(el) {
-  var sec = el.getAttribute('data-sec');
-  var id = el.getAttribute('data-id');
-  var price = parseInt(el.getAttribute('data-price'));
-  var panelId = el.getAttribute('data-panel');
-  var fnName = el.getAttribute('data-fn');
-  toggleAcc(sec, id, price, panelId, fnName);
-}
-function toggleAcc(sec,id,price,panelId,fnName){
-  SEL[sec][id]=!SEL[sec][id];
-  var fns={rL:rL,rM:rM,rS:rS,rD:rD};
-  if(fns[fnName])fns[fnName]();
-}
-
-function buildTotal(totalId,basePrice,sec){
-  var cats=ACCS_DEF[sec]||ACCS_DEF.lic;
-  var rows='<div class="total-rows">';
-  rows+='<div class="total-row header"><span>Cuota base (mes 3+)</span><span class="val">'+fmt(basePrice)+'</span></div>';
-  var accTotal=0;
-  for(var i=0;i<cats.length;i++){
-    for(var j=0;j<cats[i].items.length;j++){
-      var it=cats[i].items[j];
-      if(SEL[sec][it.id]&&it.price>0){
-        accTotal+=it.price;
-        rows+='<div class="total-row acc-line"><span>+ '+it.name+'</span><span class="val">'+fmt(it.price)+'</span></div>';
-      }
-    }
-  }
-  rows+='<div class="total-row separator"><span>Total cuota mensual</span><span class="val">'+fmt(basePrice+accTotal)+'</span></div>';
-  rows+='</div>';
-  document.getElementById(totalId).innerHTML='<div class="total-title">Resumen del plan</div>'+rows;
-}
-
-/* ── INCLUDES — solo lo que tiene el paquete base ── */
-var INC_BASE_LIC = ['5% desc. domiciliaci\u00f3n','Asistencia Plus','Ingl\u00e9s Voxy','Welbe'];
-var INC_BASE_MAE = ['5% desc. domiciliaci\u00f3n','Asistencia Plus','Ingl\u00e9s Voxy','Welbe','Coursera'];
-var INC_BASE_MS  = ['5% desc. domiciliaci\u00f3n','Asistencia Plus','Ingl\u00e9s Voxy','Sesi\u00f3n ejecutiva'];
-var INC_BASE_DOC = ['5% desc. domiciliaci\u00f3n','Asistencia Plus','Ingl\u00e9s Voxy','Welbe','Coursera'];
-
-function mkInc(id, items) {
-  var html='<div class="inc-title">Incluido en el paquete base</div><div class="inc-grid">';
-  for(var i=0;i<items.length;i++){
-    html+='<div class="inc-item"><div class="ic ic-in">&#10003;</div>';
-    html+='<div class="inc-name">'+items[i]+'</div></div>';
-  }
-  html+='</div>';
-  document.getElementById(id).innerHTML=html;
-}
-
-/* ── RENDER ── */
-function getEntry(progKey, nivel, lead, tit) {
-  var prog=PROG[progKey];
-  if(!prog)return null;
-  var nData=prog.niveles[nivel]||prog.niveles.alto;
-  var lData=nData[lead]||nData.hot;
-  return tit?lData.con:lData.sin;
-}
-
-function getNivelFromSel(selId) {
-  var sel=document.getElementById(selId);
-  var opt=sel.options[sel.selectedIndex];
-  return opt?opt.getAttribute('data-nivel'):'medio';
-}
-
-// Map catalog nivel to PROG key
-function getPROGKey(catalogNivel, catalogProg) {
-  // licenciatura mapping
-  var p = catalogProg.toUpperCase();
-  if (catalogNivel === 'LICENCIATURA') {
-    if (p.indexOf('ARQUITECTURA')>=0) return 'arquitectura';
-    if (p.indexOf('INGENIERÍA')>=0 || p.indexOf('INGENIERIA')>=0) return 'ingenieria';
-    return 'online_general';
-  }
-  if (catalogNivel === 'MAESTRÍA') return 'mae_online';
-  if (catalogNivel === 'MASTER') return 'master';
-  if (catalogNivel === 'DOCTORADO') return 'doctorado';
-  return 'online_general';
-}
-
-function rL(){
-  var progSel=document.getElementById('lprog');
-  var progName=progSel.value;
-  var nivel=getNivelFromSel('lprog');
-  var lead=document.getElementById('llead').value;
-  var zona=document.getElementById('lzona')?document.getElementById('lzona').value:'std';
-  if(zona!=='std') lead=zona;
-  var tit=false;
-  var mod=document.getElementById('lmod').value;
-
-  // Auto-select U-Camp for Ingeniería programs
-  var isIngenieria = progName.toUpperCase().indexOf('INGENI')>=0;
-  if(isIngenieria && !SEL['lic']['ucamp_auto_set']) {
-    SEL['lic']['ucamp'] = true;
-    SEL['lic']['ucamp_auto_set'] = true;
-  } else if(!isIngenieria && SEL['lic']['ucamp_auto_set']) {
-    SEL['lic']['ucamp'] = false;
-    SEL['lic']['ucamp_auto_set'] = false;
-  }
-
-  var acc=getAccTotal('lic');
-
-  // Determine PROG key based on modalidad + program name
-  var progKey;
-  if(mod==='ejecutiva') progKey='ejecutiva';
-  else if(mod==='joven') progKey='joven';
-  else if(mod==='hibrida') progKey='hibrida';
-  else if(progName.indexOf('ARQUITECTURA')>=0) progKey='arquitectura';
-  else if(progName.indexOf('INGENIER')>=0) progKey='ingenieria';
-  else progKey='online_general';
-
-  var e=getEntry(progKey,nivel,lead,tit);
-  if(!e)return;
-
-  ft('lb',e.p,e.pkg,e.esc,acc);
-  fb('lbi',e.b,LISTA);
-  var lk=(lead==='sur'||lead==='norte')?lead:lead;
-  document.getElementById('li').innerHTML=NB[nivel]+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+LBG[lead];
-  buildTotal('lic-total',e.p[2],'lic');
-  buildAccPanel('lic-acc-panel','lic',ACCS_DEF.lic,'rL');
-}
-
-function rM(){
-  var progSel=document.getElementById('mprog');
-  var progName=progSel.value;
-  var nivel=getNivelFromSel('mprog');
-  var lead=document.getElementById('mlead').value;
-  var tit=false;
-  var mod=document.getElementById('mmod').value;
-
-  // Maestría Online siempre trae Coursera incluido — marcarlo automático
-  if(mod==='online') {
-    SEL['mae']['coursera'] = false; // ya viene como included:true en ACCS_DEF
-  }
-
-  var acc=getAccTotal('mae');
-  var progKey=mod==='ejecutiva'?'mae_ejecutiva':'mae_online';
-  var e=getEntry(progKey,nivel,lead,tit);
-  if(!e)return;
-  ft('mb',e.p,e.pkg,e.esc,acc);fb('mbi',e.b,LISTA);
-  document.getElementById('mi').innerHTML=NB[nivel]+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+LBG[lead];
-  buildTotal('mae-total',e.p[2],'mae');
-  // For Maestría: coursera included only in Online modality
-  var mmod2 = document.getElementById('mmod') ? document.getElementById('mmod').value : 'online';
-  var maeCats = JSON.parse(JSON.stringify(ACCS_DEF.mae));
-  for(var _i=0;_i<maeCats.length;_i++) for(var _j=0;_j<maeCats[_i].items.length;_j++) {
-    if(maeCats[_i].items[_j].id==='coursera') maeCats[_i].items[_j].included = (mmod2==='online');
-  }
-  buildAccPanel('mae-acc-panel','mae',maeCats,'rM');
-}
-
-function rS(){
-  var progSel=document.getElementById('sprog');
-  var progName=progSel.value;
-  var nivel=getNivelFromSel('sprog');
-  var lead=document.getElementById('slead').value;
-  var tit=false;
-  var acc=getAccTotal('ms');
-  var e=getEntry('master',nivel,lead,tit);
-  if(!e)return;
-  ft('sb',e.p,e.pkg,e.esc,acc);fb('sbi',e.b,LISTA);
-  document.getElementById('si2').innerHTML=NB[nivel]+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+LBG[lead];
-  buildTotal('ms-total',e.p[4],'ms');
-  buildAccPanel('ms-acc-panel','ms',ACCS_DEF.ms,'rS');
-}
-
-function rD(){
-  var progSel=document.getElementById('dprog');
-  var progName=progSel.value;
-  var nivel=getNivelFromSel('dprog');
-  var lead=document.getElementById('dlead').value;
-  var tit=false;
-  var acc=getAccTotal('doc');
-  var e=getEntry('doctorado',nivel,lead,tit);
-  if(!e)return;
-  ft('db',e.p,e.pkg,e.esc,acc);fb('dbi',e.b,LISTA);
-  document.getElementById('di').innerHTML=NB[nivel]+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+LBG[lead];
-  buildTotal('doc-total',e.p[4],'doc');
-  buildAccPanel('doc-acc-panel','doc',ACCS_DEF.doc,'rD');
-}
-
-function rPU(){
-  var items=[{l:'Lic Online \u2014 Mayor',lista:200530,pago:74300},{l:'Lic Online \u2014 Ejecutivas',lista:200530,pago:82200},{l:'Lic Online \u2014 Joven',lista:200530,pago:82200},{l:'Lic Online \u2014 H\u00edbrida',lista:200530,pago:87900},{l:'Lic Derecho \u2014 Mayor',lista:231010,pago:83000},{l:'Lic Derecho \u2014 Ejecutivas',lista:231010,pago:91900},{l:'Lic Derecho \u2014 Joven',lista:231010,pago:91900},{l:'Lic Derecho \u2014 H\u00edbrida',lista:231010,pago:97400},{l:'Maestr\u00eda 18M \u2014 Mayor',lista:136980,pago:47700},{l:'Maestr\u00eda 24M \u2014 Mayor',lista:136980,pago:63600},{l:'Maestr\u00eda 18M \u2014 Ejecutivas',lista:136980,pago:49800},{l:'Maestr\u00eda 24M \u2014 Ejecutivas',lista:136980,pago:66400},{l:'Maestr\u00eda 18M \u2014 H\u00edbrida',lista:136980,pago:55800},{l:'Maestr\u00eda 24M \u2014 H\u00edbrida',lista:136980,pago:74400},{l:'Doctorado Online',lista:216900,pago:106400},{l:'PSI UVE Online',lista:null,pago:76100}];
-  var g=document.getElementById('pug');g.innerHTML='';
-  for(var i=0;i<items.length;i++){var it=items[i];var d=document.createElement('div');d.className='pu-card';d.innerHTML='<div class="pu-lbl">'+it.l+'</div>'+(it.lista?'<div class="pu-lista">Lista: '+fmt(it.lista)+'</div>':'')+'<div class="pu-precio">'+fmt(it.pago)+'</div>';g.appendChild(d);}
-}
-
-function init(){
-  populatePrograms('lprog','LICENCIATURA','lnivel-badge');
-  populatePrograms('mprog','MAESTRÍA','mnivel-badge');
-  populatePrograms('sprog','MASTER','snivel-badge');
-  populatePrograms('dprog','DOCTORADO','dnivel-badge');
-  rL();rM();rS();rD();rPU();
-}
 </script>
 </body>
 </html>
