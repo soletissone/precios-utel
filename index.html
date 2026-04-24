@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>UTEL — Matriz de Precios v1.2</title>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<meta name="version" content="1.2">
+<meta name="version" content="1.3">
 <style>
 :root{
   --bg:#f4f5f7;--sf:#fff;--s2:#f0f1f4;--bd:rgba(0,0,0,.09);
@@ -122,7 +122,7 @@ td{padding:9px 14px;vertical-align:middle}
 </style>
 <script>
 (function(){
-  var v='1.2';
+  var v='1.3';
   // Update URL without reloading (no cache bust needed, meta tags handle it)
   if(window.history && window.history.replaceState){
     var url=new URL(window.location.href);
@@ -151,7 +151,7 @@ td{padding:9px 14px;vertical-align:middle}
 <div id="app">
   <header>
     <span class="logo">UTEL</span>
-    <span class="ht">Matriz de Precios · Abril 2026 <span style="font-size:10px;color:var(--mu);font-weight:400">v1.2</span></span>
+    <span class="ht">Matriz de Precios · Abril 2026 <span style="font-size:10px;color:var(--mu);font-weight:400">v1.3</span></span>
     <button class="out" onclick="logout()">Salir</button>
   </header>
   <div class="main">
@@ -340,7 +340,7 @@ function tryLogin(){
   if(p===PWD){
     localStorage.removeItem('ua');
     localStorage.setItem('ok', Date.now() + 28800000); // 8 horas
-    localStorage.setItem('ver', '1.2');
+    localStorage.setItem('build', '1777070393');
     g('ls').style.display='none';
     g('app').style.display='block';
     init();
@@ -358,12 +358,13 @@ function logout(){
   g('pi').value='';
 }
 window.addEventListener('load',function(){
+  var BUILD='1777070393';
   var a=ga();
   if(a.l)g('em').textContent='Bloqueado '+Math.ceil((a.l-Date.now())/60000)+' min.';
   var _ok=parseInt(localStorage.getItem('ok')||'0');
-  var _ver=localStorage.getItem('ver');
-  // Si la versión cambió, forzar re-login
-  if(_ver!=='1.2') { localStorage.removeItem('ok'); _ok=0; }
+  var _build=localStorage.getItem('build');
+  // Si el archivo cambió, forzar re-login siempre
+  if(_build!==BUILD){ localStorage.removeItem('ok'); localStorage.removeItem('ver'); _ok=0; }
   if(_ok && Date.now()<_ok){
     g('ls').style.display='none';
     g('app').style.display='block';
@@ -390,7 +391,7 @@ var NB={
   alto:'<span class="badge b-alto">Pricing Alto</span>',
   medio:'<span class="badge b-medio">Pricing Medio</span>',
   bajo:'<span class="badge b-bajo">Pricing Bajo</span>',
-  unico:'<span class="badge b-mod">Precio Único</span>'
+  unico:'<span class="badge b-mod">Alianza / Especial</span>'
 };
 
 function sw(id){
@@ -407,7 +408,7 @@ function renderTable(tbodyId, prices, pkg, esc, accTotal){
   var acc=accTotal||0;
   var rows=[];
   rows.push({label:'Mes 1',p:prices[0]});
-  if(prices[1]!==prices[0]) rows.push({label:'Mes 2',p:prices[1]});
+  rows.push({label:'Mes 2',p:prices[1]});
   rows.push({label:'Mes 3 en adelante <span class="badge b-mod" style="font-size:10px">mes actual</span>',p:prices[2]});
   rows.forEach(function(row){
     var tr=document.createElement('tr');
@@ -427,7 +428,7 @@ function renderBeca(id,b){
 /* ═══════════════════════════════════════
    CATALOG
 ═══════════════════════════════════════ */
-var CATALOG = {"DOCTORADO": [{"p": "ADMINISTRACIÓN ESTRATÉGICA EMPRESARIAL", "v": "medio"}, {"p": "CIBERSEGURIDAD Y GESTIÓN DE RIESGOS DIGITALES", "v": "alto"}, {"p": "CIENCIA DE DATOS E INTELIGENCIA ARTIFICIAL", "v": "alto"}, {"p": "DERECHO", "v": "bajo"}, {"p": "DESARROLLO HUMANO", "v": "bajo"}, {"p": "EDUCACIÓN", "v": "alto"}, {"p": "FINANZAS", "v": "medio"}, {"p": "GESTIÓN E INNOVACIÓN TECNOLÓGICA", "v": "medio"}], "LICENCIATURA": [{"p": "ADMINISTRACIÓN", "v": "medio"}, {"p": "ADMINISTRACIÓN DE EMPRESAS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE EMPRESAS TURÍSTICAS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE RECURSOS HUMANOS", "v": "bajo"}, {"p": "ADMINISTRACIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN", "v": "medio"}, {"p": "ADMINISTRACIÓN DE VENTAS", "v": "medio"}, {"p": "ADMINISTRACIÓN Y FINANZAS", "v": "medio"}, {"p": "AGRONEGOCIOS", "v": "medio"}, {"p": "ARQUITECTURA", "v": "alto"}, {"p": "ARTE DIGITAL Y MULTIMEDIA", "v": "medio"}, {"p": "CIBERSEGURIDAD Y RIESGOS EN INTELIGENCIA ARTIFICIAL", "v": "alto"}, {"p": "CIENCIAS POLÍTICAS Y ADMINISTRACIÓN PÚBLICA", "v": "medio"}, {"p": "COMUNICACIÓN", "v": "medio"}, {"p": "COMUNICACIÓN CORPORATIVA", "v": "medio"}, {"p": "COMUNICACIÓN DIGITAL", "v": "medio"}, {"p": "COMUNICACIÓN ORGANIZACIONAL", "v": "medio"}, {"p": "CONTADURÍA PÚBLICA", "v": "medio"}, {"p": "CONTADURÍA Y FINANZAS", "v": "medio"}, {"p": "CRIMINOLOGÍA Y CRIMINALÍSTICA", "v": "bajo"}, {"p": "DERECHO", "v": "alto"}, {"p": "DERECHO EMPRESARIAL", "v": "medio"}, {"p": "DERECHO INTERNACIONAL", "v": "medio"}, {"p": "DESARROLLO SUSTENTABLE Y ECOTURISMO", "v": "medio"}, {"p": "DIRECCIÓN DE ARTE", "v": "medio"}, {"p": "DISEÑO Y ANIMACIÓN DIGITAL", "v": "medio"}, {"p": "ECONOMÍA Y FINANZAS", "v": "medio"}, {"p": "EMPRENDIMIENTO", "v": "medio"}, {"p": "FINANZAS Y ESTRATEGIA FISCAL", "v": "medio"}, {"p": "INGENIERÍA AMBIENTAL", "v": "alto"}, {"p": "INGENIERÍA EN DESARROLLO DE SOFTWARE", "v": "medio"}, {"p": "INGENIERÍA EN ENERGÍAS RENOVABLES", "v": "medio"}, {"p": "INGENIERÍA EN LOGÍSTICA Y TRANSPORTE", "v": "medio"}, {"p": "INGENIERÍA EN SISTEMAS COMPUTACIONALES", "v": "alto"}, {"p": "INGENIERÍA EN TECNOLOGÍA DE VIDEOJUEGOS Y REALIDAD VIRTUAL", "v": "alto"}, {"p": "INGENIERÍA INDUSTRIAL", "v": "alto"}, {"p": "INGENIERÍA INDUSTRIAL Y ADMINISTRACIÓN", "v": "medio"}, {"p": "INGENIERÍA ROBÓTICA", "v": "alto"}, {"p": "INTELIGENCIA ARTIFICIAL", "v": "medio"}, {"p": "MARKETING Y PUBLICIDAD", "v": "medio"}, {"p": "MEDIOS DIGITALES", "v": "medio"}, {"p": "MERCADOTECNIA", "v": "medio"}, {"p": "NEGOCIOS INTERNACIONALES", "v": "medio"}, {"p": "PEDAGOGÍA", "v": "bajo"}, {"p": "PSICOLOGÍA", "v": "bajo"}, {"p": "PSICOLOGÍA ORGANIZACIONAL", "v": "medio"}, {"p": "SEGURIDAD INFORMÁTICA", "v": "medio"}, {"p": "TECNOLOGÍA EDUCATIVA", "v": "medio"}, {"p": "UNICA", "v": "unico"}, {"p": "UVE", "v": "unico"}], "MAESTRÍA": [{"p": "ADMINISTRACIÓN DE INSTITUCIONES EDUCATIVAS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS - MBA", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS DEPORTIVOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS-IEBS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE RECURSOS HUMANOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN", "v": "medio"}, {"p": "ADMINISTRACIÓN EN MERCADOTECNIA ESTRATÉGICA", "v": "medio"}, {"p": "ADMINISTRACIÓN PÚBLICA", "v": "medio"}, {"p": "ADMINISTRACIÓN Y DIRECCIÓN COMERCIAL DE EMPRESAS TURÍSTICAS", "v": "medio"}, {"p": "ALTA DIRECCIÓN Y GOBIERNO CORPORATIVO", "v": "medio"}, {"p": "ARQUITECTURA DE SOFTWARE", "v": "alto"}, {"p": "CIBERSEGURIDAD", "v": "medio"}, {"p": "CIENCIA DE DATOS PARA NEGOCIOS", "v": "medio"}, {"p": "CIENCIAS COMPUTACIONALES Y TELECOMUNICACIONES", "v": "medio"}, {"p": "COACHING INTEGRAL Y ORGANIZACIONAL", "v": "medio"}, {"p": "COMERCIO INTERNACIONAL", "v": "medio"}, {"p": "CONCIENCIA PLENA APLICADA", "v": "alto"}, {"p": "DERECHO PROCESAL CONSTITUCIONAL", "v": "medio"}, {"p": "DERECHO PROCESAL CONSTITUCIONAL (MODALIDAD EJECUTIVA)", "v": "medio"}, {"p": "DERECHO PROCESAL PENAL", "v": "medio"}, {"p": "DERECHO PROCESAL Y JUICIOS ORALES", "v": "alto"}, {"p": "DERECHOS HUMANOS", "v": "medio"}, {"p": "DESARROLLO SUSTENTABLE Y GESTIÓN AMBIENTAL", "v": "medio"}, {"p": "DIRECCIÓN DE EMPRESA TURÍSTICAS", "v": "medio"}, {"p": "DIRECCIÓN DE EMPRESAS TURÍSTICAS", "v": "medio"}, {"p": "DIRECCIÓN DE NEGOCIOS DE ALIMENTOS Y BEBIDAS", "v": "medio"}, {"p": "DIRECCIÓN DE PROYECTOS DE INNOVACIÓN", "v": "medio"}, {"p": "DIRECCIÓN DE VENTAS", "v": "medio"}, {"p": "DIRECCIÓN E INGENIERÍA DE SOFTWARE", "v": "medio"}, {"p": "DISEÑO PARA MEDIOS DIGITALES", "v": "medio"}, {"p": "EDUCACIÓN", "v": "medio"}, {"p": "EDUCACIÓN Y DOCENCIA", "v": "bajo"}, {"p": "ENERGÍAS RENOVABLES Y EFICIENCIA ENERGÉTICA", "v": "medio"}, {"p": "ENERGÍAS RENOVABLES Y PROYECTOS ENERGÉTICOS", "v": "medio"}, {"p": "FINANZAS", "v": "medio"}, {"p": "GESTIÓN DIRECTIVA DE INSTITUCIONES EN SALUD", "v": "alto"}, {"p": "GESTIÓN DIRECTIVA DE SALUD", "v": "medio"}, {"p": "GESTIÓN DIRECTIVA EN SALUD", "v": "medio"}, {"p": "GESTIÓN ESTRATÉGICA DEL CAPITAL HUMANO", "v": "medio"}, {"p": "GESTIÓN ORGANIZACIONAL POSITIVA", "v": "medio"}, {"p": "IMPUESTOS", "v": "medio"}, {"p": "INGENIERÍA Y TECNOLOGÍA AMBIENTAL", "v": "bajo"}, {"p": "INNOVACIÓN EDUCATIVA Y DISEÑO INSTRUCCIONAL", "v": "alto"}, {"p": "INTERVENCIÓN PSICOLÓGICA Y SALUD MENTAL", "v": "medio"}, {"p": "LOGÍSTICA TRANSPORTE Y DISTRIBUCIÓN INTERNACIONAL", "v": "medio"}, {"p": "LOGÍSTICA Y CADENA DE SUMINISTRO", "v": "medio"}, {"p": "LOGÍSTICA Y CADENA DE SUMINISTROS", "v": "medio"}, {"p": "MAESTRÍA ESPECIALIZADO EN COMERCIO INTERNACIONAL", "v": "medio"}, {"p": "MAESTRÍA ESPECIALIZADO EN NUTRICIÓN", "v": "medio"}, {"p": "MARKETING DIGITAL Y E-COMMERCE", "v": "medio"}, {"p": "MERCADOTECNIA DIGITAL Y COMERCIO ELECTRÓNICO", "v": "medio"}, {"p": "MERCADOTECNIA POLÍTICA", "v": "medio"}, {"p": "PROJECT MANAGEMENT", "v": "medio"}, {"p": "PSICOLOGÍA TRANSPERSONAL", "v": "medio"}, {"p": "RESPONSABILIDAD SOCIAL", "v": "medio"}, {"p": "TECNOLOGÍA EDUCATIVA", "v": "bajo"}, {"p": "TURISMO Y REVENUE MANAGEMENT HOTELERO", "v": "medio"}], "MASTER": [{"p": "ADMINISTRACIÓN DE INSTITUCIONES EDUCATIVAS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS - MBA", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS DEPORTIVOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS-IEBS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE RECURSOS HUMANOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN", "v": "medio"}, {"p": "ADMINISTRACIÓN EN MERCADOTECNIA ESTRATÉGICA", "v": "medio"}, {"p": "ADMINISTRACIÓN PÚBLICA", "v": "medio"}, {"p": "ADMINISTRACIÓN Y DIRECCIÓN COMERCIAL DE EMPRESAS TURÍSTICAS", "v": "medio"}, {"p": "ALTA DIRECCIÓN Y GOBIERNO CORPORATIVO", "v": "medio"}, {"p": "ARQUITECTURA DE SOFTWARE", "v": "alto"}, {"p": "CIBERSEGURIDAD", "v": "medio"}, {"p": "CIENCIA DE DATOS PARA NEGOCIOS", "v": "medio"}, {"p": "CIENCIAS COMPUTACIONALES Y TELECOMUNICACIONES", "v": "medio"}, {"p": "COACHING INTEGRAL Y ORGANIZACIONAL", "v": "medio"}, {"p": "COMERCIO INTERNACIONAL", "v": "medio"}, {"p": "CONCIENCIA PLENA APLICADA", "v": "alto"}, {"p": "DERECHO PROCESAL CONSTITUCIONAL", "v": "medio"}, {"p": "DERECHO PROCESAL CONSTITUCIONAL (MODALIDAD EJECUTIVA)", "v": "medio"}, {"p": "DERECHO PROCESAL PENAL", "v": "medio"}, {"p": "DERECHO PROCESAL Y JUICIOS ORALES", "v": "alto"}, {"p": "DERECHOS HUMANOS", "v": "medio"}, {"p": "DESARROLLO SUSTENTABLE Y GESTIÓN AMBIENTAL", "v": "medio"}, {"p": "DIRECCIÓN DE EMPRESA TURÍSTICAS", "v": "medio"}, {"p": "DIRECCIÓN DE EMPRESAS TURÍSTICAS", "v": "medio"}, {"p": "DIRECCIÓN DE NEGOCIOS DE ALIMENTOS Y BEBIDAS", "v": "medio"}, {"p": "DIRECCIÓN DE PROYECTOS DE INNOVACIÓN", "v": "medio"}, {"p": "DIRECCIÓN DE VENTAS", "v": "medio"}, {"p": "DIRECCIÓN E INGENIERÍA DE SOFTWARE", "v": "medio"}, {"p": "DISEÑO PARA MEDIOS DIGITALES", "v": "medio"}, {"p": "EDUCACIÓN", "v": "medio"}, {"p": "EDUCACIÓN Y DOCENCIA", "v": "bajo"}, {"p": "ENERGÍAS RENOVABLES Y EFICIENCIA ENERGÉTICA", "v": "medio"}, {"p": "ENERGÍAS RENOVABLES Y PROYECTOS ENERGÉTICOS", "v": "medio"}, {"p": "FINANZAS", "v": "medio"}, {"p": "GESTIÓN DIRECTIVA DE INSTITUCIONES EN SALUD", "v": "alto"}, {"p": "GESTIÓN DIRECTIVA DE SALUD", "v": "medio"}, {"p": "GESTIÓN DIRECTIVA EN SALUD", "v": "medio"}, {"p": "GESTIÓN ESTRATÉGICA DEL CAPITAL HUMANO", "v": "medio"}, {"p": "GESTIÓN ORGANIZACIONAL POSITIVA", "v": "medio"}, {"p": "IMPUESTOS", "v": "medio"}, {"p": "INGENIERÍA Y TECNOLOGÍA AMBIENTAL", "v": "bajo"}, {"p": "INNOVACIÓN EDUCATIVA Y DISEÑO INSTRUCCIONAL", "v": "alto"}, {"p": "INTERVENCIÓN PSICOLÓGICA Y SALUD MENTAL", "v": "medio"}, {"p": "LOGÍSTICA TRANSPORTE Y DISTRIBUCIÓN INTERNACIONAL", "v": "medio"}, {"p": "LOGÍSTICA Y CADENA DE SUMINISTRO", "v": "medio"}, {"p": "LOGÍSTICA Y CADENA DE SUMINISTROS", "v": "medio"}, {"p": "MAESTRÍA ESPECIALIZADO EN COMERCIO INTERNACIONAL", "v": "medio"}, {"p": "MAESTRÍA ESPECIALIZADO EN NUTRICIÓN", "v": "medio"}, {"p": "MARKETING DIGITAL Y E-COMMERCE", "v": "medio"}, {"p": "MERCADOTECNIA DIGITAL Y COMERCIO ELECTRÓNICO", "v": "medio"}, {"p": "MERCADOTECNIA POLÍTICA", "v": "medio"}, {"p": "PROJECT MANAGEMENT", "v": "medio"}, {"p": "PSICOLOGÍA TRANSPERSONAL", "v": "medio"}, {"p": "RESPONSABILIDAD SOCIAL", "v": "medio"}, {"p": "TECNOLOGÍA EDUCATIVA", "v": "bajo"}, {"p": "TURISMO Y REVENUE MANAGEMENT HOTELERO", "v": "medio"}], "EDUCACIÓN_CONTINUA": [{"p": "DIPLOMADO", "v": "unico"}]};
+var CATALOG = {"DOCTORADO": [{"p": "ADMINISTRACIÓN ESTRATÉGICA EMPRESARIAL", "v": "medio"}, {"p": "CIBERSEGURIDAD Y GESTIÓN DE RIESGOS DIGITALES", "v": "doc_esp"}, {"p": "CIENCIA DE DATOS E INTELIGENCIA ARTIFICIAL", "v": "doc_esp"}, {"p": "DERECHO", "v": "bajo"}, {"p": "DESARROLLO HUMANO", "v": "bajo"}, {"p": "EDUCACIÓN", "v": "alto"}, {"p": "FINANZAS", "v": "medio"}, {"p": "GESTIÓN E INNOVACIÓN TECNOLÓGICA", "v": "medio"}], "LICENCIATURA": [{"p": "ADMINISTRACIÓN", "v": "medio"}, {"p": "ADMINISTRACIÓN DE EMPRESAS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE EMPRESAS TURÍSTICAS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE RECURSOS HUMANOS", "v": "bajo"}, {"p": "ADMINISTRACIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN", "v": "medio"}, {"p": "ADMINISTRACIÓN DE VENTAS", "v": "medio"}, {"p": "ADMINISTRACIÓN Y FINANZAS", "v": "medio"}, {"p": "AGRONEGOCIOS", "v": "medio"}, {"p": "ARQUITECTURA", "v": "arq"}, {"p": "ARTE DIGITAL Y MULTIMEDIA", "v": "unico"}, {"p": "CIBERSEGURIDAD Y RIESGOS EN INTELIGENCIA ARTIFICIAL", "v": "alto"}, {"p": "CIENCIAS POLÍTICAS Y ADMINISTRACIÓN PÚBLICA", "v": "medio"}, {"p": "COMUNICACIÓN", "v": "medio"}, {"p": "COMUNICACIÓN CORPORATIVA", "v": "unico"}, {"p": "COMUNICACIÓN DIGITAL", "v": "medio"}, {"p": "COMUNICACIÓN ORGANIZACIONAL", "v": "medio"}, {"p": "CONTADURÍA PÚBLICA", "v": "medio"}, {"p": "CONTADURÍA Y FINANZAS", "v": "medio"}, {"p": "CRIMINOLOGÍA Y CRIMINALÍSTICA", "v": "bajo"}, {"p": "DERECHO", "v": "alto"}, {"p": "DERECHO EMPRESARIAL", "v": "medio"}, {"p": "DERECHO INTERNACIONAL", "v": "medio"}, {"p": "DESARROLLO SUSTENTABLE Y ECOTURISMO", "v": "medio"}, {"p": "DIRECCIÓN DE ARTE", "v": "medio"}, {"p": "DISEÑO Y ANIMACIÓN DIGITAL", "v": "medio"}, {"p": "ECONOMÍA Y FINANZAS", "v": "medio"}, {"p": "EMPRENDIMIENTO", "v": "medio"}, {"p": "FINANZAS Y ESTRATEGIA FISCAL", "v": "medio"}, {"p": "INGENIERÍA AMBIENTAL", "v": "alto"}, {"p": "INGENIERÍA EN DESARROLLO DE SOFTWARE", "v": "medio"}, {"p": "INGENIERÍA EN ENERGÍAS RENOVABLES", "v": "medio"}, {"p": "INGENIERÍA EN LOGÍSTICA Y TRANSPORTE", "v": "medio"}, {"p": "INGENIERÍA EN SISTEMAS COMPUTACIONALES", "v": "alto"}, {"p": "INGENIERÍA EN TECNOLOGÍA DE VIDEOJUEGOS Y REALIDAD VIRTUAL", "v": "alto"}, {"p": "INGENIERÍA INDUSTRIAL", "v": "alto"}, {"p": "INGENIERÍA INDUSTRIAL Y ADMINISTRACIÓN", "v": "medio"}, {"p": "INGENIERÍA ROBÓTICA", "v": "arq"}, {"p": "INTELIGENCIA ARTIFICIAL", "v": "medio"}, {"p": "MARKETING Y PUBLICIDAD", "v": "unico"}, {"p": "MEDIOS DIGITALES", "v": "unico"}, {"p": "MERCADOTECNIA", "v": "medio"}, {"p": "NEGOCIOS INTERNACIONALES", "v": "medio"}, {"p": "PEDAGOGÍA", "v": "bajo"}, {"p": "PSICOLOGÍA", "v": "unico"}, {"p": "PSICOLOGÍA ORGANIZACIONAL", "v": "medio"}, {"p": "SEGURIDAD INFORMÁTICA", "v": "medio"}, {"p": "TECNOLOGÍA EDUCATIVA", "v": "medio"}, {"p": "UNICA", "v": "unico"}, {"p": "UVE", "v": "unico"}], "MAESTRÍA": [{"p": "ADMINISTRACIÓN DE INSTITUCIONES EDUCATIVAS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS - MBA", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS DEPORTIVOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS-IEBS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE RECURSOS HUMANOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN", "v": "medio"}, {"p": "ADMINISTRACIÓN EN MERCADOTECNIA ESTRATÉGICA", "v": "medio"}, {"p": "ADMINISTRACIÓN PÚBLICA", "v": "medio"}, {"p": "ADMINISTRACIÓN Y DIRECCIÓN COMERCIAL DE EMPRESAS TURÍSTICAS", "v": "medio"}, {"p": "ALTA DIRECCIÓN Y GOBIERNO CORPORATIVO", "v": "medio"}, {"p": "ARQUITECTURA DE SOFTWARE", "v": "arq_sw"}, {"p": "CIBERSEGURIDAD", "v": "medio"}, {"p": "CIENCIA DE DATOS PARA NEGOCIOS", "v": "medio"}, {"p": "CIENCIAS COMPUTACIONALES Y TELECOMUNICACIONES", "v": "medio"}, {"p": "COACHING INTEGRAL Y ORGANIZACIONAL", "v": "medio"}, {"p": "COMERCIO INTERNACIONAL", "v": "medio"}, {"p": "CONCIENCIA PLENA APLICADA", "v": "alto"}, {"p": "DERECHO PROCESAL CONSTITUCIONAL", "v": "medio"}, {"p": "DERECHO PROCESAL CONSTITUCIONAL (MODALIDAD EJECUTIVA)", "v": "medio"}, {"p": "DERECHO PROCESAL PENAL", "v": "medio"}, {"p": "DERECHO PROCESAL Y JUICIOS ORALES", "v": "alto"}, {"p": "DERECHOS HUMANOS", "v": "medio"}, {"p": "DESARROLLO SUSTENTABLE Y GESTIÓN AMBIENTAL", "v": "medio"}, {"p": "DIRECCIÓN DE EMPRESA TURÍSTICAS", "v": "medio"}, {"p": "DIRECCIÓN DE EMPRESAS TURÍSTICAS", "v": "medio"}, {"p": "DIRECCIÓN DE NEGOCIOS DE ALIMENTOS Y BEBIDAS", "v": "medio"}, {"p": "DIRECCIÓN DE PROYECTOS DE INNOVACIÓN", "v": "medio"}, {"p": "DIRECCIÓN DE VENTAS", "v": "medio"}, {"p": "DIRECCIÓN E INGENIERÍA DE SOFTWARE", "v": "medio"}, {"p": "DISEÑO PARA MEDIOS DIGITALES", "v": "medio"}, {"p": "EDUCACIÓN", "v": "medio"}, {"p": "EDUCACIÓN Y DOCENCIA", "v": "bajo"}, {"p": "ENERGÍAS RENOVABLES Y EFICIENCIA ENERGÉTICA", "v": "medio"}, {"p": "ENERGÍAS RENOVABLES Y PROYECTOS ENERGÉTICOS", "v": "medio"}, {"p": "FINANZAS", "v": "medio"}, {"p": "GESTIÓN DIRECTIVA DE INSTITUCIONES EN SALUD", "v": "alto"}, {"p": "GESTIÓN DIRECTIVA DE SALUD", "v": "medio"}, {"p": "GESTIÓN DIRECTIVA EN SALUD", "v": "medio"}, {"p": "GESTIÓN ESTRATÉGICA DEL CAPITAL HUMANO", "v": "medio"}, {"p": "GESTIÓN ORGANIZACIONAL POSITIVA", "v": "medio"}, {"p": "IMPUESTOS", "v": "medio"}, {"p": "INGENIERÍA Y TECNOLOGÍA AMBIENTAL", "v": "bajo"}, {"p": "INNOVACIÓN EDUCATIVA Y DISEÑO INSTRUCCIONAL", "v": "alto"}, {"p": "INTERVENCIÓN PSICOLÓGICA Y SALUD MENTAL", "v": "medio"}, {"p": "LOGÍSTICA TRANSPORTE Y DISTRIBUCIÓN INTERNACIONAL", "v": "medio"}, {"p": "LOGÍSTICA Y CADENA DE SUMINISTRO", "v": "medio"}, {"p": "LOGÍSTICA Y CADENA DE SUMINISTROS", "v": "medio"}, {"p": "MAESTRÍA ESPECIALIZADO EN COMERCIO INTERNACIONAL", "v": "medio"}, {"p": "MAESTRÍA ESPECIALIZADO EN NUTRICIÓN", "v": "medio"}, {"p": "MARKETING DIGITAL Y E-COMMERCE", "v": "medio"}, {"p": "MERCADOTECNIA DIGITAL Y COMERCIO ELECTRÓNICO", "v": "medio"}, {"p": "MERCADOTECNIA POLÍTICA", "v": "medio"}, {"p": "PROJECT MANAGEMENT", "v": "medio"}, {"p": "PSICOLOGÍA TRANSPERSONAL", "v": "medio"}, {"p": "RESPONSABILIDAD SOCIAL", "v": "medio"}, {"p": "TECNOLOGÍA EDUCATIVA", "v": "bajo"}, {"p": "TURISMO Y REVENUE MANAGEMENT HOTELERO", "v": "medio"}], "MASTER": [{"p": "ADMINISTRACIÓN DE INSTITUCIONES EDUCATIVAS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS - MBA", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS DEPORTIVOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS-IEBS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE RECURSOS HUMANOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN", "v": "medio"}, {"p": "ADMINISTRACIÓN EN MERCADOTECNIA ESTRATÉGICA", "v": "medio"}, {"p": "ADMINISTRACIÓN PÚBLICA", "v": "medio"}, {"p": "ADMINISTRACIÓN Y DIRECCIÓN COMERCIAL DE EMPRESAS TURÍSTICAS", "v": "medio"}, {"p": "ALTA DIRECCIÓN Y GOBIERNO CORPORATIVO", "v": "medio"}, {"p": "ARQUITECTURA DE SOFTWARE", "v": "arq_sw"}, {"p": "CIBERSEGURIDAD", "v": "medio"}, {"p": "CIENCIA DE DATOS PARA NEGOCIOS", "v": "medio"}, {"p": "CIENCIAS COMPUTACIONALES Y TELECOMUNICACIONES", "v": "medio"}, {"p": "COACHING INTEGRAL Y ORGANIZACIONAL", "v": "medio"}, {"p": "COMERCIO INTERNACIONAL", "v": "medio"}, {"p": "CONCIENCIA PLENA APLICADA", "v": "alto"}, {"p": "DERECHO PROCESAL CONSTITUCIONAL", "v": "medio"}, {"p": "DERECHO PROCESAL CONSTITUCIONAL (MODALIDAD EJECUTIVA)", "v": "medio"}, {"p": "DERECHO PROCESAL PENAL", "v": "medio"}, {"p": "DERECHO PROCESAL Y JUICIOS ORALES", "v": "alto"}, {"p": "DERECHOS HUMANOS", "v": "medio"}, {"p": "DESARROLLO SUSTENTABLE Y GESTIÓN AMBIENTAL", "v": "medio"}, {"p": "DIRECCIÓN DE EMPRESA TURÍSTICAS", "v": "medio"}, {"p": "DIRECCIÓN DE EMPRESAS TURÍSTICAS", "v": "medio"}, {"p": "DIRECCIÓN DE NEGOCIOS DE ALIMENTOS Y BEBIDAS", "v": "medio"}, {"p": "DIRECCIÓN DE PROYECTOS DE INNOVACIÓN", "v": "medio"}, {"p": "DIRECCIÓN DE VENTAS", "v": "medio"}, {"p": "DIRECCIÓN E INGENIERÍA DE SOFTWARE", "v": "medio"}, {"p": "DISEÑO PARA MEDIOS DIGITALES", "v": "medio"}, {"p": "EDUCACIÓN", "v": "medio"}, {"p": "EDUCACIÓN Y DOCENCIA", "v": "bajo"}, {"p": "ENERGÍAS RENOVABLES Y EFICIENCIA ENERGÉTICA", "v": "medio"}, {"p": "ENERGÍAS RENOVABLES Y PROYECTOS ENERGÉTICOS", "v": "medio"}, {"p": "FINANZAS", "v": "medio"}, {"p": "GESTIÓN DIRECTIVA DE INSTITUCIONES EN SALUD", "v": "alto"}, {"p": "GESTIÓN DIRECTIVA DE SALUD", "v": "medio"}, {"p": "GESTIÓN DIRECTIVA EN SALUD", "v": "medio"}, {"p": "GESTIÓN ESTRATÉGICA DEL CAPITAL HUMANO", "v": "medio"}, {"p": "GESTIÓN ORGANIZACIONAL POSITIVA", "v": "medio"}, {"p": "IMPUESTOS", "v": "medio"}, {"p": "INGENIERÍA Y TECNOLOGÍA AMBIENTAL", "v": "bajo"}, {"p": "INNOVACIÓN EDUCATIVA Y DISEÑO INSTRUCCIONAL", "v": "alto"}, {"p": "INTERVENCIÓN PSICOLÓGICA Y SALUD MENTAL", "v": "medio"}, {"p": "LOGÍSTICA TRANSPORTE Y DISTRIBUCIÓN INTERNACIONAL", "v": "medio"}, {"p": "LOGÍSTICA Y CADENA DE SUMINISTRO", "v": "medio"}, {"p": "LOGÍSTICA Y CADENA DE SUMINISTROS", "v": "medio"}, {"p": "MAESTRÍA ESPECIALIZADO EN COMERCIO INTERNACIONAL", "v": "medio"}, {"p": "MAESTRÍA ESPECIALIZADO EN NUTRICIÓN", "v": "medio"}, {"p": "MARKETING DIGITAL Y E-COMMERCE", "v": "medio"}, {"p": "MERCADOTECNIA DIGITAL Y COMERCIO ELECTRÓNICO", "v": "medio"}, {"p": "MERCADOTECNIA POLÍTICA", "v": "medio"}, {"p": "PROJECT MANAGEMENT", "v": "medio"}, {"p": "PSICOLOGÍA TRANSPERSONAL", "v": "medio"}, {"p": "RESPONSABILIDAD SOCIAL", "v": "medio"}, {"p": "TECNOLOGÍA EDUCATIVA", "v": "bajo"}, {"p": "TURISMO Y REVENUE MANAGEMENT HOTELERO", "v": "medio"}]};
 
 function fillSelect(selId, nivelKey, badgeId){
   var sel=g(selId); sel.innerHTML='';
@@ -445,7 +446,11 @@ function updateBadge(selId,badgeId){
   var sel=g(selId);
   if(!sel||!sel.options[sel.selectedIndex])return 'medio';
   var nivel=sel.options[sel.selectedIndex].getAttribute('data-nivel');
-  if(badgeId)g(badgeId).innerHTML=NB[nivel]||NB['medio'];
+  var specialKeys=['arq','arq_sw','doc_esp','unico'];
+  if(badgeId){
+    if(specialKeys.indexOf(nivel)>=0) g(badgeId).innerHTML='';
+    else g(badgeId).innerHTML=NB[nivel]||NB['medio'];
+  }
   return nivel||'medio';
 }
 
@@ -747,7 +752,6 @@ var ACCS = {
       ]},
       {cat:'Plataforma', items:[
         {id:'utelx',  name:'Utel X',            price:165},
-        {id:'ugen',   name:'U Genérico',        price:110}
       ]},
       {cat:'Idioma', items:[
         {id:'cambridge', name:'Cambridge',      price:165},
@@ -789,7 +793,6 @@ var ACCS = {
       ]},
       {cat:'Plataforma', items:[
         {id:'utelx',  name:'Utel X',            price:165},
-        {id:'ugen',   name:'U Genérico',        price:110}
       ]},
       {cat:'Idioma', items:[
         {id:'cambridge', name:'Cambridge',      price:220},
@@ -818,7 +821,6 @@ var ACCS = {
       ]},
       {cat:'Plataforma', items:[
         {id:'utelx',  name:'Utel X',            price:165},
-        {id:'ugen',   name:'U Genérico',        price:110}
       ]},
       {cat:'Idioma', items:[
         {id:'cambridge', name:'Cambridge',      price:220}
@@ -842,7 +844,6 @@ var ACCS = {
       ]},
       {cat:'Plataforma', items:[
         {id:'utelx',  name:'Utel X',            price:165},
-        {id:'ugen',   name:'U Genérico',        price:110}
       ]},
       {cat:'Idioma', items:[
         {id:'cambridge', name:'Cambridge',      price:220}
@@ -857,7 +858,7 @@ var ACCS = {
 };
 
 // IDs que cuentan para reglas
-var CERT_IDS  = ['coursera','facebook','microsoft','tableau','gcloud','gads','legal'];
+var CERT_IDS  = ['coursera','facebook','cifal','microsoft','tableau','gcloud','gads','legal'];
 var PLAT_IDS  = ['utelx','ugen'];
 var IDIOM_IDS = ['cambridge','duolingo'];
 
@@ -905,10 +906,11 @@ function renderAccs(panelId, sec, isOnline){
   html += '<div class="acc-group-label">Incluido en el paquete</div>';
   html += '<div class="acc-chips">';
   incList.forEach(function(item){
-    html += '<div class="chip included">'
-          + '<div class="chip-check"></div>'
+    var replaced = (item.id==='voxy' && (SEL[sec]['cambridge']||SEL[sec]['duolingo']));
+    html += '<div class="chip '+(replaced?'blocked':'included')+'">'
+          + '<div class="chip-check">'+(replaced?'✕':'')+'</div>'
           + '<span class="chip-name">'+item.name+'</span>'
-          + '<span class="chip-price">Incluido</span>'
+          + '<span class="chip-price">'+(replaced?'Reemplazado':'Incluido')+'</span>'
           + '</div>';
   });
   html += '</div></div>';
@@ -930,6 +932,14 @@ function renderAccs(panelId, sec, isOnline){
       if(!sel){
         if(item.id==='welbe' && SEL[sec]['welbep']===true){
           blocked=true; blockReason='Reemplazado por Premium';
+        } else if(item.id==='tit' && SEL[sec]['tit50']===true){
+          blocked=true; blockReason='Ya elegiste Título 50%';
+        } else if(item.id==='tit50' && SEL[sec]['tit']===true){
+          blocked=true; blockReason='Ya elegiste Titulación';
+        } else if(item.id==='voxy' && (SEL[sec]['cambridge']||SEL[sec]['duolingo'])){
+          blocked=true; blockReason='Reemplazado por idioma elegido';
+        } else if((item.id==='cambridge'||item.id==='duolingo') && SEL[sec]['voxy_manual']){
+          blocked=true; blockReason='Ya tenés Voxy activo';
         } else if(courseraInc && (isCert || isPlat)){
           blocked=true; blockReason='No compatible con Coursera';
         } else if(isCert && certCount>=maxCerts){
@@ -1027,14 +1037,21 @@ function renderMultiVariant(tbodyId, variants){
 function rL(){
   var progSel=g('lprog'); if(!progSel||!progSel.value)return;
   var progName=progSel.value;
-  var nivel=updateBadge('lprog','lnivel-badge');
+  var nivelRaw=updateBadge('lprog','lnivel-badge');
+  // Map special catalog keys to real pricing levels
+  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico'};
+  var nivel=nivelMap[nivelRaw]||nivelRaw;
   var lead=g('llead').value;
   var zona=g('lzona').value;
   if(zona!=='std') lead=zona;
   var mod=g('lmod').value;
 
-  // Auto U-Camp para ingenierías
-  var isIng=progName.toUpperCase().indexOf('INGENIER')>=0;
+  // Auto U-Camp para ingenierías específicas
+  var ingProgs=['INGENIERÍA EN SISTEMAS COMPUTACIONALES','INGENIERÍA INDUSTRIAL',
+    'INGENIERÍA INDUSTRIAL Y ADMINISTRACIÓN','INGENIERÍA EN DESARROLLO DE SOFTWARE',
+    'INTELIGENCIA ARTIFICIAL','SEGURIDAD INFORMÁTICA','INGENIERÍA ROBÓTICA'];
+  var uName2=progName.toUpperCase();
+  var isIng=ingProgs.some(function(p){return uName2.indexOf(p)>=0;});
   if(isIng) SEL['lic']['ucamp']=true;
   else if(!isIng && SEL['lic']['_ucamp_was_auto']) SEL['lic']['ucamp']=false;
   SEL['lic']['_ucamp_was_auto']=isIng;
@@ -1050,7 +1067,7 @@ function rL(){
 
   if(nivel==='unico'){
     var uName=progName.toUpperCase();
-    if(uName==='UVE'){
+    if(uName==='UVE'||uName==='PSICOLOGÍA'){
       // UVE: 2 variantes escalonadas
       var rows=[
         {label:'Escalonado Alto',p:[700,1400,2725,2725,2725,2725,2725,2725,2725,2725,2725,2725],pkg:'ESC.UVE.ALTO',esc:'—'},
@@ -1059,8 +1076,9 @@ function rL(){
       renderMultiVariant('lb', rows);
       g('lbi').innerHTML='<span>Incluye: Asistencia, Voxy, 5% domiciliación</span>';
       g('li').innerHTML=NB['unico']+' <span class="badge b-mod">UVE</span>';
-      g('lic-acc').innerHTML=''; g('lic-total').innerHTML=''; return;
-    } else if(uName==='UNICA'){
+      g('lic-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UVE</div>';
+      g('lic-total').innerHTML=''; return;
+    } else if(uName==='UNICA'||uName==='ARTE DIGITAL Y MULTIMEDIA'||uName==='MARKETING Y PUBLICIDAD'||uName==='MEDIOS DIGITALES'||uName==='COMUNICACIÓN CORPORATIVA'){
       // UNICA: 3 variantes
       var rows=[
         {label:'Escalonado Alto',p:[735,1470,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810],pkg:'ESC1.LIC.UNICA.VOXY.',esc:'—'},
@@ -1071,7 +1089,8 @@ function rL(){
       renderMultiVariant('lb', rows);
       g('lbi').innerHTML='<span>Incluye: Voxy</span>';
       g('li').innerHTML=NB['unico']+' <span class="badge b-mod">UNICA</span>';
-      g('lic-acc').innerHTML=''; g('lic-total').innerHTML=''; return;
+      g('lic-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UNICA</div>';
+      g('lic-total').innerHTML=''; return;
     } else {
       g('lb').innerHTML='<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--mu)">Ver pestaña Pagos Únicos</td></tr>';
       g('lbi').innerHTML='';g('li').innerHTML=NB['unico'];
@@ -1084,7 +1103,10 @@ function rL(){
   var acc=getAccTotal('lic',false);
   renderTable('lb',e.p,e.pkg,e.esc,acc);
   renderBeca('lbi',e.b);
-  g('li').innerHTML=NB[nivel]+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+LBG[lead];
+  // Programas con pricing especial muestran solo el nombre, sin badge de nivel
+  var specialProgs=['arquitectura','robotica','arq_software'];
+  var nivelBadge = specialProgs.indexOf(progKey)>=0 ? '' : NB[nivel];
+  g('li').innerHTML=nivelBadge+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+LBG[lead];
   renderAccs('lic-acc','lic',false);
   renderTotal('lic-total',e.p[2],'lic',false);
 }
@@ -1092,7 +1114,9 @@ function rL(){
 function rM(){
   var progSel=g('mprog'); if(!progSel||!progSel.value)return;
   var progName=progSel.value;
-  var nivel=updateBadge('mprog','mnivel-badge');
+  var nivelRaw=updateBadge('mprog','mnivel-badge');
+  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico'};
+  var nivel=nivelMap[nivelRaw]||nivelRaw;
   var lead=g('mlead').value;
   var zona=g('mzona').value;
   if(zona!=='std') lead=zona;
@@ -1121,7 +1145,9 @@ function rM(){
 function rS(){
   var progSel=g('sprog'); if(!progSel||!progSel.value)return;
   var progName=progSel.value;
-  var nivel=updateBadge('sprog','snivel-badge');
+  var nivelRaw=updateBadge('sprog','snivel-badge');
+  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico'};
+  var nivel=nivelMap[nivelRaw]||nivelRaw;
   var lead=g('slead').value;
 
   if(nivel==='unico'){
@@ -1143,7 +1169,9 @@ function rS(){
 function rD(){
   var progSel=g('dprog'); if(!progSel||!progSel.value)return;
   var progName=progSel.value;
-  var nivel=updateBadge('dprog','dnivel-badge');
+  var nivelRaw=updateBadge('dprog','dnivel-badge');
+  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico'};
+  var nivel=nivelMap[nivelRaw]||nivelRaw;
   var lead=g('dlead').value;
 
   if(nivel==='unico'){
