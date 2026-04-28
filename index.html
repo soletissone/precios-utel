@@ -119,6 +119,18 @@ td{padding:9px 14px;vertical-align:middle}
 .pu-precio{font-size:20px;font-weight:600;color:var(--ac2)}
 
 .wm{text-align:center;margin-top:32px;font-size:11px;color:rgba(0,0,0,.15);letter-spacing:.1em}
+
+/* SEARCHABLE SELECT */
+.ss-wrap{position:relative}
+.ss-input{width:100%;background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:8px 28px 8px 10px;font-size:13px;color:var(--tx);outline:none;cursor:text;box-sizing:border-box}
+.ss-input:focus{border-color:var(--ac)}
+.ss-arrow{position:absolute;right:8px;top:50%;transform:translateY(-50%);pointer-events:none;color:var(--mu);font-size:10px}
+.ss-dropdown{position:absolute;top:100%;left:0;right:0;background:var(--sf);border:1px solid var(--bd);border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.12);z-index:100;max-height:220px;overflow-y:auto;display:none}
+.ss-dropdown.open{display:block}
+.ss-option{padding:8px 12px;font-size:13px;cursor:pointer;color:var(--tx)}
+.ss-option:hover,.ss-option.active{background:var(--s2)}
+.ss-option.selected{color:var(--ac);font-weight:500}
+.ss-empty{padding:8px 12px;font-size:12px;color:var(--mu);font-style:italic}
 </style>
 <script>
 (function(){
@@ -340,7 +352,7 @@ function tryLogin(){
   if(p===PWD){
     localStorage.removeItem('ua');
     localStorage.setItem('ok', Date.now() + 28800000); // 8 horas
-    localStorage.setItem('build', '1777070393');
+    localStorage.setItem('build', '1777389648');
     g('ls').style.display='none';
     g('app').style.display='block';
     init();
@@ -358,7 +370,7 @@ function logout(){
   g('pi').value='';
 }
 window.addEventListener('load',function(){
-  var BUILD='1777070393';
+  var BUILD='1777389648';
   var a=ga();
   if(a.l)g('em').textContent='Bloqueado '+Math.ceil((a.l-Date.now())/60000)+' min.';
   var _ok=parseInt(localStorage.getItem('ok')||'0');
@@ -1267,11 +1279,108 @@ function rPU(){
 /* ═══════════════════════════════════════
    INIT
 ═══════════════════════════════════════ */
+/* ═══════════════════════════════════════
+   SEARCHABLE SELECT
+═══════════════════════════════════════ */
+function makeSearchable(selId, onChangeFn) {
+  var orig = g(selId);
+  if(!orig) return;
+  var wrap = document.createElement('div');
+  wrap.className = 'ss-wrap';
+  orig.parentNode.insertBefore(wrap, orig);
+  wrap.appendChild(orig);
+  orig.style.display = 'none';
+
+  var input = document.createElement('input');
+  input.type = 'text';
+  input.className = 'ss-input';
+  input.placeholder = 'Buscar...';
+  input.autocomplete = 'off';
+
+  var arrow = document.createElement('span');
+  arrow.className = 'ss-arrow';
+  arrow.textContent = '▾';
+
+  var dropdown = document.createElement('div');
+  dropdown.className = 'ss-dropdown';
+
+  wrap.appendChild(input);
+  wrap.appendChild(arrow);
+  wrap.appendChild(dropdown);
+
+  function getOptions() {
+    var opts = [];
+    for(var i=0;i<orig.options.length;i++) opts.push({value:orig.options[i].value, label:orig.options[i].textContent, nivel:orig.options[i].getAttribute('data-nivel')||''});
+    return opts;
+  }
+
+  function renderDropdown(filter) {
+    dropdown.innerHTML = '';
+    var opts = getOptions();
+    var filtered = filter ? opts.filter(function(o){return o.label.toLowerCase().indexOf(filter.toLowerCase())>=0;}) : opts;
+    if(filtered.length===0){
+      var em = document.createElement('div'); em.className='ss-empty'; em.textContent='Sin resultados'; dropdown.appendChild(em); return;
+    }
+    filtered.forEach(function(o){
+      var div = document.createElement('div');
+      div.className = 'ss-option' + (o.value===orig.value?' selected':'');
+      div.textContent = o.label;
+      div.setAttribute('data-value', o.value);
+      div.addEventListener('mousedown', function(e){
+        e.preventDefault();
+        orig.value = o.value;
+        input.value = o.label;
+        dropdown.classList.remove('open');
+        if(onChangeFn) onChangeFn();
+      });
+      dropdown.appendChild(div);
+    });
+  }
+
+  // Set initial value display
+  if(orig.options[orig.selectedIndex]) input.value = orig.options[orig.selectedIndex].textContent;
+
+  input.addEventListener('focus', function(){
+    renderDropdown('');
+    dropdown.classList.add('open');
+  });
+  input.addEventListener('input', function(){
+    renderDropdown(input.value);
+    dropdown.classList.add('open');
+  });
+  input.addEventListener('blur', function(){
+    setTimeout(function(){
+      dropdown.classList.remove('open');
+      // Restore label of selected value
+      if(orig.options[orig.selectedIndex]) input.value = orig.options[orig.selectedIndex].textContent;
+    }, 150);
+  });
+  arrow.addEventListener('mousedown', function(e){
+    e.preventDefault();
+    if(dropdown.classList.contains('open')){ dropdown.classList.remove('open'); input.blur(); }
+    else { input.focus(); }
+  });
+
+  // Public: refresh display after programmatic change
+  orig._ssRefresh = function(){
+    if(orig.options[orig.selectedIndex]) input.value = orig.options[orig.selectedIndex].textContent;
+  };
+}
+
+function makeSearchableAll() {
+  makeSearchable('lprog', rL);
+  makeSearchable('mprog', rM);
+  makeSearchable('sprog', rS);
+  makeSearchable('dprog', rD);
+}
+
+
 function init(){
   fillSelect('lprog','LICENCIATURA','lnivel-badge');
   fillSelect('mprog','MAESTRÍA','mnivel-badge');
   fillSelect('sprog','MASTER','snivel-badge');
   fillSelect('dprog','DOCTORADO','dnivel-badge');
+  makeSearchableAll();
   rL(); rM(); rS(); rD(); rPU();
 }
 </script>
