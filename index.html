@@ -120,6 +120,57 @@ td{padding:9px 14px;vertical-align:middle}
 
 .wm{text-align:center;margin-top:32px;font-size:11px;color:rgba(0,0,0,.15);letter-spacing:.1em}
 
+/* DOWNLOAD BUTTON */
+.dl-btn{display:flex;align-items:center;gap:6px;background:var(--ac);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer;margin-bottom:14px;transition:opacity .15s}
+.dl-btn:hover{opacity:.88}
+.dl-btn svg{flex-shrink:0}
+
+/* PRINT STYLES */
+@media print{
+  body{background:#fff!important}
+  header,#admin-btn,#admin-overlay,.tabs,.dl-btn,.acc-section,.total-section,.rules,.wm,.filters{display:none!important}
+  #app{display:block!important}
+  .sec{display:none!important}
+  .sec.active{display:block!important}
+  .print-header{display:block!important}
+  .tw{border:1px solid #ddd;border-radius:0}
+  table{font-size:12px}
+  .badge{border:1px solid #ccc}
+  .print-summary{display:block!important;margin-top:20px;border-top:2px solid #6c5ce7;padding-top:16px}
+}
+@media screen{
+  .print-header,.print-summary{display:none}
+}
+
+/* ADMIN PANEL */
+#admin-btn{position:fixed;bottom:18px;right:18px;width:36px;height:36px;border-radius:50%;background:rgba(108,92,231,.15);border:1px solid rgba(108,92,231,.3);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;z-index:200;transition:all .2s}
+#admin-btn:hover{background:rgba(108,92,231,.3)}
+#admin-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:300;align-items:center;justify-content:center}
+#admin-overlay.open{display:flex}
+#admin-panel{background:var(--sf);border-radius:16px;padding:32px;width:100%;max-width:420px;box-shadow:0 8px 40px rgba(0,0,0,.2)}
+#admin-panel h2{font-size:16px;font-weight:700;margin-bottom:4px}
+#admin-panel p{font-size:12px;color:var(--mu);margin-bottom:24px}
+.cfg-row{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--bd)}
+.cfg-row:last-of-type{border-bottom:none}
+.cfg-label{font-size:13px;font-weight:500}
+.cfg-desc{font-size:11px;color:var(--mu);margin-top:2px}
+.toggle{position:relative;width:44px;height:24px;flex-shrink:0}
+.toggle input{opacity:0;width:0;height:0;position:absolute}
+.toggle-slider{position:absolute;inset:0;background:#cbd5e1;border-radius:999px;cursor:pointer;transition:.2s}
+.toggle-slider::before{content:'';position:absolute;width:18px;height:18px;left:3px;top:3px;background:#fff;border-radius:50%;transition:.2s}
+.toggle input:checked+.toggle-slider{background:var(--ac)}
+.toggle input:checked+.toggle-slider::before{transform:translateX(20px)}
+.cfg-select{background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:6px 10px;font-size:13px;color:var(--tx);outline:none;cursor:pointer}
+.cfg-select:focus{border-color:var(--ac)}
+#admin-login-area input{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:10px;font-size:14px;margin-bottom:10px;outline:none;letter-spacing:.1em;text-align:center}
+#admin-login-area input:focus{border-color:var(--ac)}
+.cfg-save-btn{width:100%;background:var(--ac);color:#fff;border:none;border-radius:8px;padding:11px;font-size:14px;font-weight:600;cursor:pointer;margin-top:16px}
+.cfg-save-btn:hover{opacity:.88}
+.cfg-close{float:right;background:none;border:none;font-size:20px;cursor:pointer;color:var(--mu);margin-top:-4px}
+.cfg-err{font-size:12px;color:var(--hot);margin-top:6px;min-height:16px}
+.tp-dom{font-weight:600;font-size:14px;color:#16a34a;font-variant-numeric:tabular-nums}
+.dom-badge{display:inline-block;font-size:10px;font-weight:700;padding:2px 7px;border-radius:999px;background:rgba(22,163,74,.1);color:#16a34a;margin-left:4px}
+
 /* SEARCHABLE SELECT */
 .ss-wrap{position:relative}
 .ss-input{width:100%;background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:8px 28px 8px 10px;font-size:13px;color:var(--tx);outline:none;cursor:text;box-sizing:border-box}
@@ -163,7 +214,8 @@ td{padding:9px 14px;vertical-align:middle}
 <div id="app">
   <header>
     <span class="logo">UTEL</span>
-    <span class="ht">Matriz de Precios · Abril 2026 <span style="font-size:10px;color:var(--mu);font-weight:400">v1.3</span></span>
+    <span class="ht">Matriz de Precios · Abril 2026 <span style="font-size:10px;color:var(--mu);font-weight:400">v1.4</span></span>
+    <span style="font-size:11px;background:rgba(22,163,74,.1);color:#16a34a;padding:4px 10px;border-radius:999px;font-weight:600" id="dom-indicator">Domiciliación <span id="dom-pct-header">5</span>%</span>
     <button class="out" onclick="logout()">Salir</button>
   </header>
   <div class="main">
@@ -173,12 +225,20 @@ td{padding:9px 14px;vertical-align:middle}
       <div class="tab" onclick="sw('ms')">Master UTEL</div>
       <div class="tab" onclick="sw('doc')">Doctorado</div>
       <div class="tab" onclick="sw('pu')">Pagos Únicos</div>
+      <div class="tab" onclick="sw('dip')">Diplomados</div>
     </div>
 
     <!-- LICENCIATURAS -->
     <div class="sec active" id="sec-lic">
       <div class="filters">
         <div class="fg"><label>Programa</label><select id="lprog" onchange="rL()"></select></div>
+        <div class="fg"><label>Jornada</label>
+          <select id="ljor" onchange="rL()">
+            <option value="intensiva">Jornada Intensiva</option>
+            <option value="super">Jornada Super Intensiva</option>
+            <option value="completa">Jornada Completa</option>
+          </select>
+        </div>
         <div class="fg"><label>Modalidad</label>
           <select id="lmod" onchange="rL()">
             <option value="online">Online (Mayor)</option>
@@ -205,10 +265,22 @@ td{padding:9px 14px;vertical-align:middle}
       </div>
       <div class="ib" id="li"></div>
       <div class="tw"><table>
-        <thead><tr><th>Mes</th><th>Cuota base</th><th>+ Accesorios</th><th>Total</th><th>Paquete</th><th>Escalonado</th></tr></thead>
+        <thead><tr><th>Mes</th><th>Cuota base</th><th>+ Accesorios</th><th>Total</th><th class="dom-col">Con domiciliación</th><th>Paquete</th><th>Escalonado</th></tr></thead>
         <tbody id="lb"></tbody>
       </table></div>
       <div class="bi" id="lbi"></div>
+
+      <!-- Print header (only shows when printing) -->
+      <div class="print-header" style="margin-bottom:16px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.15em;color:#6c5ce7;text-transform:uppercase">UTEL — Matriz de Precios · Abril 2026</div>
+        <div id="print-info-lic" style="font-size:13px;margin-top:4px"></div>
+      </div>
+
+      <button class="dl-btn" onclick="downloadSummary('lic')">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 3v13m0 0l-4-4m4 4l4-4M3 21h18"/></svg>
+        Descargar resumen
+      </button>
+
       <div class="rules">
         <div class="rules-title">ℹ Reglas de combinación</div>
         <div class="rule-item">• Solo <strong>1 idioma adicional</strong> por plan (Cambridge o Duolingo)</div>
@@ -247,10 +319,18 @@ td{padding:9px 14px;vertical-align:middle}
       </div>
       <div class="ib" id="mi"></div>
       <div class="tw"><table>
-        <thead><tr><th>Mes</th><th>Cuota base</th><th>+ Accesorios</th><th>Total</th><th>Paquete</th><th>Escalonado</th></tr></thead>
+        <thead><tr><th>Mes</th><th>Cuota base</th><th>+ Accesorios</th><th>Total</th><th class="dom-col">Con domiciliación</th><th>Paquete</th><th>Escalonado</th></tr></thead>
         <tbody id="mb"></tbody>
       </table></div>
       <div class="bi" id="mbi"></div>
+      <div class="print-header" style="margin-bottom:16px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.15em;color:#6c5ce7;text-transform:uppercase">UTEL — Matriz de Precios · Abril 2026</div>
+        <div id="print-info-mae" style="font-size:13px;margin-top:4px"></div>
+      </div>
+      <button class="dl-btn" onclick="downloadSummary('mae')">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 3v13m0 0l-4-4m4 4l4-4M3 21h18"/></svg>
+        Descargar resumen
+      </button>
       <div class="rules">
         <div class="rules-title">ℹ Reglas de combinación</div>
         <div class="rule-item">• Solo <strong>1 idioma adicional</strong> por plan (Cambridge o Duolingo)</div>
@@ -275,10 +355,18 @@ td{padding:9px 14px;vertical-align:middle}
       </div>
       <div class="ib" id="si2"></div>
       <div class="tw"><table>
-        <thead><tr><th>Mes</th><th>Cuota base</th><th>+ Accesorios</th><th>Total</th><th>Paquete</th><th>Escalonado</th></tr></thead>
+        <thead><tr><th>Mes</th><th>Cuota base</th><th>+ Accesorios</th><th>Total</th><th class="dom-col">Con domiciliación</th><th>Paquete</th><th>Escalonado</th></tr></thead>
         <tbody id="sb"></tbody>
       </table></div>
       <div class="bi" id="sbi"></div>
+      <div class="print-header" style="margin-bottom:16px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.15em;color:#6c5ce7;text-transform:uppercase">UTEL — Matriz de Precios · Abril 2026</div>
+        <div id="print-info-ms" style="font-size:13px;margin-top:4px"></div>
+      </div>
+      <button class="dl-btn" onclick="downloadSummary('ms')">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 3v13m0 0l-4-4m4 4l4-4M3 21h18"/></svg>
+        Descargar resumen
+      </button>
       <div class="rules">
         <div class="rules-title">ℹ Reglas de combinación</div>
         <div class="rule-item">• Solo <strong>1 idioma adicional</strong> por plan</div>
@@ -302,10 +390,18 @@ td{padding:9px 14px;vertical-align:middle}
       </div>
       <div class="ib" id="di"></div>
       <div class="tw"><table>
-        <thead><tr><th>Mes</th><th>Cuota base</th><th>+ Accesorios</th><th>Total</th><th>Paquete</th><th>Escalonado</th></tr></thead>
+        <thead><tr><th>Mes</th><th>Cuota base</th><th>+ Accesorios</th><th>Total</th><th class="dom-col">Con domiciliación</th><th>Paquete</th><th>Escalonado</th></tr></thead>
         <tbody id="db"></tbody>
       </table></div>
       <div class="bi" id="dbi"></div>
+      <div class="print-header" style="margin-bottom:16px">
+        <div style="font-size:11px;font-weight:700;letter-spacing:.15em;color:#6c5ce7;text-transform:uppercase">UTEL — Matriz de Precios · Abril 2026</div>
+        <div id="print-info-doc" style="font-size:13px;margin-top:4px"></div>
+      </div>
+      <button class="dl-btn" onclick="downloadSummary('doc')">
+        <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 3v13m0 0l-4-4m4 4l4-4M3 21h18"/></svg>
+        Descargar resumen
+      </button>
       <div class="rules">
         <div class="rules-title">ℹ Reglas de combinación</div>
         <div class="rule-item">• Solo <strong>1 idioma adicional</strong> por plan</div>
@@ -316,6 +412,36 @@ td{padding:9px 14px;vertical-align:middle}
       <div id="doc-total"></div>
     </div>
 
+
+    <!-- DIPLOMADOS -->
+    <div class="sec" id="sec-dip">
+      <div class="filters">
+        <div class="fg"><label>Programa</label>
+          <select id="ddip" onchange="rDip()">
+            <optgroup label="6 meses"><option value="Actualización en Gineco-obstetricia para el 
+primer y segundo nivel de atención" data-dur="6m">Actualización en Gineco-obstetricia para el 
+primer y segundo nivel de atención</option><option value="Actualización en urgencias" data-dur="6m">Actualización en urgencias</option><option value="Administración de los servicios de salud" data-dur="6m">Administración de los servicios de salud</option><option value="Administración de proyectos" data-dur="6m">Administración de proyectos</option><option value="Administración financiera" data-dur="6m">Administración financiera</option><option value="Atención del adulto mayor" data-dur="6m">Atención del adulto mayor</option><option value="Coaching organizacional" data-dur="6m">Coaching organizacional</option><option value="Desarrollo e-learning" data-dur="6m">Desarrollo e-learning</option><option value="Dirección de operaciones" data-dur="6m">Dirección de operaciones</option><option value="Diversidad y equidad de género" data-dur="6m">Diversidad y equidad de género</option><option value="Educación en ciencias de la salud" data-dur="6m">Educación en ciencias de la salud</option><option value="Estrategia e innovacción de negocios" data-dur="6m">Estrategia e innovacción de negocios</option><option value="Gestión Sostenible de la Cadena de Suministro" data-dur="6m">Gestión Sostenible de la Cadena de Suministro</option><option value="Gestión curricular en educación a distancia" data-dur="6m">Gestión curricular en educación a distancia</option><option value="Gestión y eficiencia de sistemas energéticos" data-dur="6m">Gestión y eficiencia de sistemas energéticos</option><option value="Mindfulness para los individuos y familias" data-dur="6m">Mindfulness para los individuos y familias</option><option value="Nutrición especial en enfermedades metabólicas" data-dur="6m">Nutrición especial en enfermedades metabólicas</option><option value="Pensamiento crítico e innovación" data-dur="6m">Pensamiento crítico e innovación</option><option value="Principios en el Arte Digital y Animación" data-dur="6m">Principios en el Arte Digital y Animación</option><option value="Project management" data-dur="6m">Project management</option><option value="Pruebas Psicológicas para Adultos" data-dur="6m">Pruebas Psicológicas para Adultos</option><option value="Rehabilitación del adulto mayor" data-dur="6m">Rehabilitación del adulto mayor</option><option value="Soft skills y habilidades gerenciales" data-dur="6m">Soft skills y habilidades gerenciales</option><option value="Tanatología" data-dur="6m">Tanatología</option><option value="Transición y energía sostenible" data-dur="6m">Transición y energía sostenible</option></optgroup><optgroup label="8 meses"><option value="Animación Digital y Creación de Contenidos" data-dur="8m">Animación Digital y Creación de Contenidos</option><option value="Análisis Económico Integral" data-dur="8m">Análisis Económico Integral</option><option value="Ciencia de datos e inteligencia artificial" data-dur="8m">Ciencia de datos e inteligencia artificial</option><option value="Contabilidad y Gestión financiera" data-dur="8m">Contabilidad y Gestión financiera</option><option value="Creatividad visual y comunicación digital" data-dur="8m">Creatividad visual y comunicación digital</option><option value="Desarrollo de Medios Interactivos" data-dur="8m">Desarrollo de Medios Interactivos</option><option value="Diseño y Desarrollo de Software" data-dur="8m">Diseño y Desarrollo de Software</option><option value="Diseño y Evaluación en Entornos Digitales" data-dur="8m">Diseño y Evaluación en Entornos Digitales</option><option value="Estrategias y Operaciones de Transporte" data-dur="8m">Estrategias y Operaciones de Transporte</option><option value="Fuentes y tecnologías de energías renovables" data-dur="8m">Fuentes y tecnologías de energías renovables</option><option value="Gestión de Calidad y Mantenimiento de Software" data-dur="8m">Gestión de Calidad y Mantenimiento de Software</option><option value="Gestión de Experiencias de Aprendizaje en Ambientes Virtuales" data-dur="8m">Gestión de Experiencias de Aprendizaje en Ambientes Virtuales</option><option value="Inteligencia artificial aplicada" data-dur="8m">Inteligencia artificial aplicada</option><option value="Métodos Cuantitativos para la Toma de Decisiones" data-dur="8m">Métodos Cuantitativos para la Toma de Decisiones</option><option value="Programación y Tecnologías de Redes" data-dur="8m">Programación y Tecnologías de Redes</option><option value="Tecnologías de la Información Aplicadas a la Logística y el Transporte" data-dur="8m">Tecnologías de la Información Aplicadas a la Logística y el Transporte</option></optgroup></select>
+        </div>
+        <div class="fg"><label>Duración</label>
+          <div id="ddur-display" style="padding:8px 0;font-size:13px;font-weight:600;color:var(--ac2)">—</div>
+        </div>
+        <div class="fg"><label>Variante</label>
+          <select id="dvar" onchange="rDip()">
+            <option value="esc1">Escalonado 1 (mes 1-2: $1.000)</option>
+            <option value="esc2">Escalonado 2 (mes 1: $699, mes 2: $1.199)</option>
+          </select>
+        </div>
+      </div>
+      <div class="ib" id="dipinfo"></div>
+      <div class="tw"><table>
+        <thead><tr><th>Mes</th><th>Cuota</th><th>Total programa</th><th>Paquete</th></tr></thead>
+        <tbody id="dipbody"></tbody>
+      </table></div>
+      <div style="background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--mu);margin-top:10px">
+        Incluye: Asistencia · Voxy · 5% descuento domiciliación
+      </div>
+    </div>
+
     <!-- PAGOS ÚNICOS -->
     <div class="sec" id="sec-pu">
       <p style="font-size:13px;color:var(--mu);margin-bottom:14px">Precios pago único vigentes Abril 2026.</p>
@@ -323,6 +449,51 @@ td{padding:9px 14px;vertical-align:middle}
     </div>
 
     <div class="wm">CONFIDENCIAL — Solo para uso interno del equipo de ventas UTEL</div>
+
+  <!-- ADMIN BUTTON -->
+  <div id="admin-btn" onclick="openAdmin()" title="Configuración admin">⚙️</div>
+
+  <!-- ADMIN OVERLAY -->
+  <div id="admin-overlay">
+    <div id="admin-panel">
+      <button class="cfg-close" onclick="closeAdmin()">×</button>
+      <h2>⚙️ Configuración</h2>
+      <p>Panel de administración — solo para coordinadores</p>
+
+      <!-- LOGIN -->
+      <div id="admin-login-area">
+        <input type="password" id="admin-pi" placeholder="Clave de administrador" onkeydown="if(event.key==='Enter')adminLogin()"/>
+        <div class="cfg-err" id="admin-err"></div>
+        <button class="cfg-save-btn" onclick="adminLogin()">Ingresar</button>
+      </div>
+
+      <!-- CONFIG (hidden until logged in) -->
+      <div id="admin-cfg-area" style="display:none">
+        <div class="cfg-row">
+          <div>
+            <div class="cfg-label">Descuento por domiciliación</div>
+            <div class="cfg-desc">Aplica desde el pago 3 en adelante</div>
+          </div>
+          <select class="cfg-select" id="cfg-dom">
+            <option value="5">5%</option>
+            <option value="10">10%</option>
+          </select>
+        </div>
+        <div class="cfg-row">
+          <div>
+            <div class="cfg-label">Título Costo $0</div>
+            <div class="cfg-desc">Agrega "Título Costo $0" como accesorio disponible</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="cfg-tit0">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
+        <button class="cfg-save-btn" onclick="saveAdminConfig()">Guardar y aplicar</button>
+        <div class="cfg-err" id="cfg-msg"></div>
+      </div>
+    </div>
+  </div>
   </div>
 </div>
 
@@ -352,7 +523,7 @@ function tryLogin(){
   if(p===PWD){
     localStorage.removeItem('ua');
     localStorage.setItem('ok', Date.now() + 28800000); // 8 horas
-    localStorage.setItem('build', '1777389648');
+    localStorage.setItem('build', '1777491321');
     g('ls').style.display='none';
     g('app').style.display='block';
     init();
@@ -370,7 +541,7 @@ function logout(){
   g('pi').value='';
 }
 window.addEventListener('load',function(){
-  var BUILD='1777389648';
+  var BUILD='1777491321';
   var a=ga();
   if(a.l)g('em').textContent='Bloqueado '+Math.ceil((a.l-Date.now())/60000)+' min.';
   var _ok=parseInt(localStorage.getItem('ok')||'0');
@@ -383,6 +554,30 @@ window.addEventListener('load',function(){
     init();
   }
 });
+
+/* ═══════════════════════════════════════
+   CONFIGURACIÓN ADMIN
+═══════════════════════════════════════ */
+var ADMIN_PWD = 'UTELADMIN2026';
+
+// ── CONFIGURACIÓN ACTIVA ──────────────
+var DOMICILIACION = 5;        // 5 o 10
+var TITULO_COSTO_0 = false;   // true = activa "Título Costo $0"
+// ─────────────────────────────────────
+
+function loadConfig(){
+  var cfg = localStorage.getItem('utel_cfg');
+  if(cfg){
+    try{
+      var c = JSON.parse(cfg);
+      if(c.dom) DOMICILIACION = c.dom;
+      if(c.tit0 !== undefined) TITULO_COSTO_0 = c.tit0;
+    }catch(e){}
+  }
+}
+function saveConfig(){
+  localStorage.setItem('utel_cfg', JSON.stringify({dom:DOMICILIACION, tit0:TITULO_COSTO_0}));
+}
 
 /* ═══════════════════════════════════════
    HELPERS
@@ -408,7 +603,7 @@ var NB={
 
 function sw(id){
   document.querySelectorAll('.tab').forEach(function(t,i){
-    t.classList.toggle('active',['lic','mae','ms','doc','pu'][i]===id);
+    t.classList.toggle('active',['lic','mae','ms','doc','pu','dip'][i]===id);
   });
   document.querySelectorAll('.sec').forEach(function(s){
     s.classList.toggle('active',s.id==='sec-'+id);
@@ -418,16 +613,25 @@ function sw(id){
 function renderTable(tbodyId, prices, pkg, esc, accTotal){
   var tb=g(tbodyId); tb.innerHTML='';
   var acc=accTotal||0;
-  var rows=[];
-  rows.push({label:'Mes 1',p:prices[0]});
-  rows.push({label:'Mes 2',p:prices[1]});
-  rows.push({label:'Mes 3 en adelante <span class="badge b-mod" style="font-size:10px">mes actual</span>',p:prices[2]});
+  var pct=DOMICILIACION/100;
+  // Update column headers with current %
+  document.querySelectorAll('.dom-col').forEach(function(el){
+    el.innerHTML='Con domiciliación <span class="dom-badge">'+DOMICILIACION+'%</span>';
+  });
+  var rows=[
+    {label:'Mes 1',p:prices[0],dom:false},
+    {label:'Mes 2',p:prices[1],dom:false},
+    {label:'Mes 3 en adelante <span class="badge b-mod" style="font-size:10px">mes actual</span>',p:prices[2],dom:true}
+  ];
   rows.forEach(function(row){
+    var total=row.p+acc;
+    var domVal=row.dom?fmt(Math.round(total*(1-pct))):'—';
     var tr=document.createElement('tr');
     tr.innerHTML='<td class="tm">'+row.label+'</td>'
       +'<td class="tp">'+fmt(row.p)+'</td>'
       +'<td class="tp-acc">'+(acc>0?'+'+fmt(acc):'—')+'</td>'
-      +'<td class="tp">'+fmt(row.p+acc)+'</td>'
+      +'<td class="tp">'+fmt(total)+'</td>'
+      +'<td class="tp-dom">'+domVal+'</td>'
       +'<td class="tc">'+pkg+'</td>'
       +'<td class="tc">'+esc+'</td>';
     tb.appendChild(tr);
@@ -440,7 +644,11 @@ function renderBeca(id,b){
 /* ═══════════════════════════════════════
    CATALOG
 ═══════════════════════════════════════ */
-var CATALOG = {"DOCTORADO": [{"p": "ADMINISTRACIÓN ESTRATÉGICA EMPRESARIAL", "v": "medio"}, {"p": "CIBERSEGURIDAD Y GESTIÓN DE RIESGOS DIGITALES", "v": "doc_esp"}, {"p": "CIENCIA DE DATOS E INTELIGENCIA ARTIFICIAL", "v": "doc_esp"}, {"p": "DERECHO", "v": "bajo"}, {"p": "DESARROLLO HUMANO", "v": "bajo"}, {"p": "EDUCACIÓN", "v": "alto"}, {"p": "FINANZAS", "v": "medio"}, {"p": "GESTIÓN E INNOVACIÓN TECNOLÓGICA", "v": "medio"}], "LICENCIATURA": [{"p": "ADMINISTRACIÓN", "v": "medio"}, {"p": "ADMINISTRACIÓN DE EMPRESAS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE EMPRESAS TURÍSTICAS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE RECURSOS HUMANOS", "v": "bajo"}, {"p": "ADMINISTRACIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN", "v": "medio"}, {"p": "ADMINISTRACIÓN DE VENTAS", "v": "medio"}, {"p": "ADMINISTRACIÓN Y FINANZAS", "v": "medio"}, {"p": "AGRONEGOCIOS", "v": "medio"}, {"p": "ARQUITECTURA", "v": "arq"}, {"p": "ARTE DIGITAL Y MULTIMEDIA", "v": "unico"}, {"p": "CIBERSEGURIDAD Y RIESGOS EN INTELIGENCIA ARTIFICIAL", "v": "alto"}, {"p": "CIENCIAS POLÍTICAS Y ADMINISTRACIÓN PÚBLICA", "v": "medio"}, {"p": "COMUNICACIÓN", "v": "medio"}, {"p": "COMUNICACIÓN CORPORATIVA", "v": "unico"}, {"p": "COMUNICACIÓN DIGITAL", "v": "medio"}, {"p": "COMUNICACIÓN ORGANIZACIONAL", "v": "medio"}, {"p": "CONTADURÍA PÚBLICA", "v": "medio"}, {"p": "CONTADURÍA Y FINANZAS", "v": "medio"}, {"p": "CRIMINOLOGÍA Y CRIMINALÍSTICA", "v": "bajo"}, {"p": "DERECHO", "v": "alto"}, {"p": "DERECHO EMPRESARIAL", "v": "medio"}, {"p": "DERECHO INTERNACIONAL", "v": "medio"}, {"p": "DESARROLLO SUSTENTABLE Y ECOTURISMO", "v": "medio"}, {"p": "DIRECCIÓN DE ARTE", "v": "medio"}, {"p": "DISEÑO Y ANIMACIÓN DIGITAL", "v": "medio"}, {"p": "ECONOMÍA Y FINANZAS", "v": "medio"}, {"p": "EMPRENDIMIENTO", "v": "medio"}, {"p": "FINANZAS Y ESTRATEGIA FISCAL", "v": "medio"}, {"p": "INGENIERÍA AMBIENTAL", "v": "alto"}, {"p": "INGENIERÍA EN DESARROLLO DE SOFTWARE", "v": "medio"}, {"p": "INGENIERÍA EN ENERGÍAS RENOVABLES", "v": "medio"}, {"p": "INGENIERÍA EN LOGÍSTICA Y TRANSPORTE", "v": "medio"}, {"p": "INGENIERÍA EN SISTEMAS COMPUTACIONALES", "v": "alto"}, {"p": "INGENIERÍA EN TECNOLOGÍA DE VIDEOJUEGOS Y REALIDAD VIRTUAL", "v": "alto"}, {"p": "INGENIERÍA INDUSTRIAL", "v": "alto"}, {"p": "INGENIERÍA INDUSTRIAL Y ADMINISTRACIÓN", "v": "medio"}, {"p": "INGENIERÍA ROBÓTICA", "v": "arq"}, {"p": "INTELIGENCIA ARTIFICIAL", "v": "medio"}, {"p": "MARKETING Y PUBLICIDAD", "v": "unico"}, {"p": "MEDIOS DIGITALES", "v": "unico"}, {"p": "MERCADOTECNIA", "v": "medio"}, {"p": "NEGOCIOS INTERNACIONALES", "v": "medio"}, {"p": "PEDAGOGÍA", "v": "bajo"}, {"p": "PSICOLOGÍA", "v": "unico"}, {"p": "PSICOLOGÍA ORGANIZACIONAL", "v": "medio"}, {"p": "SEGURIDAD INFORMÁTICA", "v": "medio"}, {"p": "TECNOLOGÍA EDUCATIVA", "v": "medio"}, {"p": "UNICA", "v": "unico"}, {"p": "UVE", "v": "unico"}], "MAESTRÍA": [{"p": "ADMINISTRACIÓN DE INSTITUCIONES EDUCATIVAS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS - MBA", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS DEPORTIVOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS-IEBS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE RECURSOS HUMANOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN", "v": "medio"}, {"p": "ADMINISTRACIÓN EN MERCADOTECNIA ESTRATÉGICA", "v": "medio"}, {"p": "ADMINISTRACIÓN PÚBLICA", "v": "medio"}, {"p": "ADMINISTRACIÓN Y DIRECCIÓN COMERCIAL DE EMPRESAS TURÍSTICAS", "v": "medio"}, {"p": "ALTA DIRECCIÓN Y GOBIERNO CORPORATIVO", "v": "medio"}, {"p": "ARQUITECTURA DE SOFTWARE", "v": "arq_sw"}, {"p": "CIBERSEGURIDAD", "v": "medio"}, {"p": "CIENCIA DE DATOS PARA NEGOCIOS", "v": "medio"}, {"p": "CIENCIAS COMPUTACIONALES Y TELECOMUNICACIONES", "v": "medio"}, {"p": "COACHING INTEGRAL Y ORGANIZACIONAL", "v": "medio"}, {"p": "COMERCIO INTERNACIONAL", "v": "medio"}, {"p": "CONCIENCIA PLENA APLICADA", "v": "alto"}, {"p": "DERECHO PROCESAL CONSTITUCIONAL", "v": "medio"}, {"p": "DERECHO PROCESAL CONSTITUCIONAL (MODALIDAD EJECUTIVA)", "v": "medio"}, {"p": "DERECHO PROCESAL PENAL", "v": "medio"}, {"p": "DERECHO PROCESAL Y JUICIOS ORALES", "v": "alto"}, {"p": "DERECHOS HUMANOS", "v": "medio"}, {"p": "DESARROLLO SUSTENTABLE Y GESTIÓN AMBIENTAL", "v": "medio"}, {"p": "DIRECCIÓN DE EMPRESA TURÍSTICAS", "v": "medio"}, {"p": "DIRECCIÓN DE EMPRESAS TURÍSTICAS", "v": "medio"}, {"p": "DIRECCIÓN DE NEGOCIOS DE ALIMENTOS Y BEBIDAS", "v": "medio"}, {"p": "DIRECCIÓN DE PROYECTOS DE INNOVACIÓN", "v": "medio"}, {"p": "DIRECCIÓN DE VENTAS", "v": "medio"}, {"p": "DIRECCIÓN E INGENIERÍA DE SOFTWARE", "v": "medio"}, {"p": "DISEÑO PARA MEDIOS DIGITALES", "v": "medio"}, {"p": "EDUCACIÓN", "v": "medio"}, {"p": "EDUCACIÓN Y DOCENCIA", "v": "bajo"}, {"p": "ENERGÍAS RENOVABLES Y EFICIENCIA ENERGÉTICA", "v": "medio"}, {"p": "ENERGÍAS RENOVABLES Y PROYECTOS ENERGÉTICOS", "v": "medio"}, {"p": "FINANZAS", "v": "medio"}, {"p": "GESTIÓN DIRECTIVA DE INSTITUCIONES EN SALUD", "v": "alto"}, {"p": "GESTIÓN DIRECTIVA DE SALUD", "v": "medio"}, {"p": "GESTIÓN DIRECTIVA EN SALUD", "v": "medio"}, {"p": "GESTIÓN ESTRATÉGICA DEL CAPITAL HUMANO", "v": "medio"}, {"p": "GESTIÓN ORGANIZACIONAL POSITIVA", "v": "medio"}, {"p": "IMPUESTOS", "v": "medio"}, {"p": "INGENIERÍA Y TECNOLOGÍA AMBIENTAL", "v": "bajo"}, {"p": "INNOVACIÓN EDUCATIVA Y DISEÑO INSTRUCCIONAL", "v": "alto"}, {"p": "INTERVENCIÓN PSICOLÓGICA Y SALUD MENTAL", "v": "medio"}, {"p": "LOGÍSTICA TRANSPORTE Y DISTRIBUCIÓN INTERNACIONAL", "v": "medio"}, {"p": "LOGÍSTICA Y CADENA DE SUMINISTRO", "v": "medio"}, {"p": "LOGÍSTICA Y CADENA DE SUMINISTROS", "v": "medio"}, {"p": "MAESTRÍA ESPECIALIZADO EN COMERCIO INTERNACIONAL", "v": "medio"}, {"p": "MAESTRÍA ESPECIALIZADO EN NUTRICIÓN", "v": "medio"}, {"p": "MARKETING DIGITAL Y E-COMMERCE", "v": "medio"}, {"p": "MERCADOTECNIA DIGITAL Y COMERCIO ELECTRÓNICO", "v": "medio"}, {"p": "MERCADOTECNIA POLÍTICA", "v": "medio"}, {"p": "PROJECT MANAGEMENT", "v": "medio"}, {"p": "PSICOLOGÍA TRANSPERSONAL", "v": "medio"}, {"p": "RESPONSABILIDAD SOCIAL", "v": "medio"}, {"p": "TECNOLOGÍA EDUCATIVA", "v": "bajo"}, {"p": "TURISMO Y REVENUE MANAGEMENT HOTELERO", "v": "medio"}], "MASTER": [{"p": "ADMINISTRACIÓN DE INSTITUCIONES EDUCATIVAS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS - MBA", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS DEPORTIVOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE NEGOCIOS-IEBS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE RECURSOS HUMANOS", "v": "medio"}, {"p": "ADMINISTRACIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN", "v": "medio"}, {"p": "ADMINISTRACIÓN EN MERCADOTECNIA ESTRATÉGICA", "v": "medio"}, {"p": "ADMINISTRACIÓN PÚBLICA", "v": "medio"}, {"p": "ADMINISTRACIÓN Y DIRECCIÓN COMERCIAL DE EMPRESAS TURÍSTICAS", "v": "medio"}, {"p": "ALTA DIRECCIÓN Y GOBIERNO CORPORATIVO", "v": "medio"}, {"p": "ARQUITECTURA DE SOFTWARE", "v": "arq_sw"}, {"p": "CIBERSEGURIDAD", "v": "medio"}, {"p": "CIENCIA DE DATOS PARA NEGOCIOS", "v": "medio"}, {"p": "CIENCIAS COMPUTACIONALES Y TELECOMUNICACIONES", "v": "medio"}, {"p": "COACHING INTEGRAL Y ORGANIZACIONAL", "v": "medio"}, {"p": "COMERCIO INTERNACIONAL", "v": "medio"}, {"p": "CONCIENCIA PLENA APLICADA", "v": "alto"}, {"p": "DERECHO PROCESAL CONSTITUCIONAL", "v": "medio"}, {"p": "DERECHO PROCESAL CONSTITUCIONAL (MODALIDAD EJECUTIVA)", "v": "medio"}, {"p": "DERECHO PROCESAL PENAL", "v": "medio"}, {"p": "DERECHO PROCESAL Y JUICIOS ORALES", "v": "alto"}, {"p": "DERECHOS HUMANOS", "v": "medio"}, {"p": "DESARROLLO SUSTENTABLE Y GESTIÓN AMBIENTAL", "v": "medio"}, {"p": "DIRECCIÓN DE EMPRESA TURÍSTICAS", "v": "medio"}, {"p": "DIRECCIÓN DE EMPRESAS TURÍSTICAS", "v": "medio"}, {"p": "DIRECCIÓN DE NEGOCIOS DE ALIMENTOS Y BEBIDAS", "v": "medio"}, {"p": "DIRECCIÓN DE PROYECTOS DE INNOVACIÓN", "v": "medio"}, {"p": "DIRECCIÓN DE VENTAS", "v": "medio"}, {"p": "DIRECCIÓN E INGENIERÍA DE SOFTWARE", "v": "medio"}, {"p": "DISEÑO PARA MEDIOS DIGITALES", "v": "medio"}, {"p": "EDUCACIÓN", "v": "medio"}, {"p": "EDUCACIÓN Y DOCENCIA", "v": "bajo"}, {"p": "ENERGÍAS RENOVABLES Y EFICIENCIA ENERGÉTICA", "v": "medio"}, {"p": "ENERGÍAS RENOVABLES Y PROYECTOS ENERGÉTICOS", "v": "medio"}, {"p": "FINANZAS", "v": "medio"}, {"p": "GESTIÓN DIRECTIVA DE INSTITUCIONES EN SALUD", "v": "alto"}, {"p": "GESTIÓN DIRECTIVA DE SALUD", "v": "medio"}, {"p": "GESTIÓN DIRECTIVA EN SALUD", "v": "medio"}, {"p": "GESTIÓN ESTRATÉGICA DEL CAPITAL HUMANO", "v": "medio"}, {"p": "GESTIÓN ORGANIZACIONAL POSITIVA", "v": "medio"}, {"p": "IMPUESTOS", "v": "medio"}, {"p": "INGENIERÍA Y TECNOLOGÍA AMBIENTAL", "v": "bajo"}, {"p": "INNOVACIÓN EDUCATIVA Y DISEÑO INSTRUCCIONAL", "v": "alto"}, {"p": "INTERVENCIÓN PSICOLÓGICA Y SALUD MENTAL", "v": "medio"}, {"p": "LOGÍSTICA TRANSPORTE Y DISTRIBUCIÓN INTERNACIONAL", "v": "medio"}, {"p": "LOGÍSTICA Y CADENA DE SUMINISTRO", "v": "medio"}, {"p": "LOGÍSTICA Y CADENA DE SUMINISTROS", "v": "medio"}, {"p": "MAESTRÍA ESPECIALIZADO EN COMERCIO INTERNACIONAL", "v": "medio"}, {"p": "MAESTRÍA ESPECIALIZADO EN NUTRICIÓN", "v": "medio"}, {"p": "MARKETING DIGITAL Y E-COMMERCE", "v": "medio"}, {"p": "MERCADOTECNIA DIGITAL Y COMERCIO ELECTRÓNICO", "v": "medio"}, {"p": "MERCADOTECNIA POLÍTICA", "v": "medio"}, {"p": "PROJECT MANAGEMENT", "v": "medio"}, {"p": "PSICOLOGÍA TRANSPERSONAL", "v": "medio"}, {"p": "RESPONSABILIDAD SOCIAL", "v": "medio"}, {"p": "TECNOLOGÍA EDUCATIVA", "v": "bajo"}, {"p": "TURISMO Y REVENUE MANAGEMENT HOTELERO", "v": "medio"}]};
+var CATALOG = {"LICENCIATURA": [{"p": "Pedagogía", "v": "bajo"}, {"p": "Ingeniería Industrial", "v": "alto"}, {"p": "Ingeniería En Sistemas Computacionales", "v": "alto"}, {"p": "Criminología Y Criminalística", "v": "bajo"}, {"p": "Psicología", "v": "bajo"}, {"p": "Derecho", "v": "alto"}, {"p": "Administración", "v": "medio"}, {"p": "Ingeniería Industrial Y Administración", "v": "medio"}, {"p": "Administración De Recursos Humanos", "v": "bajo"}, {"p": "Contaduría Y Finanzas", "v": "medio"}, {"p": "Negocios Internacionales", "v": "medio"}, {"p": "Contaduría Pública", "v": "medio"}, {"p": "Psicología Organizacional", "v": "medio"}, {"p": "Administración De Negocios", "v": "medio"}, {"p": "Arte Digital Y Multimedia", "v": "medio"}, {"p": "Administración Y Finanzas", "v": "medio"}, {"p": "Administración De Empresas Turísticas", "v": "medio"}, {"p": "Ciencias Políticas Y Administración Pública", "v": "medio"}, {"p": "Marketing Y Publicidad", "v": "medio"}, {"p": "Administración De Ventas", "v": "medio"}, {"p": "Comunicación", "v": "medio"}, {"p": "Ingeniería En Logística Y Transporte", "v": "medio"}, {"p": "Desarrollo Sustentable Y Ecoturismo", "v": "medio"}, {"p": "Mercadotecnia", "v": "medio"}, {"p": "Administración De Tecnologías De La Información", "v": "medio"}, {"p": "Economía Y Finanzas", "v": "medio"}, {"p": "Derecho Internacional", "v": "medio"}, {"p": "Derecho Empresarial", "v": "medio"}, {"p": "Tecnología Educativa", "v": "medio"}, {"p": "Comunicación Digital", "v": "medio"}, {"p": "Inteligencia Artificial", "v": "medio"}, {"p": "Emprendimiento", "v": "medio"}, {"p": "Agronegocios", "v": "medio"}, {"p": "Ingeniería En Energías Renovables", "v": "medio"}, {"p": "Ingeniería En Desarrollo De Software", "v": "medio"}, {"p": "Diseño Y Animación Digital", "v": "medio"}, {"p": "Dirección De Arte", "v": "medio"}, {"p": "Comunicación Organizacional", "v": "medio"}, {"p": "Seguridad Informática", "v": "medio"}, {"p": "Comunicación Corporativa", "v": "medio"}, {"p": "Medios Digitales", "v": "medio"}, {"p": "Pedagogía-Unicef", "v": "medio"}, {"p": "Administración De Empresas", "v": "medio"}, {"p": "Inteligencia Artificial Aplicada A Negocios, Industria Y Automatización", "v": "arq"}, {"p": "Ética Y Gobernanza De La Inteligencia Artificial", "v": "arq"}, {"p": "Innovación Y Emprendimiento Con Inteligencia Artificial", "v": "medio"}, {"p": "Inteligencia Artificial Y Ciencia De Datos", "v": "medio"}, {"p": "Inteligencia Artificial En Educación", "v": "medio"}, {"p": "Ingeniería En Ciencias De Datos E Inteligencia Analítica", "v": "medio"}, {"p": "Ingeniería En Programación En La Nube", "v": "alto"}, {"p": "Software Para Entretenimiento Digital", "v": "medio"}, {"p": "Ingeniería En Sistemas Inteligentes", "v": "alto"}, {"p": "Finanzas Y Banca", "v": "medio"}, {"p": "Innovación Y Transformación De Negocios", "v": "medio"}, {"p": "Estrategia Y Transformación De Negocios", "v": "medio"}, {"p": "Comercio Electrónico Y Negocios Digitales", "v": "medio"}, {"p": "Tecnologías Interactivas Y Virtuales", "v": "alto"}, {"p": "Educación Para La Sustentabilidad", "v": "arq"}, {"p": "Ingeniería En Robótica", "v": "arq"}, {"p": "Arquitectura", "v": "arq"}, {"p": "Unica", "v": "unico"}, {"p": "Uve", "v": "unico"}], "MAESTRÍA": [{"p": "Educación Y Docencia", "v": "bajo"}, {"p": "Conciencia Plena Aplicada", "v": "alto"}, {"p": "Gestión Directiva De Instituciones En Salud", "v": "alto"}, {"p": "Derecho Procesal Y Juicios Orales", "v": "alto"}, {"p": "Tecnología Educativa", "v": "bajo"}, {"p": "Ciencia De Datos Para Negocios", "v": "medio"}, {"p": "Administración De Negocios", "v": "medio"}, {"p": "Administración Pública", "v": "medio"}, {"p": "Ingeniería Y Tecnología Ambiental", "v": "bajo"}, {"p": "Administración De Recursos Humanos", "v": "medio"}, {"p": "Dirección De Ventas", "v": "medio"}, {"p": "Mercadotecnia Digital Y Comercio Electrónico", "v": "medio"}, {"p": "Derecho Procesal Penal", "v": "medio"}, {"p": "Derechos Humanos", "v": "medio"}, {"p": "Administración De Instituciones Educativas", "v": "medio"}, {"p": "Coaching Integral Y Organizacional", "v": "medio"}, {"p": "Dirección De Proyectos De Innovación", "v": "medio"}, {"p": "Administración En Mercadotecnia Estratégica", "v": "medio"}, {"p": "Dirección De Negocios De Alimentos Y Bebidas", "v": "medio"}, {"p": "Psicología Transpersonal", "v": "medio"}, {"p": "Administración De Tecnologías De La Información", "v": "medio"}, {"p": "Finanzas", "v": "medio"}, {"p": "Derecho Procesal Constitucional", "v": "medio"}, {"p": "Ciberseguridad", "v": "medio"}, {"p": "Administración De Negocios Deportivos", "v": "medio"}, {"p": "Ciencias Computacionales Y Telecomunicaciones", "v": "medio"}, {"p": "Dirección E Ingeniería De Software", "v": "medio"}, {"p": "Gestión Estratégica Del Capital Humano", "v": "medio"}, {"p": "Logística Y Cadena De Suministro", "v": "medio"}, {"p": "Impuestos", "v": "medio"}, {"p": "Comercio Internacional", "v": "medio"}, {"p": "Logística Y Cadena De Suministros", "v": "medio"}, {"p": "Marketing Digital Y E-Commerce", "v": "medio"}, {"p": "Desarrollo Sustentable Y Gestión Ambiental", "v": "medio"}, {"p": "Dirección De Empresas Turísticas", "v": "medio"}, {"p": "Gestión Organizacional Positiva", "v": "medio"}, {"p": "Diseño Para Medios Digitales", "v": "medio"}, {"p": "Energías Renovables Y Eficiencia Energética", "v": "medio"}, {"p": "Energías Renovables Y Proyectos Energéticos", "v": "medio"}, {"p": "Responsabilidad Social", "v": "medio"}, {"p": "Educación", "v": "medio"}, {"p": "Mercadotecnia Política", "v": "medio"}, {"p": "Dirección De Empresa Turísticas", "v": "medio"}, {"p": "Intervención Psicológica Y Salud Mental", "v": "medio"}, {"p": "Educación Y Docencia-Unicef", "v": "medio"}, {"p": "Administración De Negocios - Mba", "v": "medio"}, {"p": "Turismo Y Revenue Management Hotelero", "v": "medio"}, {"p": "Maestría Especializado En Nutrición", "v": "medio"}, {"p": "Gestión Directiva De Salud", "v": "medio"}, {"p": "Logística Transporte Y Distribución Internacional", "v": "medio"}, {"p": "Maestría Especializado En Comercio Internacional", "v": "medio"}, {"p": "Administración Y Dirección Comercial De Empresas Turísticas", "v": "medio"}, {"p": "Gestión Directiva En Salud", "v": "medio"}, {"p": "Project Management", "v": "medio"}, {"p": "Administración De Negocios-Iebs", "v": "medio"}, {"p": "Derecho Procesal Constitucional (Modalidad Ejecutiva)", "v": "medio"}, {"p": "Soluciones De Inteligencia Artificial Para Negocios Y Servicios", "v": "medio"}, {"p": "Innovación Estratégica Con Inteligencia Artificial", "v": "medio"}, {"p": "Educación Inteligente Y Diseño Instruccional Con Inteligencia Artificial", "v": "medio"}, {"p": "Automatización Y Robótica Industrial", "v": "arq"}, {"p": "Automatización De Procesos Y Análisis Predictivo", "v": "medio"}, {"p": "Ingeniería De Datos E Infraestructura", "v": "arq"}, {"p": "Valuación Inmobiliaria", "v": "medio"}, {"p": "Desarrollo De Videojuegos Y Realidad Extendida", "v": "arq"}, {"p": "Arquitectura De Software", "v": "arq"}], "MASTER": [{"p": "Educación Y Docencia", "v": "bajo"}, {"p": "Conciencia Plena Aplicada", "v": "alto"}, {"p": "Gestión Directiva De Instituciones En Salud", "v": "alto"}, {"p": "Derecho Procesal Y Juicios Orales", "v": "alto"}, {"p": "Tecnología Educativa", "v": "bajo"}, {"p": "Ciencia De Datos Para Negocios", "v": "medio"}, {"p": "Administración De Negocios", "v": "medio"}, {"p": "Administración Pública", "v": "medio"}, {"p": "Ingeniería Y Tecnología Ambiental", "v": "bajo"}, {"p": "Administración De Recursos Humanos", "v": "medio"}, {"p": "Dirección De Ventas", "v": "medio"}, {"p": "Mercadotecnia Digital Y Comercio Electrónico", "v": "medio"}, {"p": "Derecho Procesal Penal", "v": "medio"}, {"p": "Derechos Humanos", "v": "medio"}, {"p": "Administración De Instituciones Educativas", "v": "medio"}, {"p": "Coaching Integral Y Organizacional", "v": "medio"}, {"p": "Dirección De Proyectos De Innovación", "v": "medio"}, {"p": "Administración En Mercadotecnia Estratégica", "v": "medio"}, {"p": "Dirección De Negocios De Alimentos Y Bebidas", "v": "medio"}, {"p": "Psicología Transpersonal", "v": "medio"}, {"p": "Administración De Tecnologías De La Información", "v": "medio"}, {"p": "Finanzas", "v": "medio"}, {"p": "Derecho Procesal Constitucional", "v": "medio"}, {"p": "Ciberseguridad", "v": "medio"}, {"p": "Administración De Negocios Deportivos", "v": "medio"}, {"p": "Ciencias Computacionales Y Telecomunicaciones", "v": "medio"}, {"p": "Dirección E Ingeniería De Software", "v": "medio"}, {"p": "Gestión Estratégica Del Capital Humano", "v": "medio"}, {"p": "Logística Y Cadena De Suministro", "v": "medio"}, {"p": "Impuestos", "v": "medio"}, {"p": "Comercio Internacional", "v": "medio"}, {"p": "Logística Y Cadena De Suministros", "v": "medio"}, {"p": "Marketing Digital Y E-Commerce", "v": "medio"}, {"p": "Desarrollo Sustentable Y Gestión Ambiental", "v": "medio"}, {"p": "Dirección De Empresas Turísticas", "v": "medio"}, {"p": "Gestión Organizacional Positiva", "v": "medio"}, {"p": "Diseño Para Medios Digitales", "v": "medio"}, {"p": "Energías Renovables Y Eficiencia Energética", "v": "medio"}, {"p": "Energías Renovables Y Proyectos Energéticos", "v": "medio"}, {"p": "Responsabilidad Social", "v": "medio"}, {"p": "Educación", "v": "medio"}, {"p": "Mercadotecnia Política", "v": "medio"}, {"p": "Dirección De Empresa Turísticas", "v": "medio"}, {"p": "Intervención Psicológica Y Salud Mental", "v": "medio"}, {"p": "Educación Y Docencia-Unicef", "v": "medio"}, {"p": "Administración De Negocios - Mba", "v": "medio"}, {"p": "Turismo Y Revenue Management Hotelero", "v": "medio"}, {"p": "Maestría Especializado En Nutrición", "v": "medio"}, {"p": "Gestión Directiva De Salud", "v": "medio"}, {"p": "Logística Transporte Y Distribución Internacional", "v": "medio"}, {"p": "Maestría Especializado En Comercio Internacional", "v": "medio"}, {"p": "Administración Y Dirección Comercial De Empresas Turísticas", "v": "medio"}, {"p": "Gestión Directiva En Salud", "v": "medio"}, {"p": "Project Management", "v": "medio"}, {"p": "Administración De Negocios-Iebs", "v": "medio"}, {"p": "Derecho Procesal Constitucional (Modalidad Ejecutiva)", "v": "medio"}, {"p": "Soluciones De Inteligencia Artificial Para Negocios Y Servicios", "v": "medio"}, {"p": "Innovación Estratégica Con Inteligencia Artificial", "v": "medio"}, {"p": "Educación Inteligente Y Diseño Instruccional Con Inteligencia Artificial", "v": "medio"}, {"p": "Automatización Y Robótica Industrial", "v": "arq"}, {"p": "Automatización De Procesos Y Análisis Predictivo", "v": "medio"}, {"p": "Ingeniería De Datos E Infraestructura", "v": "arq"}, {"p": "Valuación Inmobiliaria", "v": "medio"}, {"p": "Desarrollo De Videojuegos Y Realidad Extendida", "v": "arq"}, {"p": "Arquitectura De Software", "v": "arq"}], "DOCTORADO": [{"p": "Educación", "v": "alto"}, {"p": "Desarrollo Humano", "v": "bajo"}, {"p": "Derecho", "v": "bajo"}, {"p": "Finanzas", "v": "medio"}, {"p": "Gestión E Innovación Tecnológica", "v": "medio"}, {"p": "Administración Estratégica Empresarial", "v": "medio"}, {"p": "Ciberseguridad De Sistemas Autónomos", "v": "doc_esp"}, {"p": "Urbanismo", "v": "medio"}, {"p": "Alta Dirección Y Gobierno Corporativo", "v": "doc_esp"}, {"p": "Ciencia De Datos E Inteligencia Artificial", "v": "doc_esp"}, {"p": "Ciberseguridad Y Gestión De Riesgos", "v": "doc_esp"}]};
+var PROG_PRICE_LIC = {"PEDAGOGÍA": 1700, "INGENIERÍA INDUSTRIAL": 2210, "INGENIERÍA EN SISTEMAS COMPUTACIONALES": 2210, "CRIMINOLOGÍA Y CRIMINALÍSTICA": 1700, "PSICOLOGÍA": 1700, "DERECHO": 2100, "ADMINISTRACIÓN": 1890, "INGENIERÍA INDUSTRIAL Y ADMINISTRACIÓN": 2000, "ADMINISTRACIÓN DE RECURSOS HUMANOS": 1700, "CONTADURÍA Y FINANZAS": 1890, "NEGOCIOS INTERNACIONALES": 1890, "CONTADURÍA PÚBLICA": 1890, "PSICOLOGÍA ORGANIZACIONAL": 1890, "ADMINISTRACIÓN DE NEGOCIOS": 1890, "ARTE DIGITAL Y MULTIMEDIA": 1890, "ADMINISTRACIÓN Y FINANZAS": 1890, "ADMINISTRACIÓN DE EMPRESAS TURÍSTICAS": 1890, "CIENCIAS POLÍTICAS Y ADMINISTRACIÓN PÚBLICA": 1890, "MARKETING Y PUBLICIDAD": 1890, "ADMINISTRACIÓN DE VENTAS": 1890, "COMUNICACIÓN": 1890, "INGENIERÍA EN LOGÍSTICA Y TRANSPORTE": 2000, "DESARROLLO SUSTENTABLE Y ECOTURISMO": 1890, "MERCADOTECNIA": 1890, "ADMINISTRACIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN": 1890, "ECONOMÍA Y FINANZAS": 1890, "DERECHO INTERNACIONAL": 1890, "DERECHO EMPRESARIAL": 1890, "TECNOLOGÍA EDUCATIVA": 1890, "COMUNICACIÓN DIGITAL": 1890, "INTELIGENCIA ARTIFICIAL": 2000, "EMPRENDIMIENTO": 1890, "AGRONEGOCIOS": 1890, "INGENIERÍA EN ENERGÍAS RENOVABLES": 2000, "INGENIERÍA EN DESARROLLO DE SOFTWARE": 2000, "DISEÑO Y ANIMACIÓN DIGITAL": 1890, "DIRECCIÓN DE ARTE": 1890, "COMUNICACIÓN ORGANIZACIONAL": 1890, "SEGURIDAD INFORMÁTICA": 2000, "COMUNICACIÓN CORPORATIVA": 1890, "MEDIOS DIGITALES": 1890, "PEDAGOGÍA-UNICEF": 1890, "ADMINISTRACIÓN DE EMPRESAS": 1890, "INTELIGENCIA ARTIFICIAL APLICADA A NEGOCIOS, INDUSTRIA Y AUTOMATIZACIÓN": 2500, "ÉTICA Y GOBERNANZA DE LA INTELIGENCIA ARTIFICIAL": 2500, "INNOVACIÓN Y EMPRENDIMIENTO CON INTELIGENCIA ARTIFICIAL": 1890, "INTELIGENCIA ARTIFICIAL Y CIENCIA DE DATOS": 2000, "INTELIGENCIA ARTIFICIAL EN EDUCACIÓN": 2000, "INGENIERÍA EN CIENCIAS DE DATOS E INTELIGENCIA ANALÍTICA": 2000, "INGENIERÍA EN PROGRAMACIÓN EN LA NUBE": 2210, "SOFTWARE PARA ENTRETENIMIENTO DIGITAL": 1890, "INGENIERÍA EN SISTEMAS INTELIGENTES": 2210, "FINANZAS Y BANCA": 1890, "INNOVACIÓN Y TRANSFORMACIÓN DE NEGOCIOS": 1890, "ESTRATEGIA Y TRANSFORMACIÓN DE NEGOCIOS": 1890, "COMERCIO ELECTRÓNICO Y NEGOCIOS DIGITALES": 1890, "TECNOLOGÍAS INTERACTIVAS Y VIRTUALES": 2100, "EDUCACIÓN PARA LA SUSTENTABILIDAD": 2500, "INGENIERÍA EN ROBÓTICA": 2500, "ARQUITECTURA": 2500};
+var PROG_PRICE_MAE = {"EDUCACIÓN Y DOCENCIA": 2300, "CONCIENCIA PLENA APLICADA": 2650, "GESTIÓN DIRECTIVA DE INSTITUCIONES EN SALUD": 2650, "DERECHO PROCESAL Y JUICIOS ORALES": 2650, "TECNOLOGÍA EDUCATIVA": 2300, "CIENCIA DE DATOS PARA NEGOCIOS": 2500, "ADMINISTRACIÓN DE NEGOCIOS": 2500, "ADMINISTRACIÓN PÚBLICA": 2500, "INGENIERÍA Y TECNOLOGÍA AMBIENTAL": 2300, "ADMINISTRACIÓN DE RECURSOS HUMANOS": 2500, "DIRECCIÓN DE VENTAS": 2500, "MERCADOTECNIA DIGITAL Y COMERCIO ELECTRÓNICO": 2500, "DERECHO PROCESAL PENAL": 2500, "DERECHOS HUMANOS": 2500, "ADMINISTRACIÓN DE INSTITUCIONES EDUCATIVAS": 2500, "COACHING INTEGRAL Y ORGANIZACIONAL": 2500, "DIRECCIÓN DE PROYECTOS DE INNOVACIÓN": 2500, "ADMINISTRACIÓN EN MERCADOTECNIA ESTRATÉGICA": 2500, "DIRECCIÓN DE NEGOCIOS DE ALIMENTOS Y BEBIDAS": 2500, "PSICOLOGÍA TRANSPERSONAL": 2500, "ADMINISTRACIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN": 2500, "FINANZAS": 2500, "DERECHO PROCESAL CONSTITUCIONAL": 2500, "CIBERSEGURIDAD": 2500, "ADMINISTRACIÓN DE NEGOCIOS DEPORTIVOS": 2500, "CIENCIAS COMPUTACIONALES Y TELECOMUNICACIONES": 2500, "DIRECCIÓN E INGENIERÍA DE SOFTWARE": 2500, "GESTIÓN ESTRATÉGICA DEL CAPITAL HUMANO": 2500, "LOGÍSTICA Y CADENA DE SUMINISTRO": 2500, "IMPUESTOS": 2500, "COMERCIO INTERNACIONAL": 2500, "LOGÍSTICA Y CADENA DE SUMINISTROS": 2500, "MARKETING DIGITAL Y E-COMMERCE": 2500, "DESARROLLO SUSTENTABLE Y GESTIÓN AMBIENTAL": 2500, "DIRECCIÓN DE EMPRESAS TURÍSTICAS": 2500, "GESTIÓN ORGANIZACIONAL POSITIVA": 2500, "DISEÑO PARA MEDIOS DIGITALES": 2500, "ENERGÍAS RENOVABLES Y EFICIENCIA ENERGÉTICA": 2500, "ENERGÍAS RENOVABLES Y PROYECTOS ENERGÉTICOS": 2500, "RESPONSABILIDAD SOCIAL": 2500, "EDUCACIÓN": 2500, "MERCADOTECNIA POLÍTICA": 2500, "DIRECCIÓN DE EMPRESA TURÍSTICAS": 2500, "INTERVENCIÓN PSICOLÓGICA Y SALUD MENTAL": 2500, "EDUCACIÓN Y DOCENCIA-UNICEF": 2500, "ADMINISTRACIÓN DE NEGOCIOS - MBA": 2500, "TURISMO Y REVENUE MANAGEMENT HOTELERO": 2500, "MAESTRÍA ESPECIALIZADO EN NUTRICIÓN": 2500, "GESTIÓN DIRECTIVA DE SALUD": 2500, "LOGÍSTICA TRANSPORTE Y DISTRIBUCIÓN INTERNACIONAL": 2500, "MAESTRÍA ESPECIALIZADO EN COMERCIO INTERNACIONAL": 2500, "ADMINISTRACIÓN Y DIRECCIÓN COMERCIAL DE EMPRESAS TURÍSTICAS": 2500, "GESTIÓN DIRECTIVA EN SALUD": 2500, "PROJECT MANAGEMENT": 2500, "ADMINISTRACIÓN DE NEGOCIOS-IEBS": 2500, "DERECHO PROCESAL CONSTITUCIONAL (MODALIDAD EJECUTIVA)": 2500, "SOLUCIONES DE INTELIGENCIA ARTIFICIAL PARA NEGOCIOS Y SERVICIOS": 2500, "INNOVACIÓN ESTRATÉGICA CON INTELIGENCIA ARTIFICIAL": 2500, "EDUCACIÓN INTELIGENTE Y DISEÑO INSTRUCCIONAL CON INTELIGENCIA ARTIFICIAL": 2500, "AUTOMATIZACIÓN Y ROBÓTICA INDUSTRIAL": 2800, "AUTOMATIZACIÓN DE PROCESOS Y ANÁLISIS PREDICTIVO": 2500, "INGENIERÍA DE DATOS E INFRAESTRUCTURA": 2800, "VALUACIÓN INMOBILIARIA": 2500, "DESARROLLO DE VIDEOJUEGOS Y REALIDAD EXTENDIDA": 2800, "ARQUITECTURA DE SOFTWARE": 2800};
+var PROG_PRICE_DOC = {"EDUCACIÓN": 6083, "DESARROLLO HUMANO": 4953, "DERECHO": 4953, "FINANZAS": 5488, "GESTIÓN E INNOVACIÓN TECNOLÓGICA": 5488, "ADMINISTRACIÓN ESTRATÉGICA EMPRESARIAL": 5488, "CIBERSEGURIDAD DE SISTEMAS AUTÓNOMOS": 5600, "URBANISMO": 5488, "ALTA DIRECCIÓN Y GOBIERNO CORPORATIVO": 5600, "CIENCIA DE DATOS E INTELIGENCIA ARTIFICIAL": 5600, "CIBERSEGURIDAD Y GESTIÓN DE RIESGOS": 5600};
+
 
 function fillSelect(selId, nivelKey, badgeId){
   var sel=g(selId); sel.innerHTML='';
@@ -470,29 +678,58 @@ function updateBadge(selId,badgeId){
    PRICING DATA — ABRIL 2026
 ═══════════════════════════════════════ */
 var PROG={
-  online_general:{niveles:{
-    alto:{
-      hot:  {pkg:'P2.LI.INT.',esc:'P14.INT2M',p:[699,799,2100,2100,2100,2100,2100,2100,2100,2100,2100,2100],b:.710},
-      rmkt30:{pkg:'P3.LI.INT.',esc:'P14.INT2M',p:[699,799,1974,1974,1974,1974,1974,1974,1974,1974,1974,1974],b:.727},
-      rmkt60:{pkg:'P4.LI.INT.',esc:'P14.INT2M',p:[699,799,1932,1932,1932,1932,1932,1932,1932,1932,1932,1932],b:.733},
-      sur:  {pkg:'—',esc:'—',p:[699,799,1989,1989,1989,1989,1989,1989,1989,1989,1989,1989],b:.725},
-      norte:{pkg:'—',esc:'—',p:[699,799,2431,2431,2431,2431,2431,2431,2431,2431,2431,2431],b:.664}
-    },
-    medio:{
-      hot:  {pkg:'P5.LI.INT.',esc:'P14.INT2M',p:[699,799,1890,1890,1890,1890,1890,1890,1890,1890,1890,1890],b:.739},
-      rmkt30:{pkg:'P6.LI.INT.',esc:'P14.INT2M',p:[699,799,1777,1777,1777,1777,1777,1777,1777,1777,1777,1777],b:.754},
-      rmkt60:{pkg:'P7.LI.INT.',esc:'P14.INT2M',p:[699,799,1739,1739,1739,1739,1739,1739,1739,1739,1739,1739],b:.760},
-      sur:  {pkg:'—',esc:'—',p:[699,799,1800,1800,1800,1800,1800,1800,1800,1800,1800,1800],b:.751},
-      norte:{pkg:'—',esc:'—',p:[699,799,2200,2200,2200,2200,2200,2200,2200,2200,2200,2200],b:.696}
-    },
-    bajo:{
-      hot:  {pkg:'P8.LI.INT.',esc:'P14.INT2M',p:[699,799,1700,1700,1700,1700,1700,1700,1700,1700,1700,1700],b:.765},
-      rmkt30:{pkg:'P9.LI.INT.',esc:'P14.INT2M',p:[699,799,1598,1598,1598,1598,1598,1598,1598,1598,1598,1598],b:.779},
-      rmkt60:{pkg:'P10.LI.INT.',esc:'P14.INT2M',p:[699,799,1564,1564,1564,1564,1564,1564,1564,1564,1564,1564],b:.785},
-      sur:  {pkg:'—',esc:'—',p:[699,799,1629,1629,1629,1629,1629,1629,1629,1629,1629,1629],b:.775},
-      norte:{pkg:'—',esc:'—',p:[699,799,1991,1991,1991,1991,1991,1991,1991,1991,1991,1991],b:.725}
+  online_general:{
+    intensiva:{niveles:{
+      alto:{
+        hot:  {pkg:'P2.LI.INT.',esc:'P14.INT2M',p:[699,799,2100,2100,2100,2100,2100,2100,2100,2100,2100,2100],b:.710},
+        rmkt30:{pkg:'P3.LI.INT.',esc:'P14.INT2M',p:[699,799,1974,1974,1974,1974,1974,1974,1974,1974,1974,1974],b:.727},
+        rmkt60:{pkg:'P4.LI.INT.',esc:'P14.INT2M',p:[699,799,1932,1932,1932,1932,1932,1932,1932,1932,1932,1932],b:.733},
+        sur:  {pkg:'—',esc:'—',p:[629,719,1989,1989,1989,1989,1989,1989,1989,1989,1989,1989],b:.725},
+        norte:{pkg:'—',esc:'—',p:[769,879,2431,2431,2431,2431,2431,2431,2431,2431,2431,2431],b:.664}
+      },
+      medio:{
+        hot:  {pkg:'P5.LI.INT.',esc:'P14.INT2M',p:[699,799,1890,1890,1890,1890,1890,1890,1890,1890,1890,1890],b:.739},
+        rmkt30:{pkg:'P6.LI.INT.',esc:'P14.INT2M',p:[699,799,1777,1777,1777,1777,1777,1777,1777,1777,1777,1777],b:.754},
+        rmkt60:{pkg:'P7.LI.INT.',esc:'P14.INT2M',p:[699,799,1739,1739,1739,1739,1739,1739,1739,1739,1739,1739],b:.760},
+        sur:  {pkg:'P7.SUR.LI.INT.',esc:'P46.INT2M',p:[629,719,1800,1800,1800,1800,1800,1800,1800,1800,1800,1800],b:.751},
+        norte:{pkg:'P7.NOR.LI.INT.',esc:'P48.INT2M',p:[769,879,2200,2200,2200,2200,2200,2200,2200,2200,2200,2200],b:.696}
+      },
+      bajo:{
+        hot:  {pkg:'P8.LI.INT.',esc:'P14.INT2M',p:[699,799,1700,1700,1700,1700,1700,1700,1700,1700,1700,1700],b:.765},
+        rmkt30:{pkg:'P9.LI.INT.',esc:'P14.INT2M',p:[699,799,1598,1598,1598,1598,1598,1598,1598,1598,1598,1598],b:.779},
+        rmkt60:{pkg:'P10.LI.INT.',esc:'P14.INT2M',p:[699,799,1564,1564,1564,1564,1564,1564,1564,1564,1564,1564],b:.785},
+        sur:  {pkg:'—',esc:'—',p:[629,719,1629,1629,1629,1629,1629,1629,1629,1629,1629,1629],b:.775},
+        norte:{pkg:'—',esc:'—',p:[769,879,1991,1991,1991,1991,1991,1991,1991,1991,1991,1991],b:.725}
+      }
+    }},
+    super:{niveles:{
+      alto:{
+        hot:  {pkg:'P2.LI.SUPINT.',esc:'P8.SUPINT2M',p:[649,1100,2500,2500,2500,2500,2500,2500,2500,2500,2500,2500],b:.654},
+        rmkt30:{pkg:'P3.LI.SUPINT.',esc:'P8.SUPINT2M',p:[649,1100,2350,2350,2350,2350,2350,2350,2350,2350,2350,2350],b:.675},
+        rmkt60:{pkg:'P4.LI.SUPINT.',esc:'P8.SUPINT2M',p:[649,1100,2300,2300,2300,2300,2300,2300,2300,2300,2300,2300],b:.682},
+        sur:  {pkg:'—',esc:'—',p:[584,990,2349,2349,2349,2349,2349,2349,2349,2349,2349,2349],b:.675},
+        norte:{pkg:'—',esc:'—',p:[714,1210,2871,2871,2871,2871,2871,2871,2871,2871,2871,2871],b:.603}
+      },
+      medio:{
+        hot:  {pkg:'P5.LI.SUPINT.',esc:'P8.SUPINT2M',p:[649,1100,2250,2250,2250,2250,2250,2250,2250,2250,2250,2250],b:.689},
+        rmkt30:{pkg:'P6.LI.SUPINT.',esc:'P8.SUPINT2M',p:[649,1100,2115,2115,2115,2115,2115,2115,2115,2115,2115,2115],b:.708},
+        rmkt60:{pkg:'P7.LI.SUPINT.',esc:'P8.SUPINT2M',p:[649,1100,2070,2070,2070,2070,2070,2070,2070,2070,2070,2070],b:.714},
+        sur:  {pkg:'—',esc:'—',p:[584,990,2124,2124,2124,2124,2124,2124,2124,2124,2124,2124],b:.706},
+        norte:{pkg:'—',esc:'—',p:[714,1210,2596,2596,2596,2596,2596,2596,2596,2596,2596,2596],b:.641}
+      },
+      bajo:{
+        hot:  {pkg:'P8.LI.SUPINT.',esc:'P8.SUPINT2M',p:[649,1100,2025,2025,2025,2025,2025,2025,2025,2025,2025,2025],b:.720},
+        rmkt30:{pkg:'P9.LI.SUPINT.',esc:'P8.SUPINT2M',p:[649,1100,1904,1904,1904,1904,1904,1904,1904,1904,1904,1904],b:.737},
+        rmkt60:{pkg:'P10.LI.SUPINT.',esc:'P8.SUPINT2M',p:[649,1100,1863,1863,1863,1863,1863,1863,1863,1863,1863,1863],b:.742},
+        sur:  {pkg:'—',esc:'—',p:[584,990,1922,1922,1922,1922,1922,1922,1922,1922,1922,1922],b:.734},
+        norte:{pkg:'—',esc:'—',p:[714,1210,2349,2349,2349,2349,2349,2349,2349,2349,2349,2349],b:.675}
+      }
+    }},
+    completa:{
+      hot:  {pkg:'P1.LI.COM.',esc:'P23.COM3M',p:[853,927,1242,1834,1834,1834,1834,1834,1834,1834,1834,1834],b:.746},
+      rmkt: {pkg:'P2.LI.COM.',esc:'P23.COM3M',p:[853,927,1242,1724,1724,1724,1724,1724,1724,1724,1724,1724],b:.762}
     }
-  }},
+  },
   ingenieria:{niveles:{
     alto:{
       hot:  {pkg:'P2.LI.INT.',esc:'P14.INT2M',p:[699,799,2100,2100,2100,2100,2100,2100,2100,2100,2100,2100],b:.710},
@@ -731,10 +968,29 @@ var PROG={
   }}
 };
 
-function getPrice(progKey, nivel, lead){
+function getExactM3(progName, secType){
+  var n = progName.toUpperCase();
+  if(secType==='lic' && PROG_PRICE_LIC[n] !== undefined) return PROG_PRICE_LIC[n];
+  if(secType==='mae' && PROG_PRICE_MAE[n] !== undefined) return PROG_PRICE_MAE[n];
+  if(secType==='doc' && PROG_PRICE_DOC[n] !== undefined) return PROG_PRICE_DOC[n];
+  return null;
+}
+
+function getPrice(progKey, nivel, lead, jornada, isIng){
   var pr=PROG[progKey];
   if(!pr)return null;
-  var nd=pr.niveles[nivel]||pr.niveles.alto;
+  var nd;
+  if(pr.intensiva){
+    var jor=jornada||'intensiva';
+    var jorData=pr[jor]||pr.intensiva;
+    if(jor==='completa'){
+      // Completa: único precio, sin niveles
+      return jorData[lead]||jorData.hot||jorData.rmkt||null;
+    }
+    nd=jorData.niveles[nivel]||jorData.niveles.alto;
+  } else {
+    nd=pr.niveles[nivel]||pr.niveles.alto;
+  }
   return nd[lead]||nd.hot||null;
 }
 
@@ -1056,6 +1312,8 @@ function rL(){
   var lead=g('llead').value;
   var zona=g('lzona').value;
   if(zona!=='std') lead=zona;
+  // Jornada Completa uses 'hot' and 'rmkt' only
+  if(jornada==='completa' && (lead==='rmkt30'||lead==='rmkt60')) lead='rmkt';
   var mod=g('lmod').value;
 
   // Auto U-Camp para ingenierías específicas
@@ -1110,15 +1368,25 @@ function rL(){
     }
   }
 
-  var e=getPrice(progKey,nivel,lead);
+  var jornada=document.getElementById('ljor')?document.getElementById('ljor').value:'intensiva';
+  var isIngenieria2=(progKey==='ingenieria'||progKey==='robotica'||progKey==='arquitectura');
+  var e=getPrice(progKey,nivel,lead,jornada,isIngenieria2);
   if(!e)return;
+  // Override with exact price from catalog if available
+  var exactM3=getExactM3(progName,'lic');
+  if(exactM3 && jornada==='intensiva') {
+    e=JSON.parse(JSON.stringify(e));
+    for(var _i=2;_i<e.p.length;_i++) e.p[_i]=exactM3;
+  }
   var acc=getAccTotal('lic',false);
   renderTable('lb',e.p,e.pkg,e.esc,acc);
   renderBeca('lbi',e.b);
   // Programas con pricing especial muestran solo el nombre, sin badge de nivel
   var specialProgs=['arquitectura','robotica','arq_software'];
   var nivelBadge = specialProgs.indexOf(progKey)>=0 ? '' : NB[nivel];
-  g('li').innerHTML=nivelBadge+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+LBG[lead];
+  var jorNames={'intensiva':'Intensiva','super':'Super Intensiva','completa':'Completa'};
+  var jorBadge='<span class="badge b-mod">'+jorNames[jornada||'intensiva']+'</span>';
+  g('li').innerHTML=nivelBadge+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+jorBadge+LBG[lead];
   renderAccs('lic-acc','lic',false);
   renderTotal('lic-total',e.p[2],'lic',false);
 }
@@ -1375,13 +1643,313 @@ function makeSearchableAll() {
 }
 
 
+
+/* ═══════════════════════════════════════
+   DIPLOMADOS
+═══════════════════════════════════════ */
+var DIP_PRICES = {
+  '6m': {
+    esc1: {pkg:'ESC7.DIP.6.10.25', p:[699,1699,2400,2400,2400,2400], total:11998},
+    esc2: {pkg:'ESC7.DIP.6.10.25', p:[699,1699,2400,2400,2400,2400], total:11998}
+  },
+  '8m': {
+    esc1: {pkg:'ESC1.DIP.8.10.25', p:[1000,1000,2100,2100,2100,2100,2100,2100], total:14600},
+    esc2: {pkg:'ESC3.DIP.8.10.25', p:[699,1199,1999,1999,1999,1999,1999,1999], total:13892}
+  }
+};
+
+function rDip(){
+  var sel=g('ddip');
+  var prog=sel.value;
+  var opt=sel.options[sel.selectedIndex];
+  var dur=opt?opt.getAttribute('data-dur'):'6m';
+  var varnt=g('dvar').value;
+
+  // Show duration automatically
+  if(g('ddur-display')) g('ddur-display').textContent=dur==='6m'?'6 meses':'8 meses';
+
+  // Show/hide variante based on duration
+  var varSel=g('dvar');
+  if(dur==='6m'){
+    varSel.options[0].text='Escalonado (mes 1: $699, mes 2: $1.699)';
+    varSel.options[1].style.display='none';
+    varSel.selectedIndex=0;
+  } else {
+    varSel.options[0].text='Escalonado 1 (mes 1-2: $1.000)';
+    varSel.options[1].style.display='';
+    varSel.options[1].text='Escalonado 2 (mes 1: $699, mes 2: $1.199)';
+  }
+
+  var data = DIP_PRICES[dur][dur==='6m'?'esc1':varnt];
+  if(!data) return;
+
+  g('dipinfo').innerHTML='<span class="badge b-mod">Diplomado '+dur+'</span> <span style="color:var(--mu);font-size:12px">'+prog+'</span>';
+
+  var tb=g('dipbody'); tb.innerHTML='';
+  for(var i=0;i<data.p.length;i++){
+    var tr=document.createElement('tr');
+    tr.innerHTML='<td class="tm">Mes '+(i+1)+'</td>'
+      +'<td class="tp">$'+Math.round(data.p[i]).toLocaleString('es-MX')+'</td>'
+      +'<td class="tc">'+(i===data.p.length-1?'$'+Math.round(data.total).toLocaleString('es-MX'):'')+'</td>'
+      +'<td class="tc">'+data.pkg+'</td>';
+    tb.appendChild(tr);
+  }
+}
+
+/* ═══════════════════════════════════════
+   DESCARGAR RESUMEN
+═══════════════════════════════════════ */
+function downloadSummary(sec){
+  // Collect info
+  var progSelId={lic:'lprog',mae:'mprog',ms:'sprog',doc:'dprog'}[sec];
+  var progSel=g(progSelId);
+  var progName=progSel&&progSel.options[progSel.selectedIndex]?progSel.options[progSel.selectedIndex].text:'-';
+  var infoEl=g({lic:'li',mae:'mi',ms:'si2',doc:'di'}[sec]);
+  var infoHTML=infoEl?infoEl.innerHTML:'';
+
+  // Get table rows
+  var tbodyId={lic:'lb',mae:'mb',ms:'sb',doc:'db'}[sec];
+  var tbody=g(tbodyId);
+  var tableHTML=tbody?'<table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px">'+
+    '<thead><tr style="background:#f0f1f4"><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">Mes</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">Cuota base</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">+ Accesorios</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">Total</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#16a34a">Dom. '+DOMICILIACION+'%</th></tr></thead>'+
+    '<tbody>'+tbody.innerHTML+'</tbody></table>':'';
+
+  // Get total panel
+  var totalEl=g(sec+'-total');
+  var totalHTML=totalEl?totalEl.innerHTML:'';
+
+  // Get selected accs
+  var accs=ACCS[sec];
+  var selList=[];
+  if(accs){
+    accs.optional.forEach(function(grp){grp.items.forEach(function(it){if(SEL[sec][it.id])selList.push(it.name+' '+fmt(it.price)+'/mes');});});
+  }
+  var accHTML=selList.length?'<div style="margin-bottom:12px"><strong>Accesorios seleccionados:</strong><ul style="margin:6px 0 0 16px;font-size:13px">'+selList.map(function(a){return'<li>'+a+'</li>';}).join('')+'</ul></div>':'';
+
+  // Get beca info
+  var becaEl=g({lic:'lbi',mae:'mbi',ms:'sbi',doc:'dbi'}[sec]);
+  var becaHTML=becaEl?'<div style="font-size:12px;color:#6b7280;margin-bottom:16px">'+becaEl.innerHTML+'</div>':'';
+
+  // Build HTML for print
+  // UTEL logo SVG — exact brand colors and letterforms
+  var utelLogo='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 56" width="120" height="42">'
+    +'<defs><style>@import url(https://fonts.googleapis.com/css2?family=Nunito:wght@900&display=swap);</style></defs>'
+    +'<text y="44" font-family="Nunito,Arial Black,sans-serif" font-size="52" font-weight="900" fill="#39b54a" letter-spacing="-2">utel</text>'
+    +'</svg>';
+
+  // Build clean printable HTML - no external dependencies
+  var secLabel={lic:'Licenciatura',mae:'Maestría',ms:'Master UTEL',doc:'Doctorado'}[sec]||'';
+
+  // Get data - calculate directly from SEL and table
+  var cats=ACCS[sec];
+  var lastRow=tbody.querySelector('tr:last-child');
+  var baseCell=lastRow?lastRow.querySelector('td:nth-child(2)'):null;
+  var baseNum=0;
+  if(baseCell){var _t=baseCell.textContent.replace(/[$,.]/g,'').replace(/\s/g,'');baseNum=parseInt(_t)||0;}
+  var accSum=0;
+  if(cats) cats.optional.forEach(function(grp){grp.items.forEach(function(it){if(SEL[sec][it.id]&&it.price>0)accSum+=it.price;});});
+  var finalAmt=fmt(baseNum+accSum);
+  var baseAmt=baseCell?baseCell.textContent.trim():'—';
+
+  // Build table rows without pkg/esc
+  var tableRows='';
+  var rows2=tbody.querySelectorAll('tr');
+  rows2.forEach(function(tr){
+    var cells=tr.querySelectorAll('td');
+    if(cells.length<5) return;
+    var domCell=cells[4]?cells[4].textContent:'—';
+    var isLast=(tr===rows2[rows2.length-1]);
+    var bg=isLast?'background:#f8f8ff':'';
+    tableRows+='<tr style="border-bottom:1px solid #e5e7eb;'+bg+'">'
+      +'<td style="padding:10px 16px;font-size:13px;color:#6b7280">'+cells[0].innerHTML+'</td>'
+      +'<td style="padding:10px 16px;font-size:15px;font-weight:700;color:#5541d7">'+cells[1].textContent+'</td>'
+      +'<td style="padding:10px 16px;font-size:13px;color:#16a34a">'+cells[2].textContent+'</td>'
+      +'<td style="padding:10px 16px;font-size:15px;font-weight:700;color:#5541d7">'+cells[3].textContent+'</td>'
+      +'<td style="padding:10px 16px;font-size:14px;font-weight:700;color:#16a34a">'+domCell+'</td>'
+      +'</tr>';
+  });
+
+  // Build included chips
+  var incChips='';
+  if(cats) cats.included.forEach(function(it){
+    incChips+='<span style="display:inline-block;background:#dcfce7;color:#16a34a;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ '+it.name+'</span>';
+  });
+
+  // Build acc chips
+  var accChips='';
+  var hasAcc=false;
+  if(cats) cats.optional.forEach(function(grp){grp.items.forEach(function(it){
+    if(SEL[sec][it.id]&&it.price>0){
+      accChips+='<span style="display:inline-block;background:#eeecfd;color:#5541d7;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">'+it.name+' '+fmt(it.price)+'/mes</span>';
+      hasAcc=true;
+    }
+  });});
+
+  // Build total lines
+  var totalLines='<div style="display:flex;justify-content:space-between;padding:5px 0;font-size:13px;color:rgba(255,255,255,0.8)"><span>Cuota base (mes 3+)</span><span>'+baseAmt+'</span></div>';
+  if(cats) cats.optional.forEach(function(grp){grp.items.forEach(function(it){
+    if(SEL[sec][it.id]&&it.price>0){
+      totalLines+='<div style="display:flex;justify-content:space-between;padding:5px 0;font-size:13px;color:rgba(255,255,255,0.75)"><span>+ '+it.name+'</span><span>'+fmt(it.price)+'/mes</span></div>';
+    }
+  });});
+
+  // UTEL logo SVG inline
+  var logoSVG='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 70" width="110" height="38">'
+    +'<rect width="200" height="70" fill="white"/>'
+    +'<text y="56" x="4" font-family="Arial Black,Arial,Helvetica,sans-serif" font-size="62" font-weight="900" fill="#39b54a" letter-spacing="-3">utel</text>'
+    +'</svg>';
+
+  var html='<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">'
+    +'<title>Propuesta UTEL — '+progName+'</title>'
+    +'<style>'
+    +'*{box-sizing:border-box;margin:0;padding:0}'
+    +'body{font-family:Arial,Helvetica,sans-serif;background:#f0f0f0;padding:20px}'
+    +'.page{background:#fff;max-width:680px;margin:0 auto;border-radius:8px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.12)}'
+    +'@media print{'
+    +'  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}'
+    +'  body{background:#fff;padding:0}'
+    +'  .page{box-shadow:none;border-radius:0;max-width:100%}'
+    +'}'
+    +'</style></head><body>'
+    +'<div class="page">'
+
+    // HEADER
+    +'<div style="background:#fff;padding:20px 28px 16px;border-bottom:4px solid #39b54a;display:flex;align-items:center;justify-content:space-between">'
+    +logoSVG
+    +'<div style="text-align:right">'
+    +'<div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#374151">Propuesta Comercial</div>'
+    +'<div style="font-size:11px;color:#9ca3af;margin-top:2px">Vigente: Abril 2026</div>'
+    +'</div></div>'
+
+    // HERO
+    +'<div style="background:#1a1a2e;padding:24px 28px;color:#fff">'
+    +'<div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:6px">Programa seleccionado</div>'
+    +'<div style="font-size:22px;font-weight:700;margin-bottom:10px">'+progName+'</div>'
+    +'<span style="display:inline-block;background:#39b54a;color:#fff;border-radius:999px;padding:3px 12px;font-size:11px;font-weight:700">'+secLabel+'</span>'
+    +'</div>'
+
+    // BODY
+    +'<div style="padding:24px 28px">'
+
+    // TABLE
+    +'<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6b7280;margin-bottom:10px">Estructura de pagos</div>'
+    +'<table style="width:100%;border-collapse:collapse;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;margin-bottom:20px">'
+    +'<thead><tr style="background:#f9fafb">'
+    +'<th style="padding:9px 16px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b7280">Mes</th>'
+    +'<th style="padding:9px 16px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b7280">Cuota base</th>'
+    +'<th style="padding:9px 16px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b7280">+ Accesorios</th>'
+    +'<th style="padding:9px 16px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b7280">Total</th>'
+    +'<th style="padding:9px 16px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#16a34a">Con dom. '+DOMICILIACION+'%</th>'
+    +'</tr></thead>'
+    +'<tbody>'+tableRows+'</tbody></table>'
+
+    // INCLUIDOS
+    +'<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6b7280;margin-bottom:8px">Incluido en el paquete</div>'
+    +'<div style="margin-bottom:20px">'+incChips+'</div>'
+
+    // ACCESORIOS
+    +(hasAcc?'<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6b7280;margin-bottom:8px">Accesorios agregados</div><div style="margin-bottom:20px">'+accChips+'</div>':'')
+
+    // TOTAL BOX
+    +'<div style="background:#5541d7;border-radius:12px;padding:20px 24px;color:#fff;margin-bottom:8px">'
+    +'<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:12px">Resumen del plan</div>'
+    +totalLines
+    +'<div style="display:flex;justify-content:space-between;padding-top:14px;margin-top:10px;border-top:1px solid rgba(255,255,255,.25);font-size:20px;font-weight:700">'
+    +'<span>Total cuota mensual</span><span>'+finalAmt+'</span></div>'
+    +'</div>'
+
+    +'</div>' // body
+
+    // FOOTER
+    +'<div style="background:#f9fafb;padding:14px 28px;border-top:1px solid #e5e7eb">'
+    +'<div style="font-size:11px;color:#9ca3af">Propuesta generada el '+new Date().toLocaleDateString('es-MX',{day:'2-digit',month:'long',year:'numeric'})+'</div>'
+    +'</div>'
+
+    +'</div></body></html>';
+
+  // Open in new window and print
+  var win=window.open('','_blank','width=800,height=700');
+  win.document.write(html);
+  win.document.close();
+  win.focus();
+  setTimeout(function(){win.print();},400);
+}
+
+/* ═══════════════════════════════════════
+   ADMIN PANEL
+═══════════════════════════════════════ */
+var adminLogged = false;
+
+function openAdmin(){
+  document.getElementById('admin-overlay').classList.add('open');
+  document.getElementById('admin-pi').value='';
+  document.getElementById('admin-err').textContent='';
+  if(adminLogged) showAdminConfig();
+  else { document.getElementById('admin-login-area').style.display='block'; document.getElementById('admin-cfg-area').style.display='none'; }
+}
+function closeAdmin(){
+  document.getElementById('admin-overlay').classList.remove('open');
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeAdmin();});
+
+function adminLogin(){
+  var p=document.getElementById('admin-pi').value.trim();
+  if(p===ADMIN_PWD){
+    adminLogged=true;
+    showAdminConfig();
+  } else {
+    document.getElementById('admin-err').textContent='Clave incorrecta';
+  }
+}
+function showAdminConfig(){
+  document.getElementById('admin-login-area').style.display='none';
+  document.getElementById('admin-cfg-area').style.display='block';
+  document.getElementById('cfg-dom').value=String(DOMICILIACION);
+  document.getElementById('cfg-tit0').checked=TITULO_COSTO_0;
+}
+function saveAdminConfig(){
+  DOMICILIACION=parseInt(document.getElementById('cfg-dom').value);
+  TITULO_COSTO_0=document.getElementById('cfg-tit0').checked;
+  saveConfig();
+  // Refresh all active sections
+  rL();rM();rS();rD();
+  // Update header badge
+  var badge=document.getElementById('dom-pct-header');
+  if(badge) badge.textContent=DOMICILIACION;
+  // Update Título Costo $0 in ACCS if needed
+  updateTituloCosto0();
+  document.getElementById('cfg-msg').textContent='✓ Guardado correctamente';
+  setTimeout(function(){document.getElementById('cfg-msg').textContent='';},2500);
+}
+
+function updateTituloCosto0(){
+  // Add or remove Título Costo $0 from all ACCS optional accesorio sections
+  var sections=['lic','mae','doc'];
+  sections.forEach(function(sec){
+    var cats=ACCS[sec];
+    if(!cats) return;
+    var accCat=null;
+    for(var i=0;i<cats.optional.length;i++){
+      if(cats.optional[i].cat==='Accesorio'){ accCat=cats.optional[i]; break; }
+    }
+    if(!accCat) return;
+    // Remove existing tit0 entry
+    accCat.items=accCat.items.filter(function(x){return x.id!=='tit0_free';});
+    if(TITULO_COSTO_0){
+      accCat.items.unshift({id:'tit0_free', name:'Título Costo $0', price:0});
+    }
+  });
+}
+
+
 function init(){
+  loadConfig();
   fillSelect('lprog','LICENCIATURA','lnivel-badge');
   fillSelect('mprog','MAESTRÍA','mnivel-badge');
   fillSelect('sprog','MASTER','snivel-badge');
   fillSelect('dprog','DOCTORADO','dnivel-badge');
   makeSearchableAll();
-  rL(); rM(); rS(); rD(); rPU();
+  rL(); rM(); rS(); rD(); rPU(); rDip();
 }
 </script>
 </body>
