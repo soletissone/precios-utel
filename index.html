@@ -204,7 +204,7 @@ td{padding:9px 14px;vertical-align:middle}
 <div id="ls">
   <div class="lb">
     <div class="ll">UTEL</div>
-    <div class="lt">Matriz de Precios</div>
+    <div class="lt">Plan de Beca UTEL</div>
     <div class="ls2">Acceso restringido — Equipo de ventas</div>
     <input type="password" id="pi" placeholder="Contraseña" onkeydown="if(event.key==='Enter')tryLogin()" autocomplete="off"/>
     <button onclick="tryLogin()">Ingresar</button>
@@ -216,7 +216,7 @@ td{padding:9px 14px;vertical-align:middle}
 <div id="app">
   <header>
     <span class="logo">UTEL</span>
-    <span class="ht">Matriz de Precios · Vigente <span style="font-size:10px;color:var(--mu);font-weight:400">v1.4</span></span>
+    <span class="ht">Plan de Beca · Vigente <span style="font-size:10px;color:var(--mu);font-weight:400">v1.4</span></span>
     <span style="font-size:11px;background:rgba(22,163,74,.1);color:#16a34a;padding:4px 10px;border-radius:999px;font-weight:600" id="dom-indicator">Domiciliación <span id="dom-pct-header">5</span>%</span>
     <button class="out" onclick="logout()">Salir</button>
   </header>
@@ -233,20 +233,13 @@ td{padding:9px 14px;vertical-align:middle}
     <!-- LICENCIATURAS -->
     <div class="sec active" id="sec-lic">
       <div class="filters">
-        <div class="fg"><label>Programa</label><select id="lprog" onchange="rL()"></select></div>
+        <div class="fg"><label>Área</label><select id="larea" onchange="filterLArea()"><option value="">— Todas —</option><option value="Arquitectura y Urbanismo">Arquitectura y Urbanismo</option><option value="Capital Humano y Transformación Organizacional">Capital Humano y Transformación Organizacional</option><option value="Ciencias Sociales y Humanidades">Ciencias Sociales y Humanidades</option><option value="Ciencias Sociales y Humanoides">Ciencias Sociales y Humanoides</option><option value="Ciencias de la Salud">Ciencias de la Salud</option><option value="Derecho y Justicia Digital">Derecho y Justicia Digital</option><option value="Diseño y Comunicación">Diseño y Comunicación</option><option value="Económico-Administrativas">Económico-Administrativas</option><option value="Finanzas y Economía">Finanzas y Economía</option><option value="Hospitalidad y Turismo">Hospitalidad y Turismo</option><option value="Ingeniería y Soluciones">Ingeniería y Soluciones</option><option value="Ingeniería y Tecnología">Ingeniería y Tecnología</option><option value="Negocios, Innovación y Liderazgo">Negocios, Innovación y Liderazgo</option></select></div><div class="fg"><label>Programa</label><select id="lprog" onchange="rL()"></select></div>
         <div class="fg"><label>Jornada</label>
           <select id="ljor" onchange="rL()">
             <option value="intensiva">Jornada Intensiva</option>
           </select>
         </div>
-        <div class="fg"><label>Modalidad</label>
-          <select id="lmod" onchange="rL()">
-            <option value="online">Online (Mayor)</option>
-            <option value="ejecutiva">Ejecutiva</option>
-            <option value="joven">Utel Joven</option>
-            <option value="hibrida">Híbrida</option>
-          </select>
-        </div>
+        
         <div class="fg"><label>Lead</label>
           <select id="llead" onchange="rL()">
             <option value="hot">Hot Lead</option>
@@ -254,6 +247,7 @@ td{padding:9px 14px;vertical-align:middle}
             <option value="rmkt60">RMKT +60 días</option>
           </select>
         </div>
+        <div class="fg"><label>Fecha de inicio</label><select id="lic-fecha" onchange="setSELInicio('lic',this.value)" style="font-size:13px"><option value="">— Seleccionar —</option></select></div>
         <div class="fg"><label>Zona</label>
           <select id="lzona" onchange="rL()">
             <option value="std">Estándar</option>
@@ -269,11 +263,17 @@ td{padding:9px 14px;vertical-align:middle}
         <tbody id="lb"></tbody>
       </table></div>
       <div class="bi" id="lbi"></div>
+      <div id="exp-selector" style="display:none;margin-bottom:12px;padding:10px 14px;background:var(--s2);border:1px solid var(--bd);border-radius:8px"><div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Experiencia</div><div style="display:flex;gap:8px;flex-wrap:wrap" id="exp-chips"></div></div>
+      <div id="alianza-variant-sel" style="display:none;margin-bottom:12px;padding:10px 14px;background:var(--s2);border:1px solid var(--bd);border-radius:8px">
+        <div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">Variante de precio</div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap" id="alianza-chips"></div>
+      </div>
+      
       <div style="background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#5f4200"><strong>📋 Complemento de Colegiatura:</strong> <strong style="font-size:13px;color:#e65100">$1,100</strong> — se cobra cada 4 meses </div>
 
       <!-- Print header (only shows when printing) -->
       <div class="print-header" style="margin-bottom:16px">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.15em;color:#6c5ce7;text-transform:uppercase">UTEL — Matriz de Precios · Vigente</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.15em;color:#6c5ce7;text-transform:uppercase">UTEL — Plan de Beca · Vigente</div>
         <div id="print-info-lic" style="font-size:13px;margin-top:4px"></div>
       </div>
 
@@ -291,12 +291,12 @@ td{padding:9px 14px;vertical-align:middle}
       </div>
       <div id="lic-acc"></div>
       <div id="lic-total"></div>
-    </div>
+    
 
     <!-- MAESTRÍAS -->
     <div class="sec" id="sec-mae">
       <div class="filters">
-        <div class="fg"><label>Programa</label><select id="mprog" onchange="rM()"></select></div>
+        <div class="fg"><label>Área</label><select id="marea" onchange="filterMArea()"><option value="">— Todas —</option><option value="Arquitectura y Urbanismo">Arquitectura y Urbanismo</option><option value="Capital Humano y Transformación Organizacional">Capital Humano y Transformación Organizacional</option><option value="Ciencias Sociales y Humanidades">Ciencias Sociales y Humanidades</option><option value="Ciencias Sociales y Humanoides">Ciencias Sociales y Humanoides</option><option value="Derecho y Justicia Digital">Derecho y Justicia Digital</option><option value="Diseño y Comunicación">Diseño y Comunicación</option><option value="Económico-Administrativa">Económico-Administrativa</option><option value="Finanzas y Economía">Finanzas y Economía</option><option value="Gobierno y Política Pública">Gobierno y Política Pública</option><option value="Hospitalidad y Turismo">Hospitalidad y Turismo</option><option value="Ingeniería y Soluciones">Ingeniería y Soluciones</option><option value="Ingeniería y Tecnología">Ingeniería y Tecnología</option><option value="Negocios, Innovación y Liderazgo">Negocios, Innovación y Liderazgo</option><option value="Salud y Psicología">Salud y Psicología</option></select></div><div class="fg"><label>Programa</label><select id="mprog" onchange="rM()"></select></div>
         <div class="fg"><label>Modalidad</label>
           <select id="mmod" onchange="rM()">
             <option value="online">Online</option>
@@ -309,6 +309,7 @@ td{padding:9px 14px;vertical-align:middle}
             <option value="rmkt">RMKT</option>
           </select>
         </div>
+        <div class="fg"><label>Fecha de inicio</label><select id="mae-fecha" onchange="setSELInicio('mae',this.value)" style="font-size:13px"><option value="">— Seleccionar —</option></select></div>
 
         <div class="fg"><label>Nivel detectado</label><div id="mnivel-badge" style="padding:8px 0"></div></div>
       </div>
@@ -320,7 +321,7 @@ td{padding:9px 14px;vertical-align:middle}
       <div class="bi" id="mbi"></div>
       <div style="background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#5f4200"><strong>📋 Complemento de Colegiatura:</strong> <strong style="font-size:13px;color:#e65100">$1,200</strong> — se cobra cada 4 meses </div>
       <div class="print-header" style="margin-bottom:16px">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.15em;color:#6c5ce7;text-transform:uppercase">UTEL — Matriz de Precios · Vigente</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.15em;color:#6c5ce7;text-transform:uppercase">UTEL — Plan de Beca · Vigente</div>
         <div id="print-info-mae" style="font-size:13px;margin-top:4px"></div>
       </div>
       <button class="dl-btn" onclick="downloadSummary('mae')">
@@ -347,6 +348,7 @@ td{padding:9px 14px;vertical-align:middle}
             <option value="rmkt">RMKT</option>
           </select>
         </div>
+        <div class="fg"><label>Fecha de inicio</label><select id="ms-fecha" onchange="setSELInicio('ms',this.value)" style="font-size:13px"><option value="">— Seleccionar —</option></select></div>
         <div class="fg"><label>Nivel detectado</label><div id="snivel-badge" style="padding:8px 0"></div></div>
       </div>
       <div class="ib" id="si2"></div>
@@ -357,7 +359,7 @@ td{padding:9px 14px;vertical-align:middle}
       <div class="bi" id="sbi"></div>
       <div style="background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#5f4200"><strong>📋 Complemento de Colegiatura:</strong> <strong style="font-size:13px;color:#e65100">$1,200</strong> — se cobra cada 4 meses </div>
       <div class="print-header" style="margin-bottom:16px">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.15em;color:#6c5ce7;text-transform:uppercase">UTEL — Matriz de Precios · Vigente</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.15em;color:#6c5ce7;text-transform:uppercase">UTEL — Plan de Beca · Vigente</div>
         <div id="print-info-ms" style="font-size:13px;margin-top:4px"></div>
       </div>
       <button class="dl-btn" onclick="downloadSummary('ms')">
@@ -383,6 +385,7 @@ td{padding:9px 14px;vertical-align:middle}
             <option value="rmkt">RMKT</option>
           </select>
         </div>
+        <div class="fg"><label>Fecha de inicio</label><select id="doc-fecha" onchange="setSELInicio('doc',this.value)" style="font-size:13px"><option value="">— Seleccionar —</option></select></div>
         <div class="fg"><label>Nivel detectado</label><div id="dnivel-badge" style="padding:8px 0"></div></div>
       </div>
       <div class="ib" id="di"></div>
@@ -393,7 +396,7 @@ td{padding:9px 14px;vertical-align:middle}
       <div class="bi" id="dbi"></div>
       <div style="background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#5f4200"><strong>📋 Complemento de Colegiatura:</strong> <strong style="font-size:13px;color:#e65100">$1,200</strong> — se cobra cada 4 meses </div>
       <div class="print-header" style="margin-bottom:16px">
-        <div style="font-size:11px;font-weight:700;letter-spacing:.15em;color:#6c5ce7;text-transform:uppercase">UTEL — Matriz de Precios · Vigente</div>
+        <div style="font-size:11px;font-weight:700;letter-spacing:.15em;color:#6c5ce7;text-transform:uppercase">UTEL — Plan de Beca · Vigente</div>
         <div id="print-info-doc" style="font-size:13px;margin-top:4px"></div>
       </div>
       <button class="dl-btn" onclick="downloadSummary('doc')">
@@ -523,8 +526,8 @@ function tryLogin(){
   if(!p)return;
   if(p===PWD){
     localStorage.removeItem('ua');
-    localStorage.setItem('ok', Date.now() + 28800000); // 8 horas
-    localStorage.setItem('build', '1778012614');
+    localStorage.setItem('ok', Date.now() + 259200000); // 72 horas
+    localStorage.setItem('build', '1778110682');
     g('ls').style.display='none';
     g('app').style.display='block';
     init();
@@ -542,13 +545,10 @@ function logout(){
   g('pi').value='';
 }
 window.addEventListener('load',function(){
-  var BUILD='1778012614';
-  var a=ga();
-  if(a.l)g('em').textContent='Bloqueado '+Math.ceil((a.l-Date.now())/60000)+' min.';
+  var BUILD='1778110682';
   var _ok=parseInt(localStorage.getItem('ok')||'0');
   var _build=localStorage.getItem('build');
-  // Si el archivo cambió, forzar re-login siempre
-  if(_build!==BUILD){ localStorage.removeItem('ok'); localStorage.removeItem('ver'); _ok=0; }
+  if(_build!==BUILD){ localStorage.removeItem('ok'); _ok=0; }
   if(_ok && Date.now()<_ok){
     g('ls').style.display='none';
     g('app').style.display='block';
@@ -622,6 +622,11 @@ function isNuevo(progName){
   return NEW_PROGS.indexOf(progName.toUpperCase())>=0;
 }
 function getDuracion(sec, jornada, progName){
+  // Derecho programs always 36 months
+  var derechoProgs=['DERECHO','DERECHO INTERNACIONAL','DERECHO EMPRESARIAL'];
+  if(sec==='lic' && derechoProgs.some(function(d){return progName.toUpperCase().indexOf(d)>=0;})){
+    return '3 años (36 meses)';
+  }
   var tipo = isNuevo(progName)?'nuevo':'antiguo';
   var key = sec+'_'+jornada+'_'+tipo;
   return DUR_MAP[key]||'—';
@@ -651,6 +656,13 @@ function sw(id){
   document.querySelectorAll('.sec').forEach(function(s){
     s.classList.toggle('active',s.id==='sec-'+id);
   });
+  // Re-render the section when switching tabs
+  if(id==='mae') rM();
+  else if(id==='ms') rS();
+  else if(id==='doc') rD();
+  else if(id==='pu') rPU();
+  else if(id==='dip') rDip();
+  else if(id==='lic') rL();
 }
 
 function renderTable(tbodyId, prices, pkg, esc, accTotal, accTotal12){
@@ -710,10 +722,7 @@ function renderBeca(id,b){
 /* ═══════════════════════════════════════
    CATALOG
 ═══════════════════════════════════════ */
-var CATALOG = {"LICENCIATURA": [{"p": "Pedagogía", "v": "bajo"}, {"p": "Ingeniería Industrial", "v": "alto"}, {"p": "Ingeniería En Sistemas Computacionales", "v": "alto"}, {"p": "Criminología Y Criminalística", "v": "bajo"}, {"p": "Psicología", "v": "bajo"}, {"p": "Derecho", "v": "alto"}, {"p": "Administración", "v": "medio"}, {"p": "Ingeniería Industrial Y Administración", "v": "medio"}, {"p": "Administración De Recursos Humanos", "v": "bajo"}, {"p": "Contaduría Y Finanzas", "v": "medio"}, {"p": "Negocios Internacionales", "v": "medio"}, {"p": "Contaduría Pública", "v": "medio"}, {"p": "Psicología Organizacional", "v": "medio"}, {"p": "Administración De Negocios", "v": "medio"}, {"p": "Arte Digital Y Multimedia", "v": "unico"}, {"p": "Administración Y Finanzas", "v": "medio"}, {"p": "Administración De Empresas Turísticas", "v": "medio"}, {"p": "Ciencias Políticas Y Administración Pública", "v": "medio"}, {"p": "Marketing Y Publicidad", "v": "unico"}, {"p": "Administración De Ventas", "v": "medio"}, {"p": "Comunicación", "v": "medio"}, {"p": "Ingeniería En Logística Y Transporte", "v": "medio"}, {"p": "Desarrollo Sustentable Y Ecoturismo", "v": "medio"}, {"p": "Mercadotecnia", "v": "medio"}, {"p": "Administración De Tecnologías De La Información", "v": "medio"}, {"p": "Economía Y Finanzas", "v": "medio"}, {"p": "Derecho Internacional", "v": "medio"}, {"p": "Derecho Empresarial", "v": "medio"}, {"p": "Tecnología Educativa", "v": "medio"}, {"p": "Comunicación Digital", "v": "medio"}, {"p": "Inteligencia Artificial", "v": "medio"}, {"p": "Emprendimiento", "v": "medio"}, {"p": "Agronegocios", "v": "medio"}, {"p": "Ingeniería En Energías Renovables", "v": "medio"}, {"p": "Ingeniería En Desarrollo De Software", "v": "medio"}, {"p": "Diseño Y Animación Digital", "v": "medio"}, {"p": "Dirección De Arte", "v": "medio"}, {"p": "Comunicación Organizacional", "v": "medio"}, {"p": "Seguridad Informática", "v": "medio"}, {"p": "Comunicación Corporativa", "v": "unico"}, {"p": "Medios Digitales", "v": "unico"}, {"p": "Pedagogía-Unicef", "v": "medio"}, {"p": "Administración De Empresas", "v": "medio"}, {"p": "Inteligencia Artificial Aplicada A Negocios, Industria Y Automatización", "v": "medio"}, {"p": "Ética Y Gobernanza De La Inteligencia Artificial", "v": "medio"}, {"p": "Innovación Y Emprendimiento Con Inteligencia Artificial", "v": "medio"}, {"p": "Inteligencia Artificial Y Ciencia De Datos", "v": "medio"}, {"p": "Inteligencia Artificial En Educación", "v": "medio"}, {"p": "Ingeniería En Ciencias De Datos E Inteligencia Analítica", "v": "medio"}, {"p": "Ingeniería En Programación En La Nube", "v": "alto"}, {"p": "Software Para Entretenimiento Digital", "v": "medio"}, {"p": "Ingeniería En Sistemas Inteligentes", "v": "alto"}, {"p": "Finanzas Y Banca", "v": "medio"}, {"p": "Innovación Y Transformación De Negocios", "v": "medio"}, {"p": "Estrategia Y Transformación De Negocios", "v": "medio"}, {"p": "Comercio Electrónico Y Negocios Digitales", "v": "medio"}, {"p": "Tecnologías Interactivas Y Virtuales", "v": "alto"}, {"p": "Educación Para La Sustentabilidad", "v": "medio"}, {"p": "Ingeniería En Robótica", "v": "arq"}, {"p": "Arquitectura", "v": "arq"}, {"p": "Licenciaturas En Inteligencia Artificial Aplicada A Negocios, Industria Y Automatización", "v": "alto"}, {"p": "Licenciaturas En Ética Y Gobernanza De La Inteligencia Artificial", "v": "medio"}, {"p": "Licenciaturas En Ciberseguridad Y Riesgos En Inteligencia Artificial", "v": "alto"}, {"p": "Licenciaturas En Innovación Y Emprendimiento Con Inteligencia Artificial", "v": "medio"}, {"p": "Licenciaturas En Inteligencia Artificial Y Ciencia De Datos", "v": "medio"}, {"p": "Licenciaturas En Inteligencia Artificial En Educación", "v": "medio"}, {"p": "Licenciaturas En Ingeniería En Ciencias De Datos E Inteligencia Analítica", "v": "medio"}, {"p": "Licenciaturas En Ingeniería En Programación En La Nube", "v": "alto"}, {"p": "Licenciaturas En Software Para Entretenimiento Digital", "v": "medio"}, {"p": "Licenciaturas En Ingeniería En Sistemas Inteligentes", "v": "alto"}, {"p": "Licenciaturas En Finanzas Y Banca", "v": "medio"}, {"p": "Licenciaturas En Innovación Y Transformación De Negocios", "v": "medio"}, {"p": "Licenciaturas En Finanzas Y Estrategia Fiscal", "v": "medio"}, {"p": "Licenciaturas En Estrategia Y Transformación De Negocios", "v": "medio"}, {"p": "Licenciaturas En Ingeniería En Tecnología De Videojuegos Y Realidad Virtual", "v": "medio"}, {"p": "Licenciaturas En Comercio Electrónico Y Negocios Digitales", "v": "medio"}, {"p": "Licenciaturas En Tecnologías Interactivas Y Virtuales", "v": "alto"}, {"p": "Licenciaturas En Ingeniería Ambiental", "v": "alto"}, {"p": "Licenciaturas En Educación Para La Sustentabilidad", "v": "medio"}, {"p": "Licenciaturas En Arquitectura", "v": "medio"}, {"p": "Unica", "v": "unico"}, {"p": "Uve", "v": "unico"}], "MAESTRÍA": [{"p": "Educación Y Docencia", "v": "medio"}, {"p": "Conciencia Plena Aplicada", "v": "medio"}, {"p": "Gestión Directiva De Instituciones En Salud", "v": "medio"}, {"p": "Derecho Procesal Y Juicios Orales", "v": "medio"}, {"p": "Tecnología Educativa", "v": "medio"}, {"p": "Ciencia De Datos Para Negocios", "v": "medio"}, {"p": "Administración De Negocios", "v": "medio"}, {"p": "Administración Pública", "v": "medio"}, {"p": "Ingeniería Y Tecnología Ambiental", "v": "medio"}, {"p": "Administración De Recursos Humanos", "v": "medio"}, {"p": "Dirección De Ventas", "v": "medio"}, {"p": "Mercadotecnia Digital Y Comercio Electrónico", "v": "medio"}, {"p": "Derecho Procesal Penal", "v": "medio"}, {"p": "Derechos Humanos", "v": "medio"}, {"p": "Administración De Instituciones Educativas", "v": "medio"}, {"p": "Coaching Integral Y Organizacional", "v": "medio"}, {"p": "Dirección De Proyectos De Innovación", "v": "medio"}, {"p": "Administración En Mercadotecnia Estratégica", "v": "medio"}, {"p": "Dirección De Negocios De Alimentos Y Bebidas", "v": "medio"}, {"p": "Psicología Transpersonal", "v": "medio"}, {"p": "Administración De Tecnologías De La Información", "v": "medio"}, {"p": "Finanzas", "v": "medio"}, {"p": "Derecho Procesal Constitucional", "v": "medio"}, {"p": "Ciberseguridad", "v": "medio"}, {"p": "Administración De Negocios Deportivos", "v": "medio"}, {"p": "Ciencias Computacionales Y Telecomunicaciones", "v": "medio"}, {"p": "Dirección E Ingeniería De Software", "v": "medio"}, {"p": "Gestión Estratégica Del Capital Humano", "v": "medio"}, {"p": "Logística Y Cadena De Suministro", "v": "medio"}, {"p": "Impuestos", "v": "medio"}, {"p": "Comercio Internacional", "v": "medio"}, {"p": "Logística Y Cadena De Suministros", "v": "medio"}, {"p": "Marketing Digital Y E-Commerce", "v": "medio"}, {"p": "Desarrollo Sustentable Y Gestión Ambiental", "v": "medio"}, {"p": "Dirección De Empresas Turísticas", "v": "medio"}, {"p": "Gestión Organizacional Positiva", "v": "medio"}, {"p": "Diseño Para Medios Digitales", "v": "medio"}, {"p": "Energías Renovables Y Eficiencia Energética", "v": "medio"}, {"p": "Energías Renovables Y Proyectos Energéticos", "v": "medio"}, {"p": "Responsabilidad Social", "v": "medio"}, {"p": "Educación", "v": "medio"}, {"p": "Mercadotecnia Política", "v": "medio"}, {"p": "Dirección De Empresa Turísticas", "v": "medio"}, {"p": "Intervención Psicológica Y Salud Mental", "v": "medio"}, {"p": "Educación Y Docencia-Unicef", "v": "medio"}, {"p": "Administración De Negocios - Mba", "v": "medio"}, {"p": "Turismo Y Revenue Management Hotelero", "v": "medio"}, {"p": "Maestría Especializado En Nutrición", "v": "medio"}, {"p": "Gestión Directiva De Salud", "v": "medio"}, {"p": "Logística Transporte Y Distribución Internacional", "v": "medio"}, {"p": "Maestría Especializado En Comercio Internacional", "v": "medio"}, {"p": "Administración Y Dirección Comercial De Empresas Turísticas", "v": "medio"}, {"p": "Gestión Directiva En Salud", "v": "medio"}, {"p": "Project Management", "v": "medio"}, {"p": "Administración De Negocios-Iebs", "v": "medio"}, {"p": "Derecho Procesal Constitucional (Modalidad Ejecutiva)", "v": "medio"}, {"p": "Soluciones De Inteligencia Artificial Para Negocios Y Servicios", "v": "medio"}, {"p": "Innovación Estratégica Con Inteligencia Artificial", "v": "medio"}, {"p": "Educación Inteligente Y Diseño Instruccional Con Inteligencia Artificial", "v": "medio"}, {"p": "Automatización Y Robótica Industrial", "v": "medio"}, {"p": "Automatización De Procesos Y Análisis Predictivo", "v": "medio"}, {"p": "Ingeniería De Datos E Infraestructura", "v": "medio"}, {"p": "Valuación Inmobiliaria", "v": "medio"}, {"p": "Desarrollo De Videojuegos Y Realidad Extendida", "v": "medio"}, {"p": "Arquitectura De Software", "v": "arq"}, {"p": "Maestrías En Soluciones De Inteligencia Artificial Para Negocios Y Servicios", "v": "medio"}, {"p": "Maestrías En Innovación Estratégica Con Inteligencia Artificial", "v": "medio"}, {"p": "Maestrías En Educación Inteligente Y Diseño Instruccional Con Inteligencia Artificial", "v": "medio"}, {"p": "Maestrías En Automatización Y Robótica Industrial", "v": "medio"}, {"p": "Maestrías En Automatización De Procesos Y Análisis Predictivo", "v": "medio"}, {"p": "Maestrías En Ingeniería De Datos E Infraestructura", "v": "medio"}, {"p": "Maestrías En Arquitectura De Software", "v": "medio"}, {"p": "Maestrías En Valuación Inmobiliaria", "v": "medio"}, {"p": "Maestrías En Alta Dirección Y Gobierno Corporativo", "v": "medio"}, {"p": "Maestrías En Desarrollo De Videojuegos Y Realidad Extendida", "v": "medio"}, {"p": "Maestrías En Innovación Educativa Y Diseño Instruccional", "v": "alto"}], "MASTER": [{"p": "Educación Y Docencia", "v": "medio"}, {"p": "Conciencia Plena Aplicada", "v": "medio"}, {"p": "Gestión Directiva De Instituciones En Salud", "v": "medio"}, {"p": "Derecho Procesal Y Juicios Orales", "v": "medio"}, {"p": "Tecnología Educativa", "v": "medio"}, {"p": "Ciencia De Datos Para Negocios", "v": "medio"}, {"p": "Administración De Negocios", "v": "medio"}, {"p": "Administración Pública", "v": "medio"}, {"p": "Ingeniería Y Tecnología Ambiental", "v": "medio"}, {"p": "Administración De Recursos Humanos", "v": "medio"}, {"p": "Dirección De Ventas", "v": "medio"}, {"p": "Mercadotecnia Digital Y Comercio Electrónico", "v": "medio"}, {"p": "Derecho Procesal Penal", "v": "medio"}, {"p": "Derechos Humanos", "v": "medio"}, {"p": "Administración De Instituciones Educativas", "v": "medio"}, {"p": "Coaching Integral Y Organizacional", "v": "medio"}, {"p": "Dirección De Proyectos De Innovación", "v": "medio"}, {"p": "Administración En Mercadotecnia Estratégica", "v": "medio"}, {"p": "Dirección De Negocios De Alimentos Y Bebidas", "v": "medio"}, {"p": "Psicología Transpersonal", "v": "medio"}, {"p": "Administración De Tecnologías De La Información", "v": "medio"}, {"p": "Finanzas", "v": "medio"}, {"p": "Derecho Procesal Constitucional", "v": "medio"}, {"p": "Ciberseguridad", "v": "medio"}, {"p": "Administración De Negocios Deportivos", "v": "medio"}, {"p": "Ciencias Computacionales Y Telecomunicaciones", "v": "medio"}, {"p": "Dirección E Ingeniería De Software", "v": "medio"}, {"p": "Gestión Estratégica Del Capital Humano", "v": "medio"}, {"p": "Logística Y Cadena De Suministro", "v": "medio"}, {"p": "Impuestos", "v": "medio"}, {"p": "Comercio Internacional", "v": "medio"}, {"p": "Logística Y Cadena De Suministros", "v": "medio"}, {"p": "Marketing Digital Y E-Commerce", "v": "medio"}, {"p": "Desarrollo Sustentable Y Gestión Ambiental", "v": "medio"}, {"p": "Dirección De Empresas Turísticas", "v": "medio"}, {"p": "Gestión Organizacional Positiva", "v": "medio"}, {"p": "Diseño Para Medios Digitales", "v": "medio"}, {"p": "Energías Renovables Y Eficiencia Energética", "v": "medio"}, {"p": "Energías Renovables Y Proyectos Energéticos", "v": "medio"}, {"p": "Responsabilidad Social", "v": "medio"}, {"p": "Educación", "v": "medio"}, {"p": "Mercadotecnia Política", "v": "medio"}, {"p": "Dirección De Empresa Turísticas", "v": "medio"}, {"p": "Intervención Psicológica Y Salud Mental", "v": "medio"}, {"p": "Educación Y Docencia-Unicef", "v": "medio"}, {"p": "Administración De Negocios - Mba", "v": "medio"}, {"p": "Turismo Y Revenue Management Hotelero", "v": "medio"}, {"p": "Maestría Especializado En Nutrición", "v": "medio"}, {"p": "Gestión Directiva De Salud", "v": "medio"}, {"p": "Logística Transporte Y Distribución Internacional", "v": "medio"}, {"p": "Maestría Especializado En Comercio Internacional", "v": "medio"}, {"p": "Administración Y Dirección Comercial De Empresas Turísticas", "v": "medio"}, {"p": "Gestión Directiva En Salud", "v": "medio"}, {"p": "Project Management", "v": "medio"}, {"p": "Administración De Negocios-Iebs", "v": "medio"}, {"p": "Derecho Procesal Constitucional (Modalidad Ejecutiva)", "v": "medio"}, {"p": "Soluciones De Inteligencia Artificial Para Negocios Y Servicios", "v": "medio"}, {"p": "Innovación Estratégica Con Inteligencia Artificial", "v": "medio"}, {"p": "Educación Inteligente Y Diseño Instruccional Con Inteligencia Artificial", "v": "medio"}, {"p": "Automatización Y Robótica Industrial", "v": "medio"}, {"p": "Automatización De Procesos Y Análisis Predictivo", "v": "medio"}, {"p": "Ingeniería De Datos E Infraestructura", "v": "medio"}, {"p": "Valuación Inmobiliaria", "v": "medio"}, {"p": "Desarrollo De Videojuegos Y Realidad Extendida", "v": "medio"}, {"p": "Arquitectura De Software", "v": "arq"}, {"p": "Maestrías En Soluciones De Inteligencia Artificial Para Negocios Y Servicios", "v": "medio"}, {"p": "Maestrías En Innovación Estratégica Con Inteligencia Artificial", "v": "medio"}, {"p": "Maestrías En Educación Inteligente Y Diseño Instruccional Con Inteligencia Artificial", "v": "medio"}, {"p": "Maestrías En Automatización Y Robótica Industrial", "v": "medio"}, {"p": "Maestrías En Automatización De Procesos Y Análisis Predictivo", "v": "medio"}, {"p": "Maestrías En Ingeniería De Datos E Infraestructura", "v": "medio"}, {"p": "Maestrías En Arquitectura De Software", "v": "medio"}, {"p": "Maestrías En Valuación Inmobiliaria", "v": "medio"}, {"p": "Maestrías En Alta Dirección Y Gobierno Corporativo", "v": "medio"}, {"p": "Maestrías En Desarrollo De Videojuegos Y Realidad Extendida", "v": "medio"}, {"p": "Maestrías En Innovación Educativa Y Diseño Instruccional", "v": "alto"}], "DOCTORADO": [{"p": "Educación", "v": "alto"}, {"p": "Desarrollo Humano", "v": "bajo"}, {"p": "Derecho", "v": "bajo"}, {"p": "Finanzas", "v": "medio"}, {"p": "Gestión E Innovación Tecnológica", "v": "medio"}, {"p": "Administración Estratégica Empresarial", "v": "medio"}, {"p": "Ciberseguridad De Sistemas Autónomos", "v": "medio"}, {"p": "Urbanismo", "v": "medio"}, {"p": "Alta Dirección Y Gobierno Corporativo", "v": "medio"}, {"p": "Ciencia De Datos E Inteligencia Artificial", "v": "doc_esp"}, {"p": "Doctoado En Ciberseguridad Y Gestión De Riesgos", "v": "doc_esp"}, {"p": "Doctorado En Ciberseguridad Y Gestión De Riesgos Digitales", "v": "medio"}, {"p": "Doctorado En Ciencia De Datos E Inteligencia Artificial", "v": "medio"}, {"p": "Doctorado En Ciberseguridad De Sistemas Autónomos", "v": "medio"}, {"p": "Doctorado En Urbanismo", "v": "medio"}, {"p": "Doctorado En Alta Dirección Y Gobierno Corporativo", "v": "medio"}]};
-var PROG_PRICE_LIC = {"PEDAGOGÍA": 1700, "INGENIERÍA INDUSTRIAL": 2210, "INGENIERÍA EN SISTEMAS COMPUTACIONALES": 2210, "CRIMINOLOGÍA Y CRIMINALÍSTICA": 1700, "PSICOLOGÍA": 1700, "DERECHO": 2100, "ADMINISTRACIÓN": 1890, "INGENIERÍA INDUSTRIAL Y ADMINISTRACIÓN": 2000, "ADMINISTRACIÓN DE RECURSOS HUMANOS": 1700, "CONTADURÍA Y FINANZAS": 1890, "NEGOCIOS INTERNACIONALES": 1890, "CONTADURÍA PÚBLICA": 1890, "PSICOLOGÍA ORGANIZACIONAL": 1890, "ADMINISTRACIÓN DE NEGOCIOS": 1890, "ARTE DIGITAL Y MULTIMEDIA": 1890, "ADMINISTRACIÓN Y FINANZAS": 1890, "ADMINISTRACIÓN DE EMPRESAS TURÍSTICAS": 1890, "CIENCIAS POLÍTICAS Y ADMINISTRACIÓN PÚBLICA": 1890, "MARKETING Y PUBLICIDAD": 1890, "ADMINISTRACIÓN DE VENTAS": 1890, "COMUNICACIÓN": 1890, "INGENIERÍA EN LOGÍSTICA Y TRANSPORTE": 2000, "DESARROLLO SUSTENTABLE Y ECOTURISMO": 1890, "MERCADOTECNIA": 1890, "ADMINISTRACIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN": 1890, "ECONOMÍA Y FINANZAS": 1890, "DERECHO INTERNACIONAL": 1890, "DERECHO EMPRESARIAL": 1890, "TECNOLOGÍA EDUCATIVA": 1890, "COMUNICACIÓN DIGITAL": 1890, "INTELIGENCIA ARTIFICIAL": 2000, "EMPRENDIMIENTO": 1890, "AGRONEGOCIOS": 1890, "INGENIERÍA EN ENERGÍAS RENOVABLES": 2000, "INGENIERÍA EN DESARROLLO DE SOFTWARE": 2000, "DISEÑO Y ANIMACIÓN DIGITAL": 1890, "DIRECCIÓN DE ARTE": 1890, "COMUNICACIÓN ORGANIZACIONAL": 1890, "SEGURIDAD INFORMÁTICA": 2000, "COMUNICACIÓN CORPORATIVA": 1890, "MEDIOS DIGITALES": 1890, "PEDAGOGÍA-UNICEF": 1890, "ADMINISTRACIÓN DE EMPRESAS": 1890, "INTELIGENCIA ARTIFICIAL APLICADA A NEGOCIOS, INDUSTRIA Y AUTOMATIZACIÓN": 2500, "ÉTICA Y GOBERNANZA DE LA INTELIGENCIA ARTIFICIAL": 2500, "INNOVACIÓN Y EMPRENDIMIENTO CON INTELIGENCIA ARTIFICIAL": 1890, "INTELIGENCIA ARTIFICIAL Y CIENCIA DE DATOS": 2000, "INTELIGENCIA ARTIFICIAL EN EDUCACIÓN": 2000, "INGENIERÍA EN CIENCIAS DE DATOS E INTELIGENCIA ANALÍTICA": 2000, "INGENIERÍA EN PROGRAMACIÓN EN LA NUBE": 2210, "SOFTWARE PARA ENTRETENIMIENTO DIGITAL": 1890, "INGENIERÍA EN SISTEMAS INTELIGENTES": 2210, "FINANZAS Y BANCA": 1890, "INNOVACIÓN Y TRANSFORMACIÓN DE NEGOCIOS": 1890, "ESTRATEGIA Y TRANSFORMACIÓN DE NEGOCIOS": 1890, "COMERCIO ELECTRÓNICO Y NEGOCIOS DIGITALES": 1890, "TECNOLOGÍAS INTERACTIVAS Y VIRTUALES": 2100, "EDUCACIÓN PARA LA SUSTENTABILIDAD": 2500, "INGENIERÍA EN ROBÓTICA": 2500, "ARQUITECTURA": 2500};
-var PROG_PRICE_MAE = {"EDUCACIÓN Y DOCENCIA": 2300, "CONCIENCIA PLENA APLICADA": 2650, "GESTIÓN DIRECTIVA DE INSTITUCIONES EN SALUD": 2650, "DERECHO PROCESAL Y JUICIOS ORALES": 2650, "TECNOLOGÍA EDUCATIVA": 2300, "CIENCIA DE DATOS PARA NEGOCIOS": 2500, "ADMINISTRACIÓN DE NEGOCIOS": 2500, "ADMINISTRACIÓN PÚBLICA": 2500, "INGENIERÍA Y TECNOLOGÍA AMBIENTAL": 2300, "ADMINISTRACIÓN DE RECURSOS HUMANOS": 2500, "DIRECCIÓN DE VENTAS": 2500, "MERCADOTECNIA DIGITAL Y COMERCIO ELECTRÓNICO": 2500, "DERECHO PROCESAL PENAL": 2500, "DERECHOS HUMANOS": 2500, "ADMINISTRACIÓN DE INSTITUCIONES EDUCATIVAS": 2500, "COACHING INTEGRAL Y ORGANIZACIONAL": 2500, "DIRECCIÓN DE PROYECTOS DE INNOVACIÓN": 2500, "ADMINISTRACIÓN EN MERCADOTECNIA ESTRATÉGICA": 2500, "DIRECCIÓN DE NEGOCIOS DE ALIMENTOS Y BEBIDAS": 2500, "PSICOLOGÍA TRANSPERSONAL": 2500, "ADMINISTRACIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN": 2500, "FINANZAS": 2500, "DERECHO PROCESAL CONSTITUCIONAL": 2500, "CIBERSEGURIDAD": 2500, "ADMINISTRACIÓN DE NEGOCIOS DEPORTIVOS": 2500, "CIENCIAS COMPUTACIONALES Y TELECOMUNICACIONES": 2500, "DIRECCIÓN E INGENIERÍA DE SOFTWARE": 2500, "GESTIÓN ESTRATÉGICA DEL CAPITAL HUMANO": 2500, "LOGÍSTICA Y CADENA DE SUMINISTRO": 2500, "IMPUESTOS": 2500, "COMERCIO INTERNACIONAL": 2500, "LOGÍSTICA Y CADENA DE SUMINISTROS": 2500, "MARKETING DIGITAL Y E-COMMERCE": 2500, "DESARROLLO SUSTENTABLE Y GESTIÓN AMBIENTAL": 2500, "DIRECCIÓN DE EMPRESAS TURÍSTICAS": 2500, "GESTIÓN ORGANIZACIONAL POSITIVA": 2500, "DISEÑO PARA MEDIOS DIGITALES": 2500, "ENERGÍAS RENOVABLES Y EFICIENCIA ENERGÉTICA": 2500, "ENERGÍAS RENOVABLES Y PROYECTOS ENERGÉTICOS": 2500, "RESPONSABILIDAD SOCIAL": 2500, "EDUCACIÓN": 2500, "MERCADOTECNIA POLÍTICA": 2500, "DIRECCIÓN DE EMPRESA TURÍSTICAS": 2500, "INTERVENCIÓN PSICOLÓGICA Y SALUD MENTAL": 2500, "EDUCACIÓN Y DOCENCIA-UNICEF": 2500, "ADMINISTRACIÓN DE NEGOCIOS - MBA": 2500, "TURISMO Y REVENUE MANAGEMENT HOTELERO": 2500, "MAESTRÍA ESPECIALIZADO EN NUTRICIÓN": 2500, "GESTIÓN DIRECTIVA DE SALUD": 2500, "LOGÍSTICA TRANSPORTE Y DISTRIBUCIÓN INTERNACIONAL": 2500, "MAESTRÍA ESPECIALIZADO EN COMERCIO INTERNACIONAL": 2500, "ADMINISTRACIÓN Y DIRECCIÓN COMERCIAL DE EMPRESAS TURÍSTICAS": 2500, "GESTIÓN DIRECTIVA EN SALUD": 2500, "PROJECT MANAGEMENT": 2500, "ADMINISTRACIÓN DE NEGOCIOS-IEBS": 2500, "DERECHO PROCESAL CONSTITUCIONAL (MODALIDAD EJECUTIVA)": 2500, "SOLUCIONES DE INTELIGENCIA ARTIFICIAL PARA NEGOCIOS Y SERVICIOS": 2500, "INNOVACIÓN ESTRATÉGICA CON INTELIGENCIA ARTIFICIAL": 2500, "EDUCACIÓN INTELIGENTE Y DISEÑO INSTRUCCIONAL CON INTELIGENCIA ARTIFICIAL": 2500, "AUTOMATIZACIÓN Y ROBÓTICA INDUSTRIAL": 2800, "AUTOMATIZACIÓN DE PROCESOS Y ANÁLISIS PREDICTIVO": 2500, "INGENIERÍA DE DATOS E INFRAESTRUCTURA": 2800, "VALUACIÓN INMOBILIARIA": 2500, "DESARROLLO DE VIDEOJUEGOS Y REALIDAD EXTENDIDA": 2800, "ARQUITECTURA DE SOFTWARE": 2800};
-var PROG_PRICE_DOC = {"EDUCACIÓN": 6083, "DESARROLLO HUMANO": 4953, "DERECHO": 4953, "FINANZAS": 5488, "GESTIÓN E INNOVACIÓN TECNOLÓGICA": 5488, "ADMINISTRACIÓN ESTRATÉGICA EMPRESARIAL": 5488, "CIBERSEGURIDAD DE SISTEMAS AUTÓNOMOS": 5600, "URBANISMO": 5488, "ALTA DIRECCIÓN Y GOBIERNO CORPORATIVO": 5600, "CIENCIA DE DATOS E INTELIGENCIA ARTIFICIAL": 5600, "CIBERSEGURIDAD Y GESTIÓN DE RIESGOS": 5600};
+var CATALOG = {"LICENCIATURA": [{"p": "Pedagogía", "v": "bajo", "a": "Ciencias Sociales y Humanoides", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Ingeniería Industrial", "v": "alto", "a": "Ingeniería y Soluciones", "eje": 1, "hib": 1, "jov": 1, "ucamp": 1}, {"p": "Ingeniería En Sistemas Computacionales", "v": "alto", "a": "Ingeniería y Soluciones", "eje": 1, "hib": 1, "jov": 1, "ucamp": 1}, {"p": "Criminología Y Criminalística", "v": "bajo", "a": "Derecho y Justicia Digital", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Derecho", "v": "alto", "a": "Derecho y Justicia Digital", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Administración", "v": "medio", "a": "Negocios, Innovación y Liderazgo", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Ingeniería Industrial Y Administración", "v": "medio", "a": "Ingeniería y Soluciones", "eje": 1, "hib": 1, "jov": 1, "ucamp": 1}, {"p": "Administración De Recursos Humanos", "v": "bajo", "a": "Capital Humano y Transformación Organizacional", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Contaduría Y Finanzas", "v": "medio", "a": "Finanzas y Economía", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Negocios Internacionales", "v": "medio", "a": "Negocios, Innovación y Liderazgo", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Contaduría Pública", "v": "medio", "a": "Finanzas y Economía", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Psicología Organizacional", "v": "medio", "a": "Ciencias de la Salud", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Administración De Negocios", "v": "medio", "a": "Negocios, Innovación y Liderazgo", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Administración Y Finanzas", "v": "medio", "a": "Finanzas y Economía", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Administración De Empresas Turísticas", "v": "medio", "a": "Negocios, Innovación y Liderazgo", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Ciencias Políticas Y Administración Pública", "v": "medio", "a": "Ciencias Sociales y Humanidades", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Administración De Ventas", "v": "medio", "a": "Económico-Administrativas", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Comunicación", "v": "medio", "a": "Diseño y Comunicación", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Desarrollo Sustentable Y Ecoturismo", "v": "medio", "a": "Hospitalidad y Turismo", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Mercadotecnia", "v": "medio", "a": "Económico-Administrativas", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Administración De Tecnologías De La Información", "v": "medio", "a": "Negocios, Innovación y Liderazgo", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Economía Y Finanzas", "v": "medio", "a": "Finanzas y Economía", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Derecho Internacional", "v": "medio", "a": "Derecho y Justicia Digital", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Derecho Empresarial", "v": "medio", "a": "Derecho y Justicia Digital", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Tecnología Educativa", "v": "medio", "a": "Ciencias Sociales y Humanidades", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Comunicación Digital", "v": "medio", "a": "Diseño y Comunicación", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Comunicación Organizacional", "v": "medio", "a": "Diseño y Comunicación", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Inteligencia Artificial Aplicada A Negocios, Industria Y Automatización", "v": "rob", "a": "Ingeniería y Tecnología", "eje": 1, "hib": 1, "jov": 1, "ucamp": 1}, {"p": "Ética Y Gobernanza De La Inteligencia Artificial", "v": "rob", "a": "Ingeniería y Tecnología", "eje": 1, "hib": 1, "jov": 1, "ucamp": 1}, {"p": "Ciberseguridad Y Riesgos En Inteligencia Artificial", "v": "alto", "a": "Ingeniería y Tecnología", "eje": 1, "hib": 1, "jov": 1, "ucamp": 1}, {"p": "Innovación Y Emprendimiento Con Inteligencia Artificial", "v": "medio", "a": "Ingeniería y Tecnología", "eje": 1, "hib": 1, "jov": 1, "ucamp": 1}, {"p": "Inteligencia Artificial Y Ciencia De Datos", "v": "medio", "a": "Ciencias Sociales y Humanidades", "eje": 1, "hib": 0, "jov": 1, "ucamp": 0}, {"p": "Inteligencia Artificial En Educación", "v": "medio", "a": "Ingeniería y Tecnología", "eje": 1, "hib": 1, "jov": 1, "ucamp": 1}, {"p": "Ingeniería En Ciencias De Datos E Inteligencia Analítica", "v": "medio", "a": "Ingeniería y Soluciones", "eje": 1, "hib": 1, "jov": 1, "ucamp": 1}, {"p": "Ingeniería En Programación En La Nube", "v": "alto", "a": "Ingeniería y Soluciones", "eje": 1, "hib": 1, "jov": 1, "ucamp": 1}, {"p": "Software Para Entretenimiento Digital", "v": "medio", "a": "Ingeniería y Soluciones", "eje": 1, "hib": 1, "jov": 1, "ucamp": 1}, {"p": "Finanzas Y Banca", "v": "medio", "a": "Finanzas y Economía", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Innovación Y Transformación De Negocios", "v": "medio", "a": "Negocios, Innovación y Liderazgo", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Finanzas Y Estrategia Fiscal", "v": "medio", "a": "Finanzas y Economía", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Estrategia Y Transformación De Negocios", "v": "medio", "a": "Negocios, Innovación y Liderazgo", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Ingeniería En Tecnología De Videojuegos Y Realidad Virtual", "v": "medio", "a": "Ingeniería y Soluciones", "eje": 1, "hib": 1, "jov": 1, "ucamp": 1}, {"p": "Comercio Electrónico Y Negocios Digitales", "v": "medio", "a": "Ingeniería y Tecnología", "eje": 1, "hib": 1, "jov": 1, "ucamp": 1}, {"p": "Tecnologías Interactivas Y Virtuales", "v": "alto", "a": "Ingeniería y Tecnología", "eje": 1, "hib": 1, "jov": 1, "ucamp": 1}, {"p": "Ingeniería Ambiental", "v": "alto", "a": "Ingeniería y Soluciones", "eje": 1, "hib": 1, "jov": 1, "ucamp": 1}, {"p": "Educación Para La Sustentabilidad", "v": "rob", "a": "Ciencias Sociales y Humanidades", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Ingeniería Robótica", "v": "rob", "a": "Ingeniería y Soluciones", "eje": 1, "hib": 1, "jov": 1, "ucamp": 1}, {"p": "Arquitectura", "v": "arq", "a": "Arquitectura y Urbanismo", "eje": 1, "hib": 1, "jov": 1, "ucamp": 0}, {"p": "Psicología", "v": "uve", "a": "Ciencias de la Salud", "eje": 0, "hib": 0, "jov": 0, "ucamp": 0}, {"p": "Arte Digital Y Multimedia", "v": "unica", "a": "Diseño y Comunicación", "eje": 0, "hib": 0, "jov": 0, "ucamp": 0}, {"p": "Marketing Y Publicidad", "v": "unica", "a": "Ciencias Sociales y Humanidades", "eje": 0, "hib": 0, "jov": 0, "ucamp": 0}, {"p": "Ingeniería En Logística Y Transporte", "v": "medio", "a": "Ingeniería y Soluciones", "eje": 0, "hib": 0, "jov": 0, "ucamp": 1}, {"p": "Inteligencia Artificial", "v": "medio", "a": "Ingeniería y Tecnología", "eje": 0, "hib": 0, "jov": 0, "ucamp": 1}, {"p": "Emprendimiento", "v": "medio", "a": "Negocios, Innovación y Liderazgo", "eje": 0, "hib": 0, "jov": 0, "ucamp": 0}, {"p": "Agronegocios", "v": "medio", "a": "Negocios, Innovación y Liderazgo", "eje": 0, "hib": 0, "jov": 0, "ucamp": 0}, {"p": "Ingeniería En Energías Renovables", "v": "medio", "a": "Ingeniería y Soluciones", "eje": 0, "hib": 0, "jov": 0, "ucamp": 1}, {"p": "Ingeniería En Desarrollo De Software", "v": "medio", "a": "Ingeniería y Soluciones", "eje": 0, "hib": 0, "jov": 0, "ucamp": 1}, {"p": "Diseño Y Animación Digital", "v": "medio", "a": "Diseño y Comunicación", "eje": 0, "hib": 0, "jov": 0, "ucamp": 0}, {"p": "Dirección De Arte", "v": "medio", "a": "Diseño y Comunicación", "eje": 0, "hib": 0, "jov": 0, "ucamp": 0}, {"p": "Seguridad Informática", "v": "medio", "a": "Ingeniería y Tecnología", "eje": 0, "hib": 0, "jov": 0, "ucamp": 1}, {"p": "Comunicación Corporativa", "v": "unica", "a": "Diseño y Comunicación", "eje": 0, "hib": 0, "jov": 0, "ucamp": 0}, {"p": "Medios Digitales", "v": "unica", "a": "Ciencias Sociales y Humanidades", "eje": 0, "hib": 0, "jov": 0, "ucamp": 0}, {"p": "Administración De Empresas", "v": "medio", "a": "", "eje": 0, "hib": 0, "jov": 0, "ucamp": 0}, {"p": "Ingeniería En Sistemas Inteligentes", "v": "alto", "a": "Ingeniería y Soluciones", "eje": 0, "hib": 0, "jov": 0, "ucamp": 1}], "MAESTRÍA": [{"p": "Educación Y Docencia", "v": "bajo", "a": "Finanzas y Economía"}, {"p": "Conciencia Plena Aplicada", "v": "alto", "a": "Ciencias Sociales y Humanoides"}, {"p": "Gestión Directiva De Instituciones En Salud", "v": "alto", "a": "Salud y Psicología"}, {"p": "Derecho Procesal Y Juicios Orales", "v": "alto", "a": "Derecho y Justicia Digital"}, {"p": "Tecnología Educativa", "v": "bajo", "a": "Ciencias Sociales y Humanoides"}, {"p": "Ciencia De Datos Para Negocios", "v": "medio", "a": "Ingeniería y Tecnología"}, {"p": "Administración Pública", "v": "medio", "a": "Negocios, Innovación y Liderazgo"}, {"p": "Ingeniería Y Tecnología Ambiental", "v": "bajo", "a": "Ingeniería y Soluciones"}, {"p": "Administración De Recursos Humanos", "v": "medio", "a": "Capital Humano y Transformación Organizacional"}, {"p": "Dirección De Ventas", "v": "medio", "a": "Económico-Administrativa"}, {"p": "Mercadotecnia Digital Y Comercio Electrónico", "v": "medio", "a": "Económico-Administrativa"}, {"p": "Derecho Procesal Penal", "v": "medio", "a": "Derecho y Justicia Digital"}, {"p": "Derechos Humanos", "v": "medio", "a": "Derecho y Justicia Digital"}, {"p": "Administración De Instituciones Educativas", "v": "medio", "a": "Económico-Administrativa"}, {"p": "Coaching Integral Y Organizacional", "v": "medio", "a": "Capital Humano y Transformación Organizacional"}, {"p": "Dirección De Proyectos De Innovación", "v": "medio", "a": "Negocios, Innovación y Liderazgo"}, {"p": "Administración En Mercadotecnia Estratégica", "v": "medio", "a": "Económico-Administrativa"}, {"p": "Dirección De Negocios De Alimentos Y Bebidas", "v": "medio", "a": "Hospitalidad y Turismo"}, {"p": "Psicología Transpersonal", "v": "unag", "a": "Salud y Psicología"}, {"p": "Administración De Tecnologías De La Información", "v": "medio", "a": "Negocios, Innovación y Liderazgo"}, {"p": "Finanzas", "v": "medio", "a": "Económico-Administrativa"}, {"p": "Derecho Procesal Constitucional", "v": "medio", "a": "Derecho y Justicia Digital"}, {"p": "Ciberseguridad", "v": "medio", "a": "Ingeniería y Tecnología"}, {"p": "Administración De Negocios Deportivos", "v": "medio", "a": "Negocios, Innovación y Liderazgo"}, {"p": "Ciencias Computacionales Y Telecomunicaciones", "v": "medio", "a": "Ingeniería y Tecnología"}, {"p": "Dirección E Ingeniería De Software", "v": "medio", "a": "Ingeniería y Soluciones"}, {"p": "Gestión Estratégica Del Capital Humano", "v": "medio", "a": "Capital Humano y Transformación Organizacional"}, {"p": "Logística Y Cadena De Suministro", "v": "medio", "a": "Hospitalidad y Turismo"}, {"p": "Impuestos", "v": "medio", "a": "Finanzas y Economía"}, {"p": "Comercio Internacional", "v": "medio", "a": "Negocios, Innovación y Liderazgo"}, {"p": "Desarrollo Sustentable Y Gestión Ambiental", "v": "medio", "a": "Ciencias Sociales y Humanoides"}, {"p": "Dirección De Empresas Turísticas", "v": "medio", "a": "Hospitalidad y Turismo"}, {"p": "Gestión Organizacional Positiva", "v": "medio", "a": "Capital Humano y Transformación Organizacional"}, {"p": "Diseño Para Medios Digitales", "v": "medio", "a": "Diseño y Comunicación"}, {"p": "Energías Renovables Y Eficiencia Energética", "v": "medio", "a": "Ingeniería y Tecnología"}, {"p": "Energías Renovables Y Proyectos Energéticos", "v": "medio", "a": ""}, {"p": "Responsabilidad Social", "v": "medio", "a": "Ciencias Sociales y Humanoides"}, {"p": "Educación", "v": "medio", "a": ""}, {"p": "Mercadotecnia Política", "v": "medio", "a": "Gobierno y Política Pública"}, {"p": "Intervención Psicológica Y Salud Mental", "v": "medio", "a": ""}, {"p": "Administración De Negocios - Mba Internacional", "v": "medio", "a": "Negocios, Innovación y Liderazgo"}, {"p": "Turismo Y Revenue Management Hotelero", "v": "medio", "a": ""}, {"p": "Nutrición", "v": "medio", "a": ""}, {"p": "Gestión Directiva De Salud", "v": "medio", "a": ""}, {"p": "Logística Transporte Y Distribución Internacional", "v": "medio", "a": ""}, {"p": "Administración Y Dirección Comercial De Empresas Turísticas", "v": "medio", "a": ""}, {"p": "Project Management", "v": "medio", "a": ""}, {"p": "Administración De Negocios-Iebs", "v": "medio", "a": ""}, {"p": "Derecho Procesal Constitucional (Modalidad Ejecutiva)", "v": "medio", "a": "Ciencias Sociales y Humanidades"}, {"p": "Soluciones De Inteligencia Artificial Para Negocios Y Servicios", "v": "medio", "a": "Ingeniería y Tecnología"}, {"p": "Innovación Estratégica Con Inteligencia Artificial", "v": "medio", "a": "Ingeniería y Tecnología"}, {"p": "Educación Inteligente Y Diseño Instruccional Con Inteligencia Artificial", "v": "medio", "a": "Finanzas y Economía"}, {"p": "Automatización Y Robótica Industrial", "v": "arqsw", "a": "Ingeniería y Tecnología"}, {"p": "Automatización De Procesos Y Análisis Predictivo", "v": "medio", "a": "Ingeniería y Tecnología"}, {"p": "Ingeniería De Datos E Infraestructura", "v": "arqsw", "a": "Ingeniería y Soluciones"}, {"p": "Arquitectura De Software", "v": "arqsw", "a": "Ingeniería y Soluciones"}, {"p": "Valuación Inmobiliaria", "v": "medio", "a": "Arquitectura y Urbanismo"}, {"p": "Alta Dirección Y Gobierno Corporativo", "v": "medio", "a": "Negocios, Innovación y Liderazgo"}, {"p": "Desarrollo De Videojuegos Y Realidad Extendida", "v": "arqsw", "a": "Ingeniería y Tecnología"}, {"p": "Innovación Educativa Y Diseño Instruccional", "v": "alto", "a": "Ciencias Sociales y Humanidades"}], "MASTER": [{"p": "Educación Y Docencia", "v": "bajo", "a": "Finanzas y Economía"}, {"p": "Conciencia Plena Aplicada", "v": "alto", "a": "Ciencias Sociales y Humanoides"}, {"p": "Gestión Directiva De Instituciones En Salud", "v": "alto", "a": "Salud y Psicología"}, {"p": "Derecho Procesal Y Juicios Orales", "v": "alto", "a": "Derecho y Justicia Digital"}, {"p": "Tecnología Educativa", "v": "bajo", "a": "Ciencias Sociales y Humanoides"}, {"p": "Ciencia De Datos Para Negocios", "v": "medio", "a": "Ingeniería y Tecnología"}, {"p": "Administración Pública", "v": "medio", "a": "Negocios, Innovación y Liderazgo"}, {"p": "Ingeniería Y Tecnología Ambiental", "v": "bajo", "a": "Ingeniería y Soluciones"}, {"p": "Administración De Recursos Humanos", "v": "medio", "a": "Capital Humano y Transformación Organizacional"}, {"p": "Dirección De Ventas", "v": "medio", "a": "Económico-Administrativa"}, {"p": "Mercadotecnia Digital Y Comercio Electrónico", "v": "medio", "a": "Económico-Administrativa"}, {"p": "Derecho Procesal Penal", "v": "medio", "a": "Derecho y Justicia Digital"}, {"p": "Derechos Humanos", "v": "medio", "a": "Derecho y Justicia Digital"}, {"p": "Administración De Instituciones Educativas", "v": "medio", "a": "Económico-Administrativa"}, {"p": "Coaching Integral Y Organizacional", "v": "medio", "a": "Capital Humano y Transformación Organizacional"}, {"p": "Dirección De Proyectos De Innovación", "v": "medio", "a": "Negocios, Innovación y Liderazgo"}, {"p": "Administración En Mercadotecnia Estratégica", "v": "medio", "a": "Económico-Administrativa"}, {"p": "Dirección De Negocios De Alimentos Y Bebidas", "v": "medio", "a": "Hospitalidad y Turismo"}, {"p": "Psicología Transpersonal", "v": "unag", "a": "Salud y Psicología"}, {"p": "Administración De Tecnologías De La Información", "v": "medio", "a": "Negocios, Innovación y Liderazgo"}, {"p": "Finanzas", "v": "medio", "a": "Económico-Administrativa"}, {"p": "Derecho Procesal Constitucional", "v": "medio", "a": "Derecho y Justicia Digital"}, {"p": "Ciberseguridad", "v": "medio", "a": "Ingeniería y Tecnología"}, {"p": "Administración De Negocios Deportivos", "v": "medio", "a": "Negocios, Innovación y Liderazgo"}, {"p": "Ciencias Computacionales Y Telecomunicaciones", "v": "medio", "a": "Ingeniería y Tecnología"}, {"p": "Dirección E Ingeniería De Software", "v": "medio", "a": "Ingeniería y Soluciones"}, {"p": "Gestión Estratégica Del Capital Humano", "v": "medio", "a": "Capital Humano y Transformación Organizacional"}, {"p": "Logística Y Cadena De Suministro", "v": "medio", "a": "Hospitalidad y Turismo"}, {"p": "Impuestos", "v": "medio", "a": "Finanzas y Economía"}, {"p": "Comercio Internacional", "v": "medio", "a": "Negocios, Innovación y Liderazgo"}, {"p": "Desarrollo Sustentable Y Gestión Ambiental", "v": "medio", "a": "Ciencias Sociales y Humanoides"}, {"p": "Dirección De Empresas Turísticas", "v": "medio", "a": "Hospitalidad y Turismo"}, {"p": "Gestión Organizacional Positiva", "v": "medio", "a": "Capital Humano y Transformación Organizacional"}, {"p": "Diseño Para Medios Digitales", "v": "medio", "a": "Diseño y Comunicación"}, {"p": "Energías Renovables Y Eficiencia Energética", "v": "medio", "a": "Ingeniería y Tecnología"}, {"p": "Energías Renovables Y Proyectos Energéticos", "v": "medio", "a": ""}, {"p": "Responsabilidad Social", "v": "medio", "a": "Ciencias Sociales y Humanoides"}, {"p": "Educación", "v": "medio", "a": ""}, {"p": "Mercadotecnia Política", "v": "medio", "a": "Gobierno y Política Pública"}, {"p": "Intervención Psicológica Y Salud Mental", "v": "medio", "a": ""}, {"p": "Administración De Negocios - Mba Internacional", "v": "medio", "a": "Negocios, Innovación y Liderazgo"}, {"p": "Turismo Y Revenue Management Hotelero", "v": "medio", "a": ""}, {"p": "Nutrición", "v": "medio", "a": ""}, {"p": "Gestión Directiva De Salud", "v": "medio", "a": ""}, {"p": "Logística Transporte Y Distribución Internacional", "v": "medio", "a": ""}, {"p": "Administración Y Dirección Comercial De Empresas Turísticas", "v": "medio", "a": ""}, {"p": "Project Management", "v": "medio", "a": ""}, {"p": "Administración De Negocios-Iebs", "v": "medio", "a": ""}, {"p": "Derecho Procesal Constitucional (Modalidad Ejecutiva)", "v": "medio", "a": "Ciencias Sociales y Humanidades"}, {"p": "Soluciones De Inteligencia Artificial Para Negocios Y Servicios", "v": "medio", "a": "Ingeniería y Tecnología"}, {"p": "Innovación Estratégica Con Inteligencia Artificial", "v": "medio", "a": "Ingeniería y Tecnología"}, {"p": "Educación Inteligente Y Diseño Instruccional Con Inteligencia Artificial", "v": "medio", "a": "Finanzas y Economía"}, {"p": "Automatización Y Robótica Industrial", "v": "arqsw", "a": "Ingeniería y Tecnología"}, {"p": "Automatización De Procesos Y Análisis Predictivo", "v": "medio", "a": "Ingeniería y Tecnología"}, {"p": "Ingeniería De Datos E Infraestructura", "v": "arqsw", "a": "Ingeniería y Soluciones"}, {"p": "Arquitectura De Software", "v": "arqsw", "a": "Ingeniería y Soluciones"}, {"p": "Valuación Inmobiliaria", "v": "medio", "a": "Arquitectura y Urbanismo"}, {"p": "Alta Dirección Y Gobierno Corporativo", "v": "medio", "a": "Negocios, Innovación y Liderazgo"}, {"p": "Desarrollo De Videojuegos Y Realidad Extendida", "v": "arqsw", "a": "Ingeniería y Tecnología"}, {"p": "Innovación Educativa Y Diseño Instruccional", "v": "alto", "a": "Ciencias Sociales y Humanidades"}], "DOCTORADO": [{"p": "Desarrollo Humano", "v": "unag", "a": "Ciencias Sociales y Humanidades"}, {"p": "Derecho", "v": "bajo", "a": "Ciencias Sociales y Humanidades"}, {"p": "Finanzas", "v": "medio", "a": ""}, {"p": "Gestión E Innovación Tecnológica", "v": "medio", "a": "Ingeniería y Tecnología"}, {"p": "Administración Estratégica Empresarial", "v": "medio", "a": "Económico-Administrativas"}, {"p": "Ciberseguridad Y Gestión De Riesgos Digitales", "v": "doc_esp", "a": "Ingeniería y Tecnología"}, {"p": "Educación", "v": "alto", "a": "Económico-Administrativas"}, {"p": "Ciencia De Datos E Inteligencia Artificial", "v": "doc_esp", "a": "Ingeniería y Tecnología"}, {"p": "Ciberseguridad De Sistemas Autónomos", "v": "doc_esp", "a": "Ingeniería y Tecnología"}, {"p": "Urbanismo", "v": "medio", "a": "Ingeniería y Tecnología"}, {"p": "Alta Dirección Y Gobierno Corporativo", "v": "doc_esp", "a": "Económico-Administrativas"}]};
 
 
 function fillSelect(selId, nivelKey, badgeId){
@@ -727,6 +736,11 @@ function fillSelect(selId, nivelKey, badgeId){
     opt.textContent=(isNew?'⭐ ':'')+item.p.charAt(0)+item.p.slice(1).toLowerCase();
     sel.appendChild(opt);
   });
+  // Select first option by default - explicitly set value
+  if(sel.options && sel.options.length > 0){
+    sel.selectedIndex=0;
+    sel.value=sel.options[0].value;
+  }
   updateBadge(selId,badgeId);
 }
 function updateBadge(selId,badgeId){
@@ -748,44 +762,50 @@ var PROG = {
   online_general:{
     intensiva:{niveles:{
       alto:{
-        hot: {pkg:'—',esc:'—',p:[699, 799, 2210, 2210, 2210, 2210, 2210, 2210, 2210, 2210, 2210, 2210],b:.000},
+        hot:    {pkg:'—',esc:'—',p:[699, 799, 2100, 2100, 2100, 2100, 2100, 2100, 2100, 2100, 2100, 2100],b:.000},
         rmkt30: {pkg:'—',esc:'—',p:[699, 799, 1974, 1974, 1974, 1974, 1974, 1974, 1974, 1974, 1974, 1974],b:.000},
         rmkt60: {pkg:'—',esc:'—',p:[699, 799, 1932, 1932, 1932, 1932, 1932, 1932, 1932, 1932, 1932, 1932],b:.000},
-          norte: {pkg:'—',esc:'—',p:[769, 879, 2431, 2431, 2431, 2431, 2431, 2431, 2431, 2431, 2431, 2431],b:.000},
+        norte:  {pkg:'—',esc:'—',p:[769, 879, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321],b:.000},
+        sur:    {pkg:'—',esc:'—',p:[629, 719, 1879, 1879, 1879, 1879, 1879, 1879, 1879, 1879, 1879, 1879],b:.000}
       },
       medio:{
-        hot: {pkg:'—',esc:'—',p:[699, 799, 1890, 1890, 1890, 1890, 1890, 1890, 1890, 1890, 1890, 1890],b:.000},
+        hot:    {pkg:'—',esc:'—',p:[699, 799, 1890, 1890, 1890, 1890, 1890, 1890, 1890, 1890, 1890, 1890],b:.000},
         rmkt30: {pkg:'—',esc:'—',p:[699, 799, 1777, 1777, 1777, 1777, 1777, 1777, 1777, 1777, 1777, 1777],b:.000},
         rmkt60: {pkg:'—',esc:'—',p:[699, 799, 1739, 1739, 1739, 1739, 1739, 1739, 1739, 1739, 1739, 1739],b:.000},
-          norte: {pkg:'—',esc:'—',p:[769, 879, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200],b:.000},
+        norte:  {pkg:'—',esc:'—',p:[769, 879, 2090, 2090, 2090, 2090, 2090, 2090, 2090, 2090, 2090, 2090],b:.000},
+        sur:    {pkg:'—',esc:'—',p:[629, 719, 1690, 1690, 1690, 1690, 1690, 1690, 1690, 1690, 1690, 1690],b:.000}
       },
       bajo:{
-        hot: {pkg:'—',esc:'—',p:[699, 799, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700],b:.000},
+        hot:    {pkg:'—',esc:'—',p:[699, 799, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700],b:.000},
         rmkt30: {pkg:'—',esc:'—',p:[699, 799, 1598, 1598, 1598, 1598, 1598, 1598, 1598, 1598, 1598, 1598],b:.000},
         rmkt60: {pkg:'—',esc:'—',p:[699, 799, 1564, 1564, 1564, 1564, 1564, 1564, 1564, 1564, 1564, 1564],b:.000},
-          norte: {pkg:'—',esc:'—',p:[769, 879, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991],b:.000},
+        norte:  {pkg:'—',esc:'—',p:[769, 879, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991],b:.000},
+        sur:    {pkg:'—',esc:'—',p:[629, 719, 1629, 1629, 1629, 1629, 1629, 1629, 1629, 1629, 1629, 1629],b:.000}
       },
     }}
   },
   ingenieria:{
     intensiva:{niveles:{
       alto:{
-        hot: {pkg:'—',esc:'—',p:[699, 799, 2210, 2210, 2210, 2210, 2210, 2210, 2210, 2210, 2210, 2210],b:.000},
+        hot:    {pkg:'—',esc:'—',p:[699, 799, 2100, 2100, 2100, 2100, 2100, 2100, 2100, 2100, 2100, 2100],b:.000},
         rmkt30: {pkg:'—',esc:'—',p:[699, 799, 1974, 1974, 1974, 1974, 1974, 1974, 1974, 1974, 1974, 1974],b:.000},
         rmkt60: {pkg:'—',esc:'—',p:[699, 799, 1932, 1932, 1932, 1932, 1932, 1932, 1932, 1932, 1932, 1932],b:.000},
-          norte: {pkg:'—',esc:'—',p:[769, 879, 2431, 2431, 2431, 2431, 2431, 2431, 2431, 2431, 2431, 2431],b:.000},
+        norte:  {pkg:'—',esc:'—',p:[769, 879, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321, 2321],b:.000},
+        sur:    {pkg:'—',esc:'—',p:[629, 719, 1879, 1879, 1879, 1879, 1879, 1879, 1879, 1879, 1879, 1879],b:.000}
       },
       medio:{
-        hot: {pkg:'—',esc:'—',p:[699, 799, 1890, 1890, 1890, 1890, 1890, 1890, 1890, 1890, 1890, 1890],b:.000},
+        hot:    {pkg:'—',esc:'—',p:[699, 799, 1890, 1890, 1890, 1890, 1890, 1890, 1890, 1890, 1890, 1890],b:.000},
         rmkt30: {pkg:'—',esc:'—',p:[699, 799, 1777, 1777, 1777, 1777, 1777, 1777, 1777, 1777, 1777, 1777],b:.000},
         rmkt60: {pkg:'—',esc:'—',p:[699, 799, 1739, 1739, 1739, 1739, 1739, 1739, 1739, 1739, 1739, 1739],b:.000},
-          norte: {pkg:'—',esc:'—',p:[769, 879, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200],b:.000},
+        norte:  {pkg:'—',esc:'—',p:[769, 879, 2090, 2090, 2090, 2090, 2090, 2090, 2090, 2090, 2090, 2090],b:.000},
+        sur:    {pkg:'—',esc:'—',p:[629, 719, 1690, 1690, 1690, 1690, 1690, 1690, 1690, 1690, 1690, 1690],b:.000}
       },
       bajo:{
-        hot: {pkg:'—',esc:'—',p:[699, 799, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700],b:.000},
+        hot:    {pkg:'—',esc:'—',p:[699, 799, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700, 1700],b:.000},
         rmkt30: {pkg:'—',esc:'—',p:[699, 799, 1598, 1598, 1598, 1598, 1598, 1598, 1598, 1598, 1598, 1598],b:.000},
         rmkt60: {pkg:'—',esc:'—',p:[699, 799, 1564, 1564, 1564, 1564, 1564, 1564, 1564, 1564, 1564, 1564],b:.000},
-          norte: {pkg:'—',esc:'—',p:[769, 879, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991],b:.000},
+        norte:  {pkg:'—',esc:'—',p:[769, 879, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991, 1991],b:.000},
+        sur:    {pkg:'—',esc:'—',p:[629, 719, 1629, 1629, 1629, 1629, 1629, 1629, 1629, 1629, 1629, 1629],b:.000}
       },
     }}
   },
@@ -825,117 +845,104 @@ var PROG = {
   }},
   mae_online:{niveles:{
     alto:{
-      hot: {pkg:'—',esc:'—',p:[750, 1660, 2650, 2650, 2650, 2650, 2650, 2650, 2650, 2650, 2650, 2650],b:.000},
-      rmkt30: {pkg:'—',esc:'—',p:[750, 1660, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491],b:.000},
-      rmkt60: {pkg:'—',esc:'—',p:[750, 1660, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350],b:.000},
-      rmkt: {pkg:'—',esc:'—',p:[750, 1660, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491],b:.000},
+      hot: {pkg:'P6.MA.',esc:'P7.MAE2M',p:[750, 1660, 2430, 2430, 2430, 2430, 2430, 2430, 2430, 2430, 2430, 2430],b:.000},
+      rmkt30: {pkg:'P7.MA.',esc:'P7.MAE2M',p:[750, 1660, 2271, 2271, 2271, 2271, 2271, 2271, 2271, 2271, 2271, 2271],b:.000},
+      rmkt: {pkg:'P1.MA.',esc:'P1.MAE2M',p:[750, 1170, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230],b:.000},
     },
     medio:{
-      hot: {pkg:'—',esc:'—',p:[750, 1660, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491],b:.000},
-      rmkt30: {pkg:'—',esc:'—',p:[750, 1660, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350],b:.000},
-      rmkt60: {pkg:'—',esc:'—',p:[750, 1660, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200],b:.000},
-      rmkt: {pkg:'—',esc:'—',p:[750, 1660, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350],b:.000},
+      hot: {pkg:'P8.MA.',esc:'P7.MAE2M',p:[750, 1660, 2280, 2280, 2280, 2280, 2280, 2280, 2280, 2280, 2280, 2280],b:.000},
+      rmkt30: {pkg:'P9.MA.',esc:'P7.MAE2M',p:[750, 1660, 2130, 2130, 2130, 2130, 2130, 2130, 2130, 2130, 2130, 2130],b:.000},
+      rmkt: {pkg:'P1.MA.',esc:'P1.MAE2M',p:[750, 1170, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230],b:.000},
     },
     bajo:{
-      hot: {pkg:'—',esc:'—',p:[750, 1660, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350],b:.000},
-      rmkt30: {pkg:'—',esc:'—',p:[750, 1660, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200],b:.000},
-      rmkt60: {pkg:'—',esc:'—',p:[750, 1660, 2050, 2050, 2050, 2050, 2050, 2050, 2050, 2050, 2050, 2050],b:.000},
-      rmkt: {pkg:'—',esc:'—',p:[750, 1660, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200],b:.000},
+      hot: {pkg:'P10.MA.',esc:'P7.MAE2M',p:[750, 1660, 2080, 2080, 2080, 2080, 2080, 2080, 2080, 2080, 2080, 2080],b:.000},
+      rmkt30: {pkg:'P11.MA.',esc:'P7.MAE2M',p:[750, 1660, 1942, 1942, 1942, 1942, 1942, 1942, 1942, 1942, 1942, 1942],b:.000},
+      rmkt: {pkg:'P1.MA.',esc:'P1.MAE2M',p:[750, 1170, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230],b:.000},
     },
   }},
   mae_ejecutiva:{niveles:{
     alto:{
-      hot: {pkg:'—',esc:'—',p:[750, 1660, 2650, 2650, 2650, 2650, 2650, 2650, 2650, 2650, 2650, 2650],b:.000},
-      rmkt30: {pkg:'—',esc:'—',p:[750, 1660, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491],b:.000},
-      rmkt60: {pkg:'—',esc:'—',p:[750, 1660, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350],b:.000},
-      rmkt: {pkg:'—',esc:'—',p:[750, 1660, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491],b:.000},
+      hot: {pkg:'P6.MA.',esc:'P7.MAE2M',p:[750, 1660, 2430, 2430, 2430, 2430, 2430, 2430, 2430, 2430, 2430, 2430],b:.000},
+      rmkt30: {pkg:'P7.MA.',esc:'P7.MAE2M',p:[750, 1660, 2271, 2271, 2271, 2271, 2271, 2271, 2271, 2271, 2271, 2271],b:.000},
+      rmkt: {pkg:'P1.MA.',esc:'P1.MAE2M',p:[750, 1170, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230],b:.000},
     },
     medio:{
-      hot: {pkg:'—',esc:'—',p:[750, 1660, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491],b:.000},
-      rmkt30: {pkg:'—',esc:'—',p:[750, 1660, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350],b:.000},
-      rmkt60: {pkg:'—',esc:'—',p:[750, 1660, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200],b:.000},
-      rmkt: {pkg:'—',esc:'—',p:[750, 1660, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350],b:.000},
+      hot: {pkg:'P8.MA.',esc:'P7.MAE2M',p:[750, 1660, 2280, 2280, 2280, 2280, 2280, 2280, 2280, 2280, 2280, 2280],b:.000},
+      rmkt30: {pkg:'P9.MA.',esc:'P7.MAE2M',p:[750, 1660, 2130, 2130, 2130, 2130, 2130, 2130, 2130, 2130, 2130, 2130],b:.000},
+      rmkt: {pkg:'P1.MA.',esc:'P1.MAE2M',p:[750, 1170, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230],b:.000},
     },
     bajo:{
-      hot: {pkg:'—',esc:'—',p:[750, 1660, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350],b:.000},
-      rmkt30: {pkg:'—',esc:'—',p:[750, 1660, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200],b:.000},
-      rmkt60: {pkg:'—',esc:'—',p:[750, 1660, 2050, 2050, 2050, 2050, 2050, 2050, 2050, 2050, 2050, 2050],b:.000},
-      rmkt: {pkg:'—',esc:'—',p:[750, 1660, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200],b:.000},
+      hot: {pkg:'P10.MA.',esc:'P7.MAE2M',p:[750, 1660, 2080, 2080, 2080, 2080, 2080, 2080, 2080, 2080, 2080, 2080],b:.000},
+      rmkt30: {pkg:'P11.MA.',esc:'P7.MAE2M',p:[750, 1660, 1942, 1942, 1942, 1942, 1942, 1942, 1942, 1942, 1942, 1942],b:.000},
+      rmkt: {pkg:'P1.MA.',esc:'P1.MAE2M',p:[750, 1170, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230],b:.000},
     },
   }},
   arq_software:{niveles:{
     alto:{
-      hot: {pkg:'—',esc:'—',p:[750, 1660, 2800, 2800, 2800, 2800, 2800, 2800, 2800, 2800, 2800, 2800],b:.000},
-      rmkt30: {pkg:'—',esc:'—',p:[750, 1660, 2632, 2632, 2632, 2632, 2632, 2632, 2632, 2632, 2632, 2632],b:.000},
-      rmkt60: {pkg:'—',esc:'—',p:[750, 1660, 2490, 2490, 2490, 2490, 2490, 2490, 2490, 2490, 2490, 2490],b:.000},
-      rmkt: {pkg:'—',esc:'—',p:[750, 1660, 2632, 2632, 2632, 2632, 2632, 2632, 2632, 2632, 2632, 2632],b:.000},
+      hot: {pkg:'P12.MA.',esc:'P7.MAE2M',p:[750, 1660, 2580, 2580, 2580, 2580, 2580, 2580, 2580, 2580, 2580, 2580],b:.000},
+      rmkt30: {pkg:'P13.MA.',esc:'P7.MAE2M',p:[750, 1660, 2412, 2412, 2412, 2412, 2412, 2412, 2412, 2412, 2412, 2412],b:.000},
+      rmkt: {pkg:'P1.MA.',esc:'P1.MAE2M',p:[750, 1170, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230],b:.000},
     },
     medio:{
-      hot: {pkg:'—',esc:'—',p:[750, 1660, 2800, 2800, 2800, 2800, 2800, 2800, 2800, 2800, 2800, 2800],b:.000},
-      rmkt30: {pkg:'—',esc:'—',p:[750, 1660, 2632, 2632, 2632, 2632, 2632, 2632, 2632, 2632, 2632, 2632],b:.000},
-      rmkt60: {pkg:'—',esc:'—',p:[750, 1660, 2490, 2490, 2490, 2490, 2490, 2490, 2490, 2490, 2490, 2490],b:.000},
-      rmkt: {pkg:'—',esc:'—',p:[750, 1660, 2632, 2632, 2632, 2632, 2632, 2632, 2632, 2632, 2632, 2632],b:.000},
+      hot: {pkg:'P12.MA.',esc:'P7.MAE2M',p:[750, 1660, 2580, 2580, 2580, 2580, 2580, 2580, 2580, 2580, 2580, 2580],b:.000},
+      rmkt30: {pkg:'P13.MA.',esc:'P7.MAE2M',p:[750, 1660, 2412, 2412, 2412, 2412, 2412, 2412, 2412, 2412, 2412, 2412],b:.000},
+      rmkt: {pkg:'P1.MA.',esc:'P1.MAE2M',p:[750, 1170, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230],b:.000},
     },
     bajo:{
-      hot: {pkg:'—',esc:'—',p:[750, 1660, 2800, 2800, 2800, 2800, 2800, 2800, 2800, 2800, 2800, 2800],b:.000},
-      rmkt30: {pkg:'—',esc:'—',p:[750, 1660, 2632, 2632, 2632, 2632, 2632, 2632, 2632, 2632, 2632, 2632],b:.000},
-      rmkt60: {pkg:'—',esc:'—',p:[750, 1660, 2490, 2490, 2490, 2490, 2490, 2490, 2490, 2490, 2490, 2490],b:.000},
-      rmkt: {pkg:'—',esc:'—',p:[750, 1660, 2632, 2632, 2632, 2632, 2632, 2632, 2632, 2632, 2632, 2632],b:.000},
+      hot: {pkg:'P12.MA.',esc:'P7.MAE2M',p:[750, 1660, 2580, 2580, 2580, 2580, 2580, 2580, 2580, 2580, 2580, 2580],b:.000},
+      rmkt30: {pkg:'P13.MA.',esc:'P7.MAE2M',p:[750, 1660, 2412, 2412, 2412, 2412, 2412, 2412, 2412, 2412, 2412, 2412],b:.000},
+      rmkt: {pkg:'P1.MA.',esc:'P1.MAE2M',p:[750, 1170, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230, 2230],b:.000},
     },
   }},
   master:{niveles:{
     alto:{
-      hot: {pkg:'—',esc:'—',p:[750, 1660, 2650, 2650, 2650, 2650, 2650, 2650, 2650, 2650, 2650, 2650],b:.000},
-      rmkt30: {pkg:'—',esc:'—',p:[750, 1660, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491],b:.000},
-      rmkt60: {pkg:'—',esc:'—',p:[750, 1660, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350],b:.000},
-      rmkt: {pkg:'—',esc:'—',p:[750, 1660, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491],b:.000},
+      hot: {pkg:'P7.MS.',esc:'P76.MAS4M',p:[850, 1307, 1805, 2054, 2425, 2425, 2425, 2425, 2425, 2425, 2425, 2425],b:.000},
+      rmkt30: {pkg:'P8.MS.',esc:'P76.MAS4M',p:[850, 1307, 1805, 2054, 2270, 2270, 2270, 2270, 2270, 2270, 2270, 2270],b:.000},
     },
     medio:{
-      hot: {pkg:'—',esc:'—',p:[750, 1660, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491, 2491],b:.000},
-      rmkt30: {pkg:'—',esc:'—',p:[750, 1660, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350],b:.000},
-      rmkt60: {pkg:'—',esc:'—',p:[750, 1660, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200],b:.000},
-      rmkt: {pkg:'—',esc:'—',p:[750, 1660, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350],b:.000},
+      hot: {pkg:'P9.MS.',esc:'P76.MAS4M',p:[850, 1307, 1805, 2054, 2275, 2275, 2275, 2275, 2275, 2275, 2275, 2275],b:.000},
+      rmkt30: {pkg:'P10.MS.',esc:'P76.MAS4M',p:[850, 1307, 1805, 2054, 2129, 2129, 2129, 2129, 2129, 2129, 2129, 2129],b:.000},
     },
     bajo:{
-      hot: {pkg:'—',esc:'—',p:[750, 1660, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350, 2350],b:.000},
-      rmkt30: {pkg:'—',esc:'—',p:[750, 1660, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200],b:.000},
-      rmkt60: {pkg:'—',esc:'—',p:[750, 1660, 2050, 2050, 2050, 2050, 2050, 2050, 2050, 2050, 2050, 2050],b:.000},
-      rmkt: {pkg:'—',esc:'—',p:[750, 1660, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200, 2200],b:.000},
+      hot: {pkg:'P11.MS.',esc:'P76.MAS4M',p:[850, 1307, 1805, 2054, 2075, 2075, 2075, 2075, 2075, 2075, 2075, 2075],b:.000},
+      rmkt30: {pkg:'P12.MS.',esc:'P76.MAS4M',p:[850, 1307, 1805, 2054, 1941, 1941, 1941, 1941, 1941, 1941, 1941, 1941],b:.000},
     },
   }},
   doctorado:{niveles:{
     alto:{
-      hot: {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 6083, 6083, 6083, 6083, 6083, 6083, 6083, 6083],b:.000},
-      rmkt: {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 5718, 5718, 5718, 5718, 5718, 5718, 5718, 5718],b:.000},
+      hot:  {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 6083, 6083, 6083, 6083, 6083, 6083, 6083, 6083],b:.000},
+      rmkt: {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 5718, 5718, 5718, 5718, 5718, 5718, 5718, 5718],b:.000}
     },
     medio:{
-      hot: {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 5488, 5488, 5488, 5488, 5488, 5488, 5488, 5488],b:.000},
-      rmkt: {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 5159, 5159, 5159, 5159, 5159, 5159, 5159, 5159],b:.000},
+      hot:  {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 5488, 5488, 5488, 5488, 5488, 5488, 5488, 5488],b:.000},
+      rmkt: {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 5159, 5159, 5159, 5159, 5159, 5159, 5159, 5159],b:.000}
     },
     bajo:{
-      hot: {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 4953, 4953, 4953, 4953, 4953, 4953, 4953, 4953],b:.000},
-      rmkt: {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 4656, 4656, 4656, 4656, 4656, 4656, 4656, 4656],b:.000},
+      hot:  {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 4953, 4953, 4953, 4953, 4953, 4953, 4953, 4953],b:.000},
+      rmkt: {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 4656, 4656, 4656, 4656, 4656, 4656, 4656, 4656],b:.000}
     },
   }},
   doc_especial:{niveles:{
     alto:{
-      hot: {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 5600, 5600, 5600, 5600, 5600, 5600, 5600, 5600],b:.000},
-      rmkt: {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 5264, 5264, 5264, 5264, 5264, 5264, 5264, 5264],b:.000},
+      hot:  {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 5600, 5600, 5600, 5600, 5600, 5600, 5600, 5600],b:.000},
+      rmkt: {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 5264, 5264, 5264, 5264, 5264, 5264, 5264, 5264],b:.000}
     },
     medio:{
-      hot: {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 5600, 5600, 5600, 5600, 5600, 5600, 5600, 5600],b:.000},
-      rmkt: {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 5264, 5264, 5264, 5264, 5264, 5264, 5264, 5264],b:.000},
+      hot:  {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 5600, 5600, 5600, 5600, 5600, 5600, 5600, 5600],b:.000},
+      rmkt: {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 5264, 5264, 5264, 5264, 5264, 5264, 5264, 5264],b:.000}
     },
     bajo:{
-      hot: {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 5600, 5600, 5600, 5600, 5600, 5600, 5600, 5600],b:.000},
-      rmkt: {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 5264, 5264, 5264, 5264, 5264, 5264, 5264, 5264],b:.000},
+      hot:  {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 5600, 5600, 5600, 5600, 5600, 5600, 5600, 5600],b:.000},
+      rmkt: {pkg:'—',esc:'—',p:[1067, 1445, 3125, 3125, 5264, 5264, 5264, 5264, 5264, 5264, 5264, 5264],b:.000}
     },
   }},
-  uve:'special',
   unica:'special',
+  uve:'special',
+  unag:'special',
+
 };
 
-var NEW_PROGS = ["INGENIERÍA DE DATOS E INFRAESTRUCTURA", "GESTIÓN DE LA CALIDAD Y PROCESOS INDUSTRIALES", "FILOSOFÍA Y PENSAMIENTO CRÍTICO", "ECONOMÍA PÚBLICA, FISCALIDAD Y GOBERNANZA FINANCIERA", "COMUNICACIÓN SOCIAL Y PARTICIPACIÓN CIUDADANA", "COMERCIO ELECTRÓNICO Y NEGOCIOS DIGITALES", "FINANZAS SUSTENTABLES Y PROYECTOS DE INVERSIÓN", "CONSULTORÍA Y DESARROLLO EMPRESARIAL", "GESTIÓN DE POLÍTICAS Y GOBIERNO", "ESTUDIOS SOCIOCULTURALES", "ESTRATEGIA Y TRANSFORMACIÓN DE NEGOCIOS", "CIENCIA DE DATOS E INTELIGENCIA ARTIFICIAL", "URBANISMO", "COMUNICACIÓN Y MANEJO DE REDES SOCIALES", "ESTUDIOS INTERDISCIPLINARIOS SOBRE AMÉRICA LATINA", "TRANSFORMACIÓN DIGITAL ORGANIZACIONAL", "ECONOMÍA SUSTENTABLE Y EMPRESAS RESPONSABLES", "AUDITORÍA FINANCIERA", "ANTROPOLOGÍA Y DIVERSIDAD CULTURAL", "FINANZAS PÚBLICAS Y GESTIÓN GUBERNAMENTAL", "ESTRATEGIA DE COMERCIO INTERNACIONAL Y ADUANAS", "ARQUITECTURA DE SOFTWARE", "ARQUITECTURA", "ANÁLISIS POLÍTICO Y OPINIÓN PÚBLICA", "ÉTICA Y GOBERNANZA DE LA INTELIGENCIA ARTIFICIAL", "TURISMO DIGITAL Y GESTIÓN DE PLATAFORMAS", "INGENIERÍA AMBIENTAL", "TRANSFORMACIÓN DIGITAL EMPRESARIAL", "ESTUDIOS INTERCULTURALES Y DIVERSIDAD HUMANA", "LENGUA Y LITERATURA", "FINANZAS Y ESTRATEGIA FISCAL", "POLÍTICAS SOCIALES Y BIENESTAR SOCIAL", "COMERCIALIZACIÓN TURÍSTICA Y MERCADOS DIGITALES", "TECNOLOGÍAS INTERACTIVAS Y EXPERIENCIA E INTERFAZ DE USUARIO", "INTELIGENCIA FINANCIERA Y DETECCIÓN DE FRAUDES", "INGENIERÍA EN SISTEMAS INTELIGENTES", "DISEÑO DE INTERACCIÓN Y EXPERIENCIA DE USUARIO", "GESTIÓN DE RIESGOS AMBIENTALES", "LIDERAZGO EDUCATIVO Y GESTIÓN ESCOLAR", "INTELIGENCIA ARTIFICIAL APLICADA A NEGOCIOS, INDUSTRIA Y AUTOMATIZACIÓN", "ASESORÍA EMPRESARIAL ESTRATÉGICA", "INGENIERÍA ROBÓTICA", "TECNOLOGÍA PARA LA GESTIÓN PÚBLICA Y GOBIERNO DIGITAL", "INTERFACES INTELIGENTES Y TECNOLOGÍA INMERSIVA", "SOFTWARE PARA ENTRETENIMIENTO DIGITAL", "SEGURIDAD PÚBLICA Y GOBERNABILIDAD DEMOCRÁTICA", "POLÍTICAS PÚBLICAS Y GOBERNANZA", "GESTIÓN DEL TALENTO Y BIENESTAR ORGANIZACIONAL", "CULTURA Y TRANSFORMACIÓN DIGITAL", "EDUCACIÓN INCLUSIVA Y DIVERSIDAD", "ADMINISTRACIÓN DE RIESGOS FINANCIEROS", "EVALUACIÓN DE POLÍTICAS SOCIALES Y PROGRAMAS PÚBLICOS", "DESARROLLO SOSTENIBLE Y GESTIÓN AMBIENTAL", "HISTORIA PÚBLICA Y EDUCACIÓN PATRIMONIAL", "MERCADOTECNIA GASTRONÓMICA Y DE DESTINOS", "EDUCACIÓN PARA LA SUSTENTABILIDAD", "INNOVACIÓN EDUCATIVA Y DISEÑO INSTRUCCIONAL", "PLANEACIÓN TURÍSTICA Y DESAROLLO REGIONAL", "GESTIÓN EMPRESARIAL Y LOGÍSTICA", "INTELIGENCIA ARTIFICIAL EN EDUCACIÓN", "GASTRONOMÍA SUSTENTABLE Y CULTURA ALIMENTARIA", "CIBERSEGURIDAD Y GESTIÓN DE RIESGOS DIGITALES", "FINANZAS Y BANCA", "INGENIERÍA EN PROGRAMACIÓN EN LA NUBE", "DERECHOS HUMANOS Y JUSTICIA SOCIAL", "JUSTICIA SOCIAL Y TRANSFORMACIÓN COMUNITARIA", "DESARROLLO DE VIDEOJUEGOS Y REALIDAD EXTENDIDA", "GESTIÓN DEL CAMBIO Y TRANSFORMACIÓN ORGANIZACIONAL", "EDUCACIÓN INTELIGENTE Y DISEÑO INSTRUCCIONAL CON INTELIGENCIA ARTIFICIAL", "COMERCIALIZACIÓN Y DIRECCIÓN DE MARCAS", "INNOVACIÓN Y EMPRENDIMIENTO CON INTELIGENCIA ARTIFICIAL", "TECNOLOGÍA EDUCATIVA E INNOVACIÓN DIDÁCTICA", "DIRECCIÓN DE OPERACIONES EMPRESARIALES", "DIRECCIÓN HOTELERA Y EXPERIENCIA DEL CLIENTE", "VALUACIÓN INMOBILIARIA", "INNOVACIÓN ESTRATÉGICA CON INTELIGENCIA ARTIFICIAL", "ALTA DIRECCIÓN Y GOBIERNO CORPORATIVO", "PLANEACIÓN Y EVALUACIÓN DE PROYECTOS", "AUTOMATIZACIÓN DE PROCESOS Y ANÁLISIS PREDICTIVO", "INGENIERÍA EN CIENCIAS DE DATOS E INTELIGENCIA ANALÍTICA", "COMUNICACIÓN Y PERIODISMO", "PUBLICIDAD Y MEDIOS", "AUTOMATIZACIÓN Y ROBÓTICA INDUSTRIAL", "LENGUAS EXTRANJERAS", "INNOVACIÓN EN MODELOS DE NEGOCIO", "INTELIGENCIA ARTIFICIAL Y CIENCIA DE DATOS", "ADMINISTRACIÓN DE NEGOCIOS GASTRONÓMICOS", "CIBERSEGURIDAD DE SISTEMAS AUTÓNOMOS", "COMERCIO INTERNACIONAL", "EVALUACIÓN DE RIESGOS TECNOLÓGICOS Y RESILIENCIA OPERATIVA", "CALIDAD Y SOSTENIBILIDAD ORGANIZACIONAL", "ECONOMÍA DIGITAL Y NUEVAS FORMAS DE MERCADO", "JUSTICIA DIGITAL Y CIBERDERECHO", "INFRAESTRUCTURA Y CÓMPUTO EN LA NUBE", "INGENIERÍA EN TECNOLOGÍA DE VIDEOJUEGOS Y REALIDAD VIRTUAL", "INGENIERÍA EN AUTOMATIZACIÓN INDUSTRIAL", "TECNOLOGÍAS INTERACTIVAS Y VIRTUALES", "INNOVACIÓN Y TRANSFORMACIÓN DE NEGOCIOS", "DIRECCIÓN ESTRATÉGICA DE HOSPITALIDAD Y BIENESTAR", "SOLUCIONES DE INTELIGENCIA ARTIFICIAL PARA NEGOCIOS Y SERVICIOS", "DISEÑO Y PRODUCCIÓN DE VIDEOJUEGOS", "CIBERSEGURIDAD Y RIESGOS EN INTELIGENCIA ARTIFICIAL", "ORGANIZACIÓN DE EVENTOS CORPORATIVOS Y CONVENCIONES", "ADMINISTRACIÓN PÚBLICA Y POLÍTICAS ECONÓMICAS"];
+var NEW_PROGS = ["ENERGÍAS RENOVABLES Y EFICIENCIA ENERGÉTICA", "ARQUITECTURA", "CIBERSEGURIDAD DE SISTEMAS AUTÓNOMOS", "ÉTICA Y GOBERNANZA DE LA INTELIGENCIA ARTIFICIAL", "SOFTWARE PARA ENTRETENIMIENTO DIGITAL", "EMPRENDIMIENTO", "RESPONSABILIDAD SOCIAL", "EDUCACIÓN INTELIGENTE Y DISEÑO INSTRUCCIONAL CON INTELIGENCIA ARTIFICIAL", "INGENIERÍA EN DESARROLLO DE SOFTWARE", "INTELIGENCIA ARTIFICIAL Y CIENCIA DE DATOS", "INGENIERÍA DE DATOS E INFRAESTRUCTURA", "CIENCIA DE DATOS E INTELIGENCIA ARTIFICIAL", "DISEÑO Y ANIMACIÓN DIGITAL", "LOGÍSTICA Y CADENA DE SUMINISTRO", "INGENIERÍA EN PROGRAMACIÓN EN LA NUBE", "FINANZAS Y ESTRATEGIA FISCAL", "DISEÑO PARA MEDIOS DIGITALES", "INGENIERÍA ROBÓTICA", "INGENIERÍA EN LOGÍSTICA Y TRANSPORTE", "INNOVACIÓN EDUCATIVA Y DISEÑO INSTRUCCIONAL", "CIBERSEGURIDAD Y RIESGOS EN INTELIGENCIA ARTIFICIAL", "ESTRATEGIA Y TRANSFORMACIÓN DE NEGOCIOS", "INGENIERÍA EN TECNOLOGÍA DE VIDEOJUEGOS Y REALIDAD VIRTUAL", "EDUCACIÓN PARA LA SUSTENTABILIDAD", "IMPUESTOS", "INNOVACIÓN Y EMPRENDIMIENTO CON INTELIGENCIA ARTIFICIAL", "COMERCIO ELECTRÓNICO Y NEGOCIOS DIGITALES", "ALTA DIRECCIÓN Y GOBIERNO CORPORATIVO", "INGENIERÍA EN CIENCIAS DE DATOS E INTELIGENCIA ANALÍTICA", "DESARROLLO SUSTENTABLE Y GESTIÓN AMBIENTAL", "INGENIERÍA AMBIENTAL", "AUTOMATIZACIÓN Y ROBÓTICA INDUSTRIAL", "MERCADOTECNIA POLÍTICA", "INNOVACIÓN ESTRATÉGICA CON INTELIGENCIA ARTIFICIAL", "AUTOMATIZACIÓN DE PROCESOS Y ANÁLISIS PREDICTIVO", "SEGURIDAD INFORMÁTICA", "FINANZAS Y BANCA", "CIBERSEGURIDAD Y GESTIÓN DE RIESGOS DIGITALES", "INNOVACIÓN Y TRANSFORMACIÓN DE NEGOCIOS", "URBANISMO", "AGRONEGOCIOS", "DIRECCIÓN DE ARTE", "VALUACIÓN INMOBILIARIA", "DESARROLLO DE VIDEOJUEGOS Y REALIDAD EXTENDIDA", "ARQUITECTURA DE SOFTWARE", "TECNOLOGÍAS INTERACTIVAS Y VIRTUALES", "INTELIGENCIA ARTIFICIAL", "SOLUCIONES DE INTELIGENCIA ARTIFICIAL PARA NEGOCIOS Y SERVICIOS", "INGENIERÍA EN ENERGÍAS RENOVABLES", "INGENIERÍA EN SISTEMAS INTELIGENTES", "EDUCACIÓN", "INTELIGENCIA ARTIFICIAL EN EDUCACIÓN", "CIBERSEGURIDAD", "DERECHOS HUMANOS"];
 var DUR_MAP = {
   'lic_intensiva_nuevo': '3 años (36 meses)',
   'lic_completa_nuevo': '3 años 8 meses (44 meses)',
@@ -950,14 +957,6 @@ var DUR_MAP = {
   'ms_master_antiguo': '18 meses',
   'doc_doctorado_antiguo': '24 meses'
 };
-
-function getExactM3(progName, secType){
-  var n = progName.toUpperCase();
-  if(secType==='lic' && PROG_PRICE_LIC[n] !== undefined) return PROG_PRICE_LIC[n];
-  if(secType==='mae' && PROG_PRICE_MAE[n] !== undefined) return PROG_PRICE_MAE[n];
-  if(secType==='doc' && PROG_PRICE_DOC[n] !== undefined) return PROG_PRICE_DOC[n];
-  return null;
-}
 
 function getPrice(progKey, nivel, lead, jornada, isIng){
   var pr=PROG[progKey];
@@ -997,9 +996,7 @@ var ACCS = {
         {id:'welbep', name:'Welbe Premium (+$10 upgrade)',     price:10}
       ]},
       {cat:'Experiencia', items:[
-        {id:'ucamp',   name:'U-Camp',           price:110},
-        {id:'seseje',  name:'Sesión Ejecutiva', price:165},
-        {id:'college', name:'Utel College',     price:165}
+        {id:'ucamp',   name:'U-Camp',           price:110}
       ]},
       {cat:'Plataforma', items:[
         {id:'utelx',  name:'Utel X',            price:165},
@@ -1063,7 +1060,7 @@ var ACCS = {
     included: [
       {id:'voxy',   name:'Inglés Voxy'},
       {id:'welbe',  name:'Welbe'},
-      {id:'seseje', name:'Sesión ejecutiva'},
+      {id:'seseje', name:'Sesión Ejecutiva'},
       {id:'asist',  name:'Asistencia Plus'}
     ],
     optional: [
@@ -1110,11 +1107,17 @@ var ACCS = {
 
 // IDs que cuentan para reglas
 var CERT_IDS  = ['coursera','facebook','cifal','microsoft','tableau','gcloud','gads','legal'];
-var DEFERRED_ACCS = ['ucamp','seseje','tit','tit50','tit0_free']; // solo aplican desde mes 3
+var DEFERRED_ACCS = ['ucamp','utelx','tit','tit50','tit0_free']; // solo aplican desde mes 3
 var PLAT_IDS  = ['utelx','ugen'];
 var IDIOM_IDS = ['cambridge','duolingo'];
 
 // Estado de selección: {sec: {id: true/false}}
+var EXP_PRICES = {seseje:165, utelj:165, hibrid:440};
+var INICIO_BY_PROG = {"Pedagogía": ["18/05/2026", "01/06/2026"], "Ingeniería Industrial": ["18/05/2026", "01/06/2026"], "Ingeniería En Sistemas Computacionales": ["18/05/2026", "01/06/2026"], "Criminología Y Criminalística": ["18/05/2026", "01/06/2026"], "Derecho": ["31/08/2026"], "Administración": ["18/05/2026", "01/06/2026"], "Ingeniería Industrial Y Administración": ["18/05/2026", "01/06/2026"], "Administración De Recursos Humanos": ["01/06/2026", "08/06/2026", "06/07/2026"], "Contaduría Y Finanzas": ["18/05/2026", "01/06/2026"], "Negocios Internacionales": ["18/05/2026", "01/06/2026"], "Contaduría Pública": ["18/05/2026", "01/06/2026"], "Psicología Organizacional": ["01/06/2026"], "Administración De Negocios": ["18/05/2026", "01/06/2026"], "Administración Y Finanzas": ["18/05/2026", "01/06/2026"], "Administración De Empresas Turísticas": ["18/05/2026", "01/06/2026"], "Ciencias Políticas Y Administración Pública": ["01/06/2026", "06/07/2026"], "Administración De Ventas": ["18/05/2026", "01/06/2026"], "Comunicación": ["18/05/2026", "01/06/2026"], "Desarrollo Sustentable Y Ecoturismo": ["01/06/2026", "06/07/2026"], "Mercadotecnia": ["18/05/2026", "01/06/2026", "03/08/2026"], "Administración De Tecnologías De La Información": ["01/06/2026", "08/06/2026", "06/07/2026"], "Economía Y Finanzas": ["01/06/2026", "06/07/2026"], "Derecho Internacional": ["18/05/2026", "01/06/2026"], "Derecho Empresarial": ["18/05/2026", "01/06/2026"], "Tecnología Educativa": ["01/06/2026", "06/07/2026"], "Comunicación Digital": ["18/05/2026", "01/06/2026"], "Comunicación Organizacional": ["18/05/2026", "01/06/2026"], "Inteligencia Artificial Aplicada A Negocios, Industria Y Automatización": ["01/06/2026", "06/07/2026"], "Ética Y Gobernanza De La Inteligencia Artificial": ["06/07/2026"], "Ciberseguridad Y Riesgos En Inteligencia Artificial": ["06/07/2026"], "Innovación Y Emprendimiento Con Inteligencia Artificial": ["06/07/2026"], "Inteligencia Artificial Y Ciencia De Datos": ["01/06/2026", "06/07/2026"], "Inteligencia Artificial En Educación": ["01/06/2026", "06/07/2026"], "Ingeniería En Ciencias De Datos E Inteligencia Analítica": ["01/06/2026", "06/07/2026"], "Ingeniería En Programación En La Nube": ["01/06/2026", "06/07/2026"], "Software Para Entretenimiento Digital": ["06/07/2026"], "Finanzas Y Banca": ["06/07/2026"], "Innovación Y Transformación De Negocios": ["06/07/2026"], "Finanzas Y Estrategia Fiscal": ["06/07/2026"], "Estrategia Y Transformación De Negocios": ["06/07/2026"], "Ingeniería En Tecnología De Videojuegos Y Realidad Virtual": ["01/06/2026", "06/07/2026"], "Comercio Electrónico Y Negocios Digitales": ["18/05/2026", "01/06/2026"], "Tecnologías Interactivas Y Virtuales": ["01/06/2026", "06/07/2026"], "Ingeniería Ambiental": ["06/07/2026"], "Educación Para La Sustentabilidad": ["06/07/2026"], "Ingeniería Robótica": ["06/07/2026"], "Arquitectura": ["06/07/2026"], "Psicología": ["01/06/2026"], "Arte Digital Y Multimedia": ["29/06/2026"], "Marketing Y Publicidad": ["29/06/2026"], "Ingeniería En Logística Y Transporte": ["01/06/2026", "06/07/2026"], "Inteligencia Artificial": ["01/06/2026", "06/07/2026"], "Emprendimiento": ["01/06/2026", "06/07/2026"], "Agronegocios": ["01/06/2026", "06/07/2026"], "Ingeniería En Energías Renovables": ["01/06/2026", "06/07/2026"], "Ingeniería En Desarrollo De Software": ["18/05/2026", "01/06/2026"], "Diseño Y Animación Digital": ["01/06/2026", "06/07/2026"], "Dirección De Arte": ["01/06/2026", "06/07/2026"], "Seguridad Informática": ["01/06/2026"], "Comunicación Corporativa": ["18/05/2026", "01/06/2026"], "Medios Digitales": ["29/06/2026"], "Administración De Empresas": ["18/05/2026", "01/06/2026"], "Ingeniería En Sistemas Inteligentes": ["18/05/2026", "01/06/2026"], "Educación Y Docencia": ["08/06/2026"], "Conciencia Plena Aplicada": ["06/07/2026", "31/08/2026"], "Gestión Directiva De Instituciones En Salud": ["31/08/2026"], "Derecho Procesal Y Juicios Orales": ["31/08/2026"], "Ciencia De Datos Para Negocios": ["01/06/2026", "06/07/2026"], "Administración Pública": ["06/07/2026", "31/08/2026"], "Ingeniería Y Tecnología Ambiental": ["06/07/2026", "31/08/2026"], "Dirección De Ventas": ["01/06/2026", "06/07/2026"], "Mercadotecnia Digital Y Comercio Electrónico": ["06/07/2026", "31/08/2026"], "Derecho Procesal Penal": ["31/08/2026"], "Derechos Humanos": ["06/07/2026", "31/08/2026"], "Administración De Instituciones Educativas": ["01/06/2026", "08/06/2026", "06/07/2026"], "Coaching Integral Y Organizacional": ["01/06/2026", "06/07/2026"], "Dirección De Proyectos De Innovación": ["01/06/2026", "06/07/2026"], "Administración En Mercadotecnia Estratégica": ["01/06/2026", "08/06/2026", "06/07/2026"], "Dirección De Negocios De Alimentos Y Bebidas": ["01/06/2026", "06/07/2026"], "Psicología Transpersonal": ["31/08/2026"], "Finanzas": ["31/08/2026"], "Derecho Procesal Constitucional": ["31/08/2026"], "Ciberseguridad": ["06/07/2026", "31/08/2026"], "Administración De Negocios Deportivos": ["01/06/2026", "08/06/2026", "06/07/2026"], "Ciencias Computacionales Y Telecomunicaciones": ["31/08/2026"], "Dirección E Ingeniería De Software": ["01/06/2026", "06/07/2026"], "Gestión Estratégica Del Capital Humano": ["31/08/2026"], "Logística Y Cadena De Suministro": ["06/07/2026"], "Impuestos": ["06/07/2026", "31/08/2026"], "Comercio Internacional": ["31/08/2026"], "Desarrollo Sustentable Y Gestión Ambiental": ["06/07/2026", "31/08/2026"], "Dirección De Empresas Turísticas": ["01/06/2026", "06/07/2026"], "Gestión Organizacional Positiva": ["06/07/2026", "31/08/2026"], "Diseño Para Medios Digitales": ["31/08/2026"], "Energías Renovables Y Eficiencia Energética": ["01/06/2026", "06/07/2026"], "Energías Renovables Y Proyectos Energéticos": ["01/06/2026", "06/07/2026"], "Responsabilidad Social": ["01/06/2026", "08/06/2026", "06/07/2026", "31/08/2026"], "Educación": ["06/07/2026"], "Mercadotecnia Política": ["06/07/2026", "31/08/2026"], "Intervención Psicológica Y Salud Mental": ["06/07/2026", "31/08/2026"], "Administración De Negocios - Mba Internacional": ["01/06/2026", "08/06/2026", "06/07/2026"], "Turismo Y Revenue Management Hotelero": ["31/08/2026"], "Nutrición": ["01/06/2026", "08/06/2026", "06/07/2026", "31/08/2026"], "Gestión Directiva De Salud": ["31/08/2026"], "Logística Transporte Y Distribución Internacional": ["06/07/2026"], "Administración Y Dirección Comercial De Empresas Turísticas": ["01/06/2026", "06/07/2026"], "Project Management": ["01/06/2026", "08/06/2026", "06/07/2026", "31/08/2026"], "Administración De Negocios-Iebs": ["01/06/2026", "08/06/2026", "06/07/2026"], "Derecho Procesal Constitucional (Modalidad Ejecutiva)": ["31/08/2026"], "Soluciones De Inteligencia Artificial Para Negocios Y Servicios": ["06/07/2026"], "Innovación Estratégica Con Inteligencia Artificial": ["06/07/2026"], "Educación Inteligente Y Diseño Instruccional Con Inteligencia Artificial": ["01/06/2026", "06/07/2026"], "Automatización Y Robótica Industrial": ["06/07/2026"], "Automatización De Procesos Y Análisis Predictivo": ["06/07/2026"], "Ingeniería De Datos E Infraestructura": ["06/07/2026", "31/08/2026"], "Arquitectura De Software": ["06/07/2026"], "Valuación Inmobiliaria": ["06/07/2026"], "Alta Dirección Y Gobierno Corporativo": ["01/06/2026", "06/07/2026", "31/08/2026"], "Desarrollo De Videojuegos Y Realidad Extendida": ["06/07/2026", "31/08/2026"], "Innovación Educativa Y Diseño Instruccional": ["06/07/2026"], "Desarrollo Humano": ["31/08/2026"], "Gestión E Innovación Tecnológica": ["01/06/2026", "06/07/2026", "31/08/2026"], "Administración Estratégica Empresarial": ["31/08/2026"], "Ciberseguridad Y Gestión De Riesgos Digitales": ["31/08/2026"], "Ciencia De Datos E Inteligencia Artificial": ["31/08/2026"], "Ciberseguridad De Sistemas Autónomos": ["01/06/2026", "06/07/2026", "31/08/2026"], "Urbanismo": ["31/08/2026"]};
+var INICIO_DATES = {"lic": ["18/05/2026", "01/06/2026", "29/06/2026", "06/07/2026", "03/08/2026"], "mae": ["01/06/2026", "08/06/2026", "06/07/2026", "31/08/2026"], "ms": ["01/06/2026", "08/06/2026", "06/07/2026", "31/08/2026"], "doc": ["01/06/2026", "06/07/2026", "31/08/2026"], "dip": ["01/06/2026", "06/07/2026", "31/08/2026"]};
+var SEL_INICIO = {lic:null, mae:null, ms:null, doc:null, dip:null};
+
+var SEL_EXP = {lic: null}; // null = ninguna, 'seseje'/'utelj'/'hibrid'
 var SEL = {lic:{},mae:{},ms:{},doc:{}};
 
 function getIncludedIds(sec, isOnline){
@@ -1129,6 +1132,7 @@ function getAccTotal(sec, isOnline, excludeDeferred){
   var incIds=getIncludedIds(sec,isOnline);
   accs.optional.forEach(function(grp){
     grp.items.forEach(function(item){
+      if(item.hidden) return;
       if(SEL[sec][item.id]===true && incIds.indexOf(item.id)<0){
         if(excludeDeferred && DEFERRED_ACCS.indexOf(item.id)>=0) return;
         total+=item.price;
@@ -1243,6 +1247,11 @@ function toggleChip(sec, id, panelId, isOnline){
   // Welbe Premium reemplaza Welbe base
   if(id==='welbep' && SEL[sec]['welbep']===true) SEL[sec]['welbe_opted_out']=true;
   if(id==='welbep' && SEL[sec]['welbep']===false) SEL[sec]['welbe_opted_out']=false;
+  // Experiencia: mutually exclusive (ejecutiva, utel joven, hibrida)
+  var expIds=['seseje','utelj','hibrid'];
+  if(expIds.indexOf(id)>=0 && SEL[sec][id]===true){
+    expIds.forEach(function(eid){ if(eid!==id) SEL[sec][eid]=false; });
+  }
   // Re-render the whole section
   if(sec==='lic') rL();
   else if(sec==='mae') rM();
@@ -1298,26 +1307,23 @@ function renderMultiVariant(tbodyId, variants){
 }
 
 function rL(){
-  var progSel=g('lprog'); if(!progSel||!progSel.value)return;
+  var progSel=g('lprog'); if(!progSel)return;
+  if(!progSel.value && progSel.options.length>0) progSel.value=progSel.options[0].value;
+  if(!progSel.value)return;
   var progName=progSel.value;
   var nivelRaw=updateBadge('lprog','lnivel-badge');
   // Map special catalog keys to real pricing levels
-  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico'};
+  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico','uve':'unico','unag':'unico'};
   var nivel=nivelMap[nivelRaw]||nivelRaw;
   var lead=g('llead').value;
   var zona=g('lzona').value;
   if(zona!=='std') lead=zona;
   // Jornada Completa uses 'hot' and 'rmkt' only
   if(jornada==='completa' && (lead==='rmkt30'||lead==='rmkt60')) lead='rmkt';
-  var mod=g('lmod').value;
+  var mod=g('lmod')?g('lmod').value:'online';
 
   // Auto U-Camp para ingenierías específicas
-  var ingProgs=['INGENIERÍA EN SISTEMAS COMPUTACIONALES','INGENIERÍA INDUSTRIAL',
-    'INGENIERÍA INDUSTRIAL Y ADMINISTRACIÓN','INGENIERÍA EN DESARROLLO DE SOFTWARE',
-    'INTELIGENCIA ARTIFICIAL','SEGURIDAD INFORMÁTICA','INGENIERÍA ROBÓTICA',
-    'INGENIERÍA EN ROBÓTICA','SEGURIDAD INFORMÁTICA Y HACKING ÉTICO',
-    'INGENIERÍA EN AUTOMATIZACIÓN INDUSTRIAL','INGENIERÍA EN CIENCIAS DE DATOS',
-    'INGENIERÍA EN PROGRAMACIÓN EN LA NUBE','INGENIERÍA EN SISTEMAS INTELIGENTES'];
+  var ingProgs=["INGENIERÍA INDUSTRIAL", "INGENIERÍA EN SISTEMAS COMPUTACIONALES", "INGENIERÍA INDUSTRIAL Y ADMINISTRACIÓN", "INGENIERÍA EN LOGÍSTICA Y TRANSPORTE", "INTELIGENCIA ARTIFICIAL", "INGENIERÍA EN ENERGÍAS RENOVABLES", "INGENIERÍA EN DESARROLLO DE SOFTWARE", "SEGURIDAD INFORMÁTICA", "INTELIGENCIA ARTIFICIAL APLICADA A NEGOCIOS, INDUSTRIA Y AUTOMATIZACIÓN", "ÉTICA Y GOBERNANZA DE LA INTELIGENCIA ARTIFICIAL", "CIBERSEGURIDAD Y RIESGOS EN INTELIGENCIA ARTIFICIAL", "INNOVACIÓN Y EMPRENDIMIENTO CON INTELIGENCIA ARTIFICIAL", "INTELIGENCIA ARTIFICIAL EN EDUCACIÓN", "INGENIERÍA EN CIENCIAS DE DATOS E INTELIGENCIA ANALÍTICA", "INGENIERÍA EN PROGRAMACIÓN EN LA NUBE", "SOFTWARE PARA ENTRETENIMIENTO DIGITAL", "INGENIERÍA EN SISTEMAS INTELIGENTES", "INGENIERÍA EN TECNOLOGÍA DE VIDEOJUEGOS Y REALIDAD VIRTUAL", "COMERCIO ELECTRÓNICO Y NEGOCIOS DIGITALES", "TECNOLOGÍAS INTERACTIVAS Y VIRTUALES", "INGENIERÍA AMBIENTAL", "INGENIERÍA ROBÓTICA"];
   var uName2=progName.toUpperCase();
   var isIng=ingProgs.some(function(p){return uName2.indexOf(p)>=0;});
   if(isIng) SEL['lic']['ucamp']=true;
@@ -1336,29 +1342,56 @@ function rL(){
   if(nivel==='unico'){
     var uName=progName.toUpperCase();
     if(uName==='UVE'||uName==='PSICOLOGÍA'){
-      // UVE: 2 variantes escalonadas
-      var rows=[
-        {label:'Escalonado Alto',p:[700,1400,2725,2725,2725,2725,2725,2725,2725,2725,2725,2725],pkg:'ESC.UVE.ALTO',esc:'—'},
-        {label:'Escalonado Bajo',p:[599,1400,2725,2725,2725,2725,2725,2725,2725,2725,2725,2725],pkg:'ESC.UVE.BAJO',esc:'—'}
+      var uveVariants=[
+        {id:'alto', label:'Pricing Alto', p:[700,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'HS24.LIC.UVE.VOXY.'},
+        {id:'bajo',  label:'Pricing Bajo',  p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'BF24.LIC.UVE.VOXY.'}
       ];
-      renderMultiVariant('lb', rows);
+      if(!window._uveVariant) window._uveVariant='alto';
+      var selUVE=window._uveVariant;
+      var uveChips=uveVariants.map(function(v){
+        return '<div class="chip optional '+(selUVE===v.id?'selected':'')+'" onclick="setAlianzaVar(\'uve\',\''+v.id+'\');" style="cursor:pointer"><span class="chip-name">'+v.label+'</span></div>';
+      }).join('');
+      var chosen=uveVariants.find(function(v){return v.id===selUVE;})||uveVariants[0];
+      g('lb').innerHTML='';
+      // Show variant selector above table
+      var selDiv=g('alianza-variant-sel');
+      if(selDiv){
+        g('alianza-chips').innerHTML=uveChips;
+        selDiv.style.display='block';
+      }
+      renderTable('lb',chosen.p,chosen.pkg,'—',0,0);
       g('lbi').innerHTML='<span>Incluye: Asistencia, Voxy, 5% domiciliación</span>';
       g('li').innerHTML=NB['unico']+' <span class="badge b-mod">UVE</span>';
       g('lic-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UVE</div>';
       g('lic-total').innerHTML=''; return;
     } else if(uName==='UNICA'||uName==='ARTE DIGITAL Y MULTIMEDIA'||uName==='MARKETING Y PUBLICIDAD'||uName==='MEDIOS DIGITALES'||uName==='COMUNICACIÓN CORPORATIVA'){
-      // UNICA: 3 variantes
-      var rows=[
-        {label:'Escalonado Alto',p:[735,1470,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810],pkg:'ESC1.LIC.UNICA.VOXY.',esc:'—'},
-        {label:'Escalonado Bajo',p:[629,1470,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810],pkg:'ESC2.LIC.UNICA.VOXY.',esc:'—'},
-        {label:'Flat (cuota fija)',p:[2810,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810],pkg:'LIC.UNICA.VOXY.',esc:'—'},
-        {label:'Flat + Titulaciuión',p:[3360,3360,3360,3360,3360,3360,3360,3360,3360,3360,3360,3360],pkg:'LIC.UNICA.VOXY.TIT.',esc:'—'}
+      var unicaVariants=[
+        {id:'alto', label:'Pricing Alto', p:[735,1470,1995,2810,2810,2810,2810,2810,2810,2810,2810,2810],pkg:'ESC1.LIC.UNICA.VOXY.'},
+        {id:'bajo',  label:'Pricing Bajo',  p:[629,1470,1995,2810,2810,2810,2810,2810,2810,2810,2810,2810],pkg:'ESC2.LIC.UNICA.VOXY.'},
+        {id:'flat',  label:'Flat',           p:[2810,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810],pkg:'LIC.UNICA.VOXY.'}
       ];
-      renderMultiVariant('lb', rows);
+      if(!window._unicaVariant) window._unicaVariant='esc_alto';
+      var selUNICA=window._unicaVariant;
+      var unicaChips=unicaVariants.map(function(v){
+        return '<div class="chip optional '+(selUNICA===v.id?'selected':'')+'" onclick="setAlianzaVar(\'unica\',\''+v.id+'\');" style="cursor:pointer"><span class="chip-name">'+v.label+'</span></div>';
+      }).join('');
+      var chosenUNICA=unicaVariants.find(function(v){return v.id===selUNICA;})||unicaVariants[0];
+      g('lb').innerHTML='';
+      var selDiv2=g('alianza-variant-sel');
+      if(selDiv2){
+        g('alianza-chips').innerHTML=unicaChips;
+        selDiv2.style.display='block';
+      }
+      renderTable('lb',chosenUNICA.p,chosenUNICA.pkg,'—',0,0);
       g('lbi').innerHTML='<span>Incluye: Voxy</span>';
       g('li').innerHTML=NB['unico']+' <span class="badge b-mod">UNICA</span>';
       g('lic-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UNICA</div>';
       g('lic-total').innerHTML=''; return;
+    } else if(uName.indexOf('UNAG')>=0 || nivelRaw==='unag'){
+      g('lb').innerHTML='<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--mu)">Programa UNAG — consultar precio con el área comercial</td></tr>';
+      g('lbi').innerHTML='';g('li').innerHTML=NB['unico']+' <span class="badge b-mod">UNAG</span>';
+      g('lic-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UNAG</div>';
+      g('lic-total').innerHTML='';return;
     } else {
       g('lb').innerHTML='<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--mu)">Ver pestaña Pagos Únicos</td></tr>';
       g('lbi').innerHTML='';g('li').innerHTML=NB['unico'];
@@ -1366,19 +1399,18 @@ function rL(){
     }
   }
 
+  // Hide alianza variant selector for normal programs
+  var _avs=g('alianza-variant-sel'); if(_avs) _avs.style.display='none';
   var jornada=document.getElementById('ljor')?document.getElementById('ljor').value:'intensiva';
   var isIngenieria2=(progKey==='ingenieria'||progKey==='robotica'||progKey==='arquitectura');
   var e=getPrice(progKey,nivel,lead,jornada,isIngenieria2);
   if(!e)return;
-  // Override with exact price from catalog if available
-  var exactM3=getExactM3(progName,'lic');
-  if(exactM3 && jornada==='intensiva') {
-    e=JSON.parse(JSON.stringify(e));
-    for(var _i=2;_i<e.p.length;_i++) e.p[_i]=exactM3;
-  }
+  // Add experiencia to base price (not as separate accesorio)
+  var expPrice = SEL_EXP['lic'] ? (EXP_PRICES[SEL_EXP['lic']]||0) : 0;
+  var expPrices = e.p.map(function(v,i){ return i>=2 ? v+expPrice : v; });
   var acc=getAccTotal('lic',false);
   var acc12_lic=getAccTotal('lic',false,true);
-  renderTable('lb',e.p,e.pkg,e.esc,acc,acc12_lic);
+  renderTable('lb',expPrices,e.pkg,e.esc,acc,acc12_lic);
   renderBeca('lbi',e.b);
   // Programas con pricing especial muestran solo el nombre, sin badge de nivel
   var specialProgs=['arquitectura','robotica','arq_software'];
@@ -1388,18 +1420,39 @@ function rL(){
   var nuevoBadge=isNuevo(progName)?'<span class="b-new">NUEVO</span> ':'';
   var durStr=getDuracion('lic',jornada||'intensiva',progName);
   var durBadge='<span class="dur-badge">⏱ '+durStr+'</span>';
-  g('li').innerHTML=nivelBadge+' '+nuevoBadge+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+jorBadge+durBadge+LBG[lead];
+  var fechaBadge=SEL_INICIO['lic']?'<span class="dur-badge">📅 Inicio: '+SEL_INICIO['lic']+'</span>':'';
+  g('li').innerHTML=nivelBadge+' '+nuevoBadge+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+jorBadge+durBadge+fechaBadge+LBG[lead];
+  // Filter experiencia items based on program capabilities
+  var _licProgs=CATALOG['LICENCIATURA']||[];
+  var _progEntry=null;
+  for(var _pi=0;_pi<_licProgs.length;_pi++){if(_licProgs[_pi].p===progName){_progEntry=_licProgs[_pi];break;}}
+  if(_progEntry && ACCS['lic'] && ACCS['lic'].optional){
+    ACCS['lic'].optional.forEach(function(grp){
+      if(grp.cat==='Experiencia'){
+        grp.items.forEach(function(item){
+          if(item.id==='seseje') item.hidden=!_progEntry.eje;
+          if(item.id==='utelj')  item.hidden=!_progEntry.jov;
+          if(item.id==='hibrid') item.hidden=!_progEntry.hib;
+        });
+      }
+    });
+  }
+  renderExpSelector(_progEntry);
+  populateFechaSelects();
   renderAccs('lic-acc','lic',false);
   renderTotal('lic-total',e.p[2],'lic',false);
 }
 
 function rM(){
-  var progSel=g('mprog'); if(!progSel||!progSel.value)return;
+  var progSel=g('mprog'); if(!progSel)return;
+  if(!progSel.value && progSel.options.length>0) progSel.value=progSel.options[0].value;
+  if(!progSel.value)return;
   var progName=progSel.value;
   var nivelRaw=updateBadge('mprog','mnivel-badge');
-  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico'};
+  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico','uve':'unico','unag':'unico'};
   var nivel=nivelMap[nivelRaw]||nivelRaw;
   var lead=g('mlead').value;
+  if(lead==='rmkt') lead='rmkt30'; // mlead uses 'rmkt', PROG uses 'rmkt30'
 
   var mod=g('mmod').value;
   var isOnline=(mod==='online');
@@ -1422,17 +1475,21 @@ function rM(){
   var nuevoBadgeM=isNuevo(progName)?'<span class="b-new">NUEVO</span> ':'';
   var durBadgeM='<span class="dur-badge">⏱ '+getDuracion('mae','maestria',progName)+'</span>';
   g('mi').innerHTML=NB[nivel]+' '+nuevoBadgeM+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+durBadgeM+LBG[lead];
+  populateFechaSelects();
   renderAccs('mae-acc','mae',isOnline);
   renderTotal('mae-total',e.p[2],'mae',isOnline);
 }
 
 function rS(){
-  var progSel=g('sprog'); if(!progSel||!progSel.value)return;
+  var progSel=g('sprog'); if(!progSel)return;
+  if(!progSel.value && progSel.options.length>0) progSel.value=progSel.options[0].value;
+  if(!progSel.value)return;
   var progName=progSel.value;
   var nivelRaw=updateBadge('sprog','snivel-badge');
-  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico'};
+  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico','uve':'unico','unag':'unico'};
   var nivel=nivelMap[nivelRaw]||nivelRaw;
   var lead=g('slead').value;
+  if(lead==='rmkt') lead='rmkt30';
 
   if(nivel==='unico'){
     g('sb').innerHTML='<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--mu)">Programa de precio único — ver pestaña Pagos Únicos</td></tr>';
@@ -1454,10 +1511,12 @@ function rS(){
 }
 
 function rD(){
-  var progSel=g('dprog'); if(!progSel||!progSel.value)return;
+  var progSel=g('dprog'); if(!progSel)return;
+  if(!progSel.value && progSel.options.length>0) progSel.value=progSel.options[0].value;
+  if(!progSel.value)return;
   var progName=progSel.value;
   var nivelRaw=updateBadge('dprog','dnivel-badge');
-  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico'};
+  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico','uve':'unico','unag':'unico'};
   var nivel=nivelMap[nivelRaw]||nivelRaw;
   var lead=g('dlead').value;
 
@@ -1486,67 +1545,47 @@ function rPU(){
     {
       title: 'Licenciaturas',
       items:[
-        {l:'Online — Mayor',       lista:200530, pago:74300},
-        {l:'Ejecutivas',           lista:200530, pago:82200},
-        {l:'Joven',                lista:200530, pago:82200},
-        {l:'H\u00edbrida',        lista:200530, pago:87900},
-        {l:'Derecho — Mayor',      lista:231010, pago:83000},
-        {l:'Derecho — Ejecutivas', lista:231010, pago:91900},
-        {l:'Derecho — Joven',      lista:231010, pago:91900},
-        {l:'Derecho — H\u00edbrida', lista:231010, pago:97400}
+        {l:'Online — Mayor',       lista:200530, pago:74300,  pkg:'LI.UNICO.'},
+        {l:'Ejecutivas',           lista:200530, pago:82200,  pkg:'LI.HIBRIDO.UNICO.'},
+        {l:'Joven',                lista:200530, pago:82200,  pkg:'LI.HIBRIDO.UNICO.'},
+        {l:'Híbrida',              lista:200530, pago:87900,  pkg:'LI.HIBRIDO.UNICO.'},
+        {l:'Derecho — Mayor',      lista:231010, pago:83000,  pkg:'LI.UNICO.DERECHO.'},
+        {l:'Derecho — Ejecutivas', lista:231010, pago:91900,  pkg:'LI.DERECHO.HIBRIDO.UNICO.'},
+        {l:'Derecho — Joven',      lista:231010, pago:91900,  pkg:'LI.DERECHO.HIBRIDO.UNICO.'},
+        {l:'Derecho — Híbrida',    lista:231010, pago:97400,  pkg:'LI.DERECHO.HIBRIDO.UNICO.'}
       ]
     },
     {
-      title: 'Maestr\u00edas',
+      title: 'Maestrías',
       items:[
-        {l:'Online / Mayor — 18M',    lista:136980, pago:47700},
-        {l:'Online / Mayor — 24M',    lista:136980, pago:63600},
-        {l:'Ejecutivas — 18M',        lista:136980, pago:49800},
-        {l:'Ejecutivas — 24M',        lista:136980, pago:66400},
-        {l:'H\u00edbrida — 18M',     lista:136980, pago:55800},
-        {l:'H\u00edbrida — 24M',     lista:136980, pago:74400}
-      ]
-    },
-    {
-      title: 'Doctorado',
-      items:[
-        {l:'Online',                   lista:null,   pago:116600}
-      ]
-    },
-    {
-      title: 'PSI UVE',
-      items:[
-        {l:'PSI UVE Online', lista:216900, pago:106400}
-      ]
-    },
-    {
-      title: 'UNICA (Alianza)',
-      items:[
-        {l:'3 Escalonados — Alto (m1:$735, m2:$1470, m3+:$2810)', lista:null, pago:2810},
-        {l:'3 Escalonados — Bajo (m1:$629, m2:$1470, m3+:$2810)', lista:null, pago:2810},
-        {l:'Flat sin titulaciui\u00f3n', lista:null, pago:2810},
-        {l:'Flat con titulaciui\u00f3n', lista:null, pago:3360}
-      ]
-    },
-    {
-      title: 'UVE (Alianza)',
-      items:[
-        {l:'3 Escalonados — Alto (m1:$700, m2:$1400, m3+:$2725)', lista:null, pago:2725},
-        {l:'3 Escalonados — Bajo (m1:$599, m2:$1400, m3+:$2725)', lista:null, pago:2725}
+        {l:'Online / Mayor — 18M', lista:136980, pago:47700,  pkg:'MA.UNICO.'},
+        {l:'Online / Mayor — 24M', lista:136980, pago:63600,  pkg:'MA.UNICO.'},
+        {l:'Ejecutivas — 18M',     lista:136980, pago:49800,  pkg:'MA.HIBRIDO.UNICO.'}
       ]
     }
   ];
 
-  var html='';
+  // Includes for all PU: Asistencia Plus, Voxy, Título (always included)
+  var includesHTML = '<div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">'
+    + '<span class="chip included" style="font-size:11px"><span class="chip-check"></span><span class="chip-name">Inglés Voxy</span><span class="chip-price">Incluido</span></span>'
+    + '<span class="chip included" style="font-size:11px"><span class="chip-check"></span><span class="chip-name">Asistencia Plus</span><span class="chip-price">Incluido</span></span>'
+    + '<span class="chip included" style="font-size:11px"><span class="chip-check"></span><span class="chip-name">Titulación</span><span class="chip-price">Incluido</span></span>'
+    + '</div>';
+
+  var html = '';
   groups.forEach(function(grp){
-    html += '<div style="margin-bottom:20px">';
-    html += '<div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mu);margin-bottom:10px">'+grp.title+'</div>';
+    html += '<div class="pu-section" style="margin-bottom:24px">';
+    html += '<div style="font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--mu);margin-bottom:10px">'+grp.title+'</div>';
     html += '<div class="pu-grid">';
-    grp.items.forEach(function(it){
+    grp.items.forEach(function(item){
+      var beca = item.lista>0 ? Math.round((1-item.pago/item.lista)*100) : 0;
       html += '<div class="pu-card">'
-            + '<div class="pu-lbl">'+it.l+'</div>'
-            + (it.lista ? '<div class="pu-lista">Lista: '+fmt(it.lista)+'</div>' : '')
-            + '<div class="pu-precio">'+fmt(it.pago)+'</div>'
+            + '<div class="pu-label">'+item.l+'</div>'
+            + '<div class="pu-price">$'+item.pago.toLocaleString('es-MX')+'</div>'
+            + '<div class="pu-lista" style="font-size:11px;color:var(--mu)">Lista: $'+item.lista.toLocaleString('es-MX')+'</div>'
+            + '<div class="pu-beca" style="font-size:11px;color:#16a34a;font-weight:600">Beca '+beca+'%</div>'
+            + '<div class="pu-pkg" style="font-size:10px;color:var(--mu);margin-top:4px">'+item.pkg+'</div>'
+            + includesHTML
             + '</div>';
     });
     html += '</div></div>';
@@ -1554,12 +1593,6 @@ function rPU(){
   g('pug').innerHTML=html;
 }
 
-/* ═══════════════════════════════════════
-   INIT
-═══════════════════════════════════════ */
-/* ═══════════════════════════════════════
-   SEARCHABLE SELECT
-═══════════════════════════════════════ */
 function makeSearchable(selId, onChangeFn) {
   var orig = g(selId);
   if(!orig) return;
@@ -1827,7 +1860,6 @@ function downloadSummary(sec){
     +'<div style="background:#fff;padding:20px 28px 16px;border-bottom:4px solid #39b54a;display:flex;align-items:center;justify-content:space-between">'
     +logoSVG
     +'<div style="text-align:right">'
-    +'<div style="font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:#374151">Propuesta Comercial</div>'
     +'<div style="font-size:11px;color:#9ca3af;margin-top:2px">Vigente</div>'
     +'</div></div>'
 
@@ -1836,6 +1868,9 @@ function downloadSummary(sec){
     +'<div style="font-size:10px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:6px">Programa seleccionado</div>'
     +'<div style="font-size:22px;font-weight:700;margin-bottom:10px">'+progName+'</div>'
     +'<span style="display:inline-block;background:#39b54a;color:#fff;border-radius:999px;padding:3px 12px;font-size:11px;font-weight:700">'+secLabel+'</span>'
+    +(sec==='lic' && SEL_EXP['lic'] ? '<span style="display:inline-block;background:#7c3aed;color:#fff;border-radius:999px;padding:3px 12px;font-size:11px;font-weight:700;margin-left:8px">Con experiencia '+({'seseje':'Ejecutiva','utelj':'Utel Joven','hibrid':'Híbrida'}[SEL_EXP['lic']]||'')+'</span>' : '')
+    +(SEL_INICIO[sec]?'<div style="margin-top:6px;font-size:12px;color:rgba(255,255,255,.85);font-weight:600">📅 Fecha de inicio: '+SEL_INICIO[sec]+'</div>':'')
+    +'<div style="margin-top:6px;font-size:11px;color:rgba(255,255,255,.6)">⏱ Válido por 24 hs</div>'
     +'</div>'
 
     // BODY
@@ -1931,6 +1966,8 @@ function saveAdminConfig(){
   document.getElementById('cfg-msg').textContent='✓ Guardado';
   setTimeout(function(){document.getElementById('cfg-msg').textContent='';},2500);
 }
+
+
 function updateTituloCosto0(){
   ['lic','mae','doc'].forEach(function(sec){
     var cats=ACCS[sec]; if(!cats) return;
@@ -1941,15 +1978,140 @@ function updateTituloCosto0(){
     if(TITULO_COSTO_0) accCat.items.unshift({id:'tit0_free',name:'Título Costo $0',price:0});
   });
 }
+
+function populateFechaSelects(){
+  Object.keys(INICIO_DATES).forEach(function(sec){
+    var sel=g(sec+'-fecha');
+    if(!sel) return;
+    var dates=INICIO_DATES[sec]||[];
+    sel.innerHTML='<option value="">— Seleccionar fecha de inicio —</option>';
+    dates.forEach(function(d){
+      var opt=document.createElement('option');
+      opt.value=d; opt.textContent=d;
+      if(SEL_INICIO[sec]===d) opt.selected=true;
+      sel.appendChild(opt);
+    });
+  });
+}
+
+function setSELInicio(sec, val){
+  SEL_INICIO[sec]=val||null;
+  if(sec==='mae'){ SEL_INICIO['ms']=val||null; var ms=g('ms-fecha'); if(ms) ms.value=val||''; }
+  if(sec==='ms'){ SEL_INICIO['mae']=val||null; var ma=g('mae-fecha'); if(ma) ma.value=val||''; }
+  if(sec==='lic') rL();
+  else if(sec==='mae'||sec==='ms'){ rM(); }
+  else if(sec==='doc') rD();
+}
+
 function init(){
   loadConfig();
   fillSelect('lprog','LICENCIATURA','lnivel-badge');
-  fillSelect('mprog','MAESTRÍA','mnivel-badge');
+  fillSelect('mprog','MAESTR\u00cdA','mnivel-badge');
   fillSelect('sprog','MASTER','snivel-badge');
   fillSelect('dprog','DOCTORADO','dnivel-badge');
   makeSearchableAll();
   rL();rM();rS();rD();rPU();rDip();
 }
+
+function filterLArea(){
+  var area=g('larea').value;
+  var progs=CATALOG['LICENCIATURA']||[];
+  var filtered=area?progs.filter(function(p){return p.a===area;}):progs;
+  var sel=g('lprog'); sel.innerHTML='';
+  filtered.forEach(function(item){
+    var opt=document.createElement('option');
+    opt.value=item.p;
+    opt.setAttribute('data-nivel',item.v);
+    var isNew=NEW_PROGS.indexOf(item.p.toUpperCase())>=0;
+    opt.textContent=(isNew?'⭐ ':'')+item.p;
+    sel.appendChild(opt);
+  });
+  if(sel.options && sel.options.length > 0){sel.selectedIndex=0;sel.value=sel.options[0].value;}
+  if(window._lprogSS) window._lprogSS.update();
+  updateBadge('lprog','lnivel-badge');
+  rL();
+}
+
+function filterMArea(){
+  var area=g('marea').value;
+  var progs=CATALOG['MAESTRÍA']||[];
+  var filtered=area?progs.filter(function(p){return p.a===area;}):progs;
+  var sel=g('mprog'); sel.innerHTML='';
+  filtered.forEach(function(item){
+    var opt=document.createElement('option');
+    opt.value=item.p;
+    opt.setAttribute('data-nivel',item.v);
+    var isNew=NEW_PROGS.indexOf(item.p.toUpperCase())>=0;
+    opt.textContent=(isNew?'⭐ ':'')+item.p;
+    sel.appendChild(opt);
+  });
+  if(sel.options && sel.options.length > 0){sel.selectedIndex=0;sel.value=sel.options[0].value;}
+  if(window._mprogSS) window._mprogSS.update();
+  updateBadge('mprog','mnivel-badge');
+  rM();
+}
+
+function setAlianzaVar(type, val){
+  if(type==='uve') window._uveVariant=val;
+  else if(type==='unica') window._unicaVariant=val;
+  rL();
+}
+
+function renderExpSelector(progEntry){
+  var el=g('exp-selector');
+  var chipsEl=g('exp-chips');
+  if(!el||!chipsEl) return;
+  if(!progEntry){el.style.display='none';return;}
+  var opts=[];
+  if(progEntry.eje) opts.push({id:'seseje',label:'Ejecutiva',price:165});
+  if(progEntry.jov) opts.push({id:'utelj', label:'Utel Joven',price:165});
+  if(progEntry.hib) opts.push({id:'hibrid',label:'H\u00edbrida',price:440});
+  if(opts.length===0){el.style.display='none';SEL_EXP['lic']=null;return;}
+  el.style.display='block';
+  var cur=SEL_EXP['lic'];
+  var html='<div class="chip optional '+(cur===null?'selected':'')+'" onclick="selectExp(null)" style="cursor:pointer"><span class="chip-name">Sin experiencia</span></div>';
+  opts.forEach(function(o){
+    var sel=(cur===o.id);
+    html+='<div class="chip optional '+(sel?'selected':'')+'" onclick="selectExp(\''+o.id+'\');" style="cursor:pointer"><span class="chip-name">'+o.label+'</span><span class="chip-price">+$'+o.price+'/mes</span></div>';
+  });
+  chipsEl.innerHTML=html;
+}
+
+function selectExp(id){
+  SEL_EXP['lic']=id;
+  rL();
+}
+
+function populateFechaSelects(){
+  // For each section, populate fecha selector based on program
+  ['lic','mae','ms','doc'].forEach(function(sec){
+    var sel=g(sec+'-fecha'); if(!sel) return;
+    var progSel=g({lic:'lprog',mae:'mprog',ms:'sprog',doc:'dprog'}[sec]);
+    var progName=progSel&&progSel.value?progSel.value:'';
+    var dates=INICIO_BY_PROG[progName]||[];
+    sel.innerHTML='<option value="">— Seleccionar fecha de inicio —</option>';
+    dates.forEach(function(d){
+      var opt=document.createElement('option');
+      opt.value=d; opt.textContent=d;
+      if(SEL_INICIO[sec]===d) opt.selected=true;
+      sel.appendChild(opt);
+    });
+  });
+}
+
+function setSELInicio(sec, val){
+  SEL_INICIO[sec]=val||null;
+  if(sec==='mae'){ SEL_INICIO['ms']=val||null; var ms=g('ms-fecha'); if(ms) ms.value=val||''; }
+  if(sec==='ms'){ SEL_INICIO['mae']=val||null; var ma=g('mae-fecha'); if(ma) ma.value=val||''; }
+}
+
+
+
+
+
+
+
+
 
 </script>
 </body>
