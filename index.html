@@ -523,7 +523,7 @@ function tryLogin(){
   if(p===PWD){
     localStorage.removeItem('ua');
     localStorage.setItem('ok', Date.now() + 259200000); // 72 horas
-    localStorage.setItem('build', '1778176672');
+    localStorage.setItem('build', '1778177153');
     g('ls').style.display='none';
     g('app').style.display='block';
     init();
@@ -695,7 +695,20 @@ function renderTable(tbodyId, prices, pkg, esc, accTotal, accTotal12){
       var badgeHtml=isActual?' <span class="badge b-mod" style="font-size:10px">mes actual</span>':'';
       // Only add deferred accs on the last (highest) price group
       var isLastPrice=(p===maxPrice);
-      var rowAcc=isLastPrice?acc3:0;
+      // Always-accs (like diploma) sum on every row
+      var alwaysAcc=0;
+      if(typeof ALWAYS_ACCS!=='undefined' && typeof SEL!=='undefined'){
+        var secKey=tbodyId==='sb'?'ms':(tbodyId==='mb'?'mae':(tbodyId==='lb'?'lic':'doc'));
+        ALWAYS_ACCS.forEach(function(aid){
+          if(SEL[secKey]&&SEL[secKey][aid]){
+            var acat=ACCS[secKey];
+            if(acat) acat.optional.forEach(function(grp){
+              grp.items.forEach(function(it){if(it.id===aid) alwaysAcc+=it.price;});
+            });
+          }
+        });
+      }
+      var rowAcc=isLastPrice?acc3:alwaysAcc;
       if(lastIdx===prices.length-1){
         rows.push({label:'Mes '+(i+1)+' en adelante'+badgeHtml,p:p,dom:true,acc:rowAcc});
       } else {
@@ -1123,6 +1136,7 @@ var ACCS = {
 // IDs que cuentan para reglas
 var CERT_IDS  = ['coursera','facebook','cifal','microsoft','tableau','gcloud','gads','legal'];
 var DEFERRED_ACCS = ['ucamp','utelx','tit','tit50','tit0_free']; // solo aplican desde mes 3
+var ALWAYS_ACCS = ['diploma']; // suman en TODOS los pagos sin excepción
 var PLAT_IDS  = ['utelx','ugen'];
 var IDIOM_IDS = ['cambridge','duolingo'];
 
@@ -2167,6 +2181,7 @@ function selectExpMAE(id){
   SEL_EXP['mae']=id;
   rM();
 }
+
 
 
 
