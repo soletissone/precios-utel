@@ -1984,6 +1984,10 @@ function downloadSummary(sec){
   });
   // Ejecutiva siempre incluida para sección en
   if(sec==='en') incChips+='<span style="display:inline-block;background:#eeecfd;color:#7c3aed;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Sesión Ejecutiva</span>';
+  // Título Costo $0 si está activado (aplica a lic, mae, doc)
+  if(TITULO_COSTO_0 && ['lic','mae','doc'].indexOf(realSec)>=0){
+    incChips+='<span style="display:inline-block;background:#dcfce7;color:#16a34a;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Título Costo $0</span>';
+  }
 
   // Build acc chips
   var accChips='';
@@ -2027,6 +2031,7 @@ function downloadSummary(sec){
     +'<div style="background:#fff;padding:20px 28px 16px;border-bottom:4px solid #39b54a;display:flex;align-items:center;justify-content:space-between">'
     +logoSVG
     +'<div style="text-align:right">'
+    +'<div style="font-size:15px;font-weight:800;color:#1a1a2e;letter-spacing:.02em">'+secLabel.toUpperCase()+'</div>'
     +'<div style="font-size:11px;color:#9ca3af;margin-top:2px">Plan de beca</div>'
     +'</div></div>'
 
