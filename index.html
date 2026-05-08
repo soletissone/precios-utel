@@ -228,7 +228,7 @@ td{padding:9px 14px;vertical-align:middle}
       <div class="tab" onclick="sw('doc')">Doctorado</div>
       <div class="tab" onclick="sw('pu')">Pagos Únicos</div>
       <div class="tab" onclick="sw('dip')">Diplomados</div>
-      <div class="tab" onclick="sw('en')">Eje. Nativa</div>
+      <div class="tab" onclick="sw('en')">Ejecutiva</div>
     </div>
 
     <!-- LICENCIATURAS -->
@@ -1904,15 +1904,18 @@ function rDip(){
    DESCARGAR RESUMEN
 ═══════════════════════════════════════ */
 function downloadSummary(sec){
+  // Para sección Ejecutiva, mapear al sub-sec real
+  var realSec = (sec==='en') ? EJE_NATIVA_SEC : sec;
+
   // Collect info
-  var progSelId={lic:'lprog',mae:'mprog',ms:'sprog',doc:'dprog'}[sec];
+  var progSelId={lic:'lprog',mae:'mprog',ms:'sprog',doc:'dprog',en:'en-prog'}[sec];
   var progSel=g(progSelId);
   var progName=progSel&&progSel.options[progSel.selectedIndex]?progSel.options[progSel.selectedIndex].text:'-';
-  var infoEl=g({lic:'li',mae:'mi',ms:'si2',doc:'di'}[sec]);
+  var infoEl=g({lic:'li',mae:'mi',ms:'si2',doc:'di',en:'en-info'}[sec]);
   var infoHTML=infoEl?infoEl.innerHTML:'';
 
   // Get table rows
-  var tbodyId={lic:'lb',mae:'mb',ms:'sb',doc:'db'}[sec];
+  var tbodyId={lic:'lb',mae:'mb',ms:'sb',doc:'db',en:'en-tbody'}[sec];
   var tbody=g(tbodyId);
   var tableHTML=tbody?'<table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px">'+
     '<thead><tr style="background:#f0f1f4"><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">Mes</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">Cuota base</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">+ Accesorios</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">Total</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#16a34a">Dom. '+DOMICILIACION+'%</th></tr></thead>'+
@@ -1922,16 +1925,16 @@ function downloadSummary(sec){
   var totalEl=g(sec+'-total');
   var totalHTML=totalEl?totalEl.innerHTML:'';
 
-  // Get selected accs
-  var accs=ACCS[sec];
+  // Get selected accs — for 'en' use the real sub-section state
+  var accs=ACCS[realSec];
   var selList=[];
   if(accs){
-    accs.optional.forEach(function(grp){grp.items.forEach(function(it){if(SEL[sec][it.id])selList.push(it.name+' '+fmt(it.price)+'/mes');});});
+    accs.optional.forEach(function(grp){grp.items.forEach(function(it){if(SEL[realSec][it.id])selList.push(it.name+' '+fmt(it.price)+'/mes');});});
   }
   var accHTML=selList.length?'<div style="margin-bottom:12px"><strong>Accesorios seleccionados:</strong><ul style="margin:6px 0 0 16px;font-size:13px">'+selList.map(function(a){return'<li>'+a+'</li>';}).join('')+'</ul></div>':'';
 
   // Get beca info
-  var becaEl=g({lic:'lbi',mae:'mbi',ms:'sbi',doc:'dbi'}[sec]);
+  var becaEl=g({lic:'lbi',mae:'mbi',ms:'sbi',doc:'dbi',en:'en-bi'}[sec]);
   var becaHTML=becaEl?'<div style="font-size:12px;color:#6b7280;margin-bottom:16px">'+becaEl.innerHTML+'</div>':'';
 
   // Build HTML for print
@@ -1942,16 +1945,16 @@ function downloadSummary(sec){
     +'</svg>';
 
   // Build clean printable HTML - no external dependencies
-  var secLabel={lic:'Licenciatura',mae:'Maestría',ms:'Master UTEL',doc:'Doctorado'}[sec]||'';
+  var secLabel={lic:'Licenciatura',mae:'Maestría',ms:'Master UTEL',doc:'Doctorado',en:'Ejecutiva'}[sec]||'';
 
   // Get data - calculate directly from SEL and table
-  var cats=ACCS[sec];
+  var cats=ACCS[realSec];
   var lastRow=tbody.querySelector('tr:last-child');
   var baseCell=lastRow?lastRow.querySelector('td:nth-child(2)'):null;
   var baseNum=0;
   if(baseCell){var _t=baseCell.textContent.replace(/[$,.]/g,'').replace(/\s/g,'');baseNum=parseInt(_t)||0;}
   var accSum=0;
-  if(cats) cats.optional.forEach(function(grp){grp.items.forEach(function(it){if(SEL[sec][it.id]&&it.price>0)accSum+=it.price;});});
+  if(cats) cats.optional.forEach(function(grp){grp.items.forEach(function(it){if(SEL[realSec][it.id]&&it.price>0)accSum+=it.price;});});
   var finalAmt=fmt(baseNum+accSum);
   var baseAmt=baseCell?baseCell.textContent.trim():'—';
 
@@ -1975,15 +1978,18 @@ function downloadSummary(sec){
 
   // Build included chips
   var incChips='';
-  if(cats) cats.included.forEach(function(it){
+  var incList2=(realSec==='mae')?cats.included:cats.included;
+  if(cats) incList2.forEach(function(it){
     incChips+='<span style="display:inline-block;background:#dcfce7;color:#16a34a;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ '+it.name+'</span>';
   });
+  // Ejecutiva siempre incluida para sección en
+  if(sec==='en') incChips+='<span style="display:inline-block;background:#eeecfd;color:#7c3aed;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Sesión Ejecutiva</span>';
 
   // Build acc chips
   var accChips='';
   var hasAcc=false;
   if(cats) cats.optional.forEach(function(grp){grp.items.forEach(function(it){
-    if(SEL[sec][it.id]&&it.price>0){
+    if(SEL[realSec][it.id]&&it.price>0){
       accChips+='<span style="display:inline-block;background:#eeecfd;color:#5541d7;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">'+it.name+' '+fmt(it.price)+'/mes</span>';
       hasAcc=true;
     }
@@ -1992,7 +1998,7 @@ function downloadSummary(sec){
   // Build total lines
   var totalLines='<div style="display:flex;justify-content:space-between;padding:5px 0;font-size:13px;color:rgba(255,255,255,0.8)"><span>Cuota base (mes 3+)</span><span>'+baseAmt+'</span></div>';
   if(cats) cats.optional.forEach(function(grp){grp.items.forEach(function(it){
-    if(SEL[sec][it.id]&&it.price>0){
+    if(SEL[realSec][it.id]&&it.price>0){
       totalLines+='<div style="display:flex;justify-content:space-between;padding:5px 0;font-size:13px;color:rgba(255,255,255,0.75)"><span>+ '+it.name+'</span><span>'+fmt(it.price)+'/mes</span></div>';
     }
   });});
@@ -2069,7 +2075,7 @@ function downloadSummary(sec){
     // COMPLEMENTO DE COLEGIATURA
     +(function(){
       var colMap={lic:1100,mae:1200,ms:1200,doc:1200};
-      var colPrice=colMap[sec]||1100;
+      var colPrice=colMap[realSec]||1100;
       return '<div style="background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:12px 16px;margin:0 28px 20px;font-size:12px;color:#5f4200">'
         +'<strong>📋 Complemento de Colegiatura: $'+colPrice.toLocaleString('es-MX')+'</strong>'
         +' — se cobra cada 4 meses'
