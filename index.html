@@ -2055,10 +2055,11 @@ function showAdminConfig(){
 function saveAdminConfig(){
   DOMICILIACION=parseInt(document.getElementById('cfg-dom').value);
   TITULO_COSTO_0=document.getElementById('cfg-tit0').checked;
-  saveConfig();rL();rM();rS();rD();
+  saveConfig();
+  updateTituloCosto0();
+  rL();rM();rS();rD();
   var badge=document.getElementById('dom-pct-header');
   if(badge) badge.textContent=DOMICILIACION;
-  updateTituloCosto0();
   document.getElementById('cfg-msg').textContent='✓ Guardado';
   setTimeout(function(){document.getElementById('cfg-msg').textContent='';},2500);
 }
