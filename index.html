@@ -1347,6 +1347,7 @@ function rL(){
   if(!progSel.value && progSel.options.length>0) progSel.value=progSel.options[0].value;
   if(!progSel.value)return;
   var progName=progSel.value;
+  updateFechaByProg('lic', progName);
   if(progName!==_lastProgLic){ SEL['lic']={}; SEL_EXP['lic']=null; _lastProgLic=progName; }
   var nivelRaw=updateBadge('lprog','lnivel-badge');
   // Map special catalog keys to real pricing levels
@@ -1493,6 +1494,7 @@ function rM(){
   if(!progSel.value && progSel.options.length>0) progSel.value=progSel.options[0].value;
   if(!progSel.value)return;
   var progName=progSel.value;
+  updateFechaByProg('mae', progName); updateFechaByProg('ms', progName);
   if(progName!==_lastProgMae){ SEL['mae']={}; SEL_EXP['mae']=null; _lastProgMae=progName; }
   var nivelRaw=updateBadge('mprog','mnivel-badge');
   var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico','uve':'unico','unag':'unico'};
@@ -1590,6 +1592,7 @@ function rD(){
   if(!progSel.value && progSel.options.length>0) progSel.value=progSel.options[0].value;
   if(!progSel.value) return;
   var progName=progSel.value;
+  updateFechaByProg('doc', progName);
   var nivelRaw=updateBadge('dprog','dnivel-badge');
   var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'doc_esp','unico':'unico','uve':'unico','unag':'unag'};
   var nivel=nivelMap[nivelRaw]||nivelRaw;
