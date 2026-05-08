@@ -555,17 +555,19 @@ window.addEventListener('load',function(){
 });
 
 /* ═══════════════════════════════════════
-   CONFIGURACIÓN ADMIN — COMPARTIDA VÍA FIREBASE
+   CONFIGURACIÓN ADMIN — COMPARTIDA VÍA JSONBIN
 ═══════════════════════════════════════ */
 var ADMIN_PWD = 'UTELADMIN2026';
 
 // ── CONFIGURACIÓN ACTIVA ──────────────
-var DOMICILIACION = 5;        // default, se sobreescribe desde Firebase
-var TITULO_COSTO_0 = false;   // default, se sobreescribe desde Firebase
+var DOMICILIACION = 5;        // default, se sobreescribe desde JSONBin
+var TITULO_COSTO_0 = false;   // default, se sobreescribe desde JSONBin
 // ─────────────────────────────────────
 
-// Firebase config — completar con tus datos de Firebase
-var FB_URL = 'FIREBASE_URL_AQUI'; // ej: https://tu-proyecto-default-rtdb.firebaseio.com
+// JSONBin config
+var JB_BIN = '69fe31faadc21f119a71c60d';
+var JB_KEY = '$2a$10$pemAYCxUoUZrAcugO6D9UeczW0Gb5SGEmmGESkVa3E6XCfnddjTf.';
+var JB_URL = 'https://api.jsonbin.io/v3/b/' + JB_BIN;
 
 function loadConfig(){
   // Primero cargamos de localStorage como fallback inmediato
@@ -577,39 +579,36 @@ function loadConfig(){
       if(c.tit0!==undefined) TITULO_COSTO_0=c.tit0;
     }catch(e){}
   }
-  // Luego sincronizamos con Firebase (si está configurado)
-  if(FB_URL && FB_URL!=='FIREBASE_URL_AQUI'){
-    fetch(FB_URL+'/config.json')
-      .then(function(r){return r.json();})
-      .then(function(data){
-        if(!data) return;
-        var changed=false;
-        if(data.dom && data.dom!==DOMICILIACION){DOMICILIACION=data.dom;changed=true;}
-        if(data.tit0!==undefined && data.tit0!==TITULO_COSTO_0){TITULO_COSTO_0=data.tit0;changed=true;}
-        if(changed){
-          localStorage.setItem('utel_cfg',JSON.stringify({dom:DOMICILIACION,tit0:TITULO_COSTO_0}));
-          updateTituloCosto0();
-          rL();rM();rS();rD();
-          var badge=document.getElementById('dom-pct-header');
-          if(badge) badge.textContent=DOMICILIACION;
-        }
-      })
-      .catch(function(){});
-  }
+  // Luego sincronizamos con JSONBin (fuente de verdad compartida)
+  fetch(JB_URL+'/latest',{headers:{'X-Master-Key':JB_KEY}})
+    .then(function(r){return r.json();})
+    .then(function(res){
+      var data=res.record;
+      if(!data) return;
+      var changed=false;
+      if(data.dom!==undefined && data.dom!==DOMICILIACION){DOMICILIACION=data.dom;changed=true;}
+      if(data.tit0!==undefined && data.tit0!==TITULO_COSTO_0){TITULO_COSTO_0=data.tit0;changed=true;}
+      if(changed){
+        localStorage.setItem('utel_cfg',JSON.stringify({dom:DOMICILIACION,tit0:TITULO_COSTO_0}));
+        updateTituloCosto0();
+        rL();rM();rS();rD();
+        var badge=document.getElementById('dom-pct-header');
+        if(badge) badge.textContent=DOMICILIACION;
+      }
+    })
+    .catch(function(){});
 }
 
 function saveConfig(){
   localStorage.setItem('utel_cfg',JSON.stringify({dom:DOMICILIACION,tit0:TITULO_COSTO_0}));
-  // Guardar en Firebase para que todos los agentes lo vean
-  if(FB_URL && FB_URL!=='FIREBASE_URL_AQUI'){
-    fetch(FB_URL+'/config.json',{
-      method:'PUT',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({dom:DOMICILIACION,tit0:TITULO_COSTO_0})
-    })
-    .then(function(){console.log('Config guardada en Firebase');})
-    .catch(function(e){console.error('Error Firebase:',e);});
-  }
+  // Guardar en JSONBin para que todos los agentes lo vean
+  fetch(JB_URL,{
+    method:'PUT',
+    headers:{'Content-Type':'application/json','X-Master-Key':JB_KEY},
+    body:JSON.stringify({dom:DOMICILIACION,tit0:TITULO_COSTO_0})
+  })
+  .then(function(){console.log('Config guardada en JSONBin');})
+  .catch(function(e){console.error('Error JSONBin:',e);});
 }
 
 /* ═══════════════════════════════════════
