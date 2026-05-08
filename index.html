@@ -2184,6 +2184,7 @@ function setSELInicio(sec, val){
 
 function init(){
   loadConfig();
+  updateTituloCosto0(); // aplicar config de localStorage antes del primer render
   fillSelect('lprog','LICENCIATURA','lnivel-badge');
   fillSelect('mprog','MAESTR\u00cdA','mnivel-badge');
   fillSelect('sprog','MASTER','snivel-badge');
