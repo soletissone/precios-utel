@@ -2336,6 +2336,33 @@ function selectExpMAE(id){
 ═══════════════════════════════════════ */
 var EJE_NATIVA_SEC = 'lic';
 
+/* Mapa pkg regular → pkg ejecutivo (solo para sección Ejecutiva Nativa) */
+var EJE_PKG_MAP = {
+  'P2.LI.INT.' :{'pkg':'P2.LIEJE.INT.' ,'esc':'P14.INT2M'},
+  'P5.LI.INT.' :{'pkg':'P5.LIEJE.INT.' ,'esc':'P14.INT2M'},
+  'P8.LI.INT.' :{'pkg':'P8.LIEJE.INT.' ,'esc':'P14.INT2M'},
+  'P14.LI.INT.':{'pkg':'P11.LIEJE.INT.','esc':''},
+  'P11.LI.INT.':{'pkg':'P11.LIEJE.INT.','esc':''},
+  'P3.LI.INT.' :{'pkg':'P3.LIEJE.INT.' ,'esc':'P14.INT2M'},
+  'P6.LI.INT.' :{'pkg':'P6.LIEJE.INT.' ,'esc':'P14.INT2M'},
+  'P9.LI.INT.' :{'pkg':'P9.LIEJE.INT.' ,'esc':'P14.INT2M'},
+  'P15.LI.INT.':{'pkg':'P12.LIEJE.INT.','esc':''},
+  'P12.LI.INT.':{'pkg':'P12.LIEJE.INT.','esc':''},
+  'P4.LI.INT.' :{'pkg':'P4.LIEJE.INT.' ,'esc':'P14.INT2M'},
+  'P7.LI.INT.' :{'pkg':'P7.LIEJE.INT.' ,'esc':'P14.INT2M'},
+  'P10.LI.INT.':{'pkg':'P10.LIEJE.INT.','esc':'P14.INT2M'},
+  'P16.LI.INT.':{'pkg':'P13.LIEJE.INT.','esc':''},
+  'P13.LI.INT.':{'pkg':'P13.LIEJE.INT.','esc':''},
+  'P6.MA.' :{'pkg':'P5.MAEJE.' ,'esc':'P14.MAE2M'},
+  'P8.MA.' :{'pkg':'P7.MAEJE.' ,'esc':'P14.MAE2M'},
+  'P10.MA.':{'pkg':'P9.MAEJE.' ,'esc':'P14.MAE2M'},
+  'P12.MA.':{'pkg':'P11.MAEJE.','esc':'P14.MAE2M'},
+  'P7.MA.' :{'pkg':'P6.MAEJE.' ,'esc':'P14.MAE2M'},
+  'P9.MA.' :{'pkg':'P8.MAEJE.' ,'esc':'P14.MAE2M'},
+  'P11.MA.':{'pkg':'P10.MAEJE.','esc':'P14.MAE2M'},
+  'P13.MA.':{'pkg':'P12.MAEJE.','esc':'P14.MAE2M'}
+};
+
 var EN_PROGS = {
   lic: ['Administración','Administración De Empresas Turísticas','Administración De Negocios',
         'Administración De Recursos Humanos','Administración De Tecnologías De La Información',
@@ -2469,7 +2496,8 @@ function rEN(){
     // Eje-nativa LIC: never auto-add U-Camp
     SEL['lic']['ucamp']=false; SEL['lic']['_ucamp_was_auto']=false;
     var acc=getAccTotal('lic',false); var acc12=getAccTotal('lic',false,true);
-    renderTable('en-tbody',prices,e.pkg,e.esc,acc,acc12);
+    var ejePkg=EJE_PKG_MAP[e.pkg]; var licPkg=ejePkg?ejePkg.pkg:e.pkg; var licEsc=ejePkg?(ejePkg.esc||'—'):e.esc;
+    renderTable('en-tbody',prices,licPkg,licEsc,acc,acc12);
     renderBeca('en-bi',e.b);
     var dur=getDuracion('lic','intensiva',progName);
     g('en-info').innerHTML=(NB[nivel]||'')
@@ -2494,7 +2522,8 @@ function rEN(){
     // Bake in seseje for MAE ejecutiva nativa: -220 (quita Coursera), sin Coursera
     var prices2=e2.p.map(function(v,i){return i>=2?v-220:v;});
     var acc2=getAccTotal('mae',false); var acc12_2=getAccTotal('mae',false,true);
-    renderTable('en-tbody',prices2,e2.pkg,e2.esc,acc2,acc12_2);
+    var ejePkg2=EJE_PKG_MAP[e2.pkg]; var maePkg=ejePkg2?ejePkg2.pkg:e2.pkg; var maeEsc=ejePkg2?(ejePkg2.esc||'—'):e2.esc;
+    renderTable('en-tbody',prices2,maePkg,maeEsc,acc2,acc12_2);
     renderBeca('en-bi',e2.b);
     var dur2=getDuracion('mae','maestria',progName);
     g('en-info').innerHTML=(NB[nivel]||'')
