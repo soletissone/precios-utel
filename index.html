@@ -1348,7 +1348,6 @@ function rL(){
   if(!progSel.value)return;
   var progName=progSel.value;
   if(progName!==_lastProgLic){ SEL['lic']={}; SEL_EXP['lic']=null; _lastProgLic=progName; }
-  updateFechaByProg('lic', progName);
   var nivelRaw=updateBadge('lprog','lnivel-badge');
   // Map special catalog keys to real pricing levels
   var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico','uve':'unico','unag':'unico'};
@@ -1483,7 +1482,7 @@ function rL(){
     });
   }
   renderExpSelector(_progEntry);
-  populateFechaSelects();
+  updateFechaByProg('lic', progName);
   renderAccs('lic-acc','lic',false);
   renderTotal('lic-total',e.p[2],'lic',false);
 }
@@ -1495,7 +1494,6 @@ function rM(){
   if(!progSel.value)return;
   var progName=progSel.value;
   if(progName!==_lastProgMae){ SEL['mae']={}; SEL_EXP['mae']=null; _lastProgMae=progName; }
-  updateFechaByProg('mae', progName); updateFechaByProg('ms', progName);
   var nivelRaw=updateBadge('mprog','mnivel-badge');
   var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico','uve':'unico','unag':'unico'};
   var nivel=nivelMap[nivelRaw]||nivelRaw;
@@ -1545,7 +1543,7 @@ function rM(){
   var nuevoBadgeM=isNuevo(progName)?'<span class="b-new">NUEVO</span> ':'';
   var durBadgeM='<span class="dur-badge">⏱ '+getDuracion('mae','maestria',progName)+'</span>';
   g('mi').innerHTML=NB[nivel]+' '+nuevoBadgeM+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+durBadgeM+LBG[lead];
-  populateFechaSelects();
+  updateFechaByProg('mae', progName); updateFechaByProg('ms', progName);
   renderAccs('mae-acc','mae',isOnline);
   renderTotal('mae-total',e.p[2],'mae',isOnline);
 }
@@ -1592,7 +1590,6 @@ function rD(){
   if(!progSel.value && progSel.options.length>0) progSel.value=progSel.options[0].value;
   if(!progSel.value) return;
   var progName=progSel.value;
-  updateFechaByProg('doc', progName);
   var nivelRaw=updateBadge('dprog','dnivel-badge');
   var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'doc_esp','unico':'unico','uve':'unico','unag':'unag'};
   var nivel=nivelMap[nivelRaw]||nivelRaw;
@@ -1632,7 +1629,7 @@ function rD(){
   var nuevoBadgeD=isNuevo(progName)?'<span class="badge b-new">NUEVO</span>':'';
   var fechaBadgeD=SEL_INICIO['doc']?'<span class="dur-badge">\u{1F4C5} Inicio: '+SEL_INICIO['doc']+'</span>':'';
   g('di').innerHTML=nivelBadge+' '+nuevoBadgeD+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+durBadgeD+fechaBadgeD+LBG[lead];
-  populateFechaSelects();
+  updateFechaByProg('doc', progName);
   renderAccs('doc-acc','doc',false);
   renderTotal('doc-total',e.p[4],'doc',false);
 }
