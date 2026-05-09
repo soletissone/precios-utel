@@ -2541,16 +2541,17 @@ function rEN(){
     var msPK2=(msPKfromCat==='arqsw')?'arq_software_ms':'master';
     if(msPKfromCat==='arqsw') nivel='alto';
     var e3=getPrice(msPK2,nivel,lead); if(!e3) return;
-    // MS: seseje already included in base price (ACCS ms.included)
+    // MS ejecutiva: seseje en maestrías = $285 (base ya incluye $165) → sumar $120 desde mes 5
+    var prices3=e3.p.map(function(v,i){return i>=4?v+120:v;});
     var acc3=getAccTotal('ms',false); var acc12_3=getAccTotal('ms',false,true);
-    renderTable('en-tbody',e3.p,e3.pkg,e3.esc,acc3,acc12_3);
+    renderTable('en-tbody',prices3,e3.pkg,e3.esc,acc3,acc12_3);
     renderBeca('en-bi',e3.b);
     var dur3=getDuracion('ms','master',progName);
     g('en-info').innerHTML=(NB[nivel]||'')
       +' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'
       +'<span class="dur-badge">⏱ '+dur3+'</span>'+fechaBadge+LBG[lead];
     renderAccs('en-acc','ms',false);
-    renderTotal('en-total',e3.p[4],'ms',false);
+    renderTotal('en-total',prices3[4],'ms',false);
   }
 }
 
