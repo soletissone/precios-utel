@@ -787,7 +787,8 @@ function renderTable(tbodyId, prices, pkg, esc, accTotal, accTotal12){
     tb.appendChild(tr);
   });
 }
-function renderBeca(id,b){
+function renderBeca(id,maxPrice){
+  var b=LISTA>0?Math.max(0,1-maxPrice/LISTA):0;
   g(id).innerHTML='<span>Beca: <strong>'+(b*100).toFixed(1)+'%</strong></span><span>Lista: <strong>'+fmt(LISTA)+'</strong></span>';
 }
 
@@ -1512,7 +1513,7 @@ function rL(){
   var acc=getAccTotal('lic',false);
   var acc12_lic=getAccTotal('lic',false,true);
   renderTable('lb',expPrices,e.pkg,e.esc,acc,acc12_lic);
-  renderBeca('lbi',e.b);
+  renderBeca('lbi',Math.max.apply(null,expPrices));
   // Programas con pricing especial muestran solo el nombre, sin badge de nivel
   var specialProgs=['arquitectura','robotica','arq_software'];
   var nivelBadge = specialProgs.indexOf(progKey)>=0 ? '' : NB[nivel];
@@ -1598,7 +1599,7 @@ function rM(){
   var ejeDiscountMAE=(SEL_EXP['mae']==='seseje')?-220:0;
   var maeExpPrices=e.p.map(function(v,i){return i>=2?v+expPriceMAE+ejeDiscountMAE:v;});
   renderTable('mb',maeExpPrices,e.pkg,e.esc,acc,acc12_mae);
-  renderBeca('mbi',e.b);
+  renderBeca('mbi',Math.max.apply(null,maeExpPrices));
   var nuevoBadgeM=isNuevo(progName)?'<span class="b-new">NUEVO</span> ':'';
   var durBadgeM='<span class="dur-badge">⏱ '+getDuracion('mae','maestria',progName)+'</span>';
   g('mi').innerHTML=NB[nivel]+' '+nuevoBadgeM+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+durBadgeM+LBG[lead];
@@ -1637,7 +1638,7 @@ function rS(){
   var acc=getAccTotal('ms',false);
   var acc12_ms=getAccTotal('ms',false,true);
   renderTable('sb',e.p,e.pkg,e.esc,acc,acc12_ms);
-  renderBeca('sbi',e.b);
+  renderBeca('sbi',Math.max.apply(null,e.p));
   var nuevoBadgeS=isNuevo(progName)?'<span class="b-new">NUEVO</span> ':'';
   var durBadgeS='<span class="dur-badge">⏱ '+getDuracion('ms','master',progName)+'</span>';
   g('si2').innerHTML=NB[nivel]+' '+nuevoBadgeS+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+durBadgeS+LBG[lead];
@@ -1681,7 +1682,7 @@ function rD(){
   var acc=getAccTotal('doc',false);
   var acc12_doc=getAccTotal('doc',false,true);
   renderTable('db',e.p,e.pkg,e.esc,acc,acc12_doc);
-  renderBeca('dbi',e.b);
+  renderBeca('dbi',Math.max.apply(null,e.p));
 
   var durStr=getDuracion('doc','doctorado',progName);
   var durBadgeD=durStr&&durStr!=='—'?'<span class="dur-badge">\u23F1 '+durStr+'</span>':'';
@@ -2501,7 +2502,7 @@ function rEN(){
     var acc=getAccTotal('lic',false); var acc12=getAccTotal('lic',false,true);
     var ejePkg=EJE_PKG_MAP[e.pkg]; var licPkg=ejePkg?ejePkg.pkg:e.pkg; var licEsc=ejePkg?(ejePkg.esc||'—'):e.esc;
     renderTable('en-tbody',prices,licPkg,licEsc,acc,acc12);
-    renderBeca('en-bi',e.b);
+    renderBeca('en-bi',Math.max.apply(null,prices));
     var dur=getDuracion('lic','intensiva',progName);
     var uniqBadgeEN=isMercadoUnico(progName)?'<span style="display:inline-block;background:#fef9c3;color:#854d0e;border-radius:8px;padding:3px 10px;font-size:11px;font-weight:700;margin:0 4px">🌟 Único en el mercado</span>':'';
     g('en-info').innerHTML=(NB[nivel]||'')
@@ -2528,7 +2529,7 @@ function rEN(){
     var acc2=getAccTotal('mae',false); var acc12_2=getAccTotal('mae',false,true);
     var ejePkg2=EJE_PKG_MAP[e2.pkg]; var maePkg=ejePkg2?ejePkg2.pkg:e2.pkg; var maeEsc=ejePkg2?(ejePkg2.esc||'—'):e2.esc;
     renderTable('en-tbody',prices2,maePkg,maeEsc,acc2,acc12_2);
-    renderBeca('en-bi',e2.b);
+    renderBeca('en-bi',Math.max.apply(null,prices2));
     var dur2=getDuracion('mae','maestria',progName);
     var uniqBadgeEN2=isMercadoUnico(progName)?'<span style="display:inline-block;background:#fef9c3;color:#854d0e;border-radius:8px;padding:3px 10px;font-size:11px;font-weight:700;margin:0 4px">🌟 Único en el mercado</span>':'';
     g('en-info').innerHTML=(NB[nivel]||'')
@@ -2549,7 +2550,7 @@ function rEN(){
     // MS ejecutiva nativa = mismos precios que MS normal (seseje obligatorio ya incluido)
     var acc3=getAccTotal('ms',false); var acc12_3=getAccTotal('ms',false,true);
     renderTable('en-tbody',e3.p,e3.pkg,e3.esc,acc3,acc12_3);
-    renderBeca('en-bi',e3.b);
+    renderBeca('en-bi',Math.max.apply(null,e3.p));
     var dur3=getDuracion('ms','master',progName);
     var uniqBadgeEN3=isMercadoUnico(progName)?'<span style="display:inline-block;background:#fef9c3;color:#854d0e;border-radius:8px;padding:3px 10px;font-size:11px;font-weight:700;margin:0 4px">🌟 Único en el mercado</span>':'';
     g('en-info').innerHTML=(NB[nivel]||'')
