@@ -746,8 +746,7 @@ function renderTable(tbodyId, prices, pkg, esc, accTotal, accTotal12){
       // Find how far this price goes
       var lastIdx=i;
       while(lastIdx+1<prices.length && prices[lastIdx+1]===p) lastIdx++;
-      var isActual=(i===2);
-      var badgeHtml=isActual?' <span class="badge b-mod" style="font-size:10px">mes actual</span>':'';
+      var badgeHtml='';
       // Only add deferred accs on the last (highest) price group
       var isLastPrice=(p===maxPrice);
       // Always-accs (like diploma) sum on every row
@@ -1383,7 +1382,7 @@ function renderMultiVariant(tbodyId, variants){
     var rows=[];
     rows.push({mes:'Mes 1 — '+v.label, p:v.p[0]});
     if(v.p[1]!==v.p[0]) rows.push({mes:'Mes 2', p:v.p[1]});
-    rows.push({mes:'Mes 3+ <span class="badge b-mod" style="font-size:9px">mes actual</span>', p:v.p[2]});
+    rows.push({mes:'Mes 3+', p:v.p[2]});
     rows.forEach(function(row,i){
       var tr=document.createElement('tr');
       if(i===0) tr.style.borderTop='2px solid var(--bd)';
