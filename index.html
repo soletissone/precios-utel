@@ -1963,8 +1963,6 @@ function downloadSummary(sec){
     var bg=isLast?'background:#f8f8ff':'';
     tableRows+='<tr style="border-bottom:1px solid #e5e7eb;'+bg+'">'
       +'<td style="padding:10px 16px;font-size:13px;color:#6b7280">'+cells[0].innerHTML+'</td>'
-      +'<td style="padding:10px 16px;font-size:15px;font-weight:700;color:#5541d7">'+cells[1].textContent+'</td>'
-      +'<td style="padding:10px 16px;font-size:13px;color:#16a34a">'+cells[2].textContent+'</td>'
       +'<td style="padding:10px 16px;font-size:15px;font-weight:700;color:#5541d7">'+cells[3].textContent+'</td>'
       +'<td style="padding:10px 16px;font-size:14px;font-weight:700;color:#16a34a">'+domCell+'</td>'
       +'</tr>';
@@ -2047,8 +2045,6 @@ function downloadSummary(sec){
     +'<table style="width:100%;border-collapse:collapse;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;margin-bottom:20px">'
     +'<thead><tr style="background:#f9fafb">'
     +'<th style="padding:9px 16px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b7280">Mes</th>'
-    +'<th style="padding:9px 16px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b7280">Cuota base</th>'
-    +'<th style="padding:9px 16px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b7280">+ Accesorios</th>'
     +'<th style="padding:9px 16px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b7280">Total</th>'
     +'<th style="padding:9px 16px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#16a34a">Con dom. '+DOMICILIACION+'%</th>'
     +'</tr></thead>'
@@ -2058,14 +2054,9 @@ function downloadSummary(sec){
     +'<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6b7280;margin-bottom:8px">Incluido en el paquete</div>'
     +'<div style="margin-bottom:20px">'+incChips+'</div>'
 
-    // ACCESORIOS
-    +(hasAcc?'<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6b7280;margin-bottom:8px">Accesorios agregados</div><div style="margin-bottom:20px">'+accChips+'</div>':'')
-
-    // TOTAL BOX
+    // TOTAL BOX — solo total final
     +'<div style="background:#5541d7;border-radius:12px;padding:20px 24px;color:#fff;margin-bottom:8px">'
-    +'<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.65);margin-bottom:12px">Resumen del plan</div>'
-    +totalLines
-    +'<div style="display:flex;justify-content:space-between;padding-top:14px;margin-top:10px;border-top:1px solid rgba(255,255,255,.25);font-size:20px;font-weight:700">'
+    +'<div style="display:flex;justify-content:space-between;font-size:20px;font-weight:700">'
     +'<span>Total cuota mensual</span><span>'+finalAmt+'</span></div>'
     +'</div>'
 
