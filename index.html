@@ -1981,15 +1981,13 @@ function downloadSummary(sec){
     incChips+='<span style="display:inline-block;background:#dcfce7;color:#16a34a;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Título Costo $0</span>';
   }
 
-  // Build acc chips
-  var accChips='';
-  var hasAcc=false;
+  // Accesorios seleccionados → se agregan a incluidos sin precio
   if(cats) cats.optional.forEach(function(grp){grp.items.forEach(function(it){
     if(SEL[realSec][it.id]&&it.price>0){
-      accChips+='<span style="display:inline-block;background:#eeecfd;color:#5541d7;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">'+it.name+' '+fmt(it.price)+'/mes</span>';
-      hasAcc=true;
+      incChips+='<span style="display:inline-block;background:#eeecfd;color:#5541d7;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ '+it.name+'</span>';
     }
   });});
+  var hasAcc=false; var accChips='';
 
   // Build total lines
   var totalLines='<div style="display:flex;justify-content:space-between;padding:5px 0;font-size:13px;color:rgba(255,255,255,0.8)"><span>Cuota base (mes 3+)</span><span>'+baseAmt+'</span></div>';
