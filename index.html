@@ -2519,8 +2519,8 @@ function rEN(){
     var maePK=(nivelRaw==='arqsw')?'arq_software':'mae_online';
     if(nivelRaw==='arqsw') nivel='alto';
     var e2=getPrice(maePK,nivel,lead); if(!e2) return;
-    // Bake in seseje for MAE ejecutiva nativa: -220 (quita Coursera), sin Coursera
-    var prices2=e2.p.map(function(v,i){return i>=2?v-220:v;});
+    // Bake in seseje for MAE ejecutiva nativa: -220 (quita Coursera) +285 (seseje MAE) = +65 desde mes 3
+    var prices2=e2.p.map(function(v,i){return i>=2?v-220+285:v;});
     var acc2=getAccTotal('mae',false); var acc12_2=getAccTotal('mae',false,true);
     var ejePkg2=EJE_PKG_MAP[e2.pkg]; var maePkg=ejePkg2?ejePkg2.pkg:e2.pkg; var maeEsc=ejePkg2?(ejePkg2.esc||'—'):e2.esc;
     renderTable('en-tbody',prices2,maePkg,maeEsc,acc2,acc12_2);
