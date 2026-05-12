@@ -218,6 +218,7 @@ td{padding:9px 14px;vertical-align:middle}
     <span class="logo">UTEL</span>
     <span class="ht">Plan de Beca · Vigente <span style="font-size:10px;color:var(--mu);font-weight:400">v1.4</span></span>
     <span style="font-size:11px;background:rgba(22,163,74,.1);color:#16a34a;padding:4px 10px;border-radius:999px;font-weight:600" id="dom-indicator">Domiciliación <span id="dom-pct-header">5</span>%</span>
+    <button class="out" onclick="exportAllData()" style="margin-right:6px;background:none;border-color:var(--ac);color:var(--ac)">⬇ Exportar datos</button>
     <button class="out" onclick="logout()">Salir</button>
   </header>
   <div class="main">
@@ -594,6 +595,218 @@ function logout(){
   g('app').style.display='none';
   g('ls').style.display='flex';
   g('pi').value='';
+}
+
+/* ═══════════════════════════════════════
+   EXPORTAR TODOS LOS DATOS (JSON)
+═══════════════════════════════════════ */
+function exportAllData(){
+  var V_LIC_TO_PROG = function(v, progName){
+    var n = progName.toUpperCase();
+    if(v==='arq') return 'arquitectura';
+    if(v==='rob') return 'robotica';
+    if(v==='uve') return 'uve';
+    if(v==='unica') return 'unica';
+    if(v==='arqsw') return null; // no aplica para LIC
+    if(n.indexOf('ARQUITECTURA')>=0) return 'arquitectura';
+    if(n.indexOf('ROB')>=0) return 'robotica';
+    if(n.indexOf('INGENIER')>=0) return 'ingenieria';
+    return 'online_general';
+  };
+
+  var NIVEL_LABELS = {alto:'Pricing Alto', medio:'Pricing Medio', bajo:'Pricing Bajo'};
+
+  // Arma filas planas de precios para una sección
+  function buildFlatRows(nivel_label, progName, area, progKey, leads, experiencias, domPct){
+    var rows = [];
+    if(!progKey || PROG[progKey]==='special') return rows;
+    leads.forEach(function(lead){
+      var e = getPrice(progKey, nivel_label, lead.k, 'intensiva', false);
+      if(!e) return;
+      var exps = experiencias || [{k:null, label:'Sin experiencia', price:0}];
+      exps.forEach(function(exp){
+        var prices = e.p.map(function(v,i){
+          return i>=2 ? v + (exp.price||0) : v;
+        });
+        var maxP = Math.max.apply(null, prices);
+        var lista = (e.pkg && LISTA_MAP[e.pkg]) || LISTA;
+        var beca = lista>0 ? Math.max(0, 1 - maxP/lista) : 0;
+        rows.push({
+          nivel:       nivel_label,
+          programa:    progName,
+          area:        area,
+          lead:        lead.label,
+          experiencia: exp.label,
+          paquete:     e.pkg,
+          escalonado:  e.esc,
+          precio_lista: lista,
+          beca_pct:    parseFloat((beca*100).toFixed(1)),
+          mes_1:       prices[0],
+          mes_2:       prices[1],
+          mes_3_en_adelante: prices[4] || prices[2],
+          domiciliacion_pct: domPct,
+          con_domiciliacion: parseFloat((maxP*(1-domPct/100)).toFixed(0))
+        });
+      });
+    });
+    return rows;
+  }
+
+  var domPct = DOMICILIACION;
+  var export_rows_lic = [];
+  var export_rows_mae = [];
+  var export_rows_ms  = [];
+  var export_rows_doc = [];
+
+  // ─── LICENCIATURAS ───
+  var licLeads = [{k:'hot',label:'Hot Lead'},{k:'rmkt30',label:'RMKT +30'},{k:'rmkt60',label:'RMKT +60'}];
+  var licExps  = [
+    {k:null,  label:'Sin experiencia', price:0},
+    {k:'seseje', label:'Ejecutiva',    price:165},
+    {k:'utelj',  label:'Utel Joven',  price:165},
+    {k:'hibrid', label:'Híbrida',     price:340}
+  ];
+  CATALOG['LICENCIATURA'].forEach(function(item){
+    var nk = item.v;
+    var progKey = V_LIC_TO_PROG(nk, item.p);
+    if(nk==='uve'||nk==='unica') return; // precio especial, se agrega manualmente
+    var nivelK = (nk==='arq'||nk==='rob'||nk==='arqsw')?'alto':(nk||'medio');
+    // Para programas especiales los 3 niveles tienen mismo precio, para online variamos
+    var niveles = ['alto','medio','bajo'];
+    if(nk==='arq'||nk==='rob') niveles=['alto'];
+    niveles.forEach(function(niv){
+      var rows = buildFlatRows(niv, item.p, item.a, progKey, licLeads, licExps, domPct);
+      rows.forEach(function(r){ r.nivel_detected = niv; export_rows_lic.push(r); });
+    });
+  });
+
+  // ─── MAESTRÍAS ───
+  var maeLeads = [{k:'hot',label:'Hot Lead'},{k:'rmkt30',label:'RMKT +30'}];
+  var maeExps  = [
+    {k:null,     label:'Sin experiencia', price:0},
+    {k:'seseje', label:'Ejecutiva',       price:165},
+    {k:'hibrid', label:'Híbrida',        price:395}
+  ];
+  CATALOG['MAESTRÍA'].forEach(function(item){
+    var nk = item.v;
+    if(nk==='unag') return;
+    var progKey = (nk==='arqsw')?'arq_software':'mae_online';
+    var niveles = ['alto','medio','bajo'];
+    if(nk==='arqsw') niveles=['alto'];
+    niveles.forEach(function(niv){
+      var rows = buildFlatRows(niv, item.p, item.a, progKey, maeLeads, maeExps, domPct);
+      rows.forEach(function(r){ r.nivel_detected = niv; export_rows_mae.push(r); });
+    });
+  });
+  // UNAG fijo
+  export_rows_mae.push({programa:'Psicología Transpersonal (UNAG)', nivel:'Único', lead:'—', precio_lista:4190, mes_1:3020, mes_2:3020, mes_3_en_adelante:3020, paquete:'MA.UNAG.BASICO.2.15.21', escalonado:'—', beca_pct:0, domiciliacion_pct:domPct, con_domiciliacion:Math.round(3020*(1-domPct/100))});
+
+  // ─── MASTER UTEL ───
+  var msLeads = [{k:'hot',label:'Hot Lead'},{k:'rmkt30',label:'RMKT +30'}];
+  var msExps  = [{k:null, label:'Sesión Ejecutiva incluida', price:0}];
+  CATALOG['MASTER'].forEach(function(item){
+    var nk = item.v;
+    if(nk==='unag') return;
+    var progKey = (nk==='arqsw')?'arq_software_ms':'master';
+    var niveles = ['alto','medio','bajo'];
+    if(nk==='arqsw') niveles=['alto'];
+    niveles.forEach(function(niv){
+      var rows = buildFlatRows(niv, item.p, item.a, progKey, msLeads, msExps, domPct);
+      rows.forEach(function(r){ r.nivel_detected = niv; export_rows_ms.push(r); });
+    });
+  });
+
+  // ─── DOCTORADO ───
+  var docLeads = [{k:'hot',label:'Hot Lead'},{k:'rmkt',label:'RMKT'}];
+  var docExps  = [{k:null, label:'Sin experiencia', price:0}];
+  CATALOG['DOCTORADO'].forEach(function(item){
+    var nk = item.v;
+    if(nk==='unag') return;
+    var progKey = (nk==='doc_esp')?'doc_especial':'doctorado';
+    var niveles = ['alto','medio','bajo'];
+    niveles.forEach(function(niv){
+      var rows = buildFlatRows(niv, item.p, item.a, progKey, docLeads, docExps, domPct);
+      rows.forEach(function(r){ r.nivel_detected = niv; export_rows_doc.push(r); });
+    });
+  });
+
+  // ─── Armar JSON final ───
+  var out = {
+    meta: {
+      descripcion: 'Exportación completa de datos — Calculadora UTEL Plan de Beca',
+      version: '1.4',
+      fecha_exportacion: new Date().toISOString().slice(0,10),
+      domiciliacion_pct: domPct,
+      titulo_costo_0: TITULO_COSTO_0
+    },
+    catalog: {
+      licenciatura: CATALOG['LICENCIATURA'],
+      maestria:     CATALOG['MAESTRÍA'],
+      master:       CATALOG['MASTER'],
+      doctorado:    CATALOG['DOCTORADO']
+    },
+    pricing_tables_raw: {
+      descripcion: 'Tablas de precios crudas por progKey/nivel/lead. p[] = [mes1..mes12]',
+      data: PROG
+    },
+    pricing_flat: {
+      descripcion: 'Filas planas: un registro por programa × nivel × lead × experiencia',
+      licenciatura: export_rows_lic,
+      maestria:     export_rows_mae,
+      master:       export_rows_ms,
+      doctorado:    export_rows_doc
+    },
+    accessories: {
+      descripcion: 'Accesorios incluidos y opcionales por sección',
+      data: ACCS
+    },
+    experience_addons: {
+      descripcion: 'Costo adicional mensual (desde mes 3) por tipo de experiencia',
+      licenciatura: {ejecutiva:165, utel_joven:165, hibrida:340},
+      maestria:     {ejecutiva:165, hibrida:395},
+      master:       {nota:'Sesión Ejecutiva incluida en precio base, sin costo adicional'}
+    },
+    mappings: {
+      ejecutiva_paquete: {
+        descripcion: 'Cuando modalidad=Ejecutiva Nativa, reemplazar pkg y esc por estos valores',
+        data: EJE_PKG_MAP
+      },
+      hibrida_escalonado: {
+        descripcion: 'Cuando experiencia=Híbrida, reemplazar esc por este valor',
+        data: HIB_ESC_MAP
+      },
+      hibrida_paquete: {
+        descripcion: 'Cuando experiencia=Híbrida, reemplazar pkg por este valor (solo cuando difiere)',
+        data: HIB_PKG_MAP
+      },
+      lista_prices: {
+        descripcion: 'Precio de lista por paquete (para calcular % beca)',
+        data: LISTA_MAP
+      }
+    },
+    special_programs: {
+      nuevos:        NEW_PROGS,
+      unicos_mercado: MERCADO_UNICO_PROGS
+    },
+    start_dates: {
+      por_programa: INICIO_BY_PROG,
+      por_nivel:    INICIO_DATES
+    },
+    duration_map: DUR_MAP,
+    complemento_colegiatura: {
+      licenciatura: {monto:1100, cada_n_meses:4},
+      maestria:     {monto:1200, cada_n_meses:4},
+      master:       {monto:1200, cada_n_meses:4},
+      doctorado:    {monto:1200, cada_n_meses:4}
+    }
+  };
+
+  var blob = new Blob([JSON.stringify(out, null, 2)], {type:'application/json'});
+  var a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'utel_precios_' + new Date().toISOString().slice(0,10) + '.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
 }
 window.addEventListener('load',function(){
   var _ok=parseInt(localStorage.getItem('ok')||'0');
