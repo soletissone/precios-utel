@@ -631,14 +631,26 @@ function exportAllData(){
         var maxP = Math.max.apply(null, prices);
         var lista = (e.pkg && LISTA_MAP[e.pkg]) || LISTA;
         var beca = lista>0 ? Math.max(0, 1 - maxP/lista) : 0;
+        // Ejecutiva overrides (col P y Q del Excel)
+        var ejeMap = EJE_PKG_MAP[e.pkg] || null;
+        // Híbrida overrides
+        var hibPkg = HIB_PKG_MAP[e.pkg] || e.pkg;
+        var hibEsc = HIB_ESC_MAP[e.pkg] || e.esc;
         rows.push({
           nivel:       nivel_label,
           programa:    progName,
           area:        area,
           lead:        lead.label,
           experiencia: exp.label,
-          paquete:     e.pkg,
-          escalonado:  e.esc,
+          // Paquete / escalonado estándar
+          paquete:              e.pkg,
+          escalonado:           e.esc,
+          // Paquete / escalonado cuando modalidad = Ejecutiva Nativa (col P y Q)
+          paquete_ejecutivo:    ejeMap ? ejeMap.pkg : null,
+          escalonado_ejecutivo: ejeMap ? (ejeMap.esc || null) : null,
+          // Paquete / escalonado cuando experiencia = Híbrida
+          paquete_hibrido:      hibPkg !== e.pkg ? hibPkg : e.pkg,
+          escalonado_hibrido:   hibEsc !== e.esc ? hibEsc : e.esc,
           precio_lista: lista,
           beca_pct:    parseFloat((beca*100).toFixed(1)),
           mes_1:       prices[0],
