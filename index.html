@@ -1615,8 +1615,10 @@ function rM(){
   var expPriceMAE=SEL_EXP['mae']?(EXP_PRICES_MAE[SEL_EXP['mae']]||0):0;
   var ejeDiscountMAE=(SEL_EXP['mae']==='seseje')?-220:0;
   var maeExpPrices=e.p.map(function(v,i){return i>=2?v+expPriceMAE+ejeDiscountMAE:v;});
-  var maeEscFinal=(SEL_EXP['mae']==='hibrid'&&HIB_ESC_MAP[e.pkg])?HIB_ESC_MAP[e.pkg]:e.esc;
-  renderTable('mb',maeExpPrices,e.pkg,maeEscFinal,acc,acc12_mae);
+  var isHibridMAE=(SEL_EXP['mae']==='hibrid');
+  var maePkgFinal=(isHibridMAE&&HIB_PKG_MAP[e.pkg])?HIB_PKG_MAP[e.pkg]:e.pkg;
+  var maeEscFinal=(isHibridMAE&&HIB_ESC_MAP[e.pkg])?HIB_ESC_MAP[e.pkg]:e.esc;
+  renderTable('mb',maeExpPrices,maePkgFinal,maeEscFinal,acc,acc12_mae);
   renderBeca('mbi',Math.max.apply(null,maeExpPrices),e.pkg);
   var nuevoBadgeM=isNuevo(progName)?'<span class="b-new">NUEVO</span> ':'';
   var durBadgeM='<span class="dur-badge">⏱ '+getDuracion('mae','maestria',progName)+'</span>';
@@ -2345,16 +2347,22 @@ function selectExpMAE(id){
 ═══════════════════════════════════════ */
 var EJE_NATIVA_SEC = 'lic';
 
-/* Mapa pkg → escalonado híbrido (solo LIC cuando SEL_EXP='hibrid') */
+/* Mapa pkg → escalonado híbrido */
 var HIB_ESC_MAP = {
   'P2.LI.INT.' :'P61.INT2M','P5.LI.INT.' :'P61.INT2M','P8.LI.INT.' :'P61.INT2M',
   'P3.LI.INT.' :'P61.INT2M','P6.LI.INT.' :'P61.INT2M','P9.LI.INT.' :'P61.INT2M',
   'P4.LI.INT.' :'P61.INT2M','P7.LI.INT.' :'P61.INT2M','P10.LI.INT.':'P61.INT2M',
   'P14.LI.INT.':'P67.INT2M','P15.LI.INT.':'P67.INT2M','P16.LI.INT.':'P67.INT2M',
   'P11.LI.INT.':'P65.INT2M','P12.LI.INT.':'P65.INT2M','P13.LI.INT.':'P65.INT2M',
-  // MAE híbrida
+  // MAE híbrida esc
   'P6.MA.' :'P5.MAE2M','P8.MA.' :'P5.MAE2M','P10.MA.':'P5.MAE2M','P12.MA.':'P5.MAE2M',
   'P7.MA.' :'P5.MAE2M','P9.MA.' :'P5.MAE2M','P11.MA.':'P5.MAE2M','P13.MA.':'P5.MAE2M'
+};
+
+/* Mapa pkg → paquete híbrido (solo cuando difiere del regular) */
+var HIB_PKG_MAP = {
+  'P10.MA.':'P7.MAE2M',  // Pricing Bajo Hot
+  'P11.MA.':'P7.MAE2M'   // Pricing Bajo RMKT+30
 };
 
 var MERCADO_UNICO_PROGS = [
