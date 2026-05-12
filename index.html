@@ -1528,7 +1528,8 @@ function rL(){
   var expPrices = e.p.map(function(v,i){ return i>=2 ? v+expPrice : v; });
   var acc=getAccTotal('lic',false);
   var acc12_lic=getAccTotal('lic',false,true);
-  renderTable('lb',expPrices,e.pkg,e.esc,acc,acc12_lic);
+  var licEscFinal=(SEL_EXP['lic']==='hibrid'&&HIB_ESC_MAP[e.pkg])?HIB_ESC_MAP[e.pkg]:e.esc;
+  renderTable('lb',expPrices,e.pkg,licEscFinal,acc,acc12_lic);
   renderBeca('lbi',Math.max.apply(null,expPrices),e.pkg);
   // Programas con pricing especial muestran solo el nombre, sin badge de nivel
   var specialProgs=['arquitectura','robotica','arq_software'];
@@ -2342,6 +2343,15 @@ function selectExpMAE(id){
    EJECUTIVA NATIVA
 ═══════════════════════════════════════ */
 var EJE_NATIVA_SEC = 'lic';
+
+/* Mapa pkg → escalonado híbrido (solo LIC cuando SEL_EXP='hibrid') */
+var HIB_ESC_MAP = {
+  'P2.LI.INT.' :'P61.INT2M','P5.LI.INT.' :'P61.INT2M','P8.LI.INT.' :'P61.INT2M',
+  'P3.LI.INT.' :'P61.INT2M','P6.LI.INT.' :'P61.INT2M','P9.LI.INT.' :'P61.INT2M',
+  'P4.LI.INT.' :'P61.INT2M','P7.LI.INT.' :'P61.INT2M','P10.LI.INT.':'P61.INT2M',
+  'P14.LI.INT.':'P67.INT2M','P15.LI.INT.':'P67.INT2M','P16.LI.INT.':'P67.INT2M',
+  'P11.LI.INT.':'P65.INT2M','P12.LI.INT.':'P65.INT2M','P13.LI.INT.':'P65.INT2M'
+};
 
 var MERCADO_UNICO_PROGS = [
   'INTELIGENCIA ARTIFICIAL APLICADA A NEGOCIOS, INDUSTRIA Y AUTOMATIZACIÓN',
