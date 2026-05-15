@@ -2397,7 +2397,7 @@ function populateFechaSelects(){
 function updateFechaByProg(sec, progName){
   var sel=g(sec+'-fecha');
   if(!sel) return;
-  var dates=(progName && INICIO_BY_PROG[progName]) ? INICIO_BY_PROG[progName] : (INICIO_DATES[sec]||[]);
+  var dates=(progName && INICIO_BY_PROG[progName]) ? INICIO_BY_PROG[progName] : [];
   var curVal=SEL_INICIO[sec];
   sel.innerHTML='<option value="">— Seleccionar fecha de inicio —</option>';
   dates.forEach(function(d){
