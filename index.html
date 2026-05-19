@@ -330,7 +330,7 @@ td{padding:9px 14px;vertical-align:middle}
         <div class="rules-title">ℹ Reglas de combinación</div>
         <div class="rule-item">• Solo <strong>1 idioma adicional</strong> por plan (Cambridge o Duolingo)</div>
         <div class="rule-item">• Máximo <strong>1 certificación</strong> por plan</div>
-        <div class="rule-item">• Maestría <strong>Online</strong> incluye Coursera — bloquea demás certificaciones</div>
+        <div class="rule-item">• Maestría <strong>Online</strong> incluye Platzi — bloquea demás certificaciones</div>
       </div>
       <div id="mae-acc"></div>
       <div id="mae-total"></div>
@@ -1349,12 +1349,12 @@ var ACCS = {
       {id:'voxy',    name:'Inglés Voxy'},
       {id:'welbe',   name:'Welbe'},
       {id:'asist',   name:'Asistencia Plus'}
-      // coursera se agrega dinámicamente si modalidad=online
+      // platzi se agrega dinámicamente si modalidad=online
     ],
     included_online: [
       {id:'voxy',    name:'Inglés Voxy'},
       {id:'welbe',   name:'Welbe'},
-      {id:'coursera',name:'Coursera'},
+      {id:'platzi',  name:'Platzi'},
       {id:'asist',   name:'Asistencia Plus'}
     ],
     optional: [
@@ -1372,6 +1372,7 @@ var ACCS = {
         {id:'duolingo',  name:'Duolingo',       price:195}
       ]},
       {cat:'Certificación', items:[
+        {id:'platzi',    name:'Platzi',         price:200},
         {id:'facebook',  name:'Facebook',       price:195},
         {id:'microsoft', name:'Microsoft',      price:195},
         {id:'tableau',   name:'Tableau',        price:195},
@@ -1431,7 +1432,7 @@ var ACCS = {
 };
 
 // IDs que cuentan para reglas
-var CERT_IDS  = ['coursera','facebook','cifal','microsoft','tableau','gcloud','gads','legal'];
+var CERT_IDS  = ['coursera','platzi','facebook','cifal','microsoft','tableau','gcloud','gads','legal'];
 var DEFERRED_ACCS = ['ucamp','utelx','tit','tit50','tit0_free']; // solo aplican desde mes 3
 var ALWAYS_ACCS = ['diploma']; // suman en TODOS los pagos sin excepción
 var PLAT_IDS  = ['utelx','ugen'];
@@ -1451,9 +1452,9 @@ function getIncludedIds(sec, isOnline){
   var accs = ACCS[sec];
   var list = (sec==='mae' && isOnline) ? accs.included_online : accs.included;
   var ids = list.map(function(x){return x.id;});
-  // Cuando se selecciona Ejecutiva en maestría, Coursera se retira del paquete
+  // Cuando se selecciona Ejecutiva en maestría, Platzi se retira del paquete
   if(sec==='mae' && SEL_EXP['mae']==='seseje'){
-    ids = ids.filter(function(id){return id!=='coursera';});
+    ids = ids.filter(function(id){return id!=='platzi';});
   }
   return ids;
 }
@@ -1480,7 +1481,7 @@ function getAccTotal(sec, isOnline, excludeDeferred){
 function renderAccs(panelId, sec, isOnline){
   var accs = ACCS[sec];
   var incIds = getIncludedIds(sec, isOnline);
-  var courseraInc = incIds.indexOf('coursera') >= 0;
+  var courseraInc = incIds.indexOf('coursera') >= 0 || incIds.indexOf('platzi') >= 0;
 
   // Count selected certs and idioms (excluding included ones)
   var certCount=0, idiomCount=0;
@@ -1521,6 +1522,7 @@ function renderAccs(panelId, sec, isOnline){
     html += '<div class="acc-group-label">'+grp.cat+'</div>';
     html += '<div class="acc-chips">';
     grp.items.forEach(function(item){
+      if(incIds.indexOf(item.id)>=0) return; // ya está incluido en el paquete
       var sel = SEL[sec][item.id]===true;
       var isCert = CERT_IDS.indexOf(item.id)>=0;
       var isPlat = PLAT_IDS.indexOf(item.id)>=0;
@@ -1540,7 +1542,7 @@ function renderAccs(panelId, sec, isOnline){
         } else if((item.id==='cambridge'||item.id==='duolingo') && SEL[sec]['voxy_manual']){
           blocked=true; blockReason='Ya tenés Voxy activo';
         } else if(courseraInc && (isCert || isPlat)){
-          blocked=true; blockReason='No compatible con Coursera';
+          blocked=true; blockReason='No compatible con Coursera/Platzi';
         } else if(isCert && certCount>=maxCerts){
           blocked=true; blockReason='Máx. '+maxCerts+(maxCerts>1?' certificaciones':' certificación');
         } else if(isIdiom && idiomCount>=1){
@@ -1838,7 +1840,7 @@ function rM(){
   for(var _mpi=0;_mpi<_maeProgs.length;_mpi++){if(_maeProgs[_mpi].p===progName){_maeProgEntry=_maeProgs[_mpi];break;}}
   renderExpSelectorMAE(_maeProgEntry||{});
   var expPriceMAE=SEL_EXP['mae']?(EXP_PRICES_MAE[SEL_EXP['mae']]||0):0;
-  var ejeDiscountMAE=(SEL_EXP['mae']==='seseje')?-220:0;
+  var ejeDiscountMAE=(SEL_EXP['mae']==='seseje')?-200:0;
   var maeExpPrices=e.p.map(function(v,i){return i>=2?v+expPriceMAE+ejeDiscountMAE:v;});
   var isHibridMAE=(SEL_EXP['mae']==='hibrid');
   var maePkgFinal=(isHibridMAE&&HIB_PKG_MAP[e.pkg])?HIB_PKG_MAP[e.pkg]:e.pkg;
@@ -2787,8 +2789,8 @@ function rEN(){
     var maePK=(nivelRaw==='arqsw')?'arq_software':'mae_online';
     if(nivelRaw==='arqsw') nivel='alto';
     var e2=getPrice(maePK,nivel,lead); if(!e2) return;
-    // Bake in seseje for MAE ejecutiva nativa: -220 (quita Coursera) +285 (seseje MAE) = +65 desde mes 3
-    var prices2=e2.p.map(function(v,i){return i>=2?v-220+285:v;});
+    // Bake in seseje for MAE ejecutiva nativa: -200 (quita Platzi) +285 (seseje MAE) = +85 desde mes 3
+    var prices2=e2.p.map(function(v,i){return i>=2?v-200+285:v;});
     var acc2=getAccTotal('mae',false); var acc12_2=getAccTotal('mae',false,true);
     var ejePkg2=EJE_PKG_MAP[e2.pkg]; var maePkg=ejePkg2?ejePkg2.pkg:e2.pkg; var maeEsc=ejePkg2?(ejePkg2.esc||'—'):e2.esc;
     renderTable('en-tbody',prices2,maePkg,maeEsc,acc2,acc12_2);
