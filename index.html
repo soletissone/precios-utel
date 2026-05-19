@@ -986,6 +986,29 @@ function renderTable(tbodyId, prices, pkg, esc, accTotal, accTotal12){
   var maxPrice=0;
   for(var pi=2;pi<prices.length;pi++) if(prices[pi]>maxPrice) maxPrice=prices[pi];
 
+  // Pre-compute acc breakdown (once, outside loop)
+  var alwaysAcc=0, deferredAcc=0;
+  if(typeof ALWAYS_ACCS!=='undefined' && typeof SEL!=='undefined'){
+    var secKey=tbodyId==='sb'?'ms':(tbodyId==='mb'?'mae':(tbodyId==='lb'?'lic':'doc'));
+    var acat=ACCS[secKey];
+    ALWAYS_ACCS.forEach(function(aid){
+      if(SEL[secKey]&&SEL[secKey][aid]&&acat)
+        acat.optional.forEach(function(grp){
+          grp.items.forEach(function(it){if(it.id===aid) alwaysAcc+=it.price;});
+        });
+    });
+    if(typeof DEFERRED_ACCS!=='undefined'){
+      DEFERRED_ACCS.forEach(function(aid){
+        if(SEL[secKey]&&SEL[secKey][aid]&&acat)
+          acat.optional.forEach(function(grp){
+            grp.items.forEach(function(it){if(it.id===aid) deferredAcc+=it.price;});
+          });
+      });
+    }
+  }
+  // regularAcc: selected accs that apply from mes 3 but are NOT deferred (e.g. Platzi, certs, idiomas)
+  var regularAcc=Math.max(0, acc3-alwaysAcc-deferredAcc);
+
   // Build rows showing ALL distinct payment amounts
   var rows=[];
   var i=0;
@@ -1002,22 +1025,9 @@ function renderTable(tbodyId, prices, pkg, esc, accTotal, accTotal12){
       var lastIdx=i;
       while(lastIdx+1<prices.length && prices[lastIdx+1]===p) lastIdx++;
       var badgeHtml='';
-      // Only add deferred accs on the last (highest) price group
+      // Deferred accs only on the last (highest) price group; regular accs from mes 3 on all rows
       var isLastPrice=(p===maxPrice);
-      // Always-accs (like diploma) sum on every row
-      var alwaysAcc=0;
-      if(typeof ALWAYS_ACCS!=='undefined' && typeof SEL!=='undefined'){
-        var secKey=tbodyId==='sb'?'ms':(tbodyId==='mb'?'mae':(tbodyId==='lb'?'lic':'doc'));
-        ALWAYS_ACCS.forEach(function(aid){
-          if(SEL[secKey]&&SEL[secKey][aid]){
-            var acat=ACCS[secKey];
-            if(acat) acat.optional.forEach(function(grp){
-              grp.items.forEach(function(it){if(it.id===aid) alwaysAcc+=it.price;});
-            });
-          }
-        });
-      }
-      var rowAcc=isLastPrice?acc3:alwaysAcc;
+      var rowAcc=isLastPrice?acc3:(alwaysAcc+regularAcc);
       if(lastIdx===prices.length-1){
         rows.push({label:'Mes '+(i+1)+' en adelante'+badgeHtml,p:p,dom:true,acc:rowAcc});
       } else {
