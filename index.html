@@ -545,6 +545,16 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
             <span class="toggle-slider"></span>
           </label>
         </div>
+        <div class="cfg-row">
+          <div>
+            <div class="cfg-label">Vista previa Platzi 🧪</div>
+            <div class="cfg-desc">Muestra Platzi ($100/mes) antes del 01/06/2026 — solo para testing</div>
+          </div>
+          <label class="toggle">
+            <input type="checkbox" id="cfg-platzi">
+            <span class="toggle-slider"></span>
+          </label>
+        </div>
         <button class="cfg-save-btn" onclick="saveAdminConfig()">Guardar y aplicar</button>
         <div class="cfg-err" id="cfg-msg"></div>
       </div>
@@ -842,6 +852,9 @@ var ADMIN_PWD = 'UTELADMIN2026';
 // ── CONFIGURACIÓN ACTIVA ──────────────
 var DOMICILIACION = 5;        // default, se sobreescribe desde JSONBin
 var TITULO_COSTO_0 = false;   // default, se sobreescribe desde JSONBin
+var PLATZI_PREVIEW = false;   // habilitar Platzi antes del 01/06/2026 (solo para testing)
+var PLATZI_LAUNCH  = new Date('2026-06-01');
+function isPlatziVisible(){ return PLATZI_PREVIEW || new Date() >= PLATZI_LAUNCH; }
 // ─────────────────────────────────────
 
 // JSONBin config
@@ -857,6 +870,7 @@ function loadConfig(){
       var c=JSON.parse(cached);
       if(c.dom) DOMICILIACION=c.dom;
       if(c.tit0!==undefined) TITULO_COSTO_0=c.tit0;
+      if(c.plat!==undefined) PLATZI_PREVIEW=c.plat;
     }catch(e){}
   }
   // Luego sincronizamos con JSONBin (fuente de verdad compartida)
@@ -868,8 +882,9 @@ function loadConfig(){
       var changed=false;
       if(data.dom!==undefined && data.dom!==DOMICILIACION){DOMICILIACION=data.dom;changed=true;}
       if(data.tit0!==undefined && data.tit0!==TITULO_COSTO_0){TITULO_COSTO_0=data.tit0;changed=true;}
+      if(data.plat!==undefined && data.plat!==PLATZI_PREVIEW){PLATZI_PREVIEW=data.plat;changed=true;}
       if(changed){
-        localStorage.setItem('utel_cfg',JSON.stringify({dom:DOMICILIACION,tit0:TITULO_COSTO_0}));
+        localStorage.setItem('utel_cfg',JSON.stringify({dom:DOMICILIACION,tit0:TITULO_COSTO_0,plat:PLATZI_PREVIEW}));
         updateTituloCosto0();
         rL();rM();rS();rD();
         var badge=document.getElementById('dom-pct-header');
@@ -880,12 +895,12 @@ function loadConfig(){
 }
 
 function saveConfig(){
-  localStorage.setItem('utel_cfg',JSON.stringify({dom:DOMICILIACION,tit0:TITULO_COSTO_0}));
+  localStorage.setItem('utel_cfg',JSON.stringify({dom:DOMICILIACION,tit0:TITULO_COSTO_0,plat:PLATZI_PREVIEW}));
   // Guardar en JSONBin para que todos los agentes lo vean
   fetch(JB_URL,{
     method:'PUT',
     headers:{'Content-Type':'application/json','X-Master-Key':JB_KEY},
-    body:JSON.stringify({dom:DOMICILIACION,tit0:TITULO_COSTO_0})
+    body:JSON.stringify({dom:DOMICILIACION,tit0:TITULO_COSTO_0,plat:PLATZI_PREVIEW})
   })
   .then(function(){console.log('Config guardada en JSONBin');})
   .catch(function(e){console.error('Error JSONBin:',e);});
@@ -1372,7 +1387,7 @@ var ACCS = {
         {id:'duolingo',  name:'Duolingo',       price:195}
       ]},
       {cat:'Certificación', items:[
-        {id:'platzi',    name:'Platzi',         price:200},
+        {id:'platzi',    name:'Platzi',         price:100},
         {id:'facebook',  name:'Facebook',       price:195},
         {id:'microsoft', name:'Microsoft',      price:195},
         {id:'tableau',   name:'Tableau',        price:195},
@@ -1494,6 +1509,7 @@ function renderAccs(panelId, sec, isOnline){
 
   // — INCLUIDOS —
   var incList = (sec==='mae' && isOnline) ? accs.included_online : accs.included;
+  if(!isPlatziVisible()) incList = incList.filter(function(x){ return x.id!=='platzi'; });
   html += '<div class="acc-group">';
   html += '<div class="acc-group-label">Incluido en el paquete</div>';
   html += '<div class="acc-chips">';
@@ -1523,6 +1539,7 @@ function renderAccs(panelId, sec, isOnline){
     html += '<div class="acc-chips">';
     grp.items.forEach(function(item){
       if(incIds.indexOf(item.id)>=0) return; // ya está incluido en el paquete
+      if(item.id==='platzi' && !isPlatziVisible()) return; // oculto hasta 01/06/2026
       var sel = SEL[sec][item.id]===true;
       var isCert = CERT_IDS.indexOf(item.id)>=0;
       var isPlat = PLAT_IDS.indexOf(item.id)>=0;
@@ -2357,10 +2374,12 @@ function showAdminConfig(){
   document.getElementById('admin-cfg-area').style.display='block';
   document.getElementById('cfg-dom').value=String(DOMICILIACION);
   document.getElementById('cfg-tit0').checked=TITULO_COSTO_0;
+  document.getElementById('cfg-platzi').checked=PLATZI_PREVIEW;
 }
 function saveAdminConfig(){
   DOMICILIACION=parseInt(document.getElementById('cfg-dom').value);
   TITULO_COSTO_0=document.getElementById('cfg-tit0').checked;
+  PLATZI_PREVIEW=document.getElementById('cfg-platzi').checked;
   saveConfig();
   updateTituloCosto0();
   rL();rM();rS();rD();
