@@ -1480,10 +1480,8 @@ function getIncludedIds(sec, isOnline){
   var accs = ACCS[sec];
   var list = (sec==='mae' && isOnline) ? accs.included_online : accs.included;
   var ids = list.map(function(x){return x.id;});
-  // Cuando se selecciona Ejecutiva en maestría, Platzi se retira del paquete
-  if(sec==='mae' && SEL_EXP['mae']==='seseje'){
-    ids = ids.filter(function(id){return id!=='platzi';});
-  }
+  // Platzi se mantiene en incIds para seseje — evita que se cobre doble como opcional
+  // (el precio ya fue ajustado via ejeDiscountMAE en rM)
   return ids;
 }
 
@@ -1526,6 +1524,10 @@ function renderAccs(panelId, sec, isOnline){
     // Platzi no activo: quitar Platzi e insertar Coursera en su lugar
     incList = incList.filter(function(x){ return x.id!=='platzi'; });
     incList = incList.concat([{id:'coursera', name:'Coursera'}]);
+  }
+  if(sec==='mae' && SEL_EXP['mae']==='seseje'){
+    // Ejecutiva no incluye Platzi — ocultar chip (precio ya ajustado vía ejeDiscountMAE)
+    incList = incList.filter(function(x){ return x.id!=='platzi'; });
   }
   html += '<div class="acc-group">';
   html += '<div class="acc-group-label">Incluido en el paquete</div>';
@@ -1874,13 +1876,14 @@ function rM(){
   for(var _mpi=0;_mpi<_maeProgs.length;_mpi++){if(_maeProgs[_mpi].p===progName){_maeProgEntry=_maeProgs[_mpi];break;}}
   renderExpSelectorMAE(_maeProgEntry||{});
   var expPriceMAE=SEL_EXP['mae']?(EXP_PRICES_MAE[SEL_EXP['mae']]||0):0;
-  // ejeDiscount solo aplica cuando Platzi está activo (descuenta el Platzi que no incluye ejecutiva)
+  // ejeDiscount: cuando es ejecutiva (seseje) y Platzi está activo, descontar el Platzi que no incluye ejecutiva
   var ejeDiscountMAE=(SEL_EXP['mae']==='seseje' && isPlatziVisible())?-100:0;
-  // Si Platzi está deshabilitado, revertir a precios con Coursera: mes 3+ +120 (−Platzi+Coursera), mes 1-2 −100
+  // Si Platzi está deshabilitado, revertir a precios con Coursera: mes 3+ +120, mes 1-2 −100
   var platziOff=!isPlatziVisible();
   var maeExpPrices=e.p.map(function(v,i){
     if(i>=2) return v+expPriceMAE+ejeDiscountMAE+(platziOff?120:0);
-    return platziOff?v-100:v;
+    // mes 1-2: quitar Platzi si ejecutiva (ejeDiscountMAE=-100) o si Platzi está deshabilitado
+    return platziOff ? v-100 : v+ejeDiscountMAE;
   });
   var isHibridMAE=(SEL_EXP['mae']==='hibrid');
   var maePkgFinal=(isHibridMAE&&HIB_PKG_MAP[e.pkg])?HIB_PKG_MAP[e.pkg]:e.pkg;
