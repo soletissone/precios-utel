@@ -1522,7 +1522,11 @@ function renderAccs(panelId, sec, isOnline){
 
   // — INCLUIDOS —
   var incList = (sec==='mae' && isOnline) ? accs.included_online : accs.included;
-  if(!isPlatziVisible()) incList = incList.filter(function(x){ return x.id!=='platzi'; });
+  if(sec==='mae' && isOnline && !isPlatziVisible()){
+    // Platzi no activo: quitar Platzi e insertar Coursera en su lugar
+    incList = incList.filter(function(x){ return x.id!=='platzi'; });
+    incList = incList.concat([{id:'coursera', name:'Coursera'}]);
+  }
   html += '<div class="acc-group">';
   html += '<div class="acc-group-label">Incluido en el paquete</div>';
   html += '<div class="acc-chips">';
