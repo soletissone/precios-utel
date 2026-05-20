@@ -2834,11 +2834,11 @@ function rEN(){
     var maePK=(nivelRaw==='arqsw')?'arq_software':'mae_online';
     if(nivelRaw==='arqsw') nivel='alto';
     var e2=getPrice(maePK,nivel,lead); if(!e2) return;
-    // Bake in seseje para MAE ejecutiva nativa: quita Platzi (si visible −100, si no +120 revierte a Coursera) +285 seseje
+    // Bake in seseje para MAE ejecutiva nativa: quita Platzi en todos los pagos + 285 seseje mes 3+
     var _platziOff2=!isPlatziVisible();
     var prices2=e2.p.map(function(v,i){
       if(i>=2) return v+(_platziOff2?120:-100)+285;
-      return _platziOff2?v-100:v;
+      return v-100; // mes 1-2: ejecutiva nativa no incluye Platzi
     });
     var acc2=getAccTotal('mae',false); var acc12_2=getAccTotal('mae',false,true);
     var ejePkg2=EJE_PKG_MAP[e2.pkg]; var maePkg=ejePkg2?ejePkg2.pkg:e2.pkg; var maeEsc=ejePkg2?(ejePkg2.esc||'—'):e2.esc;
