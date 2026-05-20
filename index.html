@@ -2835,7 +2835,7 @@ function rEN(){
     if(nivelRaw==='arqsw') nivel='alto';
     var e2=getPrice(maePK,nivel,lead); if(!e2) return;
     var prices2=e2.p.map(function(v,i){
-      if(i>=2) return v+65; // online −220 (sin Coursera) +285 (seseje) = +65
+      if(i>=2) return v+185; // (online con Coursera +120) +65 seseje = +185
       return v-100; // mes 1-2: sin Platzi
     });
     var acc2=getAccTotal('mae',false); var acc12_2=getAccTotal('mae',false,true);
