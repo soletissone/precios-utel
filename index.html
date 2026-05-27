@@ -218,7 +218,6 @@ td{padding:9px 14px;vertical-align:middle}
     <span class="logo">UTEL</span>
     <span class="ht">Plan de Beca · Vigente <span style="font-size:10px;color:var(--mu);font-weight:400">v1.4</span></span>
     <span style="font-size:11px;background:rgba(22,163,74,.1);color:#16a34a;padding:4px 10px;border-radius:999px;font-weight:600" id="dom-indicator">Domiciliación <span id="dom-pct-header">5</span>%</span>
-    <button class="out" onclick="exportAllData()" style="margin-right:6px;background:none;border-color:var(--ac);color:var(--ac)">⬇ Exportar datos</button>
     <button class="out" onclick="logout()">Salir</button>
   </header>
   <div class="main">
@@ -2561,6 +2560,8 @@ function setSELInicio(sec, val){
 function init(){
   loadConfig();
   updateTituloCosto0(); // aplicar config de localStorage antes del primer render
+  var badge=document.getElementById('dom-pct-header');
+  if(badge) badge.textContent=DOMICILIACION;
   fillSelect('lprog','LICENCIATURA','lnivel-badge');
   fillSelect('mprog','MAESTR\u00cdA','mnivel-badge');
   fillSelect('sprog','MASTER','snivel-badge');
