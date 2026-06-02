@@ -546,6 +546,13 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
             <span class="toggle-slider"></span>
           </label>
         </div>
+        <div class="cfg-row" id="cfg-tit0-exp-row" style="display:none">
+          <div>
+            <div class="cfg-label" style="font-size:12px;color:var(--mu)">Vence el (opcional)</div>
+            <div class="cfg-desc">Se desactiva automáticamente en esa fecha</div>
+          </div>
+          <input type="date" id="cfg-tit0-exp" class="cfg-select" style="width:140px">
+        </div>
         <div class="cfg-row">
           <div>
             <div class="cfg-label">Vista previa Platzi 🧪</div>
@@ -853,8 +860,14 @@ var ADMIN_PWD = 'UTELADMIN2026';
 // ── CONFIGURACIÓN ACTIVA ──────────────
 var DOMICILIACION = 5;        // default, se sobreescribe desde JSONBin
 var TITULO_COSTO_0 = false;   // default, se sobreescribe desde JSONBin
-var PLATZI_PREVIEW = false;   // habilitar Platzi antes del 01/06/2026 (solo para testing)
-var PLATZI_LAUNCH  = new Date('2026-06-01');
+var TIT0_EXPIRY = null;       // fecha de vencimiento (string 'YYYY-MM-DD' o null)
+function isTit0Active(){
+  if(!TITULO_COSTO_0) return false;
+  if(!TIT0_EXPIRY) return true;
+  return new Date().toISOString().slice(0,10) <= TIT0_EXPIRY;
+}
+var PLATZI_PREVIEW = false;   // habilitar Platzi desde panel admin
+var PLATZI_LAUNCH  = new Date('2099-01-01'); // pospuesto — activar manualmente desde admin
 function isPlatziVisible(){ return PLATZI_PREVIEW || new Date() >= PLATZI_LAUNCH; }
 // ─────────────────────────────────────
 
@@ -871,6 +884,7 @@ function loadConfig(){
       var c=JSON.parse(cached);
       if(c.dom) DOMICILIACION=c.dom;
       if(c.tit0!==undefined) TITULO_COSTO_0=c.tit0;
+      if(c.tit0exp!==undefined) TIT0_EXPIRY=c.tit0exp||null;
       if(c.plat!==undefined) PLATZI_PREVIEW=c.plat;
     }catch(e){}
   }
@@ -883,9 +897,10 @@ function loadConfig(){
       var changed=false;
       if(data.dom!==undefined && data.dom!==DOMICILIACION){DOMICILIACION=data.dom;changed=true;}
       if(data.tit0!==undefined && data.tit0!==TITULO_COSTO_0){TITULO_COSTO_0=data.tit0;changed=true;}
+      if(data.tit0exp!==undefined && data.tit0exp!==TIT0_EXPIRY){TIT0_EXPIRY=data.tit0exp||null;changed=true;}
       if(data.plat!==undefined && data.plat!==PLATZI_PREVIEW){PLATZI_PREVIEW=data.plat;changed=true;}
       if(changed){
-        localStorage.setItem('utel_cfg',JSON.stringify({dom:DOMICILIACION,tit0:TITULO_COSTO_0,plat:PLATZI_PREVIEW}));
+        localStorage.setItem('utel_cfg',JSON.stringify({dom:DOMICILIACION,tit0:TITULO_COSTO_0,tit0exp:TIT0_EXPIRY,plat:PLATZI_PREVIEW}));
         updateTituloCosto0();
         rL();rM();rS();rD();
         var badge=document.getElementById('dom-pct-header');
@@ -896,12 +911,12 @@ function loadConfig(){
 }
 
 function saveConfig(){
-  localStorage.setItem('utel_cfg',JSON.stringify({dom:DOMICILIACION,tit0:TITULO_COSTO_0,plat:PLATZI_PREVIEW}));
+  localStorage.setItem('utel_cfg',JSON.stringify({dom:DOMICILIACION,tit0:TITULO_COSTO_0,tit0exp:TIT0_EXPIRY,plat:PLATZI_PREVIEW}));
   // Guardar en JSONBin para que todos los agentes lo vean
   fetch(JB_URL,{
     method:'PUT',
     headers:{'Content-Type':'application/json','X-Master-Key':JB_KEY},
-    body:JSON.stringify({dom:DOMICILIACION,tit0:TITULO_COSTO_0,plat:PLATZI_PREVIEW})
+    body:JSON.stringify({dom:DOMICILIACION,tit0:TITULO_COSTO_0,tit0exp:TIT0_EXPIRY,plat:PLATZI_PREVIEW})
   })
   .then(function(){console.log('Config guardada en JSONBin');})
   .catch(function(e){console.error('Error JSONBin:',e);});
@@ -2360,7 +2375,7 @@ function downloadSummary(sec){
   // Ejecutiva siempre incluida para sección en
   if(sec==='en') incChips+='<span style="display:inline-block;background:#eeecfd;color:#7c3aed;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Sesión Ejecutiva</span>';
   // Título Costo $0 si está activado (aplica a lic, mae, doc)
-  if(TITULO_COSTO_0 && ['lic','mae','doc'].indexOf(realSec)>=0){
+  if(isTit0Active() && ['lic','mae','doc'].indexOf(realSec)>=0){
     incChips+='<span style="display:inline-block;background:#dcfce7;color:#16a34a;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Título Costo $0</span>';
   }
 
@@ -2492,12 +2507,17 @@ function showAdminConfig(){
   document.getElementById('admin-login-area').style.display='none';
   document.getElementById('admin-cfg-area').style.display='block';
   document.getElementById('cfg-dom').value=String(DOMICILIACION);
-  document.getElementById('cfg-tit0').checked=TITULO_COSTO_0;
+  var tit0cb=document.getElementById('cfg-tit0');
+  tit0cb.checked=TITULO_COSTO_0;
+  document.getElementById('cfg-tit0-exp').value=TIT0_EXPIRY||'';
+  document.getElementById('cfg-tit0-exp-row').style.display=TITULO_COSTO_0?'flex':'none';
+  tit0cb.onchange=function(){ document.getElementById('cfg-tit0-exp-row').style.display=this.checked?'flex':'none'; };
   document.getElementById('cfg-platzi').checked=PLATZI_PREVIEW;
 }
 function saveAdminConfig(){
   DOMICILIACION=parseInt(document.getElementById('cfg-dom').value);
   TITULO_COSTO_0=document.getElementById('cfg-tit0').checked;
+  TIT0_EXPIRY=document.getElementById('cfg-tit0-exp').value||null;
   PLATZI_PREVIEW=document.getElementById('cfg-platzi').checked;
   saveConfig();
   updateTituloCosto0();
@@ -2516,7 +2536,7 @@ function updateTituloCosto0(){
     for(var i=0;i<cats.optional.length;i++){if(cats.optional[i].cat==='Accesorio'){accCat=cats.optional[i];break;}}
     if(!accCat) return;
     accCat.items=accCat.items.filter(function(x){return x.id!=='tit0_free';});
-    if(TITULO_COSTO_0) accCat.items.unshift({id:'tit0_free',name:'Título Costo $0',price:0});
+    if(isTit0Active()) accCat.items.unshift({id:'tit0_free',name:'Título Costo $0',price:0});
   });
 }
 
