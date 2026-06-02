@@ -583,6 +583,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
+var BUILD='1780422586';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -604,7 +605,7 @@ function tryLogin(){
   if(p===PWD){
     localStorage.removeItem('ua');
     localStorage.setItem('ok', Date.now() + 259200000); // 72 horas
-    localStorage.setItem('build', '1778177153');
+    localStorage.setItem('build', BUILD);
     g('ls').style.display='none';
     g('app').style.display='block';
     init();
@@ -846,9 +847,15 @@ function exportAllData(){
   URL.revokeObjectURL(a.href);
 }
 window.addEventListener('load',function(){
+  var _storedBuild=localStorage.getItem('build');
+  if(_storedBuild && _storedBuild!==BUILD){
+    // Hay versión nueva — forzar recarga para limpiar caché
+    localStorage.setItem('build', BUILD);
+    localStorage.removeItem('ok');
+    location.reload(true);
+    return;
+  }
   var _ok=parseInt(localStorage.getItem('ok')||'0');
-  var _build=localStorage.getItem('build');
-  if(_build!==BUILD){ localStorage.removeItem('ok'); _ok=0; }
   if(_ok && Date.now()<_ok){
     g('ls').style.display='none';
     g('app').style.display='block';
