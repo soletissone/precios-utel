@@ -583,7 +583,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
-var BUILD='1780613918';
+var BUILD='1780615156';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -1924,7 +1924,10 @@ function rL(){
       var _cbUve=g('lic-compl'); if(_cbUve) _cbUve.style.display='';
       g('lbi').innerHTML='<span>Incluye: Asistencia, Voxy, 5% domiciliación</span>';
       g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span><span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
-      g('lic-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UVE</div>';
+      // UVE: accesorios normales pero sin Título $0
+      var _tit0Uve=TITULO_COSTO_0; TITULO_COSTO_0=false;
+      renderAccs('lic-acc','lic',false);
+      TITULO_COSTO_0=_tit0Uve;
       g('lic-total').innerHTML=''; return;
     } else if(uName==='UNICA'||uName==='ARTE DIGITAL Y MULTIMEDIA'||uName==='MARKETING Y PUBLICIDAD'||uName==='MEDIOS DIGITALES'||uName==='COMUNICACIÓN CORPORATIVA'){
       var unicaVariants=[
@@ -2498,8 +2501,8 @@ function downloadSummary(sec){
     });
     // Ejecutiva siempre incluida para sección en
     if(sec==='en') incChips+='<span style="display:inline-block;background:#eeecfd;color:#7c3aed;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Sesión Ejecutiva</span>';
-    // Título Costo $0 si está activado (aplica a lic, mae, doc, no UNICA)
-    if(isTit0Active() && ['lic','mae','doc'].indexOf(realSec)>=0){
+    // Título Costo $0 si está activado (aplica a lic, mae, doc — no UNICA ni UVE)
+    if(isTit0Active() && ['lic','mae','doc'].indexOf(realSec)>=0 && !isUVE){
       incChips+='<span style="display:inline-block;background:#dcfce7;color:#16a34a;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Título Costo $0</span>';
     }
   }
