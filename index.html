@@ -583,7 +583,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
-var BUILD='1780610337';
+var BUILD='1780611553';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -707,14 +707,56 @@ function exportAllData(){
   CATALOG['LICENCIATURA'].forEach(function(item){
     var nk = item.v;
     var progKey = V_LIC_TO_PROG(nk, item.p);
-    if(nk==='uve'||nk==='unica') return; // precio especial, se agrega manualmente
+    if(nk==='uve'||nk==='unica') return; // se agregan abajo con variantes
     var nivelK = (nk==='arq'||nk==='rob'||nk==='arqsw')?'alto':(nk||'medio');
-    // Para programas especiales los 3 niveles tienen mismo precio, para online variamos
     var niveles = ['alto','medio','bajo'];
     if(nk==='arq'||nk==='rob') niveles=['alto'];
     niveles.forEach(function(niv){
       var rows = buildFlatRows(niv, item.p, item.a, progKey, licLeads, licExps, domPct);
       rows.forEach(function(r){ r.nivel_detected = niv; export_rows_lic.push(r); });
+    });
+  });
+
+  // ─── UNICA (Arte Digital, Marketing, Medios Digitales, Comunicación Corporativa) ───
+  var unicaVariantsExp=[
+    {label:'Pricing Alto', p:[735,1470,1995,2810,2810,2810,2810,2810,2810,2810,2810,2810], pkg:'ESC1.LIC.UNICA.VOXY.'},
+    {label:'Pricing Bajo',  p:[629,1470,1995,2810,2810,2810,2810,2810,2810,2810,2810,2810], pkg:'ESC2.LIC.UNICA.VOXY.'},
+    {label:'Flat',          p:[2810,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810], pkg:'LIC.UNICA.VOXY.'}
+  ];
+  CATALOG['LICENCIATURA'].forEach(function(item){
+    if(item.v!=='unica') return;
+    unicaVariantsExp.forEach(function(v){
+      var lista=(LISTA_MAP[v.pkg]||3200);
+      var maxP=v.p[3];
+      export_rows_lic.push({
+        programa:item.p, area:item.a||'', nivel:'Único', lead:'Hot Lead',
+        tipo_promo:v.label, precio_lista:lista,
+        mes_1:v.p[0], mes_2:v.p[1], mes_3_en_adelante:maxP,
+        paquete:v.pkg, escalonado:'—',
+        beca_pct:lista>0?Math.max(0,1-maxP/lista):0,
+        domiciliacion_pct:domPct, con_domiciliacion:Math.round(maxP*(1-domPct/100))
+      });
+    });
+  });
+
+  // ─── UVE (Psicología) ───
+  var uveVariantsExp=[
+    {label:'Pricing Alto', p:[700,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595], pkg:'HS24.LIC.UVE.VOXY.'},
+    {label:'Pricing Bajo',  p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595], pkg:'BF24.LIC.UVE.VOXY.'}
+  ];
+  CATALOG['LICENCIATURA'].forEach(function(item){
+    if(item.v!=='uve') return;
+    uveVariantsExp.forEach(function(v){
+      var lista=(LISTA_MAP[v.pkg]||4820);
+      var maxP=v.p[3];
+      export_rows_lic.push({
+        programa:item.p, area:item.a||'', nivel:'Único', lead:'Hot Lead',
+        tipo_promo:v.label, precio_lista:lista,
+        mes_1:v.p[0], mes_2:v.p[1], mes_3_en_adelante:maxP,
+        paquete:v.pkg, escalonado:'—',
+        beca_pct:lista>0?Math.max(0,1-maxP/lista):0,
+        domiciliacion_pct:domPct, con_domiciliacion:Math.round(maxP*(1-domPct/100))
+      });
     });
   });
 
