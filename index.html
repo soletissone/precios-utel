@@ -583,7 +583,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
-var BUILD='1780538601';
+var BUILD='1780588580';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -2563,18 +2563,17 @@ function updateTituloCosto0(){
   });
 }
 
-var CICLOS_ACTIVOS = 2; // cuántos ciclos son seleccionables
+var CICLOS_ACTIVOS = 2; // cuántos ciclos visibles
 function buildFechaOptions(sel, dates, curVal){
+  var hoy = new Date(); hoy.setHours(0,0,0,0);
+  var futuras = dates.filter(function(d){
+    var p=d.split('/'); var fd=new Date(p[2],p[1]-1,p[0]); return fd>=hoy;
+  }).slice(0, CICLOS_ACTIVOS);
   sel.innerHTML='<option value="">— Seleccionar fecha de inicio —</option>';
-  dates.forEach(function(d, i){
+  futuras.forEach(function(d){
     var opt=document.createElement('option');
-    var activo = i < CICLOS_ACTIVOS;
-    opt.value = activo ? d : '';
-    opt.textContent = activo ? d : d + ' (próximamente)';
-    opt.disabled = !activo;
-    if(activo) opt.style.color='';
-    else opt.style.color='#aaa';
-    if(curVal===d && activo) opt.selected=true;
+    opt.value=d; opt.textContent=d;
+    if(curVal===d) opt.selected=true;
     sel.appendChild(opt);
   });
 }
