@@ -583,7 +583,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
-var BUILD='1780609809';
+var BUILD='1780610049';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -1856,22 +1856,27 @@ function rL(){
         {id:'alto', label:'Pricing Alto', p:[700,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'HS24.LIC.UVE.VOXY.'},
         {id:'bajo',  label:'Pricing Bajo',  p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'BF24.LIC.UVE.VOXY.'}
       ];
-      // Render ambas variantes simultáneamente
-      var html='';
-      uveVariants.forEach(function(v){
-        html+='<tr><td colspan="7" style="padding:6px 10px;background:var(--s2);font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.06em">'+v.label+'</td></tr>';
-        var tmp=document.createElement('tbody');
-        renderTable(tmp.id||'_tmp',v.p,v.pkg,'—',0,0);
-        // Usar tabla temporal
-      });
-      // Renderizar alto en lb, luego agregar bajo manualmente
-      renderTable('lb',uveVariants[0].p,uveVariants[0].pkg,'—',0,0);
-      var altoRows=g('lb').innerHTML;
-      renderTable('lb',uveVariants[1].p,uveVariants[1].pkg,'—',0,0);
-      var bajoRows=g('lb').innerHTML;
-      var sep='<tr><td colspan="7" style="padding:4px 10px;background:var(--s2);font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.06em">— Pricing Alto —</td></tr>';
-      var sep2='<tr><td colspan="7" style="padding:4px 10px;background:var(--s2);font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.06em">— Pricing Bajo —</td></tr>';
-      g('lb').innerHTML=sep+altoRows+sep2+bajoRows;
+      if(!window._uveVariant) window._uveVariant='alto';
+      var selUVE=window._uveVariant;
+      // Renderizar ambas tablas por separado
+      renderTable('lb', uveVariants[0].p, uveVariants[0].pkg,'—',0,0);
+      var rowsAlto=g('lb').innerHTML;
+      renderTable('lb', uveVariants[1].p, uveVariants[1].pkg,'—',0,0);
+      var rowsBajo=g('lb').innerHTML;
+      function uveBlock(v, rows){
+        var sel=selUVE===v.id;
+        var style=sel
+          ?'border:2px solid var(--ac);border-radius:8px;overflow:hidden;margin-bottom:10px;cursor:pointer;box-shadow:0 0 0 3px rgba(124,58,237,.12)'
+          :'border:2px solid var(--bd);border-radius:8px;overflow:hidden;margin-bottom:10px;cursor:pointer;opacity:.7';
+        return '<tr><td colspan="7" style="padding:0"><div style="'+style+'" onclick="setAlianzaVar(\'uve\',\''+v.id+'\')">'
+          +'<div style="padding:6px 12px;background:'+(sel?'var(--ac)':'var(--s2)')+';display:flex;align-items:center;gap:8px">'
+          +'<span style="font-size:12px;font-weight:700;color:'+(sel?'#fff':'var(--mu)')+'">'+v.label+'</span>'
+          +(sel?'<span style="font-size:10px;background:rgba(255,255,255,.25);color:#fff;border-radius:999px;padding:1px 8px">✓ Seleccionado</span>':'')
+          +'</div>'
+          +'<table style="width:100%;border-collapse:collapse">'+rows+'</table>'
+          +'</div></td></tr>';
+      }
+      g('lb').innerHTML=uveBlock(uveVariants[0],rowsAlto)+uveBlock(uveVariants[1],rowsBajo);
       var selDiv=g('alianza-variant-sel'); if(selDiv) selDiv.style.display='none';
       g('lbi').innerHTML='<span>Incluye: Asistencia, Voxy, 5% domiciliación</span>';
       g('li').innerHTML=NB['unico']+' <span class="badge b-mod">UVE</span>';
