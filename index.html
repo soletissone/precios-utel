@@ -583,7 +583,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
-var BUILD='1780588580';
+var BUILD='1780607616';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -2587,7 +2587,7 @@ function populateFechaSelects(){
 function updateFechaByProg(sec, progName){
   var sel=g(sec+'-fecha');
   if(!sel) return;
-  var dates=(progName && INICIO_BY_PROG[progName]) ? INICIO_BY_PROG[progName] : (INICIO_DATES[sec]||[]);
+  var dates=(progName && INICIO_BY_PROG[progName]) ? INICIO_BY_PROG[progName] : [];
   var curVal=SEL_INICIO[sec];
   buildFechaOptions(sel, dates, curVal);
   if(curVal && dates.indexOf(curVal)<0){ setSELInicio(sec,null); sel.value=''; }
