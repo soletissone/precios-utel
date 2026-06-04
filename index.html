@@ -583,7 +583,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
-var BUILD='1780610049';
+var BUILD='1780610337';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -1886,21 +1886,29 @@ function rL(){
       var unicaVariants=[
         {id:'alto', label:'Pricing Alto', p:[735,1470,1995,2810,2810,2810,2810,2810,2810,2810,2810,2810],pkg:'ESC1.LIC.UNICA.VOXY.'},
         {id:'bajo',  label:'Pricing Bajo',  p:[629,1470,1995,2810,2810,2810,2810,2810,2810,2810,2810,2810],pkg:'ESC2.LIC.UNICA.VOXY.'},
-        {id:'flat',  label:'Flat',           p:[2810,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810],pkg:'LIC.UNICA.VOXY.'}
+        {id:'flat',  label:'Flat',          p:[2810,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810],pkg:'LIC.UNICA.VOXY.'}
       ];
-      if(!window._unicaVariant) window._unicaVariant='esc_alto';
+      if(!window._unicaVariant) window._unicaVariant='alto';
       var selUNICA=window._unicaVariant;
-      var unicaChips=unicaVariants.map(function(v){
-        return '<div class="chip optional '+(selUNICA===v.id?'selected':'')+'" onclick="setAlianzaVar(\'unica\',\''+v.id+'\');" style="cursor:pointer"><span class="chip-name">'+v.label+'</span></div>';
-      }).join('');
-      var chosenUNICA=unicaVariants.find(function(v){return v.id===selUNICA;})||unicaVariants[0];
-      g('lb').innerHTML='';
-      var selDiv2=g('alianza-variant-sel');
-      if(selDiv2){
-        g('alianza-chips').innerHTML=unicaChips;
-        selDiv2.style.display='block';
+      // Renderizar todas las variantes
+      var unicaRows=unicaVariants.map(function(v){
+        renderTable('lb',v.p,v.pkg,'—',0,0); return g('lb').innerHTML;
+      });
+      function unicaBlock(v, rows){
+        var sel=selUNICA===v.id;
+        var style=sel
+          ?'border:2px solid var(--ac);border-radius:8px;overflow:hidden;margin-bottom:10px;cursor:pointer;box-shadow:0 0 0 3px rgba(124,58,237,.12)'
+          :'border:2px solid var(--bd);border-radius:8px;overflow:hidden;margin-bottom:10px;cursor:pointer;opacity:.7';
+        return '<tr><td colspan="7" style="padding:0"><div style="'+style+'" onclick="setAlianzaVar(\'unica\',\''+v.id+'\')">'
+          +'<div style="padding:6px 12px;background:'+(sel?'var(--ac)':'var(--s2)')+';display:flex;align-items:center;gap:8px">'
+          +'<span style="font-size:12px;font-weight:700;color:'+(sel?'#fff':'var(--mu)')+'">'+v.label+'</span>'
+          +(sel?'<span style="font-size:10px;background:rgba(255,255,255,.25);color:#fff;border-radius:999px;padding:1px 8px">✓ Seleccionado</span>':'')
+          +'</div>'
+          +'<table style="width:100%;border-collapse:collapse">'+rows+'</table>'
+          +'</div></td></tr>';
       }
-      renderTable('lb',chosenUNICA.p,chosenUNICA.pkg,'—',0,0);
+      g('lb').innerHTML=unicaVariants.map(function(v,i){ return unicaBlock(v,unicaRows[i]); }).join('');
+      var selDiv2=g('alianza-variant-sel'); if(selDiv2) selDiv2.style.display='none';
       g('lbi').innerHTML='<span>Incluye: Voxy</span>';
       g('li').innerHTML=NB['unico']+' <span class="badge b-mod">UNICA</span>';
       g('lic-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UNICA</div>';
