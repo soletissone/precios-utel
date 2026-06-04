@@ -583,7 +583,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
-var BUILD='1780613394';
+var BUILD='1780613918';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -2395,6 +2395,12 @@ function downloadSummary(sec){
   var infoEl=g({lic:'li',mae:'mi',ms:'si2',doc:'di',en:'en-info'}[sec]);
   var infoHTML=infoEl?infoEl.innerHTML:'';
 
+  // Detectar si es programa UNICA o UVE
+  var progEntry=null;
+  if(sec==='lic'){ var _lcat=CATALOG['LICENCIATURA']||[]; for(var _i=0;_i<_lcat.length;_i++){if(_lcat[_i].p.toLowerCase()===progName.toLowerCase()||progName.toLowerCase().indexOf(_lcat[_i].p.toLowerCase())>=0){progEntry=_lcat[_i];break;}}}
+  var isUNICA = progEntry && progEntry.v==='unica';
+  var isUVE   = progEntry && progEntry.v==='uve';
+
   // Get table rows
   var tbodyId={lic:'lb',mae:'mb',ms:'sb',doc:'db',en:'en-tbody'}[sec];
   var tbody=g(tbodyId);
@@ -2439,33 +2445,63 @@ function downloadSummary(sec){
   var finalAmt=fmt(baseNum+accSum);
   var baseAmt=baseCell?baseCell.textContent.trim():'—';
 
-  // Build table rows without pkg/esc
+  // Para UNICA/UVE: extraer solo filas de la variante seleccionada
+  var _domForPDF = (isUNICA ? 5 : DOMICILIACION);
   var tableRows='';
-  var rows2=tbody.querySelectorAll('tr');
-  rows2.forEach(function(tr){
-    var cells=tr.querySelectorAll('td');
-    if(cells.length<5) return;
-    var domCell=cells[4]?cells[4].textContent:'—';
-    var isLast=(tr===rows2[rows2.length-1]);
-    var bg=isLast?'background:#f8f8ff':'';
-    tableRows+='<tr style="border-bottom:1px solid #e5e7eb;'+bg+'">'
-      +'<td style="padding:10px 16px;font-size:13px;color:#6b7280">'+cells[0].innerHTML+'</td>'
-      +'<td style="padding:10px 16px;font-size:15px;font-weight:700;color:#5541d7">'+cells[3].textContent+'</td>'
-      +'<td style="padding:10px 16px;font-size:14px;font-weight:700;color:#16a34a">'+domCell+'</td>'
-      +'</tr>';
-  });
+  if(isUNICA || isUVE){
+    var variants = isUNICA
+      ? [{id:'alto',p:[735,1470,1995,2810,2810,2810,2810,2810,2810,2810,2810,2810]},
+         {id:'bajo',p:[629,1470,1995,2810,2810,2810,2810,2810,2810,2810,2810,2810]},
+         {id:'flat',p:[2810,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810]}]
+      : [{id:'alto',p:[700,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595]},
+         {id:'bajo',p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595]}];
+    var selId = isUNICA ? (window._unicaVariant||'alto') : (window._uveVariant||'alto');
+    var selVariant = variants.find(function(v){return v.id===selId;})||variants[0];
+    var p=selVariant.p;
+    var domPct=_domForPDF/100;
+    var labels=['Mes 1','Mes 2','Mes 3 en adelante'];
+    var prices=[p[0],p[1],p[2]];
+    prices.forEach(function(price,i){
+      var dom=isDomActive()&&i===2?Math.round(price*(1-domPct)):'—';
+      var bg=i===2?'background:#f8f8ff':'';
+      tableRows+='<tr style="border-bottom:1px solid #e5e7eb;'+bg+'">'
+        +'<td style="padding:10px 16px;font-size:13px;color:#6b7280">'+labels[i]+'</td>'
+        +'<td style="padding:10px 16px;font-size:15px;font-weight:700;color:#5541d7">'+fmt(price)+'</td>'
+        +'<td style="padding:10px 16px;font-size:14px;font-weight:700;color:#16a34a">'+(dom==='—'?'—':fmt(dom))+'</td>'
+        +'</tr>';
+    });
+  } else {
+    var rows2=tbody.querySelectorAll('tr');
+    rows2.forEach(function(tr){
+      var cells=tr.querySelectorAll('td');
+      if(cells.length<5) return;
+      var domCell=cells[4]?cells[4].textContent:'—';
+      var isLast=(tr===rows2[rows2.length-1]);
+      var bg=isLast?'background:#f8f8ff':'';
+      tableRows+='<tr style="border-bottom:1px solid #e5e7eb;'+bg+'">'
+        +'<td style="padding:10px 16px;font-size:13px;color:#6b7280">'+cells[0].innerHTML+'</td>'
+        +'<td style="padding:10px 16px;font-size:15px;font-weight:700;color:#5541d7">'+cells[3].textContent+'</td>'
+        +'<td style="padding:10px 16px;font-size:14px;font-weight:700;color:#16a34a">'+domCell+'</td>'
+        +'</tr>';
+    });
+  }
 
   // Build included chips
   var incChips='';
-  var incList2=(realSec==='mae')?cats.included:cats.included;
-  if(cats) incList2.forEach(function(it){
-    incChips+='<span style="display:inline-block;background:#dcfce7;color:#16a34a;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ '+it.name+'</span>';
-  });
-  // Ejecutiva siempre incluida para sección en
-  if(sec==='en') incChips+='<span style="display:inline-block;background:#eeecfd;color:#7c3aed;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Sesión Ejecutiva</span>';
-  // Título Costo $0 si está activado (aplica a lic, mae, doc)
-  if(isTit0Active() && ['lic','mae','doc'].indexOf(realSec)>=0){
-    incChips+='<span style="display:inline-block;background:#dcfce7;color:#16a34a;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Título Costo $0</span>';
+  if(isUNICA){
+    // UNICA: solo Voxy
+    incChips='<span style="display:inline-block;background:#dcfce7;color:#16a34a;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Voxy</span>';
+  } else {
+    var incList2=(realSec==='mae')?cats.included:cats.included;
+    if(cats) incList2.forEach(function(it){
+      incChips+='<span style="display:inline-block;background:#dcfce7;color:#16a34a;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ '+it.name+'</span>';
+    });
+    // Ejecutiva siempre incluida para sección en
+    if(sec==='en') incChips+='<span style="display:inline-block;background:#eeecfd;color:#7c3aed;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Sesión Ejecutiva</span>';
+    // Título Costo $0 si está activado (aplica a lic, mae, doc, no UNICA)
+    if(isTit0Active() && ['lic','mae','doc'].indexOf(realSec)>=0){
+      incChips+='<span style="display:inline-block;background:#dcfce7;color:#16a34a;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Título Costo $0</span>';
+    }
   }
 
   // Accesorios seleccionados → se agregan a incluidos sin precio
@@ -2531,7 +2567,7 @@ function downloadSummary(sec){
     +'<thead><tr style="background:#f9fafb">'
     +'<th style="padding:9px 16px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b7280">Mes</th>'
     +'<th style="padding:9px 16px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b7280">Total</th>'
-    +'<th style="padding:9px 16px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#16a34a">Con dom. '+DOMICILIACION+'%</th>'
+    +'<th style="padding:9px 16px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#16a34a">Con dom. '+_domForPDF+'%</th>'
     +'</tr></thead>'
     +'<tbody>'+tableRows+'</tbody></table>'
 
@@ -2547,15 +2583,15 @@ function downloadSummary(sec){
 
     +'</div>' // body
 
-    // COMPLEMENTO DE COLEGIATURA
-    +(function(){
+    // COMPLEMENTO DE COLEGIATURA (no aplica para UNICA)
+    +(isUNICA ? '' : (function(){
       var colMap={lic:1100,mae:1200,ms:1200,doc:1200};
       var colPrice=colMap[realSec]||1100;
       return '<div style="background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:12px 16px;margin:0 28px 20px;font-size:12px;color:#5f4200">'
         +'<strong>📋 Complemento de Colegiatura: $'+colPrice.toLocaleString('es-MX')+'</strong>'
         +' — se cobra cada 4 meses'
         +'</div>';
-    })()
+    })())
 
     // FOOTER
     +'<div style="background:#f9fafb;padding:14px 28px;border-top:1px solid #e5e7eb">'
