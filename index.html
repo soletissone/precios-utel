@@ -583,7 +583,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
-var BUILD='1780608131';
+var BUILD='1780609809';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -1856,20 +1856,23 @@ function rL(){
         {id:'alto', label:'Pricing Alto', p:[700,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'HS24.LIC.UVE.VOXY.'},
         {id:'bajo',  label:'Pricing Bajo',  p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'BF24.LIC.UVE.VOXY.'}
       ];
-      if(!window._uveVariant) window._uveVariant='alto';
-      var selUVE=window._uveVariant;
-      var uveChips=uveVariants.map(function(v){
-        return '<div class="chip optional '+(selUVE===v.id?'selected':'')+'" onclick="setAlianzaVar(\'uve\',\''+v.id+'\');" style="cursor:pointer"><span class="chip-name">'+v.label+'</span></div>';
-      }).join('');
-      var chosen=uveVariants.find(function(v){return v.id===selUVE;})||uveVariants[0];
-      g('lb').innerHTML='';
-      // Show variant selector above table
-      var selDiv=g('alianza-variant-sel');
-      if(selDiv){
-        g('alianza-chips').innerHTML=uveChips;
-        selDiv.style.display='block';
-      }
-      renderTable('lb',chosen.p,chosen.pkg,'—',0,0);
+      // Render ambas variantes simultáneamente
+      var html='';
+      uveVariants.forEach(function(v){
+        html+='<tr><td colspan="7" style="padding:6px 10px;background:var(--s2);font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.06em">'+v.label+'</td></tr>';
+        var tmp=document.createElement('tbody');
+        renderTable(tmp.id||'_tmp',v.p,v.pkg,'—',0,0);
+        // Usar tabla temporal
+      });
+      // Renderizar alto en lb, luego agregar bajo manualmente
+      renderTable('lb',uveVariants[0].p,uveVariants[0].pkg,'—',0,0);
+      var altoRows=g('lb').innerHTML;
+      renderTable('lb',uveVariants[1].p,uveVariants[1].pkg,'—',0,0);
+      var bajoRows=g('lb').innerHTML;
+      var sep='<tr><td colspan="7" style="padding:4px 10px;background:var(--s2);font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.06em">— Pricing Alto —</td></tr>';
+      var sep2='<tr><td colspan="7" style="padding:4px 10px;background:var(--s2);font-size:11px;font-weight:700;color:var(--mu);text-transform:uppercase;letter-spacing:.06em">— Pricing Bajo —</td></tr>';
+      g('lb').innerHTML=sep+altoRows+sep2+bajoRows;
+      var selDiv=g('alianza-variant-sel'); if(selDiv) selDiv.style.display='none';
       g('lbi').innerHTML='<span>Incluye: Asistencia, Voxy, 5% domiciliación</span>';
       g('li').innerHTML=NB['unico']+' <span class="badge b-mod">UVE</span>';
       g('lic-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UVE</div>';
