@@ -272,7 +272,7 @@ td{padding:9px 14px;vertical-align:middle}
         <div style="display:flex;gap:8px;flex-wrap:wrap" id="alianza-chips"></div>
       </div>
       
-      <div style="background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#5f4200"><strong>📋 Complemento de Colegiatura:</strong> <strong style="font-size:13px;color:#e65100">$1,100</strong> — se cobra cada 4 meses </div>
+      <div id="lic-compl" style="background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#5f4200"><strong>📋 Complemento de Colegiatura:</strong> <strong style="font-size:13px;color:#e65100">$1,100</strong> — se cobra cada 4 meses </div>
 
       <!-- Print header (only shows when printing) -->
       <div class="print-header" style="margin-bottom:16px">
@@ -583,7 +583,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
-var BUILD='1780612589';
+var BUILD='1780613069';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -1900,11 +1900,16 @@ function rL(){
       ];
       if(!window._uveVariant) window._uveVariant='alto';
       var selUVE=window._uveVariant;
+      // UVE: dom siempre 5%, sin colegiatura, sin Tít$0
+      var _domOrigUve=DOMICILIACION; DOMICILIACION=5;
+      var _tit0OrigUve=TITULO_COSTO_0; TITULO_COSTO_0=false;
+      var _complBannerUve=g('lic-compl'); if(_complBannerUve) _complBannerUve.style.display='none';
       // Renderizar ambas tablas por separado
       renderTable('lb', uveVariants[0].p, uveVariants[0].pkg,'—',0,0);
       var rowsAlto=g('lb').innerHTML;
       renderTable('lb', uveVariants[1].p, uveVariants[1].pkg,'—',0,0);
       var rowsBajo=g('lb').innerHTML;
+      DOMICILIACION=_domOrigUve; TITULO_COSTO_0=_tit0OrigUve;
       function uveBlock(v, rows){
         var sel=selUVE===v.id;
         var style=sel
@@ -1934,9 +1939,14 @@ function rL(){
       if(!window._unicaVariant) window._unicaVariant='alto';
       var selUNICA=window._unicaVariant;
       // Renderizar todas las variantes
+      // UNICA: dom siempre 5%, sin colegiatura, sin Tít$0
+      var _domOrig=DOMICILIACION; DOMICILIACION=5;
+      var _tit0Orig=TITULO_COSTO_0; TITULO_COSTO_0=false;
+      var _complBanner=g('lic-compl'); if(_complBanner) _complBanner.style.display='none';
       var unicaRows=unicaVariants.map(function(v){
         renderTable('lb',v.p,v.pkg,'—',0,0); return g('lb').innerHTML;
       });
+      DOMICILIACION=_domOrig; TITULO_COSTO_0=_tit0Orig;
       function unicaBlock(v, rows){
         var sel=selUNICA===v.id;
         var style=sel
@@ -1969,9 +1979,10 @@ function rL(){
     }
   }
 
-  // Hide alianza variant selector for normal programs, restore jornada selector
+  // Restaurar para programas normales
   var _avs=g('alianza-variant-sel'); if(_avs) _avs.style.display='none';
   var _ljor=document.getElementById('ljor'); if(_ljor) _ljor.closest('.fg').style.display='';
+  var _cb=g('lic-compl'); if(_cb) _cb.style.display='';
   var jornada=_ljor?_ljor.value:'intensiva';
   var isIngenieria2=(progKey==='ingenieria'||progKey==='robotica'||progKey==='arquitectura');
   var e=getPrice(progKey,nivel,lead,jornada,isIngenieria2);
