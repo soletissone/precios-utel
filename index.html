@@ -583,7 +583,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
-var BUILD='1780537668';
+var BUILD='1780538262';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -2563,18 +2563,26 @@ function updateTituloCosto0(){
   });
 }
 
+var CICLOS_ACTIVOS = 2; // cuántos ciclos son seleccionables
+function buildFechaOptions(sel, dates, curVal){
+  sel.innerHTML='<option value="">— Seleccionar fecha de inicio —</option>';
+  dates.forEach(function(d, i){
+    var opt=document.createElement('option');
+    var activo = i < CICLOS_ACTIVOS;
+    opt.value = activo ? d : '';
+    opt.textContent = activo ? d : d + ' (próximamente)';
+    opt.disabled = !activo;
+    if(activo) opt.style.color='';
+    else opt.style.color='#aaa';
+    if(curVal===d && activo) opt.selected=true;
+    sel.appendChild(opt);
+  });
+}
 function populateFechaSelects(){
   Object.keys(INICIO_DATES).forEach(function(sec){
     var sel=g(sec+'-fecha');
     if(!sel) return;
-    var dates=INICIO_DATES[sec]||[];
-    sel.innerHTML='<option value="">— Seleccionar fecha de inicio —</option>';
-    dates.forEach(function(d){
-      var opt=document.createElement('option');
-      opt.value=d; opt.textContent=d;
-      if(SEL_INICIO[sec]===d) opt.selected=true;
-      sel.appendChild(opt);
-    });
+    buildFechaOptions(sel, INICIO_DATES[sec]||[], SEL_INICIO[sec]);
   });
 }
 function updateFechaByProg(sec, progName){
@@ -2582,13 +2590,7 @@ function updateFechaByProg(sec, progName){
   if(!sel) return;
   var dates=(progName && INICIO_BY_PROG[progName]) ? INICIO_BY_PROG[progName] : (INICIO_DATES[sec]||[]);
   var curVal=SEL_INICIO[sec];
-  sel.innerHTML='<option value="">— Seleccionar fecha de inicio —</option>';
-  dates.forEach(function(d){
-    var opt=document.createElement('option');
-    opt.value=d; opt.textContent=d;
-    if(curVal===d) opt.selected=true;
-    sel.appendChild(opt);
-  });
+  buildFechaOptions(sel, dates, curVal);
   if(curVal && dates.indexOf(curVal)<0){ setSELInicio(sec,null); sel.value=''; }
 }
 
