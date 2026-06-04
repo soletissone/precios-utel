@@ -318,7 +318,7 @@ td{padding:9px 14px;vertical-align:middle}
         <tbody id="mb"></tbody>
       </table></div>
       <div class="bi" id="mbi"></div>
-      <div style="background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#5f4200"><strong>📋 Complemento de Colegiatura:</strong> <strong style="font-size:13px;color:#e65100">$1,200</strong> — se cobra cada 4 meses </div>
+      <div id="mae-compl" style="background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#5f4200"><strong>📋 Complemento de Colegiatura:</strong> <strong style="font-size:13px;color:#e65100">$1,200</strong> — se cobra cada 4 meses </div>
       <div class="print-header" style="margin-bottom:16px">
         <div style="font-size:11px;font-weight:700;letter-spacing:.15em;color:#6c5ce7;text-transform:uppercase">UTEL — Plan de Beca · Vigente</div>
         <div id="print-info-mae" style="font-size:13px;margin-top:4px"></div>
@@ -393,7 +393,7 @@ td{padding:9px 14px;vertical-align:middle}
         <tbody id="db"></tbody>
       </table></div>
       <div class="bi" id="dbi"></div>
-      <div style="background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#5f4200"><strong>📋 Complemento de Colegiatura:</strong> <strong style="font-size:13px;color:#e65100">$1,200</strong> — se cobra cada 4 meses </div>
+      <div id="doc-compl" style="background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:10px 14px;margin-bottom:14px;font-size:12px;color:#5f4200"><strong>📋 Complemento de Colegiatura:</strong> <strong style="font-size:13px;color:#e65100">$1,200</strong> — se cobra cada 4 meses </div>
       <div class="print-header" style="margin-bottom:16px">
         <div style="font-size:11px;font-weight:700;letter-spacing:.15em;color:#6c5ce7;text-transform:uppercase">UTEL — Plan de Beca · Vigente</div>
         <div id="print-info-doc" style="font-size:13px;margin-top:4px"></div>
@@ -583,7 +583,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
-var BUILD='1780615156';
+var BUILD='1780615550';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -2053,10 +2053,15 @@ function rM(){
   else progKey='mae_online';
 
   if(nivelRaw==='unag'){
+    var _domOrigUnagMae=DOMICILIACION; DOMICILIACION=0;
     renderTable('mb',[3020,3020,3020,3020,3020,3020,3020,3020,3020,3020,3020,3020],'MA.UNAG.BASICO.2.15.21','—',0,0);
-    g('mbi').innerHTML='';
-    g('mi').innerHTML=NB['unico']+' <span class="badge b-mod">UNAG</span>';
-    g('mae-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UNAG — precio único $3.020/mes</div>';
+    DOMICILIACION=_domOrigUnagMae;
+    // Ocultar domiciliación en tabla
+    g('mb').querySelectorAll('tr').forEach(function(tr){var c=tr.querySelectorAll('td');if(c[4])c[4].textContent='—';});
+    var _mcb=g('mae-compl'); if(_mcb) _mcb.style.display='none';
+    g('mbi').innerHTML='<span style="font-size:12px;color:var(--mu)">Incluye: <strong>Voxy</strong></span>';
+    g('mi').innerHTML=NB['unico']+' <span class="badge b-mod">UNAG</span> <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>';
+    g('mae-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales — Solo incluye Voxy</div>';
     g('mae-total').innerHTML='';return;
   }
   if(nivel==='unico'){
@@ -2088,6 +2093,7 @@ function rM(){
   var isHibridMAE=(SEL_EXP['mae']==='hibrid');
   var maePkgFinal=(isHibridMAE&&HIB_PKG_MAP[e.pkg])?HIB_PKG_MAP[e.pkg]:e.pkg;
   var maeEscFinal=(isHibridMAE&&HIB_ESC_MAP[e.pkg])?HIB_ESC_MAP[e.pkg]:e.esc;
+  var _mcbR=g('mae-compl'); if(_mcbR) _mcbR.style.display='';
   renderTable('mb',maeExpPrices,maePkgFinal,maeEscFinal,acc,acc12_mae);
   renderBeca('mbi',Math.max.apply(null,maeExpPrices),e.pkg);
   var nuevoBadgeM=isNuevo(progName)?'<span class="b-new">NUEVO</span> ':'';
@@ -2148,10 +2154,14 @@ function rD(){
 
   // UNAG pricing
   if(nivelRaw==='unag'){
+    var _domOrigUnagDoc=DOMICILIACION; DOMICILIACION=0;
     renderTable('db',[4770,4770,4770,4770,4770,4770,4770,4770,4770,4770,4770,4770],'DO.UNAG.BASICO.2.15.21','—',0,0);
-    g('dbi').innerHTML='';
-    g('di').innerHTML='<span class="badge b-lev">Doctorado</span> <span class="badge b-mod">UNAG</span>';
-    g('doc-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UNAG — precio único $4.770/mes</div>';
+    DOMICILIACION=_domOrigUnagDoc;
+    g('db').querySelectorAll('tr').forEach(function(tr){var c=tr.querySelectorAll('td');if(c[4])c[4].textContent='—';});
+    var _dcb=g('doc-compl'); if(_dcb) _dcb.style.display='none';
+    g('dbi').innerHTML='<span style="font-size:12px;color:var(--mu)">Incluye: <strong>Voxy</strong></span>';
+    g('di').innerHTML='<span class="badge b-lev">Doctorado</span> <span class="badge b-mod">UNAG</span> <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>';
+    g('doc-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales — Solo incluye Voxy</div>';
     g('doc-total').innerHTML=''; updateFechaByProg('doc', progName); return;
   }
 
@@ -2171,6 +2181,7 @@ function rD(){
 
   var acc=getAccTotal('doc',false);
   var acc12_doc=getAccTotal('doc',false,true);
+  var _dcbR=g('doc-compl'); if(_dcbR) _dcbR.style.display='';
   renderTable('db',e.p,e.pkg,e.esc,acc,acc12_doc);
   renderBeca('dbi',Math.max.apply(null,e.p),e.pkg);
 
@@ -2400,9 +2411,12 @@ function downloadSummary(sec){
 
   // Detectar si es programa UNICA o UVE
   var progEntry=null;
-  if(sec==='lic'){ var _lcat=CATALOG['LICENCIATURA']||[]; for(var _i=0;_i<_lcat.length;_i++){if(_lcat[_i].p.toLowerCase()===progName.toLowerCase()||progName.toLowerCase().indexOf(_lcat[_i].p.toLowerCase())>=0){progEntry=_lcat[_i];break;}}}
+  var _catKey={lic:'LICENCIATURA',mae:'MAESTRÍA',ms:'MASTER',doc:'DOCTORADO',en:'LICENCIATURA'}[sec]||'LICENCIATURA';
+  var _searchCat=CATALOG[_catKey]||[];
+  for(var _i=0;_i<_searchCat.length;_i++){if(_searchCat[_i].p.toLowerCase()===progName.toLowerCase()){progEntry=_searchCat[_i];break;}}
   var isUNICA = progEntry && progEntry.v==='unica';
   var isUVE   = progEntry && progEntry.v==='uve';
+  var isUNAG  = progEntry && progEntry.v==='unag';
 
   // Get table rows
   var tbodyId={lic:'lb',mae:'mb',ms:'sb',doc:'db',en:'en-tbody'}[sec];
@@ -2449,7 +2463,7 @@ function downloadSummary(sec){
   var baseAmt=baseCell?baseCell.textContent.trim():'—';
 
   // Para UNICA/UVE: extraer solo filas de la variante seleccionada
-  var _domForPDF = (isUNICA ? 5 : DOMICILIACION);
+  var _domForPDF = (isUNICA ? 5 : (isUNAG ? 0 : DOMICILIACION));
   var tableRows='';
   if(isUNICA || isUVE){
     var variants = isUNICA
@@ -2491,8 +2505,8 @@ function downloadSummary(sec){
 
   // Build included chips
   var incChips='';
-  if(isUNICA){
-    // UNICA: solo Voxy
+  if(isUNICA || isUNAG){
+    // UNICA / UNAG: solo Voxy
     incChips='<span style="display:inline-block;background:#dcfce7;color:#16a34a;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Voxy</span>';
   } else {
     var incList2=(realSec==='mae')?cats.included:cats.included;
@@ -2586,8 +2600,8 @@ function downloadSummary(sec){
 
     +'</div>' // body
 
-    // COMPLEMENTO DE COLEGIATURA (no aplica para UNICA)
-    +(isUNICA ? '' : (function(){
+    // COMPLEMENTO DE COLEGIATURA (no aplica para UNICA ni UNAG)
+    +(isUNICA || isUNAG ? '' : (function(){
       var colMap={lic:1100,mae:1200,ms:1200,doc:1200};
       var colPrice=colMap[realSec]||1100;
       return '<div style="background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:12px 16px;margin:0 28px 20px;font-size:12px;color:#5f4200">'
