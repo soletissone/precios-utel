@@ -583,7 +583,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
-var BUILD='1780612327';
+var BUILD='1780612589';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -1920,8 +1920,9 @@ function rL(){
       }
       g('lb').innerHTML=uveBlock(uveVariants[0],rowsAlto)+uveBlock(uveVariants[1],rowsBajo);
       var selDiv=g('alianza-variant-sel'); if(selDiv) selDiv.style.display='none';
+      var ljorDiv=document.getElementById('ljor'); if(ljorDiv) ljorDiv.closest('.fg').style.display='none';
       g('lbi').innerHTML='<span>Incluye: Asistencia, Voxy, 5% domiciliación</span>';
-      g('li').innerHTML=NB['unico']+' <span class="badge b-mod">UVE</span>';
+      g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span><span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
       g('lic-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UVE</div>';
       g('lic-total').innerHTML=''; return;
     } else if(uName==='UNICA'||uName==='ARTE DIGITAL Y MULTIMEDIA'||uName==='MARKETING Y PUBLICIDAD'||uName==='MEDIOS DIGITALES'||uName==='COMUNICACIÓN CORPORATIVA'){
@@ -1951,8 +1952,9 @@ function rL(){
       }
       g('lb').innerHTML=unicaVariants.map(function(v,i){ return unicaBlock(v,unicaRows[i]); }).join('');
       var selDiv2=g('alianza-variant-sel'); if(selDiv2) selDiv2.style.display='none';
+      var ljorDiv2=document.getElementById('ljor'); if(ljorDiv2) ljorDiv2.closest('.fg').style.display='none';
       g('lbi').innerHTML='<span>Incluye: Voxy</span>';
-      g('li').innerHTML=NB['unico']+' <span class="badge b-mod">UNICA</span>';
+      g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span><span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
       g('lic-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UNICA</div>';
       g('lic-total').innerHTML=''; return;
     } else if(uName.indexOf('UNAG')>=0 || nivelRaw==='unag'){
@@ -1967,9 +1969,10 @@ function rL(){
     }
   }
 
-  // Hide alianza variant selector for normal programs
+  // Hide alianza variant selector for normal programs, restore jornada selector
   var _avs=g('alianza-variant-sel'); if(_avs) _avs.style.display='none';
-  var jornada=document.getElementById('ljor')?document.getElementById('ljor').value:'intensiva';
+  var _ljor=document.getElementById('ljor'); if(_ljor) _ljor.closest('.fg').style.display='';
+  var jornada=_ljor?_ljor.value:'intensiva';
   var isIngenieria2=(progKey==='ingenieria'||progKey==='robotica'||progKey==='arquitectura');
   var e=getPrice(progKey,nivel,lead,jornada,isIngenieria2);
   if(!e)return;
