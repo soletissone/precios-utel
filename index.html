@@ -583,7 +583,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
-var BUILD='1780611553';
+var BUILD='1780612327';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -1858,7 +1858,7 @@ function rL(){
   if(progName!==_lastProgLic){ SEL['lic']={}; SEL_EXP['lic']=null; _lastProgLic=progName; }
   var nivelRaw=updateBadge('lprog','lnivel-badge');
   // Map special catalog keys to real pricing levels
-  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico','uve':'unico','unag':'unico'};
+  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico','unica':'unico','uve':'unico','unag':'unico'};
   var nivel=nivelMap[nivelRaw]||nivelRaw;
   var lead=g('llead').value;
   var zona=g('lzona').value;
@@ -2022,7 +2022,7 @@ function rM(){
   updateFechaByProg('mae', progName); updateFechaByProg('ms', progName);
   if(progName!==_lastProgMae){ SEL['mae']={}; SEL_EXP['mae']=null; _lastProgMae=progName; }
   var nivelRaw=updateBadge('mprog','mnivel-badge');
-  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico','uve':'unico','unag':'unico'};
+  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico','unica':'unico','uve':'unico','unag':'unico'};
   var nivel=nivelMap[nivelRaw]||nivelRaw;
   var lead=g('mlead').value;
   if(lead==='rmkt') lead='rmkt30'; // mlead uses 'rmkt', PROG uses 'rmkt30'
@@ -2091,7 +2091,7 @@ function rS(){
   if(!progSel.value)return;
   var progName=progSel.value;
   var nivelRaw=updateBadge('sprog','snivel-badge');
-  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico','uve':'unico','unag':'unico'};
+  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico','unica':'unico','uve':'unico','unag':'unico'};
   var nivel=nivelMap[nivelRaw]||nivelRaw;
   var lead=g('slead').value;
   if(lead==='rmkt') lead='rmkt30';
@@ -2958,7 +2958,7 @@ function fillENProgs(){
   if(prevVal){sel.value=prevVal;}
   if(!sel.value && sel.options.length>0) sel.value=sel.options[0].value;
   var nivelRaw=sel.options[sel.selectedIndex]?sel.options[sel.selectedIndex].getAttribute('data-nivel'):'medio';
-  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico','uve':'unico','unag':'unico'};
+  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico','unica':'unico','uve':'unico','unag':'unico'};
   var nivel=nivelMap[nivelRaw]||nivelRaw;
   var nb=g('en-nivel-badge'); if(nb) nb.innerHTML=NB[nivel]||NB['medio']||'';
   updateFechaByProg('en',sel.value);
@@ -2976,7 +2976,7 @@ function rEN(){
   var progEntry=null;
   for(var i=0;i<progsAll.length;i++){if(progsAll[i].p===progName){progEntry=progsAll[i];break;}}
   var nivelRaw=progEntry?progEntry.v:'medio';
-  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico','uve':'unico','unag':'unico'};
+  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico','unica':'unico','uve':'unico','unag':'unico'};
   var nivel=nivelMap[nivelRaw]||nivelRaw;
   var nb=g('en-nivel-badge'); if(nb) nb.innerHTML=NB[nivel]||NB['medio']||'';
   var lead=g('en-lead').value;
