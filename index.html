@@ -583,7 +583,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
-var BUILD='1780613069';
+var BUILD='1780613394';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -1900,16 +1900,11 @@ function rL(){
       ];
       if(!window._uveVariant) window._uveVariant='alto';
       var selUVE=window._uveVariant;
-      // UVE: dom siempre 5%, sin colegiatura, sin Tít$0
-      var _domOrigUve=DOMICILIACION; DOMICILIACION=5;
-      var _tit0OrigUve=TITULO_COSTO_0; TITULO_COSTO_0=false;
-      var _complBannerUve=g('lic-compl'); if(_complBannerUve) _complBannerUve.style.display='none';
       // Renderizar ambas tablas por separado
       renderTable('lb', uveVariants[0].p, uveVariants[0].pkg,'—',0,0);
       var rowsAlto=g('lb').innerHTML;
       renderTable('lb', uveVariants[1].p, uveVariants[1].pkg,'—',0,0);
       var rowsBajo=g('lb').innerHTML;
-      DOMICILIACION=_domOrigUve; TITULO_COSTO_0=_tit0OrigUve;
       function uveBlock(v, rows){
         var sel=selUVE===v.id;
         var style=sel
@@ -1926,6 +1921,7 @@ function rL(){
       g('lb').innerHTML=uveBlock(uveVariants[0],rowsAlto)+uveBlock(uveVariants[1],rowsBajo);
       var selDiv=g('alianza-variant-sel'); if(selDiv) selDiv.style.display='none';
       var ljorDiv=document.getElementById('ljor'); if(ljorDiv) ljorDiv.closest('.fg').style.display='none';
+      var _cbUve=g('lic-compl'); if(_cbUve) _cbUve.style.display='';
       g('lbi').innerHTML='<span>Incluye: Asistencia, Voxy, 5% domiciliación</span>';
       g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span><span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
       g('lic-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UVE</div>';
