@@ -290,7 +290,6 @@ td{padding:9px 14px;vertical-align:middle}
         <div class="rule-item">• Solo <strong>1 idioma adicional</strong> por plan (Cambridge o Duolingo)</div>
         <div class="rule-item">• Máximo <strong>2 certificaciones</strong> por plan</div>
         <div class="rule-item">• Si se agrega <strong>Coursera</strong>, bloquea todas las demás certificaciones y plataformas</div>
-        <div class="rule-item">• Programas de <strong>Ingeniería</strong> incluyen U-Camp automáticamente</div>
       </div>
       <div id="lic-acc"></div>
       <div id="lic-total"></div>
@@ -583,7 +582,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
-var BUILD='1780941121';
+var BUILD='1780941280';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -1717,14 +1716,6 @@ function renderAccs(panelId, sec, isOnline){
           + '<span class="chip-price">'+(replaced?'Reemplazado':'Incluido')+'</span>'
           + '</div>';
   });
-  // Show U-Camp as auto-included for engineering programs
-  if(sec==='lic' && SEL['lic']['ucamp']===true && SEL['lic']['_ucamp_was_auto']){
-    html += '<div class="chip included">'
-          + '<div class="chip-check"></div>'
-          + '<span class="chip-name">U-Camp</span>'
-          + '<span class="chip-price">Auto · desde mes 3</span>'
-          + '</div>';
-  }
   html += '</div></div>';
 
   // — OPCIONALES por categoría —
@@ -1872,14 +1863,6 @@ function rL(){
   // Jornada Completa uses 'hot' and 'rmkt' only
   if(jornada==='completa' && (lead==='rmkt30'||lead==='rmkt60')) lead='rmkt';
   var mod=g('lmod')?g('lmod').value:'online';
-
-  // Auto U-Camp para ingenierías específicas
-  var ingProgs=["INGENIERÍA INDUSTRIAL", "INGENIERÍA EN SISTEMAS COMPUTACIONALES", "INGENIERÍA INDUSTRIAL Y ADMINISTRACIÓN", "INGENIERÍA EN LOGÍSTICA Y TRANSPORTE", "INTELIGENCIA ARTIFICIAL", "INGENIERÍA EN ENERGÍAS RENOVABLES", "INGENIERÍA EN DESARROLLO DE SOFTWARE", "SEGURIDAD INFORMÁTICA", "INTELIGENCIA ARTIFICIAL APLICADA A NEGOCIOS, INDUSTRIA Y AUTOMATIZACIÓN", "ÉTICA Y GOBERNANZA DE LA INTELIGENCIA ARTIFICIAL", "CIBERSEGURIDAD Y RIESGOS EN INTELIGENCIA ARTIFICIAL", "INNOVACIÓN Y EMPRENDIMIENTO CON INTELIGENCIA ARTIFICIAL", "INTELIGENCIA ARTIFICIAL EN EDUCACIÓN", "INGENIERÍA EN CIENCIAS DE DATOS E INTELIGENCIA ANALÍTICA", "INGENIERÍA EN PROGRAMACIÓN EN LA NUBE", "SOFTWARE PARA ENTRETENIMIENTO DIGITAL", "INGENIERÍA EN SISTEMAS INTELIGENTES", "INGENIERÍA EN TECNOLOGÍA DE VIDEOJUEGOS Y REALIDAD VIRTUAL", "COMERCIO ELECTRÓNICO Y NEGOCIOS DIGITALES", "TECNOLOGÍAS INTERACTIVAS Y VIRTUALES", "INGENIERÍA AMBIENTAL", "INGENIERÍA ROBÓTICA"];
-  var uName2=progName.toUpperCase();
-  var isIng=ingProgs.some(function(p){return uName2.indexOf(p)>=0;});
-  if(isIng) SEL['lic']['ucamp']=true;
-  else if(!isIng && SEL['lic']['_ucamp_was_auto']) SEL['lic']['ucamp']=false;
-  SEL['lic']['_ucamp_was_auto']=isIng;
 
   // Use catalog v field for special pricing keys
   var progKeyFromCat = null;
@@ -3074,8 +3057,6 @@ function rEN(){
     var e=getPrice(progKey,nivel,leadActual,'intensiva',isIng2); if(!e) return;
     // Bake in seseje: +$165 from month 3
     var prices=e.p.map(function(v,i){return i>=2?v+165:v;});
-    // Eje-nativa LIC: never auto-add U-Camp
-    SEL['lic']['ucamp']=false; SEL['lic']['_ucamp_was_auto']=false;
     var acc=getAccTotal('lic',false); var acc12=getAccTotal('lic',false,true);
     var ejePkg=EJE_PKG_MAP[e.pkg]; var licPkg=ejePkg?ejePkg.pkg:e.pkg; var licEsc=ejePkg?(ejePkg.esc||'—'):e.esc;
     renderTable('en-tbody',prices,licPkg,licEsc,acc,acc12);
