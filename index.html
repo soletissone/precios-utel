@@ -583,7 +583,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
-var BUILD='1780938329';
+var BUILD='1780938854';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -1099,10 +1099,10 @@ function renderTable(tbodyId, prices, pkg, esc, accTotal, accTotal12, domStartId
   while(i<prices.length){
     var p=prices[i];
     if(i===0){
-      rows.push({label:'Mes 1',p:p,dom:false,acc:acc12});
+      rows.push({label:'Mes 1',p:p,dom:(0>=_domIdx),acc:acc12});
       i++;
     } else if(i===1){
-      rows.push({label:'Mes 2',p:p,dom:false,acc:acc12});
+      rows.push({label:'Mes 2',p:p,dom:(1>=_domIdx),acc:acc12});
       i++;
     } else {
       var isDomRow=(i>=_domIdx);
@@ -1947,7 +1947,7 @@ function rL(){
       var _tit0Orig=TITULO_COSTO_0; TITULO_COSTO_0=false;
       var _complBanner=g('lic-compl'); if(_complBanner) _complBanner.style.display='none';
       var unicaRows=unicaVariants.map(function(v){
-        renderTable('lb',v.p,v.pkg,'—',0,0,3); return g('lb').innerHTML;
+        renderTable('lb',v.p,v.pkg,'—',0,0,v.id==='flat'?0:3); return g('lb').innerHTML;
       });
       DOMICILIACION=_domOrig; TITULO_COSTO_0=_tit0Orig;
       function unicaBlock(v, rows){
@@ -2480,11 +2480,12 @@ function downloadSummary(sec){
     var selVariant = variants.find(function(v){return v.id===selId;})||variants[0];
     var p=selVariant.p;
     var domPct=_domForPDF/100;
-    var labels=['Mes 1','Mes 2','Mes 3','Mes 4 en adelante'];
-    var prices=[p[0],p[1],p[2],p[3]];
+    var isFlat=(selId==='flat');
+    var labels=isFlat?['Mes 1','Mes 2 en adelante']:['Mes 1','Mes 2','Mes 3','Mes 4 en adelante'];
+    var prices=isFlat?[p[0],p[1]]:([p[0],p[1],p[2],p[3]]);
     prices.forEach(function(price,i){
-      var dom=isDomActive()&&i===3?Math.round(price*(1-domPct)):'—';
-      var bg=i===3?'background:#f8f8ff':'';
+      var dom=isDomActive()&&(isFlat||i===3)?Math.round(price*(1-domPct)):'—';
+      var bg=(isFlat||(i===3))?'background:#f8f8ff':'';
       tableRows+='<tr style="border-bottom:1px solid #e5e7eb;'+bg+'">'
         +'<td style="padding:10px 16px;font-size:13px;color:#6b7280">'+labels[i]+'</td>'
         +'<td style="padding:10px 16px;font-size:15px;font-weight:700;color:#5541d7">'+fmt(price)+'</td>'
