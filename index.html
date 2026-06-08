@@ -583,7 +583,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
-var BUILD='1780938854';
+var BUILD='1780938927';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -927,8 +927,8 @@ function isTit0Active(){
   if(!TIT0_EXPIRY) return true;
   return new Date().toISOString().slice(0,10) <= TIT0_EXPIRY;
 }
-var PLATZI_PREVIEW = false;   // habilitar Platzi desde panel admin
-var PLATZI_LAUNCH  = new Date('2099-01-01'); // pospuesto — activar manualmente desde admin
+var PLATZI_PREVIEW = true;    // habilitado
+var PLATZI_LAUNCH  = new Date('2026-06-01'); // activo
 function isPlatziVisible(){ return PLATZI_PREVIEW || new Date() >= PLATZI_LAUNCH; }
 // ─────────────────────────────────────
 
