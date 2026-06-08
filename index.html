@@ -583,7 +583,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
-var BUILD='1780616906';
+var BUILD='1780938329';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -1056,11 +1056,12 @@ function sw(id){
   else if(id==='en'){ fillENProgs(); rEN(); }
 }
 
-function renderTable(tbodyId, prices, pkg, esc, accTotal, accTotal12){
+function renderTable(tbodyId, prices, pkg, esc, accTotal, accTotal12, domStartIdx){
   var tb=g(tbodyId); tb.innerHTML='';
   var acc3=accTotal||0;
   var acc12=accTotal12!=null?accTotal12:acc3;
   var pct=isDomActive()?DOMICILIACION/100:0;
+  var _domIdx=(domStartIdx!==undefined)?domStartIdx:2; // índice 0-based desde donde aplica dom
   document.querySelectorAll('.dom-col').forEach(function(el){
     el.innerHTML=isDomActive()?'Con domiciliación <span class="dom-badge">'+DOMICILIACION+'%</span>':'Con domiciliación <span class="dom-badge">—</span>';
   });
@@ -1104,18 +1105,21 @@ function renderTable(tbodyId, prices, pkg, esc, accTotal, accTotal12){
       rows.push({label:'Mes 2',p:p,dom:false,acc:acc12});
       i++;
     } else {
-      // Find how far this price goes
+      var isDomRow=(i>=_domIdx);
+      // Find how far this price goes — but don't cross the dom boundary
       var lastIdx=i;
-      while(lastIdx+1<prices.length && prices[lastIdx+1]===p) lastIdx++;
-      var badgeHtml='';
-      // Deferred accs only on the last (highest) price group; regular accs from mes 3 on all rows
+      while(lastIdx+1<prices.length && prices[lastIdx+1]===p){
+        if(lastIdx+1===_domIdx) break; // cortar grupo en el límite de domiciliación
+        lastIdx++;
+      }
+      // Deferred accs only on the last (highest) price group; regular accs from _domIdx on
       var isLastPrice=(p===maxPrice);
       var rowAcc=isLastPrice?acc3:(alwaysAcc+regularAcc);
       if(lastIdx===prices.length-1){
-        rows.push({label:'Mes '+(i+1)+' en adelante'+badgeHtml,p:p,dom:true,acc:rowAcc});
+        rows.push({label:'Mes '+(i+1)+' en adelante',p:p,dom:isDomRow,acc:rowAcc});
       } else {
         var rangeLabel=(i===lastIdx)?'Mes '+(i+1):'Mes '+(i+1)+' al '+(lastIdx+1);
-        rows.push({label:rangeLabel+badgeHtml,p:p,dom:true,acc:rowAcc});
+        rows.push({label:rangeLabel,p:p,dom:isDomRow,acc:rowAcc});
       }
       i=lastIdx+1;
     }
@@ -1901,9 +1905,9 @@ function rL(){
       if(!window._uveVariant) window._uveVariant='alto';
       var selUVE=window._uveVariant;
       // Renderizar ambas tablas por separado
-      renderTable('lb', uveVariants[0].p, uveVariants[0].pkg,'—',0,0);
+      renderTable('lb', uveVariants[0].p, uveVariants[0].pkg,'—',0,0,3);
       var rowsAlto=g('lb').innerHTML;
-      renderTable('lb', uveVariants[1].p, uveVariants[1].pkg,'—',0,0);
+      renderTable('lb', uveVariants[1].p, uveVariants[1].pkg,'—',0,0,3);
       var rowsBajo=g('lb').innerHTML;
       function uveBlock(v, rows){
         var sel=selUVE===v.id;
@@ -1943,7 +1947,7 @@ function rL(){
       var _tit0Orig=TITULO_COSTO_0; TITULO_COSTO_0=false;
       var _complBanner=g('lic-compl'); if(_complBanner) _complBanner.style.display='none';
       var unicaRows=unicaVariants.map(function(v){
-        renderTable('lb',v.p,v.pkg,'—',0,0); return g('lb').innerHTML;
+        renderTable('lb',v.p,v.pkg,'—',0,0,3); return g('lb').innerHTML;
       });
       DOMICILIACION=_domOrig; TITULO_COSTO_0=_tit0Orig;
       function unicaBlock(v, rows){
@@ -2476,11 +2480,11 @@ function downloadSummary(sec){
     var selVariant = variants.find(function(v){return v.id===selId;})||variants[0];
     var p=selVariant.p;
     var domPct=_domForPDF/100;
-    var labels=['Mes 1','Mes 2','Mes 3 en adelante'];
-    var prices=[p[0],p[1],p[2]];
+    var labels=['Mes 1','Mes 2','Mes 3','Mes 4 en adelante'];
+    var prices=[p[0],p[1],p[2],p[3]];
     prices.forEach(function(price,i){
-      var dom=isDomActive()&&i===2?Math.round(price*(1-domPct)):'—';
-      var bg=i===2?'background:#f8f8ff':'';
+      var dom=isDomActive()&&i===3?Math.round(price*(1-domPct)):'—';
+      var bg=i===3?'background:#f8f8ff':'';
       tableRows+='<tr style="border-bottom:1px solid #e5e7eb;'+bg+'">'
         +'<td style="padding:10px 16px;font-size:13px;color:#6b7280">'+labels[i]+'</td>'
         +'<td style="padding:10px 16px;font-size:15px;font-weight:700;color:#5541d7">'+fmt(price)+'</td>'
