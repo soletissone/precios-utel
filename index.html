@@ -582,7 +582,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
-var BUILD='1780943578';
+var BUILD='1780943808';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -1871,8 +1871,6 @@ function rL(){
   var lead=g('llead').value;
   var zona=g('lzona').value;
   if(zona!=='std') lead=zona;
-  // Jornada Completa uses 'hot' and 'rmkt' only
-  if(jornada==='completa' && (lead==='rmkt30'||lead==='rmkt60')) lead='rmkt';
   var mod=g('lmod')?g('lmod').value:'online';
 
   // Use catalog v field for special pricing keys
@@ -1983,6 +1981,8 @@ function rL(){
   var _ljor=document.getElementById('ljor'); if(_ljor) _ljor.closest('.fg').style.display='';
   var _cb=g('lic-compl'); if(_cb) _cb.style.display='';
   var jornada=_ljor?_ljor.value:'intensiva';
+  // Jornada Completa solo tiene 'hot' y 'rmkt' (no rmkt30/rmkt60 independientes)
+  if(jornada==='completa' && (lead==='rmkt30'||lead==='rmkt60')) lead='rmkt';
   var isIngenieria2=(progKey==='ingenieria'||progKey==='robotica'||progKey==='arquitectura');
   var e=getPrice(progKey,nivel,lead,jornada,isIngenieria2);
   if(!e)return;
