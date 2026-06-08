@@ -438,7 +438,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
         <tbody id="dipbody"></tbody>
       </table></div>
       <div style="background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--mu);margin-top:10px">
-        Incluye: Asistencia · Voxy · 5% descuento domiciliación
+        Incluye: Asistencia · Voxy · Platzi · 5% descuento domiciliación
       </div>
     </div>
 
@@ -583,7 +583,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
-var BUILD='1780938927';
+var BUILD='1780941121';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -1515,6 +1515,7 @@ var ACCS = {
     included: [
       {id:'voxy',   name:'Inglés Voxy'},
       {id:'welbe',  name:'Welbe'},
+      {id:'platzi', name:'Platzi'},
       {id:'asist',  name:'Asistencia Plus'}
     ],
     optional: [
@@ -1549,8 +1550,8 @@ var ACCS = {
     included: [
       {id:'voxy',    name:'Inglés Voxy'},
       {id:'welbe',   name:'Welbe'},
+      {id:'platzi',  name:'Platzi'},
       {id:'asist',   name:'Asistencia Plus'}
-      // platzi se agrega dinámicamente si modalidad=online
     ],
     included_online: [
       {id:'voxy',    name:'Inglés Voxy'},
@@ -1611,6 +1612,7 @@ var ACCS = {
     included: [
       {id:'voxy',    name:'Inglés Voxy'},
       {id:'welbe',   name:'Welbe'},
+      {id:'platzi',  name:'Platzi'},
       {id:'asist',   name:'Asistencia Plus'}
     ],
     optional: [
@@ -2514,7 +2516,7 @@ function downloadSummary(sec){
     // UNICA / UNAG: solo Voxy
     incChips='<span style="display:inline-block;background:#dcfce7;color:#16a34a;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Voxy</span>';
   } else {
-    var incList2=(realSec==='mae')?cats.included:cats.included;
+    var incList2=(realSec==='mae')?(cats.included_online||cats.included):cats.included;
     if(cats) incList2.forEach(function(it){
       incChips+='<span style="display:inline-block;background:#dcfce7;color:#16a34a;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ '+it.name+'</span>';
     });
