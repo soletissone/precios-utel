@@ -582,7 +582,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
-var BUILD='1780941280';
+var BUILD='1780942266';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -1079,6 +1079,9 @@ function renderTable(tbodyId, prices, pkg, esc, accTotal, accTotal12, domStartId
         acat.optional.forEach(function(grp){
           grp.items.forEach(function(it){if(it.id===aid) alwaysAcc+=it.price;});
         });
+      // También ítems incluidos con precio (ej. Platzi)
+      if(acat&&acat.included)
+        acat.included.forEach(function(it){if(it.id===aid&&it.price) alwaysAcc+=it.price;});
     });
     if(typeof DEFERRED_ACCS!=='undefined'){
       DEFERRED_ACCS.forEach(function(aid){
@@ -1514,7 +1517,7 @@ var ACCS = {
     included: [
       {id:'voxy',   name:'Inglés Voxy'},
       {id:'welbe',  name:'Welbe'},
-      {id:'platzi', name:'Platzi'},
+      {id:'platzi', name:'Platzi', price:100},
       {id:'asist',  name:'Asistencia Plus'}
     ],
     optional: [
@@ -1611,7 +1614,7 @@ var ACCS = {
     included: [
       {id:'voxy',    name:'Inglés Voxy'},
       {id:'welbe',   name:'Welbe'},
-      {id:'platzi',  name:'Platzi'},
+      {id:'platzi',  name:'Platzi', price:100},
       {id:'asist',   name:'Asistencia Plus'}
     ],
     optional: [
@@ -1665,6 +1668,14 @@ function getAccTotal(sec, isOnline, excludeDeferred){
   var total=0;
   var accs=ACCS[sec];
   var incIds=getIncludedIds(sec,isOnline);
+  // Sumar ítems incluidos que tienen precio (ej. Platzi obligatorio)
+  var incList=(sec==='mae'&&isOnline)?(accs.included_online||accs.included):accs.included;
+  if(incList) incList.forEach(function(item){
+    if(item.price){
+      if(excludeDeferred && DEFERRED_ACCS.indexOf(item.id)>=0) return;
+      total+=item.price;
+    }
+  });
   accs.optional.forEach(function(grp){
     grp.items.forEach(function(item){
       if(item.hidden) return;
