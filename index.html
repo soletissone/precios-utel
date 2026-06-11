@@ -582,7 +582,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
    AUTH
 ═══════════════════════════════════════ */
 var PWD='UTEL2026*', MAX=5, LK=600000;
-var BUILD='1781211082';
+var BUILD='1781214665';
 
 function ga(){
   var d=JSON.parse(localStorage.getItem('ua')||'{}');
@@ -1643,6 +1643,25 @@ var ACCS = {
 var CERT_IDS  = ['coursera','platzi','facebook','cifal','microsoft','tableau','gcloud','gads','legal'];
 var DEFERRED_ACCS = ['ucamp','utelx','tit','tit50','tit0_free']; // solo aplican desde mes 3
 var ALWAYS_ACCS = ['diploma','platzi']; // suman en TODOS los pagos sin excepción
+// Escalonado que se usa cuando el alumno agrega Titulación (tit o tit50)
+var TITUL_ESC_MAP = {
+  // Licenciatura Intensiva (regular y ejecutiva)
+  'P14.INT2M':   'P16.INT2M',
+  // Licenciatura Intensiva Arquitectura
+  'P50.INT2M':   'P51.INT2M',
+  // Licenciatura Intensiva Híbrido (regular, Ing.Robótica, Arquitectura)
+  'P61.INT2M':   'P16.INT2M',
+  'P67.INT2M':   'P16.INT2M',
+  'P65.INT2M':   'P51.INT2M',
+  // Licenciatura Super Intensiva
+  'P8.SUPINT2M': 'P9.SUPINT2M',
+  // Maestría regular (hot + rmkt)
+  'P25.MAE2M':   'P26.MAE2M',
+  // Maestría Egresados
+  'P27.MAE2M':   'P28.MAE2M',
+  // Maestría Híbrido
+  'P29.MAE2M':   'P26.MAE2M',
+};
 var PLAT_IDS  = ['utelx','ugen'];
 var IDIOM_IDS = ['cambridge','duolingo'];
 
@@ -1984,6 +2003,10 @@ function rL(){
   var jornada=_ljor?_ljor.value:'intensiva';
   // Jornada Completa solo tiene 'hot' y 'rmkt' (no rmkt30/rmkt60 independientes)
   if(jornada==='completa' && (lead==='rmkt30'||lead==='rmkt60')) lead='rmkt';
+  // Completa: 1 solo precio — Arq. e Ing.Robótica usan 1650 (P5), todos los demás 1250 (P3)
+  if(jornada==='completa' && progKey!=='arquitectura') {
+    progKey = (progName==='Ingeniería Robótica') ? 'arquitectura' : 'online_general';
+  }
   var isIngenieria2=(progKey==='ingenieria'||progKey==='robotica'||progKey==='arquitectura');
   var e=getPrice(progKey,nivel,lead,jornada,isIngenieria2);
   if(!e)return;
@@ -1993,6 +2016,8 @@ function rL(){
   var acc=getAccTotal('lic',false);
   var acc12_lic=getAccTotal('lic',false,true);
   var licEscFinal=(SEL_EXP['lic']==='hibrid'&&HIB_ESC_MAP[e.pkg])?HIB_ESC_MAP[e.pkg]:e.esc;
+  var titLic=SEL['lic']&&(SEL['lic']['tit']||SEL['lic']['tit50']);
+  if(titLic&&TITUL_ESC_MAP[licEscFinal]) licEscFinal=TITUL_ESC_MAP[licEscFinal];
   renderTable('lb',expPrices,e.pkg,licEscFinal,acc,acc12_lic);
   renderBeca('lbi',Math.max.apply(null,expPrices),e.pkg);
   // Programas con pricing especial muestran solo el nombre, sin badge de nivel
@@ -2094,6 +2119,8 @@ function rM(){
   var isHibridMAE=(SEL_EXP['mae']==='hibrid');
   var maePkgFinal=(isHibridMAE&&HIB_PKG_MAP[e.pkg])?HIB_PKG_MAP[e.pkg]:e.pkg;
   var maeEscFinal=(isHibridMAE&&HIB_ESC_MAP[e.pkg])?HIB_ESC_MAP[e.pkg]:e.esc;
+  var titMae=SEL['mae']&&(SEL['mae']['tit']||SEL['mae']['tit50']);
+  if(titMae&&TITUL_ESC_MAP[maeEscFinal]) maeEscFinal=TITUL_ESC_MAP[maeEscFinal];
   var _mcbR=g('mae-compl'); if(_mcbR) _mcbR.style.display='';
   renderTable('mb',maeExpPrices,maePkgFinal,maeEscFinal,acc,acc12_mae);
   renderBeca('mbi',Math.max.apply(null,maeExpPrices),e.pkg);
