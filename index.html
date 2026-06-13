@@ -2190,7 +2190,7 @@ function rL(){
   renderExpSelector(_progEntry);
   updateFechaByProg('lic', progName);
   renderAccs('lic-acc','lic',false);
-  renderTotal('lic-total',e.p[2],'lic',false);
+  renderTotal('lic-total',expPrices[2],'lic',false);
 }
 
 var _lastProgMae=null;
@@ -2270,7 +2270,7 @@ function rM(){
   g('mi').innerHTML=NB[nivel]+' '+nuevoBadgeM+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'MAE')+durBadgeM+LBG[lead];
   updateFechaByProg('mae', progName); updateFechaByProg('ms', progName);
   renderAccs('mae-acc','mae',isOnline);
-  renderTotal('mae-total',e.p[2],'mae',isOnline);
+  renderTotal('mae-total',maeExpPrices[2],'mae',isOnline);
 }
 
 function rS(){
