@@ -1968,19 +1968,21 @@ function renderTotal(panelId, basePrice, sec, isOnline){
   var incIds=getIncludedIds(sec,isOnline);
   var html='<div class="total-section"><div class="total-title">Resumen del plan</div>';
   html+='<div class="total-row base"><span>Cuota base (mes 3+)</span><span>'+fmt(basePrice)+'</span></div>';
-  var total=basePrice;
+  // Accesorios incluidos con precio (ej. Platzi $100/mes)
   var incList=(sec==='mae'&&isOnline)?(accs.included_online||accs.included):accs.included;
   if(incList) incList.forEach(function(item){
-    if(item.price){ total+=item.price; html+='<div class="total-row acc-line"><span>+ '+item.name+'</span><span>'+fmt(item.price)+'</span></div>'; }
+    if(item.price){ html+='<div class="total-row acc-line"><span>+ '+item.name+'</span><span>'+fmt(item.price)+'</span></div>'; }
   });
+  // Accesorios opcionales seleccionados
   accs.optional.forEach(function(grp){
     grp.items.forEach(function(item){
       if(SEL[sec][item.id]===true && incIds.indexOf(item.id)<0){
-        total+=item.price;
         html+='<div class="total-row acc-line"><span>+ '+item.name+'</span><span>'+fmt(item.price)+'</span></div>';
       }
     });
   });
+  // Total = basePrice + getAccTotal (misma lógica que la tabla)
+  var total=basePrice+getAccTotal(sec,isOnline);
   html+='<div class="total-row final"><span>Total cuota mensual</span><span>'+fmt(total)+'</span></div>';
   html+='</div>';
   g(panelId).innerHTML=html;
