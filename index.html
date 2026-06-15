@@ -1004,12 +1004,10 @@ function exportAllData(){
 }
 window.addEventListener('load',function(){
   var _storedBuild=localStorage.getItem('build');
-  if(_storedBuild && _storedBuild!==BUILD){
-    // Hay versión nueva — forzar recarga para limpiar caché
+  if(_storedBuild!==BUILD){
+    // Versión nueva — limpiar sesión y pedir clave
     localStorage.setItem('build', BUILD);
     localStorage.removeItem('ok');
-    location.reload(true);
-    return;
   }
   var _ok=parseInt(localStorage.getItem('ok')||'0');
   if(_ok && Date.now()<_ok){
