@@ -2734,8 +2734,28 @@ function downloadSummary(sec){
     +'  *{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}'
     +'  body{background:#fff;padding:0}'
     +'  .page{box-shadow:none;border-radius:0;max-width:100%}'
+    +'  #_gate{display:none!important}'
     +'}'
-    +'</style></head><body>'
+    +'</style>'
+    +'<script>'
+    +'function _chk(){'
+    +'  var v=document.getElementById("_pi").value;'
+    +'  if(v==="UTEL2026*"){document.getElementById("_gate").style.display="none";document.getElementById("_cont").style.display="block";}'
+    +'  else{document.getElementById("_err").textContent="Clave incorrecta";document.getElementById("_pi").value="";document.getElementById("_pi").focus();}'
+    +'}'
+    +'window.onload=function(){document.getElementById("_pi").focus();};'
+    +'</script>'
+    +'</head><body>'
+    +'<div id="_gate" style="position:fixed;inset:0;background:linear-gradient(135deg,#1a1a2e,#16213e);display:flex;align-items:center;justify-content:center;z-index:9999">'
+    +'<div style="background:#fff;border-radius:16px;padding:48px 40px;width:100%;max-width:340px;text-align:center;box-shadow:0 8px 40px rgba(0,0,0,.3)">'
+    +'<div style="font-size:10px;font-weight:700;letter-spacing:.2em;color:#39b54a;text-transform:uppercase;margin-bottom:8px">UTEL</div>'
+    +'<div style="font-size:20px;font-weight:700;color:#1a1a2e;margin-bottom:4px">Plan de Beca</div>'
+    +'<div style="font-size:13px;color:#6b7280;margin-bottom:28px">Acceso restringido — Equipo de ventas</div>'
+    +'<input id="_pi" type="password" placeholder="Contraseña" onkeydown="if(event.key===\'Enter\')_chk()" style="width:100%;padding:10px 14px;border:1px solid #d1d5db;border-radius:8px;font-size:14px;outline:none;margin-bottom:10px"/>'
+    +'<div id="_err" style="color:#dc2626;font-size:12px;min-height:16px;margin-bottom:10px"></div>'
+    +'<button onclick="_chk()" style="width:100%;padding:11px;background:linear-gradient(135deg,#39b54a,#16a34a);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer">Ingresar</button>'
+    +'</div></div>'
+    +'<div id="_cont" style="display:none">'
     +'<div class="page">'
 
     // HEADER
@@ -2797,7 +2817,7 @@ function downloadSummary(sec){
     +'<div style="font-size:10px;color:#d1d5db;line-height:1.5;font-style:italic">Este documento no es oficial ni tiene carácter legal. Es un simulador de precio de colegiaturas con fines informativos. Los valores son orientativos y pueden estar sujetos a cambios sin previo aviso.</div>'
     +'</div>'
 
-    +'</div></body></html>';
+    +'</div></div></div></body></html>';
 
   // Open in new window and print
   var win=window.open('','_blank','width=800,height=700');
