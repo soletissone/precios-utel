@@ -2630,7 +2630,13 @@ function downloadSummary(sec){
   var baseNum=0;
   if(baseCell){var _t=baseCell.textContent.replace(/[$,.]/g,'').replace(/\s/g,'');baseNum=parseInt(_t)||0;}
   var accSum=0;
-  if(cats) cats.optional.forEach(function(grp){grp.items.forEach(function(it){if(SEL[realSec][it.id]&&it.price>0)accSum+=it.price;});});
+  if(cats){
+    // Incluidos con precio (ej. Platzi $100)
+    var _incDownload=(realSec==='mae')?(cats.included_online||cats.included):cats.included;
+    if(_incDownload) _incDownload.forEach(function(it){if(it.price) accSum+=it.price;});
+    // Opcionales seleccionados
+    cats.optional.forEach(function(grp){grp.items.forEach(function(it){if(SEL[realSec][it.id]&&it.price>0)accSum+=it.price;});});
+  }
   var finalAmt=fmt(baseNum+accSum);
   var baseAmt=baseCell?baseCell.textContent.trim():'—';
 
@@ -2704,6 +2710,8 @@ function downloadSummary(sec){
 
   // Build total lines
   var totalLines='<div style="display:flex;justify-content:space-between;padding:5px 0;font-size:13px;color:rgba(255,255,255,0.8)"><span>Cuota base (mes 3+)</span><span>'+baseAmt+'</span></div>';
+  // Accesorios incluidos con precio (ej. Platzi $100)
+  if(cats){var _incTL=(realSec==='mae')?(cats.included_online||cats.included):cats.included;if(_incTL) _incTL.forEach(function(it){if(it.price){totalLines+='<div style="display:flex;justify-content:space-between;padding:5px 0;font-size:13px;color:rgba(255,255,255,0.75)"><span>+ '+it.name+'</span><span>'+fmt(it.price)+'/mes</span></div>';}});}
   if(cats) cats.optional.forEach(function(grp){grp.items.forEach(function(it){
     if(SEL[realSec][it.id]&&it.price>0){
       totalLines+='<div style="display:flex;justify-content:space-between;padding:5px 0;font-size:13px;color:rgba(255,255,255,0.75)"><span>+ '+it.name+'</span><span>'+fmt(it.price)+'/mes</span></div>';
