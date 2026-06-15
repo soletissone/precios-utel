@@ -2149,7 +2149,7 @@ function rL(){
   var expPrice = SEL_EXP['lic'] ? (EXP_PRICES[SEL_EXP['lic']]||0) : 0;
   var expPrices = e.p.map(function(v,i){ return i>=2 ? v+expPrice : v; });
   var acc=getAccTotal('lic',false);
-  var acc12_lic=(jornada==='completa')?acc:getAccTotal('lic',false,true);
+  var acc12_lic=(jornada==='completa')?acc:0;
   var licEscFinal;
   if(SEL_EXP['lic']==='hibrid'){
     // Robotica híbrido usa P67.INT2M (distinto de arquitectura P65.INT2M aunque comparten pkg P11-P13)
