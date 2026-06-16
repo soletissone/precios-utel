@@ -3310,6 +3310,50 @@ function rEN(){
   }
 }
 
+
+/* ═══════════════ CHATBOT WIDGET ═══════════════ */
+var _chatOpen=false;
+function toggleChat(){
+  _chatOpen=!_chatOpen;
+  var panel=document.getElementById('chat-panel');
+  var btn=document.getElementById('chat-fab');
+  if(_chatOpen){
+    panel.style.display='flex';
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+  } else {
+    panel.style.display='none';
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>';
+  }
+}
+</script>
+
+<!-- CHATBOT WIDGET (solo post-login, dentro de #app) -->
+<div id="chat-widget" style="display:none;position:fixed;bottom:28px;right:28px;z-index:500">
+  <!-- Panel del chat -->
+  <div id="chat-panel" style="display:none;flex-direction:column;width:380px;height:560px;border-radius:16px;overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.22);margin-bottom:12px">
+    <iframe src="https://www.chatbase.co/chatbot-iframe/0PP3_Utrwkr_FZBE8_v_w" width="100%" height="100%" style="border:none;display:block" allow="microphone"></iframe>
+  </div>
+  <!-- Botón flotante -->
+  <button id="chat-fab" onclick="toggleChat()" style="width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#39b54a,#16a34a);border:none;color:#fff;cursor:pointer;box-shadow:0 4px 16px rgba(22,163,74,.45);display:flex;align-items:center;justify-content:center;margin-left:auto;transition:transform .15s,box-shadow .15s" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  </button>
+</div>
+
+<script>
+// Mostrar widget solo cuando el app está visible
+(function(){
+  var _origInit=typeof init==='function'?init:null;
+  if(_origInit){
+    var _patchedInit=false;
+    var _showChat=function(){document.getElementById('chat-widget').style.display='block';};
+    var _checkApp=setInterval(function(){
+      var appEl=document.getElementById('app');
+      if(appEl && appEl.style.display!=='none'){
+        _showChat(); clearInterval(_checkApp);
+      }
+    },300);
+  }
+})();
 </script>
 </body>
 </html>
