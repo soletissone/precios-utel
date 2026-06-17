@@ -2970,7 +2970,7 @@ function renderExpSelector(progEntry){
   var opts=[];
   if(progEntry.eje) opts.push({id:'seseje',label:'Ejecutiva',price:165});
   if(progEntry.jov) opts.push({id:'utelj', label:'Utel Joven',price:165});
-  if(progEntry.hib) opts.push({id:'hibrid',label:'H\u00edbrida',price:340});
+  if(progEntry.hib) opts.push({id:'hibrid',label:'H\u00edbrida',price:EXP_PRICES['hibrid']});
   if(opts.length===0){el.style.display='none';SEL_EXP['lic']=null;return;}
   el.style.display='block';
   var cur=SEL_EXP['lic'];
@@ -2993,7 +2993,7 @@ function renderExpSelectorMAE(progEntry){
   if(!el||!chipsEl) return;
   var opts=[];
   if(progEntry && progEntry.eje) opts.push({id:'seseje',label:'Ejecutiva',price:165});
-  if(progEntry && progEntry.hib) opts.push({id:'hibrid',label:'Híbrida',price:395});
+  if(progEntry && progEntry.hib) opts.push({id:'hibrid',label:'Híbrida',price:EXP_PRICES_MAE['hibrid']});
   if(opts.length===0){el.style.display='none';SEL_EXP['mae']=null;return;}
   el.style.display='block';
   var cur=SEL_EXP['mae'];
