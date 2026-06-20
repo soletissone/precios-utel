@@ -66,8 +66,8 @@ header{background:var(--sf);border-bottom:1px solid var(--bd);padding:14px 24px;
 .plat-btn{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;padding:5px 12px;border-radius:8px;border:none;background:#00d369;color:#000;cursor:pointer;margin-left:6px;vertical-align:middle;transition:opacity .15s,transform .1s;line-height:1.4}
 .plat-btn:hover{opacity:.85;transform:translateY(-1px)}
 .plat-menu{position:fixed;background:#fff;border:1px solid #e5e7eb;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.18);z-index:9999;min-width:250px;padding:6px 0}
-.plat-menu a{display:flex;align-items:center;gap:10px;padding:10px 16px;font-size:13px;color:#1c2d1a;text-decoration:none;font-weight:600}
-.plat-menu a:hover{background:#f0fdf4}
+.plat-menu button{display:flex;align-items:center;gap:10px;padding:10px 16px;font-size:13px;color:#1c2d1a;font-weight:600;background:none;border:none;width:100%;cursor:pointer;text-align:left}
+.plat-menu button:hover{background:#f0fdf4}
 .b-alto{background:rgba(220,38,38,.08);color:#991b1b;border:1px solid rgba(220,38,38,.2)}
 .b-medio{background:rgba(217,119,6,.08);color:#92400e;border:1px solid rgba(217,119,6,.2)}
 .b-bajo{background:rgba(6,186,6,.08);color:#166534;border:1px solid rgba(6,186,6,.2)}
@@ -1143,7 +1143,7 @@ function showPlatziMenu(e){
   menu.className='plat-menu';
   var html='';
   PLATZI_FILES.forEach(function(f){
-    html+='<a href="assets/platzi/'+encodeURIComponent(f.file)+'" download="'+f.file.replace(/"/g,'&quot;')+'"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00d369" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'+f.name+'</a>';
+    html+='<button type="button" onclick="openExt(\'assets/platzi/'+encodeURIComponent(f.file)+'\',\''+f.name+'\',\'#00d369\');var m=document.getElementById(\'platzi-menu\');if(m)m.remove();"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00d369" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>'+f.name+'</button>';
   });
   menu.innerHTML=html;
   document.body.appendChild(menu);
