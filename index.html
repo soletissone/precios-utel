@@ -63,6 +63,11 @@ header{background:var(--sf);border-bottom:1px solid var(--bd);padding:14px 24px;
 .cod-badge{font-size:10px;font-family:monospace;color:#6b7280;background:#f3f4f6;border:1px solid #e5e7eb;border-radius:5px;padding:2px 7px;margin-left:4px;letter-spacing:.04em;cursor:default;user-select:all;}
 .ficha-btn{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;padding:5px 12px;border-radius:8px;border:none;background:linear-gradient(135deg,#06ba06,#1c2d1a);color:#fff;cursor:pointer;margin-left:8px;text-decoration:none;vertical-align:middle;transition:opacity .15s,transform .1s;line-height:1.4;box-shadow:0 2px 6px rgba(37,99,235,.35);letter-spacing:.01em}
 .ficha-btn:hover{opacity:.88;transform:translateY(-1px);box-shadow:0 4px 10px rgba(37,99,235,.45)}
+.plat-btn{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:700;padding:5px 12px;border-radius:8px;border:none;background:#00d369;color:#000;cursor:pointer;margin-left:6px;vertical-align:middle;transition:opacity .15s,transform .1s;line-height:1.4}
+.plat-btn:hover{opacity:.85;transform:translateY(-1px)}
+.plat-menu{position:fixed;background:#fff;border:1px solid #e5e7eb;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.18);z-index:9999;min-width:250px;padding:6px 0}
+.plat-menu a{display:flex;align-items:center;gap:10px;padding:10px 16px;font-size:13px;color:#1c2d1a;text-decoration:none;font-weight:600}
+.plat-menu a:hover{background:#f0fdf4}
 .b-alto{background:rgba(220,38,38,.08);color:#991b1b;border:1px solid rgba(220,38,38,.2)}
 .b-medio{background:rgba(217,119,6,.08);color:#92400e;border:1px solid rgba(217,119,6,.2)}
 .b-bajo{background:rgba(6,186,6,.08);color:#166534;border:1px solid rgba(6,186,6,.2)}
@@ -1119,6 +1124,34 @@ function fichaBadge(progName,nivel){
   var url='pdfs/'+encodeURIComponent(pdf);
   return '<button class="ficha-btn" onclick="openExt(\''+url+'\',\'FICHA TÉCNICA\',\'#64748b\')" title="Ver ficha técnica del programa">📄 Ficha</button>';
 }
+var PLATZI_FILES=[
+  {name:'Info General',file:'InfoGeneral.png'},
+  {name:'Beneficios',file:'Beneficios.png'},
+  {name:'Ventas · Accede Gratis',file:'Ventas-AccedeGratis.png'},
+  {name:'¿Qué es Platzi?',file:'Que es es platzi y como complementa tu carrera.png'}
+];
+function platziBtn(){
+  if(!isPlatziVisible()) return '';
+  return '<button class="plat-btn" onclick="showPlatziMenu(event)" title="Material Platzi"><svg width="13" height="13" viewBox="0 0 32 32" fill="currentColor"><path d="M4 16L16 4l4 4-8 8 8 8-4 4z"/><path d="M14 16l6-6 4 4-2 2-4-4-4 4 2 2z" opacity=".5"/></svg> Platzi</button>';
+}
+function showPlatziMenu(e){
+  e.stopPropagation();
+  var old=document.getElementById('platzi-menu');
+  if(old){old.remove();return;}
+  var menu=document.createElement('div');
+  menu.id='platzi-menu';
+  menu.className='plat-menu';
+  var html='';
+  PLATZI_FILES.forEach(function(f){
+    html+='<a href="assets/platzi/'+encodeURIComponent(f.file)+'" download="'+f.file.replace(/"/g,'&quot;')+'"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00d369" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>'+f.name+'</a>';
+  });
+  menu.innerHTML=html;
+  document.body.appendChild(menu);
+  var r=e.currentTarget.getBoundingClientRect();
+  menu.style.top=(r.bottom+window.scrollY+4)+'px';
+  menu.style.left=Math.min(r.left,window.innerWidth-260)+'px';
+  setTimeout(function(){document.addEventListener('click',function cl(){var m=document.getElementById('platzi-menu');if(m)m.remove();document.removeEventListener('click',cl);});},0);
+}
 function getDuracion(sec, jornada, progName){
   // Derecho programs always 36 months
   var derechoProgs=['DERECHO','DERECHO INTERNACIONAL','DERECHO EMPRESARIAL'];
@@ -2076,7 +2109,7 @@ function rL(){
       var ljorDiv=document.getElementById('ljor'); if(ljorDiv) ljorDiv.closest('.fg').style.display='none';
       var _cbUve=g('lic-compl'); if(_cbUve) _cbUve.style.display='';
       g('lbi').innerHTML='<span>Incluye: Asistencia, Voxy, 5% domiciliación</span>';
-      g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
+      g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+platziBtn()+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
       // UVE: accesorios normales pero sin Título $0
       var _tit0Uve=TITULO_COSTO_0; TITULO_COSTO_0=false;
       renderAccs('lic-acc','lic',false);
@@ -2116,7 +2149,7 @@ function rL(){
       var selDiv2=g('alianza-variant-sel'); if(selDiv2) selDiv2.style.display='none';
       var ljorDiv2=document.getElementById('ljor'); if(ljorDiv2) ljorDiv2.closest('.fg').style.display='none';
       g('lbi').innerHTML='<span>Incluye: Voxy</span>';
-      g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
+      g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+platziBtn()+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
       g('lic-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UNICA</div>';
       g('lic-total').innerHTML=''; return;
     } else if(uName.indexOf('UNAG')>=0 || nivelRaw==='unag'){
@@ -2172,7 +2205,7 @@ function rL(){
   var durBadge='<span class="dur-badge">⏱ '+durStr+'</span>';
   var fechaBadge=SEL_INICIO['lic']?'<span class="dur-badge">📅 Inicio: '+SEL_INICIO['lic']+'</span>':'';
   var uniqBadgeLic=isMercadoUnico(progName)?'<span style="display:inline-block;background:#fef9c3;color:#854d0e;border-radius:8px;padding:3px 10px;font-size:11px;font-weight:700;margin:0 4px">🌟 Único en el mercado</span>':'';
-  g('li').innerHTML=nivelBadge+' '+nuevoBadge+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+uniqBadgeLic+jorBadge+durBadge+fechaBadge+LBG[lead];
+  g('li').innerHTML=nivelBadge+' '+nuevoBadge+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+platziBtn()+uniqBadgeLic+jorBadge+durBadge+fechaBadge+LBG[lead];
   // Filter experiencia items based on program capabilities
   var _licProgs=CATALOG['LICENCIATURA']||[];
   var _progEntry=null;
@@ -2228,7 +2261,7 @@ function rM(){
     g('mb').querySelectorAll('tr').forEach(function(tr){var c=tr.querySelectorAll('td');if(c[4])c[4].textContent='—';});
     var _mcb=g('mae-compl'); if(_mcb) _mcb.style.display='none';
     g('mbi').innerHTML='<span style="font-size:12px;color:var(--mu)">Incluye: <strong>Voxy</strong></span>';
-    g('mi').innerHTML=NB['unico']+' <span class="badge b-mod">UNAG</span> <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'MAE');
+    g('mi').innerHTML=NB['unico']+' <span class="badge b-mod">UNAG</span> <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'MAE')+platziBtn();
     g('mae-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales — Solo incluye Voxy</div>';
     g('mae-total').innerHTML='';return;
   }
@@ -2268,7 +2301,7 @@ function rM(){
   renderBeca('mbi',Math.max.apply(null,maeExpPrices),e.pkg);
   var nuevoBadgeM=isNuevo(progName)?'<span class="b-new">NUEVO</span> ':'';
   var durBadgeM='<span class="dur-badge">⏱ '+getDuracion('mae','maestria',progName)+'</span>';
-  g('mi').innerHTML=NB[nivel]+' '+nuevoBadgeM+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'MAE')+durBadgeM+LBG[lead];
+  g('mi').innerHTML=NB[nivel]+' '+nuevoBadgeM+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'MAE')+platziBtn()+durBadgeM+LBG[lead];
   updateFechaByProg('mae', progName); updateFechaByProg('ms', progName);
   renderAccs('mae-acc','mae',isOnline);
   renderTotal('mae-total',maeExpPrices[2],'mae',isOnline);
@@ -2308,7 +2341,7 @@ function rS(){
   renderBeca('sbi',Math.max.apply(null,e.p),e.pkg);
   var nuevoBadgeS=isNuevo(progName)?'<span class="b-new">NUEVO</span> ':'';
   var durBadgeS='<span class="dur-badge">⏱ '+getDuracion('ms','master',progName)+'</span>';
-  g('si2').innerHTML=NB[nivel]+' '+nuevoBadgeS+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'MASTER')+durBadgeS+LBG[lead];
+  g('si2').innerHTML=NB[nivel]+' '+nuevoBadgeS+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'MASTER')+platziBtn()+durBadgeS+LBG[lead];
   renderAccs('ms-acc','ms',false);
   renderTotal('ms-total',e.p[4],'ms',false);
 }
@@ -2331,7 +2364,7 @@ function rD(){
     g('db').querySelectorAll('tr').forEach(function(tr){var c=tr.querySelectorAll('td');if(c[4])c[4].textContent='—';});
     var _dcb=g('doc-compl'); if(_dcb) _dcb.style.display='none';
     g('dbi').innerHTML='<span style="font-size:12px;color:var(--mu)">Incluye: <strong>Voxy</strong></span>';
-    g('di').innerHTML='<span class="badge b-lev">Doctorado</span> <span class="badge b-mod">UNAG</span> <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'DOC');
+    g('di').innerHTML='<span class="badge b-lev">Doctorado</span> <span class="badge b-mod">UNAG</span> <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'DOC')+platziBtn();
     g('doc-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales — Solo incluye Voxy</div>';
     g('doc-total').innerHTML=''; updateFechaByProg('doc', progName); return;
   }
@@ -2361,7 +2394,7 @@ function rD(){
   var nivelBadge=NB[nivel]||NB['bajo'];
   var nuevoBadgeD=isNuevo(progName)?'<span class="badge b-new">NUEVO</span>':'';
   var fechaBadgeD=SEL_INICIO['doc']?'<span class="dur-badge">\u{1F4C5} Inicio: '+SEL_INICIO['doc']+'</span>':'';
-  g('di').innerHTML=nivelBadge+' '+nuevoBadgeD+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'DOC')+durBadgeD+fechaBadgeD+LBG[lead];
+  g('di').innerHTML=nivelBadge+' '+nuevoBadgeD+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'DOC')+platziBtn()+durBadgeD+fechaBadgeD+LBG[lead];
   updateFechaByProg('doc', progName);
   renderAccs('doc-acc','doc',false);
   renderTotal('doc-total',e.p[4],'doc',false);
