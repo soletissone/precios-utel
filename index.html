@@ -3003,6 +3003,17 @@ function downloadSummary(sec){
     +'<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6b7280;margin-bottom:8px">Incluido en el paquete</div>'
     +'<div style="margin-bottom:20px">'+incChips+'</div>'
 
+    // PLATZI BANNER
+    +(incChips.indexOf('Platzi')>=0 ? '<div style="background:#00d369;border-radius:10px;padding:16px 20px;margin-bottom:20px;display:flex;align-items:flex-start;gap:14px">'
+      +'<div style="flex-shrink:0;background:rgba(0,0,0,.12);border-radius:8px;width:36px;height:36px;display:flex;align-items:center;justify-content:center">'
+      +'<svg width="20" height="20" viewBox="0 0 32 32" fill="#fff"><path d="M4 16L16 4l4 4-8 8 8 8-4 4z"/></svg>'
+      +'</div>'
+      +'<div>'
+      +'<div style="font-size:13px;font-weight:800;color:#000;margin-bottom:4px">MEMBRESÍA PLATZI INCLUIDA</div>'
+      +'<div style="font-size:11px;color:rgba(0,0,0,.75);line-height:1.55">Impulsa tu perfil profesional con acceso a Platzi y desarrolla habilidades en inteligencia artificial, inglés, liderazgo, marketing y tecnología para destacar en el mercado laboral.</div>'
+      +'</div>'
+      +'</div>' : '')
+
     // TOTAL BOX — solo total final
     +'<div style="background:#1c2d1a;border-radius:12px;padding:20px 24px;color:#fff;margin-bottom:8px">'
     +'<div style="display:flex;justify-content:space-between;font-size:20px;font-weight:700">'
