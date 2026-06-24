@@ -168,12 +168,12 @@ td{padding:9px 14px;vertical-align:middle}
 .script-text{padding:14px;font-size:13px;line-height:1.7;color:#374151;white-space:pre-wrap}
 .speech-overlay{position:fixed;inset:0;background:rgba(0,0,0,.52);z-index:3000;display:none;align-items:center;justify-content:center;padding:16px}
 .speech-overlay.open{display:flex}
-.speech-modal{background:#fff;border-radius:16px;width:100%;max-width:560px;max-height:90vh;display:flex;flex-direction:column;overflow:hidden}
+.speech-modal{background:#fff;border-radius:16px;width:100%;max-width:560px;height:88vh;display:flex;flex-direction:column;overflow:hidden}
 .speech-mh{background:#1a1a2e;padding:14px 20px;display:flex;align-items:center;justify-content:space-between}
 .speech-mh span{color:#fff;font-size:15px;font-weight:700}
 .speech-mh button{background:none;border:none;color:#fff;font-size:20px;cursor:pointer;opacity:.7;line-height:1}
 .speech-mh button:hover{opacity:1}
-.speech-mbody{overflow-y:auto;padding:16px;display:flex;flex-direction:column;gap:12px;flex:1;min-height:0}
+.speech-mbody{overflow-y:scroll;padding:16px;display:flex;flex-direction:column;gap:12px;flex:1;min-height:0;-webkit-overflow-scrolling:touch}
 .ref-link-btn{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:700;padding:6px 14px;border-radius:8px;border:none;background:#06ba06;color:#fff;cursor:pointer;margin:0 14px 12px;text-decoration:none}
 .ref-link-btn:hover{opacity:.88}
 .speech-mfooter{padding:14px 16px;border-top:1px solid #e5e7eb;display:flex;gap:10px;justify-content:flex-end}
@@ -417,19 +417,19 @@ Platzi es una de las plataformas de aprendizaje más reconocidas de Latinoaméri
 
 Si tuvieras la oportunidad de adquirir una habilidad adicional que te ayude a destacar en el mercado laboral, ¿cuál elegirías?</div>
           <div style="display:flex;flex-wrap:wrap;gap:8px;padding:0 14px 12px">
-            <button class="ref-link-btn" style="background:#00d369;color:#000" onclick="openExt('assets/platzi/Que%20es%20es%20platzi%20y%20como%20complementa%20tu%20carrera.png','¿Qué es Platzi?','#00d369')">
+            <button class="ref-link-btn" style="background:#00d369;color:#000" onclick="openExtFromSpeech('assets/platzi/Que%20es%20es%20platzi%20y%20como%20complementa%20tu%20carrera.png','¿Qué es Platzi?','#00d369')">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
               ¿Qué es Platzi?
             </button>
-            <button class="ref-link-btn" style="background:#00d369;color:#000" onclick="openExt('assets/platzi/InfoGeneral.png','Info General Platzi','#00d369')">
+            <button class="ref-link-btn" style="background:#00d369;color:#000" onclick="openExtFromSpeech('assets/platzi/InfoGeneral.png','Info General Platzi','#00d369')">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
               Info General
             </button>
-            <button class="ref-link-btn" style="background:#00d369;color:#000" onclick="openExt('assets/platzi/Beneficios.png','Beneficios Platzi','#00d369')">
+            <button class="ref-link-btn" style="background:#00d369;color:#000" onclick="openExtFromSpeech('assets/platzi/Beneficios.png','Beneficios Platzi','#00d369')">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
               Beneficios
             </button>
-            <button class="ref-link-btn" style="background:#00d369;color:#000" onclick="openExt('assets/platzi/Ventas-AccedeGratis.png','Ventas · Accede Gratis','#00d369')">
+            <button class="ref-link-btn" style="background:#00d369;color:#000" onclick="openExtFromSpeech('assets/platzi/Ventas-AccedeGratis.png','Ventas · Accede Gratis','#00d369')">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
               Accede Gratis
             </button>
@@ -894,6 +894,10 @@ function closeSpeechPopup(){
   document.getElementById('speech-overlay').classList.remove('open');
   document.body.style.overflow='';
   _pendingDownloadSec=null;
+}
+function openExtFromSpeech(url,title,color){
+  closeSpeechPopup();
+  setTimeout(function(){openExt(url,title,color);},50);
 }
 function confirmDownload(){
   document.getElementById('speech-overlay').classList.remove('open');
