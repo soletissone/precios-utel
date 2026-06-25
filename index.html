@@ -2489,6 +2489,7 @@ function rM(){
     var _domOrigUnagMae=DOMICILIACION; DOMICILIACION=0;
     renderTable('mb',[3020,3020,3020,3020,3020,3020,3020,3020,3020,3020,3020,3020],'MA.UNAG.BASICO.2.15.21','—',0,0);
     DOMICILIACION=_domOrigUnagMae;
+    document.querySelectorAll('.dom-col').forEach(function(el){el.innerHTML=isDomActive()?'Con domiciliación <span class="dom-badge">'+DOMICILIACION+'%</span>':'Con domiciliación <span class="dom-badge">—</span>';});
     // Ocultar domiciliación en tabla
     g('mb').querySelectorAll('tr').forEach(function(tr){var c=tr.querySelectorAll('td');if(c[4])c[4].textContent='—';});
     var _mcb=g('mae-compl'); if(_mcb) _mcb.style.display='none';
@@ -2593,6 +2594,7 @@ function rD(){
     var _domOrigUnagDoc=DOMICILIACION; DOMICILIACION=0;
     renderTable('db',[4770,4770,4770,4770,4770,4770,4770,4770,4770,4770,4770,4770],'DO.UNAG.BASICO.2.15.21','—',0,0);
     DOMICILIACION=_domOrigUnagDoc;
+    document.querySelectorAll('.dom-col').forEach(function(el){el.innerHTML=isDomActive()?'Con domiciliación <span class="dom-badge">'+DOMICILIACION+'%</span>':'Con domiciliación <span class="dom-badge">—</span>';});
     g('db').querySelectorAll('tr').forEach(function(tr){var c=tr.querySelectorAll('td');if(c[4])c[4].textContent='—';});
     var _dcb=g('doc-compl'); if(_dcb) _dcb.style.display='none';
     g('dbi').innerHTML='<span style="font-size:12px;color:var(--mu)">Incluye: <strong>Voxy</strong></span>';
