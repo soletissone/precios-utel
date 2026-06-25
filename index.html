@@ -2333,7 +2333,7 @@ function rL(){
       g('lb').innerHTML=uveBlock(uveVariants[0],rowsAlto)+uveBlock(uveVariants[1],rowsBajo);
       var selDiv=g('alianza-variant-sel'); if(selDiv) selDiv.style.display='none';
       var ljorDiv=document.getElementById('ljor'); if(ljorDiv) ljorDiv.closest('.fg').style.display='none';
-      var _cbUve=g('lic-compl'); if(_cbUve) _cbUve.style.display='';
+      var _cbUve=g('lic-compl'); if(_cbUve) _cbUve.style.display='none';
       g('lbi').innerHTML='<span>Incluye: Asistencia, Voxy, 5% domiciliación</span>';
       g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+platziBtn()+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
       // UVE: accesorios normales pero sin Título $0
@@ -3050,7 +3050,7 @@ function downloadSummary(sec){
     +'</div>' // body
 
     // COMPLEMENTO DE COLEGIATURA (no aplica para UNICA ni UNAG)
-    +(isUNICA || isUNAG ? '' : (function(){
+    +(isUNICA || isUNAG || isUVE ? '' : (function(){
       var colMap={lic:1100,mae:1200,ms:1200,doc:1200};
       var colPrice=colMap[realSec]||1100;
       return '<div style="background:#fff8e1;border:1px solid #ffe082;border-radius:8px;padding:12px 16px;margin:0 28px 20px;font-size:12px;color:#5f4200">'
