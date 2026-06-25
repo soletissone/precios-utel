@@ -2746,6 +2746,7 @@ function makeSearchable(selId, onChangeFn) {
   if(orig.options[orig.selectedIndex]) input.value = orig.options[orig.selectedIndex].textContent;
 
   input.addEventListener('focus', function(){
+    input.value = '';
     renderDropdown('');
     dropdown.classList.add('open');
   });
