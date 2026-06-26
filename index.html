@@ -1360,11 +1360,50 @@ function fichaBadge(progName,nivel){
 var PLATZI_FILES=[
   {name:'¿Qué es Platzi?',file:'Que es es platzi y como complementa tu carrera.png'}
 ];
-function platziBtn(){
+var PLATZI_RUTA_MAP={
+  'INGENIERÍA EN SISTEMAS COMPUTACIONALES':'https://docs.google.com/spreadsheets/d/1zSxKI4hy2ba5FxN3-vq5xKGmSA3qiYd0/edit?gid=1125449403',
+  'PSICOLOGÍA ORGANIZACIONAL':'https://docs.google.com/spreadsheets/d/1mZEnd3wIh_9LDPdMjSvSz7NQrESApjPF/edit?gid=2143794478',
+  'ADMINISTRACIÓN DE RECURSOS HUMANOS':'https://docs.google.com/spreadsheets/d/1tHiN9yHzdg1bOMdw7zaFHZUyAxatz1HJ/edit?usp=drive_web&ouid=112742542375999389188&rtpof=true',
+  'MERCADOTECNIA':'https://docs.google.com/spreadsheets/d/1T93uzv-IyMP2KukoKJgjj1mlZD_qCGuo/edit?usp=drive_web&ouid=112742542375999389188&rtpof=true',
+  'INGENIERÍA EN DESARROLLO DE SOFTWARE':'https://docs.google.com/spreadsheets/d/1ANEl7bwd28utJde6OOLxDn1xIS5B9lEOcKXd3P9lWeU/edit?gid=597948342',
+  'INTELIGENCIA ARTIFICIAL':'https://docs.google.com/spreadsheets/d/1xIogaP_3RHT0YT5nWa5ysNrvqe_Eb8Yu-BnbLR0qSRc/edit?usp=sharing',
+  'INGENIERÍA INDUSTRIAL':'https://docs.google.com/spreadsheets/d/1jtmT7AvPqVX_lqIf6Tr55H6SAa1sa5xX4wIGKY1OK8Y/edit?gid=169611693',
+  'PEDAGOGÍA':'https://docs.google.com/spreadsheets/d/1RJ8IZFF_DMMhGsNGBSC2RQJF4tzZzNsiLxPguJY9QcI/edit?gid=705532781',
+  'INGENIERÍA INDUSTRIAL Y ADMINISTRACIÓN':'https://docs.google.com/spreadsheets/d/1SKxajCAGuX1SsPBqyr8eNgWPAcwM6KpuJUuewmzhGcU/edit?gid=496551678',
+  'CRIMINOLOGÍA Y CRIMINALÍSTICA':'https://docs.google.com/spreadsheets/d/15UTyuV256ctHzOBpnLqJPZbCEDwccLkx/edit?gid=1227186903',
+  'ADMINISTRACIÓN':'https://docs.google.com/spreadsheets/d/14YouAoua2xT2qA_AvbW7NYSqQWJdtfTw/edit?gid=1609242945',
+  'CONTADURÍA Y FINANZAS':'https://docs.google.com/spreadsheets/d/1DKFEeWsaRPO70UdtimBJCA4JNtff3pbH/edit?gid=1289336535',
+  'CONTADURÍA PÚBLICA':'https://docs.google.com/spreadsheets/d/1lN7f7hGlnVLZYFv4wcouQr31m4UE3h1g/edit?gid=1099539080',
+  'ADMINISTRACIÓN DE NEGOCIOS':'https://docs.google.com/spreadsheets/d/19OrFJDPWm-DFcIhQpRBohfHhqYkmwOC8/edit?gid=1600491161',
+  'EDUCACIÓN Y DOCENCIA':'https://docs.google.com/spreadsheets/d/1G1Laza1vstjJi-Nyqzqw99IfeB2c8i5Z/edit?usp=drive_link&ouid=101242534240492588516&rtpof=true&sd=true',
+  'INGENIERÍA EN LOGÍSTICA Y TRANSPORTE':'https://docs.google.com/spreadsheets/d/1j_bLow5b1UkVc7HE0MfukMV7GV51XsCz/edit?usp=drive_link&ouid=101242534240492588516&rtpof=true&sd=true',
+  'GESTIÓN DIRECTIVA DE INSTITUCIONES EN SALUD':'https://docs.google.com/spreadsheets/d/1iis6mWXlIPa_65FnBYA6DpDlqujDf9Pt/edit?gid=1818514659',
+  'PSICOLOGÍA':'https://docs.google.com/spreadsheets/d/1EXtZbvPo1LMTo0AZetpb3Ji0g1mR7pGV/edit?gid=1730809622',
+  'ADMINISTRACIÓN Y FINANZAS':'https://docs.google.com/spreadsheets/d/1pTD1fAZ-JZydtWE986sCUMxsOUexpIKx/edit?gid=1526735093',
+  'NEGOCIOS INTERNACIONALES':'https://docs.google.com/spreadsheets/d/1KL_mblHlfqQNOCFa8WCaRruoL7gYYvmu/edit?gid=525035355',
+  'MARKETING Y PUBLICIDAD':'https://docs.google.com/spreadsheets/d/1bBTiaWhJCuwA8iW8vXRIhfBge7qpR1qB/edit?usp=drive_web&ouid=101242534240492588516&rtpof=true',
+  'MERCADOTECNIA DIGITAL Y COMERCIO ELECTRÓNICO':'https://docs.google.com/spreadsheets/d/1hZMbXGIZknwb6uEDR7R7xJyRkmEdE0EN/edit?gid=604544219',
+  'CIBERSEGURIDAD':'https://docs.google.com/spreadsheets/d/1DDpEuPFFcKNbI0WufQczE6Zl7LXRlwCl/edit?gid=1732395365',
+  'DIRECCIÓN E INGENIERÍA DE SOFTWARE':'https://docs.google.com/spreadsheets/d/1KQJzsTPwSKqj0zcSo05sAfXKSRGA1V0z/edit?usp=drive_link&ouid=101242534240492588516&rtpof=true&sd=true',
+  'TRANSFORMACIÓN DIGITAL EMPRESARIAL':'https://docs.google.com/spreadsheets/d/1QSbTLhi3QaTYXgbli5B8BNy4WdF_sn5t/edit?usp=drive_web&ouid=101242534240492588516&rtpof=true',
+  'INTELIGENCIA ARTIFICIAL Y CIENCIA DE DATOS':'https://docs.google.com/spreadsheets/d/1Ztr0N5XQMfR7PtfMpcQsyABn4BKhfYkt/edit?gid=1781427293',
+  'SEGURIDAD INFORMÁTICA':'https://docs.google.com/spreadsheets/d/1Ztu3oC39Tq3eSMDJeeH4FxRk46Nev3ON/edit?gid=126878854',
+  'INGENIERÍA EN PROGRAMACIÓN EN LA NUBE':'https://docs.google.com/spreadsheets/d/1z-rSG3nRLDjf5oly_ZRBmEsZjTeSIeij/edit?usp=drive_web&ouid=112742542375999389188&rtpof=true',
+  'COMERCIO ELECTRÓNICO Y NEGOCIOS DIGITALES':'https://docs.google.com/spreadsheets/d/14BigGqgtUPMdJ3qwu1_QWlv5HAYiA15O/edit?gid=1406164526',
+  'DISEÑO Y ANIMACIÓN DIGITAL':'https://docs.google.com/spreadsheets/d/1ElFWsCt7pI5-37yAqnJcI9KBPZ12J_4I/edit?gid=122602269',
+  'INTELIGENCIA ARTIFICIAL APLICADA A NEGOCIOS, INDUSTRIA Y AUTOMATIZACIÓN':'https://docs.google.com/spreadsheets/d/1l3v85EUqnq2AKvnkVIiuteO2JciDOybA/edit?gid=283719118',
+  'INNOVACIÓN EN MODELOS DE NEGOCIO':'https://docs.google.com/spreadsheets/d/1NUYw13NGW3oHGxL5WKYuHdEfI4zTw0FP/edit?gid=238647768',
+  'EDUCACIÓN INTELIGENTE Y DISEÑO INSTRUCCIONAL CON INTELIGENCIA ARTIFICIAL':'https://docs.google.com/spreadsheets/d/1j1uWQr_rjhz8KIETcXTNzfLlereQwGhP3SKZJkRroJ4/edit?gid=118812514',
+  'INNOVACIÓN Y EMPRENDIMIENTO CON INTELIGENCIA ARTIFICIAL':'https://docs.google.com/spreadsheets/d/1HDCU-r4oFhUe8VHYuSgBsrJDMx9IYa1fgl2CYKxw_I4/edit?gid=117546024',
+  'COMUNICACIÓN Y MANEJO DE REDES SOCIALES':'https://docs.google.com/spreadsheets/d/1nZ3BMFCVQKj-GRSk8n0hse8WaQkqjyRkjbtzY0tNkGs/edit?gid=2108485672'
+};
+function platziBtn(progName){
   if(!isPlatziVisible()) return '';
-  return '<button class="plat-btn" onclick="showPlatziMenu(event)" title="Material Platzi"><svg width="13" height="13" viewBox="0 0 32 32" fill="currentColor"><path d="M4 16L16 4l4 4-8 8 8 8-4 4z"/><path d="M14 16l6-6 4 4-2 2-4-4-4 4 2 2z" opacity=".5"/></svg> Platzi</button>';
+  var ruta=(progName&&PLATZI_RUTA_MAP[progName.toUpperCase()])||'';
+  var escapedRuta=ruta.replace(/\\/g,'\\\\').replace(/'/g,"\\'");
+  return '<button class="plat-btn" onclick="showPlatziMenu(event,\''+escapedRuta+'\')" title="Material Platzi"><svg width="13" height="13" viewBox="0 0 32 32" fill="currentColor"><path d="M4 16L16 4l4 4-8 8 8 8-4 4z"/><path d="M14 16l6-6 4 4-2 2-4-4-4 4 2 2z" opacity=".5"/></svg> Platzi</button>';
 }
-function showPlatziMenu(e){
+function showPlatziMenu(e,rutaUrl){
   e.stopPropagation();
   var old=document.getElementById('platzi-menu');
   if(old){old.remove();return;}
@@ -1372,6 +1411,9 @@ function showPlatziMenu(e){
   menu.id='platzi-menu';
   menu.className='plat-menu';
   var html='';
+  if(rutaUrl){
+    html+='<button type="button" onclick="window.open(\''+rutaUrl.replace(/'/g,"\\'")+'\',' +'\'_blank\');var m=document.getElementById(\'platzi-menu\');if(m)m.remove();"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00d369" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>Ruta de aprendizaje Platzi</button>';
+  }
   PLATZI_FILES.forEach(function(f){
     html+='<button type="button" onclick="openExt(\'assets/platzi/'+encodeURIComponent(f.file)+'\',\''+f.name+'\',\'#00d369\');var m=document.getElementById(\'platzi-menu\');if(m)m.remove();"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#00d369" stroke-width="2.5"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>'+f.name+'</button>';
   });
@@ -2339,7 +2381,7 @@ function rL(){
       var ljorDiv=document.getElementById('ljor'); if(ljorDiv) ljorDiv.closest('.fg').style.display='none';
       var _cbUve=g('lic-compl'); if(_cbUve) _cbUve.style.display='none';
       g('lbi').innerHTML='<span>Incluye: Asistencia, Voxy, 5% domiciliación</span>';
-      g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+platziBtn()+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
+      g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+platziBtn(progName)+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
       // UVE: accesorios normales pero sin Título $0
       var _tit0Uve=TITULO_COSTO_0; TITULO_COSTO_0=false;
       renderAccs('lic-acc','lic',false);
@@ -2379,7 +2421,7 @@ function rL(){
       var selDiv2=g('alianza-variant-sel'); if(selDiv2) selDiv2.style.display='none';
       var ljorDiv2=document.getElementById('ljor'); if(ljorDiv2) ljorDiv2.closest('.fg').style.display='none';
       g('lbi').innerHTML='<span>Incluye: Voxy</span>';
-      g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+platziBtn()+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
+      g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+platziBtn(progName)+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
       g('lic-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UNICA</div>';
       g('lic-total').innerHTML=''; return;
     } else if(uName.indexOf('UNAG')>=0 || nivelRaw==='unag'){
@@ -2435,7 +2477,7 @@ function rL(){
   var durBadge='<span class="dur-badge">⏱ '+durStr+'</span>';
   var fechaBadge=SEL_INICIO['lic']?'<span class="dur-badge">📅 Inicio: '+SEL_INICIO['lic']+'</span>':'';
   var uniqBadgeLic=isMercadoUnico(progName)?'<span style="display:inline-block;background:#fef9c3;color:#854d0e;border-radius:8px;padding:3px 10px;font-size:11px;font-weight:700;margin:0 4px">🌟 Único en el mercado</span>':'';
-  g('li').innerHTML=nivelBadge+' '+nuevoBadge+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+platziBtn()+uniqBadgeLic+jorBadge+durBadge+fechaBadge+LBG[lead];
+  g('li').innerHTML=nivelBadge+' '+nuevoBadge+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+platziBtn(progName)+uniqBadgeLic+jorBadge+durBadge+fechaBadge+LBG[lead];
   // Filter experiencia items based on program capabilities
   var _licProgs=CATALOG['LICENCIATURA']||[];
   var _progEntry=null;
@@ -2492,7 +2534,7 @@ function rM(){
     g('mb').querySelectorAll('tr').forEach(function(tr){var c=tr.querySelectorAll('td');if(c[4])c[4].textContent='—';});
     var _mcb=g('mae-compl'); if(_mcb) _mcb.style.display='none';
     g('mbi').innerHTML='<span style="font-size:12px;color:var(--mu)">Incluye: <strong>Voxy</strong></span>';
-    g('mi').innerHTML=NB['unico']+' <span class="badge b-mod">UNAG</span> <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'MAE')+platziBtn();
+    g('mi').innerHTML=NB['unico']+' <span class="badge b-mod">UNAG</span> <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'MAE')+platziBtn(progName);
     g('mae-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales — Solo incluye Voxy</div>';
     g('mae-total').innerHTML='';return;
   }
@@ -2532,7 +2574,7 @@ function rM(){
   renderBeca('mbi',Math.max.apply(null,maeExpPrices),e.pkg);
   var nuevoBadgeM=isNuevo(progName)?'<span class="b-new">NUEVO</span> ':'';
   var durBadgeM='<span class="dur-badge">⏱ '+getDuracion('mae','maestria',progName)+'</span>';
-  g('mi').innerHTML=NB[nivel]+' '+nuevoBadgeM+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'MAE')+platziBtn()+durBadgeM+LBG[lead];
+  g('mi').innerHTML=NB[nivel]+' '+nuevoBadgeM+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'MAE')+platziBtn(progName)+durBadgeM+LBG[lead];
   updateFechaByProg('mae', progName); updateFechaByProg('ms', progName);
   renderAccs('mae-acc','mae',isOnline);
   renderTotal('mae-total',maeExpPrices[2],'mae',isOnline);
@@ -2572,7 +2614,7 @@ function rS(){
   renderBeca('sbi',Math.max.apply(null,e.p),e.pkg);
   var nuevoBadgeS=isNuevo(progName)?'<span class="b-new">NUEVO</span> ':'';
   var durBadgeS='<span class="dur-badge">⏱ '+getDuracion('ms','master',progName)+'</span>';
-  g('si2').innerHTML=NB[nivel]+' '+nuevoBadgeS+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'MASTER')+platziBtn()+durBadgeS+LBG[lead];
+  g('si2').innerHTML=NB[nivel]+' '+nuevoBadgeS+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'MASTER')+platziBtn(progName)+durBadgeS+LBG[lead];
   renderAccs('ms-acc','ms',false);
   renderTotal('ms-total',e.p[4],'ms',false);
 }
@@ -2596,7 +2638,7 @@ function rD(){
     g('db').querySelectorAll('tr').forEach(function(tr){var c=tr.querySelectorAll('td');if(c[4])c[4].textContent='—';});
     var _dcb=g('doc-compl'); if(_dcb) _dcb.style.display='none';
     g('dbi').innerHTML='<span style="font-size:12px;color:var(--mu)">Incluye: <strong>Voxy</strong></span>';
-    g('di').innerHTML='<span class="badge b-lev">Doctorado</span> <span class="badge b-mod">UNAG</span> <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'DOC')+platziBtn();
+    g('di').innerHTML='<span class="badge b-lev">Doctorado</span> <span class="badge b-mod">UNAG</span> <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'DOC')+platziBtn(progName);
     g('doc-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales — Solo incluye Voxy</div>';
     g('doc-total').innerHTML=''; updateFechaByProg('doc', progName); return;
   }
@@ -2626,7 +2668,7 @@ function rD(){
   var nivelBadge=NB[nivel]||NB['bajo'];
   var nuevoBadgeD=isNuevo(progName)?'<span class="badge b-new">NUEVO</span>':'';
   var fechaBadgeD=SEL_INICIO['doc']?'<span class="dur-badge">\u{1F4C5} Inicio: '+SEL_INICIO['doc']+'</span>':'';
-  g('di').innerHTML=nivelBadge+' '+nuevoBadgeD+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'DOC')+platziBtn()+durBadgeD+fechaBadgeD+LBG[lead];
+  g('di').innerHTML=nivelBadge+' '+nuevoBadgeD+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'DOC')+platziBtn(progName)+durBadgeD+fechaBadgeD+LBG[lead];
   updateFechaByProg('doc', progName);
   renderAccs('doc-acc','doc',false);
   renderTotal('doc-total',e.p[4],'doc',false);
