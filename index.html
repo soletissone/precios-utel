@@ -68,29 +68,28 @@ header{background:var(--sf);border-bottom:1px solid var(--bd);padding:14px 24px;
 .plat-menu{position:fixed;background:#fff;border:1px solid #e5e7eb;border-radius:10px;box-shadow:0 8px 24px rgba(0,0,0,.18);z-index:9999;min-width:250px;padding:6px 0}
 .plat-menu button{display:flex;align-items:center;gap:10px;padding:10px 16px;font-size:13px;color:#1c2d1a;font-weight:600;background:none;border:none;width:100%;cursor:pointer;text-align:left}
 .plat-menu button:hover{background:#f0fdf4}
-.plat-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:10000;display:flex;align-items:center;justify-content:center;padding:16px}
-.plat-card{background:#fff;border-radius:20px;overflow:hidden;width:100%;max-width:480px;max-height:90vh;display:flex;flex-direction:column}
-.plat-card-hero{background:#0f1f0e;padding:20px 22px 0;flex-shrink:0}
+.plat-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);z-index:10000;display:flex;align-items:center;justify-content:center;padding:16px}
+.plat-card{background:#0f1f0e;border-radius:20px;overflow:hidden;width:100%;max-width:460px;max-height:90vh;display:flex;flex-direction:column}
+.plat-card-hero{padding:20px 22px 16px;flex-shrink:0}
 .plat-card-hero-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px}
-.plat-card-badge{display:flex;align-items:center;gap:8px;background:rgba(0,211,105,.12);border:1px solid rgba(0,211,105,.25);border-radius:999px;padding:5px 12px 5px 7px}
-.plat-card-badge-icon{width:22px;height:22px;background:#00d369;border-radius:5px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.plat-card-badge span{font-size:12px;font-weight:600;color:#00d369}
-.plat-card-nivel{font-size:11px;color:rgba(255,255,255,.45);border:0.5px solid rgba(255,255,255,.15);border-radius:999px;padding:4px 12px;cursor:pointer;background:none;line-height:1}
-.plat-card-title{font-size:18px;font-weight:600;color:#fff;margin:0 0 4px;line-height:1.25}
-.plat-card-area{font-size:12px;color:rgba(255,255,255,.4);margin:0}
-.plat-card-body{padding:18px 22px 20px;overflow-y:auto;flex:1}
-.plat-obj{background:#f0fdf4;border-left:3px solid #00d369;border-radius:0 8px 8px 0;padding:10px 14px;margin-bottom:18px}
-.plat-obj p{font-size:13px;color:#374151;line-height:1.6;margin:0;font-style:italic}
-.plat-section{font-size:10px;font-weight:600;color:#6b7280;text-transform:uppercase;letter-spacing:.1em;margin:0 0 10px;display:flex;align-items:center;gap:8px}
-.plat-section::after{content:'';flex:1;height:0.5px;background:#e5e7eb}
-.plat-curso-link{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;text-decoration:none;border:0.5px solid transparent}
-.plat-curso-link:hover{background:#f0fdf4;border-color:#d1fae5}
-.plat-curso-num{font-size:10px;font-weight:600;color:#00d369;background:rgba(0,211,105,.1);border-radius:5px;padding:2px 6px;min-width:26px;text-align:center;flex-shrink:0}
-.plat-curso-name{font-size:13px;color:#111827;flex:1;line-height:1.4}
+.plat-card-badge{display:flex;align-items:center;gap:7px;background:rgba(0,211,105,.15);border:1px solid rgba(0,211,105,.3);border-radius:999px;padding:5px 12px 5px 8px}
+.plat-card-badge span{font-size:12px;font-weight:700;color:#00d369;letter-spacing:.01em}
+.plat-card-nivel{font-size:11px;color:rgba(255,255,255,.5);border:0.5px solid rgba(255,255,255,.2);border-radius:999px;padding:4px 12px;background:none;line-height:1}
+.plat-card-title{font-size:20px;font-weight:700;color:#fff;margin:0 0 5px;line-height:1.2}
+.plat-card-area{font-size:12px;color:rgba(255,255,255,.4);margin:0 0 2px}
+.plat-card-body{padding:16px 22px 22px;overflow-y:auto;flex:1}
+.plat-obj-label{font-size:10px;font-weight:700;color:#00d369;letter-spacing:.12em;text-transform:uppercase;margin:0 0 8px}
+.plat-obj p{font-size:13px;color:rgba(255,255,255,.75);line-height:1.65;margin:0 0 20px}
+.plat-section{font-size:10px;font-weight:700;color:rgba(255,255,255,.35);text-transform:uppercase;letter-spacing:.12em;margin:0 0 12px;display:flex;align-items:center;gap:8px}
+.plat-section::after{content:'';flex:1;height:0.5px;background:rgba(255,255,255,.1)}
+.plat-curso-link{display:flex;align-items:center;gap:12px;padding:9px 8px;border-radius:8px;text-decoration:none;transition:background .12s}
+.plat-curso-link:hover{background:rgba(0,211,105,.08)}
+.plat-curso-num{font-size:11px;font-weight:700;color:#00d369;min-width:24px;flex-shrink:0;font-variant-numeric:tabular-nums}
+.plat-curso-dot{width:6px;height:6px;border-radius:50%;background:#00d369;flex-shrink:0}
+.plat-curso-name{font-size:13px;font-weight:600;color:#fff;flex:1;line-height:1.35}
 .plat-curso-link:hover .plat-curso-name{color:#00d369}
-.plat-curso-nolink{display:flex;align-items:center;gap:10px;padding:8px 10px}
-.plat-curso-arrow{font-size:13px;color:#00d369;opacity:0;transition:opacity .1s,transform .1s;transform:translateX(-3px)}
-.plat-curso-link:hover .plat-curso-arrow{opacity:1;transform:translateX(0)}
+.plat-curso-nolink{display:flex;align-items:center;gap:12px;padding:9px 8px}
+.plat-curso-nolink .plat-curso-name{color:rgba(255,255,255,.45);font-weight:400}
 .b-alto{background:rgba(220,38,38,.08);color:#991b1b;border:1px solid rgba(220,38,38,.2)}
 .b-medio{background:rgba(217,119,6,.08);color:#92400e;border:1px solid rgba(217,119,6,.2)}
 .b-bajo{background:rgba(6,186,6,.08);color:#166534;border:1px solid rgba(6,186,6,.2)}
@@ -1476,25 +1475,23 @@ function showPlatziCard(e,progName){
   var d=PLATZI_DATA[key];
   var rutaUrl=PLATZI_RUTA_MAP[key]||'';
   var titulo=progName||'Programa';
-  var PSVG='<svg width="18" height="18" viewBox="0 0 32 32" fill="#fff"><path d="M4 16L16 4l4 4-8 8 8 8-4 4z"/><path d="M14 16l6-6 4 4-2 2-4-4-4 4 2 2z" opacity=".6"/></svg>';
-  var CSVG='<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.6)" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
-  var ESVG='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>';
-  var wave='<svg viewBox="0 0 480 20" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style="display:block;width:100%;height:20px;margin-top:-1px"><path d="M0,10 C80,20 160,0 240,10 C320,20 400,0 480,10 L480,20 L0,20 Z" fill="#fff"/></svg>';
+  var PSVG='<svg width="16" height="16" viewBox="0 0 32 32" fill="#00d369"><path d="M4 16L16 4l4 4-8 8 8 8-4 4z"/><path d="M14 16l6-6 4 4-2 2-4-4-4 4 2 2z" opacity=".6"/></svg>';
+  var CSVG='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.5)" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+  var num=function(n){return n<10?'0'+n:''+n;};
   var cursosHtml='';
   if(d&&d.c&&d.c.length){
     d.c.forEach(function(c,i){
       var nm=_cn(c[0]);
       if(c[1]){
-        cursosHtml+='<a class="plat-curso-link" href="'+c[1]+'" target="_blank" rel="noopener"><span class="plat-curso-num">'+(i+1)+'</span><span class="plat-curso-name">'+nm+'</span><span class="plat-curso-arrow">&#8594;</span></a>';
+        cursosHtml+='<a class="plat-curso-link" href="'+c[1]+'" target="_blank" rel="noopener"><span class="plat-curso-num">'+num(i+1)+'</span><span class="plat-curso-dot"></span><span class="plat-curso-name">'+nm+'</span></a>';
       } else {
-        cursosHtml+='<div class="plat-curso-nolink"><span class="plat-curso-num">'+(i+1)+'</span><span class="plat-curso-name" style="color:#6b7280;">'+nm+'</span></div>';
+        cursosHtml+='<div class="plat-curso-nolink"><span class="plat-curso-num">'+num(i+1)+'</span><span class="plat-curso-dot" style="background:rgba(255,255,255,.2)"></span><span class="plat-curso-name">'+nm+'</span></div>';
       }
     });
   } else {
-    cursosHtml='<p style="font-size:13px;color:#6b7280;margin:0;">No hay cursos cargados para este programa.</p>';
+    cursosHtml='<p style="font-size:13px;color:rgba(255,255,255,.4);margin:0;">No hay cursos cargados para este programa.</p>';
   }
-  var objHtml=d&&d.o?'<div class="plat-obj"><p>'+d.o+'</p></div>':'';
-  var rutaBtn=rutaUrl?'<a href="'+rutaUrl+'" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;font-size:11px;color:#00d369;text-decoration:none;margin-top:14px;padding:7px 14px;border:1px solid rgba(0,211,105,.3);border-radius:999px;background:rgba(0,211,105,.06);">'+ESVG+' Ver ruta completa</a>':'';
+  var objHtml=d&&d.o?'<p class="plat-obj-label">Objetivo</p><div class="plat-obj"><p>'+d.o+'</p></div>':'';
   var html='<div id="plat-ov" class="plat-overlay" onclick="if(event.target===this)this.remove();">'
     +'<div class="plat-card">'
     +'<div class="plat-card-hero">'
@@ -1503,14 +1500,12 @@ function showPlatziCard(e,progName){
     +'<button onclick="document.getElementById(\'plat-ov\').remove();" style="background:none;border:none;cursor:pointer;padding:4px;line-height:0;">'+CSVG+'</button>'
     +'</div>'
     +'<p class="plat-card-title">'+titulo+'</p>'
-    +'<p class="plat-card-area">Ruta de aprendizaje Platzi</p>'
+    +'<p class="plat-card-area">Ruta de aprendizaje · UTEL</p>'
     +'</div>'
-    +wave
     +'<div class="plat-card-body">'
     +objHtml
-    +'<p class="plat-section">Top cursos incluidos</p>'
+    +'<p class="plat-section">Con Platzi vas a aprender</p>'
     +cursosHtml
-    +'<div style="text-align:center;">'+rutaBtn+'</div>'
     +'</div>'
     +'</div>'
     +'</div>';
