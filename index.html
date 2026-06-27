@@ -296,6 +296,7 @@ td{padding:9px 14px;vertical-align:middle}
   }
 })();
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 </head>
 <body>
 
@@ -1504,7 +1505,7 @@ function showPlatziCard(e,progName){
     +'</div>'
     +'<div class="plat-card-body">'
     +'<div onclick="document.getElementById(\'plat-ov\').remove();openExt(\'assets/platzi/'+encodeURIComponent('Que es es platzi y como complementa tu carrera.png')+'\',\'¿Qué es Platzi?\',\'#00d369\')" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;border:1px solid rgba(0,211,105,.2);background:rgba(0,211,105,.06);cursor:pointer;margin-bottom:8px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00d369" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg><span style="font-size:13px;font-weight:600;color:#00d369;flex:1">¿Qué es Platzi?</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(0,211,105,.6)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>'
-    +(rutaUrl?'<a href="'+rutaUrl+'" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;border:1px solid rgba(0,211,105,.2);background:rgba(0,211,105,.06);cursor:pointer;margin-bottom:16px;text-decoration:none"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00d369" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg><span style="font-size:13px;font-weight:600;color:#00d369;flex:1">Ruta de aprendizaje completa</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(0,211,105,.6)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a>':'')
+    +(rutaUrl||d?'<div onclick="downloadPlatziPDF(\''+titulo.replace(/'/g,"\\'")+'\')" style="display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;border:1px solid rgba(0,211,105,.2);background:rgba(0,211,105,.06);cursor:pointer;margin-bottom:16px"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#00d369" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg><span style="font-size:13px;font-weight:600;color:#00d369;flex:1">Descargar folleto PDF</span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="rgba(0,211,105,.6)" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></div>':'')
     +objHtml
     +'<p class="plat-section">Con Platzi vas a aprender</p>'
     +cursosHtml
@@ -1512,6 +1513,84 @@ function showPlatziCard(e,progName){
     +'</div>'
     +'</div>';
   document.body.insertAdjacentHTML('beforeend',html);
+}
+function downloadPlatziPDF(progName){
+  if(!window.jspdf){alert('PDF no disponible, recargá la página.');return;}
+  var key=progName?progName.toUpperCase():'';
+  var d=PLATZI_DATA[key];
+  var rutaUrl=PLATZI_RUTA_MAP[key]||'';
+  var doc=new window.jspdf.jsPDF({unit:'mm',format:'a4'});
+  var W=210,mx=18,cw=174;
+  // --- HEADER fondo oscuro ---
+  doc.setFillColor(15,31,14);
+  doc.rect(0,0,W,58,'F');
+  // badge "Platzi incluido"
+  doc.setFillColor(0,50,25);
+  doc.roundedRect(mx,11,42,8,4,4,'F');
+  doc.setFontSize(8);doc.setTextColor(0,211,105);
+  doc.text('Platzi incluido',mx+5,16.5);
+  // título programa
+  doc.setFontSize(17);doc.setFont(undefined,'bold');doc.setTextColor(255,255,255);
+  var tLines=doc.splitTextToSize(progName||'',cw);
+  doc.text(tLines,mx,30);
+  var afterTitle=30+tLines.length*7;
+  // subtítulo
+  doc.setFontSize(9);doc.setFont(undefined,'normal');doc.setTextColor(120,160,120);
+  doc.text('Ruta de aprendizaje · UTEL',mx,afterTitle+3);
+  var y=68;
+  // --- OBJETIVO ---
+  if(d&&d.o){
+    doc.setFontSize(8);doc.setFont(undefined,'bold');doc.setTextColor(0,150,70);
+    doc.text('OBJETIVO',mx,y);
+    doc.setDrawColor(0,211,105);doc.line(mx+18,y-0.5,W-mx,y-0.5);
+    y+=6;
+    doc.setFillColor(240,253,244);doc.roundedRect(mx,y,cw,0,'FD');
+    doc.setFontSize(10);doc.setFont(undefined,'normal');doc.setTextColor(55,65,81);
+    var oLines=doc.splitTextToSize(d.o,cw-4);
+    // border left verde
+    doc.setFillColor(0,211,105);doc.rect(mx,y,1.5,oLines.length*5.5+4,'F');
+    doc.setFillColor(240,253,244);doc.rect(mx+1.5,y,cw-1.5,oLines.length*5.5+4,'F');
+    doc.text(oLines,mx+5,y+5);
+    y+=oLines.length*5.5+10;
+  }
+  // --- CURSOS ---
+  doc.setFontSize(8);doc.setFont(undefined,'bold');doc.setTextColor(100,116,139);
+  doc.text('CON PLATZI VAS A APRENDER',mx,y);
+  doc.setDrawColor(220,220,220);doc.line(mx+73,y-0.5,W-mx,y-0.5);
+  y+=8;
+  if(d&&d.c){
+    d.c.forEach(function(c,i){
+      var nm=_cn(c[0]);
+      var url=c[1];
+      var numStr=(i<9?'0':'')+(i+1);
+      if(y>270){doc.addPage();doc.setFillColor(15,31,14);doc.rect(0,0,W,10,'F');y=18;}
+      // número
+      doc.setFontSize(9);doc.setFont(undefined,'bold');doc.setTextColor(0,211,105);
+      doc.text(numStr,mx,y);
+      // punto
+      doc.setFillColor(0,211,105);doc.circle(mx+10,y-1.3,1.2,'F');
+      // nombre con link
+      doc.setFontSize(10);doc.setFont(undefined,'normal');
+      if(url){
+        doc.setTextColor(17,138,84);
+        doc.textWithLink(nm,mx+14,y,{url:url});
+      } else {
+        doc.setTextColor(55,65,81);
+        doc.text(nm,mx+14,y);
+      }
+      y+=8.5;
+    });
+  }
+  // --- FOOTER ---
+  doc.setFillColor(15,31,14);doc.rect(0,283,W,14,'F');
+  doc.setFontSize(7);doc.setTextColor(100,150,100);
+  doc.text('UTEL · Universidad en Línea · platzi.com',mx,291);
+  if(rutaUrl){
+    doc.setTextColor(0,211,105);
+    doc.textWithLink('Ver hoja de ruta completa →',W-mx-52,291,{url:rutaUrl});
+  }
+  var filename='Platzi_'+(progName||'Programa').replace(/[\s\/]+/g,'_')+'.pdf';
+  doc.save(filename);
 }
 function getDuracion(sec, jornada, progName){
   // Derecho programs always 36 months
