@@ -297,6 +297,7 @@ td{padding:9px 14px;vertical-align:middle}
 })();
 </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
 
@@ -1515,98 +1516,100 @@ function showPlatziCard(e,progName){
   document.body.insertAdjacentHTML('beforeend',html);
 }
 function downloadPlatziPDF(progName){
-  if(!window.jspdf){alert('PDF no disponible, recargá la página.');return;}
+  if(!window.jspdf||!window.html2canvas){alert('PDF no disponible, recargá la página.');return;}
   var key=progName?progName.toUpperCase():'';
   var d=PLATZI_DATA[key];
   var rutaUrl=PLATZI_RUTA_MAP[key]||'';
-  var doc=new window.jspdf.jsPDF({unit:'mm',format:'a4'});
-  var W=210,mx=18,cw=174;
-  // --- HEADER fondo oscuro ---
-  doc.setFillColor(15,31,14);
-  doc.rect(0,0,W,58,'F');
-  // badge "Platzi incluido"
-  doc.setFillColor(0,50,25);
-  doc.roundedRect(mx,11,42,8,4,4,'F');
-  doc.setFontSize(8);doc.setTextColor(0,211,105);
-  doc.text('Platzi incluido',mx+5,16.5);
-  // título programa
-  doc.setFontSize(17);doc.setFont(undefined,'bold');doc.setTextColor(255,255,255);
-  var tLines=doc.splitTextToSize(progName||'',cw);
-  doc.text(tLines,mx,30);
-  var afterTitle=30+tLines.length*7;
-  // subtítulo
-  doc.setFontSize(9);doc.setFont(undefined,'normal');doc.setTextColor(120,160,120);
-  doc.text('Ruta de aprendizaje · UTEL',mx,afterTitle+3);
-  var y=68;
-  // --- OBJETIVO ---
-  if(d&&d.o){
-    doc.setFontSize(8);doc.setFont(undefined,'bold');doc.setTextColor(0,150,70);
-    doc.text('OBJETIVO',mx,y);
-    doc.setDrawColor(0,211,105);doc.line(mx+18,y-0.5,W-mx,y-0.5);
-    y+=6;
-    doc.setFillColor(240,253,244);doc.roundedRect(mx,y,cw,0,'FD');
-    doc.setFontSize(10);doc.setFont(undefined,'normal');doc.setTextColor(55,65,81);
-    var oLines=doc.splitTextToSize(d.o,cw-4);
-    // border left verde
-    doc.setFillColor(0,211,105);doc.rect(mx,y,1.5,oLines.length*5.5+4,'F');
-    doc.setFillColor(240,253,244);doc.rect(mx+1.5,y,cw-1.5,oLines.length*5.5+4,'F');
-    doc.text(oLines,mx+5,y+5);
-    y+=oLines.length*5.5+10;
-  }
-  // --- CURSOS ---
-  doc.setFontSize(8);doc.setFont(undefined,'bold');doc.setTextColor(100,116,139);
-  doc.text('CON PLATZI VAS A APRENDER',mx,y);
-  doc.setDrawColor(220,220,220);doc.line(mx+73,y-0.5,W-mx,y-0.5);
-  y+=8;
+  var num=function(n){return n<10?'0'+n:''+n;};
+  var platziSVG='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="22" height="22" fill="#00d369"><path d="M4 16L16 4l4 4-8 8 8 8-4 4z"/><path d="M14 16l6-6 4 4-2 2-4-4-4 4 2 2z" opacity=".5"/></svg>';
+  var utelSVG='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 38" width="72" height="24"><text y="30" font-family="Arial Black,Arial,sans-serif" font-size="34" font-weight="900" fill="#06ba06" letter-spacing="-1">utel</text></svg>';
+  var cursosHtml='';
   if(d&&d.c){
     d.c.forEach(function(c,i){
       var nm=_cn(c[0]);
       var url=c[1];
-      var numStr=(i<9?'0':'')+(i+1);
-      if(y>270){doc.addPage();doc.setFillColor(15,31,14);doc.rect(0,0,W,10,'F');y=18;}
-      // número
-      doc.setFontSize(9);doc.setFont(undefined,'bold');doc.setTextColor(0,211,105);
-      doc.text(numStr,mx,y);
-      // punto
-      doc.setFillColor(0,211,105);doc.circle(mx+10,y-1.3,1.2,'F');
-      // nombre con link
-      doc.setFontSize(10);doc.setFont(undefined,'normal');
+      var n=num(i+1);
       if(url){
-        doc.setTextColor(17,138,84);
-        doc.textWithLink(nm,mx+14,y,{url:url});
+        cursosHtml+='<a href="'+url+'" style="display:flex;align-items:center;gap:12px;padding:9px 14px;border-radius:10px;text-decoration:none;transition:background .1s;" onmouseover="this.style.background=\'rgba(0,211,105,.08)\'" onmouseout="this.style.background=\'none\'">'
+          +'<span style="font-size:11px;font-weight:700;color:#00d369;min-width:22px;font-family:monospace;">'+n+'</span>'
+          +'<span style="width:7px;height:7px;border-radius:50%;background:#00d369;flex-shrink:0;"></span>'
+          +'<span style="font-size:13px;font-weight:600;color:#fff;line-height:1.35;">'+nm+'</span>'
+          +'</a>';
       } else {
-        doc.setTextColor(55,65,81);
-        doc.text(nm,mx+14,y);
+        cursosHtml+='<div style="display:flex;align-items:center;gap:12px;padding:9px 14px;">'
+          +'<span style="font-size:11px;font-weight:700;color:#00d369;min-width:22px;font-family:monospace;">'+n+'</span>'
+          +'<span style="width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.2);flex-shrink:0;"></span>'
+          +'<span style="font-size:13px;color:rgba(255,255,255,.45);line-height:1.35;">'+nm+'</span>'
+          +'</div>';
       }
-      y+=8.5;
     });
   }
-  // --- FOOTER con logos ---
-  var fy=281;
-  doc.setFillColor(15,31,14);doc.rect(0,fy,W,16,'F');
-  // separador verde
-  doc.setDrawColor(0,100,50);doc.line(0,fy,W,fy);
-  // Logo UTEL (texto bold verde)
-  doc.setFontSize(15);doc.setFont(undefined,'bold');doc.setTextColor(6,186,6);
-  doc.text('utel',mx,fy+10.5);
-  // Logo Platzi: chevron SVG dibujado con líneas + texto
-  var px=W-mx-28,py=fy+3.5,sc=0.28;
-  // chevron shape escalado (viewBox 0 0 32 32)
-  // Outer shape: M4,16 L16,4 20,8 12,16 20,24 16,28 Z
-  var outer=[[4,16],[16,4],[20,8],[12,16],[20,24],[16,28]];
-  var oo=outer.map(function(p){return{x:px+p[0]*sc,y:py+p[1]*sc};});
-  doc.setFillColor(0,211,105);
-  doc.lines([[oo[1].x-oo[0].x,oo[1].y-oo[0].y],[oo[2].x-oo[1].x,oo[2].y-oo[1].y],[oo[3].x-oo[2].x,oo[3].y-oo[2].y],[oo[4].x-oo[3].x,oo[4].y-oo[3].y],[oo[5].x-oo[4].x,oo[5].y-oo[4].y]],oo[0].x,oo[0].y,null,'F',true);
-  // inner shape (lighter): M14,16 l6,-6 4,4 -2,2 -4,-4 -4,4 2,2 Z
-  var inner=[[14,16],[20,10],[24,14],[22,16],[18,12],[14,16],[16,18]];
-  var ii=inner.map(function(p){return{x:px+p[0]*sc,y:py+p[1]*sc};});
-  doc.setFillColor(0,180,90);
-  doc.lines([[ii[1].x-ii[0].x,ii[1].y-ii[0].y],[ii[2].x-ii[1].x,ii[2].y-ii[1].y],[ii[3].x-ii[2].x,ii[3].y-ii[2].y],[ii[4].x-ii[3].x,ii[4].y-ii[3].y],[ii[5].x-ii[4].x,ii[5].y-ii[4].y],[ii[6].x-ii[5].x,ii[6].y-ii[5].y]],ii[0].x,ii[0].y,null,'F',true);
-  // texto "Platzi"
-  doc.setFontSize(11);doc.setFont(undefined,'bold');doc.setTextColor(0,211,105);
-  doc.text('Platzi',px+32*sc+3,py+32*sc*0.6);
-  var filename='Platzi_'+(progName||'Programa').replace(/[\s\/]+/g,'_')+'.pdf';
-  doc.save(filename);
+  var objHtml=d&&d.o
+    ?'<div style="margin-bottom:22px;">'
+      +'<p style="font-size:9px;font-weight:700;color:#00d369;letter-spacing:.12em;text-transform:uppercase;margin:0 0 8px;">Objetivo</p>'
+      +'<div style="border-left:3px solid #00d369;padding:10px 14px;background:rgba(0,211,105,.05);border-radius:0 8px 8px 0;">'
+      +'<p style="font-size:12px;color:rgba(255,255,255,.78);line-height:1.65;margin:0;font-style:italic;">'+d.o+'</p>'
+      +'</div></div>'
+    :'';
+  var html='<div id="_plat_pdf_render" style="position:fixed;left:-9999px;top:0;width:794px;background:#0f1f0e;font-family:Arial,sans-serif;">'
+    // HEADER
+    +'<div style="padding:32px 40px 24px;">'
+    +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;">'
+    +'<div style="display:flex;align-items:center;gap:8px;background:rgba(0,211,105,.12);border:1px solid rgba(0,211,105,.25);border-radius:999px;padding:6px 14px 6px 9px;">'
+    +platziSVG
+    +'<span style="font-size:12px;font-weight:700;color:#00d369;">Platzi incluido</span>'
+    +'</div>'
+    +utelSVG
+    +'</div>'
+    +'<h1 style="font-size:28px;font-weight:900;color:#fff;margin:0 0 6px;line-height:1.15;">'+progName+'</h1>'
+    +'<p style="font-size:12px;color:rgba(255,255,255,.38);margin:0;letter-spacing:.02em;">Ruta de aprendizaje · UTEL</p>'
+    +'</div>'
+    // DIVIDER
+    +'<div style="height:2px;background:linear-gradient(90deg,#00d369 0%,rgba(0,211,105,.1) 100%);margin:0 40px;border-radius:2px;"></div>'
+    // BODY
+    +'<div style="padding:28px 40px 32px;">'
+    +objHtml
+    +'<p style="font-size:9px;font-weight:700;color:rgba(255,255,255,.35);letter-spacing:.12em;text-transform:uppercase;margin:0 0 12px;display:flex;align-items:center;gap:10px;">Con Platzi vas a aprender <span style="flex:1;height:1px;background:rgba(255,255,255,.1);display:inline-block;"></span></p>'
+    +'<div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;">'+cursosHtml+'</div>'
+    +'</div>'
+    // FOOTER
+    +'<div style="margin:0 40px 32px;padding-top:16px;border-top:1px solid rgba(0,211,105,.15);display:flex;align-items:center;justify-content:space-between;">'
+    +'<span style="font-size:10px;color:rgba(255,255,255,.25);">Material exclusivo para asesores UTEL</span>'
+    +'<span style="font-size:10px;color:rgba(0,211,105,.5);">platzi.com</span>'
+    +'</div>'
+    +'</div>';
+  document.body.insertAdjacentHTML('beforeend',html);
+  var el=document.getElementById('_plat_pdf_render');
+  window.html2canvas(el,{scale:2,backgroundColor:'#0f1f0e',useCORS:true,logging:false}).then(function(canvas){
+    el.remove();
+    var imgData=canvas.toDataURL('image/png');
+    var pdf=new window.jspdf.jsPDF({unit:'px',format:[canvas.width/2,canvas.height/2]});
+    pdf.addImage(imgData,'PNG',0,0,canvas.width/2,canvas.height/2);
+    // links clickeables encima de la imagen
+    if(d&&d.c){
+      var scale=canvas.width/2/794;
+      // calcular posición Y de cada curso (aproximada)
+      var headerH=(32+20+14+6+28+24+28)*scale; // aprox
+      var hasObj=!!(d&&d.o);
+      var objH=hasObj?(8+10+d.o.length/80*14+10+22)*scale:0;
+      var sectionH=22*scale;
+      var courseRowH=38*scale;
+      var startY=headerH+objH+sectionH;
+      var cols=2;
+      var colW=(794/2/2)*scale;
+      d.c.forEach(function(c,i){
+        if(c[1]){
+          var col=i%cols;
+          var row=Math.floor(i/cols);
+          var lx=col*(794/2/2)*scale+40*scale;
+          var ly=startY+row*courseRowH;
+          pdf.link(lx,ly,colW-20*scale,courseRowH,{url:c[1]});
+        }
+      });
+    }
+    var filename='Platzi_'+(progName||'Programa').replace(/[\s\/]+/g,'_')+'.pdf';
+    pdf.save(filename);
+  }).catch(function(){el.remove();alert('Error generando PDF.');});
 }
 function getDuracion(sec, jornada, progName){
   // Derecho programs always 36 months
