@@ -1593,7 +1593,7 @@ function downloadPlatziPDF(progName){
     +'</div>'
     // Title
     +'<h1 style="font-size:52px;font-weight:700;color:'+C.w+';margin:0 0 10px;line-height:1.1;font-family:'+f+';position:relative;">'+progName+'</h1>'
-    +'<p style="font-size:16px;font-weight:500;color:'+C.g+';margin:0;font-family:'+f+';position:relative;">Ruta de aprendizaje · UTEL</p>'
+    +'<p style="font-size:16px;font-weight:500;color:'+C.g+';margin:0;font-family:'+f+';position:relative;">Ruta de aprendizaje Platzi</p>'
     +'</div>'
     // ── SECTION HEADER ──
     +'<div style="padding:36px 56px 20px;display:flex;align-items:flex-end;gap:28px;">'
@@ -1607,24 +1607,8 @@ function downloadPlatziPDF(progName){
     +'</div>'
     // ── BODY: courses + sidebar ──
     +'<div style="display:flex;gap:20px;padding:0 56px 0;">'
-    // Courses
-    +'<div style="flex:1;min-width:0;">'+cHtml+'</div>'
-    // Sidebar
-    +'<div style="width:210px;flex-shrink:0;padding-top:4px;">'
-    +'<div style="border:1px solid '+C.bd+';border-radius:24px;padding:24px 20px;background:'+C.w+';box-shadow:0 10px 30px rgba(0,0,0,.06);">'
-    +benIco('M22 10v6M2 10l10-5 10 5-10 5z M6 12v5c3.33 1.67 8.67 1.67 12 0v-5')
-    +'<p style="font-size:14px;font-weight:700;color:'+C.g+';margin:0 0 6px;font-family:'+f+';">Aprende con expertos</p>'
-    +'<p style="font-size:12px;color:'+C.ts+';line-height:1.6;margin:0 0 18px;font-family:'+f+';">Contenido creado por profesionales líderes en la industria.</p>'
-    +'<div style="width:36px;height:2px;background:'+C.g+';border-radius:1px;margin-bottom:18px;"></div>'
-    +benIco('M15 10l-4 4L7 10 M21 12a9 9 0 11-18 0 9 9 0 0118 0z M12 8v4')
-    +'<p style="font-size:14px;font-weight:700;color:'+C.g+';margin:0 0 6px;font-family:'+f+';">A tu ritmo</p>'
-    +'<p style="font-size:12px;color:'+C.ts+';line-height:1.6;margin:0 0 18px;font-family:'+f+';">Estudia cuando y donde quieras, con flexibilidad total.</p>'
-    +'<div style="width:36px;height:2px;background:'+C.g+';border-radius:1px;margin-bottom:18px;"></div>'
-    +benIco('M12 15c3.31 0 6-2.69 6-6V3H6v6c0 3.31 2.69 6 6 6z M8 21h8 M12 15v6')
-    +'<p style="font-size:14px;font-weight:700;color:'+C.g+';margin:0 0 6px;font-family:'+f+';">Certificados digitales</p>'
-    +'<p style="font-size:12px;color:'+C.ts+';line-height:1.6;margin:0;font-family:'+f+';">Demuestra lo que aprendes y potencia tu perfil profesional.</p>'
-    +'</div>'
-    +'</div>'
+    // Courses full width
+    +'<div style="width:100%;">'+cHtml+'</div>'
     +'</div>'
     // ── CTA ──
     +'<div style="margin:28px 56px 0;background:linear-gradient(135deg,#0C3D22 0%,'+C.gd+' 100%);border-radius:20px;padding:28px 32px;display:flex;align-items:center;gap:24px;">'
