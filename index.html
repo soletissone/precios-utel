@@ -1581,14 +1581,30 @@ function downloadPlatziPDF(progName){
       y+=8.5;
     });
   }
-  // --- FOOTER ---
-  doc.setFillColor(15,31,14);doc.rect(0,283,W,14,'F');
-  doc.setFontSize(7);doc.setTextColor(100,150,100);
-  doc.text('UTEL · Universidad en Línea · platzi.com',mx,291);
-  if(rutaUrl){
-    doc.setTextColor(0,211,105);
-    doc.textWithLink('Ver hoja de ruta completa →',W-mx-52,291,{url:rutaUrl});
-  }
+  // --- FOOTER con logos ---
+  var fy=281;
+  doc.setFillColor(15,31,14);doc.rect(0,fy,W,16,'F');
+  // separador verde
+  doc.setDrawColor(0,100,50);doc.line(0,fy,W,fy);
+  // Logo UTEL (texto bold verde)
+  doc.setFontSize(15);doc.setFont(undefined,'bold');doc.setTextColor(6,186,6);
+  doc.text('utel',mx,fy+10.5);
+  // Logo Platzi: chevron SVG dibujado con líneas + texto
+  var px=W-mx-28,py=fy+3.5,sc=0.28;
+  // chevron shape escalado (viewBox 0 0 32 32)
+  // Outer shape: M4,16 L16,4 20,8 12,16 20,24 16,28 Z
+  var outer=[[4,16],[16,4],[20,8],[12,16],[20,24],[16,28]];
+  var oo=outer.map(function(p){return{x:px+p[0]*sc,y:py+p[1]*sc};});
+  doc.setFillColor(0,211,105);
+  doc.lines([[oo[1].x-oo[0].x,oo[1].y-oo[0].y],[oo[2].x-oo[1].x,oo[2].y-oo[1].y],[oo[3].x-oo[2].x,oo[3].y-oo[2].y],[oo[4].x-oo[3].x,oo[4].y-oo[3].y],[oo[5].x-oo[4].x,oo[5].y-oo[4].y]],oo[0].x,oo[0].y,null,'F',true);
+  // inner shape (lighter): M14,16 l6,-6 4,4 -2,2 -4,-4 -4,4 2,2 Z
+  var inner=[[14,16],[20,10],[24,14],[22,16],[18,12],[14,16],[16,18]];
+  var ii=inner.map(function(p){return{x:px+p[0]*sc,y:py+p[1]*sc};});
+  doc.setFillColor(0,180,90);
+  doc.lines([[ii[1].x-ii[0].x,ii[1].y-ii[0].y],[ii[2].x-ii[1].x,ii[2].y-ii[1].y],[ii[3].x-ii[2].x,ii[3].y-ii[2].y],[ii[4].x-ii[3].x,ii[4].y-ii[3].y],[ii[5].x-ii[4].x,ii[5].y-ii[4].y],[ii[6].x-ii[5].x,ii[6].y-ii[5].y]],ii[0].x,ii[0].y,null,'F',true);
+  // texto "Platzi"
+  doc.setFontSize(11);doc.setFont(undefined,'bold');doc.setTextColor(0,211,105);
+  doc.text('Platzi',px+32*sc+3,py+32*sc*0.6);
   var filename='Platzi_'+(progName||'Programa').replace(/[\s\/]+/g,'_')+'.pdf';
   doc.save(filename);
 }
