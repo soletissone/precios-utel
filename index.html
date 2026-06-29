@@ -1356,11 +1356,11 @@ function codBadge(progName){
   var code=PROG_CODE_BY_PROG[progName];
   return code?'<span class="cod-badge" title="Código de programa">'+code+'</span>':'';
 }
-function fichaBadge(progName,nivel){
+function fichaBadge(progName,nivel,forceEje){
   if(!PROG_PDF_MAP) return '';
   var map=PROG_PDF_MAP[progName]; if(!map) return '';
   var selKey=nivel==='LIC'?'lic':nivel==='MAE'?'mae':nivel==='MASTER'?'ms':'doc';
-  var isEje=SEL_EXP[selKey]==='ejecutiva';
+  var isEje=forceEje||SEL_EXP[selKey]==='ejecutiva';
   var rPdf=map[nivel+'_r'], ePdf=map[nivel+'_e'];
   if(!rPdf&&!ePdf) return '';
   var pdf=(isEje&&ePdf)?ePdf:(rPdf||ePdf);
@@ -3778,7 +3778,7 @@ function rEN(){
     var dur=getDuracion('lic','intensiva',progName);
     var uniqBadgeEN=isMercadoUnico(progName)?'<span style="display:inline-block;background:#fef9c3;color:#854d0e;border-radius:8px;padding:3px 10px;font-size:11px;font-weight:700;margin:0 4px">🌟 Único en el mercado</span>':'';
     g('en-info').innerHTML=(NB[nivel]||'')
-      +fichaBadge(progName,'LIC')+platziBtn(progName)+uniqBadgeEN+'<span class="dur-badge">⏱ '+dur+'</span>'+fechaBadge+LBG[leadActual];
+      +fichaBadge(progName,'LIC',true)+platziBtn(progName)+uniqBadgeEN+'<span class="dur-badge">⏱ '+dur+'</span>'+fechaBadge+LBG[leadActual];
     renderAccs('en-acc','lic',false);
     renderTotal('en-total',prices[2],'lic',false);
 
@@ -3806,7 +3806,7 @@ function rEN(){
     var dur2=getDuracion('mae','maestria',progName);
     var uniqBadgeEN2=isMercadoUnico(progName)?'<span style="display:inline-block;background:#fef9c3;color:#854d0e;border-radius:8px;padding:3px 10px;font-size:11px;font-weight:700;margin:0 4px">🌟 Único en el mercado</span>':'';
     g('en-info').innerHTML=(NB[nivel]||'')
-      +fichaBadge(progName,'MAE')+platziBtn(progName)+uniqBadgeEN2+'<span class="dur-badge">⏱ '+dur2+'</span>'+fechaBadge+LBG[lead];
+      +fichaBadge(progName,'MAE',true)+platziBtn(progName)+uniqBadgeEN2+'<span class="dur-badge">⏱ '+dur2+'</span>'+fechaBadge+LBG[lead];
     renderAccs('en-acc','mae',false);
     renderTotal('en-total',prices2[2],'mae',false);
 
@@ -3826,7 +3826,7 @@ function rEN(){
     var dur3=getDuracion('ms','master',progName);
     var uniqBadgeEN3=isMercadoUnico(progName)?'<span style="display:inline-block;background:#fef9c3;color:#854d0e;border-radius:8px;padding:3px 10px;font-size:11px;font-weight:700;margin:0 4px">🌟 Único en el mercado</span>':'';
     g('en-info').innerHTML=(NB[nivel]||'')
-      +fichaBadge(progName,'MASTER')+platziBtn(progName)+uniqBadgeEN3+'<span class="dur-badge">⏱ '+dur3+'</span>'+fechaBadge+LBG[lead];
+      +fichaBadge(progName,'MASTER',true)+platziBtn(progName)+uniqBadgeEN3+'<span class="dur-badge">⏱ '+dur3+'</span>'+fechaBadge+LBG[lead];
     renderAccs('en-acc','ms',false);
     renderTotal('en-total',e3.p[4],'ms',false);
   }
