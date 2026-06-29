@@ -749,7 +749,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
         <div class="tab" id="en-tab-ms" onclick="swEN('ms')">Master UTEL</div>
       </div>
       <div class="filters">
-        <div class="fg"><label>Programa</label><select id="en-prog" onchange="onENProgChange()"></select></div>
+        <div class="fg"><label>Área</label><select id="en-area" onchange="filterENArea()"><option value="">— Todas —</option></select></div><div class="fg"><label>Programa</label><select id="en-prog" onchange="onENProgChange()"></select></div>
         <div class="fg"><label>Lead</label>
           <select id="en-lead" onchange="rEN()">
             <option value="hot">Hot Lead</option>
@@ -1660,7 +1660,7 @@ function sw(id){
   else if(id==='pu') rPU();
   else if(id==='dip') rDip();
   else if(id==='lic') rL();
-  else if(id==='en'){ fillENProgs(); rEN(); }
+  else if(id==='en'){ fillENAreas(); fillENProgs(); rEN(); }
 }
 
 function renderTable(tbodyId, prices, pkg, esc, accTotal, accTotal12, domStartIdx){
@@ -3675,19 +3675,47 @@ function swEN(sec){
     var amt = sec==='lic' ? '$1,100' : '$1,200';
     compl.innerHTML='<strong>📋 Complemento de Colegiatura:</strong> <strong style="font-size:13px;color:#e65100">'+amt+'</strong> — se cobra cada 4 meses';
   }
+  var ea=g('en-area'); if(ea) ea.value='';
+  fillENAreas();
   fillENProgs();
   rEN();
 }
 
+function fillENAreas(){
+  var sec=EJE_NATIVA_SEC;
+  var catKey=sec==='lic'?'LICENCIATURA':(sec==='mae'?'MAESTRÍA':'MASTER');
+  var progsAll=CATALOG[catKey]||[];
+  var allowed=EN_PROGS[sec]||[];
+  var asel=g('en-area'); if(!asel) return;
+  var prevArea=asel.value;
+  // Collect unique areas that have ejecutiva programs
+  var areas=[];
+  progsAll.forEach(function(item){
+    if(allowed.indexOf(item.p)>=0 && item.a && areas.indexOf(item.a)<0) areas.push(item.a);
+  });
+  asel.innerHTML='<option value="">— Todas —</option>';
+  areas.forEach(function(a){
+    var opt=document.createElement('option');
+    opt.value=a; opt.textContent=a;
+    asel.appendChild(opt);
+  });
+  if(prevArea) asel.value=prevArea;
+}
+function filterENArea(){ fillENProgs(); rEN(); }
 function fillENProgs(){
   var sec=EJE_NATIVA_SEC;
   var catKey=sec==='lic'?'LICENCIATURA':(sec==='mae'?'MAESTRÍA':'MASTER');
   var progsAll=CATALOG[catKey]||[];
   var allowed=EN_PROGS[sec]||[];
+  var areaVal=g('en-area')?g('en-area').value:'';
   var sel=g('en-prog'); if(!sel) return;
   var prevVal=sel.value;
   sel.innerHTML='';
-  progsAll.filter(function(item){return allowed.indexOf(item.p)>=0;}).forEach(function(item){
+  progsAll.filter(function(item){
+    if(allowed.indexOf(item.p)<0) return false;
+    if(areaVal && item.a!==areaVal) return false;
+    return true;
+  }).forEach(function(item){
     var opt=document.createElement('option');
     opt.value=item.p;
     opt.setAttribute('data-nivel',item.v);
@@ -3734,7 +3762,7 @@ function rEN(){
     else progKey='online_general';
     if(nivel==='unico'){
       g('en-tbody').innerHTML='<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--mu)">Programa especial — consultar con área comercial</td></tr>';
-      g('en-info').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>';
+      g('en-info').innerHTML=NB['unico'];
       g('en-bi').innerHTML=''; g('en-acc').innerHTML=''; g('en-total').innerHTML=''; return;
     }
     var zona=g('en-zona')?g('en-zona').value:'std';
@@ -3750,7 +3778,6 @@ function rEN(){
     var dur=getDuracion('lic','intensiva',progName);
     var uniqBadgeEN=isMercadoUnico(progName)?'<span style="display:inline-block;background:#fef9c3;color:#854d0e;border-radius:8px;padding:3px 10px;font-size:11px;font-weight:700;margin:0 4px">🌟 Único en el mercado</span>':'';
     g('en-info').innerHTML=(NB[nivel]||'')
-      +' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'
       +fichaBadge(progName,'LIC')+platziBtn(progName)+uniqBadgeEN+'<span class="dur-badge">⏱ '+dur+'</span>'+fechaBadge+LBG[leadActual];
     renderAccs('en-acc','lic',false);
     renderTotal('en-total',prices[2],'lic',false);
@@ -3779,7 +3806,6 @@ function rEN(){
     var dur2=getDuracion('mae','maestria',progName);
     var uniqBadgeEN2=isMercadoUnico(progName)?'<span style="display:inline-block;background:#fef9c3;color:#854d0e;border-radius:8px;padding:3px 10px;font-size:11px;font-weight:700;margin:0 4px">🌟 Único en el mercado</span>':'';
     g('en-info').innerHTML=(NB[nivel]||'')
-      +' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'
       +fichaBadge(progName,'MAE')+platziBtn(progName)+uniqBadgeEN2+'<span class="dur-badge">⏱ '+dur2+'</span>'+fechaBadge+LBG[lead];
     renderAccs('en-acc','mae',false);
     renderTotal('en-total',prices2[2],'mae',false);
@@ -3800,7 +3826,6 @@ function rEN(){
     var dur3=getDuracion('ms','master',progName);
     var uniqBadgeEN3=isMercadoUnico(progName)?'<span style="display:inline-block;background:#fef9c3;color:#854d0e;border-radius:8px;padding:3px 10px;font-size:11px;font-weight:700;margin:0 4px">🌟 Único en el mercado</span>':'';
     g('en-info').innerHTML=(NB[nivel]||'')
-      +' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'
       +fichaBadge(progName,'MASTER')+platziBtn(progName)+uniqBadgeEN3+'<span class="dur-badge">⏱ '+dur3+'</span>'+fechaBadge+LBG[lead];
     renderAccs('en-acc','ms',false);
     renderTotal('en-total',e3.p[4],'ms',false);
