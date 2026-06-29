@@ -3767,7 +3767,7 @@ function rEN(){
     var uniqBadgeEN=isMercadoUnico(progName)?'<span style="display:inline-block;background:#fef9c3;color:#854d0e;border-radius:8px;padding:3px 10px;font-size:11px;font-weight:700;margin:0 4px">🌟 Único en el mercado</span>':'';
     g('en-info').innerHTML=(NB[nivel]||'')
       +' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'
-      +uniqBadgeEN+'<span class="dur-badge">⏱ '+dur+'</span>'+fechaBadge+LBG[leadActual];
+      +fichaBadge(progName,'LIC')+platziBtn(progName)+uniqBadgeEN+'<span class="dur-badge">⏱ '+dur+'</span>'+fechaBadge+LBG[leadActual];
     renderAccs('en-acc','lic',false);
     renderTotal('en-total',prices[2],'lic',false);
 
@@ -3796,7 +3796,7 @@ function rEN(){
     var uniqBadgeEN2=isMercadoUnico(progName)?'<span style="display:inline-block;background:#fef9c3;color:#854d0e;border-radius:8px;padding:3px 10px;font-size:11px;font-weight:700;margin:0 4px">🌟 Único en el mercado</span>':'';
     g('en-info').innerHTML=(NB[nivel]||'')
       +' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'
-      +uniqBadgeEN2+'<span class="dur-badge">⏱ '+dur2+'</span>'+fechaBadge+LBG[lead];
+      +fichaBadge(progName,'MAE')+platziBtn(progName)+uniqBadgeEN2+'<span class="dur-badge">⏱ '+dur2+'</span>'+fechaBadge+LBG[lead];
     renderAccs('en-acc','mae',false);
     renderTotal('en-total',prices2[2],'mae',false);
 
@@ -3817,7 +3817,7 @@ function rEN(){
     var uniqBadgeEN3=isMercadoUnico(progName)?'<span style="display:inline-block;background:#fef9c3;color:#854d0e;border-radius:8px;padding:3px 10px;font-size:11px;font-weight:700;margin:0 4px">🌟 Único en el mercado</span>':'';
     g('en-info').innerHTML=(NB[nivel]||'')
       +' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'
-      +uniqBadgeEN3+'<span class="dur-badge">⏱ '+dur3+'</span>'+fechaBadge+LBG[lead];
+      +fichaBadge(progName,'MASTER')+platziBtn(progName)+uniqBadgeEN3+'<span class="dur-badge">⏱ '+dur3+'</span>'+fechaBadge+LBG[lead];
     renderAccs('en-acc','ms',false);
     renderTotal('en-total',e3.p[4],'ms',false);
   }
