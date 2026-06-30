@@ -1809,6 +1809,7 @@ function fillSelect(selId, nivelKey, badgeId){
     var isNew=NEW_PROGS.indexOf(item.p.toUpperCase())>=0;
     var isUniq=isMercadoUnico(item.p);
     opt.textContent=(isUniq?'🌟 ':isNew?'⭐ ':'')+item.p.charAt(0)+item.p.slice(1).toLowerCase();
+    if(isProx(item.p)){opt.style.color='#aaa';opt.disabled=true;opt.textContent+=' (próximamente)';}
     sel.appendChild(opt);
   });
   // Select first option by default - explicitly set value
@@ -2155,6 +2156,45 @@ var NEW_PROGS = ["ENERGÍAS RENOVABLES Y EFICIENCIA ENERGÉTICA", "ARQUITECTURA"
   "Liderazgo Educativo Y Gestión Escolar",
   "Tecnología Educativa E Innovación Didáctica"
 ];
+var PROX_PROGS=[
+  "Gestión Empresarial Y Logística",
+  "Dirección De Operaciones Empresariales",
+  "Dirección Hotelera Y Experiencia Del Cliente",
+  "Planeación Y Evaluación De Proyectos",
+  "Gastronomía Sustentable Y Cultura Alimentaria",
+  "Administración Pública Y Políticas Económicas",
+  "Derechos Humanos Y Justicia Social",
+  "Gestión De Políticas Y Gobierno",
+  "Seguridad Pública Y Gobernabilidad Democrática",
+  "Lenguas Extranjeras",
+  "Estudios Socioculturales",
+  "Lengua Y Literatura",
+  "Antropología Y Diversidad Cultural",
+  "Educación Inclusiva Y Diversidad",
+  "Turismo Digital Y Gestión De Plataformas",
+  "Gestión De La Calidad Y Procesos Industriales",
+  "Dirección Estratégica De Hospitalidad Y Bienestar",
+  "Organización De Eventos Corporativos Y Convenciones",
+  "Evaluación De Riesgos Tecnológicos Y Resiliencia Operativa",
+  "Gestión De Riesgos Ambientales",
+  "Planeación Turística Y Desarrollo Regional",
+  "Historia Pública Y Educación Patrimonial",
+  "Análisis Político Y Opinión Pública",
+  "Comunicación Social Y Participación Ciudadana",
+  "Políticas Sociales Y Bienestar Social",
+  "Justicia Social Y Transformación Comunitaria",
+  "Filosofía Y Pensamiento Crítico",
+  "Desarrollo Sostenible Y Gestión Ambiental",
+  "Calidad Y Sostenibilidad Organizacional",
+  "Evaluación De Políticas Sociales Y Programas Públicos",
+  "Políticas Públicas Y Gobernanza",
+  "Estudios Interculturales Y Diversidad Humana",
+  "Estudios Interdisciplinarios Sobre América Latina",
+  "Liderazgo Educativo Y Gestión Escolar",
+  "Tecnología Educativa E Innovación Didáctica"
+];
+var PROX_UNLOCK=new Date(2026,6,1);
+function isProx(p){return PROX_PROGS.indexOf(p)>=0&&new Date()<PROX_UNLOCK;}
 var DUR_MAP = {
   'lic_intensiva_nuevo':  '36 meses (3 años)',
   'lic_completa_nuevo':   '44 meses (3 años 8 meses)',
@@ -3535,6 +3575,7 @@ function filterLArea(){
     opt.setAttribute('data-nivel',item.v);
     var isNew=NEW_PROGS.indexOf(item.p.toUpperCase())>=0;
     opt.textContent=(isNew?'⭐ ':'')+item.p;
+    if(isProx(item.p)){opt.style.color='#aaa';opt.disabled=true;opt.textContent+=' (próximamente)';}
     sel.appendChild(opt);
   });
   if(sel.options && sel.options.length > 0){sel.selectedIndex=0;sel.value=sel.options[0].value;}
@@ -3555,6 +3596,7 @@ function filterMArea(){
     opt.setAttribute('data-nivel',item.v);
     var isNew=NEW_PROGS.indexOf(item.p.toUpperCase())>=0;
     opt.textContent=(isNew?'⭐ ':'')+item.p;
+    if(isProx(item.p)){opt.style.color='#aaa';opt.disabled=true;opt.textContent+=' (próximamente)';}
     sel.appendChild(opt);
   });
   if(sel.options && sel.options.length > 0){sel.selectedIndex=0;sel.value=sel.options[0].value;}
@@ -3831,6 +3873,7 @@ function fillENProgs(){
     opt.value=item.p;
     opt.setAttribute('data-nivel',item.v);
     opt.textContent=(isMercadoUnico(item.p)?'🌟 ':'')+item.p.charAt(0)+item.p.slice(1).toLowerCase();
+    if(isProx(item.p)){opt.style.color='#aaa';opt.disabled=true;opt.textContent+=' (próximamente)';}
     sel.appendChild(opt);
   });
   if(prevVal){sel.value=prevVal;}
