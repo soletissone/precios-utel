@@ -3734,6 +3734,9 @@ function buildFechaOptions(sel, dates, curVal){
   var hoy = new Date(); hoy.setHours(0,0,0,0);
   var futuras = dates.filter(function(d){
     var p=d.split('/'); var fd=new Date(p[2],p[1]-1,p[0]); return fd>=hoy;
+  }).sort(function(a,b){
+    var pa=a.split('/'),pb=b.split('/');
+    return new Date(pa[2],pa[1]-1,pa[0])-new Date(pb[2],pb[1]-1,pb[0]);
   }).slice(0, CICLOS_ACTIVOS);
   sel.innerHTML='<option value="">— Seleccionar fecha de inicio —</option>';
   futuras.forEach(function(d){
