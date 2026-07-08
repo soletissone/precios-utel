@@ -195,12 +195,13 @@ def leer_catalogo():
             else:
                 tier_final = 'Resto de los Doc.'
         else:
-            tier_final = norm_tier(tipo_promo_raw)
-            if tier_final is None:
+            tier_up = norm_tier(tipo_promo_raw)
+            if tier_up is None:
                 excluidos_total += 1
                 key = '%s (alianza: %s)' % (nivel, tipo_promo_raw)
                 excluidos_detalle[key] = excluidos_detalle.get(key, 0) + 1
                 continue
+            tier_final = norm_tier_display(tier_up)
 
         incluidos.append({
             'nombre': nombre,
