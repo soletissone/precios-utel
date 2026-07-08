@@ -2923,7 +2923,7 @@ function rL(){
       var ljorDiv=document.getElementById('ljor'); if(ljorDiv) ljorDiv.closest('.fg').style.display='none';
       var _cbUve=g('lic-compl'); if(_cbUve) _cbUve.style.display='none';
       g('lbi').innerHTML='<span>Incluye: Asistencia, Voxy, 5% domiciliación</span>';
-      g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+platziBtn(progName)+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
+      g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
       // UVE: accesorios normales pero sin Título $0
       var _tit0Uve=TITULO_COSTO_0; TITULO_COSTO_0=false;
       renderAccs('lic-acc','lic',false);
@@ -2963,7 +2963,7 @@ function rL(){
       var selDiv2=g('alianza-variant-sel'); if(selDiv2) selDiv2.style.display='none';
       var ljorDiv2=document.getElementById('ljor'); if(ljorDiv2) ljorDiv2.closest('.fg').style.display='none';
       g('lbi').innerHTML='<span>Incluye: Voxy</span>';
-      g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+platziBtn(progName)+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
+      g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
       g('lic-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UNICA</div>';
       g('lic-total').innerHTML=''; return;
     } else if(uName.indexOf('UNAG')>=0 || nivelRaw==='unag'){
