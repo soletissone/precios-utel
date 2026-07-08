@@ -1,0 +1,239 @@
+,Nivel,Area,DESCRIPCIÓN PROGRAMA,TIPO DE PROMO,Antigüedad,Duracion,INICIOS,Lanzamiento,VA EJECUTIVAS?,VA HIBRIDAS?,VA UTEL JOVEN?,CLAVE PROGRAMA MX
+1,Licenciatura,Ciencias Sociales y Humanidades,LICENCIATURA EN PEDAGOGÍA,PRICING BAJO,Antiguos,,Mensual,,SI,SI,SI,UTLLIPPFED
+2,Licenciatura,Ingeniería y Soluciones,LICENCIATURA EN INGENIERÍA INDUSTRIAL,PRICING ALTO,Antiguos,,Mensual,,SI,SI,SI,UTLLIIIFED
+3,Licenciatura,Ingeniería y Soluciones,LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES,PRICING ALTO,Antiguos,,Mensual,,SI,SI,SI,UTLLIISFED
+4,Licenciatura,Derecho y Justicia Digital,LICENCIATURA EN CRIMINOLOGÍA Y CRIMINALÍSTICA,PRICING BAJO,Antiguos,,Mensual,,SI,SI,SI,UTLLICRFED
+5,Licenciatura,Derecho y Justicia Digital,LICENCIATURA EN DERECHO,PRICING ALTO,Antiguos,,Mensual,,SI,SI,SI,UTLLIDDFED
+6,Licenciatura,"Negocios, Innovación y Liderazgo",LICENCIATURA EN ADMINISTRACIÓN,PRICING MEDIO,Antiguos,,Mensual,,SI,SI,SI,UTLLIAAFED
+7,Licenciatura,Ingeniería y Soluciones,LICENCIATURA EN INGENIERÍA INDUSTRIAL Y ADMINISTRACIÓN,PRICING MEDIO,Antiguos,,Mensual,,SI,SI,SI,UTLLIIAFED
+8,Licenciatura,Capital Humano y Transformación Organizacional,LICENCIATURA EN ADMINISTRACIÓN DE RECURSOS HUMANOS,PRICING BAJO,Antiguos,,Mensual,,SI,SI,SI,UTLLIARFED
+9,Licenciatura,Finanzas y Economía,LICENCIATURA EN CONTADURÍA Y FINANZAS,PRICING MEDIO,Antiguos,,Mensual,,SI,SI,SI,UTLLICFFED
+10,Licenciatura,"Negocios, Innovación y Liderazgo",LICENCIATURA EN NEGOCIOS INTERNACIONALES,PRICING MEDIO,Antiguos,,Mensual,,SI,SI,SI,UTLLINIFED
+11,Licenciatura,Finanzas y Economía,LICENCIATURA EN CONTADURÍA PÚBLICA,PRICING MEDIO,Antiguos,,Mensual,,SI,SI,SI,UTLLICPFED
+12,Licenciatura,Ciencias de la Salud,LICENCIATURA EN PSICOLOGÍA ORGANIZACIONAL,PRICING MEDIO,Antiguos,,Mensual,,SI,SI,SI,UTLLIPOFED
+13,Licenciatura,"Negocios, Innovación y Liderazgo",LICENCIATURA EN ADMINISTRACIÓN DE NEGOCIOS,PRICING MEDIO,Antiguos,,Mensual,,SI,SI,SI,UTLLIANFED
+14,Licenciatura,Finanzas y Economía,LICENCIATURA EN ADMINISTRACIÓN Y FINANZAS,PRICING MEDIO,Antiguos,,Mensual,,SI,SI,SI,UTLLIAFFED
+15,Licenciatura,"Negocios, Innovación y Liderazgo",LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS TURÍSTICAS,PRICING MEDIO,Antiguos,,Mensual,,SI,SI,SI,UTLLITUFED
+16,Licenciatura,Ciencias Sociales y Humanidades,LICENCIATURA EN CIENCIAS POLÍTICAS Y ADMINISTRACIÓN PÚBLICA,PRICING MEDIO,Antiguos,,Mensual,,SI,SI,SI,UTLLICAFED
+17,Licenciatura,Económico-Administrativas,LICENCIATURA EN ADMINISTRACIÓN DE VENTAS,PRICING MEDIO,Antiguos,,Mensual,,SI,SI,SI,UTLLIAVFED
+18,Licenciatura,Diseño y Comunicación,LICENCIATURA EN COMUNICACIÓN,PRICING MEDIO,Antiguos,,Mensual,,SI,SI,SI,UTLLICCFED
+19,Licenciatura,Hospitalidad y Turismo,LICENCIATURA EN DESARROLLO SUSTENTABLE Y ECOTURISMO,PRICING MEDIO,Antiguos,,Mensual,,SI,SI,SI,UTLLIDSFED
+20,Licenciatura,Económico-Administrativas,LICENCIATURA EN MERCADOTECNIA,PRICING MEDIO,Antiguos,,Mensual,,SI,SI,SI,UTLLIMMFED
+21,Licenciatura,"Negocios, Innovación y Liderazgo",LICENCIATURA EN ADMINISTRACIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN,PRICING MEDIO,Antiguos,,Mensual,,SI,SI,SI,UTLLIATFED
+22,Licenciatura,Finanzas y Economía,LICENCIATURA EN ECONOMÍA Y FINANZAS,PRICING MEDIO,Antiguos,,Mensual,,SI,SI,SI,UTLLIEFFED
+23,Licenciatura,Derecho y Justicia Digital,LICENCIATURA EN DERECHO INTERNACIONAL,PRICING MEDIO,Antiguos,,Mensual,,SI,SI,SI,UTLLIDIFED
+24,Licenciatura,Derecho y Justicia Digital,LICENCIATURA EN DERECHO EMPRESARIAL,PRICING MEDIO,Antiguos,,Mensual,,SI,SI,SI,UTLLIDEFED
+25,Licenciatura,Ciencias Sociales y Humanidades,LICENCIATURA EN TECNOLOGÍA EDUCATIVA,PRICING MEDIO,Antiguos,,Mensual,,SI,SI,SI,UTLLITEFED
+26,Licenciatura,Diseño y Comunicación,LICENCIATURA EN COMUNICACIÓN DIGITAL,PRICING MEDIO,Antiguos,,Mensual,,SI,SI,SI,UTLLICDFED
+27,Licenciatura,Diseño y Comunicación,LICENCIATURA EN COMUNICACIÓN ORGANIZACIONAL,PRICING MEDIO,Antiguos,,Mensual,,SI,SI,SI,UTLLICOFED
+28,Licenciatura,Ingeniería y Tecnología,"LICENCIATURA EN INTELIGENCIA ARTIFICIAL APLICADA A NEGOCIOS, INDUSTRIA Y AUTOMATIZACIÓN",Ing robotica,Antiguos,,Mensual,,SI,SI,SI,UTLLIBKFED
+29,Licenciatura,Ingeniería y Tecnología,Licenciatura en Ética y Gobernanza de la Inteligencia Artificial,Ing robotica,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,SI,UTLLIBNFED
+30,Licenciatura,Ingeniería y Tecnología,Licenciatura en Ciberseguridad y Riesgos en Inteligencia Artificial,PRICING ALTO,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,SI,UTLLIBMFED
+31,Licenciatura,Ingeniería y Tecnología,Licenciatura en Innovación y Emprendimiento con Inteligencia Artificial,PRICING MEDIO,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,SI,UTLLIBPFED
+32,Licenciatura,Ciencias Sociales y Humanidades,Licenciatura en Inteligencia Artificial y Ciencia de Datos,PRICING MEDIO,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,SI,UTLLIBLFED
+33,Licenciatura,Ingeniería y Tecnología,Licenciatura en Inteligencia Artificial en Educación,PRICING MEDIO,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,SI,UTLLIBOFED
+34,Licenciatura,Ingeniería y Soluciones,Licenciatura en Ingeniería en Ciencias de Datos e Inteligencia Analítica,PRICING MEDIO,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,SI,UTLLIBCFED
+35,Licenciatura,Ingeniería y Soluciones,Licenciatura en Ingeniería en Programación en la Nube,PRICING ALTO,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,SI,UTLLIBJFED
+36,Licenciatura,Ingeniería y Soluciones,Licenciatura en Software para Entretenimiento Digital,PRICING MEDIO,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,SI,UTLLIBWFED
+37,Licenciatura,Finanzas y Economía,Licenciatura en Finanzas y Banca,PRICING MEDIO,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,SI,UTLLIBVFED
+38,Licenciatura,"Negocios, Innovación y Liderazgo",Licenciatura en Innovación y Transformación de Negocios,PRICING MEDIO,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,SI,UTLLIAPFED
+39,Licenciatura,Finanzas y Economía,Licenciatura en Finanzas y Estrategia Fiscal,PRICING MEDIO,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,SI,UTLLIBUFED
+40,Licenciatura,"Negocios, Innovación y Liderazgo",Licenciatura en Estrategia y Transformación de Negocios,PRICING MEDIO,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,SI,UTLLIACFED
+41,Licenciatura,Ingeniería y Soluciones,Licenciatura en Ingeniería en Tecnología de Videojuegos y Realidad Virtual,Pricing Medio,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,SI,UTLLIBFFED
+42,Licenciatura,Ingeniería y Tecnología,Licenciatura en Comercio Electrónico y Negocios Digitales,PRICING MEDIO,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,SI,UTLLIAMFED
+43,Licenciatura,Ingeniería y Tecnología,Licenciatura en Tecnologías Interactivas y Virtuales,PRICING ALTO,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,SI,UTLLIAHFED
+44,Maestria,Finanzas y Economía,MAESTRÍA EN EDUCACIÓN Y DOCENCIA,Pricing bajo,Antiguos,,Mensual,,SI,SI,,UTLMAEDFED
+45,Maestria,Ciencias Sociales y Humanidades,MAESTRÍA EN CONCIENCIA PLENA APLICADA,Pricing Alto,Antiguos,,Mensual,,SI,SI,,UTLMACPFED
+46,Maestria,Salud y Psicología,MAESTRÍA EN GESTIÓN DIRECTIVA DE INSTITUCIONES EN SALUD,Pricing Alto,Antiguos,,Mensual,,SI,SI,,UTLMAGSFED
+47,Maestria,Derecho y Justicia Digital,MAESTRÍA EN DERECHO PROCESAL Y JUICIOS ORALES,Pricing Alto,Antiguos,,Mensual,,SI,SI,,UTLMADJFED
+48,Maestria,Ciencias Sociales y Humanidades,MAESTRÍA EN TECNOLOGÍA EDUCATIVA,Pricing bajo,Antiguos,,Mensual,,SI,SI,,UTLMATDFED
+49,Maestria,Ingeniería y Tecnología,MAESTRÍA EN CIENCIA DE DATOS PARA NEGOCIOS,Pricing medio,Antiguos,,Mensual,,SI,SI,,UTLMACGFED
+50,Maestria,"Negocios, Innovación y Liderazgo",MAESTRÍA EN ADMINISTRACIÓN PÚBLICA,Pricing medio,Antiguos,,Mensual,,SI,SI,,UTLMAABFED
+51,Maestria,Ingeniería y Soluciones,MAESTRÍA EN INGENIERÍA Y TECNOLOGÍA AMBIENTAL,Pricing bajo,Antiguos,,Mensual,,SI,SI,,UTLMATAFED
+52,Maestria,Capital Humano y Transformación Organizacional,MAESTRÍA EN ADMINISTRACIÓN DE RECURSOS HUMANOS,Pricing medio,Antiguos,,Mensual,,SI,SI,,UTLMAARFED
+53,Maestria,Económico-Administrativa,MAESTRÍA EN DIRECCIÓN DE VENTAS,Pricing medio,Antiguos,,Mensual,,SI,SI,,UTLMADVFED
+54,Maestria,Económico-Administrativa,MAESTRÍA EN MERCADOTECNIA DIGITAL Y COMERCIO ELECTRÓNICO,Pricing medio,Antiguos,,Mensual,,SI,SI,,UTLMAMDFED
+55,Maestria,Derecho y Justicia Digital,MAESTRÍA EN DERECHO PROCESAL PENAL,Pricing medio,Antiguos,,Mensual,,SI,SI,,UTLMADRFED
+56,Maestria,Derecho y Justicia Digital,MAESTRÍA EN DERECHOS HUMANOS,Pricing medio,Nuevos programas,,Mensual,Agosto 2025 (Bloque 0),SI,SI,,UTLMADHFED
+57,Maestria,Económico-Administrativa,MAESTRÍA EN ADMINISTRACIÓN DE INSTITUCIONES EDUCATIVAS,Pricing medio,Antiguos,,Mensual,,SI,SI,,UTLMAAIFED
+58,Maestria,Capital Humano y Transformación Organizacional,MAESTRÍA EN COACHING INTEGRAL Y ORGANIZACIONAL,Pricing medio,Antiguos,,Mensual,,SI,SI,,UTLMACIFED
+59,Maestria,"Negocios, Innovación y Liderazgo",MAESTRÍA EN DIRECCIÓN DE PROYECTOS DE INNOVACIÓN,Pricing medio,Antiguos,,Mensual,,SI,SI,,UTLMAPIFED
+60,Maestria,Económico-Administrativa,MAESTRÍA EN ADMINISTRACIÓN EN MERCADOTECNIA ESTRATÉGICA,Pricing medio,Antiguos,,Mensual,,SI,SI,,UTLMAMEFED
+61,Maestria,Hospitalidad y Turismo,MAESTRÍA EN DIRECCIÓN DE NEGOCIOS DE ALIMENTOS Y BEBIDAS,Pricing medio,Antiguos,,Mensual,,SI,SI,,UTLMANAFED
+62,Maestria,Salud y Psicología,MAESTRÍA EN PSICOLOGÍA TRANSPERSONAL,UNAG,Antiguos,,Mensual,,SI,SI,,UNAMAPTESG
+63,Maestria,"Negocios, Innovación y Liderazgo",MAESTRÍA EN ADMINISTRACIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN,Pricing medio,Antiguos,,Mensual,,SI,SI,,UTLMAATFED
+64,Maestria,Económico-Administrativa,MAESTRÍA EN FINANZAS,Pricing medio,Antiguos,,Mensual,,SI,SI,,UTLMAFNFED
+65,Maestria,Derecho y Justicia Digital,MAESTRÍA EN DERECHO PROCESAL CONSTITUCIONAL,Pricing medio,Antiguos,,Mensual,,SI,SI,,UTLMADCFED
+66,Maestria,Ingeniería y Tecnología,MAESTRÍA EN CIBERSEGURIDAD,Pricing medio,Nuevos programas,,Mensual,Agosto 2025 (Bloque 0),SI,SI,,UTLMACBFED
+67,Maestria,"Negocios, Innovación y Liderazgo",MAESTRÍA EN ADMINISTRACIÓN DE NEGOCIOS DEPORTIVOS,Pricing medio,Antiguos,,Mensual,,SI,SI,,UTLMANEFED
+68,Maestria,Ingeniería y Tecnología,MAESTRÍA EN CIENCIAS COMPUTACIONALES Y TELECOMUNICACIONES,Pricing medio,Antiguos,,Mensual,,SI,SI,,UTLMACCFED
+69,Maestria,Ingeniería y Soluciones,MAESTRÍA EN DIRECCIÓN E INGENIERÍA DE SOFTWARE,Pricing medio,Antiguos,,Mensual,,SI,SI,,UTLMASOFED
+70,Maestria,Capital Humano y Transformación Organizacional,MAESTRÍA EN GESTIÓN ESTRATÉGICA DEL CAPITAL HUMANO,Pricing medio,Antiguos,,Mensual,,SI,SI,,UTLMAGEFED
+71,Maestria,Hospitalidad y Turismo,MAESTRÍA EN LOGÍSTICA Y CADENA DE SUMINISTRO,Pricing medio,Nuevos programas,,Mensual,Agosto 2025 (Bloque 0),SI,SI,,UTLMALCFED
+72,Maestria,Finanzas y Economía,MAESTRÍA EN IMPUESTOS,Pricing medio,Nuevos programas,,Mensual,Agosto 2025 (Bloque 0),SI,SI,,UTLMAIMFED
+73,Maestria,"Negocios, Innovación y Liderazgo",MAESTRÍA EN COMERCIO INTERNACIONAL,Pricing medio,Antiguos,,Mensual,,SI,SI,,UTLMACNFED
+74,Maestria,Ciencias Sociales y Humanidades,MAESTRÍA EN DESARROLLO SUSTENTABLE Y GESTIÓN AMBIENTAL,Pricing medio,Nuevos programas,,Mensual,Agosto 2025 (Bloque 0),SI,SI,,UTLMADGFED
+75,Maestria,Hospitalidad y Turismo,MAESTRÍA EN DIRECCIÓN DE EMPRESAS TURÍSTICAS,Pricing medio,Antiguos,,Mensual,,SI,SI,,UTLMADTFED
+76,Maestria,Capital Humano y Transformación Organizacional,MAESTRÍA EN GESTIÓN ORGANIZACIONAL POSITIVA,Pricing medio,Antiguos,,Mensual,,SI,SI,,UTLMAGOFED
+77,Maestria,Diseño y Comunicación,MAESTRÍA EN DISEÑO PARA MEDIOS DIGITALES,Pricing medio,Nuevos programas,,Mensual,Agosto 2025 (Bloque 0),SI,SI,,UTLMADMFED
+78,Maestria,Ingeniería y Tecnología,MAESTRÍA EN ENERGÍAS RENOVABLES Y EFICIENCIA ENERGÉTICA,Pricing medio,Nuevos programas,,Mensual,Agosto 2025 (Bloque 0),SI,SI,,UTLMAEEFED
+79,Maestria,Ciencias Sociales y Humanidades,MAESTRÍA EN RESPONSABILIDAD SOCIAL,Pricing medio,Nuevos programas,,Mensual,Agosto 2025 (Bloque 0),SI,SI,,UTLMARSFED
+80,Maestria,Gobierno y Política Pública,MAESTRÍA EN MERCADOTECNIA POLÍTICA,Pricing medio,Nuevos programas,,Mensual,Agosto 2025 (Bloque 0),SI,SI,,UTLMAKPFED
+81,Maestria,"Negocios, Innovación y Liderazgo",MAESTRÍA EN ADMINISTRACIÓN DE NEGOCIOS - MBA INTERNACIONAL,Pricing medio,Antiguos,,Mensual,,SI,SI,,#N/A
+82,Maestria,Ciencias Sociales y Humanidades,MAESTRÍA EN DERECHO PROCESAL CONSTITUCIONAL (MODALIDAD EJECUTIVA),Pricing medio,Antiguos,,Mensual,,SI,SI,,0
+83,Doctorado,Ciencias Sociales y Humanidades,DOCTORADO EN DESARROLLO HUMANO,UNAG,Antiguos,,Mensual,,,,,UNADODUESG
+84,Doctorado,Ciencias Sociales y Humanidades,DOCTORADO EN DERECHO,PRICING BAJO,Antiguos,,Mensual,,,,,UTLDODDFED
+85,Doctorado,Ingeniería y Tecnología,DOCTORADO EN GESTIÓN E INNOVACIÓN TECNOLÓGICA,PRICING MEDIO,Antiguos,,Mensual,,,,,UTLDOGIFED
+86,Doctorado,Económico-Administrativas,DOCTORADO EN ADMINISTRACIÓN ESTRATÉGICA EMPRESARIAL,PRICING MEDIO,Antiguos,,Mensual,,,,,UTLDOAEFED
+87,Licenciatura,Ingeniería y Soluciones,Licenciatura en Ingeniería Ambiental,PRICING ALTO,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,SI,UTLLIBHFED
+88,Licenciatura,Ciencias Sociales y Humanidades,Licenciatura en Educación para la Sustentabilidad,Ing robotica,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,SI,UTLLIAJFED
+89,Licenciatura,Ingeniería y Soluciones,Licenciatura en Ingeniería Robótica,Ing robotica,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,SI,UTLLIBDFED
+90,Licenciatura,Arquitectura y Urbanismo,Licenciatura en Arquitectura,Arquitectura,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,SI,UTLLIBSFED
+91,Licenciatura,Ciencias de la Salud,LICENCIATURA EN PSICOLOGÍA,UVE,Antiguos,,Mensual,,SI,SI,SI,UVELIPSESG
+92,Maestria,Ingeniería y Tecnología,Maestría en Soluciones de Inteligencia Artificial para Negocios y Servicios,Pricing medio,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,,UTLMABPFED
+93,Maestria,Ingeniería y Tecnología,Maestría en Innovación Estratégica con Inteligencia Artificial,Pricing medio,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,,UTLMABRFED
+94,Doctorado,Ingeniería y Tecnología,Doctorado en Ciberseguridad y Gestión de Riesgos Digitales,CIE DAT E IA / CIBERSEG Y GEST DE RIESGOS,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),,,,UTLDOAKFED
+95,Maestria,Finanzas y Economía,Maestría en Educación Inteligente y Diseño Instruccional con Inteligencia Artificial,Pricing medio,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,,UTLMABQFED
+96,Maestria,Ingeniería y Tecnología,Maestría en Automatización y Robótica Industrial,ARQUITECTURA DE SOFTWARE,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,,UTLMABFFED
+97,Licenciatura,Diseño y Comunicación,LICENCIATURA EN ARTE DIGITAL Y MULTIMEDIA,UNICA,Antiguos,,Mensual,,SI,SI,SI,UNILIDAESN
+98,Maestria,Ingeniería y Tecnología,Maestría en Automatización de Procesos y Análisis Predictivo,Pricing medio,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,,UTLMABMFED
+99,Licenciatura,Ciencias Sociales y Humanidades,LICENCIATURA EN MARKETING Y PUBLICIDAD,UNICA,Antiguos,,Mensual,,SI,SI,SI,UNILIMPESN
+100,Licenciatura,Ingeniería y Soluciones,LICENCIATURA EN INGENIERÍA EN LOGÍSTICA Y TRANSPORTE,PRICING MEDIO,Nuevos programas,,Mensual,Agosto 2025 (Bloque 0),SI,SI,SI,UTLLILTFED
+101,Maestria,Ingeniería y Soluciones,Maestría en Ingeniería de Datos e Infraestructura,ARQUITECTURA DE SOFTWARE,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,,UTLMABIFED
+102,Maestria,Ingeniería y Soluciones,Maestría en Arquitectura de Software,ARQUITECTURA DE SOFTWARE,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,,UTLMABJFED
+103,Maestria,Arquitectura y Urbanismo,Maestría en Valuación Inmobiliaria,Pricing medio,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,,UTLMABOFED
+104,Licenciatura,Ingeniería y Tecnología,LICENCIATURA EN INTELIGENCIA ARTIFICIAL,PRICING MEDIO,Nuevos programas,,Mensual,Agosto 2025 (Bloque 0),SI,SI,SI,UTLLIIRFED
+105,Licenciatura,"Negocios, Innovación y Liderazgo",LICENCIATURA EN EMPRENDIMIENTO,PRICING MEDIO,Nuevos programas,,Mensual,Agosto 2025 (Bloque 0),SI,SI,SI,UTLLIMPFED
+106,Licenciatura,"Negocios, Innovación y Liderazgo",LICENCIATURA EN AGRONEGOCIOS,PRICING MEDIO,Nuevos programas,,Mensual,Agosto 2025 (Bloque 0),SI,SI,SI,UTLLIAGFED
+107,Licenciatura,Ingeniería y Soluciones,LICENCIATURA EN INGENIERÍA EN ENERGÍAS RENOVABLES,PRICING MEDIO,Nuevos programas,,Mensual,Agosto 2025 (Bloque 0),SI,SI,SI,UTLLIERFED
+108,Licenciatura,Ingeniería y Soluciones,LICENCIATURA EN INGENIERÍA EN DESARROLLO DE SOFTWARE,PRICING MEDIO,Nuevos programas,,Mensual,Agosto 2025 (Bloque 0),SI,SI,SI,UTLLIIDFED
+109,Licenciatura,Diseño y Comunicación,LICENCIATURA EN DISEÑO Y ANIMACIÓN DIGITAL,PRICING MEDIO,Nuevos programas,,Mensual,Agosto 2025 (Bloque 0),SI,SI,SI,UTLLIADFED
+110,Licenciatura,Diseño y Comunicación,LICENCIATURA EN DIRECCIÓN DE ARTE,PRICING MEDIO,Nuevos programas,,Mensual,Agosto 2025 (Bloque 0),SI,SI,SI,UTLLIDAFED
+111,Maestria,"Negocios, Innovación y Liderazgo",Maestría en Alta Dirección y Gobierno Corporativo,PRICING MEDIO,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,,UTLMABVFED
+112,Maestria,Ingeniería y Tecnología,Maestría en Desarrollo de Videojuegos y Realidad Extendida,ARQUITECTURA DE SOFTWARE,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,,UTLMABGFED
+113,Licenciatura,Ingeniería y Tecnología,LICENCIATURA EN SEGURIDAD INFORMÁTICA,PRICING MEDIO,Nuevos programas,,Mensual,Agosto 2025 (Bloque 0),SI,SI,SI,UTLLISIFED
+114,Licenciatura,Diseño y Comunicación,LICENCIATURA EN COMUNICACIÓN CORPORATIVA,UNICA,Antiguos,,Mensual,,SI,SI,SI,UNILICVESN
+115,Licenciatura,Ciencias Sociales y Humanidades,LICENCIATURA EN MEDIOS DIGITALES,UNICA,Antiguos,,Mensual,,SI,SI,SI,UNILIMIESN
+116,Maestria,Ciencias Sociales y Humanidades,Maestría en Innovación Educativa y Diseño Instruccional,PRICING ALTO,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,SI,,UTLMAAZFED
+117,Licenciatura,Ingeniería y Soluciones,Licenciatura en Ingeniería en Sistemas Inteligentes,PRICING ALTO,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),SI,,,UTLLIBIFED
+118,Doctorado,Económico-Administrativas,DOCTORADO EN EDUCACIÓN,PRICING ALTO,Antiguos,,Mensual,,,,,UTLDOEDFED
+119,Doctorado,Ingeniería y Tecnología,Doctorado en Ciencia de Datos e Inteligencia Artificial,CIE DAT E IA / CIBERSEG Y GEST DE RIESGOS,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),,,,UTLDOAMFED
+120,Doctorado,Ingeniería y Tecnología,Doctorado en Ciberseguridad de Sistemas Autónomos,CIE DAT E IA / CIBERSEG Y GEST DE RIESGOS,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),,,,UTLDOANFED
+121,Doctorado,Ingeniería y Tecnología,Doctorado en Urbanismo,PRICING MEDIO,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),,,,UTLDOAIFED
+122,Doctorado,Económico-Administrativas,Doctorado en Alta Dirección y Gobierno Corporativo,CIE DAT E IA / CIBERSEG Y GEST DE RIESGOS,Nuevos programas,,Mensual,Abril 2026 (Bloque 1),,,,UTLDOAAFED
+123,Diplomado,Económico-Administrativas,Diplomado en Dirección de operaciones,6 meses,Antiguos,6 meses,Mensual,,,,,UTSDIDONAS
+124,Diplomado,Económico-Administrativas,Diplomado en Administración de proyectos,6 meses,Antiguos,6 meses,Bimestral,,,,,UTSDIPRNAS
+125,Diplomado,Económico-Administrativas,Diplomado en Administración financiera,6 meses,Antiguos,6 meses,Bimestral,,,,,UTSDIAFNAS
+126,Diplomado,Ciencias Sociales y Humanidades,Diplomado en Soft skills y habilidades gerenciales,6 meses,Antiguos,6 meses,Bimestral,,,,,UTSDISHNAS
+127,Diplomado,Económico-Administrativas,Diplomado en Coaching organizacional,6 meses,Antiguos,6 meses,Bimestral,,,,,UTSDICONAS
+128,Diplomado,Ciencias Sociales y Humanidades,Diplomado en Pensamiento crítico e innovación,6 meses,Antiguos,6 meses,Trimestral,,,,,UTSDIPCNAS
+129,Diplomado,Económico-Administrativas,Diplomado en Desarrollo e-learning,6 meses,Antiguos,6 meses,Trimestral,,,,,UTSDIDENAS
+130,Diplomado,Ciencias Sociales y Humanidades,Diplomado en Diversidad y equidad de género,6 meses,Antiguos,6 meses,Trimestral,,,,,UTSDIDGNAS
+131,Diplomado,Ingeniería y Tecnología,Diplomado en Project management,6 meses,Antiguos,6 meses,Bimestral,,,,,UTSDIPMNAS
+132,Diplomado,Ingeniería y Tecnología,Diplomado en Ciencias de datos e inteligencia artificial,8 meses,Antiguos,8 meses,Bimestral,,,,,UTSDIIANAS
+133,Diplomado,Ingeniería y Tecnología,Diplomado en Inteligencia artificial aplicada,8 meses,Antiguos,8 meses,Bimestral,,,,,UTSDIINNAS
+134,Diplomado,Económico-Administrativas,Diplomado en Estrategia e innovación de negocios,6 meses,Antiguos,6 meses,Bimestral,,,,,UTSDIEINAS
+135,Diplomado,Económico-Administrativas,Diplomado en Contabilidad y Gestión financiera,8 meses,Antiguos,8 meses,Bimestral,,,,,UTSDICFNAS
+136,Diplomado,Ciencias Sociales y Humanidades,Diplomado en Gestión de Experiencias de Aprendizaje en Ambientes Virtuales,8 meses,Antiguos,8 meses,Trimestral,,,,,UTSDIGENAS
+137,Diplomado,Ciencias Sociales y Humanidades,Diplomado en Diseño y Evaluación en Entornos Digitales,8 meses,Antiguos,8 meses,Trimestral,,,,,UTSDIEENAS
+138,Diplomado,Económico-Administrativas,Diplomado en Análisis Económico Integral,8 meses,Antiguos,8 meses,Bimestral,,,,,UTSDIAENAS
+139,Diplomado,Económico-Administrativas,Diplomado en Métodos Cuantitativos para la Toma de Decisiones,8 meses,Antiguos,8 meses,Trimestral,,,,,UTSDIMCNAS
+140,Diplomado,Ingeniería y Tecnología,Diplomado en Programación y Tecnología de Redes,8 meses,Antiguos,8 meses,Bimestral,,,,,UTSDIPTNAS
+141,Diplomado,Ingeniería y Tecnología,Diplomado en Diseño y Desarrollo de Software,8 meses,Antiguos,8 meses,Trimestral,,,,,UTSDIDDNAS
+142,Diplomado,Ingeniería y Tecnología,Diplomado en Gestión de Calidad y Mantenimiento de Software ,8 meses,Antiguos,8 meses,Bimestral,,,,,UTSDIGCNAS
+143,Diplomado,Ingeniería y Tecnología,Diplomado en Tecnologías de la Información Aplicadas a la Logística y el Transporte,8 meses,Antiguos,8 meses,Bimestral,,,,,UTSDITINAS
+144,Diplomado,Ingeniería y Tecnología,Diplomado en Estrategias y Operaciones de Transporte,8 meses,Antiguos,8 meses,Bimestral,,,,,UTSDIEONAS
+145,Diplomado,Ingeniería y Tecnología,Diplomado en Principios en el Arte Digital y Animación,6 meses,Antiguos,6 meses,Bimestral,,,,,UTSDIPDNAS
+146,Diplomado,Ciencias Sociales y Humanidades,Diplomado en Gestión curricular en educación a distancia,6 meses,Antiguos,6 meses,Bimestral,,,,,UTSDIDTNAS
+147,Diplomado,Hospitalidad y Turismo,Diplomado en Gestión Sostenible de la Cadena de Suministro,6 meses,Antiguos,6 meses,Bimestral,,,,,UTSDISCNAS
+148,Diplomado,Ingeniería y Tecnología,Diplomado en Animación Digital y Creación de Contenidos,8 meses,Antiguos,8 meses,Bimestral,,,,,UTSDILCNAS
+149,Diplomado,Ingeniería y Tecnología,Diplomado en Desarrollo de Medios Interactivos,8 meses,Antiguos,8 meses,Bimestral,,,,,UTSDIMINAS
+150,Diplomado,Ingeniería y Tecnología,Diplomado en Creatividad y Comunicación Digital,8 meses,Antiguos,8 meses,Bimestral,,,,,UTSDIVCNAS
+151,Diplomado,Ingeniería y Tecnología,Diplomado en Fuentes y tecnologías de Energías Sostenibles,8 meses,Antiguos,8 meses,Bimestral,,,,,UTSDITENAS
+152,Diplomado,Ingeniería y Tecnología,Diplomado en Gestión y eficiencia de sistemas energéticos,8 meses,Antiguos,6 meses,Bimestral,,,,,UTSDIESNAS
+153,Diplomado,Ingeniería y Tecnología,Diplomado en Transición Energética Sostenible,6 meses,Antiguos,6 meses,Bimestral,,,,,UTSDITSNAS
+154,Diplomado,Ciencias de la Salud,Diplomado en Mindfulness para los Individuos y las Familias,6 meses,Antiguos,6 meses,Bimestral,,,,,UTSDIMFNAS
+155,Diplomado,Ciencias de la Salud,Diplomado en Atención al adulto mayor,6 meses,Antiguos,6 meses,Bimestral,,,,,UTSDIAMNAS
+156,Diplomado,Ciencias de la Salud,Diplomado en Nutrición especial en enfermedades metabólicas,6 meses,Antiguos,6 meses,Bimestral,,,,,UTSDINUNAS
+157,Diplomado,Ciencias Sociales y Humanidades,Diplomado en Tanatología,6 meses,Antiguos,6 meses,Mensual ,,,,,UTSDITANAS
+158,Diplomado,Ciencias de la Salud,"Diplomado en Actualización en Gineco-obstetricia para el 
+primer y segundo nivel de atención",6 meses,Antiguos,6 meses,Trimestral,,,,,UTSDIGONAS
+159,Diplomado,Ciencias de la Salud,Diplomado en Actualización en urgencias,6 meses,Antiguos,6 meses,Trimestral,,,,,UTSDIUMNAS
+160,Diplomado,Económico-Administrativas,Diplomado en Administración de servicios de salud,6 meses,Antiguos,6 meses,Trimestral,,,,,UTSDISSNAS
+161,Diplomado,Ciencias de la Salud,Diplomado en Educación en ciencias de la salud,6 meses,Antiguos,6 meses,Bimestral,,,,,UTSDICSNAS
+162,Diplomado,Ciencias de la Salud,Diplomado en Pruebas Psicológicas para Adultos,6 meses,Antiguos,6 meses,Bimestral,,,,,UTSDIPPNAS
+163,Diplomado,Ciencias de la Salud,Diplomado en Rehabilitación del adulto mayor,6 meses,Antiguos,6 meses,Trimestral,,,,,UTSDIRANAS
+164,Licenciaturas,Ingeniería y Tecnología,LICENCIATURA EN DISEÑO Y PRODUCCIÓN DE VIDEOJUEGOS,Ing robotica,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLLIAIFED
+165,Licenciaturas,Económico-Administrativas,"Licenciatura en Comercialización y Dirección de Marcas",PRICING MEDIO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLLIBXFED
+166,Licenciaturas,Ingeniería y Tecnología,Licenciatura en Tecnologías Interactivas y Experiencia e Interfaz de Usuario,PRICING MEDIO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLLIBGFED
+167,Licenciaturas,Económico-Administrativas,Licenciatura en Consultoría y Desarrollo Empresarial,PRICING ALTO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLLIAOFED
+168,Licenciaturas,Económico-Administrativas,"Licenciatura en Comercialización Turística y Mercados Digitales",PRICING BAJO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLLICBFED
+169,Licenciaturas,Económico-Administrativas,"Licenciatura en Comercio Internacional",PRICING ALTO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLLIABFED
+170,Licenciaturas,Económico-Administrativas,"Licenciatura en Publicidad y Medios",PRICING MEDIO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLLIAUFED
+171,Licenciaturas,Económico-Administrativas,"Licenciatura en Administración de Negocios Gastronómicos",PRICING BAJO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLLIBZFED
+172,Licenciaturas,"Arquitectura, Diseño y Comunicación","Licenciatura en Comunicación y Manejo de Redes Sociales",PRICING MEDIO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLLIAWFED
+173,Licenciaturas,"Arquitectura, Diseño y Comunicación","Licenciatura en Comunicación y Periodismo",PRICING MEDIO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLLICGFED
+174,Licenciaturas,Ingeniería y Tecnología,"Licenciatura en Ingeniería en Automatización Industrial",PRICING MEDIO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLLIBEFED
+175,Maestrias,Económico-Administrativas,"Maestría en Inteligencia Financiera y Detección de Fraudes
+",PRICING ALTO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLMAACFED
+176,Maestrias,Económico-Administrativas,"Maestría en Administración de Riesgos Financieros",PRICING ALTO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLMABSFED
+177,Maestrias,Económico-Administrativas,"Maestría en Innovación en Modelos de Negocio",PRICING ALTO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLMABTFED
+178,Maestrias,Económico-Administrativas,"Maestría en Finanzas Sustentables y Proyectos de Inversión",PRICING ALTO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLMAAKFED
+179,Maestrias,Económico-Administrativas,"Maestría en Economía Digital y Nuevas Formas de Mercado",PRICING ALTO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLMAAEFED
+180,Maestrias,Económico-Administrativas,"Maestría en Asesoría Empresarial Estratégica",PRICING ALTO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLMAAHFED
+181,Maestrias,Económico-Administrativas,"Maestría en Auditoría Financiera",PRICING ALTO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLMAAGFED
+182,Maestrias,Económico-Administrativas,"Maestría en Finanzas Públicas y Gestión Gubernamental",PRICING ALTO,Nuevos programas,,,Junio 2026 (Bloque 2),,,,UTLMAAJFED
+183,Maestrias,Económico-Administrativas,"Maestría en Economía Sustentable y Empresas Responsables",PRICING ALTO,Nuevos programas,,,Junio 2026 (Bloque 2),,,,UTLMAADFED
+184,Maestrias,Económico-Administrativas,"Maestría en Estrategia de Comercio Internacional y Aduanas",PRICING ALTO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLMAAMFED
+185,Maestrias,Económico-Administrativas,"Maestría en Mercadotecnia Gastronómica y de Destinos",PRICING ALTO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLMAAUFED
+186,Maestrias,Económico-Administrativas,"Maestría en Transformación Digital Empresarial",PRICING ALTO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLMAAOFED
+187,Maestrias,"Arquitectura, Diseño y Comunicación","Maestría en Diseño de Interacción y Experiencia de Usuario",PRICING ALTO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLMABUFED
+188,Maestrias,Económico-Administrativas,"Maestría en Transformación Digital Empresarial",PRICING ALTO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLMAAOFED
+189,Maestrias,Económico-Administrativas,"Maestría en Gestión del Cambio y Transformación Organizacional
+",PRICING BAJO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLMAAAFED
+190,Maestrias,Económico-Administrativas,"Maestría en Gestión del Talento y Bienestar Organizacional",PRICING MEDIO,Nuevos programas,,,Junio 2026 (Bloque 2),,,,UTLMAAFFED
+191,Maestrias,Económico-Administrativas,Maestría en Tecnología para la Gestión Pública y Gobierno Digital,PRICING MEDIO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLMABEFED
+192,Maestrias,Ingeniería y Tecnología,"Maestría en Infraestructura y Cómputo en la Nube",PRICING MEDIO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLMABHFED
+193,Maestrias,Ingeniería y Tecnología,"Maestría en Interfaces Inteligentes y Tecnología Inmersiva",PRICING ALTO,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLMABLFED
+194,Doctorado,Derecho y Ciencias Políticas,"Doctorado en Justicia Digital y Ciberderecho",CIE DAT E IA / CIBERSEG Y GEST DE RIESGOS,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLDOAJFED
+195,Doctorado,Económico-Administrativas,"Doctorado en Economía Pública, Fiscalidad y Gobernanza Financiera",CIE DAT E IA / CIBERSEG Y GEST DE RIESGOS,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLDOAPFED
+196,Doctorado,Económico-Administrativas,"Doctorado en Transformación Digital Organizacional
+",CIE DAT E IA / CIBERSEG Y GEST DE RIESGOS,Nuevos programas,,,Junio 2026 (Bloque 2),SI,SI,,UTLDOABFED
+197,Licenciaturas,Económico-Administrativas,Licenciatura en Gestión Empresarial y Logística,PRICING MEDIO,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLLIBTFED
+198,Licenciaturas,Económico-Administrativas,Licenciatura en Dirección de Operaciones Empresariales,PRICING MEDIO,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLLIAQFED
+199,Licenciaturas,Económico-Administrativas,Licenciatura en Dirección Hotelera y Experiencia del Cliente,PRICING MEDIO,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLLIALFED
+200,Licenciaturas,Económico-Administrativas,Licenciatura en Planeación y Evaluación de Proyectos,PRICING MEDIO,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLLIAKFED
+201,Licenciaturas,Económico-Administrativas,Licenciatura en Gastronomía Sustentable y Cultura Alimentaria,PRICING MEDIO,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLLIBYFED
+202,Licenciaturas,Económico-Administrativas,Licenciatura en Administración Pública y Políticas Económicas,PRICING MEDIO,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLLIAEFED
+203,Licenciaturas,Ciencias Sociales y Humanidades,Licenciatura en Derechos Humanos y Justicia Social,PRICING MEDIO,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLLIBAFED
+204,Licenciaturas,Ciencias Sociales y Humanidades,Licenciatura en Gestión de Políticas y Gobierno,PRICING MEDIO,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLLIAZFED
+205,Licenciaturas,Ciencias Sociales y Humanidades,Licenciatura en Seguridad Pública y Gobernabilidad Democrática,PRICING MEDIO,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLLIBBFED
+206,Licenciaturas,Ciencias Sociales y Humanidades,Licenciatura en Lenguas Extranjeras,PRICING MEDIO,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLLIBRFED
+207,Licenciaturas,Ciencias Sociales y Humanidades,Licenciatura en Estudios Socioculturales,PRICING MEDIO,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLLIAXFED
+208,Licenciaturas,Ciencias Sociales y Humanidades,Licenciatura en Lengua y Literatura,PRICING MEDIO,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLLIBQFED
+209,Licenciaturas,Ciencias Sociales y Humanidades,Licenciatura en Antropología y Diversidad Cultural,PRICING MEDIO,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLLIAYFED
+210,Maestrias,Ciencias Sociales y Humanidades,Maestría en Educación Inclusiva y Diversidad,PRICING BAJO,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLMAAYFED
+211,Maestrias,Hospitalidad y Turismo,Maestría en Turismo Digital y Gestión de Plataformas,ARQUITECTURA DE SOFTWARE,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLMABXFED
+212,Maestrias,Ingeniería y Tecnología,Maestría en Gestión de la Calidad y Procesos Industriales,PRICING ALTO,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLMAALFED
+213,Maestrias,Hospitalidad y Turismo,Maestría en Dirección Estratégica de Hospitalidad y Bienestar,ARQUITECTURA DE SOFTWARE,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLMABWFED
+214,Maestrias,Hospitalidad y Turismo,Maestría en Organización de Eventos Corporativos y Convenciones,PRICING BAJO,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLMAAVFED
+215,Maestrias,Ingeniería y Tecnología,Maestría en Evaluación de Riesgos Tecnológicos y Resiliencia Operativa,ARQUITECTURA DE SOFTWARE,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLMABKFED
+216,Maestrias,Ingeniería y Tecnología,Maestría en Gestión de Riesgos Ambientales,ARQUITECTURA DE SOFTWARE,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLMAAQFED
+217,Maestrias,Hospitalidad y Turismo,Maestría en Planeación Turística y Desarrollo Regional,ARQUITECTURA DE SOFTWARE,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLMABYFED
+218,Maestrias,Ciencias Sociales y Humanidades,Maestría en Historia Pública y Educación Patrimonial,ARQUITECTURA DE SOFTWARE,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLMABNFED
+219,Maestrias,Ciencias Sociales y Humanidades,Maestría en Análisis Político y Opinión Pública,ARQUITECTURA DE SOFTWARE,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLMABDFED
+220,Maestrias,Ciencias Sociales y Humanidades,Maestría en Comunicación Social y Participación Ciudadana,ARQUITECTURA DE SOFTWARE,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLMABAFED
+221,Maestrias,Ciencias Sociales y Humanidades,Maestría en Políticas Sociales y Bienestar Social,PRICING BAJO,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLMAAWFED
+222,Maestrias,Ciencias Sociales y Humanidades,Maestría en Justicia Social y Transformación Comunitaria,PRICING BAJO,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLMAAXFED
+223,Maestrias,Ciencias Sociales y Humanidades,Maestría en Filosofía y Pensamiento Crítico,ARQUITECTURA DE SOFTWARE,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLMABBFED
+224,Doctorado,Económico-Administrativas,Doctorado en Desarrollo Sostenible y Gestión Ambiental,PRICING BAJO,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLDOALFED
+225,Doctorado,Económico-Administrativas,Doctorado en Calidad y Sostenibilidad Organizacional,CIE DAT E IA / CIBERSEG Y GEST DE RIESGOS,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLDOAOFED
+226,Doctorado,Ciencias Sociales y Humanidades,Doctorado en Evaluación de Políticas Sociales y Programas Públicos,CIE DAT E IA / CIBERSEG Y GEST DE RIESGOS,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLDOAFFED
+227,Doctorado,Ciencias Sociales y Humanidades,Doctorado en Políticas Públicas y Gobernanza,PRICING BAJO,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLDOAQFED
+228,Doctorado,Ciencias Sociales y Humanidades,Doctorado en Estudios Interculturales y Diversidad Humana,CIE DAT E IA / CIBERSEG Y GEST DE RIESGOS,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLDOAGFED
+229,Doctorado,Ciencias Sociales y Humanidades,Doctorado en Estudios Interdisciplinarios sobre América Latina,CIE DAT E IA / CIBERSEG Y GEST DE RIESGOS,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLDOAHFED
+230,Doctorado,Ciencias Sociales y Humanidades,Doctorado en Liderazgo Educativo y Gestión Escolar,PRICING BAJO,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLDOADFED
+231,Doctorado,Ciencias Sociales y Humanidades,Doctorado en Tecnología Educativa e Innovación Didáctica,PRICING BAJO,Nuevos programas,,,Julio 2026 (Bloque 3),SI,SI,,UTLDOACFED
+232,Especialidad,,Especialidad en Gastronomía y Gestión de la enseñanza,CLAUSTRO,Nuevos programas,,,Julio 2026 (Bloque 3),,,,CLAESGEFED
+233,Maestrias,,Maestría en Psicopedagogía Clínica Infantil,CECIP,Nuevos programas,,,Julio 2026 (Bloque 3),,,,
+234,Maestrias,,Maestría en Psicología Clínica y Psicoterapia Psicoanalítica,CECIP,Nuevos programas,,,Julio 2026 (Bloque 3),,,,

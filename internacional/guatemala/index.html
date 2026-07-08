@@ -1,0 +1,638 @@
+<title>Calculadora de Precios UTEL — Guatemala</title>
+<style>
+:root{--bg:#f4f5f7;--sf:#fff;--s2:#f0f1f4;--bd:rgba(0,0,0,.09);--ac:#06ba06;--ac2:#1c2d1a;--tx:#1c2d1a;--mu:#6b7280;--hot:#dc2626;--warm:#d97706;--cold:#2563eb;--gr:#06ba06;}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:'Segoe UI',system-ui,sans-serif;min-height:100vh}
+#ls{min-height:100vh;display:flex;align-items:center;justify-content:center}
+.lb{background:var(--sf);border:1px solid var(--bd);border-radius:16px;padding:48px 40px;width:100%;max-width:360px;text-align:center;box-shadow:0 4px 24px rgba(0,0,0,.07)}
+.ll{font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--ac);text-transform:uppercase;margin-bottom:8px}
+.lt{font-size:22px;font-weight:600;margin-bottom:4px}
+.ls2{font-size:13px;color:var(--mu);margin-bottom:32px}
+.lb input{width:100%;background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:12px 16px;font-size:15px;color:var(--tx);outline:none;margin-bottom:12px;letter-spacing:.15em;text-align:center}
+.lb input:focus{border-color:var(--ac)}
+.lb button{width:100%;background:var(--ac);color:#fff;border:none;border-radius:8px;padding:12px;font-size:15px;font-weight:600;cursor:pointer}
+.lb button:hover{opacity:.88}
+.le{font-size:12px;color:var(--hot);margin-top:10px;min-height:18px}
+.la{font-size:11px;color:var(--mu);margin-top:4px}
+#app{display:none}
+header{background:var(--sf);border-bottom:1px solid var(--bd);padding:14px 24px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10}
+.logo{font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--ac);text-transform:uppercase}
+.ht{font-size:14px;font-weight:500}
+.out{font-size:12px;color:var(--mu);background:none;border:1px solid var(--bd);border-radius:6px;padding:5px 12px;cursor:pointer}
+.main{padding:24px;max-width:980px;margin:0 auto}
+.filters{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin-bottom:14px}
+.fg label{font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);display:block;margin-bottom:5px}
+.fg select{width:100%;background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:8px 10px;font-size:13px;color:var(--tx);outline:none;cursor:pointer}
+.fg select:focus{border-color:var(--ac)}
+.tw{overflow-x:auto;border-radius:10px;border:1px solid var(--bd);margin-bottom:10px}
+table{width:100%;border-collapse:collapse;font-size:13px;min-width:460px}
+thead th{background:var(--s2);padding:10px 14px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--mu);border-bottom:1px solid var(--bd)}
+tbody tr{border-bottom:1px solid var(--bd)}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:#f8f8fb}
+td{padding:9px 14px;vertical-align:middle}
+.tm{color:var(--mu);font-size:12px}
+.tp{font-weight:600;font-size:15px;color:var(--ac2)}
+.tp-acc{font-weight:600;font-size:15px;color:var(--gr)}
+.tc{font-size:11px;color:var(--mu);font-family:monospace}
+.bi{font-size:12px;color:var(--mu);background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:10px 14px;display:flex;gap:20px;flex-wrap:wrap;margin-bottom:14px}
+.bi strong{color:var(--tx)}
+.acc-section{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.acc-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mu);margin-bottom:12px}
+.acc-group{margin-bottom:12px}
+.acc-group:last-child{margin-bottom:0}
+.acc-group-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mu);margin-bottom:6px;opacity:.7}
+.acc-chips{display:flex;flex-wrap:wrap;gap:7px}
+.chip{display:flex;align-items:center;gap:5px;padding:5px 10px 5px 8px;border-radius:8px;border:1.5px solid var(--bd);background:var(--s2);font-size:12px;user-select:none}
+.chip.included{border-color:#06ba06;background:rgba(6,186,6,.08);color:#166534;cursor:default}
+.chip.selected{border-color:var(--ac);background:#edfcd8;color:var(--ac2);cursor:pointer}
+.chip.clickable{cursor:pointer}
+.chip.clickable:hover{border-color:var(--ac);background:#edfcd8}
+.chip.blocked{opacity:.45;cursor:not-allowed}
+.chip-check{width:15px;height:15px;border-radius:4px;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:9px;flex-shrink:0}
+.chip.included .chip-check,.chip.selected .chip-check{background:currentColor}
+.chip.included .chip-check::after{content:"✓";color:#fff;font-size:9px}
+.chip.selected .chip-check::after{content:"✓";color:#fff;font-size:9px}
+.chip.blocked .chip-check::after{content:"✕";font-size:9px}
+.chip-name{font-weight:500}
+.chip-price{font-size:11px;opacity:.7}
+.total-section{background:var(--sf);border:1px solid var(--bd);border-radius:10px;padding:14px 16px;margin-bottom:14px}
+.total-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--mu);margin-bottom:10px}
+.total-row{display:flex;justify-content:space-between;font-size:13px;margin-bottom:5px}
+.total-row.base{color:var(--tx)}
+.total-row.acc-line{color:var(--mu)}
+.total-row.final{border-top:1px solid var(--bd);padding-top:8px;margin-top:4px;font-weight:700;font-size:16px;color:var(--ac2)}
+.wm{text-align:center;margin-top:32px;font-size:11px;color:rgba(0,0,0,.15);letter-spacing:.1em}
+.dl-btn{display:flex;align-items:center;gap:6px;background:var(--ac);color:#fff;border:none;border-radius:8px;padding:8px 14px;font-size:12px;font-weight:600;cursor:pointer;margin-bottom:14px;transition:opacity .15s}
+.dl-btn:hover{opacity:.88}
+.ss-wrap{position:relative}
+.ss-input{width:100%;background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:8px 28px 8px 10px;font-size:13px;color:var(--tx);outline:none;cursor:text;box-sizing:border-box}
+.ss-input:focus{border-color:var(--ac)}
+.ss-arrow{position:absolute;right:8px;top:50%;transform:translateY(-50%);color:var(--mu);font-size:10px;cursor:pointer;user-select:none}
+.ss-dropdown{position:absolute;top:100%;left:0;right:0;background:var(--sf);border:1px solid var(--bd);border-radius:8px;box-shadow:0 4px 16px rgba(0,0,0,.12);z-index:100;max-height:220px;overflow-y:auto;display:none}
+.ss-dropdown.open{display:block}
+.ss-option{padding:8px 12px;font-size:13px;cursor:pointer;color:var(--tx)}
+.ss-option:hover,.ss-option.active{background:var(--s2)}
+.ss-option.selected{color:var(--ac);font-weight:500}
+.ss-empty{padding:8px 12px;font-size:12px;color:var(--mu);font-style:italic}
+.notice{font-size:12px;color:var(--mu);background:var(--sf);border:1px dashed var(--bd);border-radius:8px;padding:12px 14px;margin-bottom:14px;font-style:italic}
+@media print{body{background:#fff!important}header,.dl-btn{display:none!important}}
+</style>
+<div id="ls">
+  <div class="lb">
+    <div class="ll">UTEL</div>
+    <div class="lt">Calculadora Internacional</div>
+    <div class="ls2">Guatemala</div>
+    <input type="password" id="pi" placeholder="Contraseña" autocomplete="off" onkeydown="if(event.key==='Enter')tryLogin()">
+    <button onclick="tryLogin()">Ingresar</button>
+    <div class="le" id="em"></div>
+    <div class="la" id="am"></div>
+  </div>
+</div>
+
+<div id="app">
+  <header>
+    <div class="logo">UTEL · Guatemala</div>
+    <div class="ht">Calculadora de Precios</div>
+    <button class="out" onclick="logout()">Salir</button>
+  </header>
+  <div class="main">
+    <div class="filters">
+      <div class="fg">
+        <label>Carrera</label>
+        <select id="selCarrera" onchange="onCarreraChange()"></select>
+      </div>
+      <div class="fg">
+        <label>Jornada</label>
+        <select id="selJornada" onchange="onJornadaChange()"></select>
+      </div>
+      <div class="fg">
+        <label>Antigüedad del lead</label>
+        <select id="selAntig" onchange="onAntigChange()"></select>
+      </div>
+      <div class="fg" id="fgEqusa" style="display:none">
+        <label>¿Con equivalencia de título en USA?</label>
+        <select id="selEqusa" onchange="onEqusaChange()">
+          <option value="false">No</option>
+          <option value="true">Sí</option>
+        </select>
+      </div>
+    </div>
+
+    <div id="resultado" style="display:none">
+      <div class="bi" id="biInfo"></div>
+
+      <button class="dl-btn" onclick="window.print()">⬇ Descargar / Imprimir resumen</button>
+
+      <div class="tw">
+        <table>
+          <thead>
+            <tr><th>Periodo</th><th>Colegiatura</th><th>Accesorios</th><th>Total</th><th>Paquete</th></tr>
+          </thead>
+          <tbody id="tbodyPagos"></tbody>
+        </table>
+      </div>
+
+      <div id="accWrap"></div>
+
+      <div class="total-section" id="totalSection" style="display:none">
+        <div class="total-title">Resumen</div>
+        <div id="totalRows"></div>
+      </div>
+    </div>
+
+    <div id="sinDatos" class="notice" style="display:none">No disponible para esta combinación.</div>
+
+    <div class="wm">UTEL · Guatemala</div>
+  </div>
+</div>
+
+<script>
+/* ==================== LOGIN ==================== */
+var PWD='UTELGTM2026*', MAX=5, LK=600000;
+var BUILD='2026070801';
+function ga(){var d=JSON.parse(localStorage.getItem('ua')||'{}');if(d.l&&Date.now()<d.l)return{c:MAX,l:d.l};if(d.l){localStorage.removeItem('ua');return{c:0}}return{c:d.c||0};}
+function rf(){var d=ga(),n=(d.c||0)+1,o={c:n};if(n>=MAX)o.l=Date.now()+LK;localStorage.setItem('ua',JSON.stringify(o));return n;}
+function tryLogin(){
+  var a=ga();
+  if(a.l){g('em').textContent='Bloqueado '+Math.ceil((a.l-Date.now())/60000)+' min.';return}
+  var p=g('pi').value.trim();
+  if(!p)return;
+  if(p===PWD){
+    localStorage.removeItem('ua');
+    localStorage.setItem('ok', Date.now() + 259200000); // 72 horas
+    localStorage.setItem('build', BUILD);
+    g('ls').style.display='none'; g('app').style.display='block'; init();
+  } else {
+    var n=rf(),r=MAX-n;
+    g('em').textContent='Contraseña incorrecta.';
+    g('am').textContent=r>0?r+' intento'+(r>1?'s':'')+' restante'+(r>1?'s':''):'Bloqueado 10 min.';
+    g('pi').value='';
+  }
+}
+function logout(){localStorage.removeItem('ok');g('app').style.display='none';g('ls').style.display='flex';g('pi').value='';}
+window.addEventListener('load',function(){
+  var _storedBuild=localStorage.getItem('build');
+  if(_storedBuild!==BUILD){localStorage.setItem('build', BUILD); localStorage.removeItem('ok');}
+  var _ok=parseInt(localStorage.getItem('ok')||'0');
+  if(_ok && Date.now()<_ok){g('ls').style.display='none';g('app').style.display='block';init();}
+  else {g('ls').style.display='flex';g('app').style.display='none';}
+});
+function g(id){return document.getElementById(id)}
+
+/* ==================== DATOS (solo de este país) ==================== */
+var CATALOGO = [{"nombre": "LICENCIATURA EN PEDAGOGÍA", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN INGENIERÍA INDUSTRIAL", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN CRIMINOLOGÍA Y CRIMINALÍSTICA", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN DERECHO", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN ADMINISTRACIÓN", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN INGENIERÍA INDUSTRIAL Y ADMINISTRACIÓN", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN ADMINISTRACIÓN DE RECURSOS HUMANOS", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN CONTADURÍA Y FINANZAS", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN NEGOCIOS INTERNACIONALES", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN CONTADURÍA PÚBLICA", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN PSICOLOGÍA ORGANIZACIONAL", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN ADMINISTRACIÓN DE NEGOCIOS", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN ADMINISTRACIÓN Y FINANZAS", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN ADMINISTRACIÓN DE EMPRESAS TURÍSTICAS", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN CIENCIAS POLÍTICAS Y ADMINISTRACIÓN PÚBLICA", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN ADMINISTRACIÓN DE VENTAS", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN COMUNICACIÓN", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN DESARROLLO SUSTENTABLE Y ECOTURISMO", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN MERCADOTECNIA", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN ADMINISTRACIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN ECONOMÍA Y FINANZAS", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN DERECHO INTERNACIONAL", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN DERECHO EMPRESARIAL", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN TECNOLOGÍA EDUCATIVA", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN COMUNICACIÓN DIGITAL", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN COMUNICACIÓN ORGANIZACIONAL", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Ciberseguridad y Riesgos en Inteligencia Artificial", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Innovación y Emprendimiento con Inteligencia Artificial", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Inteligencia Artificial y Ciencia de Datos", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Inteligencia Artificial en Educación", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Ingeniería en Ciencias de Datos e Inteligencia Analítica", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Ingeniería en Programación en la Nube", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Software para Entretenimiento Digital", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Finanzas y Banca", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Innovación y Transformación de Negocios", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Finanzas y Estrategia Fiscal", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Estrategia y Transformación de Negocios", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Ingeniería en Tecnología de Videojuegos y Realidad Virtual", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Comercio Electrónico y Negocios Digitales", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Tecnologías Interactivas y Virtuales", "nivel": "Licenciatura", "tier": null}, {"nombre": "MAESTRÍA EN EDUCACIÓN Y DOCENCIA", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN CONCIENCIA PLENA APLICADA", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN GESTIÓN DIRECTIVA DE INSTITUCIONES EN SALUD", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN DERECHO PROCESAL Y JUICIOS ORALES", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN TECNOLOGÍA EDUCATIVA", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN CIENCIA DE DATOS PARA NEGOCIOS", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN ADMINISTRACIÓN PÚBLICA", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN INGENIERÍA Y TECNOLOGÍA AMBIENTAL", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN ADMINISTRACIÓN DE RECURSOS HUMANOS", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN DIRECCIÓN DE VENTAS", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN MERCADOTECNIA DIGITAL Y COMERCIO ELECTRÓNICO", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN DERECHO PROCESAL PENAL", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN DERECHOS HUMANOS", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN ADMINISTRACIÓN DE INSTITUCIONES EDUCATIVAS", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN COACHING INTEGRAL Y ORGANIZACIONAL", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN DIRECCIÓN DE PROYECTOS DE INNOVACIÓN", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN ADMINISTRACIÓN EN MERCADOTECNIA ESTRATÉGICA", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN DIRECCIÓN DE NEGOCIOS DE ALIMENTOS Y BEBIDAS", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN ADMINISTRACIÓN DE TECNOLOGÍAS DE LA INFORMACIÓN", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN FINANZAS", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN DERECHO PROCESAL CONSTITUCIONAL", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN CIBERSEGURIDAD", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN ADMINISTRACIÓN DE NEGOCIOS DEPORTIVOS", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN CIENCIAS COMPUTACIONALES Y TELECOMUNICACIONES", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN DIRECCIÓN E INGENIERÍA DE SOFTWARE", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN GESTIÓN ESTRATÉGICA DEL CAPITAL HUMANO", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN LOGÍSTICA Y CADENA DE SUMINISTRO", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN IMPUESTOS", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN COMERCIO INTERNACIONAL", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN DESARROLLO SUSTENTABLE Y GESTIÓN AMBIENTAL", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN DIRECCIÓN DE EMPRESAS TURÍSTICAS", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN GESTIÓN ORGANIZACIONAL POSITIVA", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN DISEÑO PARA MEDIOS DIGITALES", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN ENERGÍAS RENOVABLES Y EFICIENCIA ENERGÉTICA", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN RESPONSABILIDAD SOCIAL", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN MERCADOTECNIA POLÍTICA", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN ADMINISTRACIÓN DE NEGOCIOS - MBA INTERNACIONAL", "nivel": "Maestria", "tier": null}, {"nombre": "MAESTRÍA EN DERECHO PROCESAL CONSTITUCIONAL (MODALIDAD EJECUTIVA)", "nivel": "Maestria", "tier": null}, {"nombre": "DOCTORADO EN DERECHO", "nivel": "Doctorado", "tier": "Resto de los Doc."}, {"nombre": "DOCTORADO EN GESTIÓN E INNOVACIÓN TECNOLÓGICA", "nivel": "Doctorado", "tier": "Resto de los Doc."}, {"nombre": "DOCTORADO EN ADMINISTRACIÓN ESTRATÉGICA EMPRESARIAL", "nivel": "Doctorado", "tier": "Resto de los Doc."}, {"nombre": "Licenciatura en Ingeniería Ambiental", "nivel": "Licenciatura", "tier": null}, {"nombre": "Maestría en Soluciones de Inteligencia Artificial para Negocios y Servicios", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Innovación Estratégica con Inteligencia Artificial", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Educación Inteligente y Diseño Instruccional con Inteligencia Artificial", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Automatización de Procesos y Análisis Predictivo", "nivel": "Maestria", "tier": null}, {"nombre": "LICENCIATURA EN INGENIERÍA EN LOGÍSTICA Y TRANSPORTE", "nivel": "Licenciatura", "tier": null}, {"nombre": "Maestría en Valuación Inmobiliaria", "nivel": "Maestria", "tier": null}, {"nombre": "LICENCIATURA EN INTELIGENCIA ARTIFICIAL", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN EMPRENDIMIENTO", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN AGRONEGOCIOS", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN INGENIERÍA EN ENERGÍAS RENOVABLES", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN INGENIERÍA EN DESARROLLO DE SOFTWARE", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN DISEÑO Y ANIMACIÓN DIGITAL", "nivel": "Licenciatura", "tier": null}, {"nombre": "LICENCIATURA EN DIRECCIÓN DE ARTE", "nivel": "Licenciatura", "tier": null}, {"nombre": "Maestría en Alta Dirección y Gobierno Corporativo", "nivel": "Maestria", "tier": null}, {"nombre": "LICENCIATURA EN SEGURIDAD INFORMÁTICA", "nivel": "Licenciatura", "tier": null}, {"nombre": "Maestría en Innovación Educativa y Diseño Instruccional", "nivel": "Maestria", "tier": null}, {"nombre": "Licenciatura en Ingeniería en Sistemas Inteligentes", "nivel": "Licenciatura", "tier": null}, {"nombre": "DOCTORADO EN EDUCACIÓN", "nivel": "Doctorado", "tier": "Doc. Educacion"}, {"nombre": "Doctorado en Urbanismo", "nivel": "Doctorado", "tier": "Resto de los Doc."}, {"nombre": "Licenciatura en Comercialización y Dirección de Marcas", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Tecnologías Interactivas y Experiencia e Interfaz de Usuario", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Consultoría y Desarrollo Empresarial", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Comercialización Turística y Mercados Digitales", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Comercio Internacional", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Publicidad y Medios", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Administración de Negocios Gastronómicos", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Comunicación y Manejo de Redes Sociales", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Comunicación y Periodismo", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Ingeniería en Automatización Industrial", "nivel": "Licenciatura", "tier": null}, {"nombre": "Maestría en Inteligencia Financiera y Detección de Fraudes", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Administración de Riesgos Financieros", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Innovación en Modelos de Negocio", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Finanzas Sustentables y Proyectos de Inversión", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Economía Digital y Nuevas Formas de Mercado", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Asesoría Empresarial Estratégica", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Auditoría Financiera", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Finanzas Públicas y Gestión Gubernamental", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Economía Sustentable y Empresas Responsables", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Estrategia de Comercio Internacional y Aduanas", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Mercadotecnia Gastronómica y de Destinos", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Transformación Digital Empresarial", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Diseño de Interacción y Experiencia de Usuario", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Transformación Digital Empresarial", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Gestión del Cambio y Transformación Organizacional", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Gestión del Talento y Bienestar Organizacional", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Tecnología para la Gestión Pública y Gobierno Digital", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Infraestructura y Cómputo en la Nube", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Interfaces Inteligentes y Tecnología Inmersiva", "nivel": "Maestria", "tier": null}, {"nombre": "Licenciatura en Gestión Empresarial y Logística", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Dirección de Operaciones Empresariales", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Dirección Hotelera y Experiencia del Cliente", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Planeación y Evaluación de Proyectos", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Gastronomía Sustentable y Cultura Alimentaria", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Administración Pública y Políticas Económicas", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Derechos Humanos y Justicia Social", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Gestión de Políticas y Gobierno", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Seguridad Pública y Gobernabilidad Democrática", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Lenguas Extranjeras", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Estudios Socioculturales", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Lengua y Literatura", "nivel": "Licenciatura", "tier": null}, {"nombre": "Licenciatura en Antropología y Diversidad Cultural", "nivel": "Licenciatura", "tier": null}, {"nombre": "Maestría en Educación Inclusiva y Diversidad", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Gestión de la Calidad y Procesos Industriales", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Organización de Eventos Corporativos y Convenciones", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Políticas Sociales y Bienestar Social", "nivel": "Maestria", "tier": null}, {"nombre": "Maestría en Justicia Social y Transformación Comunitaria", "nivel": "Maestria", "tier": null}, {"nombre": "Doctorado en Desarrollo Sostenible y Gestión Ambiental", "nivel": "Doctorado", "tier": "Resto de los Doc."}, {"nombre": "Doctorado en Políticas Públicas y Gobernanza", "nivel": "Doctorado", "tier": "Resto de los Doc."}, {"nombre": "Doctorado en Liderazgo Educativo y Gestión Escolar", "nivel": "Doctorado", "tier": "Resto de los Doc."}, {"nombre": "Doctorado en Tecnología Educativa e Innovación Didáctica", "nivel": "Doctorado", "tier": "Resto de los Doc."}];      // catálogo completo de carreras (no es sensible)
+var PRECIOS = [{"nivel": "Licenciatura", "jornada": "Completa", "tier": "Pricing Medio", "antiguedad": "Hotlead", "equsa": false, "pagos": [611, 736, 860, 860, 860], "nombrePaquete": "GUA.HOTL.TIT.LI.COM.", "precioLista": 1055}, {"nivel": "Licenciatura", "jornada": "Completa", "tier": "Pricing Medio", "antiguedad": "Hotlead", "equsa": true, "pagos": [726, 851, 975, 975, 975], "nombrePaquete": "GUA.HOTL.TIT.EQUSA.LI.COM.", "precioLista": 1055}, {"nivel": "Licenciatura", "jornada": "Completa", "tier": "Pricing Medio", "antiguedad": "RMKT+30", "equsa": false, "pagos": [549, 660, 772, 772, 772], "nombrePaquete": "GUA.RMKT1.TIT.LI.COM.", "precioLista": 1055}, {"nivel": "Licenciatura", "jornada": "Completa", "tier": "Pricing Medio", "antiguedad": "RMKT+30", "equsa": true, "pagos": [664, 776, 887, 887, 887], "nombrePaquete": "GUA.RMKT1.TIT.EQUSA.LI.COM.", "precioLista": 1055}, {"nivel": "Licenciatura", "jornada": "Completa", "tier": "Pricing Medio", "antiguedad": "SUPER PROMO", "equsa": false, "pagos": [581, 699, 817, 817, 817], "nombrePaquete": "GUA.SUPE.TIT.LI.COM.", "precioLista": 1055}, {"nivel": "Licenciatura", "jornada": "Completa", "tier": "Pricing Medio", "antiguedad": "SUPER PROMO", "equsa": true, "pagos": [696, 814, 932, 932, 932], "nombrePaquete": "GUA.SUPE.TIT.EQUSA.LI.COM.", "precioLista": 1055}, {"nivel": "Licenciatura", "jornada": "Intensiva", "tier": "Pricing Medio", "antiguedad": "Hotlead", "equsa": false, "pagos": [702, 845, 989, 989, 989], "nombrePaquete": "GUA.HOTL.TIT.LI.INT.", "precioLista": 1055}, {"nivel": "Licenciatura", "jornada": "Intensiva", "tier": "Pricing Medio", "antiguedad": "Hotlead", "equsa": true, "pagos": [817, 960, 1104, 1104, 1104], "nombrePaquete": "GUA.HOTL.TIT.EQUSA.LI.INT.", "precioLista": 1055}, {"nivel": "Licenciatura", "jornada": "Intensiva", "tier": "Pricing Medio", "antiguedad": "RMKT+30", "equsa": false, "pagos": [549, 743, 868, 868, 868], "nombrePaquete": "GUA.RMKT1.TIT.LI.INT.", "precioLista": 1055}, {"nivel": "Licenciatura", "jornada": "Intensiva", "tier": "Pricing Medio", "antiguedad": "RMKT+30", "equsa": true, "pagos": [664, 858, 983, 983, 983], "nombrePaquete": "GUA.RMKT1.TIT.EQUSA.LI.INT.", "precioLista": 1055}, {"nivel": "Licenciatura", "jornada": "Intensiva", "tier": "Pricing Medio", "antiguedad": "SUPER PROMO", "equsa": false, "pagos": [666, 803, 940, 940, 940], "nombrePaquete": "GUA.SUPE.TIT.LI.INT.", "precioLista": 1055}, {"nivel": "Licenciatura", "jornada": "Intensiva", "tier": "Pricing Medio", "antiguedad": "SUPER PROMO", "equsa": true, "pagos": [782, 918, 1055, 1055, 1055], "nombrePaquete": "GUA.SUPE.TIT.EQUSA.LI.INT.", "precioLista": 1055}, {"nivel": "Maestria", "jornada": "", "tier": "Pricing Medio", "antiguedad": "Hotlead", "equsa": false, "pagos": [917, 1107, 1297, 1297, 1297], "nombrePaquete": "GUA.HOTL.TIT.MA.", "precioLista": 1390}, {"nivel": "Maestria", "jornada": "", "tier": "Pricing Medio", "antiguedad": "RMKT+30", "equsa": false, "pagos": [798, 963, 1127, 1127, 1127], "nombrePaquete": "GUA.RMKT1.TIT.MA.", "precioLista": 1390}, {"nivel": "Maestria", "jornada": "", "tier": "Pricing Medio", "antiguedad": "SUPER PROMO", "equsa": false, "pagos": [871, 1052, 1232, 1232, 1232], "nombrePaquete": "GUA.SUPE.TIT.MA.", "precioLista": 1390}, {"nivel": "Doctorado", "jornada": "", "tier": "Pricing Medio", "antiguedad": "Hotlead", "equsa": false, "pagos": [985, 1189, 1394, 1394, 1394], "nombrePaquete": "GUA.HOTL.TIT.DOC.4.10.26", "precioLista": 1390}, {"nivel": "Doctorado", "jornada": "", "tier": "Pricing Medio", "antiguedad": "RMKT+30", "equsa": false, "pagos": [917, 1107, 1297, 1297, 1297], "nombrePaquete": "GUA.RMKT1.TIT.DOC.4.10.26", "precioLista": 1390}, {"nivel": "Doctorado", "jornada": "", "tier": "Pricing Medio", "antiguedad": "SUPER PROMO", "equsa": false, "pagos": [935, 1130, 1324, 1324, 1324], "nombrePaquete": "GUA.SUPE.TIT.DOC.4.10.26", "precioLista": 1390}];        // grilla de precios SOLO de este país
+var ACCESORIOS = [];  // accesorios SOLO de este país (puede venir vacío)
+
+var UCAMP_PROGRAMAS = [
+  "LICENCIATURA EN INGENIERÍA INDUSTRIAL",
+  "LICENCIATURA EN INGENIERÍA EN SISTEMAS COMPUTACIONALES",
+  "LICENCIATURA EN INGENIERÍA INDUSTRIAL Y ADMINISTRACIÓN",
+  "LICENCIATURA EN INGENIERÍA EN LOGÍSTICA Y TRANSPORTE",
+  "LICENCIATURA EN INTELIGENCIA ARTIFICIAL",
+  "LICENCIATURA EN INGENIERÍA EN ENERGÍAS RENOVABLES",
+  "LICENCIATURA EN INGENIERÍA EN DESARROLLO DE SOFTWARE",
+  "LICENCIATURA EN SEGURIDAD INFORMÁTICA",
+  "LICENCIATURA EN INTELIGENCIA ARTIFICIAL APLICADA A NEGOCIOS, INDUSTRIA Y AUTOMATIZACIÓN",
+  "Licenciatura en Ética y Gobernanza de la Inteligencia Artificial",
+  "Licenciatura en Ciberseguridad y Riesgos en Inteligencia Artificial",
+  "Licenciatura en Innovación y Emprendimiento con Inteligencia Artificial",
+  "Licenciatura en Inteligencia Artificial en Educación",
+  "Licenciatura en Ingeniería en Ciencias de Datos e Inteligencia Analítica",
+  "Licenciatura en Ingeniería en Programación en la Nube",
+  "Licenciatura en Software para Entretenimiento Digital",
+  "Licenciatura en Ingeniería en Sistemas Inteligentes",
+  "Licenciatura en Ingeniería en Tecnología de Videojuegos y Realidad Virtual",
+  "Licenciatura en Comercio Electrónico y Negocios Digitales",
+  "Licenciatura en Tecnologías Interactivas y Virtuales",
+  "Licenciatura en Ingeniería Ambiental",
+  "Licenciatura en Ingeniería Robótica"
+].map(function(s){return s.toLowerCase();});
+
+var CERT_IDS = ['coursera','platzi','facebook','cifal','microsoft','tableau','gcloud','gads','legal'];
+var IDIOMA_IDS = ['cambridge','duolingo'];
+var EXPERIENCIA_IDS = ['sesiones_ejecutivas','hibridas','senior_mayor','utel_joven'];
+
+var state = {
+  carrera: null,
+  jornada: null,
+  antig: null,
+  equsa: false,
+  seleccion: {}, // id accesorio -> true
+  ucampAuto: false
+};
+
+function fmt(n){return '$'+Math.round(n).toLocaleString('en-US')}
+
+/* ==================== INIT ==================== */
+function init(){
+  var sel = g('selCarrera');
+  sel.innerHTML = '';
+  CATALOGO.forEach(function(p, idx){
+    var opt = document.createElement('option');
+    opt.value = idx;
+    opt.textContent = p.nombre;
+    sel.appendChild(opt);
+  });
+  makeSearchable('selCarrera', onCarreraChange);
+  onCarreraChange();
+}
+
+function onCarreraChange(){
+  var idx = parseInt(g('selCarrera').value);
+  state.carrera = CATALOGO[idx] || null;
+  state.seleccion = {};
+  rebuildJornadaOptions();
+}
+
+function rebuildJornadaOptions(){
+  var sel = g('selJornada');
+  sel.innerHTML = '';
+  if(!state.carrera){ sel.disabled = true; return; }
+  var nivel = state.carrera.nivel;
+  var opciones;
+  if(nivel === 'Licenciatura'){
+    opciones = ['Completa','Intensiva'];
+  } else {
+    opciones = ['']; // Maestria/Doctorado: sin jornada en la grilla internacional
+  }
+  // Solo ofrecer jornadas que realmente tengan al menos una fila para este país+nivel+tier
+  var disponibles = opciones.filter(function(j){
+    return PRECIOS.some(function(row){
+      return row.nivel === nivel && row.jornada === j && row.tier === state.carrera.tier;
+    });
+  });
+  if(disponibles.length === 0) disponibles = opciones; // si no hay nada, se mostrará "no disponible" luego igual
+  disponibles.forEach(function(j){
+    var opt = document.createElement('option');
+    opt.value = j;
+    opt.textContent = j === '' ? 'Estándar' : j;
+    sel.appendChild(opt);
+  });
+  sel.disabled = false;
+  onJornadaChange();
+}
+
+function onJornadaChange(){
+  state.jornada = g('selJornada').value;
+  rebuildAntigOptions();
+}
+
+function rebuildAntigOptions(){
+  var sel = g('selAntig');
+  sel.innerHTML = '';
+  if(!state.carrera){ sel.disabled = true; return; }
+  var nivel = state.carrera.nivel;
+  var tier = state.carrera.tier;
+  var jornada = state.jornada;
+  var candidatos = PRECIOS.filter(function(row){
+    return row.nivel === nivel && row.jornada === jornada && row.tier === tier;
+  });
+  var antigs = [];
+  candidatos.forEach(function(row){
+    if(antigs.indexOf(row.antiguedad) === -1) antigs.push(row.antiguedad);
+  });
+  antigs.forEach(function(a){
+    var opt = document.createElement('option');
+    opt.value = a;
+    opt.textContent = a;
+    sel.appendChild(opt);
+  });
+  sel.disabled = antigs.length === 0;
+  if(antigs.length === 0){
+    var opt = document.createElement('option');
+    opt.value = '';
+    opt.textContent = 'Sin opciones';
+    sel.appendChild(opt);
+  }
+  onAntigChange();
+}
+
+function onAntigChange(){
+  state.antig = g('selAntig').value;
+  rebuildEqusaOptions();
+}
+
+/* ==================== EQUIVALENCIA DE TÍTULO EN USA ==================== */
+function rebuildEqusaOptions(){
+  var fg = g('fgEqusa');
+  if(!state.carrera){ fg.style.display = 'none'; render(); return; }
+  var nivel = state.carrera.nivel, tier = state.carrera.tier, jornada = state.jornada, antig = state.antig;
+  var candidatos = PRECIOS.filter(function(row){
+    return row.nivel === nivel && row.jornada === jornada && row.tier === tier && row.antiguedad === antig;
+  });
+  var tieneFalse = candidatos.some(function(r){ return r.equsa === false; });
+  var tieneTrue = candidatos.some(function(r){ return r.equsa === true; });
+  if(tieneFalse && tieneTrue){
+    // Ambas variantes existen para esta combinación: hay que preguntar.
+    fg.style.display = '';
+    state.equsa = g('selEqusa').value === 'true';
+  } else {
+    // Solo existe una variante (o ninguna): no hace falta preguntar.
+    fg.style.display = 'none';
+    state.equsa = tieneTrue && !tieneFalse;
+  }
+  render();
+}
+
+function onEqusaChange(){
+  state.equsa = g('selEqusa').value === 'true';
+  render();
+}
+
+/* ==================== BÚSQUEDA DE FILA DE PRECIO ==================== */
+function findRow(){
+  if(!state.carrera) return null;
+  var nivel = state.carrera.nivel;
+  var tier = state.carrera.tier;
+  var jornada = state.jornada;
+  var antig = state.antig;
+  var equsa = state.equsa;
+  var matches = PRECIOS.filter(function(row){
+    return row.nivel === nivel && row.jornada === jornada && row.tier === tier && row.antiguedad === antig && row.equsa === equsa;
+  });
+  if(matches.length !== 1) return null; // 0 = no existe; >1 = ambiguo en la fuente, no se adivina
+  return matches[0];
+}
+
+/* ==================== RENDER PRINCIPAL ==================== */
+function render(){
+  var row = findRow();
+  var esUcamp = state.carrera && UCAMP_PROGRAMAS.indexOf(state.carrera.nombre.toLowerCase()) !== -1;
+  state.ucampAuto = esUcamp;
+
+  if(!row){
+    g('resultado').style.display = 'none';
+    g('sinDatos').style.display = 'block';
+    return;
+  }
+  g('sinDatos').style.display = 'none';
+  g('resultado').style.display = 'block';
+
+  g('biInfo').innerHTML =
+    '<span><strong>Carrera:</strong> '+esc(state.carrera.nombre)+'</span>'+
+    '<span><strong>Nivel:</strong> '+esc(state.carrera.nivel)+'</span>'+
+    '<span><strong>Precio de lista:</strong> '+(row.precioLista!=null?fmt(row.precioLista):'no disponible')+'</span>'+
+    '<span><strong>Paquete:</strong> '+esc(row.nombrePaquete||'no disponible')+'</span>';
+
+  renderAccesorios();
+  renderTable('tbodyPagos', row.pagos, row.nombrePaquete||'');
+  renderTotales(row);
+}
+
+function esc(s){
+  var d = document.createElement('div');
+  d.textContent = s == null ? '' : s;
+  return d.innerHTML;
+}
+
+/* ==================== TABLA DE PAGOS ESCALONADOS ==================== */
+function renderTable(tbodyId, prices, pkg){
+  var tb = g(tbodyId); tb.innerHTML = '';
+  var accTotal = getAccTotal();
+  var rows = []; var i = 0;
+  while(i < prices.length){
+    var p = prices[i];
+    if(i === 0){ rows.push({label:'Mes 1', p:p}); i++; }
+    else if(i === 1){ rows.push({label:'Mes 2', p:p}); i++; }
+    else {
+      var lastIdx = i;
+      while(lastIdx+1 < prices.length && prices[lastIdx+1] === p) lastIdx++;
+      var label = (lastIdx === prices.length-1) ? ('Mes '+(i+1)+' en adelante') : ((i===lastIdx) ? ('Mes '+(i+1)) : ('Mes '+(i+1)+' al '+(lastIdx+1)));
+      rows.push({label:label, p:p});
+      i = lastIdx+1;
+    }
+  }
+  rows.forEach(function(row){
+    var total = row.p + accTotal;
+    var tr = document.createElement('tr');
+    tr.innerHTML = '<td class="tm">'+row.label+'</td><td class="tp">'+fmt(row.p)+'</td><td class="tp-acc">'+(accTotal>0?'+'+fmt(accTotal):'—')+'</td><td class="tp">'+fmt(total)+'</td><td class="tc">'+esc(pkg)+'</td>';
+    tb.appendChild(tr);
+  });
+}
+
+/* ==================== ACCESORIOS ==================== */
+function accesoriosDisponiblesParaNivel(){
+  if(!state.carrera) return [];
+  return ACCESORIOS.filter(function(a){
+    return a.precios && a.precios[state.carrera.nivel] != null;
+  });
+}
+
+function renderAccesorios(){
+  var wrap = g('accWrap');
+  wrap.innerHTML = '';
+  var disponibles = accesoriosDisponiblesParaNivel();
+
+  if(disponibles.length === 0){
+    wrap.innerHTML = '<div class="notice">Los precios de accesorios para este país estarán disponibles próximamente.</div>';
+    return;
+  }
+
+  var nivel = state.carrera.nivel;
+  var maxCert = nivel === 'Licenciatura' ? 2 : 1;
+
+  var porGrupo = {};
+  disponibles.forEach(function(a){
+    if(!porGrupo[a.grupo]) porGrupo[a.grupo] = [];
+    porGrupo[a.grupo].push(a);
+  });
+
+  var courseraSelected = !!state.seleccion['coursera'];
+  var idiomaSeleccionado = IDIOMA_IDS.filter(function(id){ return state.seleccion[id]; })[0] || null;
+  var certSeleccionadas = CERT_IDS.filter(function(id){ return state.seleccion[id]; });
+  var experienciaSeleccionada = EXPERIENCIA_IDS.filter(function(id){ return state.seleccion[id]; })[0] || null;
+  var welbePremiumSelected = !!state.seleccion['welbe_premium'];
+  var titulacionSelected = !!state.seleccion['tit'];
+  var titulo50Selected = !!state.seleccion['titulo50'];
+
+  var section = document.createElement('div');
+  section.className = 'acc-section';
+  var title = document.createElement('div');
+  title.className = 'acc-section-title';
+  title.textContent = 'Accesorios';
+  section.appendChild(title);
+
+  Object.keys(porGrupo).forEach(function(grupo){
+    var groupDiv = document.createElement('div');
+    groupDiv.className = 'acc-group';
+    var label = document.createElement('div');
+    label.className = 'acc-group-label';
+    label.textContent = grupo;
+    groupDiv.appendChild(label);
+    var chips = document.createElement('div');
+    chips.className = 'acc-chips';
+
+    porGrupo[grupo].forEach(function(a){
+      var precio = a.precios[nivel];
+      var chip = document.createElement('div');
+      var isSelected = !!state.seleccion[a.id];
+      var isIncludedFixed = a.incluido; // ej. Voxy incluido de base
+      var blocked = false;
+      var replacedLabel = null;
+
+      // Reglas de bloqueo / reemplazo
+      if(a.id === 'voxy'){
+        if(idiomaSeleccionado){ replacedLabel = 'Reemplazado'; }
+      }
+      if(a.id === 'welbe'){
+        if(welbePremiumSelected){ replacedLabel = 'Reemplazado por Premium'; }
+      }
+      if(CERT_IDS.indexOf(a.id) !== -1 && a.id !== 'coursera'){
+        if(courseraSelected) blocked = true;
+        else if(!isSelected && certSeleccionadas.length >= maxCert) blocked = true;
+      }
+      if(a.id === 'coursera'){
+        if(!isSelected && certSeleccionadas.length >= maxCert && maxCert <= certSeleccionadas.length) {
+          // coursera cuenta como cert también
+        }
+      }
+      if(IDIOMA_IDS.indexOf(a.id) !== -1){
+        if(!isSelected && idiomaSeleccionado) blocked = true;
+      }
+      if(EXPERIENCIA_IDS.indexOf(a.id) !== -1){
+        if(!isSelected && experienciaSeleccionada) blocked = true;
+      }
+      if(a.id === 'titulo50' && titulacionSelected) blocked = true;
+      if(a.id === 'tit' && titulo50Selected) blocked = true;
+
+      var cls = 'chip';
+      if(isIncludedFixed && !replacedLabel) cls += ' included';
+      else if(isSelected) cls += ' selected';
+      else if(blocked) cls += ' blocked';
+      else cls += ' clickable';
+
+      chip.className = cls;
+      var priceLabel = precio === 0 ? 'incluido' : fmt(precio);
+      chip.innerHTML = '<span class="chip-check"></span><span class="chip-name">'+esc(a.nombre)+'</span><span class="chip-price">'+(replacedLabel?replacedLabel:priceLabel)+'</span>';
+
+      if(!isIncludedFixed && !blocked){
+        chip.addEventListener('click', function(){
+          toggleAccesorio(a.id);
+        });
+      }
+      chips.appendChild(chip);
+    });
+
+    groupDiv.appendChild(chips);
+    section.appendChild(groupDiv);
+  });
+
+  // U-Camp automático (si tiene precio para este país+nivel)
+  var ucamp = ACCESORIOS.filter(function(a){ return a.id === 'ucamp'; })[0];
+  if(state.ucampAuto){
+    var ucampDiv = document.createElement('div');
+    ucampDiv.className = 'acc-group';
+    var lbl = document.createElement('div');
+    lbl.className = 'acc-group-label';
+    lbl.textContent = 'Plataforma';
+    ucampDiv.appendChild(lbl);
+    var chipsWrap = document.createElement('div');
+    chipsWrap.className = 'acc-chips';
+    var chip = document.createElement('div');
+    if(ucamp && ucamp.precios && ucamp.precios[nivel] != null){
+      chip.className = 'chip included';
+      chip.innerHTML = '<span class="chip-check"></span><span class="chip-name">U-Camp</span><span class="chip-price">incluido</span>';
+    } else {
+      chip.className = 'chip included';
+      chip.innerHTML = '<span class="chip-check"></span><span class="chip-name">U-Camp</span><span class="chip-price">incluido próximamente</span>';
+    }
+    chipsWrap.appendChild(chip);
+    ucampDiv.appendChild(chipsWrap);
+    section.appendChild(ucampDiv);
+  }
+
+  wrap.appendChild(section);
+}
+
+function toggleAccesorio(id){
+  if(state.seleccion[id]){
+    delete state.seleccion[id];
+  } else {
+    // Al seleccionar coursera, limpiar otras certificaciones
+    if(id === 'coursera'){
+      CERT_IDS.forEach(function(c){ if(c !== 'coursera') delete state.seleccion[c]; });
+    }
+    if(id === 'welbe_premium'){ delete state.seleccion['welbe']; }
+    if(id === 'tit'){ delete state.seleccion['titulo50']; }
+    if(id === 'titulo50'){ delete state.seleccion['tit']; }
+    if(IDIOMA_IDS.indexOf(id) !== -1){
+      IDIOMA_IDS.forEach(function(l){ if(l !== id) delete state.seleccion[l]; });
+    }
+    if(EXPERIENCIA_IDS.indexOf(id) !== -1){
+      EXPERIENCIA_IDS.forEach(function(e){ if(e !== id) delete state.seleccion[e]; });
+    }
+    state.seleccion[id] = true;
+  }
+  render();
+}
+
+function getAccTotal(){
+  if(!state.carrera) return 0;
+  var nivel = state.carrera.nivel;
+  var total = 0;
+  Object.keys(state.seleccion).forEach(function(id){
+    var a = ACCESORIOS.filter(function(x){ return x.id === id; })[0];
+    if(a && a.precios && a.precios[nivel] != null){
+      total += a.precios[nivel];
+    }
+  });
+  return total;
+}
+
+/* ==================== TOTALES ==================== */
+function renderTotales(row){
+  var accTotal = getAccTotal();
+  var base = row.pagos && row.pagos.length ? row.pagos[row.pagos.length-1] : 0;
+  var totalSection = g('totalSection');
+  var totalRows = g('totalRows');
+  totalRows.innerHTML = '';
+  if(accTotal === 0){
+    totalSection.style.display = 'none';
+    return;
+  }
+  totalSection.style.display = 'block';
+  var r1 = document.createElement('div');
+  r1.className = 'total-row base';
+  r1.innerHTML = '<span>Colegiatura (mensualidad recurrente)</span><span>'+fmt(base)+'</span>';
+  var r2 = document.createElement('div');
+  r2.className = 'total-row acc-line';
+  r2.innerHTML = '<span>Accesorios seleccionados</span><span>+'+fmt(accTotal)+'</span>';
+  var r3 = document.createElement('div');
+  r3.className = 'total-row final';
+  r3.innerHTML = '<span>Total mensual</span><span>'+fmt(base+accTotal)+'</span>';
+  totalRows.appendChild(r1);
+  totalRows.appendChild(r2);
+  totalRows.appendChild(r3);
+}
+
+/* ==================== DROPDOWN BUSCABLE ==================== */
+function makeSearchable(selId, onChangeFn) {
+  var orig = g(selId);
+  if(!orig || orig.parentNode.classList.contains('ss-wrap')) return;
+  var wrap = document.createElement('div'); wrap.className = 'ss-wrap';
+  orig.parentNode.insertBefore(wrap, orig); wrap.appendChild(orig); orig.style.display = 'none';
+  var input = document.createElement('input'); input.type = 'text'; input.className = 'ss-input'; input.placeholder = 'Buscar carrera...'; input.autocomplete = 'off';
+  var arrow = document.createElement('span'); arrow.className = 'ss-arrow'; arrow.textContent = '▾';
+  var dropdown = document.createElement('div'); dropdown.className = 'ss-dropdown';
+  wrap.appendChild(input); wrap.appendChild(arrow); wrap.appendChild(dropdown);
+  function getOptions() { var opts = []; for(var i=0;i<orig.options.length;i++) opts.push({value:orig.options[i].value, label:orig.options[i].textContent}); return opts; }
+  function renderDropdown(filter) {
+    dropdown.innerHTML = '';
+    var opts = getOptions();
+    var filtered = filter ? opts.filter(function(o){return o.label.toLowerCase().indexOf(filter.toLowerCase())>=0;}) : opts;
+    if(filtered.length===0){ var em = document.createElement('div'); em.className='ss-empty'; em.textContent='Sin resultados'; dropdown.appendChild(em); return; }
+    filtered.forEach(function(o){
+      var div = document.createElement('div'); div.className = 'ss-option' + (o.value===orig.value?' selected':''); div.textContent = o.label; div.setAttribute('data-value', o.value);
+      div.addEventListener('mousedown', function(e){ e.preventDefault(); orig.value = o.value; input.value = o.label; dropdown.classList.remove('open'); if(onChangeFn) onChangeFn(); });
+      dropdown.appendChild(div);
+    });
+  }
+  if(orig.options[orig.selectedIndex]) input.value = orig.options[orig.selectedIndex].textContent;
+  input.addEventListener('focus', function(){ input.value = ''; renderDropdown(''); dropdown.classList.add('open'); });
+  input.addEventListener('input', function(){ renderDropdown(input.value); dropdown.classList.add('open'); });
+  input.addEventListener('blur', function(){ setTimeout(function(){ dropdown.classList.remove('open'); if(orig.options[orig.selectedIndex]) input.value = orig.options[orig.selectedIndex].textContent; }, 150); });
+  arrow.addEventListener('mousedown', function(e){ e.preventDefault(); if(dropdown.classList.contains('open')){ dropdown.classList.remove('open'); input.blur(); } else { input.focus(); } });
+}
+</script>
