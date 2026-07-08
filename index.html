@@ -819,14 +819,6 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
       <div id="admin-cfg-area" style="display:none">
         <div class="cfg-row">
           <div>
-            <div class="cfg-label">Domiciliación activa</div>
-            <div class="cfg-desc">Muestra la columna "Con domiciliación" en las tablas</div>
-          </div>
-          <label class="toggle"><input type="checkbox" id="cfg-dom-active" onchange="onDomActiveToggle()"><span class="toggle-slider"></span></label>
-        </div>
-        <div id="cfg-dom-details">
-        <div class="cfg-row">
-          <div>
             <div class="cfg-label">Descuento por domiciliación</div>
             <div class="cfg-desc">Aplica desde el pago 3 en adelante</div>
           </div>
@@ -841,7 +833,6 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
             <div class="cfg-desc">Se desactiva automáticamente en esa fecha</div>
           </div>
           <input type="date" id="cfg-dom-exp" class="cfg-select" style="width:140px">
-        </div>
         </div>
         <div class="cfg-row">
           <div>
@@ -1284,10 +1275,8 @@ var ADMIN_PWD = 'UTELADMIN2026';
 
 // ── CONFIGURACIÓN ACTIVA ──────────────
 var DOMICILIACION = 5;        // default, se sobreescribe desde JSONBin
-var DOM_ACTIVE = false;       // apagado por defecto, se sobreescribe desde JSONBin
 var DOM_EXPIRY = null;        // fecha de vencimiento domiciliación (string 'YYYY-MM-DD' o null)
 function isDomActive(){
-  if(!DOM_ACTIVE) return false;
   if(!DOM_EXPIRY) return true;
   return new Date().toISOString().slice(0,10) <= DOM_EXPIRY;
 }
@@ -1315,7 +1304,6 @@ function loadConfig(){
     try{
       var c=JSON.parse(cached);
       if(c.dom) DOMICILIACION=c.dom;
-      if(c.domactive!==undefined) DOM_ACTIVE=c.domactive;
       if(c.domexp!==undefined) DOM_EXPIRY=c.domexp||null;
       if(c.tit0!==undefined) TITULO_COSTO_0=c.tit0;
       if(c.tit0exp!==undefined) TIT0_EXPIRY=c.tit0exp||null;
@@ -1330,28 +1318,27 @@ function loadConfig(){
       if(!data) return;
       var changed=false;
       if(data.dom!==undefined && data.dom!==DOMICILIACION){DOMICILIACION=data.dom;changed=true;}
-      if(data.domactive!==undefined && data.domactive!==DOM_ACTIVE){DOM_ACTIVE=data.domactive;changed=true;}
       if(data.domexp!==undefined && data.domexp!==DOM_EXPIRY){DOM_EXPIRY=data.domexp||null;changed=true;}
       if(data.tit0!==undefined && data.tit0!==TITULO_COSTO_0){TITULO_COSTO_0=data.tit0;changed=true;}
       if(data.tit0exp!==undefined && data.tit0exp!==TIT0_EXPIRY){TIT0_EXPIRY=data.tit0exp||null;changed=true;}
       if(data.plat!==undefined && data.plat!==PLATZI_PREVIEW){PLATZI_PREVIEW=data.plat;changed=true;}
       if(changed){
-        localStorage.setItem('utel_cfg',JSON.stringify({dom:DOMICILIACION,domactive:DOM_ACTIVE,domexp:DOM_EXPIRY,tit0:TITULO_COSTO_0,tit0exp:TIT0_EXPIRY,plat:PLATZI_PREVIEW}));
+        localStorage.setItem('utel_cfg',JSON.stringify({dom:DOMICILIACION,domexp:DOM_EXPIRY,tit0:TITULO_COSTO_0,tit0exp:TIT0_EXPIRY,plat:PLATZI_PREVIEW}));
         updateTituloCosto0();
         rL();rM();rS();rD();
-        updateDomIndicator();
+        var badge=document.getElementById('dom-pct-header'); if(badge) badge.textContent=DOMICILIACION;
       }
     })
     .catch(function(){});
 }
 
 function saveConfig(){
-  localStorage.setItem('utel_cfg',JSON.stringify({dom:DOMICILIACION,domactive:DOM_ACTIVE,domexp:DOM_EXPIRY,tit0:TITULO_COSTO_0,tit0exp:TIT0_EXPIRY,plat:PLATZI_PREVIEW}));
+  localStorage.setItem('utel_cfg',JSON.stringify({dom:DOMICILIACION,domexp:DOM_EXPIRY,tit0:TITULO_COSTO_0,tit0exp:TIT0_EXPIRY,plat:PLATZI_PREVIEW}));
   // Guardar en JSONBin para que todos los agentes lo vean
   fetch(JB_URL,{
     method:'PUT',
     headers:{'Content-Type':'application/json','X-Master-Key':JB_KEY},
-    body:JSON.stringify({dom:DOMICILIACION,domactive:DOM_ACTIVE,domexp:DOM_EXPIRY,tit0:TITULO_COSTO_0,tit0exp:TIT0_EXPIRY,plat:PLATZI_PREVIEW})
+    body:JSON.stringify({dom:DOMICILIACION,domexp:DOM_EXPIRY,tit0:TITULO_COSTO_0,tit0exp:TIT0_EXPIRY,plat:PLATZI_PREVIEW})
   })
   .then(function(){console.log('Config guardada en JSONBin');})
   .catch(function(e){console.error('Error JSONBin:',e);});
@@ -3703,23 +3690,9 @@ function adminLogin(){
   if(p===ADMIN_PWD){adminLogged=true;showAdminConfig();}
   else{document.getElementById('admin-err').textContent='Clave incorrecta';}
 }
-function updateDomIndicator(){
-  var ind=document.getElementById('dom-indicator');
-  var badge=document.getElementById('dom-pct-header');
-  if(!ind||!badge) return;
-  if(isDomActive()){ind.style.display='';badge.textContent=DOMICILIACION;}
-  else{ind.style.display='none';}
-}
-function onDomActiveToggle(){
-  var on=document.getElementById('cfg-dom-active').checked;
-  document.getElementById('cfg-dom-details').style.display=on?'block':'none';
-}
 function showAdminConfig(){
   document.getElementById('admin-login-area').style.display='none';
   document.getElementById('admin-cfg-area').style.display='block';
-  var domActiveChk=document.getElementById('cfg-dom-active');
-  domActiveChk.checked=DOM_ACTIVE;
-  document.getElementById('cfg-dom-details').style.display=DOM_ACTIVE?'block':'none';
   document.getElementById('cfg-dom').value=String(DOMICILIACION);
   document.getElementById('cfg-dom-exp').value=DOM_EXPIRY||'';
   var tit0cb=document.getElementById('cfg-tit0');
@@ -3730,7 +3703,6 @@ function showAdminConfig(){
   document.getElementById('cfg-platzi').checked=PLATZI_PREVIEW;
 }
 function saveAdminConfig(){
-  DOM_ACTIVE=document.getElementById('cfg-dom-active').checked;
   DOMICILIACION=parseInt(document.getElementById('cfg-dom').value);
   DOM_EXPIRY=document.getElementById('cfg-dom-exp').value||null;
   TITULO_COSTO_0=document.getElementById('cfg-tit0').checked;
