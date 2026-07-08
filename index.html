@@ -1723,7 +1723,7 @@ function renderTable(tbodyId, prices, pkg, esc, accTotal, accTotal12, domStartId
       }
       // Deferred accs only on the last (highest) price group; regular accs from _domIdx on
       var isLastPrice=(p===maxPrice);
-      var rowAcc=isLastPrice?acc3:(alwaysAcc+regularAcc);
+      var rowAcc=isLastPrice?acc3:Math.min(alwaysAcc+regularAcc,acc3);
       if(lastIdx===prices.length-1){
         rows.push({label:'Mes '+(i+1)+' en adelante',p:p,dom:isDomRow,acc:rowAcc});
       } else {
@@ -1800,7 +1800,7 @@ var CATALOG = {"LICENCIATURA": [{"p": "Pedagogía", "v": "bajo", "a": "Ciencias 
 
 function fillSelect(selId, nivelKey, badgeId){
   var sel=g(selId); sel.innerHTML='';
-  var progs=CATALOG[nivelKey]||[];
+  var progs=(CATALOG[nivelKey]||[]).slice().sort(function(a,b){return a.p.localeCompare(b.p,'es');});
   progs.forEach(function(item){
     var opt=document.createElement('option');
     opt.value=item.p;
@@ -3785,7 +3785,7 @@ function init(){
 function filterLArea(){
   var area=g('larea').value;
   var progs=CATALOG['LICENCIATURA']||[];
-  var filtered=area?progs.filter(function(p){return p.a===area;}):progs;
+  var filtered=(area?progs.filter(function(p){return p.a===area;}):progs).slice().sort(function(a,b){return a.p.localeCompare(b.p,'es');});
   var sel=g('lprog'); sel.innerHTML='';
   filtered.forEach(function(item){
     var opt=document.createElement('option');
@@ -3806,7 +3806,7 @@ function filterLArea(){
 function filterMArea(){
   var area=g('marea').value;
   var progs=CATALOG['MAESTRÍA']||[];
-  var filtered=area?progs.filter(function(p){return p.a===area;}):progs;
+  var filtered=(area?progs.filter(function(p){return p.a===area;}):progs).slice().sort(function(a,b){return a.p.localeCompare(b.p,'es');});
   var sel=g('mprog'); sel.innerHTML='';
   filtered.forEach(function(item){
     var opt=document.createElement('option');
