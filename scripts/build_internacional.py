@@ -358,17 +358,19 @@ def leer_accesorios():
                 continue
             precios = {}
             for nivel, col in (('Licenciatura', col_lic), ('Maestria', col_mae), ('Doctorado', col_doc)):
+                val = None
                 if col < len(row):
                     val = parse_money(row[col])
-                    if val is not None:
-                        precios[nivel] = val
-            if precios:
-                lista.append({
-                    'id': acc_id,
-                    'grupo': grupo,
-                    'nombre': nombre,
-                    'precios': precios,
-                    'incluido': acc_id == 'voxy',  # Voxy viene incluido de base (ver Reglas.csv)
+                # Sin precio cargado todavia en el Sheet -> $0 por ahora (decision
+                # de Sole: mostrar el boton igual, clickeable, sumando $0 hasta
+                # que se cargue el precio real).
+                precios[nivel] = val if val is not None else 0
+            lista.append({
+                'id': acc_id,
+                'grupo': grupo,
+                'nombre': nombre,
+                'precios': precios,
+                'incluido': acc_id == 'voxy',  # Voxy viene incluido de base (ver Reglas.csv)
                 })
         resultado[csv_pais] = lista
 
