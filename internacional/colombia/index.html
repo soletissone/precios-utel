@@ -512,6 +512,7 @@ function descargarResumen(){
 function accesoriosDisponiblesParaNivel(){
   if(!state.carrera) return [];
   return ACCESORIOS.filter(function(a){
+    if(a.id === 'ucamp' && state.ucampAuto) return false; // ya se muestra aparte como incluido automatico
     return a.precios && a.precios[state.carrera.nivel] != null;
   });
 }
