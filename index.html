@@ -3779,8 +3779,11 @@ function init(){
   fillSelect('sprog','MASTER','snivel-badge');
   fillSelect('dprog','DOCTORADO','dnivel-badge');
   makeSearchableAll();
+  var _lp=g('lprog'); console.log('[INIT] lprog options:',_lp?_lp.options.length:0,'value:',_lp?_lp.value:'null','_ssRefresh:',_lp?typeof _lp._ssRefresh:'null');
   ['lprog','mprog','sprog','dprog'].forEach(function(id){var s=g(id);if(s&&s.options.length>0){s.selectedIndex=0;s.value=s.options[0].value;if(s._ssRefresh)s._ssRefresh();}});
-  rL();rM();rS();rD();rPU();rDip();
+  console.log('[INIT] lprog value after refresh:',_lp?_lp.value:'null');
+  try{ rL(); console.log('[INIT] rL OK'); } catch(e){ console.error('[INIT] rL ERROR:',e); }
+  rM();rS();rD();rPU();rDip();
 }
 
 function filterLArea(){
