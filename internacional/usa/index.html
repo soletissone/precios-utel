@@ -449,7 +449,7 @@ function descargarResumen(){
 
   var incChips = '';
   ACCESORIOS.forEach(function(a){
-    if(a.incluido){
+    if(a.incluido || (a.id === 'ucamp' && state.ucampAuto)){
       incChips += '<span style="display:inline-block;background:#dcfce7;color:#06ba06;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ '+esc(a.nombre)+'</span>';
     } else if(state.seleccion[a.id]){
       incChips += '<span style="display:inline-block;background:#edfcd8;color:#1c2d1a;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ '+esc(a.nombre)+'</span>';
@@ -502,6 +502,7 @@ function descargarResumen(){
     +'</div></body></html>';
 
   var win = window.open('', '_blank', 'width=800,height=700');
+  if(!win){ alert('El navegador bloqueó la ventana del resumen. Permití pop-ups para este sitio e intentá de nuevo.'); return; }
   win.document.write(html);
   win.document.close();
   win.focus();
