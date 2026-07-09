@@ -3779,7 +3779,8 @@ function init(){
   fillSelect('sprog','MASTER','snivel-badge');
   fillSelect('dprog','DOCTORADO','dnivel-badge');
   makeSearchableAll();
-  filterLArea();filterMArea();rS();rD();rPU();rDip();
+  ['lprog','mprog','sprog','dprog'].forEach(function(id){var s=g(id);if(s&&s.options.length>0){s.selectedIndex=0;s.value=s.options[0].value;if(s._ssRefresh)s._ssRefresh();}});
+  rL();rM();rS();rD();rPU();rDip();
 }
 
 function filterLArea(){
