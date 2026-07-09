@@ -68,6 +68,7 @@ ACCESORIOS_DEF = [
     ('cambridge',          'Idioma',        'Cambridge',            'Cambridge'),
     ('voxy',               'Idioma',        'Voxy',                 'Voxy'),
     ('duolingo',           'Idioma',        'Duolingo',             'Duolingo'),
+    ('utel_ingles',        'Idioma',        'Utel en Inglés',       'Utel en Ingles'),
     ('coursera',           'Certificación', 'Coursera',             'Coursera'),
     ('facebook',           'Certificación', 'Facebook',             'Facebook'),
     ('cifal',              'Certificación', 'Cifal Ciberseguridad', 'Cifal Ciberseguridad'),
@@ -223,7 +224,13 @@ def parse_money(s):
     s = (s or '').strip()
     if s == '' or s.upper() == 'N/A':
         return None
+    s = s.replace('$', '').strip()
     s = s.replace(',', '')
+    # En la hoja de accesorios, Colombia usa "." como separador de miles
+    # (ej. "$106.900" = 106900, no 106.9). Como en este negocio no hay
+    # precios con centavos, cualquier ".XXX" (punto seguido de 3 digitos)
+    # se interpreta como separador de miles, no como decimal.
+    s = re.sub(r'\.(\d{3})\b', r'\1', s)
     try:
         if '.' in s:
             return float(s)
