@@ -368,10 +368,12 @@ def leer_accesorios():
                 val = None
                 if col < len(row):
                     val = parse_money(row[col])
-                # Sin precio cargado todavia en el Sheet -> $0 por ahora (decision
-                # de Sole: mostrar el boton igual, clickeable, sumando $0 hasta
-                # que se cargue el precio real).
-                precios[nivel] = val if val is not None else 0
+                # "N/A" (o celda vacia) = no se ofrece ese accesorio para ese
+                # pais+nivel -> no se agrega la clave, y la UI no muestra el
+                # boton (igual que Mexico trata sus "N/A"). Solo se guarda si
+                # hay un valor real (incluido $0, ej. Voxy gratis).
+                if val is not None:
+                    precios[nivel] = val
             lista.append({
                 'id': acc_id,
                 'grupo': grupo,
