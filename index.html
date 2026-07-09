@@ -3770,20 +3770,21 @@ function setSELInicio(sec, val){
   else if(sec==='doc') rD();
 }
 
+function updateDomIndicator(){
+  var badge=document.getElementById('dom-pct-header');
+  if(badge) badge.textContent=DOMICILIACION;
+}
 function init(){
   loadConfig();
-  updateTituloCosto0(); // aplicar config de localStorage antes del primer render
+  updateTituloCosto0();
   updateDomIndicator();
   fillSelect('lprog','LICENCIATURA','lnivel-badge');
   fillSelect('mprog','MAESTR\u00cdA','mnivel-badge');
   fillSelect('sprog','MASTER','snivel-badge');
   fillSelect('dprog','DOCTORADO','dnivel-badge');
   makeSearchableAll();
-  var _lp=g('lprog'); console.log('[INIT] lprog options:',_lp?_lp.options.length:0,'value:',_lp?_lp.value:'null','_ssRefresh:',_lp?typeof _lp._ssRefresh:'null');
   ['lprog','mprog','sprog','dprog'].forEach(function(id){var s=g(id);if(s&&s.options.length>0){s.selectedIndex=0;s.value=s.options[0].value;if(s._ssRefresh)s._ssRefresh();}});
-  console.log('[INIT] lprog value after refresh:',_lp?_lp.value:'null');
-  try{ rL(); console.log('[INIT] rL OK'); } catch(e){ console.error('[INIT] rL ERROR:',e); }
-  rM();rS();rD();rPU();rDip();
+  rL();rM();rS();rD();rPU();rDip();
 }
 
 function filterLArea(){
