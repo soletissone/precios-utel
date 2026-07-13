@@ -329,7 +329,7 @@ td{padding:9px 14px;vertical-align:middle}
   <div class="float-left" id="float-nav">
     <!-- Docente -->
     <div class="float-btn-wrap">
-      <button class="float-btn" onclick="openExt('https://docs.google.com/forms/d/e/1FAIpQLSeMHdj48X09WEh6EBoAHsQPMYTfky5nz40uno2ag7AtO_KtEg/viewform?embedded=true','PLATICA CON UN DOCENTE','#3b82f6')" title="Platica con un Docente">
+      <button class="float-btn" onclick="gtag('event','clic_link',{link:'Docente'});openExt('https://docs.google.com/forms/d/e/1FAIpQLSeMHdj48X09WEh6EBoAHsQPMYTfky5nz40uno2ag7AtO_KtEg/viewform?embedded=true','PLATICA CON UN DOCENTE','#3b82f6')" title="Platica con un Docente">
         <div class="float-btn-icon fbi-blue">
           <svg viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
         </div>
@@ -338,7 +338,7 @@ td{padding:9px 14px;vertical-align:middle}
     </div>
     <!-- Referidos -->
     <div class="float-btn-wrap">
-      <button class="float-btn" onclick="openExt('https://referidos.utel.edu.mx/auth-colaborador','PROGRAMA DE REFERIDOS','#22c55e')" title="Programa de Referidos">
+      <button class="float-btn" onclick="gtag('event','clic_link',{link:'Referidos'});openExt('https://referidos.utel.edu.mx/auth-colaborador','PROGRAMA DE REFERIDOS','#22c55e')" title="Programa de Referidos">
         <div class="float-btn-icon fbi-green">
           <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
@@ -347,7 +347,7 @@ td{padding:9px 14px;vertical-align:middle}
     </div>
     <!-- RAS -->
     <div class="float-btn-wrap">
-      <button class="float-btn" onclick="openExt('https://salesmanager.s4learning.com/RAS/mexico/vista/iniciar-sesion.html','RAS · SALES MANAGER','#9fe770')" title="RAS Sales Manager">
+      <button class="float-btn" onclick="gtag('event','clic_link',{link:'RAS'});openExt('https://salesmanager.s4learning.com/RAS/mexico/vista/iniciar-sesion.html','RAS · SALES MANAGER','#9fe770')" title="RAS Sales Manager">
         <div class="float-btn-icon fbi-purple">
           <svg viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/><line x1="12" y1="12" x2="12" y2="16"/><line x1="10" y1="14" x2="14" y2="14"/></svg>
         </div>
@@ -356,7 +356,7 @@ td{padding:9px 14px;vertical-align:middle}
     </div>
     <!-- Scripts -->
     <div class="float-btn-wrap">
-      <button class="float-btn" onclick="toggleScripts()" title="Speeches de ventas">
+      <button class="float-btn" onclick="gtag('event','clic_link',{link:'Speech'});toggleScripts()" title="Speeches de ventas">
         <div class="float-btn-icon fbi-amber">
           <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
@@ -968,7 +968,11 @@ function openExtFromSpeech(url,title,color){
 function confirmDownload(){
   document.getElementById('speech-overlay').classList.remove('open');
   document.body.style.overflow='';
-  if(_pendingDownloadSec) downloadSummary(_pendingDownloadSec);
+  if(_pendingDownloadSec){
+    var leadName=(g('lead-name-input')?g('lead-name-input').value.trim():'');
+    gtag('event','descarga_propuesta',{seccion:_pendingDownloadSec,lead:leadName||'(sin nombre)'});
+    downloadSummary(_pendingDownloadSec);
+  }
   _pendingDownloadSec=null;
 }
 function copyScript2(id){
