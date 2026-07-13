@@ -4398,11 +4398,16 @@ function galRender(){
       +'<div style="font-size:10px;color:var(--ac);font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.2">'+sub+'</div>'
       +'<div style="font-size:11px;color:var(--tx);line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">'+img.name+'</div>'
       +'<div style="display:flex;gap:5px;margin-top:auto;padding-top:4px">'
-      +'<a href="'+dlUrl+'" download="'+nameEsc+'" onclick="gtag(\'event\',\'descargar_imagen\',{imagen:\''+nameEsc+'\',categoria:\''+sub+'\'})" style="flex:1;background:var(--ac);color:#fff;border:none;border-radius:6px;padding:5px 6px;font-size:10px;font-weight:700;cursor:pointer;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px">⬇ Descargar</a>'
-      +'<button onclick="gtag(\'event\',\'ver_imagen\',{imagen:\''+nameEsc+'\',categoria:\''+sub+'\'});window.open(\''+viewUrl+'\',\'_blank\')" style="background:var(--s2);border:1px solid var(--bd);border-radius:6px;padding:5px 8px;font-size:10px;cursor:pointer;color:var(--tx)">Ver</button>'
+      +'<button onclick="galTrack(\'descargar_imagen\',\''+nameEsc+'\',\''+sub+'\',\''+dlUrl+'\')" style="flex:1;background:var(--ac);color:#fff;border:none;border-radius:6px;padding:5px 6px;font-size:10px;font-weight:700;cursor:pointer;text-align:center">⬇ Descargar</button>'
+      +'<button onclick="galTrack(\'ver_imagen\',\''+nameEsc+'\',\''+sub+'\',\''+viewUrl+'\')" style="background:var(--s2);border:1px solid var(--bd);border-radius:6px;padding:5px 8px;font-size:10px;cursor:pointer;color:var(--tx)">Ver</button>'
       +'</div></div></div>';
   });
   grid.innerHTML=html;
+}
+
+function galTrack(eventName, imagen, categoria, url){
+  if(typeof gtag==='function') gtag('event', eventName, {imagen: imagen, categoria: categoria});
+  setTimeout(function(){ window.open(url, '_blank'); }, 300);
 }
 
 function galCopy(url, btn){
