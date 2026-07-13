@@ -3561,7 +3561,7 @@ function downloadSummary(sec){
   // Build accessory description cards (Voxy, Welbe, Asistencia Plus)
   var _ACC_DESCS={
     asist:{label:'Asistencia Plus',color:'#eff6ff',border:'#bfdbfe',icon:'🛡️',desc:'Beneficio de apoyo económico que brinda cobertura en situaciones específicas, como maternidad, defunción de un familiar y defunción de un alumno, otorgando un monto de seguro para ayudar a afrontar estos eventos de acuerdo con las condiciones establecidas.'},
-    welbe:{label:'Welbe',color:'#f0fdf4',border:'#bbf7d0',icon:'❤️',desc:'Plataforma de bienestar y salud integral que brinda acceso a servicios médicos, consultas en línea, atención psicológica, nutricional y programas de prevención para promover el cuidado de la salud de los colaboradores.'},
+    welbe:{label:'Welbe',color:'#f0fdf4',border:'#bbf7d0',icon:'❤️',desc:'Plataforma de bienestar y salud integral que brinda acceso a servicios médicos, consultas en línea, atención psicológica, nutricional y programas de prevención para promover el cuidado de la salud de los alumnos.'},
     voxy: {label:'Inglés Voxy',color:'#fefce8',border:'#fef08a',icon:'🌐',desc:'Plataforma de aprendizaje de inglés en línea con contenido personalizado según el nivel y los objetivos del usuario. Permite desarrollar habilidades de conversación, comprensión, lectura y escritura mediante lecciones interactivas y flexibles.'}
   };
   var _accDescIncList=(isUNICA||isUNAG)?[{id:'voxy'}]:((cats&&((realSec==='mae')?(cats.included_online||cats.included):cats.included))||[]);
