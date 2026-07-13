@@ -3562,16 +3562,17 @@ function downloadSummary(sec){
   var _ACC_DESCS={
     asist:{label:'Asistencia Plus',color:'#eff6ff',border:'#bfdbfe',icon:'🛡️',desc:'Beneficio de apoyo económico que brinda cobertura en situaciones específicas, como maternidad, defunción de un familiar y defunción de un alumno, otorgando un monto de seguro para ayudar a afrontar estos eventos de acuerdo con las condiciones establecidas.'},
     welbe:{label:'Welbe',color:'#f0fdf4',border:'#bbf7d0',icon:'❤️',desc:'Plataforma de bienestar y salud integral que brinda acceso a servicios médicos, consultas en línea, atención psicológica, nutricional y programas de prevención para promover el cuidado de la salud de los alumnos.'},
-    voxy: {label:'Inglés Voxy',color:'#fefce8',border:'#fef08a',icon:'🌐',desc:'Plataforma de aprendizaje de inglés en línea con contenido personalizado según el nivel y los objetivos del usuario. Permite desarrollar habilidades de conversación, comprensión, lectura y escritura mediante lecciones interactivas y flexibles.'}
+    voxy: {label:'Inglés Voxy',color:'#fefce8',border:'#fef08a',icon:'🌐',desc:'Plataforma de aprendizaje de inglés en línea con contenido personalizado según el nivel y los objetivos del usuario. Permite desarrollar habilidades de conversación, comprensión, lectura y escritura mediante lecciones interactivas y flexibles.'},
+    platzi:{label:'Platzi',color:'#00d369',border:'#00b356',icon:'🚀',desc:'Membresía incluida desde el primer día de clases con acceso a más de 1.000 cursos en inteligencia artificial, tecnología, marketing, inglés, liderazgo y negocios. Contenido práctico y actualizado para potenciar tu perfil profesional y destacar en el mercado laboral.',dark:true}
   };
   var _accDescIncList=(isUNICA||isUNAG)?[{id:'voxy'}]:((cats&&((realSec==='mae')?(cats.included_online||cats.included):cats.included))||[]);
   var accDescCards='';
   _accDescIncList.forEach(function(it){
     var d=_ACC_DESCS[it.id];
-    if(d) accDescCards+='<div style="display:flex;gap:12px;padding:12px 14px;background:'+d.color+';border:1px solid '+d.border+';border-radius:8px;margin-bottom:8px">'
-      +'<span style="font-size:18px;flex-shrink:0;line-height:1.4">'+d.icon+'</span>'
-      +'<div><div style="font-size:12px;font-weight:700;color:#1c2d1a;margin-bottom:3px">'+d.label+'</div>'
-      +'<div style="font-size:11px;color:#374151;line-height:1.55">'+d.desc+'</div></div></div>';
+    if(d) accDescCards+='<div style="display:flex;gap:10px;padding:11px 13px;background:'+d.color+';border:1px solid '+d.border+';border-radius:8px;">'
+      +'<span style="font-size:17px;flex-shrink:0;line-height:1.4">'+d.icon+'</span>'
+      +'<div><div style="font-size:11px;font-weight:700;color:'+(d.dark?'#000':'#1c2d1a')+';margin-bottom:3px">'+d.label+'</div>'
+      +'<div style="font-size:10px;color:'+(d.dark?'rgba(0,0,0,.75)':'#374151')+';line-height:1.55">'+d.desc+'</div></div></div>';
   });
 
   // Build total lines
@@ -3646,16 +3647,6 @@ function downloadSummary(sec){
     +'<div style="margin-bottom:8px">'+incChips+'</div>'
     +(accDescCards?'<div style="display:grid;grid-template-columns:1fr 1fr;gap:5px;margin-bottom:10px">'+accDescCards.replace(/margin-bottom:8px/g,'margin-bottom:0')+'</div>':'')
 
-    // PLATZI BANNER
-    +(incChips.indexOf('Platzi')>=0 ? '<div style="background:#00d369;border-radius:8px;padding:9px 12px;margin-bottom:10px;display:flex;align-items:flex-start;gap:10px">'
-      +'<div style="flex-shrink:0;background:rgba(0,0,0,.12);border-radius:6px;width:26px;height:26px;display:flex;align-items:center;justify-content:center">'
-      +'<svg width="14" height="14" viewBox="0 0 32 32" fill="#fff"><path d="M4 16L16 4l4 4-8 8 8 8-4 4z"/></svg>'
-      +'</div>'
-      +'<div>'
-      +'<div style="font-size:11px;font-weight:800;color:#000;margin-bottom:2px">MEMBRESÍA PLATZI INCLUIDA</div>'
-      +'<div style="font-size:10px;color:rgba(0,0,0,.75);line-height:1.5">Impulsa tu perfil profesional con acceso a Platzi y desarrolla habilidades en inteligencia artificial, inglés, liderazgo, marketing y tecnología para destacar en el mercado laboral.</div>'
-      +'</div>'
-      +'</div>' : '')
 
     // TOTAL BOX — solo total final
     +'<div style="background:#1c2d1a;border-radius:10px;padding:12px 18px;color:#fff;margin-bottom:6px">'
