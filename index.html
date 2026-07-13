@@ -4379,18 +4379,19 @@ function galRender(){
     var parts=img.path.split('/');
     var sub=(parts[2]||parts[1]||'').trim();
     var thumb='https://drive.google.com/thumbnail?id='+img.id+'&sz=w300';
-    var escaped=img.url.replace(/'/g,"\\'");
-    var nameEsc=img.name.replace(/'/g,"\\'");
+    var viewUrl=img.url.replace(/'/g,"\\'");
+    var dlUrl=('https://drive.google.com/uc?export=download&id='+img.id).replace(/'/g,"\\'");
+    var nameEsc=img.name.replace(/'/g,"\\'").replace(/"/g,'&quot;');
     html+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .15s" onmouseover="this.style.boxShadow=\'0 4px 16px rgba(0,0,0,.12)\'" onmouseout="this.style.boxShadow=\'none\'">'
-      +'<div style="width:100%;aspect-ratio:4/3;overflow:hidden;background:#f0f1f4;cursor:pointer" onclick="window.open(\''+escaped+'\',\'_blank\')">'
+      +'<div style="width:100%;aspect-ratio:4/3;overflow:hidden;background:#f0f1f4;cursor:pointer" onclick="window.open(\''+viewUrl+'\',\'_blank\')">'
       +'<img src="'+thumb+'" alt="'+img.name+'" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .2s" onmouseover="this.style.transform=\'scale(1.04)\'" onmouseout="this.style.transform=\'scale(1)\'" onerror="this.parentElement.innerHTML=\'<div style=\\\"display:flex;align-items:center;justify-content:center;height:100%;font-size:28px\\\">🖼</div>\'">'
       +'</div>'
       +'<div style="padding:8px 9px;flex:1;display:flex;flex-direction:column;gap:4px">'
       +'<div style="font-size:10px;color:var(--ac);font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.2">'+sub+'</div>'
       +'<div style="font-size:11px;color:var(--tx);line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">'+img.name+'</div>'
       +'<div style="display:flex;gap:5px;margin-top:auto;padding-top:4px">'
-      +'<button onclick="galCopy(\''+escaped+'\',this)" style="flex:1;background:var(--ac);color:#fff;border:none;border-radius:6px;padding:5px 6px;font-size:10px;font-weight:700;cursor:pointer">Copiar link</button>'
-      +'<button onclick="window.open(\''+escaped+'\',\'_blank\')" style="background:var(--s2);border:1px solid var(--bd);border-radius:6px;padding:5px 8px;font-size:10px;cursor:pointer;color:var(--tx)">Ver</button>'
+      +'<a href="'+dlUrl+'" download="'+nameEsc+'" style="flex:1;background:var(--ac);color:#fff;border:none;border-radius:6px;padding:5px 6px;font-size:10px;font-weight:700;cursor:pointer;text-decoration:none;text-align:center;display:flex;align-items:center;justify-content:center;gap:4px">⬇ Descargar</a>'
+      +'<button onclick="window.open(\''+viewUrl+'\',\'_blank\')" style="background:var(--s2);border:1px solid var(--bd);border-radius:6px;padding:5px 8px;font-size:10px;cursor:pointer;color:var(--tx)">Ver</button>'
       +'</div></div></div>';
   });
   grid.innerHTML=html;
