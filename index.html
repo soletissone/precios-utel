@@ -466,7 +466,8 @@ Si pudieras sumarle una habilidad a tu perfil hoy mismo, ¿qué elegirías?</div
           </div>
         </div>
       </div>
-      <div class="speech-mfooter">
+      <div class="speech-mfooter" style="flex-wrap:wrap;align-items:center;">
+        <input id="lead-name-input" type="text" placeholder="Nombre del lead (opcional)" style="flex:1;min-width:180px;padding:8px 12px;border:1px solid #d1d5db;border-radius:9px;font-size:13px;color:#1c2d1a;outline:none;" />
         <button class="btn-cancel-sp" onclick="closeSpeechPopup()">Cancelar</button>
         <button class="btn-dl-sp" onclick="confirmDownload()">⬇ Descargar propuesta</button>
       </div>
@@ -3425,6 +3426,7 @@ function downloadSummary(sec){
   var realSec = (sec==='en') ? EJE_NATIVA_SEC : sec;
 
   // Collect info
+  var leadName=(g('lead-name-input')?g('lead-name-input').value.trim():'');
   var progSelId={lic:'lprog',mae:'mprog',ms:'sprog',doc:'dprog',en:'en-prog'}[sec];
   var progSel=g(progSelId);
   var progName=progSel&&progSel.options[progSel.selectedIndex]?progSel.options[progSel.selectedIndex].text:'-';
@@ -3619,6 +3621,7 @@ function downloadSummary(sec){
     +'<div style="width:1px;align-self:stretch;background:rgba(255,255,255,.18);flex-shrink:0;"></div>'
     // Col derecha: nombre + badges
     +'<div style="flex:1;min-width:0;">'
+    +(leadName?'<div style="font-size:11px;font-weight:600;color:#63D471;letter-spacing:.04em;margin-bottom:5px;">Para: '+leadName+'</div>':'')
     +'<div style="font-size:20px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:8px;word-break:break-word;">'+progName.split(' ').map(function(w){return w.charAt(0).toUpperCase()+w.slice(1);}).join(' ')+'</div>'
     +'<div style="display:flex;flex-wrap:wrap;align-items:center;gap:5px">'
     +'<span style="display:inline-block;background:#00B140;color:#fff;border-radius:999px;padding:2px 10px;font-size:10px;font-weight:700">'+secLabel+'</span>'
