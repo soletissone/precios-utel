@@ -514,6 +514,7 @@ Si pudieras sumarle una habilidad a tu perfil hoy mismo, ¿qué elegirías?</div
       <div class="tab" onclick="sw('pu')">Pagos Únicos</div>
       <div class="tab" onclick="sw('dip')">Diplomados</div>
       <div class="tab" onclick="sw('en')">Ejecutiva</div>
+      <div class="tab" onclick="sw('gal')">🖼 Recursos</div>
     </div>
 
     <!-- LICENCIATURAS -->
@@ -794,6 +795,24 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
       <div id="en-acc"></div>
       <div id="en-total"></div>
     </div>
+    <!-- GALERÍA DE RECURSOS -->
+    <div class="sec" id="sec-gal">
+      <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center">
+        <div style="position:relative;flex:1;min-width:220px">
+          <input id="gal-search" type="text" placeholder="🔍  Buscar por nombre..." oninput="galFilter()" style="width:100%;padding:9px 12px;border:1px solid var(--bd);border-radius:9px;font-size:13px;outline:none;background:var(--sf);color:var(--tx)">
+        </div>
+        <select id="gal-cat" onchange="galFilter()" style="padding:9px 12px;border:1px solid var(--bd);border-radius:9px;font-size:13px;outline:none;background:var(--sf);color:var(--tx);cursor:pointer">
+          <option value="">— Todas las categorías —</option>
+        </select>
+        <select id="gal-sub" onchange="galFilter()" style="padding:9px 12px;border:1px solid var(--bd);border-radius:9px;font-size:13px;outline:none;background:var(--sf);color:var(--tx);cursor:pointer">
+          <option value="">— Todas las subcategorías —</option>
+        </select>
+        <span id="gal-count" style="font-size:12px;color:var(--mu);white-space:nowrap"></span>
+      </div>
+      <div id="gal-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px"></div>
+      <div id="gal-empty" style="display:none;text-align:center;padding:48px 0;color:var(--mu);font-size:14px">No se encontraron imágenes</div>
+    </div>
+
     <div class="wm">CONFIDENCIAL — Solo para uso interno del equipo de ventas UTEL</div>
     <div style="text-align:center;margin-top:8px;font-size:10px;color:rgba(0,0,0,.3);max-width:600px;margin-left:auto;margin-right:auto;line-height:1.5">
       Este simulador no constituye un documento oficial ni tiene carácter legal. Los precios mostrados son orientativos y pueden estar sujetos a cambios. Para información oficial dirigirse al área de inscripciones de UTEL.
@@ -1648,7 +1667,7 @@ var NB={
 
 function sw(id){
   document.querySelectorAll('.tab').forEach(function(t,i){
-    t.classList.toggle('active',['lic','mae','ms','doc','pu','dip','en'][i]===id);
+    t.classList.toggle('active',['lic','mae','ms','doc','pu','dip','en','gal'][i]===id);
   });
   document.querySelectorAll('.sec').forEach(function(s){
     s.classList.toggle('active',s.id==='sec-'+id);
@@ -1661,6 +1680,7 @@ function sw(id){
   else if(id==='dip') rDip();
   else if(id==='lic') rL();
   else if(id==='en'){ fillENAreas(); fillENProgs(); rEN(); }
+  else if(id==='gal') galInit();
 }
 
 function renderTable(tbodyId, prices, pkg, esc, accTotal, accTotal12, domStartIdx){
@@ -4272,6 +4292,121 @@ function toggleChat(){
     },300);
   }
 })();
+</script>
+
+<script>
+// ── GALERÍA DE RECURSOS ──────────────────────────────────────────
+var _galData=null, _galFiltered=[], _galInited=false;
+
+function galInit(){
+  if(_galInited) return;
+  _galInited=true;
+  var grid=document.getElementById('gal-grid');
+  grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--mu);font-size:13px">Cargando imágenes…</div>';
+  fetch('imagenes_utel.json')
+    .then(function(r){return r.json();})
+    .then(function(data){
+      _galData=data;
+      // Build category options
+      var cats={}, subs={};
+      data.forEach(function(img){
+        var parts=img.path.split('/');
+        var cat=(parts[1]||'').trim();
+        var sub=(parts[2]||'').trim();
+        if(cat) cats[cat]=true;
+        if(sub) subs[sub]=(subs[sub]||{});
+        if(cat&&sub) subs[sub][cat]=true;
+      });
+      var catSel=document.getElementById('gal-cat');
+      Object.keys(cats).sort().forEach(function(c){
+        var o=document.createElement('option'); o.value=c; o.textContent=c; catSel.appendChild(o);
+      });
+      // Store subcategory data for filtering
+      window._galSubs=subs;
+      galFilter();
+    })
+    .catch(function(){
+      document.getElementById('gal-grid').innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:#dc2626;font-size:13px">Error al cargar imagenes_utel.json. Verificá que el archivo esté en la misma carpeta.</div>';
+    });
+}
+
+function galUpdateSubcats(selectedCat){
+  var subSel=document.getElementById('gal-sub');
+  var prev=subSel.value;
+  subSel.innerHTML='<option value="">— Todas las subcategorías —</option>';
+  if(!_galData) return;
+  var seen={};
+  _galData.forEach(function(img){
+    var parts=img.path.split('/');
+    var cat=(parts[1]||'').trim();
+    var sub=(parts[2]||'').trim();
+    if(sub && (!selectedCat || cat===selectedCat) && !seen[sub]){
+      seen[sub]=true;
+      var o=document.createElement('option'); o.value=sub; o.textContent=sub; subSel.appendChild(o);
+    }
+  });
+  if(seen[prev]) subSel.value=prev;
+}
+
+function galFilter(){
+  if(!_galData) return;
+  var q=(document.getElementById('gal-search').value||'').toLowerCase().trim();
+  var cat=(document.getElementById('gal-cat').value||'').trim();
+  var sub=(document.getElementById('gal-sub').value||'').trim();
+  galUpdateSubcats(cat);
+  if(sub) document.getElementById('gal-sub').value=sub;
+  _galFiltered=_galData.filter(function(img){
+    var parts=img.path.split('/');
+    var imgCat=(parts[1]||'').trim();
+    var imgSub=(parts[2]||'').trim();
+    if(cat && imgCat!==cat) return false;
+    if(sub && imgSub!==sub) return false;
+    if(q && img.name.toLowerCase().indexOf(q)<0) return false;
+    return true;
+  });
+  galRender();
+}
+
+function galRender(){
+  var grid=document.getElementById('gal-grid');
+  var empty=document.getElementById('gal-empty');
+  var count=document.getElementById('gal-count');
+  count.textContent=_galFiltered.length+' imagen'+(+_galFiltered.length===1?'':'es');
+  if(!_galFiltered.length){ grid.innerHTML=''; empty.style.display='block'; return; }
+  empty.style.display='none';
+  var html='';
+  _galFiltered.forEach(function(img){
+    var parts=img.path.split('/');
+    var sub=(parts[2]||parts[1]||'').trim();
+    var thumb='https://drive.google.com/thumbnail?id='+img.id+'&sz=w300';
+    var escaped=img.url.replace(/'/g,"\\'");
+    var nameEsc=img.name.replace(/'/g,"\\'");
+    html+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .15s" onmouseover="this.style.boxShadow=\'0 4px 16px rgba(0,0,0,.12)\'" onmouseout="this.style.boxShadow=\'none\'">'
+      +'<div style="width:100%;aspect-ratio:4/3;overflow:hidden;background:#f0f1f4;cursor:pointer" onclick="window.open(\''+escaped+'\',\'_blank\')">'
+      +'<img src="'+thumb+'" alt="'+img.name+'" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .2s" onmouseover="this.style.transform=\'scale(1.04)\'" onmouseout="this.style.transform=\'scale(1)\'" onerror="this.parentElement.innerHTML=\'<div style=\\\"display:flex;align-items:center;justify-content:center;height:100%;font-size:28px\\\">🖼</div>\'">'
+      +'</div>'
+      +'<div style="padding:8px 9px;flex:1;display:flex;flex-direction:column;gap:4px">'
+      +'<div style="font-size:10px;color:var(--ac);font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.2">'+sub+'</div>'
+      +'<div style="font-size:11px;color:var(--tx);line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">'+img.name+'</div>'
+      +'<div style="display:flex;gap:5px;margin-top:auto;padding-top:4px">'
+      +'<button onclick="galCopy(\''+escaped+'\',this)" style="flex:1;background:var(--ac);color:#fff;border:none;border-radius:6px;padding:5px 6px;font-size:10px;font-weight:700;cursor:pointer">Copiar link</button>'
+      +'<button onclick="window.open(\''+escaped+'\',\'_blank\')" style="background:var(--s2);border:1px solid var(--bd);border-radius:6px;padding:5px 8px;font-size:10px;cursor:pointer;color:var(--tx)">Ver</button>'
+      +'</div></div></div>';
+  });
+  grid.innerHTML=html;
+}
+
+function galCopy(url, btn){
+  navigator.clipboard.writeText(url).then(function(){
+    var orig=btn.textContent; btn.textContent='✓ Copiado!';
+    setTimeout(function(){ btn.textContent=orig; },1800);
+  }).catch(function(){
+    var ta=document.createElement('textarea'); ta.value=url;
+    document.body.appendChild(ta); ta.select(); document.execCommand('copy'); ta.remove();
+    var orig=btn.textContent; btn.textContent='✓ Copiado!';
+    setTimeout(function(){ btn.textContent=orig; },1800);
+  });
+}
 </script>
 </body>
 </html>
