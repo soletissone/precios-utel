@@ -1741,10 +1741,10 @@ function renderTable(tbodyId, prices, pkg, esc, accTotal, accTotal12, domStartId
   while(i<prices.length){
     var p=prices[i];
     if(i===0){
-      rows.push({label:'Mes 1',p:p,dom:(0>=_domIdx),acc:acc12});
+      rows.push({label:'Mes 1',p:p,dom:(prices[0]===maxPrice&&0>=_domIdx),acc:acc12});
       i++;
     } else if(i===1){
-      rows.push({label:'Mes 2',p:p,dom:(1>=_domIdx),acc:acc12});
+      rows.push({label:'Mes 2',p:p,dom:(prices[1]===maxPrice&&1>=_domIdx),acc:acc12});
       i++;
     } else {
       var isDomRow=(i>=_domIdx);
@@ -1758,10 +1758,10 @@ function renderTable(tbodyId, prices, pkg, esc, accTotal, accTotal12, domStartId
       var isLastPrice=(p===maxPrice);
       var rowAcc=isLastPrice?acc3:Math.min(alwaysAcc+regularAcc,acc3);
       if(lastIdx===prices.length-1){
-        rows.push({label:'Mes '+(i+1)+' en adelante',p:p,dom:isDomRow,acc:rowAcc});
+        rows.push({label:'Mes '+(i+1)+' en adelante',p:p,dom:isLastPrice&&isDomRow,acc:rowAcc});
       } else {
         var rangeLabel=(i===lastIdx)?'Mes '+(i+1):'Mes '+(i+1)+' al '+(lastIdx+1);
-        rows.push({label:rangeLabel,p:p,dom:isDomRow,acc:rowAcc});
+        rows.push({label:rangeLabel,p:p,dom:isLastPrice&&isDomRow,acc:rowAcc});
       }
       i=lastIdx+1;
     }
