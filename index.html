@@ -3145,8 +3145,10 @@ function rM(){
   var ejeDiscountMAE=(SEL_EXP['mae']==='seseje' && isPlatziVisible())?-100:0;
   // Si Platzi está deshabilitado, revertir a precios con Coursera: mes 3+ +120, mes 1-2 −100
   var platziOff=!isPlatziVisible();
+  // ArqSW ya incluye Platzi en el precio base de mes 3+; mae_online no
+  var platziAdd=(isPlatziVisible() && progKey==='mae_online')?100:0;
   var maeExpPrices=e.p.map(function(v,i){
-    if(i>=2) return v+expPriceMAE+ejeDiscountMAE+(platziOff?120:100);
+    if(i>=2) return v+expPriceMAE+ejeDiscountMAE+(platziOff?120:0)+platziAdd;
     // mes 1-2: Platzi no suma en los primeros 2 pagos (ninguna maestría)
     return v-100;
   });
