@@ -587,6 +587,7 @@ Si pudieras sumarle una habilidad a tu perfil hoy mismo, ¿qué elegirías?</div
       </div>
       <div id="lic-acc"></div>
       <div id="lic-total"></div>
+      <div id="lic-recursos"></div>
     </div>
 
     <!-- MAESTRÍAS -->
@@ -630,6 +631,7 @@ Si pudieras sumarle una habilidad a tu perfil hoy mismo, ¿qué elegirías?</div
       </div>
       <div id="mae-acc"></div>
       <div id="mae-total"></div>
+      <div id="mae-recursos"></div>
     </div>
 
     <!-- MASTER UTEL -->
@@ -1389,6 +1391,47 @@ function isNuevo(progName){
 function codBadge(progName){
   var code=PROG_CODE_BY_PROG[progName];
   return code?'<span class="cod-badge" title="Código de programa">'+code+'</span>':'';
+}
+function renderRecursos(divId, progName, nivel){
+  var el=g(divId); if(!el) return;
+  var btns=[];
+  // PDFs de ficha técnica
+  var map=PROG_PDF_MAP&&PROG_PDF_MAP[progName];
+  if(map){
+    var rKey=nivel+'_r', eKey=nivel+'_e';
+    if(map[rKey]) btns.push('<button class="ficha-btn" style="font-size:12px" onclick="openExt(\'pdfs/'+encodeURIComponent(map[rKey])+'\',\'Ficha técnica\',\'#64748b\')">📄 Ficha regular</button>');
+    if(map[eKey]) btns.push('<button class="ficha-btn" style="font-size:12px" onclick="openExt(\'pdfs/'+encodeURIComponent(map[eKey])+'\',\'Ficha ejecutiva\',\'#64748b\')">📄 Ficha ejecutiva</button>');
+  }
+  // Platzi
+  if(isPlatziVisible()){
+    var platBtn=platziBtn(progName);
+    if(platBtn) btns.push(platBtn);
+  }
+  // Imágenes de galería que coincidan con el programa
+  if(typeof _galData!=='undefined'&&_galData){
+    var norm=progName.toUpperCase().replace(/[^A-ZÁÉÍÓÚÑÜ\s]/g,'').trim();
+    var words=norm.split(/\s+/).filter(function(w){return w.length>3;});
+    var imgs=_galData.filter(function(img){
+      var pathUp=img.path.toUpperCase();
+      return words.length>0&&words.every(function(w){return pathUp.indexOf(w)>=0;});
+    });
+    if(imgs.length>0){
+      var thumbs=imgs.slice(0,6).map(function(img){
+        var viewUrl='https://drive.google.com/file/d/'+img.id+'/view';
+        var thumbUrl='https://drive.google.com/thumbnail?id='+img.id+'&sz=w120';
+        return '<a href="#" onclick="event.preventDefault();window.open(\''+viewUrl+'\',\'_blank\')" title="'+img.name+'" style="display:inline-block;border-radius:6px;overflow:hidden;border:1px solid var(--bd)">'
+          +'<img src="'+thumbUrl+'" style="width:80px;height:60px;object-fit:cover;display:block"></a>';
+      }).join('');
+      btns.push('<div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">'+thumbs
+        +(imgs.length>6?'<span style="font-size:11px;color:var(--mu)">+' +(imgs.length-6)+' más</span>':'')
+        +'</div>');
+    }
+  }
+  if(!btns.length){el.innerHTML='';return;}
+  el.innerHTML='<div style="margin-top:12px;padding:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">'
+    +'<div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Recursos del programa</div>'
+    +'<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">'+btns.join('')+'</div>'
+    +'</div>';
 }
 function fichaBadge(progName,nivel,forceEje){
   if(!PROG_PDF_MAP) return '';
@@ -3083,6 +3126,7 @@ function rL(){
   updateFechaByProg('lic', progName);
   renderAccs('lic-acc','lic',false);
   renderTotal('lic-total',expPrices[2],'lic',false);
+  renderRecursos('lic-recursos', progName, 'LIC');
 }
 
 var _lastProgMae=null;
@@ -3166,6 +3210,7 @@ function rM(){
   updateFechaByProg('mae', progName); updateFechaByProg('ms', progName);
   renderAccs('mae-acc','mae',isOnline);
   renderTotal('mae-total',maeExpPrices[2],'mae',isOnline);
+  renderRecursos('mae-recursos', progName, 'MAE');
 }
 
 function rS(){
