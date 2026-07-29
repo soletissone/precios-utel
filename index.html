@@ -1392,6 +1392,13 @@ function codBadge(progName){
   var code=PROG_CODE_BY_PROG[progName];
   return code?'<span class="cod-badge" title="Código de programa">'+code+'</span>':'';
 }
+function _normRec(s){
+  return s.toLowerCase()
+    .replace(/\(nueva\)|\(new\)|\(nueva carrera\)/gi,'')
+    .replace(/[áàâä]/g,'a').replace(/[éèêë]/g,'e').replace(/[íìîï]/g,'i')
+    .replace(/[óòôö]/g,'o').replace(/[úùûü]/g,'u').replace(/ñ/g,'n')
+    .replace(/\s+/g,' ').trim();
+}
 function renderRecursos(divId, progName, nivel){
   var el=g(divId); if(!el) return;
   var btns=[];
@@ -1410,30 +1417,34 @@ function renderRecursos(divId, progName, nivel){
     var platBtn=platziBtn(progName);
     if(platBtn) btns.push(platBtn);
   }
-  // Imágenes de galería que coincidan con el programa
+  // Imágenes de galería — match exacto del último segmento del path
   if(typeof _galData!=='undefined'&&_galData){
-    var norm=progName.toUpperCase().replace(/[^A-ZÁÉÍÓÚÑÜ\s]/g,'').trim();
-    var words=norm.split(/\s+/).filter(function(w){return w.length>3;});
+    var normProg=_normRec(progName);
+    var prefixes=nivel==='LIC'?['licenciatura en ','lic. ']:
+                 nivel==='MAE'?['maestria en ','maestría en ']:
+                 nivel==='MASTER'?['master utel en ','master en ']:['doctorado en '];
+    var targets=prefixes.map(function(p){return _normRec(p+progName);});
+    // también match sin prefijo (por si la carpeta es solo el nombre)
+    targets.push(normProg);
     var imgs=_galData.filter(function(img){
-      var pathUp=img.path.toUpperCase();
-      return words.length>0&&words.every(function(w){return pathUp.indexOf(w)>=0;});
+      var parts=img.path.split('/');
+      var last=_normRec(parts[parts.length-1]);
+      return targets.some(function(t){return last===t;});
     });
     if(imgs.length>0){
-      var thumbs=imgs.slice(0,6).map(function(img){
-        var viewUrl='https://drive.google.com/file/d/'+img.id+'/view';
-        var thumbUrl='https://drive.google.com/thumbnail?id='+img.id+'&sz=w120';
-        return '<a href="#" onclick="event.preventDefault();window.open(\''+viewUrl+'\',\'_blank\')" title="'+img.name+'" style="display:inline-block;border-radius:6px;overflow:hidden;border:1px solid var(--bd)">'
-          +'<img src="'+thumbUrl+'" style="width:80px;height:60px;object-fit:cover;display:block"></a>';
+      var thumbHtml=imgs.map(function(img){
+        var previewUrl='https://drive.google.com/file/d/'+img.id+'/preview';
+        var thumbUrl='https://drive.google.com/thumbnail?id='+img.id+'&sz=w160';
+        return '<div style="display:inline-block;cursor:pointer;border-radius:6px;overflow:hidden;border:1px solid var(--bd);flex-shrink:0" title="'+img.name+'" onclick="openExt(\''+previewUrl+'\',\''+img.name.replace(/\\/g,'\\\\').replace(/'/g,'\\\'')+'\')">'
+          +'<img src="'+thumbUrl+'" style="width:90px;height:65px;object-fit:cover;display:block" loading="lazy"></div>';
       }).join('');
-      btns.push('<div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">'+thumbs
-        +(imgs.length>6?'<span style="font-size:11px;color:var(--mu)">+' +(imgs.length-6)+' más</span>':'')
-        +'</div>');
+      btns.push('<div style="display:flex;gap:6px;flex-wrap:wrap">'+thumbHtml+'</div>');
     }
   }
   if(!btns.length){el.innerHTML='';return;}
-  el.innerHTML='<div style="margin-top:12px;padding:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">'
+  el.innerHTML='<div style="margin-bottom:12px;padding:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">'
     +'<div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Recursos del programa</div>'
-    +'<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center">'+btns.join('')+'</div>'
+    +'<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-start">'+btns.join('')+'</div>'
     +'</div>';
 }
 function fichaBadge(progName,nivel,forceEje){
