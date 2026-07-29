@@ -2932,16 +2932,14 @@ function rL(){
     var uName=progName.toUpperCase();
     if(uName==='UVE'||uName==='PSICOLOGÍA'){
       var uveVariants=[
-        {id:'alto', label:'Pricing Alto', p:[700,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'HS24.LIC.UVE.VOXY.'},
-        {id:'bajo',  label:'Pricing Bajo',  p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'BF24.LIC.UVE.VOXY.'}
+        {id:'alto',         label:'Pricing Alto',    p:[700,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'HS24.LIC.UVE.VOXY.'},
+        {id:'bajo',         label:'Pricing Bajo',    p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'BF24.LIC.UVE.VOXY.'},
+        {id:'platzi_hot',   label:'Platzi Hotlead',  p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'ESC.LIC.UVE.PLATZI.'},
+        {id:'platzi_rmkt30',label:'Platzi RMKT 30',  p:[599,1400,1900,2449,2449,2449,2449,2449,2449,2449,2449,2449],pkg:'ESC2.LIC.UVE.PLATZI.'},
+        {id:'platzi_rmkt60',label:'Platzi RMKT 60',  p:[599,1400,1900,2330,2330,2330,2330,2330,2330,2330,2330,2330],pkg:'ESC3.LIC.UVE.PLATZI.'}
       ];
       if(!window._uveVariant) window._uveVariant='alto';
       var selUVE=window._uveVariant;
-      // Renderizar ambas tablas por separado
-      renderTable('lb', uveVariants[0].p, uveVariants[0].pkg,'—',0,0,3);
-      var rowsAlto=g('lb').innerHTML;
-      renderTable('lb', uveVariants[1].p, uveVariants[1].pkg,'—',0,0,3);
-      var rowsBajo=g('lb').innerHTML;
       function uveBlock(v, rows){
         var sel=selUVE===v.id;
         var style=sel
@@ -2955,7 +2953,12 @@ function rL(){
           +'<table style="width:100%;border-collapse:collapse">'+rows+'</table>'
           +'</div></td></tr>';
       }
-      g('lb').innerHTML=uveBlock(uveVariants[0],rowsAlto)+uveBlock(uveVariants[1],rowsBajo);
+      var uveHtml='';
+      uveVariants.forEach(function(v){
+        renderTable('lb', v.p, v.pkg,'—',0,0,3);
+        uveHtml+=uveBlock(v, g('lb').innerHTML);
+      });
+      g('lb').innerHTML=uveHtml;
       var selDiv=g('alianza-variant-sel'); if(selDiv) selDiv.style.display='none';
       var ljorDiv=document.getElementById('ljor'); if(ljorDiv) ljorDiv.closest('.fg').style.display='none';
       var _cbUve=g('lic-compl'); if(_cbUve) _cbUve.style.display='none';
