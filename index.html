@@ -555,6 +555,7 @@ Si pudieras sumarle una habilidad a tu perfil hoy mismo, ¿qué elegirías?</div
         <div class="fg"><label>Nivel detectado</label><div id="lnivel-badge" style="padding:8px 0"></div></div>
       </div>
       <div class="ib" id="li"></div>
+      <div id="lic-recursos"></div>
       <div class="tw"><table>
         <thead><tr><th>Mes</th><th>Cuota base</th><th>+ Accesorios</th><th>Total</th><th class="dom-col">Con domiciliación</th><th>Paquete</th><th>Escalonado</th></tr></thead>
         <tbody id="lb"></tbody>
@@ -587,7 +588,6 @@ Si pudieras sumarle una habilidad a tu perfil hoy mismo, ¿qué elegirías?</div
       </div>
       <div id="lic-acc"></div>
       <div id="lic-total"></div>
-      <div id="lic-recursos"></div>
     </div>
 
     <!-- MAESTRÍAS -->
@@ -606,6 +606,7 @@ Si pudieras sumarle una habilidad a tu perfil hoy mismo, ¿qué elegirías?</div
         <div class="fg"><label>Nivel detectado</label><div id="mnivel-badge" style="padding:8px 0"></div></div>
       </div>
       <div class="ib" id="mi"></div>
+      <div id="mae-recursos"></div>
       <div class="tw"><table>
         <thead><tr><th>Mes</th><th>Cuota base</th><th>+ Accesorios</th><th>Total</th><th class="dom-col">Con domiciliación</th><th>Paquete</th><th>Escalonado</th></tr></thead>
         <tbody id="mb"></tbody>
@@ -631,7 +632,6 @@ Si pudieras sumarle una habilidad a tu perfil hoy mismo, ¿qué elegirías?</div
       </div>
       <div id="mae-acc"></div>
       <div id="mae-total"></div>
-      <div id="mae-recursos"></div>
     </div>
 
     <!-- MASTER UTEL -->
@@ -4370,6 +4370,8 @@ function toggleChat(){
 <script>
 // ── GALERÍA DE RECURSOS ──────────────────────────────────────────
 var _galData=null, _galFiltered=[], _galInited=false;
+// Pre-cargar imágenes para sección de recursos por programa
+fetch('imagenes_utel.json').then(function(r){return r.json();}).then(function(data){_galData=data;}).catch(function(){});
 
 function galInit(){
   if(_galInited) return;
