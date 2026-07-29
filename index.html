@@ -3146,7 +3146,7 @@ function rM(){
   // Si Platzi está deshabilitado, revertir a precios con Coursera: mes 3+ +120, mes 1-2 −100
   var platziOff=!isPlatziVisible();
   var maeExpPrices=e.p.map(function(v,i){
-    if(i>=2) return v+expPriceMAE+ejeDiscountMAE+(platziOff?120:0);
+    if(i>=2) return v+expPriceMAE+ejeDiscountMAE+(platziOff?120:100);
     // mes 1-2: Platzi no suma en los primeros 2 pagos (ninguna maestría)
     return v-100;
   });
