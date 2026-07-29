@@ -1398,9 +1398,12 @@ function renderRecursos(divId, progName, nivel){
   // PDFs de ficha técnica
   var map=PROG_PDF_MAP&&PROG_PDF_MAP[progName];
   if(map){
+    var selKey=nivel==='LIC'?'lic':(nivel==='MAE'?'mae':(nivel==='MASTER'?'ms':'doc'));
+    var isEje=SEL_EXP&&SEL_EXP[selKey]==='seseje';
     var rKey=nivel+'_r', eKey=nivel+'_e';
-    if(map[rKey]) btns.push('<button class="ficha-btn" style="font-size:12px" onclick="openExt(\'pdfs/'+encodeURIComponent(map[rKey])+'\',\'Ficha técnica\',\'#64748b\')">📄 Ficha regular</button>');
-    if(map[eKey]) btns.push('<button class="ficha-btn" style="font-size:12px" onclick="openExt(\'pdfs/'+encodeURIComponent(map[eKey])+'\',\'Ficha ejecutiva\',\'#64748b\')">📄 Ficha ejecutiva</button>');
+    if(!isEje && map[rKey]) btns.push('<button class="ficha-btn" style="font-size:12px" onclick="openExt(\'pdfs/'+encodeURIComponent(map[rKey])+'\',\'Ficha técnica\',\'#64748b\')">📄 Ficha técnica</button>');
+    if(isEje && map[eKey]) btns.push('<button class="ficha-btn" style="font-size:12px" onclick="openExt(\'pdfs/'+encodeURIComponent(map[eKey])+'\',\'Ficha ejecutiva\',\'#64748b\')">📄 Ficha ejecutiva</button>');
+    if(isEje && !map[eKey] && map[rKey]) btns.push('<button class="ficha-btn" style="font-size:12px" onclick="openExt(\'pdfs/'+encodeURIComponent(map[rKey])+'\',\'Ficha técnica\',\'#64748b\')">📄 Ficha técnica</button>');
   }
   // Platzi
   if(isPlatziVisible()){
