@@ -2931,14 +2931,18 @@ function rL(){
   if(nivel==='unico'){
     var uName=progName.toUpperCase();
     if(uName==='UVE'||uName==='PSICOLOGÍA'){
-      var uveVariants=[
-        {id:'alto',         label:'Pricing Alto',    p:[700,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'HS24.LIC.UVE.VOXY.'},
-        {id:'bajo',         label:'Pricing Bajo',    p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'BF24.LIC.UVE.VOXY.'},
-        {id:'platzi_hot',   label:'Platzi Hotlead',  p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'ESC.LIC.UVE.PLATZI.'},
-        {id:'platzi_rmkt30',label:'Platzi RMKT 30',  p:[599,1400,1900,2449,2449,2449,2449,2449,2449,2449,2449,2449],pkg:'ESC2.LIC.UVE.PLATZI.'},
-        {id:'platzi_rmkt60',label:'Platzi RMKT 60',  p:[599,1400,1900,2330,2330,2330,2330,2330,2330,2330,2330,2330],pkg:'ESC3.LIC.UVE.PLATZI.'}
+      var uveAllVariants=[
+        {id:'alto',         leads:['hot'],           label:'Pricing Alto',    p:[700,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'HS24.LIC.UVE.VOXY.'},
+        {id:'bajo',         leads:['hot'],           label:'Pricing Bajo',    p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'BF24.LIC.UVE.VOXY.'},
+        {id:'platzi_hot',   leads:['hot'],           label:'Platzi Hotlead',  p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'ESC.LIC.UVE.PLATZI.'},
+        {id:'platzi_rmkt30',leads:['rmkt30'],        label:'Platzi RMKT 30',  p:[599,1400,1900,2449,2449,2449,2449,2449,2449,2449,2449,2449],pkg:'ESC2.LIC.UVE.PLATZI.'},
+        {id:'platzi_rmkt60',leads:['rmkt60'],        label:'Platzi RMKT 60',  p:[599,1400,1900,2330,2330,2330,2330,2330,2330,2330,2330,2330],pkg:'ESC3.LIC.UVE.PLATZI.'}
       ];
-      if(!window._uveVariant) window._uveVariant='alto';
+      var uveLead=g('llead').value;
+      var uveVariants=uveAllVariants.filter(function(v){ return v.leads.indexOf(uveLead)>=0; });
+      if(!uveVariants.length) uveVariants=uveAllVariants;
+      if(!window._uveVariant || !uveVariants.find(function(v){return v.id===window._uveVariant;}))
+        window._uveVariant=uveVariants[0].id;
       var selUVE=window._uveVariant;
       function uveBlock(v, rows){
         var sel=selUVE===v.id;
