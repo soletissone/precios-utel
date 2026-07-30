@@ -3344,7 +3344,7 @@ function rPU(){
             + '<div class="pu-price">$'+item.pago.toLocaleString('es-MX')+'</div>'
             + (item.lista>0?'<div class="pu-lista" style="font-size:11px;color:var(--mu)">Lista: $'+item.lista.toLocaleString('es-MX')+'</div>':'')
             + (item.lista>0?'<div class="pu-beca" style="font-size:11px;color:#06ba06;font-weight:600">Beca '+beca+'%</div>':'')
-            + '<div class="pu-pkg" style="font-size:10px;color:var(--mu);margin-top:4px">'+item.pkg+'</div>'
+            + (item.pkg&&item.pkg!=='—'?'<div class="pu-pkg" style="font-size:10px;color:var(--mu);margin-top:4px">'+item.pkg+'</div>':'')
             + mkIncludes(item.noTitulo)
             + '</div>';
     });
