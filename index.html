@@ -3298,17 +3298,39 @@ function rPU(){
       items:[
         {l:'Online / Mayor — 18M', lista:136980, pago:47700,  pkg:'MA.UNICO.'},
         {l:'Online / Mayor — 24M', lista:136980, pago:63600,  pkg:'MA.UNICO.'},
-        {l:'Ejecutivas — 18M',     lista:136980, pago:49800,  pkg:'MA.HIBRIDO.UNICO.'}
+        {l:'Ejecutivas — 18M',     lista:136980, pago:49800,  pkg:'MA.HIBRIDO.UNICO.'},
+        {l:'Ejecutivas — 24M',     lista:136980, pago:66400,  pkg:'MA.HIBRIDO.UNICO.'},
+        {l:'Híbrida — 18M',        lista:136980, pago:55800,  pkg:'MA.HIBRIDO.UNICO.'},
+        {l:'Híbrida — 24M',        lista:136980, pago:74400,  pkg:'MA.HIBRIDO.UNICO.'}
+      ]
+    },
+    {
+      title: 'Doctorado',
+      items:[
+        {l:'Online',               lista:0,      pago:116600, pkg:'—'}
+      ]
+    },
+    {
+      title: 'PSI UVE',
+      items:[
+        {l:'Online',               lista:216900, pago:106400, pkg:'—', noTitulo:true}
+      ]
+    },
+    {
+      title: 'UNICA',
+      items:[
+        {l:'Online — Sin Título',  lista:90080,  pago:76100,  pkg:'—', noTitulo:true},
+        {l:'Online — Con Título',  lista:102400, pago:90900,  pkg:'—'}
       ]
     }
   ];
 
-  // Includes for all PU: Asistencia Plus, Voxy, Título (always included)
-  var includesHTML = '<div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">'
-    + '<span class="chip included" style="font-size:11px"><span class="chip-check"></span><span class="chip-name">Inglés Voxy</span><span class="chip-price">Incluido</span></span>'
-    + '<span class="chip included" style="font-size:11px"><span class="chip-check"></span><span class="chip-name">Asistencia Plus</span><span class="chip-price">Incluido</span></span>'
-    + '<span class="chip included" style="font-size:11px"><span class="chip-check"></span><span class="chip-name">Titulación</span><span class="chip-price">Incluido</span></span>'
-    + '</div>';
+  function mkIncludes(noTitulo){
+    var chips = '<span class="chip included" style="font-size:11px"><span class="chip-check"></span><span class="chip-name">Inglés Voxy</span><span class="chip-price">Incluido</span></span>'
+      + '<span class="chip included" style="font-size:11px"><span class="chip-check"></span><span class="chip-name">Asistencia Plus</span><span class="chip-price">Incluido</span></span>';
+    if(!noTitulo) chips += '<span class="chip included" style="font-size:11px"><span class="chip-check"></span><span class="chip-name">Titulación</span><span class="chip-price">Incluido</span></span>';
+    return '<div style="margin-top:10px;display:flex;gap:6px;flex-wrap:wrap">'+chips+'</div>';
+  }
 
   var html = '';
   groups.forEach(function(grp){
@@ -3320,10 +3342,10 @@ function rPU(){
       html += '<div class="pu-card">'
             + '<div class="pu-label">'+item.l+'</div>'
             + '<div class="pu-price">$'+item.pago.toLocaleString('es-MX')+'</div>'
-            + '<div class="pu-lista" style="font-size:11px;color:var(--mu)">Lista: $'+item.lista.toLocaleString('es-MX')+'</div>'
-            + '<div class="pu-beca" style="font-size:11px;color:#06ba06;font-weight:600">Beca '+beca+'%</div>'
+            + (item.lista>0?'<div class="pu-lista" style="font-size:11px;color:var(--mu)">Lista: $'+item.lista.toLocaleString('es-MX')+'</div>':'')
+            + (item.lista>0?'<div class="pu-beca" style="font-size:11px;color:#06ba06;font-weight:600">Beca '+beca+'%</div>':'')
             + '<div class="pu-pkg" style="font-size:10px;color:var(--mu);margin-top:4px">'+item.pkg+'</div>'
-            + includesHTML
+            + mkIncludes(item.noTitulo)
             + '</div>';
     });
     html += '</div></div>';
