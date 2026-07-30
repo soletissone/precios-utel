@@ -3710,6 +3710,14 @@ function downloadSummary(sec){
 
   // Open in new window and print
   var win=window.open('','_blank','width=800,height=700');
+  if(!win){
+    // Popup bloqueado — abrir en pestaña usando Blob
+    var blob=new Blob([html],{type:'text/html'});
+    var blobUrl=URL.createObjectURL(blob);
+    win=window.open(blobUrl,'_blank');
+    if(!win){alert('Permitir popups para poder descargar la propuesta.'); return;}
+    return;
+  }
   win.document.write(html);
   win.document.close();
   win.focus();
