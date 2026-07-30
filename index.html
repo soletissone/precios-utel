@@ -3533,7 +3533,7 @@ function downloadSummary(sec){
     var selVariant = (isUNICA ? unicaLeadMap : uveLeadMap)[_pdfLead] || (isUNICA ? unicaLeadMap : uveLeadMap)['hot'];
     var p=selVariant.p;
     var domPct=_domForPDF/100;
-    var isFlat=(selId==='flat');
+    var isFlat=false;
     var labels=isFlat?['Mes 1','Mes 2 en adelante']:['Mes 1','Mes 2','Mes 3','Mes 4 en adelante'];
     var prices=isFlat?[p[0],p[1]]:([p[0],p[1],p[2],p[3]]);
     prices.forEach(function(price,i){
