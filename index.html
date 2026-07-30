@@ -3523,14 +3523,14 @@ function downloadSummary(sec){
   var _domForPDF = (isUNICA ? 5 : (isUNAG ? 0 : DOMICILIACION));
   var tableRows='';
   if(isUNICA || isUVE){
-    var variants = isUNICA
-      ? [{id:'alto',p:[735,1470,1995,2810,2810,2810,2810,2810,2810,2810,2810,2810]},
-         {id:'bajo',p:[629,1470,1995,2810,2810,2810,2810,2810,2810,2810,2810,2810]},
-         {id:'flat',p:[2810,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810]}]
-      : [{id:'alto',p:[700,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595]},
-         {id:'bajo',p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595]}];
-    var selId = isUNICA ? (window._unicaVariant||'alto') : (window._uveVariant||'alto');
-    var selVariant = variants.find(function(v){return v.id===selId;})||variants[0];
+    var _pdfLead=g('llead').value||'hot';
+    var unicaLeadMap={'hot':{p:[629,1470,1995,2810,2810,2810,2810,2810,2810,2810,2810,2810]},
+                      'rmkt30':{p:[629,1470,1995,2649,2649,2649,2649,2649,2649,2649,2649,2649]},
+                      'rmkt60':{p:[629,1470,1995,2449,2449,2449,2449,2449,2449,2449,2449,2449]}};
+    var uveLeadMap={'hot':{p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595]},
+                    'rmkt30':{p:[599,1400,1900,2449,2449,2449,2449,2449,2449,2449,2449,2449]},
+                    'rmkt60':{p:[599,1400,1900,2330,2330,2330,2330,2330,2330,2330,2330,2330]}};
+    var selVariant = (isUNICA ? unicaLeadMap : uveLeadMap)[_pdfLead] || (isUNICA ? unicaLeadMap : uveLeadMap)['hot'];
     var p=selVariant.p;
     var domPct=_domForPDF/100;
     var isFlat=(selId==='flat');
@@ -3563,9 +3563,9 @@ function downloadSummary(sec){
 
   // Build included chips
   var incChips='';
-  if(isUNICA || isUNAG){
-    // UNICA / UNAG: solo Voxy
-    incChips='<span style="display:inline-block;background:#dcfce7;color:#06ba06;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Voxy</span>';
+  if(isUNICA || isUVE || isUNAG){
+    // UNICA / UVE / UNAG: incluye Platzi
+    incChips='<span style="display:inline-block;background:#dcfce7;color:#06ba06;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Platzi</span>';
   } else {
     var incList2=(realSec==='mae')?(cats.included_online||cats.included):cats.included;
     if(cats) incList2.forEach(function(it){
@@ -3594,7 +3594,7 @@ function downloadSummary(sec){
     voxy: {label:'Inglés Voxy',color:'#fefce8',border:'#fef08a',icon:'🌐',desc:'Plataforma de aprendizaje de inglés en línea con contenido personalizado según el nivel y los objetivos del usuario. Permite desarrollar habilidades de conversación, comprensión, lectura y escritura mediante lecciones interactivas y flexibles.'},
     platzi:{label:'Platzi',color:'#00d369',border:'#00b356',icon:'🚀',desc:'Membresía incluida desde el primer día de clases con acceso a más de 1.000 cursos en inteligencia artificial, tecnología, marketing, inglés, liderazgo y negocios. Contenido práctico y actualizado para potenciar tu perfil profesional y destacar en el mercado laboral.',dark:true}
   };
-  var _accDescIncList=(isUNICA||isUNAG)?[{id:'voxy'}]:((cats&&((realSec==='mae')?(cats.included_online||cats.included):cats.included))||[]);
+  var _accDescIncList=(isUNICA||isUVE||isUNAG)?[{id:'platzi'}]:((cats&&((realSec==='mae')?(cats.included_online||cats.included):cats.included))||[]);
   var accDescCards='';
   _accDescIncList.forEach(function(it){
     var d=_ACC_DESCS[it.id];
