@@ -1098,9 +1098,9 @@ function exportAllData(){
   var uveVariantsExp=[
     {label:'Pricing Alto',    p:[700,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595], pkg:'HS24.LIC.UVE.VOXY.'},
     {label:'Pricing Bajo',    p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595], pkg:'BF24.LIC.UVE.VOXY.'},
-    {label:'Platzi Hotlead',  p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595], pkg:'ESC.LIC.UVE.PLATZI.'},
+    {label:'Platzi Hotlead',  p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595], pkg:'ESC2.LIC.UVE.PLATZI.'},
     {label:'Platzi RMKT 30',  p:[599,1400,1900,2449,2449,2449,2449,2449,2449,2449,2449,2449], pkg:'ESC2.LIC.UVE.PLATZI.'},
-    {label:'Platzi RMKT 60',  p:[599,1400,1900,2330,2330,2330,2330,2330,2330,2330,2330,2330], pkg:'ESC3.LIC.UVE.PLATZI.'}
+    {label:'Platzi RMKT 60',  p:[599,1400,1900,2300,2300,2300,2300,2300,2300,2300,2300,2300], pkg:'ESC3.LIC.UVE.PLATZI.'}
   ];
   CATALOG['LICENCIATURA'].forEach(function(item){
     if(item.v!=='uve') return;
@@ -1679,7 +1679,7 @@ var LISTA_MAP={
   'ESC1.LIC.UNICA.VOXY.':3200,'ESC2.LIC.UNICA.VOXY.':3200,'LIC.UNICA.VOXY.':3200,
   'ESC.LIC.UNICA.PLATZI.':3200,'ESC2.LIC.UNICA.PLATZI.':3200,'ESC3.LIC.UNICA.PLATZI.':3200,'LIC.UNICA.VOXY.TIT.':3200,
   'HS24.LIC.UVE.VOXY.':4820,'BF24.LIC.UVE.VOXY.':4820,
-  'ESC.LIC.UVE.PLATZI.':7233,'ESC2.LIC.UVE.PLATZI.':7233,'ESC3.LIC.UVE.PLATZI.':7233,
+  'ESC2.LIC.UVE.PLATZI.':4820,'ESC3.LIC.UVE.PLATZI.':4820,
   'MA.UNAG.BASICO.2.15.21':4190,'DO.UNAG.BASICO.2.15.21':6620
 };
 var LBG={
@@ -2949,9 +2949,9 @@ function rL(){
       var uveAllVariants=[
         {id:'alto',         leads:['hot'],           label:'Pricing Alto',    p:[700,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'HS24.LIC.UVE.VOXY.'},
         {id:'bajo',         leads:['hot'],           label:'Pricing Bajo',    p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'BF24.LIC.UVE.VOXY.'},
-        {id:'platzi_hot',   leads:['hot'],           label:'Platzi Hotlead',  p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'ESC.LIC.UVE.PLATZI.'},
+        {id:'platzi_hot',   leads:['hot'],           label:'Platzi Hotlead',  p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'ESC2.LIC.UVE.PLATZI.'},
         {id:'platzi_rmkt30',leads:['rmkt30'],        label:'Platzi RMKT 30',  p:[599,1400,1900,2449,2449,2449,2449,2449,2449,2449,2449,2449],pkg:'ESC2.LIC.UVE.PLATZI.'},
-        {id:'platzi_rmkt60',leads:['rmkt60'],        label:'Platzi RMKT 60',  p:[599,1400,1900,2330,2330,2330,2330,2330,2330,2330,2330,2330],pkg:'ESC3.LIC.UVE.PLATZI.'}
+        {id:'platzi_rmkt60',leads:['rmkt60'],        label:'Platzi RMKT 60',  p:[599,1400,1900,2300,2300,2300,2300,2300,2300,2300,2300,2300],pkg:'ESC3.LIC.UVE.PLATZI.'}
       ];
       var uveLead=g('llead').value;
       var uveVariants=uveAllVariants.filter(function(v){ return v.leads.indexOf(uveLead)>=0; });
