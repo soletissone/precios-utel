@@ -3833,10 +3833,9 @@ function init(){
   updateDomIndicator();
   fillSelect('lprog','LICENCIATURA','lnivel-badge');
   fillSelect('mprog','MAESTR\u00cdA','mnivel-badge');
-  fillSelect('sprog','MASTER','snivel-badge');
   fillSelect('dprog','DOCTORADO','dnivel-badge');
   makeSearchableAll();
-  ['lprog','mprog','sprog','dprog'].forEach(function(id){var s=g(id);if(s&&s.options.length>0){s.selectedIndex=0;s.value=s.options[0].value;if(s._ssRefresh)s._ssRefresh();}});
+  ['lprog','mprog','dprog'].forEach(function(id){var s=g(id);if(s&&s.options.length>0){s.selectedIndex=0;s.value=s.options[0].value;if(s._ssRefresh)s._ssRefresh();}});
   rL();rM();rD();rPU();rDip();
 }
 
