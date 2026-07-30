@@ -2989,24 +2989,20 @@ function rL(){
       TITULO_COSTO_0=_tit0Uve;
       g('lic-total').innerHTML=''; return;
     } else if(uName==='UNICA'||uName==='ARTE DIGITAL Y MULTIMEDIA'||uName==='MARKETING Y PUBLICIDAD'||uName==='MEDIOS DIGITALES'||uName==='COMUNICACIÓN CORPORATIVA'){
-      var unicaVariants=[
-        {id:'hot',    label:'Hotlead',        p:[629,1470,1995,2810,2810,2810,2810,2810,2810,2810,2810,2810],pkg:'ESC.LIC.UNICA.PLATZI.'},
-        {id:'rmkt30', label:'RMKT 30 días',   p:[629,1470,1995,2649,2649,2649,2649,2649,2649,2649,2649,2649],pkg:'ESC2.LIC.UNICA.PLATZI.'},
-        {id:'rmkt60', label:'RMKT 60 días',   p:[629,1470,1995,2449,2449,2449,2449,2449,2449,2449,2449,2449],pkg:'ESC3.LIC.UNICA.PLATZI.'},
-        {id:'flat',   label:'Flat',           p:[2810,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810,2810],pkg:'LIC.UNICA.VOXY.'},
-        {id:'flattit',label:'Flat + Título',  p:[3360,3360,3360,3360,3360,3360,3360,3360,3360,3360,3360,3360],pkg:'LIC.UNICA.VOXY.TIT.'}
+      var unicaAllVariants=[
+        {id:'unica_hot',    leads:['hot'],    label:'Hotlead',      p:[629,1470,1995,2810,2810,2810,2810,2810,2810,2810,2810,2810],pkg:'ESC.LIC.UNICA.PLATZI.'},
+        {id:'unica_rmkt30', leads:['rmkt30'], label:'RMKT 30 días', p:[629,1470,1995,2649,2649,2649,2649,2649,2649,2649,2649,2649],pkg:'ESC2.LIC.UNICA.PLATZI.'},
+        {id:'unica_rmkt60', leads:['rmkt60'], label:'RMKT 60 días', p:[629,1470,1995,2449,2449,2449,2449,2449,2449,2449,2449,2449],pkg:'ESC3.LIC.UNICA.PLATZI.'}
       ];
-      if(!window._unicaVariant) window._unicaVariant='hot';
+      var unicaLead=g('llead').value;
+      var unicaVariants=unicaAllVariants.filter(function(v){ return v.leads.indexOf(unicaLead)>=0; });
+      if(!unicaVariants.length) unicaVariants=unicaAllVariants;
+      if(!window._unicaVariant||!unicaVariants.find(function(v){return v.id===window._unicaVariant;}))
+        window._unicaVariant=unicaVariants[0].id;
       var selUNICA=window._unicaVariant;
-      // Renderizar todas las variantes
-      // UNICA: dom siempre 5%, sin colegiatura, sin Tít$0
       var _domOrig=DOMICILIACION; DOMICILIACION=5;
       var _tit0Orig=TITULO_COSTO_0; TITULO_COSTO_0=false;
       var _complBanner=g('lic-compl'); if(_complBanner) _complBanner.style.display='none';
-      var unicaRows=unicaVariants.map(function(v){
-        renderTable('lb',v.p,v.pkg,'—',0,0,(v.id==='flat'||v.id==='flattit')?0:3); return g('lb').innerHTML;
-      });
-      DOMICILIACION=_domOrig; TITULO_COSTO_0=_tit0Orig;
       function unicaBlock(v, rows){
         var sel=selUNICA===v.id;
         var style=sel
@@ -3020,10 +3016,16 @@ function rL(){
           +'<table style="width:100%;border-collapse:collapse">'+rows+'</table>'
           +'</div></td></tr>';
       }
-      g('lb').innerHTML=unicaVariants.map(function(v,i){ return unicaBlock(v,unicaRows[i]); }).join('');
+      var unicaHtml='';
+      unicaVariants.forEach(function(v){
+        renderTable('lb',v.p,v.pkg,'—',0,0,3);
+        unicaHtml+=unicaBlock(v, g('lb').innerHTML);
+      });
+      DOMICILIACION=_domOrig; TITULO_COSTO_0=_tit0Orig;
+      g('lb').innerHTML=unicaHtml;
       var selDiv2=g('alianza-variant-sel'); if(selDiv2) selDiv2.style.display='none';
       var ljorDiv2=document.getElementById('ljor'); if(ljorDiv2) ljorDiv2.closest('.fg').style.display='none';
-      g('lbi').innerHTML='<span>Incluye: Voxy</span>';
+      g('lbi').innerHTML='<span>Incluye: Asistencia, Voxy, 5% domiciliación</span>';
       g('li').innerHTML=NB['unico']+' <span class="badge b-mod">UNICA</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
       g('lic-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UNICA</div>';
       g('lic-total').innerHTML=''; return;
