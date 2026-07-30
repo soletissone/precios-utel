@@ -2946,85 +2946,34 @@ function rL(){
   if(nivel==='unico'){
     var uName=progName.toUpperCase();
     if(uName==='UVE'||uName==='PSICOLOGÍA'){
-      var uveAllVariants=[
-        {id:'alto',         leads:['hot'],           label:'Pricing Alto',    p:[700,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'HS24.LIC.UVE.VOXY.'},
-        {id:'bajo',         leads:['hot'],           label:'Pricing Bajo',    p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'BF24.LIC.UVE.VOXY.'},
-        {id:'platzi_hot',   leads:['hot'],           label:'Platzi Hotlead',  p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'ESC2.LIC.UVE.PLATZI.'},
-        {id:'platzi_rmkt30',leads:['rmkt30'],        label:'Platzi RMKT 30',  p:[599,1400,1900,2449,2449,2449,2449,2449,2449,2449,2449,2449],pkg:'ESC2.LIC.UVE.PLATZI.'},
-        {id:'platzi_rmkt60',leads:['rmkt60'],        label:'Platzi RMKT 60',  p:[599,1400,1900,2300,2300,2300,2300,2300,2300,2300,2300,2300],pkg:'ESC3.LIC.UVE.PLATZI.'}
-      ];
+      var uveMap={'hot':{p:[599,1400,1900,2595,2595,2595,2595,2595,2595,2595,2595,2595],pkg:'ESC2.LIC.UVE.PLATZI.'},
+                  'rmkt30':{p:[599,1400,1900,2449,2449,2449,2449,2449,2449,2449,2449,2449],pkg:'ESC2.LIC.UVE.PLATZI.'},
+                  'rmkt60':{p:[599,1400,1900,2300,2300,2300,2300,2300,2300,2300,2300,2300],pkg:'ESC3.LIC.UVE.PLATZI.'}};
       var uveLead=g('llead').value;
-      var uveVariants=uveAllVariants.filter(function(v){ return v.leads.indexOf(uveLead)>=0; });
-      if(!uveVariants.length) uveVariants=uveAllVariants;
-      if(!window._uveVariant || !uveVariants.find(function(v){return v.id===window._uveVariant;}))
-        window._uveVariant=uveVariants[0].id;
-      var selUVE=window._uveVariant;
-      function uveBlock(v, rows){
-        var sel=selUVE===v.id;
-        var style=sel
-          ?'border:2px solid var(--ac);border-radius:8px;overflow:hidden;margin-bottom:10px;cursor:pointer;box-shadow:0 0 0 3px rgba(6,186,6,.12)'
-          :'border:2px solid var(--bd);border-radius:8px;overflow:hidden;margin-bottom:10px;cursor:pointer;opacity:.7';
-        return '<tr><td colspan="7" style="padding:0"><div style="'+style+'" onclick="setAlianzaVar(\'uve\',\''+v.id+'\')">'
-          +'<div style="padding:6px 12px;background:'+(sel?'var(--ac)':'var(--s2)')+';display:flex;align-items:center;gap:8px">'
-          +'<span style="font-size:12px;font-weight:700;color:'+(sel?'#fff':'var(--mu)')+'">'+v.label+'</span>'
-          +(sel?'<span style="font-size:10px;background:rgba(255,255,255,.25);color:#fff;border-radius:999px;padding:1px 8px">✓ Seleccionado</span>':'')
-          +'</div>'
-          +'<table style="width:100%;border-collapse:collapse">'+rows+'</table>'
-          +'</div></td></tr>';
-      }
-      var uveHtml='';
-      uveVariants.forEach(function(v){
-        renderTable('lb', v.p, v.pkg,'—',0,0,3);
-        uveHtml+=uveBlock(v, g('lb').innerHTML);
-      });
-      g('lb').innerHTML=uveHtml;
-      var selDiv=g('alianza-variant-sel'); if(selDiv) selDiv.style.display='none';
-      var ljorDiv=document.getElementById('ljor'); if(ljorDiv) ljorDiv.closest('.fg').style.display='none';
+      var uveV=uveMap[uveLead]||uveMap['hot'];
       var _cbUve=g('lic-compl'); if(_cbUve) _cbUve.style.display='none';
+      var ljorDivU=document.getElementById('ljor'); if(ljorDivU) ljorDivU.closest('.fg').style.display='none';
+      var selDivU=g('alianza-variant-sel'); if(selDivU) selDivU.style.display='none';
+      renderTable('lb',uveV.p,uveV.pkg,'—',0,0,3);
       g('lbi').innerHTML='<span>Incluye: Asistencia, Voxy, 5% domiciliación</span>';
       g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
-      // UVE: accesorios normales pero sin Título $0
       var _tit0Uve=TITULO_COSTO_0; TITULO_COSTO_0=false;
       renderAccs('lic-acc','lic',false);
       TITULO_COSTO_0=_tit0Uve;
       g('lic-total').innerHTML=''; return;
     } else if(uName==='UNICA'||uName==='ARTE DIGITAL Y MULTIMEDIA'||uName==='MARKETING Y PUBLICIDAD'||uName==='MEDIOS DIGITALES'||uName==='COMUNICACIÓN CORPORATIVA'){
-      var unicaAllVariants=[
-        {id:'unica_hot',    leads:['hot'],    label:'Hotlead',      p:[629,1470,1995,2810,2810,2810,2810,2810,2810,2810,2810,2810],pkg:'ESC.LIC.UNICA.PLATZI.'},
-        {id:'unica_rmkt30', leads:['rmkt30'], label:'RMKT 30 días', p:[629,1470,1995,2649,2649,2649,2649,2649,2649,2649,2649,2649],pkg:'ESC2.LIC.UNICA.PLATZI.'},
-        {id:'unica_rmkt60', leads:['rmkt60'], label:'RMKT 60 días', p:[629,1470,1995,2449,2449,2449,2449,2449,2449,2449,2449,2449],pkg:'ESC3.LIC.UNICA.PLATZI.'}
-      ];
+      var unicaMap={'hot':{p:[629,1470,1995,2810,2810,2810,2810,2810,2810,2810,2810,2810],pkg:'ESC.LIC.UNICA.PLATZI.'},
+                    'rmkt30':{p:[629,1470,1995,2649,2649,2649,2649,2649,2649,2649,2649,2649],pkg:'ESC2.LIC.UNICA.PLATZI.'},
+                    'rmkt60':{p:[629,1470,1995,2449,2449,2449,2449,2449,2449,2449,2449,2449],pkg:'ESC3.LIC.UNICA.PLATZI.'}};
       var unicaLead=g('llead').value;
-      var unicaVariants=unicaAllVariants.filter(function(v){ return v.leads.indexOf(unicaLead)>=0; });
-      if(!unicaVariants.length) unicaVariants=unicaAllVariants;
-      if(!window._unicaVariant||!unicaVariants.find(function(v){return v.id===window._unicaVariant;}))
-        window._unicaVariant=unicaVariants[0].id;
-      var selUNICA=window._unicaVariant;
+      var unicaV=unicaMap[unicaLead]||unicaMap['hot'];
       var _domOrig=DOMICILIACION; DOMICILIACION=5;
       var _tit0Orig=TITULO_COSTO_0; TITULO_COSTO_0=false;
       var _complBanner=g('lic-compl'); if(_complBanner) _complBanner.style.display='none';
-      function unicaBlock(v, rows){
-        var sel=selUNICA===v.id;
-        var style=sel
-          ?'border:2px solid var(--ac);border-radius:8px;overflow:hidden;margin-bottom:10px;cursor:pointer;box-shadow:0 0 0 3px rgba(6,186,6,.12)'
-          :'border:2px solid var(--bd);border-radius:8px;overflow:hidden;margin-bottom:10px;cursor:pointer;opacity:.7';
-        return '<tr><td colspan="7" style="padding:0"><div style="'+style+'" onclick="setAlianzaVar(\'unica\',\''+v.id+'\')">'
-          +'<div style="padding:6px 12px;background:'+(sel?'var(--ac)':'var(--s2)')+';display:flex;align-items:center;gap:8px">'
-          +'<span style="font-size:12px;font-weight:700;color:'+(sel?'#fff':'var(--mu)')+'">'+v.label+'</span>'
-          +(sel?'<span style="font-size:10px;background:rgba(255,255,255,.25);color:#fff;border-radius:999px;padding:1px 8px">✓ Seleccionado</span>':'')
-          +'</div>'
-          +'<table style="width:100%;border-collapse:collapse">'+rows+'</table>'
-          +'</div></td></tr>';
-      }
-      var unicaHtml='';
-      unicaVariants.forEach(function(v){
-        renderTable('lb',v.p,v.pkg,'—',0,0,3);
-        unicaHtml+=unicaBlock(v, g('lb').innerHTML);
-      });
-      DOMICILIACION=_domOrig; TITULO_COSTO_0=_tit0Orig;
-      g('lb').innerHTML=unicaHtml;
       var selDiv2=g('alianza-variant-sel'); if(selDiv2) selDiv2.style.display='none';
       var ljorDiv2=document.getElementById('ljor'); if(ljorDiv2) ljorDiv2.closest('.fg').style.display='none';
+      renderTable('lb',unicaV.p,unicaV.pkg,'—',0,0,3);
+      DOMICILIACION=_domOrig; TITULO_COSTO_0=_tit0Orig;
       g('lbi').innerHTML='<span>Incluye: Asistencia, Voxy, 5% domiciliación</span>';
       g('li').innerHTML=NB['unico']+' <span class="badge b-mod">UNICA</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
       g('lic-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UNICA</div>';
