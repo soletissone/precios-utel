@@ -1699,7 +1699,7 @@ var NB={
 
 function sw(id){
   document.querySelectorAll('.tab').forEach(function(t,i){
-    t.classList.toggle('active',['lic','mae','ms','doc','pu','dip','en','gal'][i]===id);
+    t.classList.toggle('active',['lic','mae','doc','pu','dip','en','gal'][i]===id);
   });
   document.querySelectorAll('.sec').forEach(function(s){
     s.classList.toggle('active',s.id==='sec-'+id);
