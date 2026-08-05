@@ -4322,8 +4322,8 @@ function _galBuildUI(data){
   var cats={}, subs={};
   data.forEach(function(img){
     var parts=img.path.split('/');
-    var cat=(parts[1]||'').trim();
-    var sub=(parts[2]||'').trim();
+    var cat=(parts[0]||'').trim();
+    var sub=(parts.length>2?(parts[1]||''):'').trim();
     if(cat) cats[cat]=true;
     if(sub) subs[sub]=(subs[sub]||{});
     if(cat&&sub) subs[sub][cat]=true;
@@ -4357,8 +4357,8 @@ function galUpdateSubcats(selectedCat){
   var seen={};
   _galData.forEach(function(img){
     var parts=img.path.split('/');
-    var cat=(parts[1]||'').trim();
-    var sub=(parts[2]||'').trim();
+    var cat=(parts[0]||'').trim();
+    var sub=(parts.length>2?(parts[1]||''):'').trim();
     if(sub && (!selectedCat || cat===selectedCat) && !seen[sub]){
       seen[sub]=true;
       var o=document.createElement('option'); o.value=sub; o.textContent=sub; subSel.appendChild(o);
@@ -4376,8 +4376,8 @@ function galFilter(){
   if(sub) document.getElementById('gal-sub').value=sub;
   _galFiltered=_galData.filter(function(img){
     var parts=img.path.split('/');
-    var imgCat=(parts[1]||'').trim();
-    var imgSub=(parts[2]||'').trim();
+    var imgCat=(parts[0]||'').trim();
+    var imgSub=(parts.length>2?(parts[1]||''):'').trim();
     if(cat && imgCat!==cat) return false;
     if(sub && imgSub!==sub) return false;
     if(q && img.name.toLowerCase().indexOf(q)<0) return false;
@@ -4396,9 +4396,9 @@ function galRender(){
   var html='';
   _galFiltered.forEach(function(img){
     var parts=img.path.split('/');
-    var sub=(parts[2]||parts[1]||'').trim();
+    var sub=(parts.length>2?parts[1]:parts[0]||'').trim();
     var thumb='https://drive.google.com/thumbnail?id='+img.id+'&sz=w300';
-    var viewUrl=img.url.replace(/'/g,"\\'");
+    var viewUrl=('https://drive.google.com/file/d/'+img.id+'/view').replace(/'/g,"\\'");
     var dlUrl=('https://drive.google.com/uc?export=download&id='+img.id).replace(/'/g,"\\'");
     var nameEsc=img.name.replace(/'/g,"\\'").replace(/"/g,'&quot;');
     html+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .15s" onmouseover="this.style.boxShadow=\'0 4px 16px rgba(0,0,0,.12)\'" onmouseout="this.style.boxShadow=\'none\'">'
