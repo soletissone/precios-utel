@@ -4314,54 +4314,37 @@ var _galData=null, _galFiltered=[], _galInited=false;
 // Pre-cargar imágenes para sección de recursos por programa
 fetch('imagenes_utel.json').then(function(r){return r.json();}).then(function(data){_galData=data;}).catch(function(){});
 
+function _galBuildUI(data){
+  _galData=data;
+  var cats={}, subs={};
+  data.forEach(function(img){
+    var parts=img.path.split('/');
+    var cat=(parts[1]||'').trim();
+    var sub=(parts[2]||'').trim();
+    if(cat) cats[cat]=true;
+    if(sub) subs[sub]=(subs[sub]||{});
+    if(cat&&sub) subs[sub][cat]=true;
+  });
+  var catSel=document.getElementById('gal-cat');
+  Object.keys(cats).sort().forEach(function(c){
+    var o=document.createElement('option'); o.value=c; o.textContent=c; catSel.appendChild(o);
+  });
+  window._galSubs=subs;
+  galFilter();
+}
+
 function galInit(){
   if(_galInited) return;
   _galInited=true;
   var grid=document.getElementById('gal-grid');
+  // Si la pre-carga ya terminó, usar datos en memoria directamente
+  if(_galData && _galData.length){ _galBuildUI(_galData); return; }
   grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--mu);font-size:13px">Cargando imágenes…</div>';
   fetch('imagenes_utel.json')
     .then(function(r){return r.json();})
-    .then(function(data){
-      _galData=data;
-      // Build category options
-      var cats={}, subs={};
-      data.forEach(function(img){
-        var parts=img.path.split('/');
-        var cat=(parts[1]||'').trim();
-        var sub=(parts[2]||'').trim();
-        if(cat) cats[cat]=true;
-        if(sub) subs[sub]=(subs[sub]||{});
-        if(cat&&sub) subs[sub][cat]=true;
-      });
-      var catSel=document.getElementById('gal-cat');
-      Object.keys(cats).sort().forEach(function(c){
-        var o=document.createElement('option'); o.value=c; o.textContent=c; catSel.appendChild(o);
-      });
-      // Store subcategory data for filtering
-      window._galSubs=subs;
-      galFilter();
-    })
+    .then(function(data){ _galBuildUI(data); })
     .catch(function(){
-      // Si la pre-carga ya llenó _galData, usarla en lugar de mostrar error
-      if(_galData && _galData.length){
-        var cats={}, subs={};
-        _galData.forEach(function(img){
-          var parts=img.path.split('/');
-          var cat=(parts[1]||'').trim();
-          var sub=(parts[2]||'').trim();
-          if(cat) cats[cat]=true;
-          if(sub) subs[sub]=(subs[sub]||{});
-          if(cat&&sub) subs[sub][cat]=true;
-        });
-        var catSel=document.getElementById('gal-cat');
-        Object.keys(cats).sort().forEach(function(c){
-          var o=document.createElement('option'); o.value=c; o.textContent=c; catSel.appendChild(o);
-        });
-        window._galSubs=subs;
-        galFilter();
-      } else {
-        document.getElementById('gal-grid').innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:#dc2626;font-size:13px">Error al cargar imagenes_utel.json. Verificá que el archivo esté en la misma carpeta.</div>';
-      }
+      grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:#dc2626;font-size:13px">Error al cargar imagenes_utel.json. Verificá que el archivo esté en la misma carpeta.</div>';
     });
 }
 
