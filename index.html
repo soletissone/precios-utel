@@ -4342,7 +4342,26 @@ function galInit(){
       galFilter();
     })
     .catch(function(){
-      document.getElementById('gal-grid').innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:#dc2626;font-size:13px">Error al cargar imagenes_utel.json. Verificá que el archivo esté en la misma carpeta.</div>';
+      // Si la pre-carga ya llenó _galData, usarla en lugar de mostrar error
+      if(_galData && _galData.length){
+        var cats={}, subs={};
+        _galData.forEach(function(img){
+          var parts=img.path.split('/');
+          var cat=(parts[1]||'').trim();
+          var sub=(parts[2]||'').trim();
+          if(cat) cats[cat]=true;
+          if(sub) subs[sub]=(subs[sub]||{});
+          if(cat&&sub) subs[sub][cat]=true;
+        });
+        var catSel=document.getElementById('gal-cat');
+        Object.keys(cats).sort().forEach(function(c){
+          var o=document.createElement('option'); o.value=c; o.textContent=c; catSel.appendChild(o);
+        });
+        window._galSubs=subs;
+        galFilter();
+      } else {
+        document.getElementById('gal-grid').innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:#dc2626;font-size:13px">Error al cargar imagenes_utel.json. Verificá que el archivo esté en la misma carpeta.</div>';
+      }
     });
 }
 
