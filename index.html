@@ -4311,8 +4311,11 @@ function toggleChat(){
 <script>
 // ── GALERÍA DE RECURSOS ──────────────────────────────────────────
 var _galData=null, _galFiltered=[], _galInited=false;
-// Pre-cargar imágenes para sección de recursos por programa
-fetch('imagenes_utel.json').then(function(r){return r.json();}).then(function(data){_galData=data;}).catch(function(){});
+// Una sola promesa compartida con timeout de 15s
+var _galPromise=Promise.race([
+  fetch('imagenes_utel.json').then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}),
+  new Promise(function(_,rej){setTimeout(function(){rej(new Error('timeout'));},15000);})
+]).then(function(data){_galData=data;return data;});
 
 function _galBuildUI(data){
   _galData=data;
@@ -4337,14 +4340,12 @@ function galInit(){
   if(_galInited) return;
   _galInited=true;
   var grid=document.getElementById('gal-grid');
-  // Si la pre-carga ya terminó, usar datos en memoria directamente
   if(_galData && _galData.length){ _galBuildUI(_galData); return; }
   grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:var(--mu);font-size:13px">Cargando imágenes…</div>';
-  fetch('imagenes_utel.json')
-    .then(function(r){return r.json();})
+  _galPromise
     .then(function(data){ _galBuildUI(data); })
-    .catch(function(){
-      grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:#dc2626;font-size:13px">Error al cargar imagenes_utel.json. Verificá que el archivo esté en la misma carpeta.</div>';
+    .catch(function(e){
+      grid.innerHTML='<div style="grid-column:1/-1;text-align:center;padding:40px;color:#dc2626;font-size:13px">No se pudieron cargar las imágenes ('+(e&&e.message?e.message:'error')+').</div>';
     });
 }
 
