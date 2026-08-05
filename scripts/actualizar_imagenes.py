@@ -25,9 +25,15 @@ def main():
         print("No se encontraron archivos.")
         return
 
+    SKIP_FOLDERS = {'no usar', 'no_usar', 'no-usar'}
+
     results = []
     for item in items:
         path = item.path.replace('\\', '/')
+        # Excluir archivos dentro de carpetas "no usar"
+        path_parts = [p.strip().lower() for p in path.split('/')]
+        if any(p in SKIP_FOLDERS for p in path_parts):
+            continue
         ext = os.path.splitext(item.path)[1].lower()
         if ext in IMAGE_EXTS:
             results.append({
