@@ -4368,7 +4368,8 @@ function galUpdateSubcats(selectedCat){
 
 function galFilter(){
   if(!_galData) return;
-  var q=(document.getElementById('gal-search').value||'').toLowerCase().trim();
+  var normalize=function(s){return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');};
+  var q=normalize(document.getElementById('gal-search').value||'').trim();
   var cat=(document.getElementById('gal-cat').value||'').trim();
   var sub=(document.getElementById('gal-sub').value||'').trim();
   galUpdateSubcats(cat);
@@ -4379,7 +4380,7 @@ function galFilter(){
     var imgSub=(parts.length>2?(parts[1]||''):'').trim();
     if(cat && imgCat!==cat) return false;
     if(sub && imgSub!==sub) return false;
-    if(q && img.name.toLowerCase().indexOf(q)<0) return false;
+    if(q && normalize(img.path).indexOf(q)<0) return false;
     return true;
   });
   galRender();
