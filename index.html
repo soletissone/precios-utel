@@ -777,6 +777,9 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
           <option value="">— Todas las subcategorías —</option>
         </select>
         <select id="gal-sub2" onchange="galFilter()" style="padding:9px 12px;border:1px solid var(--bd);border-radius:9px;font-size:13px;outline:none;background:var(--sf);color:var(--tx);cursor:pointer;display:none">
+          <option value="">— Todos los grupos —</option>
+        </select>
+        <select id="gal-sub3" onchange="galFilter()" style="padding:9px 12px;border:1px solid var(--bd);border-radius:9px;font-size:13px;outline:none;background:var(--sf);color:var(--tx);cursor:pointer;display:none">
           <option value="">— Todos los programas —</option>
         </select>
         <span id="gal-count" style="font-size:12px;color:var(--mu);white-space:nowrap"></span>
@@ -4363,19 +4366,22 @@ function galInit(){
     });
 }
 
-function galUpdateSubcats(selectedCat, selectedSub){
+function galUpdateSubcats(selectedCat, selectedSub, selectedSub2){
   var subSel=document.getElementById('gal-sub');
   var sub2Sel=document.getElementById('gal-sub2');
-  var prevSub=subSel.value, prevSub2=sub2Sel.value;
+  var sub3Sel=document.getElementById('gal-sub3');
+  var prevSub=subSel.value, prevSub2=sub2Sel.value, prevSub3=sub3Sel.value;
   subSel.innerHTML='<option value="">— Todas las subcategorías —</option>';
-  sub2Sel.innerHTML='<option value="">— Todos los programas —</option>';
+  sub2Sel.innerHTML='<option value="">— Todos los grupos —</option>';
+  sub3Sel.innerHTML='<option value="">— Todos los programas —</option>';
   if(!_galData) return;
-  var seenSub={}, seenSub2={};
+  var seenSub={}, seenSub2={}, seenSub3={};
   _galData.forEach(function(img){
     var parts=img.path.split('/');
     var cat=(parts[0]||'').trim();
     var sub=(parts.length>2?(parts[1]||''):'').trim();
     var sub2=(parts.length>3?(parts[2]||''):'').trim();
+    var sub3=(parts.length>4?(parts[3]||''):'').trim();
     if(sub && (!selectedCat||cat===selectedCat) && !seenSub[sub]){
       seenSub[sub]=true;
       var o=document.createElement('option'); o.value=sub; o.textContent=sub; subSel.appendChild(o);
@@ -4384,10 +4390,16 @@ function galUpdateSubcats(selectedCat, selectedSub){
       seenSub2[sub2]=true;
       var o2=document.createElement('option'); o2.value=sub2; o2.textContent=sub2; sub2Sel.appendChild(o2);
     }
+    if(sub3 && (!selectedCat||cat===selectedCat) && (!selectedSub||sub===selectedSub) && (!selectedSub2||sub2===selectedSub2) && !seenSub3[sub3]){
+      seenSub3[sub3]=true;
+      var o3=document.createElement('option'); o3.value=sub3; o3.textContent=sub3; sub3Sel.appendChild(o3);
+    }
   });
   if(seenSub[prevSub]) subSel.value=prevSub;
   if(seenSub2[prevSub2]) sub2Sel.value=prevSub2;
+  if(seenSub3[prevSub3]) sub3Sel.value=prevSub3;
   sub2Sel.style.display=Object.keys(seenSub2).length>0?'':'none';
+  sub3Sel.style.display=Object.keys(seenSub3).length>0?'':'none';
 }
 
 function galFilter(){
@@ -4397,17 +4409,21 @@ function galFilter(){
   var cat=(document.getElementById('gal-cat').value||'').trim();
   var sub=(document.getElementById('gal-sub').value||'').trim();
   var sub2=(document.getElementById('gal-sub2').value||'').trim();
-  galUpdateSubcats(cat, sub);
+  var sub3=(document.getElementById('gal-sub3').value||'').trim();
+  galUpdateSubcats(cat, sub, sub2);
   if(sub) document.getElementById('gal-sub').value=sub;
   if(sub2) document.getElementById('gal-sub2').value=sub2;
+  if(sub3) document.getElementById('gal-sub3').value=sub3;
   _galFiltered=_galData.filter(function(img){
     var parts=img.path.split('/');
     var imgCat=(parts[0]||'').trim();
     var imgSub=(parts.length>2?(parts[1]||''):'').trim();
     var imgSub2=(parts.length>3?(parts[2]||''):'').trim();
+    var imgSub3=(parts.length>4?(parts[3]||''):'').trim();
     if(cat && imgCat!==cat) return false;
     if(sub && imgSub!==sub) return false;
     if(sub2 && imgSub2!==sub2) return false;
+    if(sub3 && imgSub3!==sub3) return false;
     if(q && normalize(img.path).indexOf(q)<0) return false;
     return true;
   });
