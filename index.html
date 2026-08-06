@@ -4389,27 +4389,41 @@ function galRender(){
   var grid=document.getElementById('gal-grid');
   var empty=document.getElementById('gal-empty');
   var count=document.getElementById('gal-count');
-  count.textContent=_galFiltered.length+' imagen'+(+_galFiltered.length===1?'':'es');
-  if(!_galFiltered.length){ grid.innerHTML=''; empty.style.display='block'; return; }
+  var total=_galFiltered.length;
+  count.textContent=total+' recurso'+(total===1?'':'s');
+  if(!total){ grid.innerHTML=''; empty.style.display='block'; return; }
   empty.style.display='none';
+  var VIDEO_EXTS=/\.(mp4|mov|avi|webm)$/i;
   var html='';
   _galFiltered.forEach(function(img){
     var parts=img.path.split('/');
     var sub=(parts.length>2?parts[1]:parts[0]||'').trim();
-    var thumb='https://drive.google.com/thumbnail?id='+img.id+'&sz=w300';
+    var isVideo=VIDEO_EXTS.test(img.name);
     var viewUrl=('https://drive.google.com/file/d/'+img.id+'/view').replace(/'/g,"\\'");
     var dlUrl=('https://drive.google.com/uc?export=download&id='+img.id).replace(/'/g,"\\'");
     var nameEsc=img.name.replace(/'/g,"\\'").replace(/"/g,'&quot;');
+    var preview;
+    if(isVideo){
+      preview='<div style="width:100%;aspect-ratio:4/3;overflow:hidden;background:#111;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative" onclick="window.open(\''+viewUrl+'\',\'_blank\')">'
+        +'<div style="width:56px;height:56px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;transition:transform .15s" onmouseover="this.style.transform=\'scale(1.12)\'" onmouseout="this.style.transform=\'scale(1)\'">▶</div>'
+        +'<div style="position:absolute;bottom:7px;right:9px;background:rgba(0,0,0,.55);color:#fff;font-size:9px;padding:2px 6px;border-radius:4px">VIDEO</div>'
+        +'</div>';
+    } else {
+      var thumb='https://drive.google.com/thumbnail?id='+img.id+'&sz=w300';
+      preview='<div style="width:100%;aspect-ratio:4/3;overflow:hidden;background:#f0f1f4;cursor:pointer" onclick="window.open(\''+viewUrl+'\',\'_blank\')">'
+        +'<img src="'+thumb+'" alt="'+img.name+'" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .2s" onmouseover="this.style.transform=\'scale(1.04)\'" onmouseout="this.style.transform=\'scale(1)\'" onerror="this.parentElement.innerHTML=\'<div style=\\\"display:flex;align-items:center;justify-content:center;height:100%;font-size:32px\\\">🖼</div>\'">'
+        +'</div>';
+    }
+    var dlLabel=isVideo?'⬇ Descargar':'⬇ Descargar';
+    var verLabel=isVideo?'▶ Ver':'Ver';
     html+='<div style="background:var(--sf);border:1px solid var(--bd);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;transition:box-shadow .15s" onmouseover="this.style.boxShadow=\'0 4px 16px rgba(0,0,0,.12)\'" onmouseout="this.style.boxShadow=\'none\'">'
-      +'<div style="width:100%;aspect-ratio:4/3;overflow:hidden;background:#f0f1f4;cursor:pointer" onclick="window.open(\''+viewUrl+'\',\'_blank\')">'
-      +'<img src="'+thumb+'" alt="'+img.name+'" loading="lazy" style="width:100%;height:100%;object-fit:cover;transition:transform .2s" onmouseover="this.style.transform=\'scale(1.04)\'" onmouseout="this.style.transform=\'scale(1)\'" onerror="this.parentElement.innerHTML=\'<div style=\\\"display:flex;align-items:center;justify-content:center;height:100%;font-size:28px\\\">🖼</div>\'">'
-      +'</div>'
+      +preview
       +'<div style="padding:8px 9px;flex:1;display:flex;flex-direction:column;gap:4px">'
       +'<div style="font-size:10px;color:var(--ac);font-weight:700;letter-spacing:.04em;text-transform:uppercase;line-height:1.2">'+sub+'</div>'
       +'<div style="font-size:11px;color:var(--tx);line-height:1.35;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical">'+img.name+'</div>'
       +'<div style="display:flex;gap:5px;margin-top:auto;padding-top:4px">'
-      +'<button onclick="galTrack(\'descargar_imagen\',\''+nameEsc+'\',\''+sub+'\',\''+dlUrl+'\')" style="flex:1;background:var(--ac);color:#fff;border:none;border-radius:6px;padding:5px 6px;font-size:10px;font-weight:700;cursor:pointer;text-align:center">⬇ Descargar</button>'
-      +'<button onclick="galTrack(\'ver_imagen\',\''+nameEsc+'\',\''+sub+'\',\''+viewUrl+'\')" style="background:var(--s2);border:1px solid var(--bd);border-radius:6px;padding:5px 8px;font-size:10px;cursor:pointer;color:var(--tx)">Ver</button>'
+      +'<button onclick="galTrack(\'descargar_recurso\',\''+nameEsc+'\',\''+sub+'\',\''+dlUrl+'\')" style="flex:1;background:var(--ac);color:#fff;border:none;border-radius:6px;padding:5px 6px;font-size:10px;font-weight:700;cursor:pointer;text-align:center">'+dlLabel+'</button>'
+      +'<button onclick="galTrack(\'ver_recurso\',\''+nameEsc+'\',\''+sub+'\',\''+viewUrl+'\')" style="background:var(--s2);border:1px solid var(--bd);border-radius:6px;padding:5px 8px;font-size:10px;cursor:pointer;color:var(--tx)">'+verLabel+'</button>'
       +'</div></div></div>';
   });
   grid.innerHTML=html;
