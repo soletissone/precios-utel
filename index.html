@@ -1389,7 +1389,7 @@ function renderRecursos(divId, progName, nivel){
       var parts=img.path.split('/');
       return parts.some(function(seg){
         var s=_normRec(seg);
-        return targets.some(function(t){return s===t||s.indexOf(t)>=0||t.indexOf(s)>=0;});
+        return targets.some(function(t){return s===t||s.indexOf(t)>=0;});
       });
     });
     if(imgs.length>0){
