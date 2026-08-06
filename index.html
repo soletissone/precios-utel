@@ -1382,13 +1382,19 @@ function renderRecursos(divId, progName, nivel){
     var prefixes=nivel==='LIC'?['licenciatura en ','lic. ']:
                  nivel==='MAE'?['maestria en ','maestría en ']:
                  nivel==='MASTER'?['master utel en ','master en ']:['doctorado en '];
+    // carpeta de primer nivel dentro de Catalogo Programas que corresponde al tipo
+    var nivelFolder=nivel==='LIC'?'licenciaturas':
+                    nivel==='MAE'?'maestria':
+                    nivel==='MASTER'?'master':
+                    nivel==='DOC'?'doctorados':null;
     var targets=prefixes.map(function(p){return _normRec(p+progName);});
-    // también match sin prefijo (por si la carpeta es solo el nombre)
     targets.push(normProg);
     var imgs=_galData.filter(function(img){
       var parts=img.path.split('/');
-      return parts.some(function(seg){
-        var s=_normRec(seg);
+      var pathNorm=parts.map(_normRec);
+      // si hay carpeta de tipo definida, el path debe contenerla
+      if(nivelFolder && pathNorm.indexOf(nivelFolder)<0) return false;
+      return pathNorm.some(function(s){
         return targets.some(function(t){return s===t||s.indexOf(t)>=0;});
       });
     });
