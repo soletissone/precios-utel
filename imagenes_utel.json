@@ -255,6 +255,21 @@
     "path": "Catalogo Programas/Acredita tu Bachillerato Ceneval/Ceneval_Bachillerato_Tip.jpg"
   },
   {
+    "id": "1sj8TF5YTeMtwA8R4ngFgupCapyAfoNxb",
+    "name": "UtelUniversidad-Editorial-Mx-MaestríaPsicologíaClínicayPsicoterapiaPsicoanalítica-FT.pdf",
+    "path": "Catalogo Programas/Alianzas/CECIP/Maestría en Psicología Clínica y Psicoterapia Psicoanalítica/UtelUniversidad-Editorial-Mx-MaestríaPsicologíaClínicayPsicoterapiaPsicoanalítica-FT.pdf"
+  },
+  {
+    "id": "1RSidp64_hudXDbZl6fnZmIuA3ook37PC",
+    "name": "UtelUniversidad-Editorial-Mx-MaestríaPsicopedagogíaClínicaInfantil-FT.pdf",
+    "path": "Catalogo Programas/Alianzas/CECIP/Maestría en Psicopedagogía Clínica Infantil/UtelUniversidad-Editorial-Mx-MaestríaPsicopedagogíaClínicaInfantil-FT.pdf"
+  },
+  {
+    "id": "1YpT5nUnNm89CZ4NLpuaRgRALNr51bTmP",
+    "name": "UtelUniversidad-Editorial-Mx-EspecialidadGastronomíayGestióndelaEnseñanza-FT.pdf",
+    "path": "Catalogo Programas/Alianzas/El Claustro/Especialidad en Gastronomía y Gestión de la Enseñanza/UtelUniversidad-Editorial-Mx-EspecialidadGastronomíayGestióndelaEnseñanza-FT.pdf"
+  },
+  {
     "id": "19S0R8YdiSqvGKwdh2YfbuKtcWvqM4LIk",
     "name": "Utel+ElClaustro_ Especialidad Gastronomía",
     "path": "Catalogo Programas/Alianzas/El Claustro/Utel+ElClaustro_ Especialidad Gastronomía"
@@ -420,6 +435,71 @@
     "path": "Catalogo Programas/Alianzas/UVE/Utel_UVE_Lic psicologia_Puestos Laborales"
   },
   {
+    "id": "1PHGNbNIh-eBmuswGNT1PXtQvt72wL_vC",
+    "name": "UtelUSA_AdmFinanzas.pdf",
+    "path": "Catalogo Programas/Doble Titulación - Utel USA/Licenciaturas - Fichas técnicas/UtelUSA_AdmFinanzas.pdf"
+  },
+  {
+    "id": "13unW2D2LuHNb4PnGHIHgQdExMfBVZtqz",
+    "name": "UtelUSA_AdmNegocios.pdf",
+    "path": "Catalogo Programas/Doble Titulación - Utel USA/Licenciaturas - Fichas técnicas/UtelUSA_AdmNegocios.pdf"
+  },
+  {
+    "id": "1qesgoh6lF4nIDKmfkcqg9L5mn787bx9H",
+    "name": "UtelUSA_AdmRecursosHumanos.pdf",
+    "path": "Catalogo Programas/Doble Titulación - Utel USA/Licenciaturas - Fichas técnicas/UtelUSA_AdmRecursosHumanos.pdf"
+  },
+  {
+    "id": "1FlGOCRwgwA1tWdFRmBKXYncmQRg9GJvA",
+    "name": "UtelUSA_AdmTecInformacion.pdf",
+    "path": "Catalogo Programas/Doble Titulación - Utel USA/Licenciaturas - Fichas técnicas/UtelUSA_AdmTecInformacion.pdf"
+  },
+  {
+    "id": "17cNvUPCnHvT4ByQq5UToPOGrLQ_eEmsG",
+    "name": "UtelUSA_Administracion.pdf",
+    "path": "Catalogo Programas/Doble Titulación - Utel USA/Licenciaturas - Fichas técnicas/UtelUSA_Administracion.pdf"
+  },
+  {
+    "id": "17122tySF0rfivX9HlnG-TTj3jvwHDUbv",
+    "name": "UtelUSA_IngSistemasComp.pdf",
+    "path": "Catalogo Programas/Doble Titulación - Utel USA/Licenciaturas - Fichas técnicas/UtelUSA_IngSistemasComp.pdf"
+  },
+  {
+    "id": "1J5VHSw3yxsC10oQzLWBNr9Dw1sCYw_bv",
+    "name": "UtelUSA_PsicologiaOrganizacional.pdf",
+    "path": "Catalogo Programas/Doble Titulación - Utel USA/Licenciaturas - Fichas técnicas/UtelUSA_PsicologiaOrganizacional.pdf"
+  },
+  {
+    "id": "1p4sFI4dHVN0ZjsAPVdVcg4iG31v5NOdz",
+    "name": "Brochure_UtelUSA_Maestria_AdmInstitucionesEducativas.pdf",
+    "path": "Catalogo Programas/Doble Titulación - Utel USA/Maestrías - Fichas técnicas/Brochure_UtelUSA_Maestria_AdmInstitucionesEducativas.pdf"
+  },
+  {
+    "id": "12SOBc9W7Bk7z9pKWKchTcenAk2El5bdU",
+    "name": "Brochure_UtelUSA_Maestria_AdmNegocios.pdf",
+    "path": "Catalogo Programas/Doble Titulación - Utel USA/Maestrías - Fichas técnicas/Brochure_UtelUSA_Maestria_AdmNegocios.pdf"
+  },
+  {
+    "id": "1jdh5vUOntDtobzSEGkP7y-EHG-CTxQZF",
+    "name": "Brochure_UtelUSA_Maestria_DirProyectosInnovacion.pdf",
+    "path": "Catalogo Programas/Doble Titulación - Utel USA/Maestrías - Fichas técnicas/Brochure_UtelUSA_Maestria_DirProyectosInnovacion.pdf"
+  },
+  {
+    "id": "1mrqQReQlhn0websx0eBWycpbXwfdt1ZW",
+    "name": "Brochure_UtelUSA_Maestria_EducacionDocencia.pdf",
+    "path": "Catalogo Programas/Doble Titulación - Utel USA/Maestrías - Fichas técnicas/Brochure_UtelUSA_Maestria_EducacionDocencia.pdf"
+  },
+  {
+    "id": "11TyNQHRbGTMl6bmi8yn_bY2Zse2O3K95",
+    "name": "Brochure_UtelUSA_Maestria_MercadotecniaDig.pdf",
+    "path": "Catalogo Programas/Doble Titulación - Utel USA/Maestrías - Fichas técnicas/Brochure_UtelUSA_Maestria_MercadotecniaDig.pdf"
+  },
+  {
+    "id": "1nSjLtNAZz2ZFAXr0EDxG553fDeKz1RRV",
+    "name": "Brochure_UtelUSA_Maestria_TecEducativa.pdf",
+    "path": "Catalogo Programas/Doble Titulación - Utel USA/Maestrías - Fichas técnicas/Brochure_UtelUSA_Maestria_TecEducativa.pdf"
+  },
+  {
     "id": "1tZ5lLOucUPNjbgRo_NrB79pStM1t8qGR",
     "name": "UTEL_DobleTitulacion_Lic",
     "path": "Catalogo Programas/Doble Titulación - Utel USA/UTEL_DobleTitulacion_Lic"
@@ -480,6 +560,41 @@
     "path": "Catalogo Programas/Doble Titulación - Utel USA/Utel_Tutorial_Portal de Admisiones"
   },
   {
+    "id": "1mJyOLuCrGv_eVBNeqjSgO0vBDKMWrvb1",
+    "name": "UtelMx_FichasTecnicas_Doctorado_AdministraciónEstratégicaEmpresarial.pdf",
+    "path": "Catalogo Programas/Doctorados/Doctorado_AdministraciónEstratégicaEmpresarial/Ficha Técnica/UtelMx_FichasTecnicas_Doctorado_AdministraciónEstratégicaEmpresarial.pdf"
+  },
+  {
+    "id": "1PZUs_3RQVCS5lYrZ37dT4Ru204zykW9E",
+    "name": "UtelMx_FichasTecnicas_Doctorado_Derecho.pdf",
+    "path": "Catalogo Programas/Doctorados/Doctorado_Derecho/UtelMx_FichasTecnicas_Doctorado_Derecho.pdf"
+  },
+  {
+    "id": "1reCPs0pKGZKT8r7o09JApbuClbRV0n8_",
+    "name": "UtelMx_FichasTecnicas_Doctorado_Educación.pdf",
+    "path": "Catalogo Programas/Doctorados/Doctorado_Educación/Ficha Técnica/UtelMx_FichasTecnicas_Doctorado_Educación.pdf"
+  },
+  {
+    "id": "1aDZit5OzSIskRpeedM1cqTxQDq9L0iKP",
+    "name": "UtelMx_FichasTecnicas_Doctorado_Finanzas.pdf",
+    "path": "Catalogo Programas/Doctorados/Doctorado_Finanzas/Ficha Técnica/UtelMx_FichasTecnicas_Doctorado_Finanzas.pdf"
+  },
+  {
+    "id": "1d12M-eAEODxrMaMpqTIJLY7NxspeR5i-",
+    "name": "UtelMx_FichasTecnicas_Doctorado_Gestión_Innovación_Tecnológica.pdf",
+    "path": "Catalogo Programas/Doctorados/Doctorado_Gestión_Innovación_Tecnológica/Ficha Técnica/UtelMx_FichasTecnicas_Doctorado_Gestión_Innovación_Tecnológica.pdf"
+  },
+  {
+    "id": "1d7DNB1gcjMaZQF1ZsWsl4W0rfD5kpqUt",
+    "name": "UtelUniversidad-Editorial-Mx-DoctoradoAltaDirecciónyGobiernoCorporativo-FT.pdf",
+    "path": "Catalogo Programas/Doctorados/Doctorados Bloque 1 (37_105 programas)/Doctorado en Alta Dirección y  Gobierno Corporativo/UtelUniversidad-Editorial-Mx-DoctoradoAltaDirecciónyGobiernoCorporativo-FT.pdf"
+  },
+  {
+    "id": "1Bzd_qpbyCX9H-TPtjiasR4-xtM_p5h4W",
+    "name": "UtelUniversidad-Editorial-Mx-DoctoradoCiberseguridaddeSistemasAutónomos-FT.pdf",
+    "path": "Catalogo Programas/Doctorados/Doctorados Bloque 1 (37_105 programas)/Doctorado en Ciberseguridad de  Sistemas Autónomos/UtelUniversidad-Editorial-Mx-DoctoradoCiberseguridaddeSistemasAutónomos-FT.pdf"
+  },
+  {
     "id": "168JiX-s8t4Afx91BUS02Q93Z9ASOE2gI",
     "name": "Balance Marketing - Ciberseguridad - Utel Cuadrado.mov",
     "path": "Catalogo Programas/Doctorados/Doctorados Bloque 1 (37_105 programas)/Doctorado en Ciberseguridad y  Gestión de Riesgos Digitales/Balance Marketing - Ciberseguridad - Utel Cuadrado.mov"
@@ -490,6 +605,11 @@
     "path": "Catalogo Programas/Doctorados/Doctorados Bloque 1 (37_105 programas)/Doctorado en Ciberseguridad y  Gestión de Riesgos Digitales/Balance Marketing - Ciberseguridad - Utel Vertical.mov"
   },
   {
+    "id": "1kByldMm_CTV9NkU8P8urho5WY8-2NZ5Y",
+    "name": "UtelUniversidad-Editorial-Mx-DoctoradoCiberseguridadyGestióndeRiesgosDigitales-FT.pdf",
+    "path": "Catalogo Programas/Doctorados/Doctorados Bloque 1 (37_105 programas)/Doctorado en Ciberseguridad y  Gestión de Riesgos Digitales/UtelUniversidad-Editorial-Mx-DoctoradoCiberseguridadyGestióndeRiesgosDigitales-FT.pdf"
+  },
+  {
     "id": "1389L029JysSJSUviqLdugVX6QVE8evu9",
     "name": "UtelUniversidad-Ventas-NuevosProgramas-F109-Doctorado-CiberseguridadyGestionDeRiesgosDigitales.png",
     "path": "Catalogo Programas/Doctorados/Doctorados Bloque 1 (37_105 programas)/Doctorado en Ciberseguridad y  Gestión de Riesgos Digitales/UtelUniversidad-Ventas-NuevosProgramas-F109-Doctorado-CiberseguridadyGestionDeRiesgosDigitales.png"
@@ -498,6 +618,11 @@
     "id": "1-UMH0kUnOjNmyLsFPMA39BPK47lgQEh0",
     "name": "UtelUniversidad-Ventas-NuevosProgramas-F111-Doctorado-CiberseguridadyGestiondeRiesgosDigitales.png",
     "path": "Catalogo Programas/Doctorados/Doctorados Bloque 1 (37_105 programas)/Doctorado en Ciberseguridad y  Gestión de Riesgos Digitales/UtelUniversidad-Ventas-NuevosProgramas-F111-Doctorado-CiberseguridadyGestiondeRiesgosDigitales.png"
+  },
+  {
+    "id": "1Gm2vznw-4UdVkufLtvCeWZREy9E1n5fU",
+    "name": "UtelUniversidad-Editorial-Mx-DoctoradoCienciadeDatoseInteligenciaArtificial-FT.pdf",
+    "path": "Catalogo Programas/Doctorados/Doctorados Bloque 1 (37_105 programas)/Doctorado en Ciencia de Datos e  Inteligencia Artificial/UtelUniversidad-Editorial-Mx-DoctoradoCienciadeDatoseInteligenciaArtificial-FT.pdf"
   },
   {
     "id": "183uAPGTqoxPTX3tVu93eXiXzINvnXvc1",
@@ -513,6 +638,16 @@
     "id": "1UZwNJA_Ni3cIK8EPxhgsQrswPDnT9SVG",
     "name": "UtelUniversidad-Ventas-NuevosProgramas-F204-Doctorado-CienciaDatosInteligenciaArtificial.mp4",
     "path": "Catalogo Programas/Doctorados/Doctorados Bloque 1 (37_105 programas)/Doctorado en Ciencia de Datos e  Inteligencia Artificial/UtelUniversidad-Ventas-NuevosProgramas-F204-Doctorado-CienciaDatosInteligenciaArtificial.mp4"
+  },
+  {
+    "id": "1g-q8vOQY9KaaX0fv66dRdZztu5d3p2AA",
+    "name": "UtelUniversidad-Editorial-Mx-DoctoradoUrbanismo-FT.pdf",
+    "path": "Catalogo Programas/Doctorados/Doctorados Bloque 1 (37_105 programas)/Doctorado en Urbanismo/UtelUniversidad-Editorial-Mx-DoctoradoUrbanismo-FT.pdf"
+  },
+  {
+    "id": "1to0jPOWy3FmTODt9YBqD1q8gL0gPEWNy",
+    "name": "MX_Doctorado_en__Justicia_Digital_y_Ciberderecho_Nuevos_Programas_Bloque_2_1779211642198_474519 (1).pdf",
+    "path": "Catalogo Programas/Doctorados/Doctorados Bloque 2/Doctorado Justicia Digital y Ciberderecho/MX_Doctorado_en__Justicia_Digital_y_Ciberderecho_Nuevos_Programas_Bloque_2_1779211642198_474519 (1).pdf"
   },
   {
     "id": "1PHvkoGR5XotzOA_jzuKDUpQOefyv1Q1L",
@@ -535,6 +670,51 @@
     "path": "Catalogo Programas/Doctorados/Doctorados Bloque 2/Doctorado Justicia Digital y Ciberderecho/copy_A0824176-B431-45B2-9A97-BE20E81FF59A.MOV"
   },
   {
+    "id": "1qZaeB0y1eW5Fce7w0Lwz0lpDf2S1cYLt",
+    "name": "MX_Doctorado_en__Economía_Pública,_Fiscalidad_y_Gobernanza_Financiera_Nuevos_Programas_Bloque_2_1779211633531_273538.pdf",
+    "path": "Catalogo Programas/Doctorados/Doctorados Bloque 2/Doctorado en Economía Pública, Fiscalidad y Gobernanza Financiera/MX_Doctorado_en__Economía_Pública,_Fiscalidad_y_Gobernanza_Financiera_Nuevos_Programas_Bloque_2_1779211633531_273538.pdf"
+  },
+  {
+    "id": "1QsCZTBJPT9vR1G0vWMDtsZw2p71eTxWZ",
+    "name": "MX_Doctorado_en__Transformación_Digital_Organizacional_Nuevos_Programas_Bloque_2_1779211624408_425620.pdf",
+    "path": "Catalogo Programas/Doctorados/Doctorados Bloque 2/Doctorado en Transformación Digital Organizacional/MX_Doctorado_en__Transformación_Digital_Organizacional_Nuevos_Programas_Bloque_2_1779211624408_425620.pdf"
+  },
+  {
+    "id": "1XocE6ftsRqFDvK11D0jx0gvtAN1DHZ_B",
+    "name": "MX_Doctorado_en__Calidad_y_Sostenibilidad_Organizacional_Nuevos_Programas_Bloque_3_1781821680945_520305.pdf",
+    "path": "Catalogo Programas/Doctorados/Doctorados Bloque 3/Doctorado en Calidad y Sostenibilidad Organizacional/MX_Doctorado_en__Calidad_y_Sostenibilidad_Organizacional_Nuevos_Programas_Bloque_3_1781821680945_520305.pdf"
+  },
+  {
+    "id": "1ORsSzJmEu9-VM7PdnqzPTRu4xVRzEVCN",
+    "name": "MX_Doctorado_en__Desarrollo_Sostenible_y_Gestión_Ambiental_Nuevos_Programas_Bloque_3_1781821697891_624451.pdf",
+    "path": "Catalogo Programas/Doctorados/Doctorados Bloque 3/Doctorado en Desarrollo Sostenible y Gestión Ambiental/MX_Doctorado_en__Desarrollo_Sostenible_y_Gestión_Ambiental_Nuevos_Programas_Bloque_3_1781821697891_624451.pdf"
+  },
+  {
+    "id": "1hazAFacpYa8XSwXScvOlqpogut4BPcvk",
+    "name": "MX_Doctorado_en__Estudios_Interculturales_y_Diversidad_Humana_Nuevos_Programas_Bloque_3_1781821729184_986523.pdf",
+    "path": "Catalogo Programas/Doctorados/Doctorados Bloque 3/Doctorado en Estudios Interculturales y Diversidad Humana/MX_Doctorado_en__Estudios_Interculturales_y_Diversidad_Humana_Nuevos_Programas_Bloque_3_1781821729184_986523.pdf"
+  },
+  {
+    "id": "1HC33ZA7Wae4qveR97n4JcEt2nRJ48XtJ",
+    "name": "MX_Doctorado_en__Estudios_Interdisciplinarios_sobre_América_Latina_Nuevos_Programas_Bloque_3_1781821627962_878643.pdf",
+    "path": "Catalogo Programas/Doctorados/Doctorados Bloque 3/Doctorado en Estudios Interdisciplinarios sobre América Latina/MX_Doctorado_en__Estudios_Interdisciplinarios_sobre_América_Latina_Nuevos_Programas_Bloque_3_1781821627962_878643.pdf"
+  },
+  {
+    "id": "1mthK2Xvnpie88YH6_zUKEbOOtdcHikb8",
+    "name": "MX_Doctorado_en__Evaluación_de_Políticas_Sociales_y_Programas_Públicos_Nuevos_Programas_Bloque_3_1781821662838_794875.pdf",
+    "path": "Catalogo Programas/Doctorados/Doctorados Bloque 3/Doctorado en Evaluación de Políticas Sociales y Programas Públicos/MX_Doctorado_en__Evaluación_de_Políticas_Sociales_y_Programas_Públicos_Nuevos_Programas_Bloque_3_1781821662838_794875.pdf"
+  },
+  {
+    "id": "1F0n76HY6_8e-PJRa_4hSFdEaMorqscVM",
+    "name": "MX_Doctorado_en__Liderazgo_Educativo_y_Gestión_Escolar_Nuevos_Programas_Bloque_3_1781821750740_794316.pdf",
+    "path": "Catalogo Programas/Doctorados/Doctorados Bloque 3/Doctorado en Liderazgo Educativo y Gestión Escolar/MX_Doctorado_en__Liderazgo_Educativo_y_Gestión_Escolar_Nuevos_Programas_Bloque_3_1781821750740_794316.pdf"
+  },
+  {
+    "id": "1Z1w-WW4m7oqT2DW_-wWaodZMZwtbeFa2",
+    "name": "MX_Doctorado_en__Políticas_Públicas_y_Gobernanza_Nuevos_Programas_Bloque_3_1781821713601_24046.pdf",
+    "path": "Catalogo Programas/Doctorados/Doctorados Bloque 3/Doctorado en Políticas Públicas y Gobernanza/MX_Doctorado_en__Políticas_Públicas_y_Gobernanza_Nuevos_Programas_Bloque_3_1781821713601_24046.pdf"
+  },
+  {
     "id": "18H_PcnD2gzZDNTqJC09D1yGg5jIMfcvs",
     "name": "UtelUniversidad-Mx-NuevosProgramas-ExitoComercial-F28-1080x1920.png",
     "path": "Catalogo Programas/Doctorados/Doctorados Bloque 3/Doctorado en Políticas Públicas y Gobernanza/UtelUniversidad-Mx-NuevosProgramas-ExitoComercial-F28-1080x1920.png"
@@ -548,6 +728,11 @@
     "id": "1W1H9-SmenKVwbmI86r90CWmakLZv8DEM",
     "name": "UtelUniversidad-Mx-NuevosProgramas-ExitoComercial-Políticas-Públicas-y-Gobernanza_F27-1080x1920.jpg",
     "path": "Catalogo Programas/Doctorados/Doctorados Bloque 3/Doctorado en Políticas Públicas y Gobernanza/UtelUniversidad-Mx-NuevosProgramas-ExitoComercial-Políticas-Públicas-y-Gobernanza_F27-1080x1920.jpg"
+  },
+  {
+    "id": "1juCor4lo411M195PyqRXNNnHL57peLuP",
+    "name": "MX_Doctorado_en__Tecnología_Educativa_e_Innovación_Didáctica_Nuevos_Programas_Bloque_3_1781901635030_242039.pdf",
+    "path": "Catalogo Programas/Doctorados/Doctorados Bloque 3/Doctorado en Tecnología Educativa e Innovación Didáctica/MX_Doctorado_en__Tecnología_Educativa_e_Innovación_Didáctica_Nuevos_Programas_Bloque_3_1781901635030_242039.pdf"
   },
   {
     "id": "1JXXjC8YXj9ATshQZcn9IXn2c194_-InQ",
@@ -1590,6 +1775,186 @@
     "path": "Catalogo Programas/General - Nuevos Programas/Urban Lab • Arquitectura y Urbanismo/UtelUniversidad-Mx-NuevosProgramas-Bloque3-PaidMedia-F3-ArquitecturaUrbanismo-1080x1920-2.png"
   },
   {
+    "id": "1YYwXCtISE4kRKUo53YTwLD1us788GkGS",
+    "name": "(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Lic_DireccionDeArte.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Ciencias Sociales y Humanidades/(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Lic_DireccionDeArte.pdf"
+  },
+  {
+    "id": "1HvnrZdQybN3x3fg337oQJD1VC2pLGOZQ",
+    "name": "(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Lic_DisenoAnimacionDigital.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Ciencias Sociales y Humanidades/(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Lic_DisenoAnimacionDigital.pdf"
+  },
+  {
+    "id": "1Mjbhp9gUozxUHkNuVTSwe97-G0XkXX4c",
+    "name": "(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Lic_Emprendimiento.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Ciencias Sociales y Humanidades/(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Lic_Emprendimiento.pdf"
+  },
+  {
+    "id": "17C-TiK_R-WQdxggmmmx5q8AwTApLapfK",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_CienciasPoliticasAdminPublica.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_CienciasPoliticasAdminPublica.pdf"
+  },
+  {
+    "id": "1Hi1pqav2lB1ti7QbEjjIiXd91EdH3bc7",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_Comunicacion.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_Comunicacion.pdf"
+  },
+  {
+    "id": "1ELykGJKsdF8olztNtXqnaBAFefo-tUyS",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_ComunicacionDigital.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_ComunicacionDigital.pdf"
+  },
+  {
+    "id": "1NPxGuirqAJ4SPKqIdW4pNKUjUyimN3A6",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_ComunicacionOrganizacional.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_ComunicacionOrganizacional.pdf"
+  },
+  {
+    "id": "1zqcvZleTa7tT63wHcVgBL3oeIEWnJTPv",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_CriminologiaCriminalistica.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_CriminologiaCriminalistica.pdf"
+  },
+  {
+    "id": "1xvECkpiXhq1sLWSQYikYHLHibUIsUWQu",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_Derecho.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_Derecho.pdf"
+  },
+  {
+    "id": "1VJqxf7tjX384XxX9oQnK-CsCEOcFIT-N",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_DerechoEmpresarial.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_DerechoEmpresarial.pdf"
+  },
+  {
+    "id": "1OFtcx5foOnq6r4tf7QmXP_ISeC5OIaE-",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_Pedagogia.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_Pedagogia.pdf"
+  },
+  {
+    "id": "1Y6QDY6gbhUxrQf1zy9-z2R_yz_m1bf9j",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_Psicologia.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_Psicologia.pdf"
+  },
+  {
+    "id": "1d0alz-rXvwRgpvqrwophV9DtHk4AKuX8",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_PsicologiaOrganizacional.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_PsicologiaOrganizacional.pdf"
+  },
+  {
+    "id": "1kkXqz8fjYXDuE_5XcAfZlqtX0IP6EFod",
+    "name": "(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Lic_Agronegocios.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Económico - Administrativo/(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Lic_Agronegocios.pdf"
+  },
+  {
+    "id": "1VQ5y3wj_v1iLFblACqm98QsG0J3oyP3g",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_AdminFinanzas.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Económico - Administrativo/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_AdminFinanzas.pdf"
+  },
+  {
+    "id": "19GEG60UQPnTQc2C0ro9lir433akbhNLa",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_AdminNegocios.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Económico - Administrativo/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_AdminNegocios.pdf"
+  },
+  {
+    "id": "1W6eIpoTGUxhs6IM48u0RU5Zx79lIlEtW",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_AdminRecursosHumanos.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Económico - Administrativo/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_AdminRecursosHumanos.pdf"
+  },
+  {
+    "id": "1-W6sx-dRDXmqm2KaZurxQhPrfEMA6NiN",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_AdminTecnologiasInfo.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Económico - Administrativo/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_AdminTecnologiasInfo.pdf"
+  },
+  {
+    "id": "1lpe33n2SBz6SzS0-psIMk4Co2yJiQwib",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_AdminVentas.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Económico - Administrativo/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_AdminVentas.pdf"
+  },
+  {
+    "id": "1-LgYqNHx4C2vSezgkcGI6QtTfgjeIJYL",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_Administracion.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Económico - Administrativo/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_Administracion.pdf"
+  },
+  {
+    "id": "1WHt_eg-j_i74yKVHYIkEeSGOJdcXrFzu",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_ContaduriaFinanzas.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Económico - Administrativo/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_ContaduriaFinanzas.pdf"
+  },
+  {
+    "id": "1ujnzcNjKacL0i5VgXJHv0G0FF5_kaCR2",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_ContaduriaPublica.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Económico - Administrativo/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_ContaduriaPublica.pdf"
+  },
+  {
+    "id": "13J_YWNdsyCBX5zC84Eu1QRnhRr6r5dup",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_EconomiaFinanzas.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Económico - Administrativo/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_EconomiaFinanzas.pdf"
+  },
+  {
+    "id": "10Q5IwByA_LTScuoRfAFeoglTR-87VnLJ",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_Mercadotecnia.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Económico - Administrativo/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_Mercadotecnia.pdf"
+  },
+  {
+    "id": "1aujLQGl9Ut1NGqlyQ6t17Z_rBQjzmNIz",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_NegociosInternacionales.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Económico - Administrativo/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_NegociosInternacionales.pdf"
+  },
+  {
+    "id": "1vXmKd2de3aLJF0g3QcDeGTkMhoGc81PY",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_AdminEmpresasTuristicas.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Hospitalidad y Turismo/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_AdminEmpresasTuristicas.pdf"
+  },
+  {
+    "id": "1hfr3QwhwdpvnnC960JBBvW6F1XEZW7Fy",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_DesarrolloSustentableEcoturismo.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Hospitalidad y Turismo/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_DesarrolloSustentableEcoturismo.pdf"
+  },
+  {
+    "id": "1FxQQCG9bBP3C7aa6uYE8G_d2GaJwUPrJ",
+    "name": "(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Lic_IngenieriaDesarrolloDeSoftware.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Ingeniería/(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Lic_IngenieriaDesarrolloDeSoftware.pdf"
+  },
+  {
+    "id": "12JNtkrkCScZExQ4smQZLSvlYD2oVcY1l",
+    "name": "(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Lic_IngenieriaEnergiasRenovables.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Ingeniería/(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Lic_IngenieriaEnergiasRenovables.pdf"
+  },
+  {
+    "id": "1dvs6zq-wzk1gqKv9kd5YcyogE8HSsTzO",
+    "name": "(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Lic_IngenieriaLogisticaTransporte.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Ingeniería/(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Lic_IngenieriaLogisticaTransporte.pdf"
+  },
+  {
+    "id": "1CPEpdZN1rw9cFbbhiBuYokpIB33-HxJZ",
+    "name": "(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Lic_InteligenciaArtificial.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Ingeniería/(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Lic_InteligenciaArtificial.pdf"
+  },
+  {
+    "id": "1XLGkYX_GuHFxuALxCfhyVEZuRhei1-ts",
+    "name": "(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Lic_SeguridadInformatica.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Ingeniería/(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Lic_SeguridadInformatica.pdf"
+  },
+  {
+    "id": "1SuSOs5IpysV7GkTESTRVQimefPrlxkHv",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_IngenieriaIndustrial.pdf",
+    "path": "Catalogo Programas/Licenciaturas Ejecutivas/Ingeniería/UtelMX_FichasTecnicas_Programas Ejecutivos_Lic_IngenieriaIndustrial.pdf"
+  },
+  {
+    "id": "19SSIPTjV8I8qv1Ey-i_psCGmAe-d7fKb",
+    "name": "MX_Licenciatura_en__Administración_Pública_y_Políticas_Económicas_Nuevos_Programas_Bloque_3_1781818942657_224506.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura Bloque 3/Licenciatura en Administración Pública y Políticas Económicas/MX_Licenciatura_en__Administración_Pública_y_Políticas_Económicas_Nuevos_Programas_Bloque_3_1781818942657_224506.pdf"
+  },
+  {
+    "id": "1tCSqu7IyepzZmW0t6VSwjOo-62ai7XqO",
+    "name": "MX_Licenciatura_en__Antropología_y_Diversidad_Cultural_Nuevos_Programas_Bloque_3_1781819962408_766687.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura Bloque 3/Licenciatura en Antropología y Diversidad Cultural/MX_Licenciatura_en__Antropología_y_Diversidad_Cultural_Nuevos_Programas_Bloque_3_1781819962408_766687.pdf"
+  },
+  {
+    "id": "1R-J9PyMS8dMR7QwO8Yo311ppj7Z0vgTb",
+    "name": "MX_Licenciatura_en__Derechos_Humanos_y_Justicia_Social_Nuevos_Programas_Bloque_3_1781818929222_175863.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura Bloque 3/Licenciatura en Derechos Humanos y Justicia Social/MX_Licenciatura_en__Derechos_Humanos_y_Justicia_Social_Nuevos_Programas_Bloque_3_1781818929222_175863.pdf"
+  },
+  {
     "id": "1cC9VM3mUWiO6JlrPGxv-GBelNFO1xdOS",
     "name": "UtelUniversidad-Mx-NuevosProgramas-Bloque3-Comercial-F8-DerechosHumanosJusticiaSocial.png",
     "path": "Catalogo Programas/Licenciaturas/Licenciatura Bloque 3/Licenciatura en Derechos Humanos y Justicia Social/UtelUniversidad-Mx-NuevosProgramas-Bloque3-Comercial-F8-DerechosHumanosJusticiaSocial.png"
@@ -1603,6 +1968,26 @@
     "id": "1geSfX2oBZnWLixJ2SIDy52pSdjpLiJhU",
     "name": "UtelUniversidad-Mx-NuevosProgramas-ExitoComercial-Derechos-Humanos-y-Justicia-Social_F7-1080x1920.jpg",
     "path": "Catalogo Programas/Licenciaturas/Licenciatura Bloque 3/Licenciatura en Derechos Humanos y Justicia Social/UtelUniversidad-Mx-NuevosProgramas-ExitoComercial-Derechos-Humanos-y-Justicia-Social_F7-1080x1920.jpg"
+  },
+  {
+    "id": "1-gbanN7YuGAc3ASfCV5JxvI7nC1g_rn2",
+    "name": "MX_Licenciatura_en__Dirección_Hotelera_y_Experiencia_del_Cliente_Nuevos_Programas_Bloque_3_1781820008075_889180.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura Bloque 3/Licenciatura en Dirección Hotelera y Experiencia del Cliente/MX_Licenciatura_en__Dirección_Hotelera_y_Experiencia_del_Cliente_Nuevos_Programas_Bloque_3_1781820008075_889180.pdf"
+  },
+  {
+    "id": "1plzbfeRKCbLMqo3Hz8HbVu9q7gK83-7L",
+    "name": "MX_Licenciatura_en__Dirección_de_Operaciones_Empresariales_Nuevos_Programas_Bloque_3_1781819055484_43966.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura Bloque 3/Licenciatura en Dirección de Operaciones Empresariales/MX_Licenciatura_en__Dirección_de_Operaciones_Empresariales_Nuevos_Programas_Bloque_3_1781819055484_43966.pdf"
+  },
+  {
+    "id": "1u7oAGQAx8JozHBddvU2yEHGbJe64f8AV",
+    "name": "MX_Licenciatura_en__Estudios_Socioculturales_Nuevos_Programas_Bloque_3_1781818853609_632055.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura Bloque 3/Licenciatura en Estudios Socioculturales/MX_Licenciatura_en__Estudios_Socioculturales_Nuevos_Programas_Bloque_3_1781818853609_632055.pdf"
+  },
+  {
+    "id": "16jCKIoTQzqjvp8knuUOSDEk4FIcISku9",
+    "name": "MX_Licenciatura_en__Gastronomía_Sustentable_y_Cultura_Alimentaria_Nuevos_Programas_Bloque_3_1781818970244_238744.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura Bloque 3/Licenciatura en Gastronomía Sustentable y Cultura Alimentaria/MX_Licenciatura_en__Gastronomía_Sustentable_y_Cultura_Alimentaria_Nuevos_Programas_Bloque_3_1781818970244_238744.pdf"
   },
   {
     "id": "1IUkpPQEuI3EwdaVE0Qwhbjc1s435zlbg",
@@ -1620,6 +2005,21 @@
     "path": "Catalogo Programas/Licenciaturas/Licenciatura Bloque 3/Licenciatura en Gastronomía Sustentable y Cultura Alimentaria/UtelUniversidad-Mx-NuevosProgramas-ExitoComercial-Gastronomía-Sustentable-y-Cultura-Alimentaria_F3-1080x1920.jpg"
   },
   {
+    "id": "1z0d8821aM0SA73_CCNstNAPljmmt_ptn",
+    "name": "MX_Licenciatura_en__Gestión_Empresarial_y_Logística_Nuevos_Programas_Bloque_3_1781819077479_752813.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura Bloque 3/Licenciatura en Gestión Empresarial y Logística/MX_Licenciatura_en__Gestión_Empresarial_y_Logística_Nuevos_Programas_Bloque_3_1781819077479_752813.pdf"
+  },
+  {
+    "id": "1DMxyh_O5KL8tAUdur1zWqm4tPysT1yGE",
+    "name": "MX_Licenciatura_en__Gestión_de_Políticas_y_Gobierno_Nuevos_Programas_Bloque_3_1781819987758_221502.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura Bloque 3/Licenciatura en Gestión de Políticas y Gobierno/MX_Licenciatura_en__Gestión_de_Políticas_y_Gobierno_Nuevos_Programas_Bloque_3_1781819987758_221502.pdf"
+  },
+  {
+    "id": "1oejiUfBjymutFDP5ZMW4bNi7jsiAI0ec",
+    "name": "MX_Licenciatura_en__Lenguas_Extranjeras_Nuevos_Programas_Bloque_3_1781820025119_43230 (1).pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura Bloque 3/Licenciatura en Lenguas Extranjeras/MX_Licenciatura_en__Lenguas_Extranjeras_Nuevos_Programas_Bloque_3_1781820025119_43230 (1).pdf"
+  },
+  {
     "id": "1UReS9jS36_iI8LxA4WAo_38Mb850-0LP",
     "name": "UtelUniversidad-Mx-NuevosProgramas-Bloque3-Comercial-F12-LenguasExtranjeras.png",
     "path": "Catalogo Programas/Licenciaturas/Licenciatura Bloque 3/Licenciatura en Lenguas Extranjeras/UtelUniversidad-Mx-NuevosProgramas-Bloque3-Comercial-F12-LenguasExtranjeras.png"
@@ -1635,6 +2035,21 @@
     "path": "Catalogo Programas/Licenciaturas/Licenciatura Bloque 3/Licenciatura en Lenguas Extranjeras/UtelUniversidad-Mx-NuevosProgramas-ExitoComercial-Lenguas-Extranjeras_F11-1080x1920.jpg"
   },
   {
+    "id": "1RuhOWWrKzPTD3VVD08wv68uAJy9X1zsU",
+    "name": "MX_Licenciatura_en__Planeación_y_Evaluación_de_Proyectos_Nuevos_Programas_Bloque_3_1781818989633_608650.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura Bloque 3/Licenciatura en Planeación y Evaluación de Proyectos/MX_Licenciatura_en__Planeación_y_Evaluación_de_Proyectos_Nuevos_Programas_Bloque_3_1781818989633_608650.pdf"
+  },
+  {
+    "id": "1Si9MyHZlBmOXN2RTtC0T3DhE_2_zvEii",
+    "name": "UtelMx_FichasTecnicas_Lic_AdministracióndeEmpresasTurísticas.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Administración de Empresas Turísticas/UtelMx_FichasTecnicas_Lic_AdministracióndeEmpresasTurísticas/UtelMx_FichasTecnicas_Lic_AdministracióndeEmpresasTurísticas.pdf"
+  },
+  {
+    "id": "1AGA3HmMkKEMGeikzRtZiPqpBF6B7SHx0",
+    "name": "UtelMx_FichasTecnicas_Lic_AdminNegocios.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Administración de Negocios/Utel_Mx_Fichas_Tecnicas_Lic_Admin_Negocios/UtelMx_FichasTecnicas_Lic_AdminNegocios.pdf"
+  },
+  {
     "id": "1q85IOWHU9V7P_3tKsWqc0fkvVCP-XNej",
     "name": "UtelMx_Comp_AdniDeRRHH.jpg",
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Administración de Recursos Humanos/UtelMx_Comp_AdniDeRRHH.jpg"
@@ -1645,9 +2060,24 @@
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Administración de Recursos Humanos/UtelMx_Core_Comp1_Licenciaturas_Recursos_Humanos.png"
   },
   {
+    "id": "14EARAlQ7XBeQBUe6CbCW32t8AINkMlnC",
+    "name": "UtelMx_FichasTecnicas_Lic_AdminRRHH.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Administración de Recursos Humanos/UtelMx_FichasTecnicas_Lic_AdminRRHH/UtelMx_FichasTecnicas_Lic_AdminRRHH.pdf"
+  },
+  {
     "id": "1qIyvbOiv-YbNzAjlTUaU86Gsu0ma4fLi",
     "name": "UtelMx_Comp_AdmistraciondeTecnologia.jpg",
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Administración de Tecnologías de Información/UtelMx_Comp_AdmistraciondeTecnologia.jpg"
+  },
+  {
+    "id": "1Rh3i7HB0qIXQEkAoj4y2La3TXB7WhCqs",
+    "name": "UtelMx_FichasTecnicas_Lic_AdminTecDEInfo.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Administración de Tecnologías de Información/UtelMx_FichasTecnicas_Lic_AdminTecDEInfo/UtelMx_FichasTecnicas_Lic_AdminTecDEInfo.pdf"
+  },
+  {
+    "id": "1g2NE_dZ5IcIx8w71Iu5OmFgMYblVa009",
+    "name": "UtelMx__Infografía_Licenciatura_AdminTecnologiasInformacion.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Administración de Tecnologías de Información/UtelMx__Infografía_Licenciatura_AdminTecnologiasInformacion.pdf"
   },
   {
     "id": "1ROM8hbfxxd2LcEPdE35AeZa3SJGsxojK",
@@ -1655,9 +2085,39 @@
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Administración de Ventas/UtelMX_Lic_Adminitracion_Ventas_Comp.jpg"
   },
   {
+    "id": "1aCJE25HEzh30spwh5C9wKmDTQexY_tw5",
+    "name": "UtelMx_FichasTecnicas_Lic_AdminVentas.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Administración de Ventas/UtelMx_FichasTecnicas_Lic_AdminVentas/UtelMx_FichasTecnicas_Lic_AdminVentas.pdf"
+  },
+  {
+    "id": "1PbN1_2TxRtpfJVbkiEhvD_FHfUeqdCTS",
+    "name": "UtelMx_FichasTecnicas_Lic_AdminFinanza.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Administración y Finanzas/Fichas técnicas/UtelMx_FichasTecnicas_Lic_AdminFinanza.pdf"
+  },
+  {
+    "id": "10bC32Tc8WjJpJkQ6YmmRkI-yrwBPKxG_",
+    "name": "UtelMx_FichasTecnicas_Lic_Administracion.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Administración/UtelMx_FichasTecnicas_Lic_Admin/UtelMx_FichasTecnicas_Lic_Administracion.pdf"
+  },
+  {
+    "id": "1r7zZO9ZBPFCKiXYRIiRSMaczvrSlDjB0",
+    "name": "UtelMx_FichasTecnicas_Lic_Agronegocios.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Agronegocios (NUEVA)/UtelMx_FichasTecnicas_Lic_Agronegocios.pdf"
+  },
+  {
     "id": "1EP0zqTDuvEfXuYXLp-hGrmE4QU5jTgnH",
     "name": "UtelMx__Agronegocios.png",
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Agronegocios (NUEVA)/UtelMx__Agronegocios.png"
+  },
+  {
+    "id": "1GMHzsh_J7VNvhRv6fNmmLUe0KURdIX1-",
+    "name": "UtelMx_FichasTecnicas_Lic_ArteDigitalyMultimedia.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Arte Digital y Multimedia/UtelMx_FichasTecnicas_Lic_ArteDigitalyMultimedia/UtelMx_FichasTecnicas_Lic_ArteDigitalyMultimedia.pdf"
+  },
+  {
+    "id": "10ADveOktxzgH6xGDahthgUc_8J-yzjYK",
+    "name": "UtelMx_FichasTecnicas_Lic_CienciasPolíticasyAdministraciónPública.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Ciencias Políticas y Administración Pública/UtelMx_FichasTecnicas_Lic_CienciasPolíticasyAdministraciónPública/UtelMx_FichasTecnicas_Lic_CienciasPolíticasyAdministraciónPública.pdf"
   },
   {
     "id": "1e5MN1lnyIWFgRsmA3xghvMQX3qqAKnYw",
@@ -1665,9 +2125,29 @@
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Ciencias Políticas y Administración Pública/UtelMx_Infografia1_Licenciatura_ CienciasPolíticas_AdministraciónPública.jpg"
   },
   {
+    "id": "1NIBfPpHxcvk9II4WWaVpU-fIciCbKx5U",
+    "name": "UtelMx_FichasTecnicas_Lic_ComunicaciónCorporativa.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Comunicación Corporativa/UtelMx_FichasTecnicas_Lic_ComunicaciónCorporativa/UtelMx_FichasTecnicas_Lic_ComunicaciónCorporativa.pdf"
+  },
+  {
+    "id": "1LrLdeaRC8whnPQMnAutBRjagRmUwZSyd",
+    "name": "UtelMx_FichasTecnicas_Lic_ComunicaciónDigital.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Comunicación Digital/UtelMx_FichasTecnicas_Lic_ComunicaciónDigital/UtelMx_FichasTecnicas_Lic_ComunicaciónDigital.pdf"
+  },
+  {
     "id": "1UHMCNPnpWdB_ThHuxAbus3lwG_j_0tie",
     "name": "UtelMx_Infografia1_Licenciatura_Comunicacion_Digital.jpg",
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Comunicación Digital/UtelMx_Infografia1_Licenciatura_Comunicacion_Digital.jpg"
+  },
+  {
+    "id": "1le6zMpoEeQ_MGOC2bH3FWWmbvTiPIXC5",
+    "name": "UtelMx_FichasTecnicas_Lic_ComunicaciónOrganizacional.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Comunicación Organizacional/UtelMx_FichasTecnicas_Lic_ComunicaciónOrganizacional/UtelMx_FichasTecnicas_Lic_ComunicaciónOrganizacional.pdf"
+  },
+  {
+    "id": "1mAlaCS1AY9P3D_3JSRlDTlSNXJzMbc6t",
+    "name": "UtelMx_FichasTecnicas_Lic_Comunicación.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Comunicación/UtelMx_FichasTecnicas_Lic_Comunicación/UtelMx_FichasTecnicas_Lic_Comunicación.pdf"
   },
   {
     "id": "1JyIfN_0VuAa5VLBdCm1-eysVfFaCQ2YD",
@@ -1678,6 +2158,16 @@
     "id": "1d7EEoMIKCobq3RTrE_utAOT42XeXnrVd",
     "name": "UtelMx_Core_Comp1_Licenciaturas_Contaduría_Pública.jpg",
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Contaduría Pública/UtelMx_Core_Comp1_Licenciaturas_Contaduría_Pública.jpg"
+  },
+  {
+    "id": "1YyJnBnE8YpnsgNdJhUZWgP89rYN6R8fx",
+    "name": "UtelMx_FichasTecnicas_Lic_ContaduriaPublica.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Contaduría Pública/UtelMx_FichasTecnicas_Lic_ContadurกaPublica/UtelMx_FichasTecnicas_Lic_ContaduriaPublica.pdf"
+  },
+  {
+    "id": "1H0hPN0TVOVrB4L_rIW__7LgYtnQMmxTE",
+    "name": "UtelMx_FichasTecnicas_Lic_ContaduriaFinanzas.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Contaduría y Finanzas/UtelMx_FichasTecnicas_Lic_ContadurกaFinanzas/UtelMx_FichasTecnicas_Lic_ContaduriaFinanzas.pdf"
   },
   {
     "id": "169SSw2ZqDtJWKn9LtqccCILpNtWrGtM_",
@@ -1765,9 +2255,29 @@
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Criminología y Criminalística/Utel_Criminología y Criminalística_Que aprenderas"
   },
   {
+    "id": "1DlwOJ-RCpX8V72YZ3foHn8BgKiSxWPRA",
+    "name": "UtelMx_FichasTecnicas_Lic_CriminologíayCriminalística.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Criminología y Criminalística/Utel_FichasTecnicas_Lic_CriminologíayCriminalística/UtelMx_FichasTecnicas_Lic_CriminologíayCriminalística.pdf"
+  },
+  {
+    "id": "1RLURELt3-6Kgk_eWjyGTOmswrg_0ATiJ",
+    "name": "UtelMx_FichasTecnicas_Lic_DerechoEmpresarial.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Derecho Empresarial/UtelMx_FichasTecnicas_Lic_DerechoEmpresarial/UtelMx_FichasTecnicas_Lic_DerechoEmpresarial.pdf"
+  },
+  {
+    "id": "1YiYjxyQ2mRh28Vlgn8g8Aa2pRJ2M3nV7",
+    "name": "UtelMx_FichasTecnicas_Lic_DerechoInternacional.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Derecho Internacional/UtelMx_FichasTecnicas_Lic_DerechoInternacional/UtelMx_FichasTecnicas_Lic_DerechoInternacional.pdf"
+  },
+  {
     "id": "1I4S-VIuYFojncTMuy3Yt0r65MYSnmACx",
     "name": "UtelMx_Core_Comp1_Licenciaturas_LicEnDerecho.png",
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Derecho/UtelMx_FichasTecnicas_Lic_Derecho/UtelMx_Core_Comp1_Licenciaturas_LicEnDerecho.png"
+  },
+  {
+    "id": "1nX63AWIp8TV6ywdajwmlcsLXVjI0nB17",
+    "name": "UtelMx_FichasTecnicas_Lic_Derecho.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Derecho/UtelMx_FichasTecnicas_Lic_Derecho/UtelMx_FichasTecnicas_Lic_Derecho.pdf"
   },
   {
     "id": "1xeFwHucC0WpnME4e6mf1idWmY1qxQkAd",
@@ -1790,9 +2300,24 @@
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Derecho/UtelMx_FichasTecnicas_Lic_Derecho/Victor_vertical.mov"
   },
   {
+    "id": "1MpXO28l3Ym8Dqoy2GaVMqvch2RyiHoDA",
+    "name": "UtelMx_FichasTecnicas_Lic_DesarrolloSustentableyEcoturismo.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Desarrollo Sustentable y Ecoturismo/UtelMx_FichasTecnicas_Lic_DesarrolloSustentableyEcoturismo/UtelMx_FichasTecnicas_Lic_DesarrolloSustentableyEcoturismo.pdf"
+  },
+  {
+    "id": "1IT_UB_Y0SXauzFDNz248fdeBCYFk9KiD",
+    "name": "UtelMx_FichasTecnicas_Lic_DireccionDeArte.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Dirección de Arte (NUEVA)/UtelMx_FichasTecnicas_Lic_DireccionDeArte.pdf"
+  },
+  {
     "id": "1gRQxIlxKry6mQhWrWkWYl433qQuUk-Y9",
     "name": "UtelMx_LDA.png",
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Dirección de Arte (NUEVA)/UtelMx_LDA.png"
+  },
+  {
+    "id": "1ySYcnOEb1mogsHlWEIdoRAbcJKC0Qz__",
+    "name": "UtelMx_FichasTecnicas_Lic_DisenoAnimacionDigital.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Diseño y Animación Digital (NUEVA)/UtelMx_FichasTecnicas_Lic_DisenoAnimacionDigital.pdf"
   },
   {
     "id": "1rvlSNFKBq4_gTEGumio6R2jVlRYcQugT",
@@ -1810,9 +2335,24 @@
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Economía y Finanzas (nueva)/UtelMx_Core_Comp3_Licenciatura_ Economía_Finanzas.png.png"
   },
   {
+    "id": "1aEk2Gfq-QdtHzWxjG4Az1xzeIa8eprrl",
+    "name": "UtelMx_FichasTecnicas_Lic_EconomíaYFinanzas.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Economía y Finanzas (nueva)/UtelMx_FichasTecnicas_Lic_EconomíaYFinanzas/UtelMx_FichasTecnicas_Lic_EconomíaYFinanzas.pdf"
+  },
+  {
+    "id": "1ETwL7eYQ3lnpfYUheje7VldNK-H1Besk",
+    "name": "UtelMx_FichasTecnicas_Lic_Emprendimiento.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Emprendimiento (NUEVA)/UtelMx_FichasTecnicas_Lic_Emprendimiento.pdf"
+  },
+  {
     "id": "1lzjaue6v92PCk9QRPAuLw3RI8i_L6JLz",
     "name": "UtelMx__InfografíaNP_LicEmprendimiento.png",
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Emprendimiento (NUEVA)/UtelMx__InfografíaNP_LicEmprendimiento.png"
+  },
+  {
+    "id": "1qck62aHGEA9X-9MG6C45My2YNyvxm1_2",
+    "name": "UtelMx_FichasTecnicas_Lic_IngIndustrialyAdmin.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Ingeniería Industrial y Administración/UtelMx_FichasTecnicas_Lic_IngIndustrialyAdmin/UtelMx_FichasTecnicas_Lic_IngIndustrialyAdmin.pdf"
   },
   {
     "id": "1BTLA5Vz5Dc44UoM-dBhTsFLyKV7QWl5e",
@@ -1820,14 +2360,34 @@
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Ingeniería Industrial y Administración/UtelMx_inform1_Licenciatura en Ingeniería Industrial y Administración.jpg"
   },
   {
+    "id": "1qMLOPh0GfsTG6XGObp4-v40Su2UzQchc",
+    "name": "UtelMx_Core_Infografía_Licenciaturas_IngIndustrial.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Ingeniería Industrial/UtelMx_Core_Infografía_Licenciaturas_IngIndustrial.pdf"
+  },
+  {
+    "id": "1RkGDOI8to5tOgJH867pYos3f6u5eUsib",
+    "name": "UtelMx_FichasTecnicas_Lic_ingenieriaIndustrial.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Ingeniería Industrial/UtelMx_FichasTecnicas_Lic_ingenieriaIndustrial/UtelMx_FichasTecnicas_Lic_ingenieriaIndustrial.pdf"
+  },
+  {
     "id": "1lYJ1NJhwHQPHq8pik6JYdibaaDOxEpZt",
     "name": "Ing. Desarrollo de Software.mov",
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Ingeniería en Desarrollo de Software (NUEVA)/Ing. Desarrollo de Software.mov"
   },
   {
+    "id": "15yV2b6Ds74CUrO8Ssvkxt-gO9gf0B_E-",
+    "name": "UtelMx_FichasTecnicas_Lic_IngenieriaDesarrolloDeSoftware.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Ingeniería en Desarrollo de Software (NUEVA)/UtelMx_FichasTecnicas_Lic_IngenieriaDesarrolloDeSoftware.pdf"
+  },
+  {
     "id": "12ufFioN9hbmROrD8zAwqu8yhIrmdSXVS",
     "name": "UtelMx__InfografíaNP_LicIngDesarrolloSoftware.png",
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Ingeniería en Desarrollo de Software (NUEVA)/UtelMx__InfografíaNP_LicIngDesarrolloSoftware.png"
+  },
+  {
+    "id": "1TBmijYBKf3-p9IHudFbFX0JVOBMzGwI4",
+    "name": "UtelMx_FichasTecnicas_Lic_IngenieriaEnergiasRenovables.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Ingeniería en Energías Renovables (NUEVA)/UtelMx_FichasTecnicas_Lic_IngenieriaEnergiasRenovables.pdf"
   },
   {
     "id": "1UaMXxQmh6-NMEwBA9NWfZ03ZlhM6PPQq",
@@ -1838,6 +2398,11 @@
     "id": "1zQthamlK96AHMaanJWbg5R6yOuFV0mXT",
     "name": "UtelMx__EnergíasRenovables.png",
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Ingeniería en Energías Renovables (NUEVA)/UtelMx__EnergíasRenovables.png"
+  },
+  {
+    "id": "1ODqlszoAdjzo_M216SDxlNc2gumXCQSK",
+    "name": "UtelMx_FichasTecnicas_Lic_IngenieriaLogisticaTransporte.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Ingeniería en Logística y Transporte (NUEVA)/UtelMx_FichasTecnicas_Lic_IngenieriaLogisticaTransporte.pdf"
   },
   {
     "id": "1KvL1jHvuzdE6WGaZGbGNxO4gWfxo8dM0",
@@ -1875,9 +2440,19 @@
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Inteligencia Artificial (NUEVA)/Utel_Lic_Inteligencia Artificial_Lenguaje IA"
   },
   {
+    "id": "12iTNmNLvrv5M6uDz83EgEJTFRGTXe8aT",
+    "name": "UtelMx_FichasTecnicas_Lic_MarketingyPublicidad.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Marketing y Publicidad/UtelMx_FichasTecnicas_Lic_MarketingyPublicidad/UtelMx_FichasTecnicas_Lic_MarketingyPublicidad.pdf"
+  },
+  {
     "id": "1w-Za3ZgIR8j7-otaEfvG2NujEqzjaSX8",
     "name": "UtelMx_Core_Comp1_Licenciaturas_LIc_En_Mercadotecnia.png",
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Mercadotecnia/UtelMx_Core_Comp1_Licenciaturas_LIc_En_Mercadotecnia.png"
+  },
+  {
+    "id": "148ue8ZoeiYI5uZzqQDtn1e5x1LL0TQQC",
+    "name": "UtelMx_FichasTecnicas_Lic_Mercadotecnia.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Mercadotecnia/UtelMx_FichasTecnicas_Lic_Mercadotecnia/UtelMx_FichasTecnicas_Lic_Mercadotecnia.pdf"
   },
   {
     "id": "1863eLR7w4pk4SyIQNvhU8J2DU46owU7h",
@@ -1890,9 +2465,19 @@
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Negocios Internacionales/UtelMx_Comp_NegocioInternacionales.jpg"
   },
   {
+    "id": "1577xA0Ey7a8fO5kHbewkaGF2nDrSvvjF",
+    "name": "UtelMx_FichasTecnicas_Lic_NegociosInternacionales.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Negocios Internacionales/UtelMx_FichasTecnicas_Lic_NegociosInternacionales/UtelMx_FichasTecnicas_Lic_NegociosInternacionales.pdf"
+  },
+  {
     "id": "13WGu2e4Drp86RS6kPzKOJjC5Mtaamm_j",
     "name": "Utel_Core_Licenciatura_Pedagogía",
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Pedagogía/Utel_Core_Licenciatura_Pedagogía"
+  },
+  {
+    "id": "1sSaxofYo9_usZhO84qRaQ2mv5imtb2DA",
+    "name": "UtelMx_FichasTecnicas_Lic_Pedagogía.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Pedagogía/Utel_FichasTecnicas_Licenciatura_Pedagogía/UtelMx_FichasTecnicas_Lic_Pedagogía.pdf"
   },
   {
     "id": "1qFxoW89WfGEAzXKwvwydbtHNMBMgvK_X",
@@ -1905,6 +2490,26 @@
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Psicología Organizacional/UtelMx_Core_Comp1_Licenciatura_Psicología_Organizacional.png"
   },
   {
+    "id": "1o9M_R74XKks7_LQpFj3Fnayt0L0-0K0W",
+    "name": "UtelMx_Core_Infografia_Licenciatura_Psicología_Organizacional.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Psicología Organizacional/UtelMx_Core_Infografia_Licenciatura_Psicología_Organizacional.pdf"
+  },
+  {
+    "id": "1YThdpdN4cO0RaTpVelWy0wM4rRCn6QGM",
+    "name": "UtelMx_FichasTecnicas_Lic_PsicologíaOrganizacional.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Psicología Organizacional/UtelMx_FichasTecnicas_Lic_PsicologíaOrganizacional/UtelMx_FichasTecnicas_Lic_PsicologíaOrganizacional.pdf"
+  },
+  {
+    "id": "1Am7D3DGXuRzSonejjALfch0xCfkdhwAM",
+    "name": "Utel_Mx_Fichas_Tecnicas_Lic_Psicologia_UVE.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Psicología/Utel_FichasTecnicas_Lic_Psicología/Utel_Mx_Fichas_Tecnicas_Lic_Psicologia_UVE.pdf"
+  },
+  {
+    "id": "1RQBPHS1GU4FwtCUDuHjjax-ILmWgEAxM",
+    "name": "UtelMx_FichasTecnicas_Lic_SeguridadInformatica.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Seguridad Informática (NUEVA)/UtelMx_FichasTecnicas_Lic_SeguridadInformatica.pdf"
+  },
+  {
     "id": "1qza0ssWVPT6BP8UcHl4mb-8XaHEOo6dX",
     "name": "UtelMx__Seguridad Informática.png",
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Seguridad Informática (NUEVA)/UtelMx__Seguridad Informática.png"
@@ -1913,6 +2518,26 @@
     "id": "160_uYslZpiae78M2qM6jUpuhuCH1U9oX",
     "name": "UtelMx_Core_Comp1_Licenciatura_En_Tecnología_Educativa.png",
     "path": "Catalogo Programas/Licenciaturas/Licenciatura en Tecnología Educativa (nueva)/UtelMx_Core_Comp1_Licenciatura_En_Tecnología_Educativa.png"
+  },
+  {
+    "id": "1usLTzl0TogP5XZRLFOdHLVFPCyydSi_P",
+    "name": "UtelMx_FichasTecnicas_Lic_ en Tecnología Educativa.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciatura en Tecnología Educativa (nueva)/UtelMx_FichasTecnicas_Lic_ en Tecnología Educativa/UtelMx_FichasTecnicas_Lic_ en Tecnología Educativa.pdf"
+  },
+  {
+    "id": "1dE-_kn30MvxRC0VrDTDgGkh7cU3S6xyv",
+    "name": "UtelUniversidad-Editorial-Mx-LicenciaturaEducaciónParaLaSustentabilidad-FT.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Educación para  la Sustentabilidad/UtelUniversidad-Editorial-Mx-LicenciaturaEducaciónParaLaSustentabilidad-FT.pdf"
+  },
+  {
+    "id": "1nHkdr8IHW2SC5sUL2hByBkevis1FNBQq",
+    "name": "UtelUniversidad-Editorial-Mx-LicenciaturaEstrategiayTransformacióndeNegocios-FT.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Estrategia y  Transformación  de Negocios/UtelUniversidad-Editorial-Mx-LicenciaturaEstrategiayTransformacióndeNegocios-FT.pdf"
+  },
+  {
+    "id": "1DwJA4_48fBmggoikedLGGhasqtbFRy-5",
+    "name": "UtelUniversidad-Editorial-Mx-LicenciaturaFinanzasyEstrategiaFiscal-FT.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Finanzas y  Estrategia Fiscal/UtelUniversidad-Editorial-Mx-LicenciaturaFinanzasyEstrategiaFiscal-FT.pdf"
   },
   {
     "id": "18pRwYnqYAVWx1YzCr5qnP3wJA39sd81L",
@@ -1930,6 +2555,11 @@
     "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Finanzas y  Estrategia Fiscal/UtelUniversidad-Ventas-NuevosProgramas-F151-Licenciatura-FinanzasEstrategiaFiscal.mp4"
   },
   {
+    "id": "1H-kiVD7pSIDygIPyEoZacEC-rUdTDlST",
+    "name": "UtelUniversidad-Editorial-Mx-LicenciaturaFinanzasyBanca-FT.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Finanzas y Banca/UtelUniversidad-Editorial-Mx-LicenciaturaFinanzasyBanca-FT.pdf"
+  },
+  {
     "id": "1A998xdW2Hgz76wg2ZBKb2Q0rOxdB_uEJ",
     "name": "Mariana_cuadrado.mov",
     "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Ingeniería Ambiental/Mariana_cuadrado.mov"
@@ -1938,6 +2568,11 @@
     "id": "1iu59otQnUjCnqJD5x6BbDv1mi-qxbJKu",
     "name": "Mariana_vertical.MOV",
     "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Ingeniería Ambiental/Mariana_vertical.MOV"
+  },
+  {
+    "id": "1fudWO2yf19fCnesA7WakmN4bNf8Bl-M1",
+    "name": "UtelUniversidad-Editorial-Mx-LicenciaturaIngenieríaAmbiental-FT.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Ingeniería Ambiental/UtelUniversidad-Editorial-Mx-LicenciaturaIngenieríaAmbiental-FT.pdf"
   },
   {
     "id": "1N5ToMFXtHRCNNeCezbDrfu3WDTLpV-Eb",
@@ -1965,6 +2600,11 @@
     "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Ingeniería Robótica/KarlaKarentOcegueraGuajardo_Vertical.mov"
   },
   {
+    "id": "1DIqEoIsPhQCrA2WRT_vNQfLXSWUG2ZOe",
+    "name": "UtelUniversidad-Editorial-Mx-LicenciaturaIngenieríaRobótica-FT.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Ingeniería Robótica/UtelUniversidad-Editorial-Mx-LicenciaturaIngenieríaRobótica-FT.pdf"
+  },
+  {
     "id": "1rGSIHCZkm1_MC-LA5DH2a-I9reyffUWo",
     "name": "UtelUniversidad-Ventas-NuevosProgramas-F44-Licenciatura-IngenieriaRobotica.png",
     "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Ingeniería Robótica/UtelUniversidad-Ventas-NuevosProgramas-F44-Licenciatura-IngenieriaRobotica.png"
@@ -1975,6 +2615,21 @@
     "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Ingeniería Robótica/UtelUniversidad-Ventas-NuevosProgramas-F45-Licenciatura-IngenieriaRobotica.png"
   },
   {
+    "id": "13ckm6YvMA0ZE6bfFK_Uhf_4N6LmEAvTM",
+    "name": "UtelUniversidad-Editorial-Mx-LicenciaturaIngenieríaProgramaciónenlaNube-FT.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Ingeniería en  Programación en la Nube/UtelUniversidad-Editorial-Mx-LicenciaturaIngenieríaProgramaciónenlaNube-FT.pdf"
+  },
+  {
+    "id": "1bF73aABK4DQXEM2_sdrZGx_G48xdoCT4",
+    "name": "UtelUniversidad-Editorial-Mx-LicenciaturaIngenieríaSistemasInteligentes-FT.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Ingeniería en  Sistemas Inteligentes/UtelUniversidad-Editorial-Mx-LicenciaturaIngenieríaSistemasInteligentes-FT.pdf"
+  },
+  {
+    "id": "1PnbtgDdH9bYsTPD2QuFyNCbtrcBaEt2l",
+    "name": "UtelUniversidad-Editorial-Mx-LicenciaturaIngenieríaCienciadeDatoseInteligenciaAnalítica-FT.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Ingeniería en Ciencia de Datos e Inteligencia Analítica/UtelUniversidad-Editorial-Mx-LicenciaturaIngenieríaCienciadeDatoseInteligenciaAnalítica-FT.pdf"
+  },
+  {
     "id": "1y37oeLTvzr_uhQwhOZUAnb8Shp1c8oIf",
     "name": "Kary_cuadrado.MOV",
     "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Ingeniería en Tecnología de Videojuegos y  Realidad Virtual/Kary_cuadrado.MOV"
@@ -1983,6 +2638,11 @@
     "id": "1uyu24TFs8v5k5Ljqm7shpx-w8EcaaSav",
     "name": "Kary_vertical.MOV",
     "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Ingeniería en Tecnología de Videojuegos y  Realidad Virtual/Kary_vertical.MOV"
+  },
+  {
+    "id": "1kG1iGoTNqcoq7mmWoreuvOiZKXGVQ0Jp",
+    "name": "UtelUniversidad-Editorial-Mx-LicenciaturaIngenieríaTecnologíadeVideojuegosyRealidadVirtual-FT.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Ingeniería en Tecnología de Videojuegos y  Realidad Virtual/UtelUniversidad-Editorial-Mx-LicenciaturaIngenieríaTecnologíadeVideojuegosyRealidadVirtual-FT.pdf"
   },
   {
     "id": "1ysGqwsglZZXmNV5hQ5Yg3ExLDqZDNGrA",
@@ -1998,6 +2658,51 @@
     "id": "15qJqpe5ESotHEubGI5ZJYy0qGq1lc-1g",
     "name": "UtelUniversidad-Ventas-NuevosProgramas-F4-Licenciatura-VideojuegosVR.png",
     "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Ingeniería en Tecnología de Videojuegos y  Realidad Virtual/UtelUniversidad-Ventas-NuevosProgramas-F4-Licenciatura-VideojuegosVR.png"
+  },
+  {
+    "id": "1HOQyMYBaBDjaB1-vGhQprZi5TstC4Xgu",
+    "name": "UtelUniversidad-Editorial-Mx-LicenciaturaInnovaciónyEmprendimientoconInteligenciaArtificial-FT.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Innovación y  Emprendimiento con Inteligencia Artificial/UtelUniversidad-Editorial-Mx-LicenciaturaInnovaciónyEmprendimientoconInteligenciaArtificial-FT.pdf"
+  },
+  {
+    "id": "1sTouKFwQXTLni9LWGOV-IEkVWiDHwcsG",
+    "name": "UtelUniversidad-Editorial-Mx-LicenciaturaInnovaciónyTransformacióndeNegocios-FT.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Innovación y  Transformación  de Negocios/UtelUniversidad-Editorial-Mx-LicenciaturaInnovaciónyTransformacióndeNegocios-FT.pdf"
+  },
+  {
+    "id": "1vQX11VMF3anQJ1l1f-61IlDvQSDi6d5a",
+    "name": "UtelUniversidad-Editorial-Mx-LicenciaturaInteligenciaArtificialAplicadaaNegociosIndustriayAutomatización-FT.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Inteligencia  Artificial aplicada a  Negocios, Industria y Automatización/UtelUniversidad-Editorial-Mx-LicenciaturaInteligenciaArtificialAplicadaaNegociosIndustriayAutomatización-FT.pdf"
+  },
+  {
+    "id": "1HMXQ1MAAsfPJckHIJww6G7z7FeCLFuVn",
+    "name": "UtelUniversidad-Editorial-Mx-LicenciaturaInteligenciaArtificialyCienciadeDatos-FT.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Inteligencia Artificial  y Ciencia de Datos/UtelUniversidad-Editorial-Mx-LicenciaturaInteligenciaArtificialyCienciadeDatos-FT.pdf"
+  },
+  {
+    "id": "1_P0lqTIHAd9FHMQW95dkARng9szHQydY",
+    "name": "UtelUniversidad-Editorial-Mx-LicenciaturaInteligenciaArtificialenEducación-FT.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Inteligencia Artificial en Educación/UtelUniversidad-Editorial-Mx-LicenciaturaInteligenciaArtificialenEducación-FT.pdf"
+  },
+  {
+    "id": "1qcXWijXWrDVsdoPCxRbPrHKSUHn5s6DP",
+    "name": "UtelUniversidad-Editorial-Mx-LicenciaturaSoftwareParaEntretenimientoDigital-FT.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Software para  Entretenimiento  Digital/UtelUniversidad-Editorial-Mx-LicenciaturaSoftwareParaEntretenimientoDigital-FT.pdf"
+  },
+  {
+    "id": "1_9nfzJHvJKle1SpK_pHaQQYVtWX6w9vx",
+    "name": "UtelUniversidad-Editorial-Mx-LicenciaturaTecnologíasInteractivasyVirtuales-FT.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Tecnologías  Interactivas y Virtuales/UtelUniversidad-Editorial-Mx-LicenciaturaTecnologíasInteractivasyVirtuales-FT.pdf"
+  },
+  {
+    "id": "1oQS-VcfO0RuS9phqnjAUcDOX0-SVx34B",
+    "name": "UtelUniversidad-Editorial-Mx-LicenciaturaÉticayGobernanzadelaInteligenciaArtificial-FT.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 1 (37_105 programas)/Licenciatura en Ética y Gobernanza  de la Inteligencia  Artificial/UtelUniversidad-Editorial-Mx-LicenciaturaÉticayGobernanzadelaInteligenciaArtificial-FT.pdf"
+  },
+  {
+    "id": "1pU_cz91XC7VitgMcDNwjG5yiOBcz4c4c",
+    "name": "MX_Licenciatura_en__Comercio_Internacional_Nuevos_Programas_Bloque_2_1779202927023_294263.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Lic. Comercio internacional/MX_Licenciatura_en__Comercio_Internacional_Nuevos_Programas_Bloque_2_1779202927023_294263.pdf"
   },
   {
     "id": "1shn8uNv4gV_iNYsPSCkW5aBP7xT2l1AZ",
@@ -2035,6 +2740,11 @@
     "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Lic. Diseño y Producción de Videojuegos/David_vertical.mov"
   },
   {
+    "id": "1wZZ3t1KMzwypoT-3CDb8NvZQ2B_MuA4D",
+    "name": "MX_Licenciatura_en__Diseño_y_Producción_de_Videojuegos_Nuevos_Programas_Bloque_2_1779202973030_333315.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Lic. Diseño y Producción de Videojuegos/MX_Licenciatura_en__Diseño_y_Producción_de_Videojuegos_Nuevos_Programas_Bloque_2_1779202973030_333315.pdf"
+  },
+  {
     "id": "12VOX_1kCOKdtKdHwt-gnYIX_ZfBa-KSu",
     "name": "UtelUniversidad-Ventas-NuevosProgramas-F2-Licenciatura-Videojuegos.png",
     "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Lic. Diseño y Producción de Videojuegos/UtelUniversidad-Ventas-NuevosProgramas-F2-Licenciatura-Videojuegos.png"
@@ -2050,6 +2760,11 @@
     "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Lic. Diseño y Producción de Videojuegos/UtelUniversidad-Ventas-NuevosProgramas-F4-Licenciatura-Videojuegos.png"
   },
   {
+    "id": "1DcRJ5nLL9CfNmBLzO3MK3tJP_kstzGDq",
+    "name": "MX_Licenciatura_en__Administración_de_Negocios_Gastronómicos_Nuevos_Programas_Bloque_2_1779202907968_591940.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Licenciatura en Administración de Negocios Gastronómicos/MX_Licenciatura_en__Administración_de_Negocios_Gastronómicos_Nuevos_Programas_Bloque_2_1779202907968_591940.pdf"
+  },
+  {
     "id": "1oxo5HLQwRL-MUpx8BJCtXEQFX2fENT7n",
     "name": "Daniela_cuadrado.mov",
     "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Licenciatura en Arquitectura/Daniela_cuadrado.mov"
@@ -2058,6 +2773,11 @@
     "id": "1IwCPYfAllIAtorRHCACaCxdw3lSHw9c7",
     "name": "Daniela_vertical.mov",
     "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Licenciatura en Arquitectura/Daniela_vertical.mov"
+  },
+  {
+    "id": "1HV8z0Fw_k626_IbD_cd-kpu7RKiLnXYU",
+    "name": "UtelUniversidad-Editorial-Mx-LicenciaturaArquitectura-FT.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Licenciatura en Arquitectura/UtelUniversidad-Editorial-Mx-LicenciaturaArquitectura-FT.pdf"
   },
   {
     "id": "1MJrLsViffNrLSpwvR4mnrcT6mHOOqL6w",
@@ -2080,6 +2800,11 @@
     "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Licenciatura en Ciberseguridad  y Riesgos en  Inteligencia Artificial/Cretividad_UtelUniversidad-Ventas-NuevosProgramas-F131-Licenciatura-CiberseguridadIA.mp4"
   },
   {
+    "id": "1eo8CiJSN6VjGCvQzZas2Lcq9_juHVcvr",
+    "name": "UtelUniversidad-Editorial-Mx-LicenciaturaCiberseguridadyRiesgosEnInteligenciaArtificial-FT.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Licenciatura en Ciberseguridad  y Riesgos en  Inteligencia Artificial/UtelUniversidad-Editorial-Mx-LicenciaturaCiberseguridadyRiesgosEnInteligenciaArtificial-FT.pdf"
+  },
+  {
     "id": "1nnys3z9qLpKrczYv9Lpq1V0DS3OB0Iox",
     "name": "UtelUniversidad-Ventas-NuevosProgramas-F132-Licenciatura-CiberseguridadIA.png",
     "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Licenciatura en Ciberseguridad  y Riesgos en  Inteligencia Artificial/UtelUniversidad-Ventas-NuevosProgramas-F132-Licenciatura-CiberseguridadIA.png"
@@ -2088,6 +2813,41 @@
     "id": "10MBmzpE6uKv9s-dDFkYmynt1STDhdI99",
     "name": "UtelUniversidad-Ventas-NuevosProgramas-F133-Licenciatura-CiberseguridadIA.png",
     "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Licenciatura en Ciberseguridad  y Riesgos en  Inteligencia Artificial/UtelUniversidad-Ventas-NuevosProgramas-F133-Licenciatura-CiberseguridadIA.png"
+  },
+  {
+    "id": "1MaUxDODxX0wH61VIYXd_G3XK9ZB6PVL5",
+    "name": "MX_Licenciatura_en__Comercialización_Turística_y_Mercados_Digitales_Nuevos_Programas_Bloque_2_1779202936491_969483.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Licenciatura en Comercialización Turística y Mercados Digitales/MX_Licenciatura_en__Comercialización_Turística_y_Mercados_Digitales_Nuevos_Programas_Bloque_2_1779202936491_969483.pdf"
+  },
+  {
+    "id": "1puQztLlI57qFvrksOjshOWVmctU-cF_4",
+    "name": "MX_Licenciatura_en__Comercialización_y_Dirección_de_Marcas_Nuevos_Programas_Bloque_2_1779202963656_377975.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Licenciatura en Comercialización y Dirección de Marcas/MX_Licenciatura_en__Comercialización_y_Dirección_de_Marcas_Nuevos_Programas_Bloque_2_1779202963656_377975.pdf"
+  },
+  {
+    "id": "1NONy8O-Cq4FaBb1ZeXNfq32bKZBC9-Ix",
+    "name": "UtelUniversidad-Editorial-Mx-LicenciaturaComercioElectrónicoyNegociosDigitales-FT.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Licenciatura en Comercio Electrónico y Negocios Digitales/UtelUniversidad-Editorial-Mx-LicenciaturaComercioElectrónicoyNegociosDigitales-FT.pdf"
+  },
+  {
+    "id": "1_MLmX77EAzoD1cESOyevXXT8SoX7cMX_",
+    "name": "MX_Licenciatura_en__Comunicación_y_manejo_de_Redes_Sociales_Nuevos_Programas_Bloque_2_1779202897141_285024.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Licenciatura en Comunicación y Manejo de Redes Sociales/MX_Licenciatura_en__Comunicación_y_manejo_de_Redes_Sociales_Nuevos_Programas_Bloque_2_1779202897141_285024.pdf"
+  },
+  {
+    "id": "1POhs-xJj506od4io6mfxBBwq64fUfNTh",
+    "name": "MX_Licenciatura_en__Comunicación_y_Periodismo_Nuevos_Programas_Bloque_2_1779202886839_172722.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Licenciatura en Comunicación y Periodismo/MX_Licenciatura_en__Comunicación_y_Periodismo_Nuevos_Programas_Bloque_2_1779202886839_172722.pdf"
+  },
+  {
+    "id": "1UkE70C_E73v7xHT7aYNeCgNI3Jf68vjl",
+    "name": "MX_Licenciatura_en__Consultoría_y_Desarrollo_Empresarial_Nuevos_Programas_Bloque_2_1779202945655_32159.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Licenciatura en Consultoría y Desarrollo Empresarial/MX_Licenciatura_en__Consultoría_y_Desarrollo_Empresarial_Nuevos_Programas_Bloque_2_1779202945655_32159.pdf"
+  },
+  {
+    "id": "1Q3svwGmdeadKDc1QaW4AUGzRSueRBlkZ",
+    "name": "MX_Licenciatura_en__Ingeniería_en_Automatización_Industrial_Nuevos_Programas_Bloque_2_1779202875180_598576 (1).pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Licenciatura en Ingeniería Automatización Industrial./MX_Licenciatura_en__Ingeniería_en_Automatización_Industrial_Nuevos_Programas_Bloque_2_1779202875180_598576 (1).pdf"
   },
   {
     "id": "1RIR1lFvukwvC-bc7nR3jBWq6O_-ZDUA3",
@@ -2113,6 +2873,16 @@
     "id": "1IYcd0kAErRZTYF1jJNrYuD67uMpmlRUo",
     "name": "UtelUniversidad-Ventas-NuevosProgramas-F43-Licenciatura-IngenieriaAutomatizacionIndustrial.png",
     "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Licenciatura en Ingeniería Automatización Industrial./UtelUniversidad-Ventas-NuevosProgramas-F43-Licenciatura-IngenieriaAutomatizacionIndustrial.png"
+  },
+  {
+    "id": "18-6ZiJ_YBiv24OUj7CpcbAP30-spC9d2",
+    "name": "MX_Licenciatura_en__Publicidad_y_Medios_Nuevos_Programas_Bloque_2_1779202917924_199009.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Licenciatura en Publicidad y Medios/MX_Licenciatura_en__Publicidad_y_Medios_Nuevos_Programas_Bloque_2_1779202917924_199009.pdf"
+  },
+  {
+    "id": "1gqk2eQb_TwelHI_1y_7Tcz7LWFurXXUQ",
+    "name": "MX_Licenciatura_en__Tecnologías_Interactivas_y_Experiencia_e_Interfaz_de_Usuario_Nuevos_Programas_Bloque_2_1779202954593_132830.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas Bloque 2/Licenciatura en Tecnologias Interactivas y experiencia en interfaz de usuario/MX_Licenciatura_en__Tecnologías_Interactivas_y_Experiencia_e_Interfaz_de_Usuario_Nuevos_Programas_Bloque_2_1779202954593_132830.pdf"
   },
   {
     "id": "1N2oeAbjKby_c8VWkkAs2wi-6F3l66g8-",
@@ -2175,9 +2945,29 @@
     "path": "Catalogo Programas/Licenciaturas/Licenciaturas en Ingeniería en Sistemas Computacionales/UtelMx_Core_Comp1_Licenciaturas_IngSistemas.png"
   },
   {
+    "id": "1AH-peKj5I8sA9d685I1dZdiAp5MkBkX4",
+    "name": "UtelMx_Core_Infografía_Licenciaturas_IngSistemas.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas en Ingeniería en Sistemas Computacionales/UtelMx_Core_Infografía_Licenciaturas_IngSistemas.pdf"
+  },
+  {
+    "id": "1vnzf2FEyfCDW7HEFSsTdEgQcLS4c77pM",
+    "name": "UtelMx_FichasTecnicas_Lic_SistemasComputacionales.pdf",
+    "path": "Catalogo Programas/Licenciaturas/Licenciaturas en Ingeniería en Sistemas Computacionales/UtelMx_FichasTecnicas_Lic_SistemasComputacionales/UtelMx_FichasTecnicas_Lic_SistemasComputacionales.pdf"
+  },
+  {
     "id": "1QpmInnexDyAuOklumrlUd7PneUtipBgE",
     "name": "MAE Administración Pública.png",
     "path": "Catalogo Programas/Maestría/Maestria en Administración Pública/MAE Administración Pública.png"
+  },
+  {
+    "id": "1uiiIAZfLsLka1dStq3ZOvXHHprapiWuj",
+    "name": "UtelMx_FichasTecnicas_Maestría_AdministraciónPublica.pdf",
+    "path": "Catalogo Programas/Maestría/Maestria en Administración Pública/Utel_Mx_Fichas_Tecnicas_Maestr_a_Administracion_Publica/UtelMx_FichasTecnicas_Maestría_AdministraciónPublica.pdf"
+  },
+  {
+    "id": "1QxN3ehZlsarWiFxVg45nSB83jIAoG3J5",
+    "name": "UtelMx_FichasTecnicas_Maestría_AdministraciónDeInstitucionesEducativas.pdf",
+    "path": "Catalogo Programas/Maestría/Maestria en Administración de Instituciones Educativas/UtelMx_FichasTecnicas_Maestrกa_AdministracionDeInstitucionesEducativas/UtelMx_FichasTecnicas_Maestría_AdministraciónDeInstitucionesEducativas.pdf"
   },
   {
     "id": "1LwwTemcnRW2aORAC0oKsZg0QDyEu_h0d",
@@ -2190,9 +2980,19 @@
     "path": "Catalogo Programas/Maestría/Maestria en Administración de Negocios Deportivos/MAE Administración de Negocios Deportivos.png"
   },
   {
+    "id": "1NzbdNcJbI3Y7SR1hGGsYWfN3jin8JYF7",
+    "name": "UtelMx_FichasTecnicas_Maestría_AdministraciónDeNegociosDeportivos.pdf",
+    "path": "Catalogo Programas/Maestría/Maestria en Administración de Negocios Deportivos/UtelMx_FichasTecnicas_Maestrกa_AdministracionDeNegociosDeportivos/UtelMx_FichasTecnicas_Maestría_AdministraciónDeNegociosDeportivos.pdf"
+  },
+  {
     "id": "1QuRYDMrsbXm53wVQwgtEIzHrm5NPMBWT",
     "name": "MAE Administración de Tecnologías de la Información.png",
     "path": "Catalogo Programas/Maestría/Maestria en Administración de Tecnologías de la Información/MAE Administración de Tecnologías de la Información.png"
+  },
+  {
+    "id": "1P52jm8Yo-ZFoxHaaJ-TBCg76eVSiCIJA",
+    "name": "UtelMx_FichasTecnicas_Maestría_AdministraciónDeTecnologíasDeLaInfo.pdf",
+    "path": "Catalogo Programas/Maestría/Maestria en Administración de Tecnologías de la Información/Utel_Mx_Fichas_Tecnicas_Maestr_a_Administracion_De_Tecnolog_as_De_La_Info/UtelMx_FichasTecnicas_Maestría_AdministraciónDeTecnologíasDeLaInfo.pdf"
   },
   {
     "id": "1vyskF5_U6mTrvbAj9HA4643JRRF2Muu3",
@@ -2200,9 +3000,39 @@
     "path": "Catalogo Programas/Maestría/Maestria en Ciencia de Datos para Negocios/MAE Ciencia de Datos para Negocios.png"
   },
   {
+    "id": "1wCJoiFVK82RRupbuD36pNUMHCuHZUR0s",
+    "name": "UtelMx_ContenidoValor_Infografía_Maestrias_CienciaDatosNegocios.pdf",
+    "path": "Catalogo Programas/Maestría/Maestria en Ciencia de Datos para Negocios/UtelMx_ContenidoValor_Infografía_Maestrias_CienciaDatosNegocios.pdf"
+  },
+  {
+    "id": "1EmgcOxklIQE8rsEkC8-bjWi4o7zvwhhF",
+    "name": "UtelMx_FichasTecnicas_Maestría_CienciaDeDatosParaNegocios.pdf",
+    "path": "Catalogo Programas/Maestría/Maestria en Ciencia de Datos para Negocios/UtelMx_FichasTecnicas_Maestr¡a_CienciaDeDatosParaNegocios/UtelMx_FichasTecnicas_Maestría_CienciaDeDatosParaNegocios.pdf"
+  },
+  {
+    "id": "166nKD1gr01q9a-bjVU-smldGuTaIqF_W",
+    "name": "UtelMx_FichasTecnicas_Maestría_CienciasComputacionalesTelecomunicaciones.pdf",
+    "path": "Catalogo Programas/Maestría/Maestria en Ciencias Computacionales y Telecomunicaciones/Utel_Mx_Fichas_Tecnicas_Maestr_a_Ciencias_Computacionales_Telecomunicaciones/UtelMx_FichasTecnicas_Maestría_CienciasComputacionalesTelecomunicaciones.pdf"
+  },
+  {
+    "id": "17VBFNOY0-z_O0S1k0mb0Gc7L_n7JTFF3",
+    "name": "UtelMx_FichasTecnicas_Maestría_CoachingIntegralOrganizacional.pdf",
+    "path": "Catalogo Programas/Maestría/Maestria en Coaching Integral y Organizacional/UtelMx_FichasTecnicas_Maestria_CoachingIntegralOrganizacional/UtelMx_FichasTecnicas_Maestría_CoachingIntegralOrganizacional.pdf"
+  },
+  {
     "id": "1NXr_T1GqmhPbAxRPIiCowDk58NT7KsNR",
     "name": "MAE Comercio Internacional.png",
     "path": "Catalogo Programas/Maestría/Maestria en Comercio Internacional/MAE Comercio Internacional.png"
+  },
+  {
+    "id": "1zADfqBWQ_OoZbREocG791TM0IJHkKYuL",
+    "name": "UtelMx_FichasTecnicas_Maestría_ComercioInternacional.pdf",
+    "path": "Catalogo Programas/Maestría/Maestria en Comercio Internacional/UtelMx_FichasTecnicas_Maestr¡a_ComercioInternacional/UtelMx_FichasTecnicas_Maestría_ComercioInternacional.pdf"
+  },
+  {
+    "id": "1PkKDT2gKlnmT-bZ2baPrGPqj0qjP3X9o",
+    "name": "UtelMx_FichasTecnicas_Maestría_DerechoProcesalConstitucional.pdf",
+    "path": "Catalogo Programas/Maestría/Maestria en Derecho Procesal Constitucional/UtelMx_FichasTecnicas_Mae_DerechoProcesalConstitucional/UtelMx_FichasTecnicas_Maestría_DerechoProcesalConstitucional.pdf"
   },
   {
     "id": "1-c1_OvW3OouLTRTPdB4zza2ENL2p9Zx1",
@@ -2213,6 +3043,11 @@
     "id": "1phQICU690FOMK4_ACzTeOhXvxPAnTQti",
     "name": "MAE Derecho Procesal Penal.png",
     "path": "Catalogo Programas/Maestría/Maestria en Derecho Procesal Penal/MAE Derecho Procesal Penal.png"
+  },
+  {
+    "id": "16Tpn3I0BLMHULSGG5zwfbU66NFwDrmXC",
+    "name": "UtelMx_FichasTecnicas_Maestría_DerechoProcesalPenal.pdf",
+    "path": "Catalogo Programas/Maestría/Maestria en Derecho Procesal Penal/UtelMx_FichasTecnicas_Maestría_DerechoProcesalPenal/UtelMx_FichasTecnicas_Maestría_DerechoProcesalPenal.pdf"
   },
   {
     "id": "1zUGkumcuP3vFC83xAXWll7qwJ50zFXaN",
@@ -2235,14 +3070,59 @@
     "path": "Catalogo Programas/Maestría/Maestria en Derecho Procesal y Juicios Orales/MAE Derecho Procesal y Juicios Orales.png"
   },
   {
+    "id": "13IUO0juKl2fPKgC6_z75kdVIFI3EGf5i",
+    "name": "UtelMx_FichasTecnicas_Maestría_DerechoProcesalyJuiciosOrales.pdf",
+    "path": "Catalogo Programas/Maestría/Maestria en Derecho Procesal y Juicios Orales/UtelMx_FichasTecnicas_Maestría_DerechoProcesalyJuiciosOrales/UtelMx_FichasTecnicas_Maestría_DerechoProcesalyJuiciosOrales.pdf"
+  },
+  {
+    "id": "1XKSlDaV4tcDBXZE7B2fn_OmyHO26rF85",
+    "name": "UtelMx_FichasTecnicas_Maestría_DireccióndeEmpresasTurísticas.pdf",
+    "path": "Catalogo Programas/Maestría/Maestria en Dirección de Empresas Turísticas/UtelMx_FichasTecnicas_Maestría_DireccióndeEmpresasTurísticas/UtelMx_FichasTecnicas_Maestría_DireccióndeEmpresasTurísticas.pdf"
+  },
+  {
     "id": "1otI3YzG-kR0MsX2d6DziUYr5aWsxbPfu",
     "name": "UtelMx_Maestria_DirecNEgocios_Alimentos_Bebidas.png",
     "path": "Catalogo Programas/Maestría/Maestria en Dirección de Negocios de Alimentos y Bebidas/UtelMx_Maestria_DirecNEgocios_Alimentos_Bebidas.png"
   },
   {
+    "id": "19hgtxwFiGZQ7IXJzvLh70P9F9qdqnYZB",
+    "name": "UtelMx_FichasTecnicas_Maestría_DireccióndeNegociosdeAlimentosyBebidas.pdf",
+    "path": "Catalogo Programas/Maestría/Maestria en Dirección de Negocios de Alimentos y Bebidas/Utel_Mx_Fichas_Tecnicas_Maestria_Direccionde_Negociosde_Alimentosy_Bebidas/UtelMx_FichasTecnicas_Maestría_DireccióndeNegociosdeAlimentosyBebidas.pdf"
+  },
+  {
+    "id": "1aG8LsM88OHBP1HE50EIR3rT1zc2vGDDv",
+    "name": "UtelMx_FichasTecnicas_Maestría_DirecciónDeProyectosDeInnovación.pdf",
+    "path": "Catalogo Programas/Maestría/Maestria en Dirección de Proyectos de Innovación/UtelMx_FichasTecnicas_Maestrกa_DireccionDeProyectosDeInnovacion/UtelMx_FichasTecnicas_Maestría_DirecciónDeProyectosDeInnovación.pdf"
+  },
+  {
+    "id": "1kqJs3aS0c99l9NPSYo4VtJh1YQMECwLu",
+    "name": "UtelMx_FichasTecnicas_Maestría_DirecciónIngenieríaDeSoftware.pdf",
+    "path": "Catalogo Programas/Maestría/Maestria en Dirección e Ingeniería de Software/UtelMx_FichasTecnicas_Maestrกa_DireccionIngenierกaDeSoftware/UtelMx_FichasTecnicas_Maestría_DirecciónIngenieríaDeSoftware.pdf"
+  },
+  {
+    "id": "1iy8KobACNDwUiLtxAU_meOY7W-H8vQvO",
+    "name": "UtelMx_FichasTecnicas_Maestría_GestiónEstratégicaCapitalHumano.pdf",
+    "path": "Catalogo Programas/Maestría/Maestria en Gestión Estratégica del Capital Humano/Utel_Mx_Fichas_Tecnicas_Maestria_Gestion_Estrategica_Capital_Humano/UtelMx_FichasTecnicas_Maestría_GestiónEstratégicaCapitalHumano.pdf"
+  },
+  {
+    "id": "1NzTzp3mRh3jW7FMrVBHsbxswb50XgikP",
+    "name": "UtelMx_FichasTecnicas_Maestría_IngenieríaTecnologíaAmbiental.pdf",
+    "path": "Catalogo Programas/Maestría/Maestria en Ingeniería y Tecnología Ambiental/UtelMx_FichasTecnicas_Maestria_IngenieriaTecnologiaAmbiental/UtelMx_FichasTecnicas_Maestría_IngenieríaTecnologíaAmbiental.pdf"
+  },
+  {
     "id": "1pOdsH2vBFrssz1Lt_dsoHl5CV8guyRbu",
     "name": "UtelMx_Info_TecAmbiental.png",
     "path": "Catalogo Programas/Maestría/Maestria en Ingeniería y Tecnología Ambiental/UtelMx_Info_TecAmbiental.png"
+  },
+  {
+    "id": "112m9w0zZJzKjDKNhWYowp3TT_A4Nkz6p",
+    "name": "UtelMx_Infografía_Maestrias_TecnologiaAmbiental.pdf",
+    "path": "Catalogo Programas/Maestría/Maestria en Ingeniería y Tecnología Ambiental/UtelMx_Infografía_Maestrias_TecnologiaAmbiental.pdf"
+  },
+  {
+    "id": "1CwLXxdjXP-e4S4J1VyEmh9qvSHHjBwKz",
+    "name": "UtelMx_FichasTecnicas_Mae. en Administración Pública con CIFAL Málaga UNITAR (2).pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Administración Pública con CIFAL Málaga y UNITAR/UtelMx_FichasTecnicas_Mae. en Administración Pública con CIFAL Málaga UNITAR/UtelMx_FichasTecnicas_Mae. en Administración Pública con CIFAL Málaga UNITAR (2).pdf"
   },
   {
     "id": "1xWnfIc9snJENTR2N2wjb07dkbQEQ8dQk",
@@ -2255,9 +3135,24 @@
     "path": "Catalogo Programas/Maestría/Maestría en Administración de Recursos Humanos/UtelMx_Core_Comp1_Maestria_Administracion_de_Recursos Humanos.png"
   },
   {
+    "id": "1NNSlB3Scm4AAhEm9sqJxZt5qWhkSxVF7",
+    "name": "UtelMx_FichasTecnicas_Maestría_AdministraciónDeRRHH.pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Administración de Recursos Humanos/UtelMx_FichasTecnicas_Maestrกa_AdministracionDeRRHH/UtelMx_FichasTecnicas_Maestría_AdministraciónDeRRHH.pdf"
+  },
+  {
     "id": "1XCcISTEbhu7QpK3D33gKaApkfC60sr4L",
     "name": "MAE Administración en Mercadotecnia Estratégica.png",
     "path": "Catalogo Programas/Maestría/Maestría en Administración en Mercadotecnia Estratégica/MAE Administración en Mercadotecnia Estratégica.png"
+  },
+  {
+    "id": "1pkVgNzyN-l_hx7bWruZh8qRE2p7TK1mR",
+    "name": "UtelMx_FichasTecnicas_Maestría_AdministraciónMercadotecniaEstratégica.pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Administración en Mercadotecnia Estratégica/UtelMx_FichasTecnicas_Maestria_AdmonMercadotecniaEstrategica/UtelMx_FichasTecnicas_Maestría_AdministraciónMercadotecniaEstratégica.pdf"
+  },
+  {
+    "id": "1a14rXAGf1__oWdudbD2kGkm_-22gbYFB",
+    "name": "UtelMx_FichasTecnicas_Mae_Ciberseguridad.pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Ciberseguridad (NUEVA)/UtelMx_FichasTecnicas_Mae_Ciberseguridad.pdf"
   },
   {
     "id": "1IqtMts3Gh0bqyJQNrAjZop2hiGusLKFR",
@@ -2270,9 +3165,24 @@
     "path": "Catalogo Programas/Maestría/Maestría en Derechos Humanos (NUEVA)/MAE Derechos Humanos.png"
   },
   {
+    "id": "1IcZOOvHrbxarilZpH1z7qIE1gloxQdcy",
+    "name": "UtelMx_FichasTecnicas_Mae_DerechosHumanos.pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Derechos Humanos (NUEVA)/UtelMx_FichasTecnicas_Mae_DerechosHumanos.pdf"
+  },
+  {
     "id": "1biu6n6FgxUlNM4BEaIYiSZTWbAIUS9rG",
     "name": "MAE Desarrollo Sustentable y Gestión Ambiental.png",
     "path": "Catalogo Programas/Maestría/Maestría en Desarrollo Sustentable y Gestión Ambiental (NUEVA)/MAE Desarrollo Sustentable y Gestión Ambiental.png"
+  },
+  {
+    "id": "1HbooTIvrERitHA4E3PuOmdeDgyo9xyBi",
+    "name": "UtelMx_FichasTecnicas_Mae_DesarrolloSustentableGestiónAmbiental (1).pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Desarrollo Sustentable y Gestión Ambiental (NUEVA)/UtelMx_FichasTecnicas_Mae_DesarrolloSustentableGestiónAmbiental (1).pdf"
+  },
+  {
+    "id": "1TiGRbyDEyfn0sB5bqkt-g_JYLf2BN77G",
+    "name": "UtelMx_FichasTecnicas_Mae_DesarrolloSustentableGestiónAmbiental.pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Desarrollo Sustentable y Gestión Ambiental (NUEVA)/UtelMx_FichasTecnicas_Mae_DesarrolloSustentableGestiónAmbiental.pdf"
   },
   {
     "id": "1uqoS1CzDxAysKi8Zee3QgrU0YwLyFWdv",
@@ -2280,9 +3190,24 @@
     "path": "Catalogo Programas/Maestría/Maestría en Desarrollo Sustentable y Gestión Ambiental (NUEVA)/UtelMx__InfografíaNP_MaeDesarrolloSustentable.png"
   },
   {
+    "id": "1a6BrHB9d65II75gmMhPt-k9e7N-_AjaR",
+    "name": "UtelMx_FichasTecnicas_Maestría_DirecciónDeVentas.pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Dirección de Ventas/Utel_Mx_Fichas_Tecnicas_Maestria_Direccion_De_Ventas/UtelMx_FichasTecnicas_Maestría_DirecciónDeVentas.pdf"
+  },
+  {
+    "id": "1DF9KM5WaFazG7h2oaMnYkNrLEC6z7pm8",
+    "name": "UtelMx_FichasTecnicas_Mae_DisenoParaMediosDigitales.pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Diseño para Medios Digitales (NUEVA)/UtelMx_FichasTecnicas_Mae_DisenoParaMediosDigitales.pdf"
+  },
+  {
     "id": "1-VCKgjWTev6AAc1zJnKgAwlpUpVKeI3C",
     "name": "UtelMx_MDMD.png",
     "path": "Catalogo Programas/Maestría/Maestría en Diseño para Medios Digitales (NUEVA)/UtelMx_MDMD.png"
+  },
+  {
+    "id": "1VcYcGZcJFpRCN4ZYrMtWbr4o-hUM1D2d",
+    "name": "UtelMx_FichasTecnicas_Maestría_EducaciónyDocencia.pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Educación y Docencia/Utel_FichasTecnicas_Maestría_Educación y Docencia/UtelMx_FichasTecnicas_Maestría_EducaciónyDocencia.pdf"
   },
   {
     "id": "1UxuFjBBLnSJptCp-OjP6d9TbRryE-Sfn",
@@ -2300,6 +3225,11 @@
     "path": "Catalogo Programas/Maestría/Maestría en Energías Renovables y Eficiencia Energética (NUEVA)/MAE Energías Renovables y Eficiencia Energética.png"
   },
   {
+    "id": "18RzcTf8nex4a72uXhOPBNFI_Gvsux_pY",
+    "name": "UtelMx_FichasTecnicas_Mae_EnergiaRenovablesEficienciaEnergetica.pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Energías Renovables y Eficiencia Energética (NUEVA)/UtelMx_FichasTecnicas_Mae_EnergiaRenovablesEficienciaEnergetica.pdf"
+  },
+  {
     "id": "1HWu5bSpe_4fzTD0phsupl4diP5oODg9R",
     "name": "UtelMx__MEREE.png",
     "path": "Catalogo Programas/Maestría/Maestría en Energías Renovables y Eficiencia Energética (NUEVA)/UtelMx__MEREE.png"
@@ -2308,6 +3238,16 @@
     "id": "14Ov369J3C3akRcxfGaAR3IHeOTQJxSgb",
     "name": "UtelMx_Core_Comp1_Maestria_Finanzas.png",
     "path": "Catalogo Programas/Maestría/Maestría en Finanzas (nueva)/UtelMx_Core_Comp1_Maestria_Finanzas.png"
+  },
+  {
+    "id": "1wJYGUEYhsBvEz717KhwAIzRlq6hoeeyn",
+    "name": "UtelMx_Infografía_Maestrias_Finanzas.pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Finanzas (nueva)/UtelMx_Infografía_Maestrias_Finanzas.pdf"
+  },
+  {
+    "id": "1wRY5VLSvJ3BQsDgVuIsqXPPG1RQ_86fZ",
+    "name": "UtelMx_FichasTecnicas_Maestría_Finanzas.pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Finanzas (nueva)/Utel_Mx_Fichas_Tecnicas_Maes_en_Finanzas/UtelMx_FichasTecnicas_Maestría_Finanzas.pdf"
   },
   {
     "id": "1rSQpHrES9XrHwNr74_9HNIFdr5faZ295",
@@ -2325,9 +3265,24 @@
     "path": "Catalogo Programas/Maestría/Maestría en Gestión Directiva de Instituciones en Salud/MAE Gestión Directiva de Instituciones en Salud (2).png"
   },
   {
+    "id": "13hTE5tctwf2lSaE48QeV2Y8ZM94vpCHH",
+    "name": "UtelMx_ContenidoValor_Infografía_Maestrias_GesDirInstitucionesSalud.pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Gestión Directiva de Instituciones en Salud/UtelMx_ContenidoValor_Infografía_Maestrias_GesDirInstitucionesSalud.pdf"
+  },
+  {
     "id": "1_aQpIJKLL3wBfQRs1TOFnRUFw1dCypr4",
     "name": "UtelMx_Core_Comp1_Maestria_ GestiónDirectiva_de_Instituciones_en_Salud.png",
     "path": "Catalogo Programas/Maestría/Maestría en Gestión Directiva de Instituciones en Salud/UtelMx_Core_Comp1_Maestria_ GestiónDirectiva_de_Instituciones_en_Salud.png"
+  },
+  {
+    "id": "1Sm2ZsVCz4vl7yGMfdcWkyXBKov0Gn_W5",
+    "name": "UtelMx_FichasTecnicas_Maestría_GestiónDirectivadeInstitucionesdeSalud.pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Gestión Directiva de Instituciones en Salud/Utel_Mx_Fichas_Tecnicas_Maestria_Gestion_Directivade_Institucionesde_Salud/UtelMx_FichasTecnicas_Maestría_GestiónDirectivadeInstitucionesdeSalud.pdf"
+  },
+  {
+    "id": "1TIOatl3xLPbWQr0N7IgJeXuEJxj1yvPL",
+    "name": "UtelMx_FichasTecnicas_Maestría_GestiónOrganizacionalPositiva.pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Gestión Organizacional Positiva/Utel_Mx_Fichas_Tecnicas_Maestria_Gestion_Organizacional_Positiva/UtelMx_FichasTecnicas_Maestría_GestiónOrganizacionalPositiva.pdf"
   },
   {
     "id": "1hMol3W1nI62Z4yNjWa5tT2M2OIN3JUfn",
@@ -2335,9 +3290,19 @@
     "path": "Catalogo Programas/Maestría/Maestría en Impuestos (NUEVA)/MAE Impuestos.png"
   },
   {
+    "id": "1HbODItbcGIozJAngjEze50Id_xlkrjWf",
+    "name": "UtelMx_FichasTecnicas_Mae_Impuestos.pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Impuestos (NUEVA)/UtelMx_FichasTecnicas_Mae_Impuestos.pdf"
+  },
+  {
     "id": "1DM5CXC5Y6ddBC1kpvo23Lsc1mo_tu9g9",
     "name": "UtelMx_MI.png",
     "path": "Catalogo Programas/Maestría/Maestría en Impuestos (NUEVA)/UtelMx_MI.png"
+  },
+  {
+    "id": "1wajEmTGi0qw9DQp6fRm0rB2h96lyBol_",
+    "name": "UtelMx_FichasTecnicas_Mae_LogisticaCadenaSuministro.pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Logística y Cadena de Suministro (NUEVA)/UtelMx_FichasTecnicas_Mae_LogisticaCadenaSuministro.pdf"
   },
   {
     "id": "1jo8-7DG2H2SlH2V4tNVTJHtXtEt-XdWq",
@@ -2350,6 +3315,11 @@
     "path": "Catalogo Programas/Maestría/Maestría en MBA Internacional/UtelMx_Core_Comp1_Maestria_MBA_Internacional.jpg"
   },
   {
+    "id": "1ZFJRerHNNYWFdo6jYrHLLYm57n1y3-Y6",
+    "name": "UtelMx_FichasTecnicas_Maestría_MercadotecniaDigitalComercioElectrónico.pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en MBA Internacional/UtelMx_FichasTecnicas_Maestria_AdministracionDeNegocios/UtelMx_FichasTecnicas_Maestría_MercadotecniaDigitalComercioElectrónico.pdf"
+  },
+  {
     "id": "1q16bcnh1INei-y9x61oXKVm2hunW43_f",
     "name": "UtelMx_Core_Comp1_Maestria Mercadotecnia Digital y Comercio Electrónico.png",
     "path": "Catalogo Programas/Maestría/Maestría en Mercadotecnia Digital y Comercio Electrónico/UtelMx_Core_Comp1_Maestria Mercadotecnia Digital y Comercio Electrónico.png"
@@ -2360,9 +3330,19 @@
     "path": "Catalogo Programas/Maestría/Maestría en Mercadotecnia Digital y Comercio Electrónico/UtelMx_Maest_MarketingDigital_E_Commerce.png"
   },
   {
+    "id": "1lYWVmAhGtFnuy842MZiOBC2VDCmX5aan",
+    "name": "UtelMx_FichasTecnicas_Mae_MercadotecniaPolitica.pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Mercadotecnia Política (NUEVA)/UtelMx_FichasTecnicas_Mae_MercadotecniaPolitica.pdf"
+  },
+  {
     "id": "1qcKg8ybYRaCV5k40_SjCpsl-hb-i4toE",
     "name": "UtelMx_MMP.png",
     "path": "Catalogo Programas/Maestría/Maestría en Mercadotecnia Política (NUEVA)/UtelMx_MMP.png"
+  },
+  {
+    "id": "1QjP18zt8tjK1SAzXJsQm75-iiwEvqXTq",
+    "name": "UtelMx_FichasTecnicas_Maestría_Mindfulness.pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Mindfulness/Utel_FichasTecnicas_Maestría_Mindfulness/UtelMx_FichasTecnicas_Maestría_Mindfulness.pdf"
   },
   {
     "id": "1POtGftND2QEuEkovxRhctCYYL5guCDHH",
@@ -2380,6 +3360,11 @@
     "path": "Catalogo Programas/Maestría/Maestría en Psicología Transpersonal/UtelMx_Core_Comp1_Maestria_ Psicología_Transpersonal.png"
   },
   {
+    "id": "1LVnL9MCTfHoz0F7ExJJtS5oQXQRzaJmV",
+    "name": "UtelMx_FichasTecnicas_Mae_ResponsabilidadSocial.pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Responsabilidad Social (NUEVA)/UtelMx_FichasTecnicas_Mae_ResponsabilidadSocial.pdf"
+  },
+  {
     "id": "1SADW6HL_lPTmt3hVa8nxhyIdS4nItoFm",
     "name": "GSS_Creatividad_UtelMx_1080x1920_May24_Sem20_2.png",
     "path": "Catalogo Programas/Maestría/Maestría en Tecnología Educativa (nueva)/GSS_Creatividad_UtelMx_1080x1920_May24_Sem20_2.png"
@@ -2388,6 +3373,21 @@
     "id": "1dOdNFSQ9Qm4y6GuJVCaktIdTzHiBI2o8",
     "name": "UtelMx_Core_Comp1_Maestria_Tecnología_Educativa_.png",
     "path": "Catalogo Programas/Maestría/Maestría en Tecnología Educativa (nueva)/UtelMx_Core_Comp1_Maestria_Tecnología_Educativa_.png"
+  },
+  {
+    "id": "1K1vHKJqR133_nWUPzUoPS__M1Unnvpzo",
+    "name": "UtelMx_FichasTecnicas_Maestría_TecnologíaEducativa.pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Tecnología Educativa (nueva)/UtelMx_FichasTecnicas_Maes. en Tecnología Educativa/UtelMx_FichasTecnicas_Maestría_TecnologíaEducativa.pdf"
+  },
+  {
+    "id": "1YccgQE-w_Co87ht7gItUp5w1HtgZy7Oc",
+    "name": "UtelMx_Infografía_Maestrias_TecnologíaEducativa.pdf",
+    "path": "Catalogo Programas/Maestría/Maestría en Tecnología Educativa (nueva)/UtelMx_Infografía_Maestrias_TecnologíaEducativa.pdf"
+  },
+  {
+    "id": "19I4Sjql-G5ubNQ14UxbISgFSMDriTgdA",
+    "name": "UtelUniversidad-Editorial-Mx-MaestríaAltaDirecciónyGobiernoCorporativo-FT.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 1 (37_105 programas)/Maestría en Alta Dirección y  Gobierno Corporativo/UtelUniversidad-Editorial-Mx-MaestríaAltaDirecciónyGobiernoCorporativo-FT.pdf"
   },
   {
     "id": "1xcn7L_c34C30U3_KXPiwiX4jpdutYEuQ",
@@ -2410,6 +3410,11 @@
     "path": "Catalogo Programas/Maestría/Maestrías Bloque 1 (37_105 programas)/Maestría en Arquitectura  de Software/CuadradoUtel.mp4"
   },
   {
+    "id": "1S_1Z3H6O7KZRZHre450ssqYexR_RqnFg",
+    "name": "UtelUniversidad-Editorial-Mx-MaestríaArquitecturadeSoftware-FT.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 1 (37_105 programas)/Maestría en Arquitectura  de Software/UtelUniversidad-Editorial-Mx-MaestríaArquitecturadeSoftware-FT.pdf"
+  },
+  {
     "id": "1qImaSt5fhfRNCbhuINq7hNCa2cGrgtRG",
     "name": "UtelUniversidad-Ventas-NuevosProgramas-F88-Maestria-ArquitecturaDeSoftware.png",
     "path": "Catalogo Programas/Maestría/Maestrías Bloque 1 (37_105 programas)/Maestría en Arquitectura  de Software/UtelUniversidad-Ventas-NuevosProgramas-F88-Maestria-ArquitecturaDeSoftware.png"
@@ -2430,6 +3435,41 @@
     "path": "Catalogo Programas/Maestría/Maestrías Bloque 1 (37_105 programas)/Maestría en Arquitectura  de Software/VerticalUtel.mp4"
   },
   {
+    "id": "1-qw-_LpblDiq9vQErwvb15IF__ILjwSq",
+    "name": "UtelUniversidad-Editorial-Mx-MaestríaAutomatizacióndeProcesosyAnálisisPredictivo-FT.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 1 (37_105 programas)/Maestría en Automatización de  Procesos y Análisis  Predictivo/UtelUniversidad-Editorial-Mx-MaestríaAutomatizacióndeProcesosyAnálisisPredictivo-FT.pdf"
+  },
+  {
+    "id": "1VCAjXV2PVlldOj1GxhTg6V_Y6uaSVjen",
+    "name": "UtelUniversidad-Editorial-Mx-MaestríaAutomatizaciónyRobóticaIndustrial-FT.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 1 (37_105 programas)/Maestría en Automatización y  Robótica Industrial/UtelUniversidad-Editorial-Mx-MaestríaAutomatizaciónyRobóticaIndustrial-FT.pdf"
+  },
+  {
+    "id": "1yrxpGbnkQXAivcMr8b1Mi3xq-K_X4Cbo",
+    "name": "UtelUniversidad-Editorial-Mx-MaestríaDesarrollodeVideojuegosyRealidadExtendida-FT.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 1 (37_105 programas)/Maestría en Desarrollo de  Videojuegos y Realidad Extendida/UtelUniversidad-Editorial-Mx-MaestríaDesarrollodeVideojuegosyRealidadExtendida-FT.pdf"
+  },
+  {
+    "id": "13YqowMRv74_niPYIn6WGcqPbP5abE5fJ",
+    "name": "UtelUniversidad-Editorial-Mx-MaestríaEducaciónInteligenteyDiseñoInstruccionalconInteligenciaArtificial-FT (1).pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 1 (37_105 programas)/Maestría en Educación Inteligente y Diseño Instruccional con Inteligencia Artificial/UtelUniversidad-Editorial-Mx-MaestríaEducaciónInteligenteyDiseñoInstruccionalconInteligenciaArtificial-FT (1).pdf"
+  },
+  {
+    "id": "1qqmvEF-hFohwQrktvsTpexczuYOt8YzY",
+    "name": "UtelUniversidad-Editorial-Mx-MaestríaIngenieríadeDatoseInfraestructura-FT.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 1 (37_105 programas)/Maestría en Ingeniería de Datos  e Infraestructura/UtelUniversidad-Editorial-Mx-MaestríaIngenieríadeDatoseInfraestructura-FT.pdf"
+  },
+  {
+    "id": "1ppnVnmVTIccovEXa7HV7-ZINBTqjD9lY",
+    "name": "UtelUniversidad-Editorial-Mx-MaestríaInnovaciónEstratégicaconInteligenciaArtificial-FT.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 1 (37_105 programas)/Maestría en Innovación  Estratégica con  Inteligencia Artificial/UtelUniversidad-Editorial-Mx-MaestríaInnovaciónEstratégicaconInteligenciaArtificial-FT.pdf"
+  },
+  {
+    "id": "1s_H0hOjwD6wzerKJoUrjNyd7QFcupPrv",
+    "name": "UtelUniversidad-Editorial-Mx-MaestríaInnovaciónEducativayDiseñoInstruccional-FT.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 1 (37_105 programas)/Maestría en Innovación Educativa  y Diseño Instruccional/UtelUniversidad-Editorial-Mx-MaestríaInnovaciónEducativayDiseñoInstruccional-FT.pdf"
+  },
+  {
     "id": "1vDYH_RsBrcepJkwKBx_MY8JQxqgWqUrf",
     "name": "UtelUniversidad-Ventas-NuevosProgramas-F183-Maestria-InnovacionEducativa.png",
     "path": "Catalogo Programas/Maestría/Maestrías Bloque 1 (37_105 programas)/Maestría en Innovación Educativa  y Diseño Instruccional/UtelUniversidad-Ventas-NuevosProgramas-F183-Maestria-InnovacionEducativa.png"
@@ -2445,6 +3485,16 @@
     "path": "Catalogo Programas/Maestría/Maestrías Bloque 1 (37_105 programas)/Maestría en Innovación Educativa  y Diseño Instruccional/UtelUniversidad-Ventas-NuevosProgramas-F185-Maestria-InnovacionEducativa.png"
   },
   {
+    "id": "1gsTlSUIOoNQSs7lkKbNBMbF5zOSBsfBz",
+    "name": "UtelUniversidad-Editorial-Mx-MaestríaSolucionesdeInteligenciaArtificialparaNegociosyServicios-FT (1).pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 1 (37_105 programas)/Maestría en Soluciones de Inteligencia  Artificial para Negocios y Servicios/UtelUniversidad-Editorial-Mx-MaestríaSolucionesdeInteligenciaArtificialparaNegociosyServicios-FT (1).pdf"
+  },
+  {
+    "id": "1XI5NuwjidTwDJfXyxuq-7B1AlHfEgkqD",
+    "name": "UtelUniversidad-Editorial-Mx-MaestríaValuaciónInmobiliaria-FT.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 1 (37_105 programas)/Maestría en Valuación Inmobiliaria/UtelUniversidad-Editorial-Mx-MaestríaValuaciónInmobiliaria-FT.pdf"
+  },
+  {
     "id": "1fIjsQjSKZFxzcpkUSMblLZ-wBcKohKOB",
     "name": "Denisse_cuadrado.mov",
     "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestria Finanzas Publicas y Gestion Gubernamental/Denisse_cuadrado.mov"
@@ -2453,6 +3503,11 @@
     "id": "1o5_RD6ht3WH-Jhe_rncXUOIjvMNYXvao",
     "name": "Denisse_vertical.mov",
     "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestria Finanzas Publicas y Gestion Gubernamental/Denisse_vertical.mov"
+  },
+  {
+    "id": "1KYLnhj7yJUY66_u1FJmFYrnq7q5F1EYo",
+    "name": "MX_Maestria_en__Finanzas_Públicas_y_Gestión_Gubernamental_Nuevos_Programas_Bloque_2_1779211206697_190031 (1).pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestria Finanzas Publicas y Gestion Gubernamental/MX_Maestria_en__Finanzas_Públicas_y_Gestión_Gubernamental_Nuevos_Programas_Bloque_2_1779211206697_190031 (1).pdf"
   },
   {
     "id": "1lLZfiSvWl_bIUK-XqxUNBY3LV1ui9gqW",
@@ -2470,6 +3525,86 @@
     "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestria Finanzas Publicas y Gestion Gubernamental/UtelUniversidad-Ventas-NuevosProgramas-F23-Maestria-FinanzasPublicas.png"
   },
   {
+    "id": "1vPR7Z6vUB3qIZyKn-HQblC-aOQrQ12sl",
+    "name": "MX_Maestria_en__Administración_de_Riesgos_Financieros_Nuevos_Programas_Bloque_2_1779211269491_379208.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestría en Administración de Riesgos Financieros/MX_Maestria_en__Administración_de_Riesgos_Financieros_Nuevos_Programas_Bloque_2_1779211269491_379208.pdf"
+  },
+  {
+    "id": "1LmVFLMuYYD9DwG4KG77uifSuf8j_GRfz",
+    "name": "MX_Maestria_en__Asesoría_Empresarial_Estratégica_Nuevos_Programas_Bloque_2_1779211227285_74347.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestría en Asesoría Empresarial Estratégica/MX_Maestria_en__Asesoría_Empresarial_Estratégica_Nuevos_Programas_Bloque_2_1779211227285_74347.pdf"
+  },
+  {
+    "id": "1AMc0GUp_cHksDU3_STliyTs8tMq7dgfx",
+    "name": "MX_Maestria_en__Auditoría_Financiera_Nuevos_Programas_Bloque_2_1779211218540_123349.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestría en Auditoría Financiera/MX_Maestria_en__Auditoría_Financiera_Nuevos_Programas_Bloque_2_1779211218540_123349.pdf"
+  },
+  {
+    "id": "1gfc9ZzwJ9zG4aSr9CXtS_b3s8Ejk8a5X",
+    "name": "MX_Maestria_en__Cultura_y_Transformación_Digital_Nuevos_Programas_Bloque_2_1779211150151_50029.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestría en Cultura y Transformación Digital/MX_Maestria_en__Cultura_y_Transformación_Digital_Nuevos_Programas_Bloque_2_1779211150151_50029.pdf"
+  },
+  {
+    "id": "146FZ1WY4UJMAlxEIARVsoPG1OVyKRdfR",
+    "name": "MX_Maestria_en__Diseño_de_Interacción_y_Experiencia_de_Usuario_Nuevos_Programas_Bloque_2_1779211159894_321294.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestría en Diseño de Interacción y Experiencia de Usuario/MX_Maestria_en__Diseño_de_Interacción_y_Experiencia_de_Usuario_Nuevos_Programas_Bloque_2_1779211159894_321294.pdf"
+  },
+  {
+    "id": "1lTcajDuwmd-bAo3Au_n-3LHdIYSD1fT9",
+    "name": "MX_Maestria_en__Economía_Sustentable_y_Empresas_Responsables_Nuevos_Programas_Bloque_2_1779211197475_763206.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestría en Economía Sustentable y Empresas Responsables/MX_Maestria_en__Economía_Sustentable_y_Empresas_Responsables_Nuevos_Programas_Bloque_2_1779211197475_763206.pdf"
+  },
+  {
+    "id": "1EQT8XwKbY0zBgpKRGX3ueOmBPUr5l1uI",
+    "name": "MX_Maestria_en__Estrategias_de_Comercio_Internacional_y_Aduanas_Nuevos_Programas_Bloque_2_1779211188560_852568.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestría en Estrategias de Comercio Internacional y Aduanas/MX_Maestria_en__Estrategias_de_Comercio_Internacional_y_Aduanas_Nuevos_Programas_Bloque_2_1779211188560_852568.pdf"
+  },
+  {
+    "id": "13XQyLIL8qYAwwy-yhW2SqEAL_HM8i7oJ",
+    "name": "MX_Maestria_en__Finanzas_Sustentables_y_Proyectos_de_Inversión_Nuevos_Programas_Bloque_2_1779211249408_34954.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestría en Finanzas Sustentables y Proyectos de Inversión/MX_Maestria_en__Finanzas_Sustentables_y_Proyectos_de_Inversión_Nuevos_Programas_Bloque_2_1779211249408_34954.pdf"
+  },
+  {
+    "id": "1gxfnlh1sOmvdvrjIoclcZ6JmOFX8P72I",
+    "name": "MX_Maestria_en__Gestión_del_Cambio_y_Transformación_Organizacional_Nuevos_Programas_Bloque_2_1779211140715_449263.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestría en Gestión del Cambio y Transformación Organizacional/MX_Maestria_en__Gestión_del_Cambio_y_Transformación_Organizacional_Nuevos_Programas_Bloque_2_1779211140715_449263.pdf"
+  },
+  {
+    "id": "1WqxeFpmvLi2fAhZf7dPKnILxhRtjnVel",
+    "name": "MX_Maestria_en__Gestión_del_Talento_y_Bienestar_Organizacional_Nuevos_Programas_Bloque_2_1779211122551_558635.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestría en Gestión del Talento y Bienestar Organizacional/MX_Maestria_en__Gestión_del_Talento_y_Bienestar_Organizacional_Nuevos_Programas_Bloque_2_1779211122551_558635.pdf"
+  },
+  {
+    "id": "1dWQ_hmHrEpRgN0s8zbQ8qD-2TW-4h4Qi",
+    "name": "MX_Maestria_en__Tecnología_para_la_Gestión_Pública_y_Gobierno_Digital_Nuevos_Programas_Bloque_2_1779211112883_242783.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestría en Infraestructura y Cómputo en la Nube/MX_Maestria_en__Tecnología_para_la_Gestión_Pública_y_Gobierno_Digital_Nuevos_Programas_Bloque_2_1779211112883_242783.pdf"
+  },
+  {
+    "id": "1oFdk8GfSWAoaWbQCPRNVuNwLir7ZCD2J",
+    "name": "MX_Maestria_en__Innovación_en_Modelos_de_Negocio_Nuevos_Programas_Bloque_2_1779211259548_865861.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestría en Innovación en Modelos de Negocio/MX_Maestria_en__Innovación_en_Modelos_de_Negocio_Nuevos_Programas_Bloque_2_1779211259548_865861.pdf"
+  },
+  {
+    "id": "1xvid1P8Q-2gfjkyqeddqlQiuGUpc4oFo",
+    "name": "MX_Maestria_en__Inteligencia_Financiera_y_Detección_de_Fraudes_Nuevos_Programas_Bloque_2_1779211278648_50587.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestría en Inteligencia Financiera y Detección de Fraudes/MX_Maestria_en__Inteligencia_Financiera_y_Detección_de_Fraudes_Nuevos_Programas_Bloque_2_1779211278648_50587.pdf"
+  },
+  {
+    "id": "12Vo_GIm7ZVYYHVQp2jvnx_D3eI9Ihn7L",
+    "name": "MX_Maestria_en__Interfaces_Inteligentes_y_Tecnología_Inmersiva_Nuevos_Programas_Bloque_2_1779211091380_966430.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestría en Interfaces Inteligentes y Tecnología Inmersiva - Ventas/MX_Maestria_en__Interfaces_Inteligentes_y_Tecnología_Inmersiva_Nuevos_Programas_Bloque_2_1779211091380_966430.pdf"
+  },
+  {
+    "id": "12qJB1_8z1CnVPqTwtaNBicl7k85Zxfjp",
+    "name": "MX_Maestria_en__Mercadotecnia_Gastronómica_y_de_Destinos_Nuevos_Programas_Bloque_2_1779211178679_501595.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestría en Mercadotecnia Gastronómica y de Destinos/MX_Maestria_en__Mercadotecnia_Gastronómica_y_de_Destinos_Nuevos_Programas_Bloque_2_1779211178679_501595.pdf"
+  },
+  {
+    "id": "1cjxO299Cl49Bl0D5Ww0OHvB788NRGkD2",
+    "name": "MX_Maestria_en__Tecnología_para_la_Gestión_Pública_y_Gobierno_Digital_Nuevos_Programas_Bloque_2_1779211112883_242783.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestría en Tecnología para la Gestión Pública y Gobierno Digital/MX_Maestria_en__Tecnología_para_la_Gestión_Pública_y_Gobierno_Digital_Nuevos_Programas_Bloque_2_1779211112883_242783.pdf"
+  },
+  {
     "id": "13k3XRtfY-nhQ-eGmjqJhiZ__maG_qC-b",
     "name": "Fernanada_vertical.mp4",
     "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestría en Transformación Digital Empresarial/Fernanada_vertical.mp4"
@@ -2480,6 +3615,11 @@
     "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestría en Transformación Digital Empresarial/Fernanda_cuadrado (1).mp4"
   },
   {
+    "id": "1BOZoIceReUFs4SpXhEmYWS4TDP88haUr",
+    "name": "MX_Maestria_en__Transformación_Digital_Empresarial_Nuevos_Programas_Bloque_2_1779211169008_997815 (1).pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestría en Transformación Digital Empresarial/MX_Maestria_en__Transformación_Digital_Empresarial_Nuevos_Programas_Bloque_2_1779211169008_997815 (1).pdf"
+  },
+  {
     "id": "1C2QoonlPoqRGSADarrs1wJfqOSgxrzur",
     "name": "UtelUniversidad-Ventas-NuevosProgramas-F34-Maestría-TranformacionDigitalEmpresarial.png",
     "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestría en Transformación Digital Empresarial/UtelUniversidad-Ventas-NuevosProgramas-F34-Maestría-TranformacionDigitalEmpresarial.png"
@@ -2488,6 +3628,26 @@
     "id": "1r31p9V3r2RnNqDwNyj5HOH14PtRVacLC",
     "name": "UtelUniversidad-Ventas-NuevosProgramas-F35-Maestría-TranformacionDigitalEmpresarial.png",
     "path": "Catalogo Programas/Maestría/Maestrías Bloque 2/Maestría en Transformación Digital Empresarial/UtelUniversidad-Ventas-NuevosProgramas-F35-Maestría-TranformacionDigitalEmpresarial.png"
+  },
+  {
+    "id": "1OUNAQlAVr08qMx1hcRM5qPx7TANo_rpZ",
+    "name": "MX_Maestria_en__Análisis_Político_y_Opinión_Pública_Nuevos_Programas_Bloque_3_1781820288423_849296.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 3/Maestría en Análisis Político y Opinión Pública/MX_Maestria_en__Análisis_Político_y_Opinión_Pública_Nuevos_Programas_Bloque_3_1781820288423_849296.pdf"
+  },
+  {
+    "id": "1TdHuKv7R5ZJn55KnQLOARLgyhXWF9lRQ",
+    "name": "MX_Maestria_en__Comunicación_Social_y_Participación_Ciudadana_Nuevos_Programas_Bloque_3_1781821413826_253668.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 3/Maestría en Comunicación Social y Participación Ciudadana/MX_Maestria_en__Comunicación_Social_y_Participación_Ciudadana_Nuevos_Programas_Bloque_3_1781821413826_253668.pdf"
+  },
+  {
+    "id": "1XFYnvkb1GXizeCpa2VaUjyWb5bTgwZ8H",
+    "name": "MX_Maestria_en__Dirección_Estratégica_de_Hospitalidad_y_Bienestar_Nuevos_Programas_Bloque_3_1781820490852_705718.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 3/Maestría en Dirección Estratégica de Hospitalidad y Bienestar/MX_Maestria_en__Dirección_Estratégica_de_Hospitalidad_y_Bienestar_Nuevos_Programas_Bloque_3_1781820490852_705718.pdf"
+  },
+  {
+    "id": "1FIfl96GAEBKhDrarjiTxUsUjcFzBThPW",
+    "name": "MX_Maestria_en__Educación_Inclusiva_y_Diversidad_Nuevos_Programas_Bloque_3_1781820537231_653515.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 3/Maestría en Educación Inclusiva y Diversidad/MX_Maestria_en__Educación_Inclusiva_y_Diversidad_Nuevos_Programas_Bloque_3_1781820537231_653515.pdf"
   },
   {
     "id": "1Vmak8fHtSrgxMg-YKHj6XMDoLxfYmUu5",
@@ -2505,6 +3665,51 @@
     "path": "Catalogo Programas/Maestría/Maestrías Bloque 3/Maestría en Educación Inclusiva y Diversidad/UtelUniversidad-Mx-NuevosProgramas-ExitoComercial-F17-1080x1920.png"
   },
   {
+    "id": "1480rEYdfI46jEgBz7aJ_OL-RaWUY5KVn",
+    "name": "MX_Maestria_en__Evaluación_de_Riesgos_Tecnológicos_y_Resiliencia_Operativa_Nuevos_Programas_Bloque_3_1781820456072_275165.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 3/Maestría en Evaluación de Riesgos Tecnológicos y Resiliencia Operativa/MX_Maestria_en__Evaluación_de_Riesgos_Tecnológicos_y_Resiliencia_Operativa_Nuevos_Programas_Bloque_3_1781820456072_275165.pdf"
+  },
+  {
+    "id": "1YBAhO1XOFAc35syLyRW-BAWG9D5-tPE_",
+    "name": "MX_Maestria_en__Filosofía_y_Pensamiento_Crítico_Nuevos_Programas_Bloque_3_1781820265715_103821.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 3/Maestría en Filosofía y Pensamiento Crítico/MX_Maestria_en__Filosofía_y_Pensamiento_Crítico_Nuevos_Programas_Bloque_3_1781820265715_103821.pdf"
+  },
+  {
+    "id": "18ZgKyIcSLc9f2zwv1zKJQbELJ4l3DeQi",
+    "name": "MX_Maestria_en__Gestión_de_Riesgos_Ambientales_Nuevos_Programas_Bloque_3_1781820439095_788060.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 3/Maestría en Gestión de Riesgos Ambientales/MX_Maestria_en__Gestión_de_Riesgos_Ambientales_Nuevos_Programas_Bloque_3_1781820439095_788060.pdf"
+  },
+  {
+    "id": "1SSWV1WY6H_s5QCw7YAet-HEHyTOUEsaO",
+    "name": "MX_Maestria_en__Gestión_de_la_Calidad_y_Procesos_Industriales_Nuevos_Programas_Bloque_3_1781821440484_580464.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 3/Maestría en Gestión de la Calidad y Procesos Industriales/MX_Maestria_en__Gestión_de_la_Calidad_y_Procesos_Industriales_Nuevos_Programas_Bloque_3_1781821440484_580464.pdf"
+  },
+  {
+    "id": "1RXpfGgeLIhdVyidksASULQwjVe4ym8AR",
+    "name": "MX_Maestria_en__Justicia_Social_y_Transformación_Comunitaria_Nuevos_Programas_Bloque_3_1781820307762_915410.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 3/Maestría en Justicia Social y Transformación Comunitaria/MX_Maestria_en__Justicia_Social_y_Transformación_Comunitaria_Nuevos_Programas_Bloque_3_1781820307762_915410.pdf"
+  },
+  {
+    "id": "1ikjPdSJVLwjPhnj6AwpPS9J_8NnTsyhA",
+    "name": "MX_Maestria_en__Organización_de_Eventos_Corporativos_y_Convenciones_Nuevos_Programas_Bloque_3_1781820473399_88391.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 3/Maestría en Organización de Eventos Corporativos y Convenciones/MX_Maestria_en__Organización_de_Eventos_Corporativos_y_Convenciones_Nuevos_Programas_Bloque_3_1781820473399_88391.pdf"
+  },
+  {
+    "id": "12JCeIkP4kgnkCqEiVZ0lKno4XlArOna7",
+    "name": "MX_Maestria_en__Planeación_Turística_y_Desarrollo_Regional_Nuevos_Programas_Bloque_3_1781820418985_854780.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 3/Maestría en Planeación Turística y Desarrollo Regional/MX_Maestria_en__Planeación_Turística_y_Desarrollo_Regional_Nuevos_Programas_Bloque_3_1781820418985_854780.pdf"
+  },
+  {
+    "id": "183UuqRUlQya87-cbVLzgJozWPwPMzQZP",
+    "name": "MX_Maestria_en__Políticas_Sociales_y_Bienestar_Social_Nuevos_Programas_Bloque_3_1781820329150_472340.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 3/Maestría en Políticas Sociales y Bienestar Social/MX_Maestria_en__Políticas_Sociales_y_Bienestar_Social_Nuevos_Programas_Bloque_3_1781820329150_472340.pdf"
+  },
+  {
+    "id": "1wMrjvCzat41M8kW64ZsDZxM9_OaVzdB2",
+    "name": "MX_Maestria_en__Turismo_Digital_y_Gestión_de_Plataformas_Nuevos_Programas_Bloque_3_1781820523758_999486.pdf",
+    "path": "Catalogo Programas/Maestría/Maestrías Bloque 3/Maestría en Turismo Digital y Gestión de Plataformas/MX_Maestria_en__Turismo_Digital_y_Gestión_de_Plataformas_Nuevos_Programas_Bloque_3_1781820523758_999486.pdf"
+  },
+  {
     "id": "1jn4OrTRVGyO_BCsqvcZR1mpcIEWdfzRG",
     "name": "UtelUniversidad-Mx-NuevosProgramas-ExitoComercial-F20-1080x1920.png",
     "path": "Catalogo Programas/Maestría/Maestrías Bloque 3/Maestría en Turismo Digital y Gestión de Plataformas/UtelUniversidad-Mx-NuevosProgramas-ExitoComercial-F20-1080x1920.png"
@@ -2520,9 +3725,434 @@
     "path": "Catalogo Programas/Maestría/Maestrías Bloque 3/Maestría en Turismo Digital y Gestión de Plataformas/UtelUniversidad-Mx-NuevosProgramas-ExitoComercial-Turismo-Digital-y-Gestión-de-Plataformas_F19-1080x1920.jpg"
   },
   {
+    "id": "1CymjR6j2JP7QBUbsiRDaMnkfuUWJVPjH",
+    "name": "UtelMx_Brochure Maestrías.pdf",
+    "path": "Catalogo Programas/Maestría/UtelMx_Brochure Maestrías.pdf"
+  },
+  {
+    "id": "12SPDXzHMvsfzNIcMxSwRe7FyCeJbyQTM",
+    "name": "(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Mae_DerechosHumanos.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Ciencias Sociales y Humanidades/(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Mae_DerechosHumanos.pdf"
+  },
+  {
+    "id": "16D0FErN0R7N-g9dxLfiYKJnnc01M2HWE",
+    "name": "(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Mae_DesarrolloSustentableGestionAmbiental.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Ciencias Sociales y Humanidades/(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Mae_DesarrolloSustentableGestionAmbiental.pdf"
+  },
+  {
+    "id": "1tLo6P46r1ODK8m9OMw3DuwaFsL6EXxTf",
+    "name": "(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Mae_DisenoParaMediosDigitales.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Ciencias Sociales y Humanidades/(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Mae_DisenoParaMediosDigitales.pdf"
+  },
+  {
+    "id": "1lMbAPVi4bjszFlya4s0F9G0btoihuCCi",
+    "name": "(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Mae_MercadotecniaPolitica.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Ciencias Sociales y Humanidades/(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Mae_MercadotecniaPolitica.pdf"
+  },
+  {
+    "id": "1Io5wGWOuOP5HtyQTn-JzFXs6WOsg7XC_",
+    "name": "(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Mae_ResponsabilidadSocial.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Ciencias Sociales y Humanidades/(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Mae_ResponsabilidadSocial.pdf"
+  },
+  {
+    "id": "1MZ43bKSIe-szMLS_kdMTzPen9kTs41tw",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_DerechoProcesalConstitucional.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_DerechoProcesalConstitucional.pdf"
+  },
+  {
+    "id": "1OFtxfDCDkfzcP1zJf3ZnP4XBADvS4bWg",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_DerechoProcesalJuiciosOrales.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_DerechoProcesalJuiciosOrales.pdf"
+  },
+  {
+    "id": "14xOYXA_LIGC228qajLx_vFUFfPiOCpx9",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_DerechoProcesalPenal.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_DerechoProcesalPenal.pdf"
+  },
+  {
+    "id": "1Sj2nlRuYg4lrC_4C626VB58jF9sej9Ek",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_EducacionDocencia.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_EducacionDocencia.pdf"
+  },
+  {
+    "id": "196yIEFWQ6R1_neidKiLRYYCF_g7unC_u",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_Mindfulness.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_Mindfulness.pdf"
+  },
+  {
+    "id": "18RFqy-DiZdCXDGMbyau5AR4j5UjVDD6d",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_GestionDirectivaInstitucionesSalud.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Ciencias de la Salud/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_GestionDirectivaInstitucionesSalud.pdf"
+  },
+  {
+    "id": "18b3JNRn9Q6bt_kkkL-LNHq06m7Azb1sd",
+    "name": "(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Mae_Impuestos.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Económico - Administrativa/(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Mae_Impuestos.pdf"
+  },
+  {
+    "id": "1pucp5jtHy8-78UcWkPDCReADMWnJLozB",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_AdminInstitucionesEducativas.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Económico - Administrativa/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_AdminInstitucionesEducativas.pdf"
+  },
+  {
+    "id": "11LTJKUZCrNgQxlkzxKJ2ECpmBt_uZUhq",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_AdminMercadotecniaEstrategica.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Económico - Administrativa/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_AdminMercadotecniaEstrategica.pdf"
+  },
+  {
+    "id": "1sZ7Fq6poEGrO_UaZbR6my1ovQosXsEVT",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_AdminNegocios.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Económico - Administrativa/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_AdminNegocios.pdf"
+  },
+  {
+    "id": "1G8iw-u7eGSNIMQYdacCABKYDVrazIggl",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_AdminNegociosDeportivos.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Económico - Administrativa/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_AdminNegociosDeportivos.pdf"
+  },
+  {
+    "id": "1lcGxVu56io2RZX1ltysvg4iIPtlbLbyw",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_AdminPublica.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Económico - Administrativa/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_AdminPublica.pdf"
+  },
+  {
+    "id": "1CBjo6G2lR3lQ0oCNq3gBFLqxDCKVHewF",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_AdminRecursosHumanos.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Económico - Administrativa/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_AdminRecursosHumanos.pdf"
+  },
+  {
+    "id": "1DoSaAUWz9pyffyaIwqdM_DricpwBvgTg",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_AdminTecnologiasInfo.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Económico - Administrativa/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_AdminTecnologiasInfo.pdf"
+  },
+  {
+    "id": "1N1cBGf8Kpb7DJA62Bfa6DcET3mzG0dF0",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_CoachingIntegralOrganizacional.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Económico - Administrativa/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_CoachingIntegralOrganizacional.pdf"
+  },
+  {
+    "id": "14-tB6OIBuZzookMY9C_hyUvej8y61rkn",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_ComercioInternacional.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Económico - Administrativa/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_ComercioInternacional.pdf"
+  },
+  {
+    "id": "1Ar37HdB6-Qt852RecEL6MysfJsWIj4C9",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_DireccionNegociosAlimentosBebidas.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Económico - Administrativa/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_DireccionNegociosAlimentosBebidas.pdf"
+  },
+  {
+    "id": "1sZM8OJ6EZYFIUXmMAscYa9yu9i-1yWZx",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_DireccionVentas.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Económico - Administrativa/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_DireccionVentas.pdf"
+  },
+  {
+    "id": "1Esq2YUoovp9eq2tbfq-9V9QRAwJ7mi6K",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_Finanzas.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Económico - Administrativa/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_Finanzas.pdf"
+  },
+  {
+    "id": "1PHdzQ5VhFRvDYKaLfu9STv5aiGw_LAUB",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_GestionEstrategicaCapitalHumano.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Económico - Administrativa/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_GestionEstrategicaCapitalHumano.pdf"
+  },
+  {
+    "id": "1ETfEYC-MHjC_OE50elmaPPMZByb3vMuy",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_GestionOrganizacionalPositiva.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Económico - Administrativa/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_GestionOrganizacionalPositiva.pdf"
+  },
+  {
+    "id": "1WZrnKs6D1qNRX_cYnsQhCVnX2v0d1qCT",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_MercadotecniaDigitalComercioElectronico.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Económico - Administrativa/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_MercadotecniaDigitalComercioElectronico.pdf"
+  },
+  {
+    "id": "1tlGvlJwYpd-1uD5fOt9-HSjeo4hdgWka",
+    "name": "Utel_MX_Fichas_Tecnicas_Prog_Ejecutivos_Master_Derecho_Procesal_Constitucional_a5b241ea3a.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Educación e Innovación Educativa/Utel_MX_Fichas_Tecnicas_Prog_Ejecutivos_Master_Derecho_Procesal_Constitucional_a5b241ea3a.pdf"
+  },
+  {
+    "id": "11cv5zZe8rfQuW4I2NjkMuupZOhbl30Ln",
+    "name": "Utel_MX_Fichas_Tecnicas_Programas_Ejecutivos_Mae_Derecho_Procesal_Constitucional_5b656c6461.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Educación e Innovación Educativa/Utel_MX_Fichas_Tecnicas_Programas_Ejecutivos_Mae_Derecho_Procesal_Constitucional_5b656c6461.pdf"
+  },
+  {
+    "id": "1Wrx8g2QveqrGeSOT19jc1a_DBu1Rx_Xp",
+    "name": "Utel_MX_Fichas_Tecnicas_Programas_Ejecutivos_Mae_Tecnologia_Educativa_30a2bde6e2.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Educación e Innovación Educativa/Utel_MX_Fichas_Tecnicas_Programas_Ejecutivos_Mae_Tecnologia_Educativa_30a2bde6e2.pdf"
+  },
+  {
+    "id": "1irD940Z2DtDEEnxetpqlcXfxKi86ikyD",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_DireccionEmpresasTuristicas.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Hospitalidad y Turismo/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_DireccionEmpresasTuristicas.pdf"
+  },
+  {
+    "id": "1s2W3MbWrBdhNFjYnmDvIr9hh9vSrNXG7",
+    "name": "(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Mae_Ciberseguridad.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Ingeniería/(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Mae_Ciberseguridad.pdf"
+  },
+  {
+    "id": "1jPjVeZnSXogk-Cn_RlKFyqdvRt_zzcvV",
+    "name": "(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Mae_EnergiasRenovablesEficienciaEnergetica.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Ingeniería/(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Mae_EnergiasRenovablesEficienciaEnergetica.pdf"
+  },
+  {
+    "id": "1nVrYhpc9j8t8aEq7_5mswhLM5wBV2Gbx",
+    "name": "(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Mae_LogisticaCadenaSuministro.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Ingeniería/(NUEVO)_UtelMX_FichasTecnicas_ProgEje_Mae_LogisticaCadenaSuministro.pdf"
+  },
+  {
+    "id": "1YMSXcRB9WgNsiTJfjElUcSox-0Pi79NW",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_CienciaDatosParaNegocios.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Ingeniería/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_CienciaDatosParaNegocios.pdf"
+  },
+  {
+    "id": "1aNL8s-z66owX0b-SXAj5mOhsIe591AMp",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_CienciasCompuTelecomunicaciones.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Ingeniería/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_CienciasCompuTelecomunicaciones.pdf"
+  },
+  {
+    "id": "1Lws_93XPe9ntC7ovzhbX6DXNJAdxTE9N",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_DireccionIngenieriaSoftware.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Ingeniería/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_DireccionIngenieriaSoftware.pdf"
+  },
+  {
+    "id": "1VTj_eQZ38_UqcEPbtXOOfnzlT8pbl6QS",
+    "name": "UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_DireccionProyectosInnovacion.pdf",
+    "path": "Catalogo Programas/Maestrías Ejecutivas/Ingeniería/UtelMX_FichasTecnicas_Programas Ejecutivos_Mae_DireccionProyectosInnovacion.pdf"
+  },
+  {
+    "id": "1jQOp0IoIuReaZxdDYNLzhFGIhOXOFQgq",
+    "name": "Utel_MX_Fichas_Tecnicas_Master_Ciberseguridad_a4dd1cbd22.pdf",
+    "path": "Catalogo Programas/Máster 2025/Ciberseguridad/Utel_MX_Fichas_Tecnicas_Master_Ciberseguridad_a4dd1cbd22.pdf"
+  },
+  {
+    "id": "1KXiamwq1gRCjLk0rr7lptotAnZns8rHT",
+    "name": "UtelMX_FichasTecnicas_Master_DerechoProcesalConstitucional.pdf",
+    "path": "Catalogo Programas/Máster 2025/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Master_DerechoProcesalConstitucional.pdf"
+  },
+  {
+    "id": "1maVG4zkyXfoa_4B40q4aFYCEIoVSqO_F",
+    "name": "UtelMX_FichasTecnicas_Master_DerechoProcesalJuiciosOrales.pdf",
+    "path": "Catalogo Programas/Máster 2025/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Master_DerechoProcesalJuiciosOrales.pdf"
+  },
+  {
+    "id": "1dqvru062XkXRa_7gc3uygPzsCIs9f9x3",
+    "name": "UtelMX_FichasTecnicas_Master_DerechoProcesalPenal.pdf",
+    "path": "Catalogo Programas/Máster 2025/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Master_DerechoProcesalPenal.pdf"
+  },
+  {
+    "id": "15DF2SvdQ5Sfs45UtYKBs_GIqC0vGtAvh",
+    "name": "UtelMX_FichasTecnicas_Master_DerechosHumanos.pdf",
+    "path": "Catalogo Programas/Máster 2025/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Master_DerechosHumanos.pdf"
+  },
+  {
+    "id": "1nD-l5iC-dYuITiJrGSvetni6XY9JEPWl",
+    "name": "UtelMX_FichasTecnicas_Master_DesarrolloSustentableGestiónAmbiental.pdf",
+    "path": "Catalogo Programas/Máster 2025/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Master_DesarrolloSustentableGestiónAmbiental.pdf"
+  },
+  {
+    "id": "1EkOZ2im582WHbO3N4gjR-YhDC2xhE3PA",
+    "name": "UtelMX_FichasTecnicas_Master_DisenoParaMediosDigitales.pdf",
+    "path": "Catalogo Programas/Máster 2025/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Master_DisenoParaMediosDigitales.pdf"
+  },
+  {
+    "id": "1OLguEvL8DE-k0PBz4nrOaVBmfnp3FewX",
+    "name": "UtelMX_FichasTecnicas_Master_EducacionDocencia.pdf",
+    "path": "Catalogo Programas/Máster 2025/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Master_EducacionDocencia.pdf"
+  },
+  {
+    "id": "1brKaG7n1JDInWiJYdrvhCyM74_SZhucO",
+    "name": "UtelMX_FichasTecnicas_Master_MercadotecniaPolitica.pdf",
+    "path": "Catalogo Programas/Máster 2025/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Master_MercadotecniaPolitica.pdf"
+  },
+  {
+    "id": "1257RgVrk3QU42RqDI5ApYGXJ-E-UMlkU",
+    "name": "UtelMX_FichasTecnicas_Master_Mindfulness.pdf",
+    "path": "Catalogo Programas/Máster 2025/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Master_Mindfulness.pdf"
+  },
+  {
+    "id": "1IbYAmvbMZrahHfgR81V7tqbCejieI9Lh",
+    "name": "UtelMX_FichasTecnicas_Master_ResponsabilidadSocial.pdf",
+    "path": "Catalogo Programas/Máster 2025/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Master_ResponsabilidadSocial.pdf"
+  },
+  {
+    "id": "1jkLYzFc48QDEmeBcFtLQiJvkINi3AULL",
+    "name": "UtelMX_FichasTecnicas_Master_TecnologiaEducativa.pdf",
+    "path": "Catalogo Programas/Máster 2025/Ciencias Sociales y Humanidades/UtelMX_FichasTecnicas_Master_TecnologiaEducativa.pdf"
+  },
+  {
+    "id": "1d9taBCexGElOQa44CXF0UNWnwb6Q7Vsw",
+    "name": "UtelMX_FichasTecnicas_Master_GestionDirectivaInstitucionesDeSalud.pdf",
+    "path": "Catalogo Programas/Máster 2025/Ciencias de la Salud/UtelMX_FichasTecnicas_Master_GestionDirectivaInstitucionesDeSalud.pdf"
+  },
+  {
+    "id": "1-9H-XtQFAIIessKa3Etp0y_9sEzmsj6V",
+    "name": "Utel_MX_Fichas_Tecnicas_Master_Derechos_Humanos_86e1fdd532.pdf",
+    "path": "Catalogo Programas/Máster 2025/Derechos Humanos/Utel_MX_Fichas_Tecnicas_Master_Derechos_Humanos_86e1fdd532.pdf"
+  },
+  {
+    "id": "1sGh9h1fpXDCPdChxF7Y-dm7Siqowy7Ji",
+    "name": "Utel_MX_Fichas_Tecnicas_Master_Desarrollo_Sustentable_Gestion_Ambiental_a52a6432ce.pdf",
+    "path": "Catalogo Programas/Máster 2025/Desarrollo Sustentable Gestión Ambiental/Utel_MX_Fichas_Tecnicas_Master_Desarrollo_Sustentable_Gestion_Ambiental_a52a6432ce.pdf"
+  },
+  {
+    "id": "1cLO1BtEWDQlyxrihc-fI2OfV0xh-HSRs",
+    "name": "Utel_MX_Fichas_Tecnicas_Master_Diseno_Para_Medios_Digitales_895783aab9.pdf",
+    "path": "Catalogo Programas/Máster 2025/Diseño Medios Digitales/Utel_MX_Fichas_Tecnicas_Master_Diseno_Para_Medios_Digitales_895783aab9.pdf"
+  },
+  {
+    "id": "12wcoH0kWdRAfsCZ4Vzku4YyLAnWEpZuK",
+    "name": "UtelMX_FichasTecnicas_Master_AdminInstitucionesEducativas.pdf",
+    "path": "Catalogo Programas/Máster 2025/Económico - Administrativo/UtelMX_FichasTecnicas_Master_AdminInstitucionesEducativas.pdf"
+  },
+  {
+    "id": "1GiPktcJh5AohjrGDGdvbIF1O0yzHTjFF",
+    "name": "UtelMX_FichasTecnicas_Master_AdminMercadotecniaEstrategica.pdf",
+    "path": "Catalogo Programas/Máster 2025/Económico - Administrativo/UtelMX_FichasTecnicas_Master_AdminMercadotecniaEstrategica.pdf"
+  },
+  {
+    "id": "1mgLrF0Fv_ahzhn4pLc3WmoiDcb07zIxl",
+    "name": "UtelMX_FichasTecnicas_Master_AdminNegocios.pdf",
+    "path": "Catalogo Programas/Máster 2025/Económico - Administrativo/UtelMX_FichasTecnicas_Master_AdminNegocios.pdf"
+  },
+  {
+    "id": "1sDdhN7Xw4A6y-vm7nCFXr9-xH_P9P5KM",
+    "name": "UtelMX_FichasTecnicas_Master_AdminNegociosDeportivos.pdf",
+    "path": "Catalogo Programas/Máster 2025/Económico - Administrativo/UtelMX_FichasTecnicas_Master_AdminNegociosDeportivos.pdf"
+  },
+  {
+    "id": "1bjJk0ZKkGoTdY3s2SXCMDgF_Mz4KprQQ",
+    "name": "UtelMX_FichasTecnicas_Master_AdminTecnologiasDeInformacion.pdf",
+    "path": "Catalogo Programas/Máster 2025/Económico - Administrativo/UtelMX_FichasTecnicas_Master_AdminTecnologiasDeInformacion.pdf"
+  },
+  {
+    "id": "1U41ylVjQd0ECbLkmTb0MxzVerpR0PfUi",
+    "name": "UtelMX_FichasTecnicas_Master_AdministracionPublica.pdf",
+    "path": "Catalogo Programas/Máster 2025/Económico - Administrativo/UtelMX_FichasTecnicas_Master_AdministracionPublica.pdf"
+  },
+  {
+    "id": "12xTKSi-0FO2bT9O6C8u7WmKw65oc0IWS",
+    "name": "UtelMX_FichasTecnicas_Master_AdministracionRRHH.pdf",
+    "path": "Catalogo Programas/Máster 2025/Económico - Administrativo/UtelMX_FichasTecnicas_Master_AdministracionRRHH.pdf"
+  },
+  {
+    "id": "19exowyLDU6_mMYC17S0t89RPdGkFkGQl",
+    "name": "UtelMX_FichasTecnicas_Master_CoachingIntegralOrganizacional.pdf",
+    "path": "Catalogo Programas/Máster 2025/Económico - Administrativo/UtelMX_FichasTecnicas_Master_CoachingIntegralOrganizacional.pdf"
+  },
+  {
+    "id": "1EguSc6xrZc9O7sDMjpQs26-AsZHb_2QY",
+    "name": "UtelMX_FichasTecnicas_Master_ComercioInternacional.pdf",
+    "path": "Catalogo Programas/Máster 2025/Económico - Administrativo/UtelMX_FichasTecnicas_Master_ComercioInternacional.pdf"
+  },
+  {
+    "id": "1PgxQI_GalhmLpMjyJmhCdJL9rRIwFy48",
+    "name": "UtelMX_FichasTecnicas_Master_DireccionDeVentas.pdf",
+    "path": "Catalogo Programas/Máster 2025/Económico - Administrativo/UtelMX_FichasTecnicas_Master_DireccionDeVentas.pdf"
+  },
+  {
+    "id": "1tXWjyFjMMsVDA6rg8jxKvTT2YojUBagL",
+    "name": "UtelMX_FichasTecnicas_Master_DireccionNegociosDeAlimentos.pdf",
+    "path": "Catalogo Programas/Máster 2025/Económico - Administrativo/UtelMX_FichasTecnicas_Master_DireccionNegociosDeAlimentos.pdf"
+  },
+  {
+    "id": "1npiuDuoT1mx0neJoTBcYx9OtmL0JCwjM",
+    "name": "UtelMX_FichasTecnicas_Master_Finanzas.pdf",
+    "path": "Catalogo Programas/Máster 2025/Económico - Administrativo/UtelMX_FichasTecnicas_Master_Finanzas.pdf"
+  },
+  {
+    "id": "1vX5zkzwd8f63MRw65rp-7Vz1qZpGRmXw",
+    "name": "UtelMX_FichasTecnicas_Master_GestionEstrategicaDelCapitalHumano.pdf",
+    "path": "Catalogo Programas/Máster 2025/Económico - Administrativo/UtelMX_FichasTecnicas_Master_GestionEstrategicaDelCapitalHumano.pdf"
+  },
+  {
+    "id": "1dvPWos0m4UGkQtCKkUF8KdUFp9pR5Sld",
+    "name": "UtelMX_FichasTecnicas_Master_GestionOrganizacionalPositiva.pdf",
+    "path": "Catalogo Programas/Máster 2025/Económico - Administrativo/UtelMX_FichasTecnicas_Master_GestionOrganizacionalPositiva.pdf"
+  },
+  {
+    "id": "1dl8OMN-gCnY-VFOYvndA_W9Gy4H__xTg",
+    "name": "UtelMX_FichasTecnicas_Master_Impuestos.pdf",
+    "path": "Catalogo Programas/Máster 2025/Económico - Administrativo/UtelMX_FichasTecnicas_Master_Impuestos.pdf"
+  },
+  {
+    "id": "1leRecyaovb5ak9gaqeCC8DnmXelBeAgo",
+    "name": "UtelMX_FichasTecnicas_Master_MercadotecniaDigitalComencioElectronico.pdf",
+    "path": "Catalogo Programas/Máster 2025/Económico - Administrativo/UtelMX_FichasTecnicas_Master_MercadotecniaDigitalComencioElectronico.pdf"
+  },
+  {
+    "id": "1FSHtiA7RZvR7kR-PqUMV3j7Ol9UFyy5_",
+    "name": "Ejemplo Diploma Máster.pdf",
+    "path": "Catalogo Programas/Máster 2025/Ejemplo Diploma Máster.pdf"
+  },
+  {
+    "id": "1rj7_11FGfr1N4hzLMpeyE6mislJwpQSz",
+    "name": "Utel_MX_Fichas_Tecnicas_Master_Energias_Renovables_4d9b3c09d2.pdf",
+    "path": "Catalogo Programas/Máster 2025/Energías Renovables/Utel_MX_Fichas_Tecnicas_Master_Energias_Renovables_4d9b3c09d2.pdf"
+  },
+  {
+    "id": "1zDoAP9o517MTJS7p_6iRIlE3KNJBDBGd",
+    "name": "UtelMX_FichasTecnicas_Master_DireccionEmpresasTuristicas.pdf",
+    "path": "Catalogo Programas/Máster 2025/Hospitalidad y Turismo/UtelMX_FichasTecnicas_Master_DireccionEmpresasTuristicas.pdf"
+  },
+  {
+    "id": "1Dql8H2sqA32ejSLKDsry45TQXOEFTDH1",
+    "name": "Utel_MX_Fichas_Tecnicas_Master_Impuestos_30371c17c8.pdf",
+    "path": "Catalogo Programas/Máster 2025/Impuestos/Utel_MX_Fichas_Tecnicas_Master_Impuestos_30371c17c8.pdf"
+  },
+  {
+    "id": "1VleuDz9q2PK5wT5__WZOGbJ40rSv-y-k",
+    "name": "UtelMX_FichasTecnicas_Master_Ciberseguridad.pdf",
+    "path": "Catalogo Programas/Máster 2025/Ingenierías/UtelMX_FichasTecnicas_Master_Ciberseguridad.pdf"
+  },
+  {
+    "id": "1wBiEmiY5VzuRUYBFH5VNz8GCAwkw42BZ",
+    "name": "UtelMX_FichasTecnicas_Master_CienciaDatosParaNegocios.pdf",
+    "path": "Catalogo Programas/Máster 2025/Ingenierías/UtelMX_FichasTecnicas_Master_CienciaDatosParaNegocios.pdf"
+  },
+  {
+    "id": "1sRHf41z932JNEhYyISHWtGr3NO3f2GUW",
+    "name": "UtelMX_FichasTecnicas_Master_CienciasComputacionalesTelecomunicaciones.pdf",
+    "path": "Catalogo Programas/Máster 2025/Ingenierías/UtelMX_FichasTecnicas_Master_CienciasComputacionalesTelecomunicaciones.pdf"
+  },
+  {
+    "id": "1NXSiCuSNxsVvoNnUs8aRJtafa63CkF4G",
+    "name": "UtelMX_FichasTecnicas_Master_DireccionIngenieriaDeSoftware.pdf",
+    "path": "Catalogo Programas/Máster 2025/Ingenierías/UtelMX_FichasTecnicas_Master_DireccionIngenieriaDeSoftware.pdf"
+  },
+  {
+    "id": "1r4rjHNrEb4NpnNH-Nwa7OaGUkLVLPeJf",
+    "name": "UtelMX_FichasTecnicas_Master_DireccionProyectosDeInnovacion.pdf",
+    "path": "Catalogo Programas/Máster 2025/Ingenierías/UtelMX_FichasTecnicas_Master_DireccionProyectosDeInnovacion.pdf"
+  },
+  {
+    "id": "1ugOYTGhA6DsbeWaWzTkIrrIGHjMzRjAU",
+    "name": "UtelMX_FichasTecnicas_Master_EnergiasRenovables.pdf",
+    "path": "Catalogo Programas/Máster 2025/Ingenierías/UtelMX_FichasTecnicas_Master_EnergiasRenovables.pdf"
+  },
+  {
+    "id": "19bacZ7XfObNR5g6VnF4oyrkhDu2c6DaW",
+    "name": "UtelMX_FichasTecnicas_Master_IngenieriaTecnologiaAmbiental.pdf",
+    "path": "Catalogo Programas/Máster 2025/Ingenierías/UtelMX_FichasTecnicas_Master_IngenieriaTecnologiaAmbiental.pdf"
+  },
+  {
+    "id": "1vGcuk1O5k3LJEZ6y41wZo5Oa6EGFal5P",
+    "name": "UtelMX_FichasTecnicas_Master_LogisticaCadenaDeSuministro.pdf",
+    "path": "Catalogo Programas/Máster 2025/Ingenierías/UtelMX_FichasTecnicas_Master_LogisticaCadenaDeSuministro.pdf"
+  },
+  {
+    "id": "1M5xgsuTRQZ-TQKDTOjPIFiO7bu33dX6-",
+    "name": "Utel_MX_Fichas_Tecnicas_Master_Logistica_Cadena_De_Suministro_151d616dbf.pdf",
+    "path": "Catalogo Programas/Máster 2025/Logística Cadena de Suministros/Utel_MX_Fichas_Tecnicas_Master_Logistica_Cadena_De_Suministro_151d616dbf.pdf"
+  },
+  {
     "id": "1-i8747_FQfvzLoKdOC3aUJFU0WcKI1GN",
     "name": "Master.mov",
     "path": "Catalogo Programas/Máster 2025/Master.mov"
+  },
+  {
+    "id": "1CC9GyY8vKFYaE9njhKFNdO9uiQYQ74ch",
+    "name": "Utel_MX_Fichas_Tecnicas_Master_Mercadotecnia_Politica_a5cb797a14.pdf",
+    "path": "Catalogo Programas/Máster 2025/Mercadotecnia Política/Utel_MX_Fichas_Tecnicas_Master_Mercadotecnia_Politica_a5cb797a14.pdf"
   },
   {
     "id": "1O8_X-1UxGHngzKogSvmHAazOjY8bRyQf",
@@ -2583,6 +4213,61 @@
     "id": "1tUeucCdB8Q_ihn8Qb1Fy_iT0d4Zld7Re",
     "name": "Creatividad_UtelMx_ÉxitoComercial_Fila9.png",
     "path": "Catalogo Programas/Máster 2025/Másteres Internacionales (con Coursera)/Infografías de valor/Creatividad_UtelMx_ÉxitoComercial_Fila9.png"
+  },
+  {
+    "id": "10KfV1NBL1YJEi51saCp4H-LUDyXciQDu",
+    "name": "Utel Mx_FichasTecnicas_Ciencia de Datos .pdf",
+    "path": "Catalogo Programas/Máster 2025/Másteres Internacionales (con Coursera)/Utel Mx_FichasTecnicas_Ciencia de Datos .pdf"
+  },
+  {
+    "id": "1kuVCxolgIpp1b2-y5BeHpkqKW-LxQKPH",
+    "name": "Utel Mx_FichasTecnicas_Desarrollo de Software y Estructura de Datos.pdf",
+    "path": "Catalogo Programas/Máster 2025/Másteres Internacionales (con Coursera)/Utel Mx_FichasTecnicas_Desarrollo de Software y Estructura de Datos.pdf"
+  },
+  {
+    "id": "1No5wdG1HNyegMKBJW5e9DBiN2TGrSdtT",
+    "name": "Utel Mx_FichasTecnicas_Dirección de Proyectos y Liderazgo.pdf",
+    "path": "Catalogo Programas/Máster 2025/Másteres Internacionales (con Coursera)/Utel Mx_FichasTecnicas_Dirección de Proyectos y Liderazgo.pdf"
+  },
+  {
+    "id": "1ZTbDXi9pYCS4Vs96RB1y17Y-mu7J0lK5",
+    "name": "Utel Mx_FichasTecnicas_Gestión en Hotelería y Turismo.pdf",
+    "path": "Catalogo Programas/Máster 2025/Másteres Internacionales (con Coursera)/Utel Mx_FichasTecnicas_Gestión en Hotelería y Turismo.pdf"
+  },
+  {
+    "id": "1vtJIvpOyLouWENHprH4Zq-07bDeFcBPt",
+    "name": "Utel Mx_FichasTecnicas_Machine Learning .pdf",
+    "path": "Catalogo Programas/Máster 2025/Másteres Internacionales (con Coursera)/Utel Mx_FichasTecnicas_Machine Learning .pdf"
+  },
+  {
+    "id": "1tT5OjxuVVPzU19LMZxnsL32lrKWmetzk",
+    "name": "Utel Mx_FichasTecnicas_Soluciones Avanzadas en Ciberseguridad.pdf",
+    "path": "Catalogo Programas/Máster 2025/Másteres Internacionales (con Coursera)/Utel Mx_FichasTecnicas_Soluciones Avanzadas en Ciberseguridad.pdf"
+  },
+  {
+    "id": "1Dj6KIPECFmYQN8B5_cgcSRWnt85CMlrb",
+    "name": "UtelMx_FichasTecnicas_Análisis de Datos.pdf",
+    "path": "Catalogo Programas/Máster 2025/Másteres Internacionales (con Coursera)/UtelMx_FichasTecnicas_Análisis de Datos.pdf"
+  },
+  {
+    "id": "1MdnrGy9hi9lOlgKs5aqO_gkG3C0lQJ3L",
+    "name": "UtelMx_FichasTecnicas_Neurociencia Médica.pdf",
+    "path": "Catalogo Programas/Máster 2025/Másteres Internacionales (con Coursera)/UtelMx_FichasTecnicas_Neurociencia Médica.pdf"
+  },
+  {
+    "id": "1D7KHmZkXJRywR0sWLWnjiQKCpW-d3ivZ",
+    "name": "UtelMx_FichasTecnicas_Pensamiento Crítico para la Toma de Decisiones.pdf",
+    "path": "Catalogo Programas/Máster 2025/Másteres Internacionales (con Coursera)/UtelMx_FichasTecnicas_Pensamiento Crítico para la Toma de Decisiones.pdf"
+  },
+  {
+    "id": "1d37Kc-38e6UjRIHLqdD-By1ne9J9HXjm",
+    "name": "UtelMx_FichasTecnicas_Psicología de la Ansiedad, la Depresión y las Conductas Adictivas.pdf",
+    "path": "Catalogo Programas/Máster 2025/Másteres Internacionales (con Coursera)/UtelMx_FichasTecnicas_Psicología de la Ansiedad, la Depresión y las Conductas Adictivas.pdf"
+  },
+  {
+    "id": "1rSjnUImIUpsbQEVtveVASWp7PWOV1PS1",
+    "name": "Utel_MX_Fichas_Tecnicas_Master_Responsabilidad_Social_df20a1bf85.pdf",
+    "path": "Catalogo Programas/Máster 2025/Responsabilidad Social/Utel_MX_Fichas_Tecnicas_Master_Responsabilidad_Social_df20a1bf85.pdf"
   },
   {
     "id": "18VY8O6s4ZxSJr31cfxZ5p3I4804REnJA",
@@ -2738,6 +4423,281 @@
     "id": "1KpKhloDJ4KIVUyDXp3k2xR-AKlfE---O",
     "name": "Vinculacion.mp4",
     "path": "Empleabilidad/Vinculacion.mp4"
+  },
+  {
+    "id": "1Nl3YZvMKP6ZZ6ixkm-sHs9Hs4N1AB1Vi",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_CienciasPoliticasAdminPublica.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Ciencias sociales y humanidades/UtelMx_FichaTecnica_ModHibrida_Licenciatura_CienciasPoliticasAdminPublica.pdf"
+  },
+  {
+    "id": "1EsvR00mqG3sb0VndCA6z5X-pRGiYFPqh",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_Comunicacion.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Ciencias sociales y humanidades/UtelMx_FichaTecnica_ModHibrida_Licenciatura_Comunicacion.pdf"
+  },
+  {
+    "id": "1qMBA-8VBCRIBoZSJeapBc-JCcD9OG0Bp",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_ComunicacionDigital.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Ciencias sociales y humanidades/UtelMx_FichaTecnica_ModHibrida_Licenciatura_ComunicacionDigital.pdf"
+  },
+  {
+    "id": "1P_inmtcmaLgQXeJ_MPmjmw5IV6HnnH32",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_ComunicacionOrganizacional.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Ciencias sociales y humanidades/UtelMx_FichaTecnica_ModHibrida_Licenciatura_ComunicacionOrganizacional.pdf"
+  },
+  {
+    "id": "1QRUipuCZM3dQNuKhkU4vu0e-fR99Dr7M",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_CriminologiaCriminalistica.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Ciencias sociales y humanidades/UtelMx_FichaTecnica_ModHibrida_Licenciatura_CriminologiaCriminalistica.pdf"
+  },
+  {
+    "id": "1rNxgTRkWVbxcYCtuY3HF9VsRGMS3pbBz",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_Derecho.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Ciencias sociales y humanidades/UtelMx_FichaTecnica_ModHibrida_Licenciatura_Derecho.pdf"
+  },
+  {
+    "id": "1O05wXilYbP7MVGUbbNdxlSh8WQKYYbC-",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_DerechoEmpresarial.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Ciencias sociales y humanidades/UtelMx_FichaTecnica_ModHibrida_Licenciatura_DerechoEmpresarial.pdf"
+  },
+  {
+    "id": "11mWqJfWvMMKNGyzLjge0RI36mBHNN6aA",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_DerechoInternacional.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Ciencias sociales y humanidades/UtelMx_FichaTecnica_ModHibrida_Licenciatura_DerechoInternacional.pdf"
+  },
+  {
+    "id": "1wB3b5QmUbI91Zqh6auBwKkOEsnPwYhRD",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_Pedagogía.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Ciencias sociales y humanidades/UtelMx_FichaTecnica_ModHibrida_Licenciatura_Pedagogía.pdf"
+  },
+  {
+    "id": "1Sgt_y1-kwR-mHAiU5hqpQTfSuHn-tYmB",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_PsicologiaOrganizacional.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Ciencias sociales y humanidades/UtelMx_FichaTecnica_ModHibrida_Licenciatura_PsicologiaOrganizacional.pdf"
+  },
+  {
+    "id": "1X_pgNQd2a0AE3YSWO57lUv7cizgGFw0w",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_TecnologiaEducativa.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Ciencias sociales y humanidades/UtelMx_FichaTecnica_ModHibrida_Licenciatura_TecnologiaEducativa.pdf"
+  },
+  {
+    "id": "14nwru-ayP-cejUKmaeLuE0OqNK3ToEMH",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_AdminNegocios.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Licenciatura_AdminNegocios.pdf"
+  },
+  {
+    "id": "1snETu78UD020I1QFJgJlFdHUWYG8bkFb",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_AdminRecursosHumanos.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Licenciatura_AdminRecursosHumanos.pdf"
+  },
+  {
+    "id": "1YSMJeN5bABNvKLiyfK0zvKN7cZOEGdLK",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_AdminTecnologiasDeInformacion.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Licenciatura_AdminTecnologiasDeInformacion.pdf"
+  },
+  {
+    "id": "13ZtUzSsFQYBt62vvfECBzy9CoYx_xgRo",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_Administracion.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Licenciatura_Administracion.pdf"
+  },
+  {
+    "id": "1AQRSybX1wSs5_uuBrcv4AS9WswQ63F9z",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_AdministracionFinanzas.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Licenciatura_AdministracionFinanzas.pdf"
+  },
+  {
+    "id": "1OOfrFFVyFTIY6cceMVKu--mLxO_VDnVL",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_AdministracionVentas.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Licenciatura_AdministracionVentas.pdf"
+  },
+  {
+    "id": "1s6abXBJwNuZjZcJp_gioUi-eJaCdrF7U",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_ContaduriaFinanzas.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Licenciatura_ContaduriaFinanzas.pdf"
+  },
+  {
+    "id": "1KO-9N8bAuSxSiY-H0AGyal7CFWOSa006",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_ContaduriaPublica.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Licenciatura_ContaduriaPublica.pdf"
+  },
+  {
+    "id": "1bVUky5h4ioTAfslxzASB00mcaL-QGbGk",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_EconomiaFinanzas.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Licenciatura_EconomiaFinanzas.pdf"
+  },
+  {
+    "id": "1DEVxj8P9Y5jBHzG3ce_QattYdQ2RcL1k",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_Mercadotecnia.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Licenciatura_Mercadotecnia.pdf"
+  },
+  {
+    "id": "1Woeh3SJP1UL8Dqc486qCg3YwSEoH5by3",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_NegociosInternacionales.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Licenciatura_NegociosInternacionales.pdf"
+  },
+  {
+    "id": "1AyqAbFua3YZtWQyw1t-hwh_RjW7eIMeM",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_AdminEmpresasTuristicas.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Hospitalidad y Turismo/UtelMx_FichaTecnica_ModHibrida_Licenciatura_AdminEmpresasTuristicas.pdf"
+  },
+  {
+    "id": "1ArJIfybRqGgvfEZ3SiIk98wVZJis70Rt",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_DesarrolloSustentableEcoturismo.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Hospitalidad y Turismo/UtelMx_FichaTecnica_ModHibrida_Licenciatura_DesarrolloSustentableEcoturismo.pdf"
+  },
+  {
+    "id": "1B4JcVNzfUZJfJxq8-zu6aMOKsj_f8i7o",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_IngenieriaIndustrial.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Ingenierías/UtelMx_FichaTecnica_ModHibrida_Licenciatura_IngenieriaIndustrial.pdf"
+  },
+  {
+    "id": "1Aia38h4LwBPNC5bqkjf4dJ1iFd6JlJov",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_IngenieriaIndustrialAdmin.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Ingenierías/UtelMx_FichaTecnica_ModHibrida_Licenciatura_IngenieriaIndustrialAdmin.pdf"
+  },
+  {
+    "id": "1bNmsKUMDLAPjgPL07_kkqTQWOCbEj7th",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Licenciatura_IngenieriaSistemasComp.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Licenciaturas/Ingenierías/UtelMx_FichaTecnica_ModHibrida_Licenciatura_IngenieriaSistemasComp.pdf"
+  },
+  {
+    "id": "18rCDjDAJdi06_6MlQVl2KIkp-XmsD_Hu",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_GestionDirectivaInstitucionesDeSalud.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Ciencias de la salud/UtelMx_FichaTecnica_ModHibrida_Maestria_GestionDirectivaInstitucionesDeSalud.pdf"
+  },
+  {
+    "id": "1CAN6aeZMTaxTDx3AYCTTkT8cXZZHN48t",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_DerechoProcesalConstitucional.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Ciencias sociales y humanidades/UtelMx_FichaTecnica_ModHibrida_Maestria_DerechoProcesalConstitucional.pdf"
+  },
+  {
+    "id": "1oWby1_ZTIQstn70gVbjckVZ5m-tJVfHm",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_DerechoProcesalJuiciosOrales.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Ciencias sociales y humanidades/UtelMx_FichaTecnica_ModHibrida_Maestria_DerechoProcesalJuiciosOrales.pdf"
+  },
+  {
+    "id": "1qcpzhzPQ4KCesZpmOjJ-oYnfFPxiWgLM",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_DerechoProcesalPenal.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Ciencias sociales y humanidades/UtelMx_FichaTecnica_ModHibrida_Maestria_DerechoProcesalPenal.pdf"
+  },
+  {
+    "id": "1zoWtsb-f5Oss_MaGy_yTTb7vnbzWp33x",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_EducacionDocencia.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Ciencias sociales y humanidades/UtelMx_FichaTecnica_ModHibrida_Maestria_EducacionDocencia.pdf"
+  },
+  {
+    "id": "1vDbuX1Xb5zar-fVN6NfSyl4fzojv1TtZ",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_Mindfulness.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Ciencias sociales y humanidades/UtelMx_FichaTecnica_ModHibrida_Maestria_Mindfulness.pdf"
+  },
+  {
+    "id": "1difC3I5n77BjAxAjrvNyG4SEGNJKEeKy",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_TecnologiaEducativa.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Ciencias sociales y humanidades/UtelMx_FichaTecnica_ModHibrida_Maestria_TecnologiaEducativa.pdf"
+  },
+  {
+    "id": "1FBVukrjgPdmSVM96HkuXUZMFKp1Jcj_x",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_AdminInstitucionesEducativas.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Maestria_AdminInstitucionesEducativas.pdf"
+  },
+  {
+    "id": "1_aczLuNbCFPtFmAWMlIQV-9IHa4t5cFg",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_AdminMercadotecniaEstrategica.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Maestria_AdminMercadotecniaEstrategica.pdf"
+  },
+  {
+    "id": "1TIzO4IzK5PeZtU6GV2rUND8PaAKYKLHa",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_AdminNegocios.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Maestria_AdminNegocios.pdf"
+  },
+  {
+    "id": "1QJxBaowgCgrS3tlAOESxvHYj0yVo435q",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_AdminNegociosDeportivos.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Maestria_AdminNegociosDeportivos.pdf"
+  },
+  {
+    "id": "1y42jO5L7NkdsfeuHORv7d2i3beCGleCS",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_AdminPublica.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Maestria_AdminPublica.pdf"
+  },
+  {
+    "id": "1KrKMF3AjG5SscTTBRlWs8CqR-VswJxfF",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_AdminTecnologiasDeInformacion.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Maestria_AdminTecnologiasDeInformacion.pdf"
+  },
+  {
+    "id": "14iJTCsOVYJwluJrdpBshg0ZJPRPoclR9",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_CoachingIntegralOrganizacional.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Maestria_CoachingIntegralOrganizacional.pdf"
+  },
+  {
+    "id": "1ngoD89oZhnk0obde2jPxjsxDm0py9kUw",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_ComercioInternacional.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Maestria_ComercioInternacional.pdf"
+  },
+  {
+    "id": "1pF7RzGZ40wCqc39WmiXVMJ1JLSPuDZn1",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_DireccionNegociosDeAlimentosBebidas.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Maestria_DireccionNegociosDeAlimentosBebidas.pdf"
+  },
+  {
+    "id": "1-UIymnC8PUyXmSNj8HWbOjnDnyT73lgZ",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_DireccionVentas.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Maestria_DireccionVentas.pdf"
+  },
+  {
+    "id": "1tBXekAaOvYtjAbzc-K59e7apc8BxVexo",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_Finanzas.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Maestria_Finanzas.pdf"
+  },
+  {
+    "id": "1QK4a9s_XvUJ4litmJP_3w3LRZ4yFoe4v",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_GestionEstrategicaDelCapitalHumano.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Maestria_GestionEstrategicaDelCapitalHumano.pdf"
+  },
+  {
+    "id": "1aE17xmBF0pd4rCIgXeoE8jlhwK-6X8O1",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_GestionOrganizacionalPositiva.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Maestria_GestionOrganizacionalPositiva.pdf"
+  },
+  {
+    "id": "1-MsVBo5fLgETVlRs9TZnhDy3IEQPqjc0",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_MercadotecniaDigitalComercioElectronico.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Económico - Administrativo/UtelMx_FichaTecnica_ModHibrida_Maestria_MercadotecniaDigitalComercioElectronico.pdf"
+  },
+  {
+    "id": "1wbexZ4JI-LEQqDbuDBIlAicCVfUZ_bPL",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_DireccionEmpresasTuristicas.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Hospitalidad y turismo/UtelMx_FichaTecnica_ModHibrida_Maestria_DireccionEmpresasTuristicas.pdf"
+  },
+  {
+    "id": "1sioOBy97tnlRKPd54Rd2cmSuTduvCsqH",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_CienciaComputacionalesTelecomunicaciones.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Ingeniería/UtelMx_FichaTecnica_ModHibrida_Maestria_CienciaComputacionalesTelecomunicaciones.pdf"
+  },
+  {
+    "id": "16NWSqW_3xqt-W7cIzhDrJz-CKpDnjIyi",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_CienciaDatosParaNegocios.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Ingeniería/UtelMx_FichaTecnica_ModHibrida_Maestria_CienciaDatosParaNegocios.pdf"
+  },
+  {
+    "id": "1qkikmIb28-68_sGVzMgR36_-nMmxzuul",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_DireccionIngenieriaDeSoftware.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Ingeniería/UtelMx_FichaTecnica_ModHibrida_Maestria_DireccionIngenieriaDeSoftware.pdf"
+  },
+  {
+    "id": "1j8rQn4o9AWlBnmYDaQy02btFaWCIKMHz",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_DireccionProyectosInnovacion.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Ingeniería/UtelMx_FichaTecnica_ModHibrida_Maestria_DireccionProyectosInnovacion.pdf"
+  },
+  {
+    "id": "1u-Eqjw5emxdm6W99QjFr8OCTYJcXtde1",
+    "name": "UtelMx_FichaTecnica_ModHibrida_Maestria_IngenieriaTecnologiaAmbiental.pdf",
+    "path": "Modalidades/Modalidad Híbrida/Maestría/Ingeniería/UtelMx_FichaTecnica_ModHibrida_Maestria_IngenieriaTecnologiaAmbiental.pdf"
+  },
+  {
+    "id": "15eRSynX68rMT_5ePT9OiNo9ZC__SzfSB",
+    "name": "UtelMx_ModHibrida_Brochure.pdf",
+    "path": "Modalidades/Modalidad Híbrida/UtelMx_ModHibrida_Brochure.pdf"
   },
   {
     "id": "1vP5iniP3t_FGEHfcqn_NlEfqyudh3Mz2",
