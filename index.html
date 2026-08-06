@@ -4336,7 +4336,7 @@ function toggleChat(){
 var _galData=null, _galFiltered=[], _galInited=false;
 // Una sola promesa compartida con timeout de 15s
 var _galPromise=Promise.race([
-  fetch('imagenes_utel.json').then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}),
+  fetch('imagenes_utel.json?v=1010').then(function(r){if(!r.ok)throw new Error(r.status);return r.json();}),
   new Promise(function(_,rej){setTimeout(function(){rej(new Error('timeout'));},15000);})
 ]).then(function(data){_galData=data;return data;});
 
