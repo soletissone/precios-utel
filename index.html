@@ -585,6 +585,15 @@ Si pudieras sumarle una habilidad a tu perfil hoy mismo, ¿qué elegirías?</div
         <div class="rule-item">• Máximo <strong>2 certificaciones</strong> por plan</div>
         <div class="rule-item">• Si se agrega <strong>Coursera</strong>, bloquea todas las demás certificaciones y plataformas</div>
       </div>
+      <div id="promo-flash-banner" style="display:none;align-items:center;gap:10px;background:linear-gradient(135deg,#ff4d00,#ff9500);color:#fff;border-radius:10px;padding:12px 18px;margin-bottom:12px;font-weight:700;font-size:14px;box-shadow:0 4px 14px rgba(255,80,0,.35);animation:flashPulse 1.5s ease-in-out infinite">
+        <span style="font-size:22px">⚡</span>
+        <div>
+          <div style="font-size:16px;letter-spacing:.04em">PROMO FLASH</div>
+          <div style="font-size:11px;font-weight:400;opacity:.92">Precio especial RMKT 60 días activado · Solo este programa</div>
+        </div>
+        <span style="font-size:22px">⚡</span>
+      </div>
+      <style>@keyframes flashPulse{0%,100%{box-shadow:0 4px 14px rgba(255,80,0,.35)}50%{box-shadow:0 4px 28px rgba(255,80,0,.7)}}</style>
       <div id="lic-acc"></div>
       <div id="lic-total"></div>
     </div>
@@ -2934,12 +2943,53 @@ function renderMultiVariant(tbodyId, variants){
   });
 }
 
+// ── PROMO FLASH ──────────────────────────────────────────────────
+var PROMO_FLASH_PROGS = [
+  'Pedagogía',
+  'Inteligencia Artificial',
+  'Psicología Organizacional',
+  'Criminología Y Criminalística',
+  'Ingeniería En Energías Renovables',
+  'Administración De Negocios',
+  'Administración Y Finanzas'
+];
+// Para activar fecha límite descomentar: var PROMO_FLASH_FIN = new Date('2026-08-18T23:59:59');
+var PROMO_FLASH_FIN = null;
+
+function isPromoFlash(progName){
+  if(!progName) return false;
+  var activa = !PROMO_FLASH_FIN || new Date() <= PROMO_FLASH_FIN;
+  if(!activa) return false;
+  return PROMO_FLASH_PROGS.some(function(p){ return p.toLowerCase()===progName.toLowerCase(); });
+}
+
+function applyPromoFlash(progName){
+  var leadSel=g('llead');
+  var isFlash=isPromoFlash(progName);
+  var banner=g('promo-flash-banner');
+  if(isFlash){
+    // Forzar RMKT 60 días y deshabilitar otras opciones
+    leadSel.value='rmkt60';
+    for(var i=0;i<leadSel.options.length;i++){
+      leadSel.options[i].disabled = (leadSel.options[i].value !== 'rmkt60');
+    }
+    if(banner) banner.style.display='flex';
+  } else {
+    for(var i=0;i<leadSel.options.length;i++){
+      leadSel.options[i].disabled = false;
+    }
+    if(banner) banner.style.display='none';
+  }
+}
+// ─────────────────────────────────────────────────────────────────
+
 var _lastProgLic=null;
 function rL(){
   var progSel=g('lprog'); if(!progSel)return;
   if(!progSel.value && progSel.options.length>0) progSel.value=progSel.options[0].value;
   if(!progSel.value)return;
   var progName=progSel.value;
+  applyPromoFlash(progName);
   updateFechaByProg('lic', progName);
   if(progName!==_lastProgLic){ SEL['lic']={}; SEL_EXP['lic']=null; _lastProgLic=progName; }
   var nivelRaw=updateBadge('lprog','lnivel-badge');
