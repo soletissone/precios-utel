@@ -1395,7 +1395,7 @@ function renderRecursos(divId, progName, nivel){
       // si hay carpeta de tipo definida, el path debe contenerla
       if(nivelFolder && pathNorm.indexOf(nivelFolder)<0) return false;
       return pathNorm.some(function(s){
-        return targets.some(function(t){return s===t||s.indexOf(t)>=0;});
+        return targets.some(function(t){return s===t;});
       });
     });
     if(imgs.length>0){
