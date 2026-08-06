@@ -776,6 +776,9 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
         <select id="gal-sub" onchange="galFilter()" style="padding:9px 12px;border:1px solid var(--bd);border-radius:9px;font-size:13px;outline:none;background:var(--sf);color:var(--tx);cursor:pointer">
           <option value="">— Todas las subcategorías —</option>
         </select>
+        <select id="gal-sub2" onchange="galFilter()" style="padding:9px 12px;border:1px solid var(--bd);border-radius:9px;font-size:13px;outline:none;background:var(--sf);color:var(--tx);cursor:pointer;display:none">
+          <option value="">— Todos los programas —</option>
+        </select>
         <span id="gal-count" style="font-size:12px;color:var(--mu);white-space:nowrap"></span>
       </div>
       <div id="gal-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:10px"></div>
@@ -4360,22 +4363,31 @@ function galInit(){
     });
 }
 
-function galUpdateSubcats(selectedCat){
+function galUpdateSubcats(selectedCat, selectedSub){
   var subSel=document.getElementById('gal-sub');
-  var prev=subSel.value;
+  var sub2Sel=document.getElementById('gal-sub2');
+  var prevSub=subSel.value, prevSub2=sub2Sel.value;
   subSel.innerHTML='<option value="">— Todas las subcategorías —</option>';
+  sub2Sel.innerHTML='<option value="">— Todos los programas —</option>';
   if(!_galData) return;
-  var seen={};
+  var seenSub={}, seenSub2={};
   _galData.forEach(function(img){
     var parts=img.path.split('/');
     var cat=(parts[0]||'').trim();
     var sub=(parts.length>2?(parts[1]||''):'').trim();
-    if(sub && (!selectedCat || cat===selectedCat) && !seen[sub]){
-      seen[sub]=true;
+    var sub2=(parts.length>3?(parts[2]||''):'').trim();
+    if(sub && (!selectedCat||cat===selectedCat) && !seenSub[sub]){
+      seenSub[sub]=true;
       var o=document.createElement('option'); o.value=sub; o.textContent=sub; subSel.appendChild(o);
     }
+    if(sub2 && (!selectedCat||cat===selectedCat) && (!selectedSub||sub===selectedSub) && !seenSub2[sub2]){
+      seenSub2[sub2]=true;
+      var o2=document.createElement('option'); o2.value=sub2; o2.textContent=sub2; sub2Sel.appendChild(o2);
+    }
   });
-  if(seen[prev]) subSel.value=prev;
+  if(seenSub[prevSub]) subSel.value=prevSub;
+  if(seenSub2[prevSub2]) sub2Sel.value=prevSub2;
+  sub2Sel.style.display=Object.keys(seenSub2).length>0?'':'none';
 }
 
 function galFilter(){
@@ -4384,14 +4396,18 @@ function galFilter(){
   var q=normalize(document.getElementById('gal-search').value||'').trim();
   var cat=(document.getElementById('gal-cat').value||'').trim();
   var sub=(document.getElementById('gal-sub').value||'').trim();
-  galUpdateSubcats(cat);
+  var sub2=(document.getElementById('gal-sub2').value||'').trim();
+  galUpdateSubcats(cat, sub);
   if(sub) document.getElementById('gal-sub').value=sub;
+  if(sub2) document.getElementById('gal-sub2').value=sub2;
   _galFiltered=_galData.filter(function(img){
     var parts=img.path.split('/');
     var imgCat=(parts[0]||'').trim();
     var imgSub=(parts.length>2?(parts[1]||''):'').trim();
+    var imgSub2=(parts.length>3?(parts[2]||''):'').trim();
     if(cat && imgCat!==cat) return false;
     if(sub && imgSub!==sub) return false;
+    if(sub2 && imgSub2!==sub2) return false;
     if(q && normalize(img.path).indexOf(q)<0) return false;
     return true;
   });
@@ -4407,11 +4423,15 @@ function galRender(){
   if(!total){ grid.innerHTML=''; empty.style.display='block'; return; }
   empty.style.display='none';
   var VIDEO_EXTS=/\.(mp4|mov|avi|webm)$/i;
+  var PDF_EXTS=/\.pdf$/i;
   var html='';
   _galFiltered.forEach(function(img){
     var parts=img.path.split('/');
     var sub=(parts.length>2?parts[1]:parts[0]||'').trim();
     var isVideo=VIDEO_EXTS.test(img.name);
+    var isPDF=PDF_EXTS.test(img.name);
+    var hasExt=/\.[a-zA-Z0-9]{2,5}$/.test(img.name);
+    var isGSlide=!hasExt;
     var viewUrl=('https://drive.google.com/file/d/'+img.id+'/view').replace(/'/g,"\\'");
     var dlUrl=('https://drive.google.com/uc?export=download&id='+img.id).replace(/'/g,"\\'");
     var nameEsc=img.name.replace(/'/g,"\\'").replace(/"/g,'&quot;');
@@ -4421,6 +4441,18 @@ function galRender(){
         +'<div style="width:56px;height:56px;background:rgba(255,255,255,.15);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:26px;transition:transform .15s" onmouseover="this.style.transform=\'scale(1.12)\'" onmouseout="this.style.transform=\'scale(1)\'">▶</div>'
         +'<div style="position:absolute;bottom:7px;right:9px;background:rgba(0,0,0,.55);color:#fff;font-size:9px;padding:2px 6px;border-radius:4px">VIDEO</div>'
         +'</div>';
+    } else if(isPDF){
+      preview='<div style="width:100%;aspect-ratio:4/3;overflow:hidden;background:#fee2e2;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative" onclick="window.open(\''+viewUrl+'\',\'_blank\')">'
+        +'<div style="display:flex;flex-direction:column;align-items:center;gap:6px">'
+        +'<div style="font-size:36px">📄</div>'
+        +'<div style="font-size:10px;font-weight:700;color:#dc2626;letter-spacing:.05em">PDF</div>'
+        +'</div></div>';
+    } else if(isGSlide){
+      preview='<div style="width:100%;aspect-ratio:4/3;overflow:hidden;background:#e8f0fe;cursor:pointer;display:flex;align-items:center;justify-content:center;position:relative" onclick="window.open(\''+viewUrl+'\',\'_blank\')">'
+        +'<div style="display:flex;flex-direction:column;align-items:center;gap:6px">'
+        +'<div style="font-size:36px">📊</div>'
+        +'<div style="font-size:10px;font-weight:700;color:#1a73e8;letter-spacing:.05em">GOOGLE SLIDES</div>'
+        +'</div></div>';
     } else {
       var thumb='https://drive.google.com/thumbnail?id='+img.id+'&sz=w300';
       preview='<div style="width:100%;aspect-ratio:4/3;overflow:hidden;background:#f0f1f4;cursor:pointer" onclick="window.open(\''+viewUrl+'\',\'_blank\')">'
