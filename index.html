@@ -1791,11 +1791,11 @@ function sw(id){
 var _b2bUnlocked=false;
 var _b2bAccSel={};
 var B2B_ACC_OPTS=[
-  {id:'eje',   label:'Ejecutiva',        price:165},
-  {id:'hib',   label:'Híbrida',          price:300},
-  {id:'utelj', label:'Utel Jóven',       price:165},
-  {id:'titlic',label:'Título Lic',       price:200},
-  {id:'titpos',label:'Título Posgrados', price:400}
+  {id:'eje',   label:'Ejecutiva',        price:165, niveles:['lic','mae','doc','dip']},
+  {id:'hib',   label:'Híbrida',          price:300, niveles:['lic','mae','doc','dip']},
+  {id:'utelj', label:'Utel Jóven',       price:165, niveles:['lic','mae','doc','dip']},
+  {id:'titlic',label:'Título Lic',       price:200, niveles:['lic']},
+  {id:'titpos',label:'Título Posgrados', price:400, niveles:['mae','doc']}
 ];
 var B2B_PLANES={
   lic:[
@@ -1838,8 +1838,10 @@ function b2bLogin(){
 function b2bRenderChips(){
   var cont=document.getElementById('b2b-acc-chips');
   if(!cont) return;
+  var nivel=document.getElementById('b2b-nivel').value;
   cont.innerHTML='';
   B2B_ACC_OPTS.forEach(function(a){
+    if(a.niveles.indexOf(nivel)<0){ _b2bAccSel[a.id]=false; return; }
     var sel=!!_b2bAccSel[a.id];
     var chip=document.createElement('div');
     chip.className='chip'+(sel?' selected':'');
