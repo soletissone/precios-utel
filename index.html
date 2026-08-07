@@ -522,6 +522,7 @@ Si pudieras sumarle una habilidad a tu perfil hoy mismo, ¿qué elegirías?</div
       <div class="tab" onclick="sw('dip')">Diplomados</div>
       <div class="tab" onclick="sw('en')">Ejecutiva</div>
       <div class="tab" onclick="sw('gal')">🖼 Recursos</div>
+      <div class="tab" onclick="sw('b2b')" style="color:#1a73e8;font-weight:700">🤝 B2B</div>
     </div>
 
     <!-- LICENCIATURAS -->
@@ -772,6 +773,50 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
       </div>
       <div id="en-acc"></div>
       <div id="en-total"></div>
+    </div>
+    <!-- B2B -->
+    <div class="sec" id="sec-b2b">
+      <!-- Password gate -->
+      <div id="b2b-gate" style="text-align:center;padding:48px 20px">
+        <div style="font-size:36px;margin-bottom:12px">🔒</div>
+        <div style="font-size:18px;font-weight:700;margin-bottom:6px;color:var(--tx)">Sección B2B</div>
+        <div style="font-size:13px;color:var(--mu);margin-bottom:20px">Ingresá la contraseña para acceder</div>
+        <div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap">
+          <input id="b2b-pwd" type="password" placeholder="Contraseña" style="padding:10px 14px;border:1px solid var(--bd);border-radius:8px;font-size:14px;background:var(--sf);color:var(--tx);width:220px;outline:none" onkeydown="if(event.key==='Enter')b2bLogin()">
+          <button onclick="b2bLogin()" style="padding:10px 20px;background:#1a73e8;color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:600;cursor:pointer">Entrar</button>
+        </div>
+        <div id="b2b-err" style="color:#dc2626;font-size:12px;margin-top:10px;display:none">Contraseña incorrecta</div>
+      </div>
+      <!-- B2B content (hidden until login) -->
+      <div id="b2b-content" style="display:none">
+        <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:flex-end">
+          <div>
+            <div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Nivel</div>
+            <select id="b2b-nivel" onchange="b2bRender()" style="padding:8px 12px;border:1px solid var(--bd);border-radius:8px;font-size:13px;background:var(--sf);color:var(--tx)">
+              <option value="lic">Licenciatura</option>
+              <option value="mae">Maestría</option>
+              <option value="doc">Doctorado</option>
+              <option value="dip">Diplomado</option>
+            </select>
+          </div>
+          <div id="b2b-plan-wrap">
+            <div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Plan</div>
+            <select id="b2b-plan" onchange="b2bRender()" style="padding:8px 12px;border:1px solid var(--bd);border-radius:8px;font-size:13px;background:var(--sf);color:var(--tx)"></select>
+          </div>
+          <div id="b2b-acc-wrap">
+            <div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Accesorios</div>
+            <select id="b2b-acc" onchange="b2bRender()" style="padding:8px 12px;border:1px solid var(--bd);border-radius:8px;font-size:13px;background:var(--sf);color:var(--tx)">
+              <option value="0">Sin accesorio</option>
+              <option value="165">Ejecutiva ($165)</option>
+              <option value="300">Híbrida ($300)</option>
+              <option value="165j">Utel Jóven ($165)</option>
+              <option value="200">Título Lic ($200)</option>
+              <option value="400">Título Posgrados ($400)</option>
+            </select>
+          </div>
+        </div>
+        <div id="b2b-table"></div>
+      </div>
     </div>
     <!-- GALERÍA DE RECURSOS -->
     <div class="sec" id="sec-gal">
@@ -1733,7 +1778,7 @@ var NB={
 
 function sw(id){
   document.querySelectorAll('.tab').forEach(function(t,i){
-    t.classList.toggle('active',['lic','mae','doc','pu','dip','en','gal'][i]===id);
+    t.classList.toggle('active',['lic','mae','doc','pu','dip','en','gal','b2b'][i]===id);
   });
   document.querySelectorAll('.sec').forEach(function(s){
     s.classList.toggle('active',s.id==='sec-'+id);
@@ -1746,6 +1791,112 @@ function sw(id){
   else if(id==='lic') rL();
   else if(id==='en'){ fillENAreas(); fillENProgs(); rEN(); }
   else if(id==='gal') galInit();
+  else if(id==='b2b') b2bInit();
+}
+
+// ── B2B ──────────────────────────────────────────────────────────────────────
+var _b2bUnlocked=false;
+var B2B_PLANES={
+  lic:[
+    {label:'Completa General',code:'B2B2.LI.COM.',pagos:[759,1045,1210,1210,1210,1210,1210,1210,1210,1210,1210,1210]},
+    {label:'Completa Robótica y Arquitectura',code:'B2B1.LI.COM.',pagos:[759,1045,1569,1569,1569,1569,1569,1569,1569,1569,1569,1569]},
+    {label:'Intensiva General',code:'B2B2.LI.INT.',pagos:[759,1045,1580,1580,1580,1580,1580,1580,1580,1580,1580,1580]},
+    {label:'Intensiva Robótica y Arquitectura',code:'B2B1.LI.INT.',pagos:[1330,1330,1330,1330,1330,1330,1330,1330,1330,1330,1330,1330]},
+    {label:'Super Intensiva General',code:'B2B1.LI.SUPINT.',pagos:[759,1140,1865,1865,1865,1865,1865,1865,1865,1865,1865,1865]}
+  ],
+  mae:[
+    {label:'Pricing Bajo + Platzi',code:'P11.MA. / P25.MAE2M',pagos:[750,1660,2042,2042,2042,2042,2042,2042,2042,2042,2042,2042],lista:7610}
+  ],
+  doc:[
+    {label:'Pricing B2B',code:'B2B1.DO.4.10.26 / DOC1.2M',pagos:[1109,2815,4519,4519,4519,4519,4519,4519,4519,4519,4519,4519],lista:7720}
+  ],
+  dip:[
+    {label:'Diplomado 6 meses',code:'DIP6M',pago_unico:12150},
+    {label:'Diplomado 8 meses',code:'DIP8M',pago_unico:15555}
+  ]
+};
+
+function b2bInit(){
+  if(_b2bUnlocked) b2bRender();
+}
+
+function b2bLogin(){
+  var pwd=document.getElementById('b2b-pwd').value;
+  if(btoa(pwd)==='UGFsdGEyMDI2Kg=='){
+    _b2bUnlocked=true;
+    document.getElementById('b2b-gate').style.display='none';
+    document.getElementById('b2b-content').style.display='block';
+    b2bFillPlanes();
+    b2bRender();
+  } else {
+    document.getElementById('b2b-err').style.display='block';
+  }
+}
+
+function b2bFillPlanes(){
+  var nivel=document.getElementById('b2b-nivel').value;
+  var sel=document.getElementById('b2b-plan');
+  sel.innerHTML='';
+  (B2B_PLANES[nivel]||[]).forEach(function(p,i){
+    var o=document.createElement('option'); o.value=i; o.textContent=p.label+' ('+p.code+')'; sel.appendChild(o);
+  });
+}
+
+function b2bRender(){
+  if(!_b2bUnlocked) return;
+  b2bFillPlanes();
+  var nivel=document.getElementById('b2b-nivel').value;
+  var planIdx=parseInt(document.getElementById('b2b-plan').value)||0;
+  var accVal=document.getElementById('b2b-acc').value;
+  var accMonto=accVal==='165j'?165:parseFloat(accVal)||0;
+  var plan=(B2B_PLANES[nivel]||[])[planIdx];
+  if(!plan){document.getElementById('b2b-table').innerHTML='';return;}
+  var fmt=function(n){return '$'+n.toLocaleString('es-MX',{minimumFractionDigits:0,maximumFractionDigits:0});};
+  var isDip=!!plan.pago_unico;
+  var accWrap=document.getElementById('b2b-acc-wrap');
+  accWrap.style.display=isDip?'none':'';
+  var html='<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13px">';
+  html+='<thead><tr style="background:#1a73e8;color:#fff">';
+  if(isDip){
+    html+='<th style="padding:10px 14px;text-align:left">Plan</th><th style="padding:10px 14px;text-align:right">Pago único</th>';
+  } else {
+    html+='<th style="padding:10px 14px;text-align:left">Pago #</th><th style="padding:10px 14px;text-align:right">Colegiatura</th>';
+    if(accMonto>0) html+='<th style="padding:10px 14px;text-align:right">Accesorio</th><th style="padding:10px 14px;text-align:right">Total</th>';
+  }
+  html+='</tr></thead><tbody>';
+  if(isDip){
+    html+='<tr style="background:var(--sf)"><td style="padding:10px 14px;border-bottom:1px solid var(--bd)">'+plan.label+'</td><td style="padding:10px 14px;text-align:right;font-weight:700;border-bottom:1px solid var(--bd)">'+fmt(plan.pago_unico)+'</td></tr>';
+  } else {
+    var total=0;
+    plan.pagos.forEach(function(p,i){
+      var rowTotal=p+accMonto;
+      total+=rowTotal;
+      var bg=i%2===0?'var(--sf)':'var(--bg)';
+      html+='<tr style="background:'+bg+'">';
+      html+='<td style="padding:8px 14px;border-bottom:1px solid var(--bd)">Pago '+(i+1)+'</td>';
+      html+='<td style="padding:8px 14px;text-align:right;border-bottom:1px solid var(--bd)">'+fmt(p)+'</td>';
+      if(accMonto>0){
+        html+='<td style="padding:8px 14px;text-align:right;border-bottom:1px solid var(--bd);color:#1a73e8">'+fmt(accMonto)+'</td>';
+        html+='<td style="padding:8px 14px;text-align:right;border-bottom:1px solid var(--bd);font-weight:600">'+fmt(rowTotal)+'</td>';
+      }
+      html+='</tr>';
+    });
+    html+='<tr style="background:#e8f0fe;font-weight:700">';
+    html+='<td style="padding:10px 14px" colspan="'+(accMonto>0?1:1)+'">TOTAL</td>';
+    html+='<td style="padding:10px 14px;text-align:right">'+(accMonto>0?'':fmt(total))+'</td>';
+    if(accMonto>0){
+      html+='<td style="padding:10px 14px;text-align:right">'+fmt(accMonto*12)+'</td>';
+      html+='<td style="padding:10px 14px;text-align:right">'+fmt(total)+'</td>';
+    }
+    html+='</tr>';
+    if(plan.lista){
+      var beca=((plan.lista-total)/plan.lista*100).toFixed(1);
+      html+='<tr><td colspan="'+(accMonto>0?4:2)+'" style="padding:8px 14px;font-size:11px;color:var(--mu)">Precio de lista: '+fmt(plan.lista)+' · Descuento: '+beca+'%</td></tr>';
+    }
+  }
+  html+='</tbody></table></div>';
+  html+='<div style="margin-top:10px;font-size:11px;color:var(--mu)">· Incluye: 5% domiciliación · Asistencia $65 · Inglés · Welbe $65 · Platzi $100<br>· Accesorios suman desde el pago 1 · Sin promos adicionales</div>';
+  document.getElementById('b2b-table').innerHTML=html;
 }
 
 function renderTable(tbodyId, prices, pkg, esc, accTotal, accTotal12, domStartIdx){
