@@ -803,16 +803,9 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
             <div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Plan</div>
             <select id="b2b-plan" onchange="b2bRender()" style="padding:8px 12px;border:1px solid var(--bd);border-radius:8px;font-size:13px;background:var(--sf);color:var(--tx)"></select>
           </div>
-          <div id="b2b-acc-wrap">
-            <div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Accesorios</div>
-            <select id="b2b-acc" onchange="b2bRender()" style="padding:8px 12px;border:1px solid var(--bd);border-radius:8px;font-size:13px;background:var(--sf);color:var(--tx)">
-              <option value="0">Sin accesorio</option>
-              <option value="165">Ejecutiva ($165)</option>
-              <option value="300">Híbrida ($300)</option>
-              <option value="165j">Utel Jóven ($165)</option>
-              <option value="200">Título Lic ($200)</option>
-              <option value="400">Título Posgrados ($400)</option>
-            </select>
+          <div id="b2b-acc-wrap" style="flex:1;min-width:260px">
+            <div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Accesorios <span style="font-weight:400;text-transform:none">(suman desde pago 1)</span></div>
+            <div class="acc-chips" id="b2b-acc-chips"></div>
           </div>
         </div>
         <div id="b2b-table"></div>
@@ -1796,6 +1789,14 @@ function sw(id){
 
 // ── B2B ──────────────────────────────────────────────────────────────────────
 var _b2bUnlocked=false;
+var _b2bAccSel={};
+var B2B_ACC_OPTS=[
+  {id:'eje',   label:'Ejecutiva',        price:165},
+  {id:'hib',   label:'Híbrida',          price:300},
+  {id:'utelj', label:'Utel Jóven',       price:165},
+  {id:'titlic',label:'Título Lic',       price:200},
+  {id:'titpos',label:'Título Posgrados', price:400}
+];
 var B2B_PLANES={
   lic:[
     {label:'Completa General',code:'B2B2.LI.COM.',pagos:[759,1045,1210,1210,1210,1210,1210,1210,1210,1210,1210,1210]},
@@ -1817,7 +1818,7 @@ var B2B_PLANES={
 };
 
 function b2bInit(){
-  if(_b2bUnlocked) b2bRender();
+  if(_b2bUnlocked){ b2bRenderChips(); b2bRender(); }
 }
 
 function b2bLogin(){
@@ -1827,10 +1828,32 @@ function b2bLogin(){
     document.getElementById('b2b-gate').style.display='none';
     document.getElementById('b2b-content').style.display='block';
     b2bFillPlanes();
+    b2bRenderChips();
     b2bRender();
   } else {
     document.getElementById('b2b-err').style.display='block';
   }
+}
+
+function b2bRenderChips(){
+  var cont=document.getElementById('b2b-acc-chips');
+  if(!cont) return;
+  cont.innerHTML='';
+  B2B_ACC_OPTS.forEach(function(a){
+    var sel=!!_b2bAccSel[a.id];
+    var chip=document.createElement('div');
+    chip.className='chip'+(sel?' selected':'');
+    chip.style.cursor='pointer';
+    chip.innerHTML='<div class="chip-check"></div>'
+      +'<span class="chip-name">'+a.label+'</span>'
+      +'<span class="chip-price" style="margin-left:4px;color:var(--mu);font-size:11px">$'+a.price+'</span>';
+    chip.onclick=function(){
+      _b2bAccSel[a.id]=!_b2bAccSel[a.id];
+      b2bRenderChips();
+      b2bRender();
+    };
+    cont.appendChild(chip);
+  });
 }
 
 function b2bFillPlanes(){
@@ -1847,8 +1870,8 @@ function b2bRender(){
   b2bFillPlanes();
   var nivel=document.getElementById('b2b-nivel').value;
   var planIdx=parseInt(document.getElementById('b2b-plan').value)||0;
-  var accVal=document.getElementById('b2b-acc').value;
-  var accMonto=accVal==='165j'?165:parseFloat(accVal)||0;
+  var accMonto=0;
+  B2B_ACC_OPTS.forEach(function(a){ if(_b2bAccSel[a.id]) accMonto+=a.price; });
   var plan=(B2B_PLANES[nivel]||[])[planIdx];
   if(!plan){document.getElementById('b2b-table').innerHTML='';return;}
   var fmt=function(n){return '$'+n.toLocaleString('es-MX',{minimumFractionDigits:0,maximumFractionDigits:0});};
@@ -1868,29 +1891,39 @@ function b2bRender(){
     html+='<tr style="background:var(--sf)"><td style="padding:10px 14px;border-bottom:1px solid var(--bd)">'+plan.label+'</td><td style="padding:10px 14px;text-align:right;font-weight:700;border-bottom:1px solid var(--bd)">'+fmt(plan.pago_unico)+'</td></tr>';
   } else {
     var total=0;
+    plan.pagos.forEach(function(p){total+=p+accMonto;});
+    // Agrupar pagos consecutivos iguales
+    var grupos=[];
     plan.pagos.forEach(function(p,i){
-      var rowTotal=p+accMonto;
-      total+=rowTotal;
-      var bg=i%2===0?'var(--sf)':'var(--bg)';
+      var last=grupos[grupos.length-1];
+      if(last && last.monto===p) last.hasta=i+1;
+      else grupos.push({monto:p,desde:i+1,hasta:i+1});
+    });
+    grupos.forEach(function(g,ri){
+      var rowTotal=g.monto+accMonto;
+      var label=g.desde===g.hasta?'Pago '+g.desde:'Pagos '+g.desde+' al '+g.hasta;
+      var bg=ri%2===0?'var(--sf)':'var(--bg)';
       html+='<tr style="background:'+bg+'">';
-      html+='<td style="padding:8px 14px;border-bottom:1px solid var(--bd)">Pago '+(i+1)+'</td>';
-      html+='<td style="padding:8px 14px;text-align:right;border-bottom:1px solid var(--bd)">'+fmt(p)+'</td>';
+      html+='<td style="padding:8px 14px;border-bottom:1px solid var(--bd)">'+label+'</td>';
+      html+='<td style="padding:8px 14px;text-align:right;border-bottom:1px solid var(--bd)">'+fmt(g.monto)+'</td>';
       if(accMonto>0){
         html+='<td style="padding:8px 14px;text-align:right;border-bottom:1px solid var(--bd);color:#1a73e8">'+fmt(accMonto)+'</td>';
         html+='<td style="padding:8px 14px;text-align:right;border-bottom:1px solid var(--bd);font-weight:600">'+fmt(rowTotal)+'</td>';
       }
       html+='</tr>';
     });
+    var totalBase=0; plan.pagos.forEach(function(p){totalBase+=p;});
+    var totalAcc=accMonto*plan.pagos.length;
     html+='<tr style="background:#e8f0fe;font-weight:700">';
-    html+='<td style="padding:10px 14px" colspan="'+(accMonto>0?1:1)+'">TOTAL</td>';
-    html+='<td style="padding:10px 14px;text-align:right">'+(accMonto>0?'':fmt(total))+'</td>';
+    html+='<td style="padding:10px 14px">TOTAL</td>';
+    html+='<td style="padding:10px 14px;text-align:right">'+fmt(totalBase)+'</td>';
     if(accMonto>0){
-      html+='<td style="padding:10px 14px;text-align:right">'+fmt(accMonto*12)+'</td>';
+      html+='<td style="padding:10px 14px;text-align:right">'+fmt(totalAcc)+'</td>';
       html+='<td style="padding:10px 14px;text-align:right">'+fmt(total)+'</td>';
     }
     html+='</tr>';
     if(plan.lista){
-      var beca=((plan.lista-total)/plan.lista*100).toFixed(1);
+      var beca=((plan.lista-totalBase)/plan.lista*100).toFixed(1);
       html+='<tr><td colspan="'+(accMonto>0?4:2)+'" style="padding:8px 14px;font-size:11px;color:var(--mu)">Precio de lista: '+fmt(plan.lista)+' · Descuento: '+beca+'%</td></tr>';
     }
   }
