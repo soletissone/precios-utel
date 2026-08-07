@@ -1790,13 +1790,113 @@ function sw(id){
 // ── B2B ──────────────────────────────────────────────────────────────────────
 var _b2bUnlocked=false;
 var _b2bAccSel={};
-var B2B_ACC_OPTS=[
-  {id:'eje',   label:'Ejecutiva',        price:165, niveles:['lic','mae','doc','dip']},
-  {id:'hib',   label:'Híbrida',          price:300, niveles:['lic','mae','doc','dip']},
-  {id:'utelj', label:'Utel Jóven',       price:165, niveles:['lic','mae','doc','dip']},
-  {id:'titlic',label:'Título Lic',       price:200, niveles:['lic']},
-  {id:'titpos',label:'Título Posgrados', price:400, niveles:['mae','doc']}
-];
+// Accesorios B2B por nivel: {included, groups:[{cat, items:[{id,label,price,excl?}]}]}
+var B2B_ACCS={
+  lic:{
+    included:[
+      {id:'voxy',  label:'Inglés Voxy'},
+      {id:'welbe', label:'Welbe'},
+      {id:'platzi',label:'Platzi'},
+      {id:'asist', label:'Asistencia Plus'}
+    ],
+    groups:[
+      {cat:'Experiencia', excl:true, items:[
+        {id:'seseje',label:'Ejecutiva',   price:165},
+        {id:'hibrid', label:'Híbrida',    price:300},
+        {id:'utelj',  label:'Utel Jóven', price:165}
+      ]},
+      {cat:'Accesorio', items:[
+        {id:'titlic', label:'Título Lic',          price:200},
+        {id:'welbep', label:'Welbe Premium (+$10)', price:10}
+      ]},
+      {cat:'Idioma', excl:true, items:[
+        {id:'cambridge',label:'Cambridge', price:165},
+        {id:'duolingo', label:'Duolingo',  price:195}
+      ]},
+      {cat:'Certificación', items:[
+        {id:'platzi_opt',  label:'Platzi',        price:100},
+        {id:'facebook',    label:'Facebook',       price:195},
+        {id:'microsoft',   label:'Microsoft',      price:195},
+        {id:'tableau',     label:'Tableau',        price:195},
+        {id:'gcloud',      label:'Google Cloud',   price:195},
+        {id:'gads',        label:'Google Ads',     price:195},
+        {id:'legal',       label:'Legaltech',      price:195},
+        {id:'coursera',    label:'Coursera',       price:220}
+      ]},
+      {cat:'Plataforma', items:[
+        {id:'utelx',label:'Utel X', price:165}
+      ]}
+    ]
+  },
+  mae:{
+    included:[
+      {id:'voxy',  label:'Inglés Voxy'},
+      {id:'welbe', label:'Welbe'},
+      {id:'platzi',label:'Platzi'},
+      {id:'asist', label:'Asistencia Plus'}
+    ],
+    groups:[
+      {cat:'Experiencia', excl:true, items:[
+        {id:'seseje',label:'Ejecutiva',   price:165},
+        {id:'hibrid', label:'Híbrida',    price:300},
+        {id:'utelj',  label:'Utel Jóven', price:165}
+      ]},
+      {cat:'Accesorio', items:[
+        {id:'titpos', label:'Título Posgrados',    price:400},
+        {id:'welbep', label:'Welbe Premium (+$10)', price:10}
+      ]},
+      {cat:'Idioma', excl:true, items:[
+        {id:'cambridge',label:'Cambridge', price:220},
+        {id:'duolingo', label:'Duolingo',  price:195}
+      ]},
+      {cat:'Certificación', items:[
+        {id:'platzi_opt', label:'Platzi',    price:100},
+        {id:'facebook',   label:'Facebook',  price:195},
+        {id:'microsoft',  label:'Microsoft', price:195},
+        {id:'tableau',    label:'Tableau',   price:195},
+        {id:'gads',       label:'Google Ads',price:195}
+      ]},
+      {cat:'Plataforma', items:[
+        {id:'utelx',label:'Utel X', price:165}
+      ]}
+    ]
+  },
+  doc:{
+    included:[
+      {id:'voxy',  label:'Inglés Voxy'},
+      {id:'welbe', label:'Welbe'},
+      {id:'platzi',label:'Platzi'},
+      {id:'asist', label:'Asistencia Plus'}
+    ],
+    groups:[
+      {cat:'Experiencia', excl:true, items:[
+        {id:'seseje',label:'Ejecutiva',   price:165},
+        {id:'hibrid', label:'Híbrida',    price:300},
+        {id:'utelj',  label:'Utel Jóven', price:165}
+      ]},
+      {cat:'Accesorio', items:[
+        {id:'titpos', label:'Título Posgrados', price:400}
+      ]},
+      {cat:'Idioma', excl:true, items:[
+        {id:'cambridge',label:'Cambridge', price:220}
+      ]},
+      {cat:'Certificación', items:[
+        {id:'platzi_opt', label:'Platzi',    price:100},
+        {id:'facebook',   label:'Facebook',  price:195},
+        {id:'microsoft',  label:'Microsoft', price:195},
+        {id:'gads',       label:'Google Ads',price:195},
+        {id:'coursera',   label:'Coursera',  price:195}
+      ]},
+      {cat:'Plataforma', items:[
+        {id:'utelx',label:'Utel X', price:165}
+      ]}
+    ]
+  },
+  dip:{
+    included:[],
+    groups:[]
+  }
+};
 var B2B_PLANES={
   lic:[
     {label:'Completa General',code:'B2B2.LI.COM.',pagos:[759,1045,1210,1210,1210,1210,1210,1210,1210,1210,1210,1210]},
@@ -1839,22 +1939,46 @@ function b2bRenderChips(){
   var cont=document.getElementById('b2b-acc-chips');
   if(!cont) return;
   var nivel=document.getElementById('b2b-nivel').value;
-  cont.innerHTML='';
-  B2B_ACC_OPTS.forEach(function(a){
-    if(a.niveles.indexOf(nivel)<0){ _b2bAccSel[a.id]=false; return; }
-    var sel=!!_b2bAccSel[a.id];
-    var chip=document.createElement('div');
-    chip.className='chip'+(sel?' selected':'');
-    chip.style.cursor='pointer';
-    chip.innerHTML='<div class="chip-check"></div>'
-      +'<span class="chip-name">'+a.label+'</span>'
-      +'<span class="chip-price" style="margin-left:4px;color:var(--mu);font-size:11px">$'+a.price+'</span>';
-    chip.onclick=function(){
-      _b2bAccSel[a.id]=!_b2bAccSel[a.id];
+  var cfg=B2B_ACCS[nivel]||{included:[],groups:[]};
+  var html='';
+  // Incluidos
+  if(cfg.included.length){
+    html+='<div class="acc-group"><div class="acc-group-label">Incluido en el paquete</div><div class="acc-chips">';
+    cfg.included.forEach(function(a){
+      html+='<div class="chip included"><div class="chip-check"></div><span class="chip-name">'+a.label+'</span><span class="chip-price" style="margin-left:4px;font-size:11px">Incluido</span></div>';
+    });
+    html+='</div></div>';
+  }
+  // Opcionales por grupo
+  cfg.groups.forEach(function(grp){
+    if(!grp.items.length) return;
+    html+='<div class="acc-group"><div class="acc-group-label">'+grp.cat+'</div><div class="acc-chips">';
+    grp.items.forEach(function(a){
+      var sel=!!_b2bAccSel[a.id];
+      html+='<div class="chip'+(sel?' selected':'')+'" style="cursor:pointer" data-b2b-id="'+a.id+'" data-b2b-excl="'+(grp.excl?'1':'0')+'" data-b2b-grp="'+grp.cat+'">'
+        +'<div class="chip-check"></div>'
+        +'<span class="chip-name">'+a.label+'</span>'
+        +'<span class="chip-price" style="margin-left:4px;color:var(--mu);font-size:11px">$'+a.price+'</span>'
+        +'</div>';
+    });
+    html+='</div></div>';
+  });
+  cont.innerHTML=html;
+  // Attach click handlers
+  cont.querySelectorAll('[data-b2b-id]').forEach(function(chip){
+    chip.addEventListener('click',function(){
+      var id=chip.getAttribute('data-b2b-id');
+      var isExcl=chip.getAttribute('data-b2b-excl')==='1';
+      var grpName=chip.getAttribute('data-b2b-grp');
+      _b2bAccSel[id]=!_b2bAccSel[id];
+      if(isExcl && _b2bAccSel[id]){
+        cont.querySelectorAll('[data-b2b-grp="'+grpName+'"]').forEach(function(c){
+          if(c.getAttribute('data-b2b-id')!==id) _b2bAccSel[c.getAttribute('data-b2b-id')]=false;
+        });
+      }
       b2bRenderChips();
       b2bRender();
-    };
-    cont.appendChild(chip);
+    });
   });
 }
 
@@ -1867,13 +1991,17 @@ function b2bFillPlanes(){
   });
 }
 
+var _b2bLastNivel='';
 function b2bRender(){
   if(!_b2bUnlocked) return;
   b2bFillPlanes();
   var nivel=document.getElementById('b2b-nivel').value;
+  if(nivel!==_b2bLastNivel){ _b2bAccSel={}; _b2bLastNivel=nivel; }
+  b2bRenderChips();
   var planIdx=parseInt(document.getElementById('b2b-plan').value)||0;
   var accMonto=0;
-  B2B_ACC_OPTS.forEach(function(a){ if(_b2bAccSel[a.id]) accMonto+=a.price; });
+  var cfg=B2B_ACCS[nivel]||{included:[],groups:[]};
+  cfg.groups.forEach(function(grp){ grp.items.forEach(function(a){ if(_b2bAccSel[a.id]) accMonto+=a.price; }); });
   var plan=(B2B_PLANES[nivel]||[])[planIdx];
   if(!plan){document.getElementById('b2b-table').innerHTML='';return;}
   var fmt=function(n){return '$'+n.toLocaleString('es-MX',{minimumFractionDigits:0,maximumFractionDigits:0});};
