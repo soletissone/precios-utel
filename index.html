@@ -789,9 +789,9 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
       </div>
       <!-- B2B content (hidden until login) -->
       <div id="b2b-content" style="display:none">
-        <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:flex-end">
-          <div>
-            <div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Nivel</div>
+        <div class="filters" style="margin-bottom:14px">
+          <div class="fg">
+            <label>Nivel</label>
             <select id="b2b-nivel" onchange="b2bRender()" style="padding:8px 12px;border:1px solid var(--bd);border-radius:8px;font-size:13px;background:var(--sf);color:var(--tx)">
               <option value="lic">Licenciatura</option>
               <option value="mae">Maestría</option>
@@ -799,16 +799,22 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
               <option value="dip">Diplomado</option>
             </select>
           </div>
-          <div id="b2b-plan-wrap">
-            <div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px">Plan</div>
-            <select id="b2b-plan" onchange="b2bRender()" style="padding:8px 12px;border:1px solid var(--bd);border-radius:8px;font-size:13px;background:var(--sf);color:var(--tx)"></select>
-          </div>
-          <div id="b2b-acc-wrap" style="flex:1;min-width:260px">
-            <div style="font-size:11px;font-weight:600;color:var(--mu);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px">Accesorios <span style="font-weight:400;text-transform:none">(suman desde pago 1)</span></div>
-            <div class="acc-chips" id="b2b-acc-chips"></div>
+          <div class="fg" id="b2b-plan-wrap">
+            <label>Plan</label>
+            <select id="b2b-plan" onchange="b2bRenderTable()" style="padding:8px 12px;border:1px solid var(--bd);border-radius:8px;font-size:13px;background:var(--sf);color:var(--tx)"></select>
           </div>
         </div>
         <div id="b2b-table"></div>
+        <div id="b2b-acc-wrap" style="margin-top:16px">
+          <div class="acc-section">
+            <div class="acc-section-title">Accesorios <span style="font-weight:400;text-transform:none;font-size:11px">(suman desde pago 1)</span></div>
+            <div id="b2b-acc-chips"></div>
+          </div>
+        </div>
+        <button class="dl-btn" onclick="b2bDownload()" style="margin-top:12px">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 3v13m0 0l-4-4m4 4l4-4M3 21h18"/></svg>
+          Descargar resumen
+        </button>
       </div>
     </div>
     <!-- GALERÍA DE RECURSOS -->
@@ -1814,7 +1820,6 @@ var B2B_ACCS={
         {id:'duolingo', label:'Duolingo',  price:195}
       ]},
       {cat:'Certificación', items:[
-        {id:'platzi_opt',  label:'Platzi',        price:100},
         {id:'facebook',    label:'Facebook',       price:195},
         {id:'microsoft',   label:'Microsoft',      price:195},
         {id:'tableau',     label:'Tableau',        price:195},
@@ -1850,7 +1855,6 @@ var B2B_ACCS={
         {id:'duolingo', label:'Duolingo',  price:195}
       ]},
       {cat:'Certificación', items:[
-        {id:'platzi_opt', label:'Platzi',    price:100},
         {id:'facebook',   label:'Facebook',  price:195},
         {id:'microsoft',  label:'Microsoft', price:195},
         {id:'tableau',    label:'Tableau',   price:195},
@@ -1881,7 +1885,6 @@ var B2B_ACCS={
         {id:'cambridge',label:'Cambridge', price:220}
       ]},
       {cat:'Certificación', items:[
-        {id:'platzi_opt', label:'Platzi',    price:100},
         {id:'facebook',   label:'Facebook',  price:195},
         {id:'microsoft',  label:'Microsoft', price:195},
         {id:'gads',       label:'Google Ads',price:195},
@@ -1977,9 +1980,48 @@ function b2bRenderChips(){
         });
       }
       b2bRenderChips();
-      b2bRender();
+      b2bRenderTable();
     });
   });
+}
+
+function b2bDownload(){
+  var nivel=document.getElementById('b2b-nivel').value;
+  var planIdx=parseInt(document.getElementById('b2b-plan').value)||0;
+  var plan=(B2B_PLANES[nivel]||[])[planIdx];
+  if(!plan) return;
+  var fmt=function(n){return '$'+n.toLocaleString('es-MX',{minimumFractionDigits:0,maximumFractionDigits:0});};
+  var cfg=B2B_ACCS[nivel]||{included:[],groups:[]};
+  var accMonto=0, accLabels=[];
+  cfg.groups.forEach(function(grp){ grp.items.forEach(function(a){ if(_b2bAccSel[a.id]){ accMonto+=a.price; accLabels.push(a.label+' '+fmt(a.price)); } }); });
+  var nivelLabel={lic:'Licenciatura',mae:'Maestría',doc:'Doctorado',dip:'Diplomado'}[nivel]||nivel;
+  var lines=['UTEL — Precios B2B','','Nivel: '+nivelLabel,'Plan: '+plan.label+' ('+plan.code+')',''];
+  if(accLabels.length) lines.push('Accesorios: '+accLabels.join(', '),'');
+  lines.push('Incluido: Inglés Voxy · Welbe · Platzi · Asistencia Plus · 5% domiciliación','');
+  if(plan.pago_unico){
+    lines.push('Pago único: '+fmt(plan.pago_unico));
+  } else {
+    var grupos=[];
+    plan.pagos.forEach(function(p,i){
+      var last=grupos[grupos.length-1];
+      if(last && last.monto===p) last.hasta=i+1;
+      else grupos.push({monto:p,desde:i+1,hasta:i+1});
+    });
+    grupos.forEach(function(g){
+      var label=g.desde===g.hasta?'Pago '+g.desde:'Pagos '+g.desde+' al '+g.hasta;
+      var row=label+': '+fmt(g.monto);
+      if(accMonto>0) row+=' + accesorios '+fmt(accMonto)+' = '+fmt(g.monto+accMonto);
+      lines.push(row);
+    });
+    var totalBase=0; plan.pagos.forEach(function(p){totalBase+=p;});
+    lines.push('','TOTAL colegiatura: '+fmt(totalBase));
+    if(accMonto>0) lines.push('TOTAL accesorios: '+fmt(accMonto*plan.pagos.length),'TOTAL general: '+fmt(totalBase+accMonto*plan.pagos.length));
+  }
+  lines.push('','Accesorios suman desde el pago 1 · Sin promos adicionales');
+  var blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'});
+  var a=document.createElement('a'); a.href=URL.createObjectURL(blob);
+  a.download='B2B_'+nivelLabel+'_'+plan.code.replace(/[^a-zA-Z0-9]/g,'_')+'.txt';
+  a.click();
 }
 
 function b2bFillPlanes(){
@@ -1992,12 +2034,19 @@ function b2bFillPlanes(){
 }
 
 var _b2bLastNivel='';
+// Llamado cuando cambia nivel (resetea plan y accesorios)
 function b2bRender(){
   if(!_b2bUnlocked) return;
-  b2bFillPlanes();
   var nivel=document.getElementById('b2b-nivel').value;
   if(nivel!==_b2bLastNivel){ _b2bAccSel={}; _b2bLastNivel=nivel; }
+  b2bFillPlanes();
   b2bRenderChips();
+  b2bRenderTable();
+}
+// Llamado cuando cambia solo el plan (no resetea accesorios ni plan)
+function b2bRenderTable(){
+  if(!_b2bUnlocked) return;
+  var nivel=document.getElementById('b2b-nivel').value;
   var planIdx=parseInt(document.getElementById('b2b-plan').value)||0;
   var accMonto=0;
   var cfg=B2B_ACCS[nivel]||{included:[],groups:[]};
