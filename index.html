@@ -1967,10 +1967,30 @@ function b2bRenderChips(){
     html+='</div></div>';
   });
   cont.innerHTML=html;
-  // Attach click handlers
+  // Calcular estado de bloqueo por reglas de certificación
+  var nivel=document.getElementById('b2b-nivel').value;
+  var maxCerts=nivel==='lic'?2:1;
+  var b2bCertIds=['facebook','microsoft','tableau','gcloud','gads','legal','coursera'];
+  var selCerts=b2bCertIds.filter(function(id){ return !!_b2bAccSel[id]; });
+  var courseraOn=!!_b2bAccSel['coursera'];
+  var otherCertsOn=selCerts.filter(function(id){ return id!=='coursera'; }).length;
+
   cont.querySelectorAll('[data-b2b-id]').forEach(function(chip){
+    var id=chip.getAttribute('data-b2b-id');
+    var isCert=b2bCertIds.indexOf(id)>=0;
+    var blocked=false, blockReason='';
+    if(isCert && !_b2bAccSel[id]){
+      if(id==='coursera' && otherCertsOn>0){ blocked=true; blockReason='Incompatible'; }
+      else if(id!=='coursera' && courseraOn){ blocked=true; blockReason='Bloqueado por Coursera'; }
+      else if(selCerts.length>=maxCerts){ blocked=true; blockReason='Máx '+maxCerts+(maxCerts===1?' cert':' certs'); }
+    }
+    if(blocked){
+      chip.className='chip blocked';
+      chip.style.cursor='not-allowed';
+      chip.querySelector('.chip-price').textContent=blockReason;
+    }
     chip.addEventListener('click',function(){
-      var id=chip.getAttribute('data-b2b-id');
+      if(blocked) return;
       var isExcl=chip.getAttribute('data-b2b-excl')==='1';
       var grpName=chip.getAttribute('data-b2b-grp');
       _b2bAccSel[id]=!_b2bAccSel[id];
