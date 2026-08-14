@@ -909,6 +909,13 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
             <span class="toggle-slider"></span>
           </label>
         </div>
+        <div class="cfg-row" style="margin-top:8px">
+          <div>
+            <div class="cfg-label">GitHub Token</div>
+            <div class="cfg-desc">Para sincronizar con el iframe. Se guarda solo en este navegador.</div>
+          </div>
+          <input type="password" id="cfg-gh-token" class="cfg-select" style="width:200px;font-size:11px" placeholder="ghp_...">
+        </div>
         <button class="cfg-save-btn" onclick="saveAdminConfig()">Guardar y aplicar</button>
         <div class="cfg-err" id="cfg-msg"></div>
       </div>
@@ -1329,7 +1336,7 @@ window.addEventListener('load',function(){
 var ADMIN_PWD = 'UTELADMIN2026';
 
 // ── CONFIGURACIÓN ACTIVA ──────────────
-var DOMICILIACION = 10;       // default, se sobreescribe desde JSONBin
+var DOMICILIACION = 5;        // default, se sobreescribe desde JSONBin
 var DOM_EXPIRY = null;        // fecha de vencimiento domiciliación (string 'YYYY-MM-DD' o null)
 function isDomActive(){
   if(!DOM_EXPIRY) return true;
@@ -1352,12 +1359,26 @@ var JB_BIN = '69fe31faadc21f119a71c60d';
 var JB_KEY = '$2a$10$pemAYCxUoUZrAcugO6D9UeczW0Gb5SGEmmGESkVa3E6XCfnddjTf.';
 var JB_URL = 'https://api.jsonbin.io/v3/b/' + JB_BIN;
 
+function _applyConfigData(data){
+  var changed=false;
+  if(data.dom!==undefined && data.dom!==DOMICILIACION){DOMICILIACION=data.dom;changed=true;}
+  if(data.domexp!==undefined && data.domexp!==DOM_EXPIRY){DOM_EXPIRY=data.domexp||null;changed=true;}
+  if(data.tit0!==undefined && data.tit0!==TITULO_COSTO_0){TITULO_COSTO_0=data.tit0;changed=true;}
+  if(data.tit0exp!==undefined && data.tit0exp!==TIT0_EXPIRY){TIT0_EXPIRY=data.tit0exp||null;changed=true;}
+  if(data.plat!==undefined && data.plat!==PLATZI_PREVIEW){PLATZI_PREVIEW=data.plat;changed=true;}
+  if(changed){
+    localStorage.setItem('utel_cfg',JSON.stringify({dom:DOMICILIACION,domexp:DOM_EXPIRY,tit0:TITULO_COSTO_0,tit0exp:TIT0_EXPIRY,plat:PLATZI_PREVIEW}));
+    updateTituloCosto0();
+    rL();rM();rD();
+    var badge=document.getElementById('dom-pct-header'); if(badge) badge.textContent=DOMICILIACION;
+  }
+}
+
 function loadConfig(){
-  // Primero cargamos de localStorage como fallback inmediato
+  // Fallback inmediato desde localStorage
   var cached = localStorage.getItem('utel_cfg');
   if(cached){
-    try{
-      var c=JSON.parse(cached);
+    try{var c=JSON.parse(cached);
       if(c.dom) DOMICILIACION=c.dom;
       if(c.domexp!==undefined) DOM_EXPIRY=c.domexp||null;
       if(c.tit0!==undefined) TITULO_COSTO_0=c.tit0;
@@ -1365,38 +1386,42 @@ function loadConfig(){
       if(c.plat!==undefined) PLATZI_PREVIEW=c.plat;
     }catch(e){}
   }
-  // Luego sincronizamos con JSONBin (fuente de verdad compartida)
-  fetch(JB_URL+'/latest',{headers:{'X-Master-Key':JB_KEY}})
+  // Fuente de verdad: config.json mismo origen (funciona en iframes sin CORS)
+  fetch('config.json?_='+Date.now())
     .then(function(r){return r.json();})
-    .then(function(res){
-      var data=res.record;
-      if(!data) return;
-      var changed=false;
-      if(data.dom!==undefined && data.dom!==DOMICILIACION){DOMICILIACION=data.dom;changed=true;}
-      if(data.domexp!==undefined && data.domexp!==DOM_EXPIRY){DOM_EXPIRY=data.domexp||null;changed=true;}
-      if(data.tit0!==undefined && data.tit0!==TITULO_COSTO_0){TITULO_COSTO_0=data.tit0;changed=true;}
-      if(data.tit0exp!==undefined && data.tit0exp!==TIT0_EXPIRY){TIT0_EXPIRY=data.tit0exp||null;changed=true;}
-      if(data.plat!==undefined && data.plat!==PLATZI_PREVIEW){PLATZI_PREVIEW=data.plat;changed=true;}
-      if(changed){
-        localStorage.setItem('utel_cfg',JSON.stringify({dom:DOMICILIACION,domexp:DOM_EXPIRY,tit0:TITULO_COSTO_0,tit0exp:TIT0_EXPIRY,plat:PLATZI_PREVIEW}));
-        updateTituloCosto0();
-        rL();rM();rD();
-        var badge=document.getElementById('dom-pct-header'); if(badge) badge.textContent=DOMICILIACION;
-      }
-    })
-    .catch(function(){});
+    .then(function(data){_applyConfigData(data);})
+    .catch(function(){
+      // Fallback a JSONBin si config.json no está disponible
+      fetch(JB_URL+'/latest',{headers:{'X-Master-Key':JB_KEY}})
+        .then(function(r){return r.json();})
+        .then(function(res){if(res.record) _applyConfigData(res.record);})
+        .catch(function(){});
+    });
 }
 
 function saveConfig(){
   localStorage.setItem('utel_cfg',JSON.stringify({dom:DOMICILIACION,domexp:DOM_EXPIRY,tit0:TITULO_COSTO_0,tit0exp:TIT0_EXPIRY,plat:PLATZI_PREVIEW}));
-  // Guardar en JSONBin para que todos los agentes lo vean
-  fetch(JB_URL,{
-    method:'PUT',
-    headers:{'Content-Type':'application/json','X-Master-Key':JB_KEY},
-    body:JSON.stringify({dom:DOMICILIACION,domexp:DOM_EXPIRY,tit0:TITULO_COSTO_0,tit0exp:TIT0_EXPIRY,plat:PLATZI_PREVIEW})
-  })
-  .then(function(){console.log('Config guardada en JSONBin');})
-  .catch(function(e){console.error('Error JSONBin:',e);});
+  var payload={dom:DOMICILIACION,domexp:DOM_EXPIRY,tit0:TITULO_COSTO_0,tit0exp:TIT0_EXPIRY,plat:PLATZI_PREVIEW};
+  // Guardar en JSONBin
+  fetch(JB_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':JB_KEY},body:JSON.stringify(payload)})
+    .catch(function(){});
+  // Guardar en config.json vía GitHub API (token en localStorage)
+  var ghToken=localStorage.getItem('utel_gh_token');
+  if(ghToken){
+    var cfgContent=JSON.stringify({dom:DOMICILIACION,domexp:DOM_EXPIRY||null,tit0:TITULO_COSTO_0,tit0exp:TIT0_EXPIRY||null,plat:PLATZI_PREVIEW},null,2);
+    // Obtener SHA actual
+    fetch('https://api.github.com/repos/soletissone/precios-utel/contents/config.json',{headers:{'Authorization':'token '+ghToken}})
+      .then(function(r){return r.json();})
+      .then(function(info){
+        return fetch('https://api.github.com/repos/soletissone/precios-utel/contents/config.json',{
+          method:'PUT',
+          headers:{'Authorization':'token '+ghToken,'Content-Type':'application/json'},
+          body:JSON.stringify({message:'config: actualizar domiciliacion y configuracion',content:btoa(cfgContent),sha:info.sha})
+        });
+      })
+      .then(function(r){if(r.ok) console.log('config.json actualizado');})
+      .catch(function(e){console.error('Error GitHub API:',e);});
+  }
 }
 
 /* ═══════════════════════════════════════
@@ -4262,6 +4287,8 @@ function showAdminConfig(){
   document.getElementById('admin-cfg-area').style.display='block';
   document.getElementById('cfg-dom').value=String(DOMICILIACION);
   document.getElementById('cfg-dom-exp').value=DOM_EXPIRY||'';
+  var storedToken=localStorage.getItem('utel_gh_token')||'';
+  document.getElementById('cfg-gh-token').value=storedToken?'●●●●●●●●●●●●':'';
   var tit0cb=document.getElementById('cfg-tit0');
   tit0cb.checked=TITULO_COSTO_0;
   document.getElementById('cfg-tit0-exp').value=TIT0_EXPIRY||'';
@@ -4275,6 +4302,8 @@ function saveAdminConfig(){
   TITULO_COSTO_0=document.getElementById('cfg-tit0').checked;
   TIT0_EXPIRY=document.getElementById('cfg-tit0-exp').value||null;
   PLATZI_PREVIEW=document.getElementById('cfg-platzi').checked;
+  var tokenInput=document.getElementById('cfg-gh-token').value.trim();
+  if(tokenInput && tokenInput!=='●●●●●●●●●●●●') localStorage.setItem('utel_gh_token',tokenInput);
   saveConfig();
   updateTituloCosto0();
   rL();rM();rD();
