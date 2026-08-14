@@ -2077,6 +2077,7 @@ function b2bRenderTable(){
   var isDip=!!plan.pago_unico;
   var accWrap=document.getElementById('b2b-acc-wrap');
   accWrap.style.display=isDip?'none':'';
+  var domPct=isDomActive()?DOMICILIACION/100:0;
   var html='<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13px">';
   html+='<thead><tr style="background:#1a73e8;color:#fff">';
   if(isDip){
@@ -2084,6 +2085,7 @@ function b2bRenderTable(){
   } else {
     html+='<th style="padding:10px 14px;text-align:left">Pago #</th><th style="padding:10px 14px;text-align:right">Colegiatura</th>';
     if(accMonto>0) html+='<th style="padding:10px 14px;text-align:right">Accesorio</th><th style="padding:10px 14px;text-align:right">Total</th>';
+    if(domPct>0) html+='<th style="padding:10px 14px;text-align:right">Con domiciliación <span style="background:rgba(255,255,255,0.25);border-radius:4px;padding:1px 5px;font-size:10px">'+DOMICILIACION+'%</span></th>';
   }
   html+='</tr></thead><tbody>';
   if(isDip){
@@ -2091,17 +2093,20 @@ function b2bRenderTable(){
   } else {
     var total=0;
     plan.pagos.forEach(function(p){total+=p+accMonto;});
-    // Agrupar pagos consecutivos iguales
+    // Agrupar pagos consecutivos iguales — pero cortar en pago 3 (índice 2) para domiciliación
     var grupos=[];
     plan.pagos.forEach(function(p,i){
       var last=grupos[grupos.length-1];
-      if(last && last.monto===p) last.hasta=i+1;
+      if(last && last.monto===p && !(i===2 && last.desde<=2)) last.hasta=i+1;
       else grupos.push({monto:p,desde:i+1,hasta:i+1});
     });
+    var colCount=accMonto>0?(domPct>0?5:4):(domPct>0?3:2);
     grupos.forEach(function(g,ri){
       var rowTotal=g.monto+accMonto;
       var label=g.desde===g.hasta?'Pago '+g.desde:'Pagos '+g.desde+' al '+g.hasta;
       var bg=ri%2===0?'var(--sf)':'var(--bg)';
+      var applyDom=domPct>0 && g.desde>=3;
+      var domVal=applyDom?Math.round(rowTotal*(1-domPct)):null;
       html+='<tr style="background:'+bg+'">';
       html+='<td style="padding:8px 14px;border-bottom:1px solid var(--bd)">'+label+'</td>';
       html+='<td style="padding:8px 14px;text-align:right;border-bottom:1px solid var(--bd)">'+fmt(g.monto)+'</td>';
@@ -2109,6 +2114,7 @@ function b2bRenderTable(){
         html+='<td style="padding:8px 14px;text-align:right;border-bottom:1px solid var(--bd);color:#1a73e8">'+fmt(accMonto)+'</td>';
         html+='<td style="padding:8px 14px;text-align:right;border-bottom:1px solid var(--bd);font-weight:600">'+fmt(rowTotal)+'</td>';
       }
+      if(domPct>0) html+='<td style="padding:8px 14px;text-align:right;border-bottom:1px solid var(--bd);color:#15803d;font-weight:'+(applyDom?'700':'400')+'">'+( applyDom?fmt(domVal):'—' )+'</td>';
       html+='</tr>';
     });
     var totalBase=0; plan.pagos.forEach(function(p){totalBase+=p;});
@@ -2120,10 +2126,11 @@ function b2bRenderTable(){
       html+='<td style="padding:10px 14px;text-align:right">'+fmt(totalAcc)+'</td>';
       html+='<td style="padding:10px 14px;text-align:right">'+fmt(total)+'</td>';
     }
+    if(domPct>0) html+='<td style="padding:10px 14px;text-align:right"></td>';
     html+='</tr>';
     if(plan.lista){
       var beca=((plan.lista-totalBase)/plan.lista*100).toFixed(1);
-      html+='<tr><td colspan="'+(accMonto>0?4:2)+'" style="padding:8px 14px;font-size:11px;color:var(--mu)">Precio de lista: '+fmt(plan.lista)+' · Descuento: '+beca+'%</td></tr>';
+      html+='<tr><td colspan="'+colCount+'" style="padding:8px 14px;font-size:11px;color:var(--mu)">Precio de lista: '+fmt(plan.lista)+' · Descuento: '+beca+'%</td></tr>';
     }
   }
   html+='</tbody></table></div>';
