@@ -2012,36 +2012,86 @@ function b2bDownload(){
   if(!plan) return;
   var fmt=function(n){return '$'+n.toLocaleString('es-MX',{minimumFractionDigits:0,maximumFractionDigits:0});};
   var cfg=B2B_ACCS[nivel]||{included:[],groups:[]};
-  var accMonto=0, accLabels=[];
-  cfg.groups.forEach(function(grp){ grp.items.forEach(function(a){ if(_b2bAccSel[a.id]){ accMonto+=a.price; accLabels.push(a.label+' '+fmt(a.price)); } }); });
+  var accMonto=0;
+  var accOptLabels=[];
+  cfg.groups.forEach(function(grp){ grp.items.forEach(function(a){ if(_b2bAccSel[a.id]){ accMonto+=a.price; accOptLabels.push(a.label); } }); });
   var nivelLabel={lic:'Licenciatura',mae:'Maestría',doc:'Doctorado',dip:'Diplomado'}[nivel]||nivel;
-  var lines=['UTEL — Precios B2B','','Nivel: '+nivelLabel,'Plan: '+plan.label+' ('+plan.code+')',''];
-  if(accLabels.length) lines.push('Accesorios: '+accLabels.join(', '),'');
-  lines.push('Incluido: Inglés Voxy · Welbe · Platzi · Asistencia Plus · 5% domiciliación','');
+  var domPct=isDomActive()?DOMICILIACION/100:0;
+
+  // Build payment table rows
+  var tableRows='';
   if(plan.pago_unico){
-    lines.push('Pago único: '+fmt(plan.pago_unico));
+    tableRows='<tr><td style="padding:8px 12px;font-size:13px;color:#6b7280">Pago único</td>'
+      +'<td style="padding:8px 12px;font-size:15px;font-weight:700;color:#1c2d1a">'+fmt(plan.pago_unico)+'</td>'
+      +(domPct>0?'<td style="padding:8px 12px">—</td>':'')+'</tr>';
   } else {
     var grupos=[];
     plan.pagos.forEach(function(p,i){
       var last=grupos[grupos.length-1];
-      if(last && last.monto===p) last.hasta=i+1;
+      if(last && last.monto===p && !(i===2 && last.desde<=2)) last.hasta=i+1;
       else grupos.push({monto:p,desde:i+1,hasta:i+1});
     });
-    grupos.forEach(function(g){
+    grupos.forEach(function(g,ri){
+      var rowTotal=g.monto+accMonto;
       var label=g.desde===g.hasta?'Pago '+g.desde:'Pagos '+g.desde+' al '+g.hasta;
-      var row=label+': '+fmt(g.monto);
-      if(accMonto>0) row+=' + accesorios '+fmt(accMonto)+' = '+fmt(g.monto+accMonto);
-      lines.push(row);
+      var applyDom=domPct>0 && g.desde>=3;
+      var domVal=applyDom?fmt(Math.round(rowTotal*(1-domPct))):'—';
+      var isLast=(ri===grupos.length-1);
+      var bg=isLast?'background:#f8f8ff':'';
+      tableRows+='<tr style="border-bottom:1px solid #e5e7eb;'+bg+'">'
+        +'<td style="padding:8px 12px;font-size:13px;color:#6b7280">'+label+'</td>'
+        +'<td style="padding:8px 12px;font-size:15px;font-weight:700;color:#1c2d1a">'+fmt(rowTotal)+'</td>'
+        +(domPct>0?'<td style="padding:8px 12px;font-size:14px;font-weight:700;color:#06ba06">'+(applyDom?domVal:'—')+'</td>':'')
+        +'</tr>';
     });
-    var totalBase=0; plan.pagos.forEach(function(p){totalBase+=p;});
-    lines.push('','TOTAL colegiatura: '+fmt(totalBase));
-    if(accMonto>0) lines.push('TOTAL accesorios: '+fmt(accMonto*plan.pagos.length),'TOTAL general: '+fmt(totalBase+accMonto*plan.pagos.length));
   }
-  lines.push('','Accesorios suman desde el pago 1 · Sin promos adicionales');
-  var blob=new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'});
+
+  // Included chips
+  var incChips='';
+  var _incBase=['Inglés Voxy','Welbe','Platzi','Asistencia Plus'];
+  _incBase.forEach(function(n){incChips+='<span style="display:inline-block;background:#dcfce7;color:#06ba06;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ '+n+'</span>';});
+  if(domPct>0) incChips+='<span style="display:inline-block;background:#dcfce7;color:#06ba06;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ '+DOMICILIACION+'% domiciliación</span>';
+  accOptLabels.forEach(function(n){incChips+='<span style="display:inline-block;background:#edfcd8;color:#1c2d1a;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ '+n+'</span>';});
+
+  var utelSVG='<svg height="32" style="width:auto;display:block;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1056.63 416.2"><path fill="#ffffff" d="M205.62,0V160.83h0v25.84h0c0,2.13-.11,4.23-.3,6.32h0c-1.16,12.87-5.88,25.04-13.62,35.45-2.09,2.82-4.36,5.53-6.9,8.07-13.41,13.41-31.1,20.8-49.82,20.82h-.02c-18.71-.01-36.4-7.4-49.82-20.82-2.53-2.53-4.8-5.25-6.9-8.07-7.74-10.41-12.46-22.58-13.62-35.45h0c-.19-2.09-.3-4.19-.3-6.31h0v-25.85h0V0H0V186.65c0,2.13,.06,4.24,.16,6.34,1.1,23.48,8.28,45.43,19.97,64.33,4.68,7.57,10.13,14.6,16.16,21.09,8.27,8.88,17.67,16.69,28.03,23.11,20.58,12.74,44.79,20.13,70.64,20.14,25.85,0,50.06-7.39,70.64-20.14,10.36-6.42,19.76-14.23,28.03-23.11,6.03-6.48,11.48-13.52,16.16-21.09,11.7-18.9,18.87-40.85,19.97-64.33,.1-2.1,.16-4.22,.16-6.34V0h-64.33Z"/><path fill="#ffffff" d="M512.9,273.07c-1.85-2.99-3.6-6.04-5.26-9.14-5.98-11.23-10.66-23.21-13.9-35.46l-.02-.03c-2.09,2.82-4.36,5.53-6.9,8.07-13.41,13.41-31.11,20.8-49.82,20.82h-.09c-18.71-.01-36.4-7.4-49.82-20.82-2.53-2.53-4.8-5.25-6.9-8.07-7.74-10.41-12.46-22.58-13.62-35.45-.19-2.09-.3-4.2-.3-6.32v-25.84h0v-32.17h104.9l-.03-64.33h-104.87V0h-64.33V186.65c0,2.13,.06,4.24,.16,6.34,1.1,23.48,8.28,45.43,19.97,64.33,4.68,7.57,10.13,14.6,16.16,21.09,8.27,8.88,17.67,16.69,28.03,23.11,20.58,12.74,44.79,20.13,70.64,20.14h.07c25.83,0,50.02-7.38,70.59-20.1,5.91-3.66,11.52-7.85,16.77-12.36-4.17-5.21-8.04-10.58-11.47-16.12Z"/></svg>';
+
+  var html='<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">'
+    +'<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">'
+    +'<title>Propuesta B2B — '+nivelLabel+' — '+plan.label+'</title>'
+    +'<style>*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,sans-serif}body{background:#f0f0f0;padding:14px}.page{background:#fff;max-width:700px;margin:0 auto;border-radius:8px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.12)}'
+    +'@media print{*{-webkit-print-color-adjust:exact!important;print-color-adjust:exact!important}body{background:#fff;padding:0}.page{box-shadow:none;border-radius:0;max-width:100%}@page{margin:0;size:A4}}</style></head><body>'
+    +'<div class="page">'
+    +'<div style="background:#062A17;padding:16px 24px;position:relative;overflow:hidden;">'
+    +'<svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.07;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 200" preserveAspectRatio="none"><path d="M-20,120 Q170,30 360,100 Q550,170 710,70" fill="none" stroke="#00B140" stroke-width="2.5"/><path d="M-20,160 Q200,70 400,140 Q580,200 710,110" fill="none" stroke="#00B140" stroke-width="1.5"/></svg>'
+    +'<div style="position:relative;z-index:2;display:flex;align-items:center;gap:18px;">'
+    +'<div style="flex-shrink:0;display:flex;flex-direction:column;gap:7px;">'+utelSVG
+    +'<div style="font-size:9px;font-weight:700;color:#63D471;letter-spacing:.1em;text-transform:uppercase;">&#9658; PROPUESTA B2B</div></div>'
+    +'<div style="width:1px;align-self:stretch;background:rgba(255,255,255,.18);flex-shrink:0;"></div>'
+    +'<div style="flex:1;min-width:0;">'
+    +'<div style="font-size:20px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:8px;">'+plan.label+'</div>'
+    +'<div style="display:flex;flex-wrap:wrap;align-items:center;gap:5px">'
+    +'<span style="display:inline-block;background:#00B140;color:#fff;border-radius:999px;padding:2px 10px;font-size:10px;font-weight:700">'+nivelLabel+'</span>'
+    +'<span style="display:inline-block;background:rgba(255,255,255,.12);color:#fff;border-radius:999px;padding:2px 10px;font-size:10px;font-weight:600">'+plan.code+'</span>'
+    +'<span style="display:inline-block;background:rgba(255,255,255,.12);color:#fff;border-radius:999px;padding:2px 10px;font-size:10px;font-weight:600">🤝 B2B</span>'
+    +'</div></div></div></div>'
+    +'<div style="padding:14px 20px">'
+    +'<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6b7280;margin-bottom:6px">Estructura de pagos</div>'
+    +'<table style="width:100%;border-collapse:collapse;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;margin-bottom:12px">'
+    +'<thead><tr style="background:#f9fafb">'
+    +'<th style="padding:7px 12px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b7280">Pago</th>'
+    +'<th style="padding:7px 12px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b7280">Total</th>'
+    +(domPct>0?'<th style="padding:7px 12px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#06ba06">Con dom. '+DOMICILIACION+'%</th>':'')
+    +'</tr></thead><tbody>'+tableRows+'</tbody></table>'
+    +'<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6b7280;margin-bottom:5px">Incluido en el paquete</div>'
+    +'<div style="margin-bottom:14px">'+incChips+'</div>'
+    +'<div style="font-size:10px;color:#9ca3af;margin-top:4px">· Accesorios suman desde el pago 1 · Sin promos adicionales · Válido por 24 hs</div>'
+    +'</div></div>'
+    +'</body></html>';
+
+  var blob=new Blob([html],{type:'text/html;charset=utf-8'});
   var url=URL.createObjectURL(blob);
   var a=document.createElement('a'); a.href=url;
-  a.download='B2B_'+nivelLabel+'_'+plan.code.replace(/[^a-zA-Z0-9]/g,'_')+'.txt';
+  a.download='B2B_'+nivelLabel+'_'+plan.code.replace(/[^a-zA-Z0-9]/g,'_')+'.html';
   document.body.appendChild(a); a.click(); document.body.removeChild(a);
   setTimeout(function(){URL.revokeObjectURL(url);},1000);
 }
