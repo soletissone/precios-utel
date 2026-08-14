@@ -2041,7 +2041,7 @@ function b2bDownload(){
   var accOptLabels=[];
   cfg.groups.forEach(function(grp){ grp.items.forEach(function(a){ if(_b2bAccSel[a.id]){ accMonto+=a.price; accOptLabels.push(a.label); } }); });
   var nivelLabel={lic:'Licenciatura',mae:'Maestría',doc:'Doctorado',dip:'Diplomado'}[nivel]||nivel;
-  var domPct=isDomActive()?DOMICILIACION/100:0;
+  var domPct=0.05;
 
   // Build payment table rows
   var tableRows='';
@@ -2154,7 +2154,7 @@ function b2bRenderTable(){
   var isDip=!!plan.pago_unico;
   var accWrap=document.getElementById('b2b-acc-wrap');
   accWrap.style.display=isDip?'none':'';
-  var domPct=isDomActive()?DOMICILIACION/100:0;
+  var domPct=0.05;
   var html='<div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:13px">';
   html+='<thead><tr style="background:#1a73e8;color:#fff">';
   if(isDip){
