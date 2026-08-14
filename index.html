@@ -1816,6 +1816,8 @@ function sw(id){
   else if(id==='en'){ fillENAreas(); fillENProgs(); rEN(); }
   else if(id==='gal') galInit();
   else if(id==='b2b') b2bInit();
+  var domInd=document.getElementById('dom-indicator');
+  if(domInd) domInd.style.display=(id==='b2b')?'none':'';
 }
 
 // ── B2B ──────────────────────────────────────────────────────────────────────
@@ -2196,17 +2198,6 @@ function b2bRenderTable(){
       if(domPct>0) html+='<td style="padding:8px 14px;text-align:right;border-bottom:1px solid var(--bd);color:#15803d;font-weight:'+(applyDom?'700':'400')+'">'+( applyDom?fmt(domVal):'—' )+'</td>';
       html+='</tr>';
     });
-    var totalBase=0; plan.pagos.forEach(function(p){totalBase+=p;});
-    var totalAcc=accMonto*plan.pagos.length;
-    html+='<tr style="background:#e8f0fe;font-weight:700">';
-    html+='<td style="padding:10px 14px">TOTAL</td>';
-    html+='<td style="padding:10px 14px;text-align:right">'+fmt(totalBase)+'</td>';
-    if(accMonto>0){
-      html+='<td style="padding:10px 14px;text-align:right">'+fmt(totalAcc)+'</td>';
-      html+='<td style="padding:10px 14px;text-align:right">'+fmt(total)+'</td>';
-    }
-    if(domPct>0) html+='<td style="padding:10px 14px;text-align:right"></td>';
-    html+='</tr>';
     if(plan.lista){
       var beca=((plan.lista-totalBase)/plan.lista*100).toFixed(1);
       html+='<tr><td colspan="'+colCount+'" style="padding:8px 14px;font-size:11px;color:var(--mu)">Precio de lista: '+fmt(plan.lista)+' · Descuento: '+beca+'%</td></tr>';
