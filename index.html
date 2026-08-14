@@ -1930,7 +1930,7 @@ var B2B_PLANES={
     {label:'Completa General',code:'B2B2.LI.COM.',pagos:[759,1045,1210,1210,1210,1210,1210,1210,1210,1210,1210,1210]},
     {label:'Completa Robótica y Arquitectura',code:'B2B1.LI.COM.',pagos:[759,1045,1569,1569,1569,1569,1569,1569,1569,1569,1569,1569]},
     {label:'Intensiva General',code:'B2B2.LI.INT.',pagos:[759,1045,1580,1580,1580,1580,1580,1580,1580,1580,1580,1580]},
-    {label:'Intensiva Robótica y Arquitectura',code:'B2B1.LI.INT.',pagos:[1330,1330,1330,1330,1330,1330,1330,1330,1330,1330,1330,1330]},
+    {label:'Intensiva Robótica y Arquitectura',code:'B2B1.LI.INT.',pagos:[1330,1330,2280,2280,2280,2280,2280,2280,2280,2280,2280,2280]},
     {label:'Super Intensiva General',code:'B2B1.LI.SUPINT.',pagos:[759,1140,1865,1865,1865,1865,1865,1865,1865,1865,1865,1865]}
   ],
   mae:[
@@ -2053,7 +2053,8 @@ function b2bDownload(){
     var grupos=[];
     plan.pagos.forEach(function(p,i){
       var last=grupos[grupos.length-1];
-      if(last && last.monto===p && !(i===2 && last.desde<=2)) last.hasta=i+1;
+      var esFronteraDom=i===2 && last && last.desde<=2 && last.monto!==p;
+      if(last && last.monto===p && !esFronteraDom) last.hasta=i+1;
       else grupos.push({monto:p,desde:i+1,hasta:i+1});
     });
     grupos.forEach(function(g,ri){
@@ -2170,11 +2171,12 @@ function b2bRenderTable(){
   } else {
     var total=0;
     plan.pagos.forEach(function(p){total+=p+accMonto;});
-    // Agrupar pagos consecutivos iguales — pero cortar en pago 3 (índice 2) para domiciliación
+    // Agrupar pagos consecutivos iguales — cortar en pago 3 solo si el precio cambia (para domiciliación)
     var grupos=[];
     plan.pagos.forEach(function(p,i){
       var last=grupos[grupos.length-1];
-      if(last && last.monto===p && !(i===2 && last.desde<=2)) last.hasta=i+1;
+      var esFronteraDom=i===2 && last && last.desde<=2 && last.monto!==p;
+      if(last && last.monto===p && !esFronteraDom) last.hasta=i+1;
       else grupos.push({monto:p,desde:i+1,hasta:i+1});
     });
     var colCount=accMonto>0?(domPct>0?5:4):(domPct>0?3:2);
