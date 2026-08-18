@@ -36,6 +36,20 @@ def collect(items, prefix, seen_ids, results):
                 "path": path
             })
 
+def list_folder_with_retry(gdown, url, retries=4, delay=15):
+    import time
+    for attempt in range(1, retries + 1):
+        try:
+            items = gdown.download_folder(url, skip_download=True, quiet=True) or []
+            return items
+        except Exception as e:
+            print(f"  Error intento {attempt}/{retries}: {e}")
+            if attempt < retries:
+                print(f"  Reintentando en {delay}s...")
+                time.sleep(delay)
+    print("  Todos los reintentos fallaron, se omite esta carpeta.")
+    return []
+
 def main():
     try:
         import gdown
@@ -51,14 +65,14 @@ def main():
     # 1. Listar subcarpetas extra PRIMERO para que sus IDs tengan prioridad
     for folder_name, folder_url in EXTRA_FOLDERS.items():
         print(f"Listando {folder_name}...")
-        extra_items = gdown.download_folder(folder_url, skip_download=True, quiet=True) or []
+        extra_items = list_folder_with_retry(gdown, folder_url)
         before = len(results)
         collect(extra_items, folder_name, seen_ids, results)
         print(f"  +{len(results)-before} items de {folder_name}")
 
     # 2. Listar carpeta raíz (los IDs ya en EXTRA_FOLDERS se saltan automáticamente)
     print("Listando carpeta raíz...")
-    root_items = gdown.download_folder(FOLDER_URL, skip_download=True, quiet=True) or []
+    root_items = list_folder_with_retry(gdown, FOLDER_URL)
     before = len(results)
     collect(root_items, '', seen_ids, results)
     print(f"  +{len(results)-before} items desde raíz")
