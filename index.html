@@ -1366,11 +1366,11 @@ function _applyConfigData(data){
   if(data.tit0!==undefined && data.tit0!==TITULO_COSTO_0){TITULO_COSTO_0=data.tit0;changed=true;}
   if(data.tit0exp!==undefined && data.tit0exp!==TIT0_EXPIRY){TIT0_EXPIRY=data.tit0exp||null;changed=true;}
   if(data.plat!==undefined && data.plat!==PLATZI_PREVIEW){PLATZI_PREVIEW=data.plat;changed=true;}
+  var badge=document.getElementById('dom-pct-header'); if(badge) badge.textContent=DOMICILIACION;
   if(changed){
     localStorage.setItem('utel_cfg',JSON.stringify({dom:DOMICILIACION,domexp:DOM_EXPIRY,tit0:TITULO_COSTO_0,tit0exp:TIT0_EXPIRY,plat:PLATZI_PREVIEW}));
     updateTituloCosto0();
     rL();rM();rD();
-    var badge=document.getElementById('dom-pct-header'); if(badge) badge.textContent=DOMICILIACION;
   }
 }
 
