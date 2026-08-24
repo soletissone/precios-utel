@@ -2225,6 +2225,7 @@ function b2bRenderTable(){
       html+='</tr>';
     });
     if(plan.lista){
+      var totalBase=plan.pagos.reduce(function(s,p){return s+p;},0);
       var beca=((plan.lista-totalBase)/plan.lista*100).toFixed(1);
       html+='<tr><td colspan="'+colCount+'" style="padding:8px 14px;font-size:11px;color:var(--mu)">Precio de lista: '+fmt(plan.lista)+' · Descuento: '+beca+'%</td></tr>';
     }
