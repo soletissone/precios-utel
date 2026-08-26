@@ -1535,6 +1535,11 @@ function _buildDriveFichaMap(){
     if(!_driveFichaMap[key]) _driveFichaMap[key]=[];
     _driveFichaMap[key].push({id:e.id,name:e.name});
   });
+  // Aliases: Drive folder name (normalizado) -> clave del catálogo (normalizada)
+  var ALIASES={'estrategias de comercio internacional y aduanas':'estrategia de comercio internacional y aduanas'};
+  Object.keys(ALIASES).forEach(function(k){
+    if(_driveFichaMap[k]&&!_driveFichaMap[ALIASES[k]]){_driveFichaMap[ALIASES[k]]=_driveFichaMap[k];}
+  });
   return _driveFichaMap;
 }
 function fichaBadge(progName,nivel,forceEje){
