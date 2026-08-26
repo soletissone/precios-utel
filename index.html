@@ -1524,7 +1524,7 @@ function _buildDriveFichaMap(){
   _driveFichaMap={};
   var EX=/Alianzas|Doble Titulaci|B[aá]sicos|Accesorios|Comunidad|Empleabilidad|Modalidades|Prestigio|Referidos/i;
   function _n(s){return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ').trim();}
-  function _sl(s){return s.replace(/^(maestr[ií]a en |licenciatura en |doctorado en |especialidad en )/i,'').trim();}
+  function _sl(s){return s.replace(/^(maestr[ií]a en |licenciatura en |doctorado en |especialidad en |lic\. |mae\. |doc\. |esp\. )/i,'').trim();}
   (_galData||[]).forEach(function(e){
     if(!(e.name||'').toLowerCase().endsWith('.pdf')) return;
     if((e.path||'').indexOf('Catalogo Programas')<0) return;
