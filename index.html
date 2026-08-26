@@ -1524,7 +1524,7 @@ function _buildDriveFichaMap(){
   _driveFichaMap={};
   var EX=/Alianzas|Doble Titulaci|B[aá]sicos|Accesorios|Comunidad|Empleabilidad|Modalidades|Prestigio|Referidos/i;
   function _n(s){return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ').trim();}
-  function _sl(s){return s.replace(/^(maestr[ií]a en |licenciatura en |doctorado en |especialidad en |lic\. |mae\. |doc\. |esp\. )/i,'').trim();}
+  function _sl(s){return s.replace(/^(maestr[ií]a en |maestr[ií]a |licenciatura en |licenciatura |doctorado en |doctorado |especialidad en |especialidad |lic\. |mae\. |doc\. |esp\. )/i,'').trim();}
   (_galData||[]).forEach(function(e){
     if(!(e.name||'').toLowerCase().endsWith('.pdf')) return;
     if((e.path||'').indexOf('Catalogo Programas')<0) return;
@@ -1535,11 +1535,10 @@ function _buildDriveFichaMap(){
     if(!_driveFichaMap[key]) _driveFichaMap[key]=[];
     _driveFichaMap[key].push({id:e.id,name:e.name});
   });
-  // Aliases: Drive folder name (normalizado) -> clave del catálogo (normalizada)
-  var ALIASES={'estrategias de comercio internacional y aduanas':'estrategia de comercio internacional y aduanas'};
-  Object.keys(ALIASES).forEach(function(k){
-    if(_driveFichaMap[k]&&!_driveFichaMap[ALIASES[k]]){_driveFichaMap[ALIASES[k]]=_driveFichaMap[k];}
-  });
+  // Índice secundario: clave con 's' final removida de cada palabra, para matchear plural/singular
+  _driveFichaMap._stem={};
+  function _stem(s){return s.split(' ').map(function(w){return w.length>3&&w[w.length-1]==='s'?w.slice(0,-1):w;}).join(' ');}
+  Object.keys(_driveFichaMap).forEach(function(k){if(k!=='_stem'){var sk=_stem(k);if(!_driveFichaMap._stem[sk])_driveFichaMap._stem[sk]=_driveFichaMap[k];}});
   return _driveFichaMap;
 }
 function fichaBadge(progName,nivel,forceEje){
@@ -1548,7 +1547,8 @@ function fichaBadge(progName,nivel,forceEje){
   if(!map){
     var dfm=_buildDriveFichaMap();
     var nk=progName.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ').trim();
-    var dp=(dfm[nk]||[])[0];
+    var arr=dfm[nk]||(dfm._stem&&dfm._stem[nk.split(' ').map(function(w){return w.length>3&&w[w.length-1]==='s'?w.slice(0,-1):w;}).join(' ')])||[];
+    var dp=arr[0];
     if(!dp) return '';
     return '<button class="ficha-btn" onclick="openExt(\'https://drive.google.com/open?id='+dp.id+'\',\'FICHA TÉCNICA\',\'#64748b\')" title="Ver ficha técnica (Drive)">📄 Ficha</button>';
   }
