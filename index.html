@@ -1518,9 +1518,35 @@ function renderRecursos(divId, progName, nivel){
     +'<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-start">'+btns.join('')+'</div>'
     +'</div>';
 }
+var _driveFichaMap=null;
+function _buildDriveFichaMap(){
+  if(_driveFichaMap) return _driveFichaMap;
+  _driveFichaMap={};
+  var EX=/Alianzas|Doble Titulaci|B[aá]sicos|Accesorios|Comunidad|Empleabilidad|Modalidades|Prestigio|Referidos/i;
+  function _n(s){return s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ').trim();}
+  function _sl(s){return s.replace(/^(maestr[ií]a en |licenciatura en |doctorado en |especialidad en )/i,'').trim();}
+  (_galData||[]).forEach(function(e){
+    if(!(e.name||'').toLowerCase().endsWith('.pdf')) return;
+    if((e.path||'').indexOf('Catalogo Programas')<0) return;
+    if(EX.test(e.path||'')) return;
+    var pts=(e.path||'').split('/');
+    if(pts.length<2) return;
+    var key=_n(_sl(pts[pts.length-2]));
+    if(!_driveFichaMap[key]) _driveFichaMap[key]=[];
+    _driveFichaMap[key].push({id:e.id,name:e.name});
+  });
+  return _driveFichaMap;
+}
 function fichaBadge(progName,nivel,forceEje){
   if(!PROG_PDF_MAP) return '';
-  var map=PROG_PDF_MAP[progName]; if(!map) return '';
+  var map=PROG_PDF_MAP[progName];
+  if(!map){
+    var dfm=_buildDriveFichaMap();
+    var nk=progName.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,' ').trim();
+    var dp=(dfm[nk]||[])[0];
+    if(!dp) return '';
+    return '<button class="ficha-btn" onclick="openExt(\'https://drive.google.com/open?id='+dp.id+'\',\'FICHA TÉCNICA\',\'#64748b\')" title="Ver ficha técnica (Drive)">📄 Ficha</button>';
+  }
   var selKey=nivel==='LIC'?'lic':nivel==='MAE'?'mae':nivel==='MASTER'?'ms':'doc';
   var isEje=forceEje||SEL_EXP[selKey]==='ejecutiva';
   var rPdf=map[nivel+'_r'], ePdf=map[nivel+'_e'];
