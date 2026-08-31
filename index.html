@@ -3548,12 +3548,14 @@ function rL(){
       var _cbUve=g('lic-compl'); if(_cbUve) _cbUve.style.display='none';
       var ljorDivU=document.getElementById('ljor'); if(ljorDivU) ljorDivU.closest('.fg').style.display='none';
       var selDivU=g('alianza-variant-sel'); if(selDivU) selDivU.style.display='none';
-      renderTable('lb',uveV.p,uveV.pkg,'—',0,0,3);
-      g('lbi').innerHTML='<span>Incluye: Asistencia, Platzi, 5% domiciliación</span>';
-      g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
       var _tit0Uve=TITULO_COSTO_0; TITULO_COSTO_0=false;
       renderAccs('lic-acc','lic',false);
       TITULO_COSTO_0=_tit0Uve;
+      var _uveAcc=getAccTotal('lic',false);
+      var _uvePl12=0; (ACCS['lic'].included||[]).forEach(function(it){if(ALWAYS_ACCS.indexOf(it.id)>=0&&it.price)_uvePl12+=it.price;});
+      renderTable('lb',uveV.p,uveV.pkg,'—',_uveAcc,_uvePl12,3);
+      g('lbi').innerHTML='<span>Incluye: Asistencia, 5% domiciliación</span>';
+      g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+platziBtn(progName)+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
       g('lic-total').innerHTML=''; return;
     } else if(uName==='UNICA'||uName==='ARTE DIGITAL Y MULTIMEDIA'||uName==='MARKETING Y PUBLICIDAD'||uName==='MEDIOS DIGITALES'||uName==='COMUNICACIÓN CORPORATIVA'){
       var unicaMap={'hot':{p:[629,1470,1995,2810,2810,2810,2810,2810,2810,2810,2810,2810],pkg:'ESC.LIC.UNICA.PLATZI.'},
