@@ -4561,8 +4561,9 @@ function populateFechaSelects(){
 function updateFechaByProg(sec, progName){
   var sel=g(sec+'-fecha');
   if(!sel) return;
-  var _ibpKey=(progName && INICIO_BY_PROG[progName+'|'+sec]) ? progName+'|'+sec : progName;
-  var dates=(progName && INICIO_BY_PROG[_ibpKey]) ? INICIO_BY_PROG[_ibpKey] : [];
+  var _ibpKey=(progName && INICIO_BY_PROG[progName+'|'+sec] && INICIO_BY_PROG[progName+'|'+sec].length) ? progName+'|'+sec : progName;
+  var _ibpDates=(progName && INICIO_BY_PROG[_ibpKey] && INICIO_BY_PROG[_ibpKey].length) ? INICIO_BY_PROG[_ibpKey] : null;
+  var dates=_ibpDates || (INICIO_DATES[sec]||[]);
   var curVal=SEL_INICIO[sec];
   buildFechaOptions(sel, dates, curVal);
   if(curVal && dates.indexOf(curVal)<0){ setSELInicio(sec,null); sel.value=''; }
