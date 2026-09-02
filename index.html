@@ -1399,7 +1399,8 @@ function loadConfig(){
       if(c.plat!==undefined) PLATZI_PREVIEW=c.plat;
     }catch(e){}
   }
-  // Fuente de verdad: config.json mismo origen (funciona en iframes sin CORS)
+  // Fuente de verdad: config.json — solo aplica si nunca se guardó manualmente desde el panel
+  if(!localStorage.getItem('utel_cfg_manual'))
   fetch('config.json?_='+Date.now())
     .then(function(r){return r.json();})
     .then(function(data){_applyConfigData(data);})
@@ -1413,6 +1414,7 @@ function loadConfig(){
 }
 
 function saveConfig(){
+  localStorage.setItem('utel_cfg_manual','1');
   localStorage.setItem('utel_cfg',JSON.stringify({dom:DOMICILIACION,domexp:DOM_EXPIRY,tit0:TITULO_COSTO_0,tit0exp:TIT0_EXPIRY,plat:PLATZI_PREVIEW}));
   var payload={dom:DOMICILIACION,domexp:DOM_EXPIRY,tit0:TITULO_COSTO_0,tit0exp:TIT0_EXPIRY,plat:PLATZI_PREVIEW};
   // Guardar en JSONBin
