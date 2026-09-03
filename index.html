@@ -1575,7 +1575,8 @@ function fichaBadge(progName,nivel,forceEje){
     var arr=dfm[nk]||dfm._stem[nkStem]||dfm._nostop[nkNostop]||dfm._nostop[nkBoth]||[];
     var dp=arr[0];
     if(!dp) return '';
-    return '<button class="ficha-btn" onclick="openExt(\'https://drive.google.com/open?id='+dp.id+'\',\'FICHA TÉCNICA\',\'#64748b\')" title="Ver ficha técnica (Drive)">📄 Ficha</button>';
+    var _furl='https://docs.google.com/viewer?url='+encodeURIComponent('https://drive.google.com/uc?export=download&id='+dp.id)+'&embedded=true';
+    return '<button class="ficha-btn" onclick="openExt(\''+_furl.replace(/\'/g,\'\\\\\')+'\',\'FICHA TÉCNICA\',\'#64748b\')" title="Ver ficha técnica">📄 Ficha</button>';
   }
   var selKey=nivel==='LIC'?'lic':nivel==='MAE'?'mae':nivel==='MASTER'?'ms':'doc';
   var isEje=forceEje||SEL_EXP[selKey]==='ejecutiva';
