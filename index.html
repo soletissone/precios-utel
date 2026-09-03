@@ -3671,6 +3671,14 @@ function rL(){
   if(!progSel.value)return;
   var progName=progSel.value;
   applyPromoFlash(progName);
+  // Programas nuevos no tienen super intensiva
+  var _superOpt=document.querySelector('#ljor option[value="super"]');
+  if(_superOpt){
+    var _esNuevo=isNuevo(progName);
+    _superOpt.disabled=_esNuevo;
+    _superOpt.hidden=_esNuevo;
+    if(_esNuevo && g('ljor').value==='super') g('ljor').value='intensiva';
+  }
   updateFechaByProg('lic', progName);
   if(progName!==_lastProgLic){ SEL['lic']={}; SEL_EXP['lic']=null; _lastProgLic=progName; }
   var nivelRaw=updateBadge('lprog','lnivel-badge');
