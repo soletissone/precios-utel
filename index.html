@@ -1575,7 +1575,7 @@ function fichaBadge(progName,nivel,forceEje){
     var arr=dfm[nk]||dfm._stem[nkStem]||dfm._nostop[nkNostop]||dfm._nostop[nkBoth]||[];
     var dp=arr[0];
     if(!dp) return '';
-    return '<button class="ficha-btn" onclick="window.open(\'https://drive.google.com/file/d/'+dp.id+'/preview\',\'_blank\')" title="Ver ficha técnica (Drive)">📄 Ficha</button>';
+    return '<button class="ficha-btn" onclick="openExt(\'https://drive.google.com/open?id='+dp.id+'\',\'FICHA TÉCNICA\',\'#64748b\')" title="Ver ficha técnica (Drive)">📄 Ficha</button>';
   }
   var selKey=nivel==='LIC'?'lic':nivel==='MAE'?'mae':nivel==='MASTER'?'ms':'doc';
   var isEje=forceEje||SEL_EXP[selKey]==='ejecutiva';
