@@ -1500,11 +1500,11 @@ function renderRecursos(divId, progName, nivel){
     if(imgs.length>0){
       var VIDEO_RE=/\.(mp4|mov|avi|webm)$/i;
       var thumbHtml=imgs.map(function(img){
-        var previewUrl='https://drive.google.com/open?id='+img.id;
-        var nameEsc=img.name.replace(/\\/g,'\\\\').replace(/'/g,'\\\'');
-        var displayName=img.name.replace(/\s*[-_]\s*(LIC|MAE|MASTER|DOC)\s*/gi,'').replace(/\.(pptx?|pdf|docx?|xlsx?)$/i,'').trim()||img.name;
         var isVid=VIDEO_RE.test(img.name);
         var isPdfRec=/\.pdf$/i.test(img.name);
+        var previewUrl=isPdfRec?'https://drive.google.com/file/d/'+img.id+'/preview':'https://drive.google.com/open?id='+img.id;
+        var nameEsc=img.name.replace(/\\/g,'\\\\').replace(/'/g,'\\\'');
+        var displayName=img.name.replace(/\s*[-_]\s*(LIC|MAE|MASTER|DOC)\s*/gi,'').replace(/\.(pptx?|pdf|docx?|xlsx?)$/i,'').trim()||img.name;
         var isImg=/\.(jpe?g|png|gif|webp|bmp|svg)$/i.test(img.name);
         var icon=isVid?'▶':isPdfRec?'📄':isImg?'🖼':'📊';
         var bg=isVid?'#1a1a2e':isPdfRec?'#fef2f2':isImg?'#f0fdf4':'#eff6ff';
@@ -1575,8 +1575,7 @@ function fichaBadge(progName,nivel,forceEje){
     var arr=dfm[nk]||dfm._stem[nkStem]||dfm._nostop[nkNostop]||dfm._nostop[nkBoth]||[];
     var dp=arr[0];
     if(!dp) return '';
-    var _furl='https://docs.google.com/viewer?url='+encodeURIComponent('https://drive.google.com/uc?export=download&id='+dp.id)+'&embedded=true';
-    return '<button class="ficha-btn" onclick="openExt(\''+_furl+'\',\'FICHA TÉCNICA\',\'#64748b\')" title="Ver ficha técnica">📄 Ficha</button>';
+    return '<button class="ficha-btn" onclick="openExt(\'https://drive.google.com/file/d/'+dp.id+'/preview\',\'FICHA TÉCNICA\',\'#64748b\')" title="Ver ficha técnica">📄 Ficha</button>';
   }
   var selKey=nivel==='LIC'?'lic':nivel==='MAE'?'mae':nivel==='MASTER'?'ms':'doc';
   var isEje=forceEje||SEL_EXP[selKey]==='ejecutiva';
