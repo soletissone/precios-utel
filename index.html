@@ -982,6 +982,11 @@ function logout(){
   g('pi').value='';
 }
 var currentExtUrl='';
+function _recThumbErr(el,icon,accent,label){
+  var p=el.parentNode;
+  p.style.display='flex';p.style.alignItems='center';p.style.justifyContent='center';p.style.flexDirection='column';p.style.gap='3px';
+  p.innerHTML='<span style="font-size:26px;line-height:1">'+icon+'</span><span style="font-size:9px;font-weight:800;color:'+accent+';letter-spacing:.08em">'+label+'</span>';
+}
 function openExt(url,title,dotColor){
   currentExtUrl=url;
   g('ext-title').textContent=title;
@@ -1504,20 +1509,19 @@ function renderRecursos(divId, progName, nivel){
         var isPdfRec=/\.pdf$/i.test(img.name);
         var previewUrl=isPdfRec?'https://drive.google.com/file/d/'+img.id+'/preview':'https://drive.google.com/open?id='+img.id;
         var nameEsc=img.name.replace(/\\/g,'\\\\').replace(/'/g,'\\\'');
-        var displayName=img.name.replace(/\s*[-_]\s*(LIC|MAE|MASTER|DOC)\s*/gi,'').replace(/\.(pptx?|pdf|docx?|xlsx?)$/i,'').trim()||img.name;
+        var displayName=img.name.replace(/\s*[-_]\s*(LIC|MAE|MASTER|DOC)\s*/gi,'').replace(/\.(pptx?|pdf|docx?|xlsx?|png|jpe?g|gif|webp|bmp|svg)$/i,'').trim()||img.name;
         var isImg=/\.(jpe?g|png|gif|webp|bmp|svg)$/i.test(img.name);
-        var icon=isVid?'▶':isPdfRec?'📄':isImg?'🖼':'📊';
-        var bg=isVid?'#1a1a2e':isPdfRec?'#fef2f2':isImg?'#f0fdf4':'#eff6ff';
-        var accent=isVid?'#fff':isPdfRec?'#dc2626':isImg?'#16a34a':'#1d4ed8';
-        var label=isVid?'VIDEO':isPdfRec?'PDF':isImg?'IMAGEN':'SLIDES';
-        var thumbPart=isImg
-          ?'<div style="width:100%;height:72px;overflow:hidden;position:relative;background:'+bg+'">'
-            +'<img src="https://drive.google.com/thumbnail?id='+img.id+'&sz=w300" style="width:100%;height:72px;object-fit:cover;display:block" loading="lazy" '
-            +'onerror="this.parentNode.innerHTML=\'<div style=\\\"width:100%;height:72px;display:flex;align-items:center;justify-content:center;font-size:28px\\\">🖼</div>\'">'
-            +'</div>'
-          :'<div style="width:100%;height:72px;background:'+bg+';display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px">'
+        var icon=isVid?'▶':isPdfRec?'📄':'🖼';
+        var bg=isVid?'#1a1a2e':isPdfRec?'#fef2f2':'#f0fdf4';
+        var accent=isVid?'#fff':isPdfRec?'#dc2626':'#16a34a';
+        var label=isVid?'VIDEO':isPdfRec?'PDF':'IMAGEN';
+        var thumbPart=isVid
+          ?'<div style="width:100%;height:72px;background:'+bg+';display:flex;align-items:center;justify-content:center;flex-direction:column;gap:3px">'
             +'<span style="font-size:26px;line-height:1">'+icon+'</span>'
             +'<span style="font-size:9px;font-weight:800;color:'+accent+';letter-spacing:.08em">'+label+'</span>'
+            +'</div>'
+          :'<div style="width:100%;height:72px;overflow:hidden;position:relative;background:'+bg+'">'
+            +'<img src="https://lh3.googleusercontent.com/d/'+img.id+'=w280" style="width:100%;height:72px;object-fit:cover;display:block" loading="lazy" onerror="_recThumbErr(this,\''+icon+'\',\''+accent+'\',\''+label+'\')">'
             +'</div>';
         return '<div data-rec-card onclick="openExt(\''+previewUrl+'\',\''+nameEsc+'\')" title="'+nameEsc+'" style="display:flex;flex-direction:column;cursor:pointer;border-radius:8px;overflow:hidden;border:1px solid var(--bd);flex-shrink:0;width:130px;transition:box-shadow .15s;background:var(--sf)" onmouseover="this.style.boxShadow=\'0 3px 10px rgba(0,0,0,.12)\'" onmouseout="this.style.boxShadow=\'none\'">'
           +thumbPart
