@@ -1406,8 +1406,7 @@ function loadConfig(){
       if(c.plat!==undefined) PLATZI_PREVIEW=c.plat;
     }catch(e){}
   }
-  // Fuente de verdad: config.json — solo aplica si nunca se guardó manualmente desde el panel
-  if(!localStorage.getItem('utel_cfg_manual'))
+  // Fuente de verdad: config.json — siempre se aplica (sobreescribe caché local)
   fetch('config.json?_='+Date.now())
     .then(function(r){return r.json();})
     .then(function(data){_applyConfigData(data);})
@@ -3640,8 +3639,15 @@ function renderMultiVariant(tbodyId, variants){
 }
 
 // ── PROMO FLASH ──────────────────────────────────────────────────
-var PROMO_FLASH_PROGS = [];
-// Para activar fecha límite descomentar: var PROMO_FLASH_FIN = new Date('2026-08-18T23:59:59');
+var PROMO_FLASH_PROGS = [
+  'Pedagogía',
+  'Administración Y Finanzas',
+  'Administración De Negocios',
+  'Ingeniería En Energías Renovables',
+  'Criminología Y Criminalística',
+  'Psicología Organizacional',
+  'Inteligencia Artificial'
+];
 var PROMO_FLASH_FIN = null;
 
 function isPromoFlash(progName){
