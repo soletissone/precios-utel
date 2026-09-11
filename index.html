@@ -549,6 +549,7 @@ Si pudieras sumarle una habilidad a tu perfil hoy mismo, ¿qué elegirías?</div
           <div style="font-weight:400;opacity:.93;line-height:1.5">Estudia tu licenciatura híbrida con un modelo flexible que combina lo mejor del aprendizaje en línea y sesiones presenciales semanales en CDMX. Fortalece tus habilidades y adquiere competencias de alta demanda para desenvolverte en entornos laborales cada vez más cambiantes.<br><span style="font-size:11px;opacity:.75;margin-top:4px;display:inline-block">*Disponible únicamente en CDMX</span></div>
         </div>
       </div>
+      <div id="hibrid-recursos-lic" style="display:none;margin-bottom:12px"></div>
       <div id="promo-flash-banner-top" style="display:none;align-items:center;gap:10px;background:linear-gradient(135deg,#ff4d00,#ff9500);color:#fff;border-radius:10px;padding:12px 18px;margin-bottom:12px;font-weight:700;font-size:14px;box-shadow:0 4px 14px rgba(255,80,0,.35);animation:flashPulse 1.5s ease-in-out infinite">
         <span style="font-size:22px">⚡</span>
         <div style="flex:1">
@@ -623,6 +624,7 @@ Si pudieras sumarle una habilidad a tu perfil hoy mismo, ¿qué elegirías?</div
 
     <!-- MAESTRÍAS -->
     <div class="sec" id="sec-mae">
+      <div id="hibrid-recursos-mae" style="display:none;margin-bottom:12px"></div>
       <div id="hibrid-banner-mae" style="display:none;align-items:flex-start;gap:12px;background:linear-gradient(135deg,#1a3a2a,#0d5c3a);color:#fff;border-radius:10px;padding:14px 18px;margin-bottom:12px;font-size:13px;box-shadow:0 3px 10px rgba(0,80,40,.3)">
         <span style="font-size:20px;margin-top:1px">🏫</span>
         <div>
@@ -3614,6 +3616,55 @@ function renderMultiVariant(tbodyId, variants){
   });
 }
 
+// ── HÍBRIDA RECURSOS ─────────────────────────────────────────────
+var HIB_FICHAS_LIC = {"cienciaspoliticasadminpublica": "1Nl3YZvMKP6ZZ6ixkm-sHs9Hs4N1AB1Vi", "comunicacion": "1EsvR00mqG3sb0VndCA6z5X-pRGiYFPqh", "comunicaciondigital": "1qMBA-8VBCRIBoZSJeapBc-JCcD9OG0Bp", "comunicacionorganizacional": "1P_inmtcmaLgQXeJ_MPmjmw5IV6HnnH32", "criminologiacriminalistica": "1QRUipuCZM3dQNuKhkU4vu0e-fR99Dr7M", "derecho": "1rNxgTRkWVbxcYCtuY3HF9VsRGMS3pbBz", "derechoempresarial": "1O05wXilYbP7MVGUbbNdxlSh8WQKYYbC-", "derechointernacional": "11mWqJfWvMMKNGyzLjge0RI36mBHNN6aA", "pedagogia": "1wB3b5QmUbI91Zqh6auBwKkOEsnPwYhRD", "psicologiaorganizacional": "1Sgt_y1-kwR-mHAiU5hqpQTfSuHn-tYmB", "tecnologiaeducativa": "1X_pgNQd2a0AE3YSWO57lUv7cizgGFw0w", "adminnegocios": "14nwru-ayP-cejUKmaeLuE0OqNK3ToEMH", "adminrecursoshumanos": "1snETu78UD020I1QFJgJlFdHUWYG8bkFb", "admintecnologiasdeinformacion": "1YSMJeN5bABNvKLiyfK0zvKN7cZOEGdLK", "administracion": "13ZtUzSsFQYBt62vvfECBzy9CoYx_xgRo", "administracionfinanzas": "1AQRSybX1wSs5_uuBrcv4AS9WswQ63F9z", "administracionventas": "1OOfrFFVyFTIY6cceMVKu--mLxO_VDnVL", "contaduriafinanzas": "1s6abXBJwNuZjZcJp_gioUi-eJaCdrF7U", "contaduriapublica": "1KO-9N8bAuSxSiY-H0AGyal7CFWOSa006", "economiafinanzas": "1bVUky5h4ioTAfslxzASB00mcaL-QGbGk", "mercadotecnia": "1DEVxj8P9Y5jBHzG3ce_QattYdQ2RcL1k", "negociosinternacionales": "1Woeh3SJP1UL8Dqc486qCg3YwSEoH5by3", "adminempresasturisticas": "1AyqAbFua3YZtWQyw1t-hwh_RjW7eIMeM", "desarrollosustentableecoturismo": "1ArJIfybRqGgvfEZ3SiIk98wVZJis70Rt", "ingenieriaindustrial": "1B4JcVNzfUZJfJxq8-zu6aMOKsj_f8i7o", "ingenieriaindustrialadmin": "1Aia38h4LwBPNC5bqkjf4dJ1iFd6JlJov", "ingenieriasistemascomp": "1bNmsKUMDLAPjgPL07_kkqTQWOCbEj7th"};
+var HIB_FICHAS_MAE = {"gestiondirectivainstitucionesdesalud": "18rCDjDAJdi06_6MlQVl2KIkp-XmsD_Hu", "derechoprocesalconstitucional": "1CAN6aeZMTaxTDx3AYCTTkT8cXZZHN48t", "derechoprocesaljuiciosorales": "1oWby1_ZTIQstn70gVbjckVZ5m-tJVfHm", "derechoprocesalpenal": "1qcpzhzPQ4KCesZpmOjJ-oYnfFPxiWgLM", "educaciondocencia": "1zoWtsb-f5Oss_MaGy_yTTb7vnbzWp33x", "mindfulness": "1vDbuX1Xb5zar-fVN6NfSyl4fzojv1TtZ", "tecnologiaeducativa": "1difC3I5n77BjAxAjrvNyG4SEGNJKEeKy", "admininstitucioneseducativas": "1FBVukrjgPdmSVM96HkuXUZMFKp1Jcj_x", "adminmercadotecniaestrategica": "1_aczLuNbCFPtFmAWMlIQV-9IHa4t5cFg", "adminnegocios": "1TIzO4IzK5PeZtU6GV2rUND8PaAKYKLHa", "adminnegociosdeportivos": "1QJxBaowgCgrS3tlAOESxvHYj0yVo435q", "adminpublica": "1y42jO5L7NkdsfeuHORv7d2i3beCGleCS", "admintecnologiasdeinformacion": "1KrKMF3AjG5SscTTBRlWs8CqR-VswJxfF", "coachingintegralorganizacional": "14iJTCsOVYJwluJrdpBshg0ZJPRPoclR9", "comerciointernacional": "1ngoD89oZhnk0obde2jPxjsxDm0py9kUw", "direccionnegociosdealimentosbebidas": "1pF7RzGZ40wCqc39WmiXVMJ1JLSPuDZn1", "direccionventas": "1-UIymnC8PUyXmSNj8HWbOjnDnyT73lgZ", "finanzas": "1tBXekAaOvYtjAbzc-K59e7apc8BxVexo", "gestionestrategicadelcapitalhumano": "1QK4a9s_XvUJ4litmJP_3w3LRZ4yFoe4v", "gestionorganizacionalpositiva": "1aE17xmBF0pd4rCIgXeoE8jlhwK-6X8O1", "mercadotecniadigitalcomercioelectronico": "1-MsVBo5fLgETVlRs9TZnhDy3IEQPqjc0", "direccionempresasturisticas": "1wbexZ4JI-LEQqDbuDBIlAicCVfUZ_bPL", "cienciacomputacionalestelecomunicaciones": "1sioOBy97tnlRKPd54Rd2cmSuTduvCsqH", "cienciadatosparanegocios": "16NWSqW_3xqt-W7cIzhDrJz-CKpDnjIyi", "direccioningenieriadesoftware": "1qkikmIb28-68_sGVzMgR36_-nMmxzuul", "direccionproyectosinnovacion": "1j8rQn4o9AWlBnmYDaQy02btFaWCIKMHz", "ingenieriatecnologiaambiental": "1u-Eqjw5emxdm6W99QjFr8OCTYJcXtde1"};
+var HIB_BROCHURE_ID = "15eRSynX68rMT_5ePT9OiNo9ZC__SzfSB";
+var HIB_TESTIMONIALS = [{"id":"1vP5iniP3t_FGEHfcqn_NlEfqyudh3Mz2","name":"Testimonial Cristian"},{"id":"1Hhv8XauKgAgJDxTBj--jG7HqEpgSrvkJ","name":"Testimonial María Elena"},{"id":"1T65--kvNUCZg7HqEpgSrvkJ","name":"Testimonial Mary"}];
+
+function _hibNormKey(name){
+  return name.toLowerCase()
+    .replace(/[áàä]/g,'a').replace(/[éèë]/g,'e').replace(/[íìï]/g,'i')
+    .replace(/[óòö]/g,'o').replace(/[úùü]/g,'u').replace(/ñ/g,'n')
+    .replace(/[^a-z0-9]/g,'');
+}
+
+function renderHibRecursos(sec, progName){
+  var contId = 'hibrid-recursos-'+sec;
+  var cont = g(contId);
+  if(!cont) return;
+  if(!progName){ cont.style.display='none'; cont.innerHTML=''; return; }
+
+  var fichasMap = (sec==='lic') ? HIB_FICHAS_LIC : HIB_FICHAS_MAE;
+  var key = _hibNormKey(progName);
+  var fichaId = fichasMap[key] || null;
+
+  var cards = '';
+
+  if(fichaId){
+    cards += '<a href="https://drive.google.com/file/d/'+fichaId+'/view" target="_blank" style="display:flex;align-items:center;gap:10px;background:var(--sf);border:1px solid var(--bd);border-radius:9px;padding:10px 14px;text-decoration:none;color:var(--tx);font-size:12px;font-weight:600;transition:box-shadow .15s" onmouseover="this.style.boxShadow=\'0 2px 8px rgba(0,0,0,.12)\'" onmouseout="this.style.boxShadow=\'none\'">'
+      +'<span style="font-size:20px">📄</span>'
+      +'<div><div style="font-weight:700;color:#dc2626;font-size:11px;letter-spacing:.06em">FICHA TÉCNICA</div>'
+      +'<div>'+progName+' · Modalidad Híbrida</div></div></a>';
+  }
+
+  cards += '<a href="https://drive.google.com/file/d/'+HIB_BROCHURE_ID+'/view" target="_blank" style="display:flex;align-items:center;gap:10px;background:var(--sf);border:1px solid var(--bd);border-radius:9px;padding:10px 14px;text-decoration:none;color:var(--tx);font-size:12px;font-weight:600;transition:box-shadow .15s" onmouseover="this.style.boxShadow=\'0 2px 8px rgba(0,0,0,.12)\'" onmouseout="this.style.boxShadow=\'none\'">'
+    +'<span style="font-size:20px">📘</span>'
+    +'<div><div style="font-weight:700;color:#0d5c3a;font-size:11px;letter-spacing:.06em">BROCHURE</div>'
+    +'<div>Modalidad Híbrida · General</div></div></a>';
+
+  HIB_TESTIMONIALS.forEach(function(t){
+    cards += '<a href="https://drive.google.com/file/d/'+t.id+'/view" target="_blank" style="display:flex;align-items:center;gap:10px;background:var(--sf);border:1px solid var(--bd);border-radius:9px;padding:10px 14px;text-decoration:none;color:var(--tx);font-size:12px;font-weight:600;transition:box-shadow .15s" onmouseover="this.style.boxShadow=\'0 2px 8px rgba(0,0,0,.12)\'" onmouseout="this.style.boxShadow=\'none\'">'
+      +'<span style="font-size:20px">🎥</span>'
+      +'<div><div style="font-weight:700;color:#7c3aed;font-size:11px;letter-spacing:.06em">TESTIMONIAL</div>'
+      +'<div>'+t.name+'</div></div></a>';
+  });
+
+  cont.innerHTML = '<div style="font-size:11px;font-weight:700;color:var(--mu);letter-spacing:.07em;margin-bottom:8px">RECURSOS HÍBRIDA</div>'
+    +'<div style="display:flex;flex-wrap:wrap;gap:8px">'+cards+'</div>';
+  cont.style.display='block';
+}
+
 // ── PROMO FLASH ──────────────────────────────────────────────────
 var PROMO_FLASH_PROGS = [
   'Pedagogía',
@@ -3668,7 +3719,7 @@ function rL(){
     if(_esNuevo && g('ljor').value==='super') g('ljor').value='intensiva';
   }
   updateFechaByProg('lic', progName);
-  if(progName!==_lastProgLic){ SEL['lic']={}; SEL_EXP['lic']=null; _lastProgLic=progName; var _bh=g('hibrid-banner-lic'); if(_bh) _bh.style.display='none'; }
+  if(progName!==_lastProgLic){ SEL['lic']={}; SEL_EXP['lic']=null; _lastProgLic=progName; var _bh=g('hibrid-banner-lic'); if(_bh) _bh.style.display='none'; renderHibRecursos('lic',null); }
   var nivelRaw=updateBadge('lprog','lnivel-badge');
   // Map special catalog keys to real pricing levels
   var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico','unica':'unico','uve':'unico','unag':'unico'};
@@ -3809,7 +3860,7 @@ function rM(){
   if(!progSel.value)return;
   var progName=progSel.value;
   updateFechaByProg('mae', progName); updateFechaByProg('ms', progName);
-  if(progName!==_lastProgMae){ SEL['mae']={}; SEL_EXP['mae']=null; _lastProgMae=progName; var _bh=g('hibrid-banner-mae'); if(_bh) _bh.style.display='none'; }
+  if(progName!==_lastProgMae){ SEL['mae']={}; SEL_EXP['mae']=null; _lastProgMae=progName; var _bh=g('hibrid-banner-mae'); if(_bh) _bh.style.display='none'; renderHibRecursos('mae',null); }
   var nivelRaw=updateBadge('mprog','mnivel-badge');
   var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico','unica':'unico','uve':'unico','unag':'unico'};
   var nivel=nivelMap[nivelRaw]||nivelRaw;
@@ -4662,6 +4713,8 @@ function renderExpSelector(progEntry){
 function selectExp(id){
   SEL_EXP['lic']=id;
   var b=g('hibrid-banner-lic'); if(b) b.style.display=(id==='hibrid'?'flex':'none');
+  var prog=g('lprog')?g('lprog').value:'';
+  renderHibRecursos('lic', id==='hibrid'?prog:null);
   rL();
 }
 
@@ -4687,6 +4740,8 @@ function renderExpSelectorMAE(progEntry){
 function selectExpMAE(id){
   SEL_EXP['mae']=id;
   var b=g('hibrid-banner-mae'); if(b) b.style.display=(id==='hibrid'?'flex':'none');
+  var prog=g('mprog')?g('mprog').value:'';
+  renderHibRecursos('mae', id==='hibrid'?prog:null);
   rM();
 }
 
