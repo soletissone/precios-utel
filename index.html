@@ -535,6 +535,7 @@ Si pudieras sumarle una habilidad a tu perfil hoy mismo, ¿qué elegirías?</div
       <div class="tab" onclick="sw('doc')">Doctorado</div>
       <div class="tab" onclick="sw('pu')">Pagos Únicos</div>
       <div class="tab" onclick="sw('dip')">Diplomados</div>
+      <div class="tab" onclick="sw('hib')">🏫 Híbrida</div>
       <div class="tab" onclick="sw('en')">Ejecutiva</div>
       <div class="tab" onclick="sw('gal')">🖼 Recursos</div>
       <div class="tab" onclick="sw('b2b')" style="color:#1a73e8;font-weight:700">🤝 B2B</div>
@@ -542,14 +543,6 @@ Si pudieras sumarle una habilidad a tu perfil hoy mismo, ¿qué elegirías?</div
 
     <!-- LICENCIATURAS -->
     <div class="sec active" id="sec-lic">
-      <div id="hibrid-banner-lic" style="display:none;align-items:flex-start;gap:12px;background:linear-gradient(135deg,#1a3a2a,#0d5c3a);color:#fff;border-radius:10px;padding:14px 18px;margin-bottom:12px;font-size:13px;box-shadow:0 3px 10px rgba(0,80,40,.3)">
-        <span style="font-size:20px;margin-top:1px">🏫</span>
-        <div>
-          <div style="font-weight:700;font-size:14px;margin-bottom:4px">Modalidad Híbrida</div>
-          <div style="font-weight:400;opacity:.93;line-height:1.5">Estudia tu licenciatura híbrida con un modelo flexible que combina lo mejor del aprendizaje en línea y sesiones presenciales semanales en CDMX. Fortalece tus habilidades y adquiere competencias de alta demanda para desenvolverte en entornos laborales cada vez más cambiantes.<br><span style="font-size:11px;opacity:.75;margin-top:4px;display:inline-block">*Disponible únicamente en CDMX</span></div>
-        </div>
-      </div>
-      <div id="hibrid-recursos-lic" style="display:none;margin-bottom:12px"></div>
       <div id="promo-flash-banner-top" style="display:none;align-items:center;gap:10px;background:linear-gradient(135deg,#ff4d00,#ff9500);color:#fff;border-radius:10px;padding:12px 18px;margin-bottom:12px;font-weight:700;font-size:14px;box-shadow:0 4px 14px rgba(255,80,0,.35);animation:flashPulse 1.5s ease-in-out infinite">
         <span style="font-size:22px">⚡</span>
         <div style="flex:1">
@@ -624,14 +617,6 @@ Si pudieras sumarle una habilidad a tu perfil hoy mismo, ¿qué elegirías?</div
 
     <!-- MAESTRÍAS -->
     <div class="sec" id="sec-mae">
-      <div id="hibrid-recursos-mae" style="display:none;margin-bottom:12px"></div>
-      <div id="hibrid-banner-mae" style="display:none;align-items:flex-start;gap:12px;background:linear-gradient(135deg,#1a3a2a,#0d5c3a);color:#fff;border-radius:10px;padding:14px 18px;margin-bottom:12px;font-size:13px;box-shadow:0 3px 10px rgba(0,80,40,.3)">
-        <span style="font-size:20px;margin-top:1px">🏫</span>
-        <div>
-          <div style="font-weight:700;font-size:14px;margin-bottom:4px">Modalidad Híbrida</div>
-          <div style="font-weight:400;opacity:.93;line-height:1.5">Estudia tu maestría híbrida con un modelo flexible que combina lo mejor del aprendizaje en línea y sesiones presenciales semanales en CDMX. Fortalece tu liderazgo y adquiere competencias de alta demanda para tomar decisiones estratégicas en entornos laborales cada vez más cambiantes.<br><span style="font-size:11px;opacity:.75;margin-top:4px;display:inline-block">*Disponible únicamente en CDMX</span></div>
-        </div>
-      </div>
       <div class="filters">
         <div class="fg"><label>Área</label><select id="marea" onchange="filterMArea()"><option value="">— Todas —</option><option value="Arquitectura y Urbanismo">Arquitectura y Urbanismo</option><option value="Capital Humano y Transformación Organizacional">Capital Humano y Transformación Organizacional</option><option value="Ciencias Sociales y Humanidades">Ciencias Sociales y Humanidades</option><option value="Derecho y Justicia Digital">Derecho y Justicia Digital</option><option value="Diseño y Comunicación">Diseño y Comunicación</option><option value="Económico-Administrativa">Económico-Administrativa</option><option value="Finanzas y Economía">Finanzas y Economía</option><option value="Gobierno y Política Pública">Gobierno y Política Pública</option><option value="Hospitalidad y Turismo">Hospitalidad y Turismo</option><option value="Ingeniería y Soluciones">Ingeniería y Soluciones</option><option value="Ingeniería y Tecnología">Ingeniería y Tecnología</option><option value="Negocios, Innovación y Liderazgo">Negocios, Innovación y Liderazgo</option><option value="Salud y Psicología">Salud y Psicología</option></select></div><div class="fg"><label>Programa</label><select id="mprog" onchange="rM()"></select></div>
         
@@ -750,6 +735,64 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
       <div class="pu-grid" id="pug"></div>
     </div>
 
+
+    <!-- HÍBRIDA -->
+    <div class="sec" id="sec-hib">
+      <div style="flex-direction:column;gap:12px;background:linear-gradient(135deg,#1a3a2a,#0d5c3a);color:#fff;border-radius:10px;padding:14px 18px;margin-bottom:16px;font-size:13px;box-shadow:0 3px 10px rgba(0,80,40,.3)">
+        <div style="display:flex;align-items:flex-start;gap:12px">
+          <span style="font-size:20px;margin-top:1px">🏫</span>
+          <div>
+            <div style="font-weight:700;font-size:14px;margin-bottom:4px">Modalidad Híbrida</div>
+            <div style="font-weight:400;opacity:.93;line-height:1.5">Modelo flexible que combina lo mejor del aprendizaje en línea y sesiones presenciales semanales. Fortalecé habilidades y adquirí competencias de alta demanda para desenvolverte en entornos laborales cada vez más cambiantes.</div>
+          </div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,.2);padding-top:10px;margin-top:4px">
+          <div style="font-size:10px;font-weight:800;letter-spacing:.1em;opacity:.8;margin-bottom:8px">📍 DÓNDE SE REALIZAN LAS SESIONES PRESENCIALES</div>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
+            <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:7px 10px;font-size:11px;min-width:160px;flex:1"><div style="font-weight:700;margin-bottom:2px">Utel Hub · CDMX</div><div style="opacity:.8;font-size:10px">Barranca del Muerto 261, Benito Juárez</div><div style="opacity:.7;font-size:10px;margin-top:2px">Mié 7–9pm · Jue 7–9am · Sáb 9–11am / 11–1pm</div></div>
+            <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:7px 10px;font-size:11px;min-width:160px;flex:1"><div style="font-weight:700;margin-bottom:2px">Naucalpan</div><div style="opacity:.8;font-size:10px">Calz. de la Naranja 159, Alce Blanco</div><div style="opacity:.7;font-size:10px;margin-top:2px">Sáb 9–11am</div></div>
+            <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:7px 10px;font-size:11px;min-width:160px;flex:1"><div style="font-weight:700;margin-bottom:2px">Aeropuerto · CDMX</div><div style="opacity:.8;font-size:10px">WeHotel, Blvd. Puerto Aéreo 390</div><div style="opacity:.7;font-size:10px;margin-top:2px">Sáb 9–11am</div></div>
+            <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:7px 10px;font-size:11px;min-width:160px;flex:1"><div style="font-weight:700;margin-bottom:2px">Polanco · CDMX</div><div style="opacity:.8;font-size:10px">Plaza Arquímedes, Arquímedes 130</div><div style="opacity:.7;font-size:10px;margin-top:2px">Sáb 9–11am</div></div>
+            <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:7px 10px;font-size:11px;min-width:160px;flex:1"><div style="font-weight:700;margin-bottom:2px">Toluca</div><div style="opacity:.8;font-size:10px">Fiesta Inn, Ignacio Allende 124, Centro</div><div style="opacity:.7;font-size:10px;margin-top:2px">Sáb 9–11am</div></div>
+            <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:7px 10px;font-size:11px;min-width:160px;flex:1"><div style="font-weight:700;margin-bottom:2px">Puebla</div><div style="opacity:.8;font-size:10px">Comfort Inn, Av. Juárez 1309, Centro</div><div style="opacity:.7;font-size:10px;margin-top:2px">Sáb 9–11am</div></div>
+            <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:7px 10px;font-size:11px;min-width:160px;flex:1"><div style="font-weight:700;margin-bottom:2px">Querétaro</div><div style="opacity:.8;font-size:10px">Gran Hotel, Benito Juárez Sur 5, Centro</div><div style="opacity:.7;font-size:10px;margin-top:2px">Sáb 9–11am</div></div>
+            <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:7px 10px;font-size:11px;min-width:160px;flex:1"><div style="font-weight:700;margin-bottom:2px">Monterrey</div><div style="opacity:.8;font-size:10px">CANACO, Melchor Ocampo 411, Centro</div><div style="opacity:.7;font-size:10px;margin-top:2px">Sáb 9–11am</div></div>
+            <div style="background:rgba(255,255,255,.12);border-radius:8px;padding:7px 10px;font-size:11px;min-width:160px;flex:1"><div style="font-weight:700;margin-bottom:2px">Guadalajara</div><div style="opacity:.8;font-size:10px">PLAi, Independencia 55, Zona Centro</div><div style="opacity:.7;font-size:10px;margin-top:2px">Sáb 9–11am</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="tabs" style="margin-bottom:16px">
+        <div class="tab active" id="hib-tab-lic" onclick="swHIB('lic')">Licenciatura</div>
+        <div class="tab" id="hib-tab-mae" onclick="swHIB('mae')">Maestría</div>
+      </div>
+      <div class="filters">
+        <div class="fg"><label>Área</label><select id="hib-area" onchange="filterHIBArea()"><option value="">— Todas —</option></select></div>
+        <div class="fg"><label>Programa</label><select id="hib-prog" onchange="onHIBProgChange()"></select></div>
+        <div class="fg"><label>Lead</label>
+          <select id="hib-lead" onchange="rHIB()">
+            <option value="hot">Hot Lead</option>
+            <option value="rmkt30">RMKT +30 días</option>
+            <option value="rmkt60">RMKT +60 días</option>
+          </select>
+        </div>
+        <div class="fg"><label>Fecha de inicio</label><select id="hib-fecha" onchange="setSELInicio('hib',this.value)" style="font-size:13px"><option value="">— Seleccionar —</option></select></div>
+      </div>
+      <div class="ib" id="hib-info"></div>
+      <div class="tw"><table>
+        <thead><tr><th>Mes</th><th>Cuota base</th><th>+ Accesorios</th><th>Total</th><th class="dom-col">Con domiciliación</th><th>Paquete</th><th>Escalonado</th></tr></thead>
+        <tbody id="hib-tbody"></tbody>
+      </table></div>
+      <div class="bi" id="hib-bi"></div>
+      <div id="hibrid-recursos-hib" style="margin-bottom:12px"></div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button class="dl-btn" onclick="downloadSummaryWithSpeech('hib')">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 3v13m0 0l-4-4m4 4l4-4M3 21h18"/></svg>
+          Speeches
+        </button>
+      </div>
+      <div id="hib-acc"></div>
+      <div id="hib-total"></div>
+    </div>
 
     <!-- EJECUTIVA NATIVA -->
     <div class="sec" id="sec-en">
@@ -1889,7 +1932,7 @@ var NB={
 
 function sw(id){
   document.querySelectorAll('.tab').forEach(function(t,i){
-    t.classList.toggle('active',['lic','mae','doc','pu','dip','en','gal','b2b'][i]===id);
+    t.classList.toggle('active',['lic','mae','doc','pu','dip','hib','en','gal','b2b'][i]===id);
   });
   document.querySelectorAll('.sec').forEach(function(s){
     s.classList.toggle('active',s.id==='sec-'+id);
@@ -1900,6 +1943,7 @@ function sw(id){
   else if(id==='pu') rPU();
   else if(id==='dip') rDip();
   else if(id==='lic') rL();
+  else if(id==='hib'){ fillHIBAreas(); fillHIBProgs(); rHIB(); }
   else if(id==='en'){ fillENAreas(); fillENProgs(); rEN(); }
   else if(id==='gal') galInit();
   else if(id==='b2b') b2bInit();
@@ -3405,7 +3449,7 @@ var PROG_PDF_MAP={ "Administración":{"LIC_e":"UtelMX_FichasTecnicas_Programas_E
 "Tecnología Educativa E Innovación Didáctica":{"DOC_r":"UtelMx_FichasTecnicas_Doctorado_TecnologiaEducativaEInnovacionDidactica_Bloque3.pdf"},
 };
 var INICIO_DATES = {"lic": ["22/06/2026", "29/06/2026", "06/07/2026", "20/07/2026", "27/07/2026", "03/08/2026", "17/08/2026", "31/08/2026", "14/09/2026", "28/09/2026", "12/10/2026", "26/10/2026", "09/11/2026", "23/11/2026", "07/12/2026"], "mae": ["08/06/2026", "06/07/2026", "13/07/2026", "03/08/2026", "31/08/2026", "28/09/2026", "26/10/2026", "23/11/2026"], "ms": ["06/07/2026", "03/08/2026", "31/08/2026", "28/09/2026", "26/10/2026", "23/11/2026"], "doc": ["06/07/2026", "03/08/2026", "31/08/2026", "28/09/2026", "26/10/2026", "23/11/2026"], "dip": ["29/06/2026", "27/07/2026"]};
-var SEL_INICIO = {lic:null, mae:null, ms:null, doc:null, dip:null, en:null};
+var SEL_INICIO = {lic:null, mae:null, ms:null, doc:null, dip:null, en:null, hib:null};
 
 var SEL_EXP = {lic: null, mae: null}; // null = ninguna, 'seseje'/'utelj'/'hibrid'
 var SEL = {lic:{},mae:{},ms:{},doc:{},en:{}};
@@ -3635,7 +3679,8 @@ function renderHibRecursos(sec, progName){
   if(!cont) return;
   if(!progName){ cont.style.display='none'; cont.innerHTML=''; return; }
 
-  var fichasMap = (sec==='lic') ? HIB_FICHAS_LIC : HIB_FICHAS_MAE;
+  var fichasSec = (sec==='hib') ? HIB_NAT_SEC : sec;
+  var fichasMap = (fichasSec==='lic') ? HIB_FICHAS_LIC : HIB_FICHAS_MAE;
   var key = _hibNormKey(progName);
   var fichaId = fichasMap[key] || null;
 
@@ -3663,6 +3708,138 @@ function renderHibRecursos(sec, progName){
   cont.innerHTML = '<div style="font-size:11px;font-weight:700;color:var(--mu);letter-spacing:.07em;margin-bottom:8px">RECURSOS HÍBRIDA</div>'
     +'<div style="display:flex;flex-wrap:wrap;gap:8px">'+cards+'</div>';
   cont.style.display='block';
+}
+
+// ── HÍBRIDA TAB ──────────────────────────────────────────────────
+var HIB_NAT_SEC = 'lic';
+
+function swHIB(sec){
+  HIB_NAT_SEC = sec;
+  ['lic','mae'].forEach(function(s){
+    var t=g('hib-tab-'+s); if(t) t.classList.toggle('active',s===sec);
+  });
+  var lsel=g('hib-lead');
+  if(lsel){
+    lsel.innerHTML = sec==='lic'
+      ? '<option value="hot">Hot Lead</option><option value="rmkt30">RMKT +30 días</option><option value="rmkt60">RMKT +60 días</option>'
+      : '<option value="hot">Hot Lead</option><option value="rmkt30">RMKT</option>';
+  }
+  INICIO_DATES['hib'] = INICIO_DATES[sec==='lic'?'lic':'mae']||[];
+  var ea=g('hib-area'); if(ea) ea.value='';
+  fillHIBAreas();
+  fillHIBProgs();
+  rHIB();
+}
+
+function fillHIBAreas(){
+  var catKey=HIB_NAT_SEC==='lic'?'LICENCIATURA':'MAESTRÍA';
+  var progsAll=CATALOG[catKey]||[];
+  var asel=g('hib-area'); if(!asel) return;
+  var prevArea=asel.value;
+  var areas=[];
+  progsAll.forEach(function(item){
+    if(item.hib && item.a && areas.indexOf(item.a)<0) areas.push(item.a);
+  });
+  asel.innerHTML='<option value="">— Todas —</option>';
+  areas.forEach(function(a){
+    var opt=document.createElement('option');
+    opt.value=a; opt.textContent=a; asel.appendChild(opt);
+  });
+  if(prevArea) asel.value=prevArea;
+}
+
+function filterHIBArea(){ fillHIBProgs(); rHIB(); }
+
+function fillHIBProgs(){
+  var catKey=HIB_NAT_SEC==='lic'?'LICENCIATURA':'MAESTRÍA';
+  var progsAll=CATALOG[catKey]||[];
+  var areaVal=g('hib-area')?g('hib-area').value:'';
+  var sel=g('hib-prog'); if(!sel) return;
+  var prevVal=sel.value;
+  sel.innerHTML='';
+  progsAll.filter(function(item){
+    if(!item.hib) return false;
+    if(areaVal && item.a!==areaVal) return false;
+    return true;
+  }).forEach(function(item){
+    var opt=document.createElement('option');
+    opt.value=item.p;
+    opt.textContent=(isMercadoUnico(item.p)?'🌟 ':'')+item.p.charAt(0)+item.p.slice(1).toLowerCase();
+    sel.appendChild(opt);
+  });
+  if(prevVal) sel.value=prevVal;
+  if(!sel.value && sel.options.length>0) sel.value=sel.options[0].value;
+  updateFechaByProg('hib', sel.value);
+}
+
+function onHIBProgChange(){
+  updateFechaByProg('hib', g('hib-prog')?g('hib-prog').value:'');
+  rHIB();
+}
+
+function rHIB(){
+  var sec=HIB_NAT_SEC;
+  var progSel=g('hib-prog'); if(!progSel) return;
+  if(!progSel.value && progSel.options.length>0) progSel.value=progSel.options[0].value;
+  if(!progSel.value){ renderHibRecursos('hib',null); return; }
+  var progName=progSel.value;
+  var lead=g('hib-lead')?g('hib-lead').value:'hot';
+  if(lead==='rmkt') lead='rmkt30';
+  var fechaBadge=SEL_INICIO['hib']?'<span class="dur-badge">📅 Inicio: '+SEL_INICIO['hib']+'</span>':'';
+  updateFechaByProg('hib', progName);
+  renderHibRecursos('hib', progName);
+
+  var catKey=sec==='lic'?'LICENCIATURA':'MAESTRÍA';
+  var progsAll=CATALOG[catKey]||[];
+  var progEntry=null;
+  for(var i=0;i<progsAll.length;i++){if(progsAll[i].p===progName){progEntry=progsAll[i];break;}}
+  var nivelRaw=progEntry?progEntry.v:'medio';
+  var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico','unica':'unico','uve':'unico','unag':'unico'};
+  var nivel=nivelMap[nivelRaw]||nivelRaw;
+
+  if(sec==='lic'){
+    var progNameUP=progName.toUpperCase();
+    var progKey;
+    if(nivelRaw==='arq') progKey='arquitectura';
+    else if(nivelRaw==='rob') progKey='robotica';
+    else if(nivelRaw==='arqsw') progKey='arq_software';
+    else if(progNameUP.indexOf('ARQUITECTURA')>=0) progKey='arquitectura';
+    else if(progNameUP.indexOf('ROB')>=0) progKey='robotica';
+    else if(progNameUP.indexOf('INGENIER')>=0) progKey='ingenieria';
+    else progKey='online_general';
+    var isIng2=progKey==='ingenieria'||progKey==='robotica'||progKey==='arquitectura';
+    var e=getPrice(progKey,nivel,lead,'intensiva',isIng2); if(!e) return;
+    var expPrices=e.p.map(function(v,i){return i>=2?v+300:v;});
+    var licEscFinal=(progKey==='robotica')?'P89.INT2M':(HIB_ESC_MAP[e.pkg]||e.esc);
+    var acc=getAccTotal('lic',false);
+    var _p12=0; (ACCS['lic'].included||[]).forEach(function(it){if(ALWAYS_ACCS.indexOf(it.id)>=0&&it.price)_p12+=it.price;});
+    renderTable('hib-tbody',expPrices,e.pkg,licEscFinal,acc,_p12);
+    renderBeca('hib-bi',Math.max.apply(null,expPrices),e.pkg);
+    var dur=getDuracion('lic','intensiva',progName);
+    g('hib-info').innerHTML=(NB[nivel]||'')+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+platziBtn(progName)+'<span class="dur-badge">⏱ '+dur+'</span>'+fechaBadge+LBG[lead];
+    renderAccs('hib-acc','lic',false);
+    renderTotal('hib-total',expPrices[2],'lic',false);
+  } else {
+    var progKey2=(nivelRaw==='arqsw')?'arq_software':'mae_online';
+    if(nivelRaw==='arqsw') nivel='alto';
+    var e2=getPrice(progKey2,nivel,lead); if(!e2) return;
+    var platziOff=!isPlatziVisible();
+    var platziAdd=(isPlatziVisible()&&(progKey2==='mae_online'||progKey2==='arq_software'))?100:0;
+    var maeExpPrices=e2.p.map(function(v,i){
+      if(i>=2) return v+300+(platziOff?120:0)+platziAdd;
+      return v-100;
+    });
+    var maePkgFinal=HIB_PKG_MAP[e2.pkg]||e2.pkg;
+    var maeEscFinal=HIB_ESC_MAP[e2.pkg]||e2.esc;
+    var acc2=getAccTotal('mae',true);
+    var acc12_m=getAccTotal('mae',true,true);
+    renderTable('hib-tbody',maeExpPrices,maePkgFinal,maeEscFinal,acc2,acc12_m);
+    renderBeca('hib-bi',Math.max.apply(null,maeExpPrices),e2.pkg);
+    var dur2=getDuracion('mae','maestria',progName);
+    g('hib-info').innerHTML=(NB[nivel]||'')+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'MAE')+platziBtn(progName)+'<span class="dur-badge">⏱ '+dur2+'</span>'+fechaBadge+LBG[lead];
+    renderAccs('hib-acc','mae',true);
+    renderTotal('hib-total',maeExpPrices[2],'mae',true);
+  }
 }
 
 // ── PROMO FLASH ──────────────────────────────────────────────────
@@ -4248,19 +4425,19 @@ function rDip(){
 ═══════════════════════════════════════ */
 function downloadSummary(sec){
   // Para sección Ejecutiva, mapear al sub-sec real
-  var realSec = (sec==='en') ? EJE_NATIVA_SEC : sec;
+  var realSec = (sec==='en') ? EJE_NATIVA_SEC : (sec==='hib') ? HIB_NAT_SEC : sec;
 
   // Collect info
   var leadName=(g('lead-name-input')?g('lead-name-input').value.trim():'');
-  var progSelId={lic:'lprog',mae:'mprog',ms:'sprog',doc:'dprog',en:'en-prog'}[sec];
+  var progSelId={lic:'lprog',mae:'mprog',ms:'sprog',doc:'dprog',en:'en-prog',hib:'hib-prog'}[sec];
   var progSel=g(progSelId);
   var progName=progSel&&progSel.options[progSel.selectedIndex]?progSel.options[progSel.selectedIndex].text:'-';
-  var infoEl=g({lic:'li',mae:'mi',ms:'si2',doc:'di',en:'en-info'}[sec]);
+  var infoEl=g({lic:'li',mae:'mi',ms:'si2',doc:'di',en:'en-info',hib:'hib-info'}[sec]);
   var infoHTML=infoEl?infoEl.innerHTML:'';
 
   // Detectar si es programa UNICA o UVE
   var progEntry=null;
-  var _catKey={lic:'LICENCIATURA',mae:'MAESTRÍA',ms:'MASTER',doc:'DOCTORADO',en:'LICENCIATURA'}[sec]||'LICENCIATURA';
+  var _catKey={lic:'LICENCIATURA',mae:'MAESTRÍA',ms:'MASTER',doc:'DOCTORADO',en:'LICENCIATURA',hib:HIB_NAT_SEC==='lic'?'LICENCIATURA':'MAESTRÍA'}[sec]||'LICENCIATURA';
   var _searchCat=CATALOG[_catKey]||[];
   for(var _i=0;_i<_searchCat.length;_i++){if(_searchCat[_i].p.toLowerCase()===progName.toLowerCase()){progEntry=_searchCat[_i];break;}}
   var isUNICA = progEntry && progEntry.v==='unica';
@@ -4268,7 +4445,7 @@ function downloadSummary(sec){
   var isUNAG  = progEntry && progEntry.v==='unag';
 
   // Get table rows
-  var tbodyId={lic:'lb',mae:'mb',ms:'sb',doc:'db',en:'en-tbody'}[sec];
+  var tbodyId={lic:'lb',mae:'mb',ms:'sb',doc:'db',en:'en-tbody',hib:'hib-tbody'}[sec];
   var tbody=g(tbodyId);
   var tableHTML=tbody?'<table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px">'+
     '<thead><tr style="background:#f0f1f4"><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">Mes</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">Cuota base</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">+ Accesorios</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">Total</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#06ba06">Dom. '+DOMICILIACION+'%</th></tr></thead>'+
@@ -4287,7 +4464,7 @@ function downloadSummary(sec){
   var accHTML=selList.length?'<div style="margin-bottom:12px"><strong>Accesorios seleccionados:</strong><ul style="margin:6px 0 0 16px;font-size:13px">'+selList.map(function(a){return'<li>'+a+'</li>';}).join('')+'</ul></div>':'';
 
   // Get beca info
-  var becaEl=g({lic:'lbi',mae:'mbi',ms:'sbi',doc:'dbi',en:'en-bi'}[sec]);
+  var becaEl=g({lic:'lbi',mae:'mbi',ms:'sbi',doc:'dbi',en:'en-bi',hib:'hib-bi'}[sec]);
   var becaHTML=becaEl?'<div style="font-size:12px;color:#6b7280;margin-bottom:16px">'+becaEl.innerHTML+'</div>':'';
 
   // Build HTML for print
@@ -4624,6 +4801,7 @@ function setSELInicio(sec, val){
   if(sec==='lic') rL();
   else if(sec==='mae'||sec==='ms'){ rM(); }
   else if(sec==='doc') rD();
+  else if(sec==='hib') rHIB();
 }
 
 function updateDomIndicator(){
