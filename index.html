@@ -542,6 +542,13 @@ Si pudieras sumarle una habilidad a tu perfil hoy mismo, ¿qué elegirías?</div
 
     <!-- LICENCIATURAS -->
     <div class="sec active" id="sec-lic">
+      <div id="hibrid-banner-lic" style="display:none;align-items:flex-start;gap:12px;background:linear-gradient(135deg,#1a3a2a,#0d5c3a);color:#fff;border-radius:10px;padding:14px 18px;margin-bottom:12px;font-size:13px;box-shadow:0 3px 10px rgba(0,80,40,.3)">
+        <span style="font-size:20px;margin-top:1px">🏫</span>
+        <div>
+          <div style="font-weight:700;font-size:14px;margin-bottom:4px">Modalidad Híbrida</div>
+          <div style="font-weight:400;opacity:.93;line-height:1.5">Estudia tu licenciatura híbrida con un modelo flexible que combina lo mejor del aprendizaje en línea y sesiones presenciales semanales en CDMX. Fortalece tus habilidades y adquiere competencias de alta demanda para desenvolverte en entornos laborales cada vez más cambiantes.<br><span style="font-size:11px;opacity:.75;margin-top:4px;display:inline-block">*Disponible únicamente en CDMX</span></div>
+        </div>
+      </div>
       <div id="promo-flash-banner-top" style="display:none;align-items:center;gap:10px;background:linear-gradient(135deg,#ff4d00,#ff9500);color:#fff;border-radius:10px;padding:12px 18px;margin-bottom:12px;font-weight:700;font-size:14px;box-shadow:0 4px 14px rgba(255,80,0,.35);animation:flashPulse 1.5s ease-in-out infinite">
         <span style="font-size:22px">⚡</span>
         <div style="flex:1">
@@ -616,6 +623,13 @@ Si pudieras sumarle una habilidad a tu perfil hoy mismo, ¿qué elegirías?</div
 
     <!-- MAESTRÍAS -->
     <div class="sec" id="sec-mae">
+      <div id="hibrid-banner-mae" style="display:none;align-items:flex-start;gap:12px;background:linear-gradient(135deg,#1a3a2a,#0d5c3a);color:#fff;border-radius:10px;padding:14px 18px;margin-bottom:12px;font-size:13px;box-shadow:0 3px 10px rgba(0,80,40,.3)">
+        <span style="font-size:20px;margin-top:1px">🏫</span>
+        <div>
+          <div style="font-weight:700;font-size:14px;margin-bottom:4px">Modalidad Híbrida</div>
+          <div style="font-weight:400;opacity:.93;line-height:1.5">Estudia tu maestría híbrida con un modelo flexible que combina lo mejor del aprendizaje en línea y sesiones presenciales semanales en CDMX. Fortalece tu liderazgo y adquiere competencias de alta demanda para tomar decisiones estratégicas en entornos laborales cada vez más cambiantes.<br><span style="font-size:11px;opacity:.75;margin-top:4px;display:inline-block">*Disponible únicamente en CDMX</span></div>
+        </div>
+      </div>
       <div class="filters">
         <div class="fg"><label>Área</label><select id="marea" onchange="filterMArea()"><option value="">— Todas —</option><option value="Arquitectura y Urbanismo">Arquitectura y Urbanismo</option><option value="Capital Humano y Transformación Organizacional">Capital Humano y Transformación Organizacional</option><option value="Ciencias Sociales y Humanidades">Ciencias Sociales y Humanidades</option><option value="Derecho y Justicia Digital">Derecho y Justicia Digital</option><option value="Diseño y Comunicación">Diseño y Comunicación</option><option value="Económico-Administrativa">Económico-Administrativa</option><option value="Finanzas y Economía">Finanzas y Economía</option><option value="Gobierno y Política Pública">Gobierno y Política Pública</option><option value="Hospitalidad y Turismo">Hospitalidad y Turismo</option><option value="Ingeniería y Soluciones">Ingeniería y Soluciones</option><option value="Ingeniería y Tecnología">Ingeniería y Tecnología</option><option value="Negocios, Innovación y Liderazgo">Negocios, Innovación y Liderazgo</option><option value="Salud y Psicología">Salud y Psicología</option></select></div><div class="fg"><label>Programa</label><select id="mprog" onchange="rM()"></select></div>
         
@@ -3692,7 +3706,7 @@ function rL(){
     if(_esNuevo && g('ljor').value==='super') g('ljor').value='intensiva';
   }
   updateFechaByProg('lic', progName);
-  if(progName!==_lastProgLic){ SEL['lic']={}; SEL_EXP['lic']=null; _lastProgLic=progName; }
+  if(progName!==_lastProgLic){ SEL['lic']={}; SEL_EXP['lic']=null; _lastProgLic=progName; var _bh=g('hibrid-banner-lic'); if(_bh) _bh.style.display='none'; }
   var nivelRaw=updateBadge('lprog','lnivel-badge');
   // Map special catalog keys to real pricing levels
   var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico','unica':'unico','uve':'unico','unag':'unico'};
@@ -3833,7 +3847,7 @@ function rM(){
   if(!progSel.value)return;
   var progName=progSel.value;
   updateFechaByProg('mae', progName); updateFechaByProg('ms', progName);
-  if(progName!==_lastProgMae){ SEL['mae']={}; SEL_EXP['mae']=null; _lastProgMae=progName; }
+  if(progName!==_lastProgMae){ SEL['mae']={}; SEL_EXP['mae']=null; _lastProgMae=progName; var _bh=g('hibrid-banner-mae'); if(_bh) _bh.style.display='none'; }
   var nivelRaw=updateBadge('mprog','mnivel-badge');
   var nivelMap={'arq':'alto','arq_sw':'alto','doc_esp':'alto','unico':'unico','unica':'unico','uve':'unico','unag':'unico'};
   var nivel=nivelMap[nivelRaw]||nivelRaw;
@@ -4685,6 +4699,7 @@ function renderExpSelector(progEntry){
 
 function selectExp(id){
   SEL_EXP['lic']=id;
+  var b=g('hibrid-banner-lic'); if(b) b.style.display=(id==='hibrid'?'flex':'none');
   rL();
 }
 
@@ -4709,6 +4724,7 @@ function renderExpSelectorMAE(progEntry){
 
 function selectExpMAE(id){
   SEL_EXP['mae']=id;
+  var b=g('hibrid-banner-mae'); if(b) b.style.display=(id==='hibrid'?'flex':'none');
   rM();
 }
 
