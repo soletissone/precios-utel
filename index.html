@@ -1476,7 +1476,8 @@ function _applyConfigData(data){
 }
 
 function loadConfig(){
-  // Fallback inmediato desde localStorage
+  var manualSet = localStorage.getItem('utel_cfg_manual') === '1';
+  // Aplicar localStorage primero
   var cached = localStorage.getItem('utel_cfg');
   if(cached){
     try{var c=JSON.parse(cached);
@@ -1487,7 +1488,9 @@ function loadConfig(){
       if(c.plat!==undefined) PLATZI_PREVIEW=c.plat;
     }catch(e){}
   }
-  // Fuente de verdad: config.json — siempre se aplica (sobreescribe caché local)
+  // Si el admin ya guardó manualmente, no pisar con config.json
+  if(manualSet) return;
+  // Fuente de verdad: config.json (solo si no hay configuración manual)
   fetch('config.json?_='+Date.now())
     .then(function(r){return r.json();})
     .then(function(data){_applyConfigData(data);})
