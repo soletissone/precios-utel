@@ -4780,7 +4780,7 @@ function saveAdminConfig(){
   if(tokenInput && tokenInput!=='●●●●●●●●●●●●') localStorage.setItem('utel_gh_token',tokenInput);
   saveConfig();
   updateTituloCosto0();
-  rL();rM();rD();
+  rL();rM();rD();rHIB();
   updateDomIndicator();
   document.getElementById('cfg-msg').textContent='✓ Guardado';
   setTimeout(function(){document.getElementById('cfg-msg').textContent='';},2500);
