@@ -818,6 +818,13 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
           Descargar resumen
         </button>
       </div>
+      <div id="hib-promo-flash-banner" style="display:none;align-items:center;gap:10px;background:linear-gradient(135deg,#ff4d00,#ff9500);color:#fff;border-radius:10px;padding:12px 18px;margin-bottom:12px;font-weight:700;font-size:14px;box-shadow:0 4px 14px rgba(255,80,0,.35);animation:flashPulse 1.5s ease-in-out infinite">
+        <span style="font-size:22px">⚡</span>
+        <div style="flex:1">
+          <div style="font-size:17px;letter-spacing:.04em">PROMO FLASH</div>
+          <div style="font-weight:400;font-size:13px;opacity:.92">Este programa tiene precio diferencial — se aplica RMKT +60 días automáticamente.</div>
+        </div>
+      </div>
       <div id="hib-acc"></div>
       <div id="hib-total"></div>
     </div>
@@ -3632,7 +3639,8 @@ function toggleChip(sec, id, panelId, isOnline){
     expIds.forEach(function(eid){ if(eid!==id) SEL[sec][eid]=false; });
   }
   // Re-render the whole section
-  if(sec==='lic'){ if(g('sec-en')&&g('sec-en').classList.contains('active')) rEN(); else rL(); }
+  if(panelId==='hib-acc'){ rHIB(); }
+  else if(sec==='lic'){ if(g('sec-en')&&g('sec-en').classList.contains('active')) rEN(); else rL(); }
   else if(sec==='mae'){ if(g('sec-en')&&g('sec-en').classList.contains('active')) rEN(); else rM(); }
   else if(sec==='doc') rD();
   else if(sec==='en') rEN();
@@ -3818,13 +3826,16 @@ function rHIB(){
   var progName=progSel.value;
   // Aplicar promo flash a hib-lead igual que en Lic
   var _hibLeadSel=g('hib-lead');
+  var _hibFlashBanner=g('hib-promo-flash-banner');
   if(_hibLeadSel && HIB_NAT_SEC==='lic'){
     var _hibFlash=isPromoFlash(progName);
     for(var _fi=0;_fi<_hibLeadSel.options.length;_fi++){
       _hibLeadSel.options[_fi].disabled=_hibFlash&&(_hibLeadSel.options[_fi].value!=='rmkt60');
     }
-    if(_hibFlash) _hibLeadSel.value='rmkt60';
-    else for(var _fi2=0;_fi2<_hibLeadSel.options.length;_fi2++) _hibLeadSel.options[_fi2].disabled=false;
+    if(_hibFlash){ _hibLeadSel.value='rmkt60'; if(_hibFlashBanner) _hibFlashBanner.style.display='flex'; }
+    else{ for(var _fi2=0;_fi2<_hibLeadSel.options.length;_fi2++) _hibLeadSel.options[_fi2].disabled=false; if(_hibFlashBanner) _hibFlashBanner.style.display='none'; }
+  } else {
+    if(_hibFlashBanner) _hibFlashBanner.style.display='none';
   }
   var lead=g('hib-lead')?g('hib-lead').value:'hot';
   if(lead==='rmkt') lead='rmkt30';
@@ -3860,7 +3871,7 @@ function rHIB(){
     var isIng2=progKey==='ingenieria'||progKey==='robotica'||progKey==='arquitectura';
     var e=getPrice(progKey,nivel,leadHib,hibJor,isIng2); if(!e) return;
     var expPrices=e.p.map(function(v,i){return i>=2?v+300:v;});
-    var licEscFinal=(hibJor==='completa')?e.esc:((progKey==='robotica')?'P89.INT2M':(HIB_ESC_MAP[e.pkg]||e.esc));
+    var licEscFinal=(progKey==='robotica')?'P89.INT2M':(HIB_ESC_MAP[e.pkg]||e.esc);
     var acc=getAccTotal('lic',false);
     var _p12=0; (ACCS['lic'].included||[]).forEach(function(it){if(ALWAYS_ACCS.indexOf(it.id)>=0&&it.price)_p12+=it.price;});
     renderTable('hib-tbody',expPrices,e.pkg,licEscFinal,acc,_p12);
@@ -5043,14 +5054,22 @@ var EJE_NATIVA_SEC = 'lic';
 
 /* Mapa pkg → escalonado híbrido */
 var HIB_ESC_MAP = {
+  // Intensiva híbrida
   'P2.LI.INT.' :'P87.INT2M','P5.LI.INT.' :'P87.INT2M','P8.LI.INT.' :'P87.INT2M',
   'P3.LI.INT.' :'P87.INT2M','P6.LI.INT.' :'P87.INT2M','P9.LI.INT.' :'P87.INT2M',
   'P4.LI.INT.' :'P87.INT2M','P7.LI.INT.' :'P87.INT2M','P10.LI.INT.':'P87.INT2M',
   'P14.LI.INT.':'P89.INT2M','P15.LI.INT.':'P89.INT2M','P16.LI.INT.':'P89.INT2M',
   'P11.LI.INT.':'P71.INT2M','P12.LI.INT.':'P71.INT2M','P13.LI.INT.':'P71.INT2M',
-  // MAE híbrida esc
-  'P6.MA.' :'P29.MAE2M','P8.MA.' :'P29.MAE2M','P10.MA.':'P29.MAE2M','P12.MA.':'P29.MAE2M',
-  'P7.MA.' :'P29.MAE2M','P9.MA.' :'P29.MAE2M','P11.MA.':'P29.MAE2M','P13.MA.':'P29.MAE2M'
+  // Super Intensiva híbrida
+  'P2.LI.SUPINT.':'P26.SUPINT2M','P5.LI.SUPINT.':'P26.SUPINT2M','P8.LI.SUPINT.' :'P26.SUPINT2M',
+  'P3.LI.SUPINT.':'P26.SUPINT2M','P6.LI.SUPINT.':'P26.SUPINT2M','P9.LI.SUPINT.' :'P26.SUPINT2M',
+  'P4.LI.SUPINT.':'P26.SUPINT2M','P7.LI.SUPINT.':'P26.SUPINT2M','P10.LI.SUPINT.':'P26.SUPINT2M',
+  // Completa híbrida
+  'P3.LI.COM.':'P8.COM2M','P4.LI.COM.':'P8.COM2M',
+  'P5.LI.COM.':'P8.COM2M','P6.LI.COM.':'P8.COM2M',
+  // MAE híbrida
+  'P6.MA.' :'P33.MAE2M','P8.MA.' :'P33.MAE2M','P10.MA.':'P33.MAE2M','P12.MA.':'P33.MAE2M',
+  'P7.MA.' :'P33.MAE2M','P9.MA.' :'P33.MAE2M','P11.MA.':'P33.MAE2M','P13.MA.':'P33.MAE2M'
 };
 
 /* Mapa pkg → paquete híbrido (solo cuando difiere del regular) */
