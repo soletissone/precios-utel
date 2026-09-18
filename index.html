@@ -3816,6 +3816,16 @@ function rHIB(){
   if(!progSel.value && progSel.options.length>0) progSel.value=progSel.options[0].value;
   if(!progSel.value){ renderHibRecursos('hib',null); return; }
   var progName=progSel.value;
+  // Aplicar promo flash a hib-lead igual que en Lic
+  var _hibLeadSel=g('hib-lead');
+  if(_hibLeadSel && HIB_NAT_SEC==='lic'){
+    var _hibFlash=isPromoFlash(progName);
+    for(var _fi=0;_fi<_hibLeadSel.options.length;_fi++){
+      _hibLeadSel.options[_fi].disabled=_hibFlash&&(_hibLeadSel.options[_fi].value!=='rmkt60');
+    }
+    if(_hibFlash) _hibLeadSel.value='rmkt60';
+    else for(var _fi2=0;_fi2<_hibLeadSel.options.length;_fi2++) _hibLeadSel.options[_fi2].disabled=false;
+  }
   var lead=g('hib-lead')?g('hib-lead').value:'hot';
   if(lead==='rmkt') lead='rmkt30';
   var fechaBadge=SEL_INICIO['hib']?'<span class="dur-badge">📅 Inicio: '+SEL_INICIO['hib']+'</span>':'';
