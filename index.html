@@ -773,6 +773,12 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
       <div class="filters">
         <div class="fg"><label>Área</label><select id="hib-area" onchange="filterHIBArea()"><option value="">— Todas —</option></select></div>
         <div class="fg"><label>Programa</label><select id="hib-prog" onchange="onHIBProgChange()"></select></div>
+        <div class="fg" id="hib-jor-wrap"><label>Jornada</label>
+          <select id="hib-jor" onchange="rHIB()">
+            <option value="intensiva">Jornada Intensiva</option>
+            <option value="completa">Jornada Completa</option>
+          </select>
+        </div>
         <div class="fg"><label>Lead</label>
           <select id="hib-lead" onchange="rHIB()">
             <option value="hot">Hot Lead</option>
@@ -3750,6 +3756,7 @@ function swHIB(sec){
       : '<option value="hot">Hot Lead</option><option value="rmkt30">RMKT</option>';
   }
   INICIO_DATES['hib'] = INICIO_DATES[sec==='lic'?'lic':'mae']||[];
+  var jorWrap=g('hib-jor-wrap'); if(jorWrap) jorWrap.style.display=sec==='lic'?'':'none';
   var ea=g('hib-area'); if(ea) ea.value='';
   fillHIBAreas();
   fillHIBProgs();
@@ -3824,6 +3831,8 @@ function rHIB(){
   var nivel=nivelMap[nivelRaw]||nivelRaw;
 
   if(sec==='lic'){
+    var jorWrapLic=g('hib-jor-wrap'); if(jorWrapLic) jorWrapLic.style.display='';
+    var hibJor=g('hib-jor')?g('hib-jor').value:'intensiva';
     var progNameUP=progName.toUpperCase();
     var progKey;
     if(nivelRaw==='arq') progKey='arquitectura';
@@ -3833,21 +3842,29 @@ function rHIB(){
     else if(progNameUP.indexOf('ROB')>=0) progKey='robotica';
     else if(progNameUP.indexOf('INGENIER')>=0) progKey='ingenieria';
     else progKey='online_general';
+    var leadHib=lead;
+    if(hibJor==='completa' && (leadHib==='rmkt30'||leadHib==='rmkt60')) leadHib='rmkt';
+    if(hibJor==='completa' && progKey!=='arquitectura'){
+      progKey=(progNameUP==='INGENIERÍA ROBÓTICA')?'arquitectura':'online_general';
+    }
     var isIng2=progKey==='ingenieria'||progKey==='robotica'||progKey==='arquitectura';
-    var e=getPrice(progKey,nivel,lead,'intensiva',isIng2); if(!e) return;
+    var e=getPrice(progKey,nivel,leadHib,hibJor,isIng2); if(!e) return;
     var expPrices=e.p.map(function(v,i){return i>=2?v+300:v;});
-    var licEscFinal=(progKey==='robotica')?'P89.INT2M':(HIB_ESC_MAP[e.pkg]||e.esc);
+    var licEscFinal=(hibJor==='completa')?e.esc:((progKey==='robotica')?'P89.INT2M':(HIB_ESC_MAP[e.pkg]||e.esc));
     var acc=getAccTotal('lic',false);
     var _p12=0; (ACCS['lic'].included||[]).forEach(function(it){if(ALWAYS_ACCS.indexOf(it.id)>=0&&it.price)_p12+=it.price;});
     renderTable('hib-tbody',expPrices,e.pkg,licEscFinal,acc,_p12);
     renderBeca('hib-bi',Math.max.apply(null,expPrices),e.pkg);
-    var dur=getDuracion('lic','intensiva',progName);
+    var dur=getDuracion('lic',hibJor,progName);
+    var jorNames={intensiva:'Intensiva',completa:'Completa'};
+    var jorBadge='<span class="badge b-mod">'+jorNames[hibJor]+'</span>';
     var sedeLic=g('hib-sede')?g('hib-sede').value:'';
     var sedeBadgeLic=sedeLic?'<span class="dur-badge">📍 '+sedeLic+'</span>':'';
-    g('hib-info').innerHTML=(NB[nivel]||'')+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+platziBtn(progName)+'<span class="dur-badge">⏱ '+dur+'</span>'+fechaBadge+sedeBadgeLic+LBG[lead];
+    g('hib-info').innerHTML=(NB[nivel]||'')+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+platziBtn(progName)+jorBadge+'<span class="dur-badge">⏱ '+dur+'</span>'+fechaBadge+sedeBadgeLic+LBG[leadHib];
     renderAccs('hib-acc','lic',false);
     renderTotal('hib-total',expPrices[2],'lic',false);
   } else {
+    var jorWrapMae=g('hib-jor-wrap'); if(jorWrapMae) jorWrapMae.style.display='none';
     var progKey2=(nivelRaw==='arqsw')?'arq_software':'mae_online';
     if(nivelRaw==='arqsw') nivel='alto';
     var e2=getPrice(progKey2,nivel,lead); if(!e2) return;
