@@ -3540,6 +3540,13 @@ function renderAccs(panelId, sec, isOnline){
   var maxCerts = (sec==='lic') ? 2 : 1;
 
   var html = '<div class="acc-section">';
+  if(isTit0Active() && ['lic','mae','doc'].indexOf(sec)>=0){
+    html += '<div style="display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#16a34a,#22c55e);color:#fff;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:13px;font-weight:700;box-shadow:0 3px 10px rgba(22,163,74,.3)">'
+          + '<span style="font-size:18px">🎓</span>'
+          + '<div><div style="font-size:14px;letter-spacing:.02em">PROMO TÍTULO COSTO $0</div>'
+          + '<div style="font-weight:400;font-size:12px;opacity:.92">Titulación disponible sin costo adicional — seleccionala abajo</div></div>'
+          + '</div>';
+  }
   html += '<div class="acc-section-title">Accesorios</div>';
 
   // — INCLUIDOS —
