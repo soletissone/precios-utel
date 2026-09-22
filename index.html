@@ -3518,7 +3518,8 @@ function getAccTotal(sec, isOnline, excludeDeferred){
       if(item.hidden) return;
       if(SEL[sec][item.id]===true && incIds.indexOf(item.id)<0){
         if(excludeDeferred && DEFERRED_ACCS.indexOf(item.id)>=0) return;
-        total+=item.price;
+        var _p=isTit0Active()&&(item.id==='tit'||item.id==='tit50')?0:item.price;
+        total+=_p;
       }
     });
   });
@@ -3615,9 +3616,10 @@ function renderAccs(panelId, sec, isOnline){
         html += ' data-sec="'+sec+'" data-id="'+item.id+'" data-panel="'+panelId+'" data-online="'+isOnline+'" onclick="handleChip(this)"';
       }
       html += '>';
+      var _tit0chip=isTit0Active()&&(item.id==='tit'||item.id==='tit50');
       html += '<div class="chip-check">'+(blocked?'✕':'')+'</div>';
-      html += '<span class="chip-name">'+item.name+'</span>';
-      html += '<span class="chip-price">'+(blocked?blockReason:fmt(item.price)+'/mes')+'</span>';
+      html += '<span class="chip-name">'+item.name+(_tit0chip?' <span style="background:#16a34a;color:#fff;border-radius:4px;padding:1px 5px;font-size:9px;font-weight:700">GRATIS</span>':'')+'</span>';
+      html += '<span class="chip-price">'+(blocked?blockReason:(_tit0chip?'<s style="opacity:.4">'+fmt(item.price)+'</s> $0':fmt(item.price))+'/mes')+'</span>';
       html += '</div>';
     });
     html += '</div></div>';
