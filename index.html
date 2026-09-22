@@ -3522,7 +3522,7 @@ function getAccTotal(sec, isOnline, excludeDeferred){
       if(item.hidden) return;
       if(SEL[sec][item.id]===true && incIds.indexOf(item.id)<0){
         if(excludeDeferred && DEFERRED_ACCS.indexOf(item.id)>=0) return;
-        var _p=isTit0Active()&&(item.id==='tit'||item.id==='tit50')?0:item.price;
+        var _p=isTit0Active()&&item.id==='tit'?0:item.price;
         total+=_p;
       }
     });
@@ -3620,7 +3620,7 @@ function renderAccs(panelId, sec, isOnline){
         html += ' data-sec="'+sec+'" data-id="'+item.id+'" data-panel="'+panelId+'" data-online="'+isOnline+'" onclick="handleChip(this)"';
       }
       html += '>';
-      var _tit0chip=isTit0Active()&&(item.id==='tit'||item.id==='tit50');
+      var _tit0chip=isTit0Active()&&item.id==='tit';
       html += '<div class="chip-check">'+(blocked?'✕':'')+'</div>';
       html += '<span class="chip-name">'+item.name+(_tit0chip?' <span style="background:#16a34a;color:#fff;border-radius:4px;padding:1px 5px;font-size:9px;font-weight:700">GRATIS</span>':'')+'</span>';
       html += '<span class="chip-price">'+(blocked?blockReason:(_tit0chip?'<s style="opacity:.4">'+fmt(item.price)+'</s> $0':fmt(item.price))+'/mes')+'</span>';
@@ -4862,7 +4862,7 @@ function updateTituloCosto0(){
       var cats=ACCS[sec]; if(!cats) return;
       cats.optional.forEach(function(grp){
         grp.items.forEach(function(item){
-          if(item.id==='tit'||item.id==='tit50') _ORIG_TIT_PRICES[sec+'_'+item.id]=item.price;
+          if(item.id==='tit') _ORIG_TIT_PRICES[sec+'_'+item.id]=item.price;
         });
       });
     });
@@ -4875,7 +4875,7 @@ function updateTituloCosto0(){
     cats.optional.forEach(function(grp){
       grp.items=grp.items.filter(function(x){return x.id!=='tit0_free';});
       grp.items.forEach(function(item){
-        if((item.id==='tit'||item.id==='tit50')&&_ORIG_TIT_PRICES[sec+'_'+item.id]!==undefined){
+        if(item.id==='tit'&&_ORIG_TIT_PRICES[sec+'_'+item.id]!==undefined){
           item.price=active?0:_ORIG_TIT_PRICES[sec+'_'+item.id];
         }
       });
