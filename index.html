@@ -994,7 +994,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
         <div class="cfg-row">
           <div>
             <div class="cfg-label">Título Costo $0</div>
-            <div class="cfg-desc">Agrega "Título Costo $0" como accesorio disponible</div>
+            <div class="cfg-desc">Cuando está activo, Titulación y Título 50% se muestran con precio $0</div>
           </div>
           <label class="toggle">
             <input type="checkbox" id="cfg-tit0">
@@ -3055,7 +3055,7 @@ var ACCS = {
 
 // IDs que cuentan para reglas
 var CERT_IDS  = ['coursera','platzi','facebook','cifal','microsoft','tableau','gcloud','gads','legal'];
-var DEFERRED_ACCS = ['ucamp','utelx','tit','tit50','tit0_free']; // solo aplican desde mes 3
+var DEFERRED_ACCS = ['ucamp','utelx','tit','tit50']; // solo aplican desde mes 3
 var ALWAYS_ACCS = ['diploma','platzi']; // suman en TODOS los pagos sin excepción
 // Escalonado que se usa cuando el alumno agrega Titulación (tit o tit50)
 var TITUL_ESC_MAP = {
@@ -4830,14 +4830,31 @@ function saveAdminConfig(){
 }
 
 
+var _ORIG_TIT_PRICES = null;
 function updateTituloCosto0(){
+  // Guardar precios originales la primera vez
+  if(!_ORIG_TIT_PRICES){
+    _ORIG_TIT_PRICES = {};
+    ['lic','mae','doc'].forEach(function(sec){
+      var cats=ACCS[sec]; if(!cats) return;
+      cats.optional.forEach(function(grp){
+        grp.items.forEach(function(item){
+          if(item.id==='tit'||item.id==='tit50') _ORIG_TIT_PRICES[sec+'_'+item.id]=item.price;
+        });
+      });
+    });
+  }
+  var active=isTit0Active();
   ['lic','mae','doc'].forEach(function(sec){
     var cats=ACCS[sec]; if(!cats) return;
-    var accCat=null;
-    for(var i=0;i<cats.optional.length;i++){if(cats.optional[i].cat==='Accesorio'){accCat=cats.optional[i];break;}}
-    if(!accCat) return;
-    accCat.items=accCat.items.filter(function(x){return x.id!=='tit0_free';});
-    if(isTit0Active()) accCat.items.unshift({id:'tit0_free',name:'Título Costo $0',price:0});
+    cats.optional.forEach(function(grp){
+      grp.items=grp.items.filter(function(x){return x.id!=='tit0_free';});
+      grp.items.forEach(function(item){
+        if((item.id==='tit'||item.id==='tit50')&&_ORIG_TIT_PRICES[sec+'_'+item.id]!==undefined){
+          item.price=active?0:_ORIG_TIT_PRICES[sec+'_'+item.id];
+        }
+      });
+    });
   });
 }
 
