@@ -4762,10 +4762,9 @@ function downloadSummary(sec){
     // NOTA LEGAL TÍTULO COSTO $0 (solo si está activo y aplica a la sección)
     +(isTit0Active() && ['lic','mae','doc'].indexOf(realSec)>=0 && !isUNICA && !isUVE && !isUNAG ? (
       '<div style="margin:0 20px 10px;padding:10px 14px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;">'
-      +'<div style="font-size:11px;font-weight:700;color:#14532d;margin-bottom:6px;">🎓 Condiciones — Titulación Costo $0 · Exoneración de Pago por Titulación (EPPT)</div>'
-      +'<div style="font-size:10px;color:#374151;line-height:1.65">'
-      +'Para mantener el beneficio durante todo el cursado, el alumno debe: <b>no tener adeudos</b> · <b>no reprobar materias</b> (Lic: mínimo 6.0; Maestría y Doctorado: mínimo 7.0; reprobatorias figuran como NA o NP) · <b>contar con expediente completo</b> con documentos digitales obligatorios en estatus "validados" (MX: antecedente académico + acta de nacimiento; LATAM: documento de identidad + antecedente académico; Equivalencia/revalidación: antecedente académico + acta de nacimiento + carta poder en físico).<br>'
-      +'El beneficio se pierde automáticamente si el alumno solicita baja temporal o definitiva.'
+      +'<div style="font-size:11px;font-weight:700;color:#14532d;margin-bottom:4px;">🎓 Titulación Costo $0 — Exoneración de Pago por Titulación (EPPT)</div>'
+      +'<div style="font-size:10px;color:#374151;line-height:1.6">'
+      +'Sujeto a requisitos para mantener el beneficio durante todo el cursado. En caso de no cumplirse los requisitos, el beneficio se pierde automáticamente.'
       +'</div>'
       +'</div>'
     ) : '')
