@@ -531,6 +531,10 @@ Si pudieras sumarle una habilidad a tu perfil hoy mismo, ¿qué elegirías?</div
     </div>
   </header>
   <div class="main">
+    <div id="tit0-global-banner" style="display:none;align-items:center;gap:10px;background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;padding:10px 20px;font-size:13px;font-weight:700;border-bottom:2px solid #22c55e">
+      <span style="font-size:18px">🎓</span>
+      <span>PROMO ACTIVA: Titulación Costo $0 — los chips de Titulación se muestran sin costo</span>
+    </div>
     <div class="tabs">
       <div class="tab active" onclick="sw('lic')">Licenciaturas</div>
       <div class="tab" onclick="sw('mae')">Maestrías</div>
@@ -4864,6 +4868,8 @@ function updateTituloCosto0(){
     });
   }
   var active=isTit0Active();
+  var _gb=document.getElementById('tit0-global-banner');
+  if(_gb) _gb.style.display=active?'flex':'none';
   ['lic','mae','doc'].forEach(function(sec){
     var cats=ACCS[sec]; if(!cats) return;
     cats.optional.forEach(function(grp){
