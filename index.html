@@ -2012,8 +2012,7 @@ var B2B_ACCS={
         {id:'utelj',  label:'Utel Jóven', price:165}
       ]},
       {cat:'Accesorio', items:[
-        {id:'titlic', label:'Título Lic',          price:200},
-        {id:'welbep', label:'Asistencia Medica Integral Premium (+$10)', price:10}
+        {id:'titlic', label:'Título Lic',          price:200}
       ]},
       {cat:'Idioma', excl:true, items:[
         {id:'cambridge',label:'Cambridge', price:165},
@@ -2047,8 +2046,7 @@ var B2B_ACCS={
         {id:'utelj',  label:'Utel Jóven', price:165}
       ]},
       {cat:'Accesorio', items:[
-        {id:'titpos', label:'Título Posgrados',    price:400},
-        {id:'welbep', label:'Asistencia Medica Integral Premium (+$10)', price:10}
+        {id:'titpos', label:'Título Posgrados',    price:400}
       ]},
       {cat:'Idioma', excl:true, items:[
         {id:'cambridge',label:'Cambridge', price:220},
@@ -2942,8 +2940,7 @@ var ACCS = {
     optional: [
       {cat:'Accesorio', items:[
         {id:'tit',    name:'Titulación',       price:195},
-        {id:'tit50',  name:'Título 50%',        price:165},
-        {id:'welbep', name:'Asistencia Medica Integral Premium (+$10 upgrade)',     price:10}
+        {id:'tit50',  name:'Título 50%',        price:165}
       ]},
       {cat:'Experiencia', items:[
         {id:'ucamp',   name:'U-Camp',           price:110}
@@ -2983,8 +2980,7 @@ var ACCS = {
     optional: [
       {cat:'Accesorio', items:[
         {id:'tit',    name:'Titulación',        price:305},
-        {id:'tit50',  name:'Título 50%',        price:275},
-        {id:'welbep', name:'Asistencia Medica Integral Premium (+$10 upgrade)',     price:10}
+        {id:'tit50',  name:'Título 50%',        price:275}
       ]},
       {cat:'Experiencia', items:[]},
       {cat:'Plataforma', items:[
@@ -3595,9 +3591,7 @@ function renderAccs(panelId, sec, isOnline){
       var blocked = false;
       var blockReason = '';
       if(!sel){
-        if(item.id==='welbe' && SEL[sec]['welbep']===true){
-          blocked=true; blockReason='Reemplazado por Premium';
-        } else if(item.id==='tit' && SEL[sec]['tit50']===true){
+        if(item.id==='tit' && SEL[sec]['tit50']===true){
           blocked=true; blockReason='Ya elegiste Título 50%';
         } else if(item.id==='tit50' && SEL[sec]['tit']===true){
           blocked=true; blockReason='Ya elegiste Titulación';
@@ -3643,9 +3637,6 @@ function handleChip(el){
 }
 function toggleChip(sec, id, panelId, isOnline){
   SEL[sec][id] = !SEL[sec][id];
-  // Asistencia Medica Integral Premium reemplaza base
-  if(id==='welbep' && SEL[sec]['welbep']===true) SEL[sec]['welbe_opted_out']=true;
-  if(id==='welbep' && SEL[sec]['welbep']===false) SEL[sec]['welbe_opted_out']=false;
   // Experiencia: mutually exclusive (ejecutiva, utel joven, hibrida)
   var expIds=['seseje','utelj','hibrid'];
   if(expIds.indexOf(id)>=0 && SEL[sec][id]===true){
