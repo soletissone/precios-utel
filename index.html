@@ -1493,56 +1493,62 @@ function _applyConfigData(data){
 }
 
 function loadConfig(){
-  var manualSet = localStorage.getItem('utel_cfg_manual') === '1';
-  // Aplicar localStorage primero
-  var cached = localStorage.getItem('utel_cfg');
-  if(cached){
-    try{var c=JSON.parse(cached);
-      if(c.dom) DOMICILIACION=c.dom;
-      if(c.domexp!==undefined) DOM_EXPIRY=c.domexp||null;
-      if(c.tit0!==undefined) TITULO_COSTO_0=c.tit0;
-      if(c.tit0exp!==undefined) TIT0_EXPIRY=c.tit0exp||null;
-      if(c.plat!==undefined) PLATZI_PREVIEW=c.plat;
-    }catch(e){}
-  }
-  // Si el admin ya guardó manualmente, no pisar con config.json
-  if(manualSet) return;
-  // Fuente de verdad: config.json (solo si no hay configuración manual)
+  // Fuente de verdad: config.json (siempre, con cache-bust)
   fetch('config.json?_='+Date.now())
     .then(function(r){return r.json();})
     .then(function(data){_applyConfigData(data);})
     .catch(function(){
-      // Fallback a JSONBin si config.json no está disponible
-      fetch(JB_URL+'/latest',{headers:{'X-Master-Key':JB_KEY}})
-        .then(function(r){return r.json();})
-        .then(function(res){if(res.record) _applyConfigData(res.record);})
-        .catch(function(){});
+      // Fallback: localStorage si config.json no está disponible
+      var cached = localStorage.getItem('utel_cfg');
+      if(cached){
+        try{var c=JSON.parse(cached);
+          var d={};
+          if(c.dom!==undefined) d.dom=c.dom;
+          if(c.domexp!==undefined) d.domexp=c.domexp;
+          if(c.tit0!==undefined) d.tit0=c.tit0;
+          if(c.tit0exp!==undefined) d.tit0exp=c.tit0exp;
+          if(c.plat!==undefined) d.plat=c.plat;
+          _applyConfigData(d);
+        }catch(e){}
+      }
     });
 }
 
 function saveConfig(){
-  localStorage.setItem('utel_cfg_manual','1');
+  // Guardar en localStorage como respaldo
   localStorage.setItem('utel_cfg',JSON.stringify({dom:DOMICILIACION,domexp:DOM_EXPIRY,tit0:TITULO_COSTO_0,tit0exp:TIT0_EXPIRY,plat:PLATZI_PREVIEW}));
   var payload={dom:DOMICILIACION,domexp:DOM_EXPIRY,tit0:TITULO_COSTO_0,tit0exp:TIT0_EXPIRY,plat:PLATZI_PREVIEW};
-  // Guardar en JSONBin
-  fetch(JB_URL,{method:'PUT',headers:{'Content-Type':'application/json','X-Master-Key':JB_KEY},body:JSON.stringify(payload)})
-    .catch(function(){});
-  // Guardar en config.json vía GitHub API (token en localStorage)
+  var msgEl=document.getElementById('cfg-msg');
+  // Actualizar config.json vía GitHub API (fuente de verdad para todos los usuarios)
   var ghToken=localStorage.getItem('utel_gh_token');
   if(ghToken){
     var cfgContent=JSON.stringify({dom:DOMICILIACION,domexp:DOM_EXPIRY||null,tit0:TITULO_COSTO_0,tit0exp:TIT0_EXPIRY||null,plat:PLATZI_PREVIEW},null,2);
-    // Obtener SHA actual
     fetch('https://api.github.com/repos/soletissone/precios-utel/contents/config.json',{headers:{'Authorization':'token '+ghToken}})
       .then(function(r){return r.json();})
       .then(function(info){
         return fetch('https://api.github.com/repos/soletissone/precios-utel/contents/config.json',{
           method:'PUT',
           headers:{'Authorization':'token '+ghToken,'Content-Type':'application/json'},
-          body:JSON.stringify({message:'config: actualizar domiciliacion y configuracion',content:btoa(cfgContent),sha:info.sha})
+          body:JSON.stringify({message:'config: actualizar configuracion',content:btoa(cfgContent),sha:info.sha})
         });
       })
-      .then(function(r){if(r.ok) console.log('config.json actualizado');})
-      .catch(function(e){console.error('Error GitHub API:',e);});
+      .then(function(r){
+        if(r.ok){
+          if(msgEl) msgEl.textContent='✓ Guardado y publicado para todos';
+        } else {
+          if(msgEl) msgEl.textContent='⚠ Guardado local — token GitHub inválido o expirado';
+        }
+        setTimeout(function(){if(msgEl) msgEl.textContent='';},4000);
+      })
+      .catch(function(){
+        if(msgEl) msgEl.textContent='⚠ Guardado local — error de red al publicar';
+        setTimeout(function(){if(msgEl) msgEl.textContent='';},4000);
+      });
+  } else {
+    if(msgEl){
+      msgEl.textContent='⚠ Sin token GitHub — cambio solo local';
+      setTimeout(function(){msgEl.textContent='';},4000);
+    }
   }
 }
 
@@ -4839,8 +4845,6 @@ function saveAdminConfig(){
   updateTituloCosto0();
   rL();rM();rD();rHIB();
   updateDomIndicator();
-  document.getElementById('cfg-msg').textContent='✓ Guardado';
-  setTimeout(function(){document.getElementById('cfg-msg').textContent='';},2500);
 }
 
 
