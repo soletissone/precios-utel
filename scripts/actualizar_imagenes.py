@@ -85,5 +85,21 @@ def main():
     print(f"\nOK {len(results)} recursos guardados")
     print(f"  Carpetas: {cats}")
 
+    # Actualizar _galData embebido en index.html
+    html_path = os.path.join(os.path.dirname(OUTPUT_PATH), "index.html")
+    if os.path.exists(html_path):
+        print(f"\nActualizando _galData en index.html...")
+        with open(html_path, "r", encoding="utf-8") as f:
+            html = f.read()
+        new_gal = "var _galData=" + json.dumps(results, ensure_ascii=False, separators=(',', ':')) + ";"
+        import re
+        new_html, n = re.subn(r'var _galData=\[.*?\];', new_gal, html, count=1, flags=re.DOTALL)
+        if n:
+            with open(html_path, "w", encoding="utf-8") as f:
+                f.write(new_html)
+            print(f"  _galData actualizado ({len(results)} items)")
+        else:
+            print("  ADVERTENCIA: no se encontró var _galData en index.html")
+
 if __name__ == "__main__":
     main()
