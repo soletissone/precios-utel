@@ -900,6 +900,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
         <div class="fg"><label>Institución</label><div style="padding:8px 0;font-size:13px;font-weight:700;color:#7c3aed">CLAUSTRO</div></div>
       </div>
       <div class="ib" id="alii"></div>
+      <div id="ali-recursos" style="margin-bottom:12px"></div>
       <div class="tw"><table>
         <thead><tr><th>Mes</th><th>Cuota</th><th>Paquete</th></tr></thead>
         <tbody id="alib"></tbody>
@@ -2186,7 +2187,25 @@ function rALI(){
   var price=d.price; var meses=d.meses; var pkg=d.pkg;
   var total=price*meses;
   var infoEl=g('alii');
-  if(infoEl) infoEl.innerHTML='<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span style="background:#7c3aed;color:#fff;border-radius:6px;padding:2px 10px;font-size:12px;font-weight:700">CLAUSTRO</span><span style="font-size:13px;color:var(--mu)">Especialidad · '+meses+' meses · Total: <strong style="color:var(--tx)">'+fmt(total)+'</strong></span></div>';
+  if(infoEl) infoEl.innerHTML='<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span style="background:#7c3aed;color:#fff;border-radius:6px;padding:2px 10px;font-size:12px;font-weight:700">CLAUSTRO</span><span style="font-size:13px;color:var(--mu)">Especialidad · <strong style="color:var(--tx)">'+meses+' meses</strong> · 3 cuatrimestres · Total: <strong style="color:var(--tx)">'+fmt(total)+'</strong></span></div>';
+  // Recursos CLAUSTRO
+  var recEl=g('ali-recursos');
+  if(recEl){
+    var _claCard=function(icon,label,color,id,desc){
+      return '<a href="https:\/\/drive.google.com\/file\/d\/'+id+'\/view" target="_blank" style="display:flex;align-items:center;gap:10px;background:var(--sf);border:1px solid var(--bd);border-radius:9px;padding:10px 14px;text-decoration:none;color:var(--tx);font-size:12px;font-weight:600;transition:box-shadow .15s" onmouseover="this.style.boxShadow=\'0 2px 8px rgba(0,0,0,.12)\'" onmouseout="this.style.boxShadow=\'none\'"><span style="font-size:20px">'+icon+'</span><div><div style="font-weight:700;color:'+color+';font-size:11px;letter-spacing:.06em">'+label+'</div><div>'+desc+'</div></div></a>';
+    };
+    var _cards=''
+      +_claCard('📄','FICHA TÉCNICA','#dc2626','1YpT5nUnNm89CZ4NLpuaRgRALNr51bTmP','Especialidad en Gastronomía y Gestión de la Enseñanza')
+      +_claCard('🖼','IMAGEN GENERAL','#7c3aed','19S0R8YdiSqvGKwdh2YfbuKtcWvqM4LIk','Utel + El Claustro')
+      +_claCard('📚','LO QUE APRENDERÁS','#7c3aed','1f8eMcoiFJhvQ9DvQSh7OJh5tI9-rYl_X','Contenidos del programa')
+      +_claCard('💻','100% ONLINE','#7c3aed','1a9FEa-Wi4pmAQb4dNJI2TzeWnHZynjyU','Modalidad')
+      +_claCard('📊','DATOS DUROS','#7c3aed','1Y6CzaXfq6uyfHQJYTMjUVR7IseH0nEyH','Estadísticas del programa')
+      +_claCard('❓','¿QUÉ SIGNIFICA?','#7c3aed','15icKyBt1vDka-vYWsEchni7ds57KT0X7','Descripción')
+      +_claCard('🏆','ÚNICA EN MÉXICO','#7c3aed','1Iv1Xr2W3BNyxJ4u9DhJqjW03vNkR011g','Diferencial');
+    recEl.innerHTML='<div style="font-size:11px;font-weight:700;color:var(--mu);letter-spacing:.07em;margin-bottom:8px">RECURSOS CLAUSTRO</div>'
+      +'<div style="display:flex;flex-wrap:wrap;gap:8px">'+_cards+'</div>';
+  }
+
   var tbody=g('alib');
   if(!tbody) return;
   tbody.innerHTML='<tr><td>1 al '+meses+'</td><td>'+fmt(price)+'</td><td style="font-size:12px">'+pkg+'</td></tr>';
