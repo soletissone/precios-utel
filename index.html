@@ -904,6 +904,13 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
         <thead><tr><th>Mes</th><th>Cuota</th><th>Total acumulado</th><th>Paquete</th></tr></thead>
         <tbody id="alib"></tbody>
       </table></div>
+      <div id="ali-total"></div>
+      <div style="display:flex;gap:8px;align-items:center;margin-top:14px">
+        <button class="dl-btn" onclick="downloadSummaryWithSpeech('ali')">
+          <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 3v13m0 0l-4-4m4 4l4-4M3 21h18"/></svg>
+          Descargar resumen
+        </button>
+      </div>
     </div>
     <!-- B2B -->
     <div class="sec" id="sec-b2b">
@@ -4576,15 +4583,15 @@ function downloadSummary(sec){
 
   // Collect info
   var leadName=(g('lead-name-input')?g('lead-name-input').value.trim():'');
-  var progSelId={lic:'lprog',mae:'mprog',ms:'sprog',doc:'dprog',en:'en-prog',hib:'hib-prog'}[sec];
+  var progSelId={lic:'lprog',mae:'mprog',ms:'sprog',doc:'dprog',en:'en-prog',hib:'hib-prog',ali:'aliprog'}[sec];
   var progSel=g(progSelId);
   var progName=progSel&&progSel.options[progSel.selectedIndex]?progSel.options[progSel.selectedIndex].text:'-';
-  var infoEl=g({lic:'li',mae:'mi',ms:'si2',doc:'di',en:'en-info',hib:'hib-info'}[sec]);
+  var infoEl=g({lic:'li',mae:'mi',ms:'si2',doc:'di',en:'en-info',hib:'hib-info',ali:'alii'}[sec]);
   var infoHTML=infoEl?infoEl.innerHTML:'';
 
   // Detectar si es programa UNICA o UVE
   var progEntry=null;
-  var _catKey={lic:'LICENCIATURA',mae:'MAESTRÍA',ms:'MASTER',doc:'DOCTORADO',en:'LICENCIATURA',hib:HIB_NAT_SEC==='lic'?'LICENCIATURA':'MAESTRÍA'}[sec]||'LICENCIATURA';
+  var _catKey={lic:'LICENCIATURA',mae:'MAESTRÍA',ms:'MASTER',doc:'DOCTORADO',en:'LICENCIATURA',hib:HIB_NAT_SEC==='lic'?'LICENCIATURA':'MAESTRÍA',ali:'ESPECIALIDAD'}[sec]||'LICENCIATURA';
   var _searchCat=CATALOG[_catKey]||[];
   for(var _i=0;_i<_searchCat.length;_i++){if(_searchCat[_i].p.toLowerCase()===progName.toLowerCase()){progEntry=_searchCat[_i];break;}}
   var isUNICA = progEntry && progEntry.v==='unica';
@@ -4592,7 +4599,7 @@ function downloadSummary(sec){
   var isUNAG  = progEntry && progEntry.v==='unag';
 
   // Get table rows
-  var tbodyId={lic:'lb',mae:'mb',ms:'sb',doc:'db',en:'en-tbody',hib:'hib-tbody'}[sec];
+  var tbodyId={lic:'lb',mae:'mb',ms:'sb',doc:'db',en:'en-tbody',hib:'hib-tbody',ali:'alib'}[sec];
   var tbody=g(tbodyId);
   var tableHTML=tbody?'<table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px">'+
     '<thead><tr style="background:#f0f1f4"><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">Mes</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">Cuota base</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">+ Accesorios</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">Total</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#06ba06">Dom. '+DOMICILIACION+'%</th></tr></thead>'+
