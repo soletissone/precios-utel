@@ -897,6 +897,7 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
             <option value="rmkt60">RMKT +60</option>
           </select>
         </div>
+        <div class="fg"><label>Fecha de inicio</label><select id="ali-fecha" onchange="setSELInicio('ali',this.value)" style="font-size:13px"><option value="">— Seleccionar —</option></select></div>
         <div class="fg"><label>Institución</label><div style="padding:8px 0;font-size:13px;font-weight:700;color:#7c3aed">El Claustro</div></div>
       </div>
       <div class="ib" id="alii"></div>
@@ -2187,7 +2188,8 @@ function rALI(){
   var price=d.price; var meses=d.meses; var pkg=d.pkg;
   var total=price*meses;
   var infoEl=g('alii');
-  if(infoEl) infoEl.innerHTML='<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span style="background:#7c3aed;color:#fff;border-radius:6px;padding:2px 10px;font-size:12px;font-weight:700">CLAUSTRO</span><span style="font-size:13px;color:var(--mu)">Especialidad · <strong style="color:var(--tx)">'+meses+' meses</strong> · 3 cuatrimestres · Total: <strong style="color:var(--tx)">'+fmt(total)+'</strong></span></div>';
+  var _aliInicio=SEL_INICIO['ali']?'<span class="dur-badge">📅 Inicio: '+SEL_INICIO['ali']+'</span>':'';
+  if(infoEl) infoEl.innerHTML='<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span style="background:#7c3aed;color:#fff;border-radius:6px;padding:2px 10px;font-size:12px;font-weight:700">CLAUSTRO</span><span style="font-size:13px;color:var(--mu)">Especialidad · <strong style="color:var(--tx)">'+meses+' meses</strong> · 3 cuatrimestres · Total: <strong style="color:var(--tx)">'+fmt(total)+'</strong></span>'+_aliInicio+'</div>';
   // Recursos CLAUSTRO
   var recEl=g('ali-recursos');
   if(recEl){
@@ -3593,8 +3595,8 @@ var PROG_PDF_MAP={ "Administración":{"LIC_e":"UtelMX_FichasTecnicas_Programas_E
 "Liderazgo Educativo Y Gestión Escolar":{"DOC_r":"UtelMx_FichasTecnicas_Doctorado_LiderazgoEducativoYGestionEscolar_Bloque3.pdf"},
 "Tecnología Educativa E Innovación Didáctica":{"DOC_r":"UtelMx_FichasTecnicas_Doctorado_TecnologiaEducativaEInnovacionDidactica_Bloque3.pdf"},
 };
-var INICIO_DATES = {"lic": ["22/06/2026", "29/06/2026", "06/07/2026", "20/07/2026", "27/07/2026", "03/08/2026", "17/08/2026", "31/08/2026", "14/09/2026", "28/09/2026", "12/10/2026", "26/10/2026", "09/11/2026", "23/11/2026", "07/12/2026"], "mae": ["08/06/2026", "06/07/2026", "13/07/2026", "03/08/2026", "31/08/2026", "28/09/2026", "26/10/2026", "23/11/2026"], "ms": ["06/07/2026", "03/08/2026", "31/08/2026", "28/09/2026", "26/10/2026", "23/11/2026"], "doc": ["06/07/2026", "03/08/2026", "31/08/2026", "28/09/2026", "26/10/2026", "23/11/2026"], "dip": ["29/06/2026", "27/07/2026"]};
-var SEL_INICIO = {lic:null, mae:null, ms:null, doc:null, dip:null, en:null, hib:null};
+var INICIO_DATES = {"ali": ["06/07/2026", "03/08/2026", "31/08/2026", "28/09/2026", "26/10/2026", "23/11/2026"], "lic":["22/06/2026", "29/06/2026", "06/07/2026", "20/07/2026", "27/07/2026", "03/08/2026", "17/08/2026", "31/08/2026", "14/09/2026", "28/09/2026", "12/10/2026", "26/10/2026", "09/11/2026", "23/11/2026", "07/12/2026"], "mae": ["08/06/2026", "06/07/2026", "13/07/2026", "03/08/2026", "31/08/2026", "28/09/2026", "26/10/2026", "23/11/2026"], "ms": ["06/07/2026", "03/08/2026", "31/08/2026", "28/09/2026", "26/10/2026", "23/11/2026"], "doc": ["06/07/2026", "03/08/2026", "31/08/2026", "28/09/2026", "26/10/2026", "23/11/2026"], "dip": ["29/06/2026", "27/07/2026"]};
+var SEL_INICIO = {lic:null, mae:null, ms:null, doc:null, dip:null, en:null, hib:null, ali:null};
 
 var SEL_EXP = {lic: null, mae: null}; // null = ninguna, 'seseje'/'utelj'/'hibrid'
 var SEL = {lic:{},mae:{},ms:{},doc:{},en:{}};
@@ -4641,6 +4643,7 @@ function downloadSummary(sec){
       +'<span style="display:inline-block;background:#00B140;color:#fff;border-radius:999px;padding:2px 10px;font-size:10px;font-weight:700">Especialidad</span>'
       +'<span style="display:inline-block;background:rgba(255,255,255,.18);color:#fff;border-radius:999px;padding:2px 10px;font-size:10px;font-weight:600">El Claustro</span>'
       +'<span style="display:inline-block;background:rgba(255,255,255,.12);color:#fff;border-radius:999px;padding:2px 10px;font-size:10px;font-weight:600">'+_aliLeadLabel+'</span>'
+      +(SEL_INICIO['ali']?'<span style="display:inline-block;background:rgba(255,255,255,.12);color:#fff;border-radius:999px;padding:2px 10px;font-size:10px;font-weight:600">&#128197; Inicio: '+SEL_INICIO['ali']+'</span>':'')
       +'<span style="display:inline-block;background:rgba(255,255,255,.10);color:#fff;border-radius:999px;padding:2px 10px;font-size:10px;font-weight:600">&#9201; Válido por 24 hs</span>'
       +'</div></div></div></div>'
       +'<div style="padding:14px 20px">'
