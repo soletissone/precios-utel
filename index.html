@@ -4587,6 +4587,50 @@ function downloadSummary(sec){
   var infoEl=g({lic:'li',mae:'mi',ms:'si2',doc:'di',en:'en-info',hib:'hib-info',ali:'alii'}[sec]);
   var infoHTML=infoEl?infoEl.innerHTML:'';
 
+  // ── ESPECIALIDADES (CLAUSTRO) — bloque propio ───────────────────────────────
+  if(sec==='ali'){
+    var _aliLead=(g('alilead')||{}).value||'hot';
+    var _aliD=_CLAUSTRO_DATA[_aliLead]||_CLAUSTRO_DATA.hot;
+    var _aliTotal=fmt(_aliD.price*_aliD.meses);
+    var _aliLeadLabel={hot:'Hot Lead',rmkt30:'RMKT +30',rmkt60:'RMKT +60'}[_aliLead]||'';
+    var _aliHtml='<!DOCTYPE html><html lang="es"><head><meta charset="UTF-8">'
+      +'<link href="https:\/\/fonts.googleapis.com\/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">'
+      +'<title>Propuesta UTEL — '+progName+'</title>'
+      +'<style>*{box-sizing:border-box;margin:0;padding:0;font-family:Inter,system-ui,sans-serif}body{background:#f0f0f0;padding:14px}.page{background:#fff;max-width:700px;margin:0 auto;border-radius:8px;overflow:hidden;box-shadow:0 2px 20px rgba(0,0,0,.12)}@media print{body{background:#fff;padding:0}.page{box-shadow:none;border-radius:0;max-width:100%}@page{margin:0;size:A4}}</style>'
+      +'</head><body><div class="page">'
+      +'<div style="background:#3b0764;padding:16px 24px;">'
+      +'<div style="display:flex;align-items:center;gap:16px">'
+      +'<div style="font-size:9px;font-weight:700;color:#c4b5fd;letter-spacing:.12em;text-transform:uppercase;writing-mode:vertical-rl;transform:rotate(180deg)">PROPUESTA COMERCIAL</div>'
+      +'<div style="flex:1">'
+      +(leadName?'<div style="font-size:11px;color:#c4b5fd;margin-bottom:4px">Para: '+leadName+'</div>':'')
+      +'<div style="font-size:20px;font-weight:800;color:#fff;margin-bottom:8px">Especialidad en '+progName+'</div>'
+      +'<div style="display:flex;gap:6px;flex-wrap:wrap">'
+      +'<span style="background:#7c3aed;color:#fff;border-radius:999px;padding:2px 10px;font-size:10px;font-weight:700">CLAUSTRO</span>'
+      +'<span style="background:rgba(255,255,255,.15);color:#fff;border-radius:999px;padding:2px 10px;font-size:10px;font-weight:600">'+_aliLeadLabel+'</span>'
+      +'<span style="background:rgba(255,255,255,.12);color:#fff;border-radius:999px;padding:2px 10px;font-size:10px;font-weight:600">⏱ Válido por 24 hs</span>'
+      +'</div></div></div></div>'
+      +'<div style="padding:14px 20px">'
+      +'<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6b7280;margin-bottom:6px">Estructura de pagos</div>'
+      +'<table style="width:100%;border-collapse:collapse;border:1px solid #e5e7eb;border-radius:8px;overflow:hidden;margin-bottom:12px">'
+      +'<thead><tr style="background:#f9fafb"><th style="padding:7px 12px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b7280">Mes</th><th style="padding:7px 12px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b7280">Cuota mensual</th><th style="padding:7px 12px;text-align:left;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:#6b7280">Paquete</th></tr></thead>'
+      +'<tbody><tr style="border-bottom:1px solid #e5e7eb"><td style="padding:8px 12px;color:#6b7280">1 al '+_aliD.meses+'</td><td style="padding:8px 12px;font-size:15px;font-weight:700;color:#1c2d1a">'+fmt(_aliD.price)+'</td><td style="padding:8px 12px;font-size:12px;color:#6b7280">'+_aliD.pkg+'</td></tr></tbody>'
+      +'</table>'
+      +'<div style="font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#6b7280;margin-bottom:5px">Incluido en el paquete</div>'
+      +'<div style="margin-bottom:10px"><span style="display:inline-block;background:#dcfce7;color:#06ba06;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Platzi</span></div>'
+      +'<div style="background:#3b0764;border-radius:10px;padding:12px 18px;color:#fff;margin-bottom:6px">'
+      +'<div style="display:flex;justify-content:space-between;font-size:13px;color:rgba(255,255,255,.75);padding-bottom:6px"><span>Cuota mensual × '+_aliD.meses+' meses</span><span>'+fmt(_aliD.price)+' × '+_aliD.meses+'</span></div>'
+      +'<div style="display:flex;justify-content:space-between;font-size:17px;font-weight:700;border-top:1px solid rgba(255,255,255,.2);padding-top:8px"><span>Total programa</span><span>'+_aliTotal+'</span></div>'
+      +'</div>'
+      +'</div></div></body></html>';
+    var _aliBlob=new Blob([_aliHtml],{type:'text/html;charset=utf-8'});
+    var _aliA=document.createElement('a');
+    _aliA.href=URL.createObjectURL(_aliBlob);
+    _aliA.download='Propuesta_CLAUSTRO_'+progName.replace(/[^a-zA-Z0-9]/g,'_')+'.html';
+    _aliA.click();
+    return;
+  }
+  // ────────────────────────────────────────────────────────────────────────────
+
   // Detectar si es programa UNICA o UVE
   var progEntry=null;
   var _catKey={lic:'LICENCIATURA',mae:'MAESTRÍA',ms:'MASTER',doc:'DOCTORADO',en:'LICENCIATURA',hib:HIB_NAT_SEC==='lic'?'LICENCIATURA':'MAESTRÍA',ali:'ESPECIALIDAD'}[sec]||'LICENCIATURA';
