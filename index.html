@@ -901,10 +901,13 @@ primer y segundo nivel de atención</option><option value="Actualización en urg
       </div>
       <div class="ib" id="alii"></div>
       <div class="tw"><table>
-        <thead><tr><th>Mes</th><th>Cuota</th><th>Total acumulado</th><th>Paquete</th></tr></thead>
+        <thead><tr><th>Mes</th><th>Cuota</th><th>Paquete</th></tr></thead>
         <tbody id="alib"></tbody>
       </table></div>
       <div id="ali-total"></div>
+      <div style="background:var(--sf);border:1px solid var(--bd);border-radius:8px;padding:10px 14px;font-size:12px;color:var(--mu);margin-top:10px">
+        Incluye: Platzi · 5% descuento domiciliación
+      </div>
       <div style="display:flex;gap:8px;align-items:center;margin-top:14px">
         <button class="dl-btn" onclick="downloadSummaryWithSpeech('ali')">
           <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path d="M12 3v13m0 0l-4-4m4 4l4-4M3 21h18"/></svg>
@@ -2186,10 +2189,9 @@ function rALI(){
   if(infoEl) infoEl.innerHTML='<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span style="background:#7c3aed;color:#fff;border-radius:6px;padding:2px 10px;font-size:12px;font-weight:700">CLAUSTRO</span><span style="font-size:13px;color:var(--mu)">Especialidad · '+prices.length+' meses · Total: <strong style="color:var(--tx)">'+fmt(total)+'</strong></span></div>';
   var tbody=g('alib');
   if(!tbody) return;
-  var rows=''; var acc=0;
+  var rows='';
   prices.forEach(function(p,i){
-    acc+=p;
-    rows+='<tr><td>'+(i+1)+'</td><td>'+fmt(p)+'</td><td>'+fmt(acc)+'</td>'+(i===0?'<td rowspan="'+prices.length+'" style="font-size:12px">'+pkg+'</td>':'')+'</tr>';
+    rows+='<tr><td>'+(i+1)+'</td><td>'+fmt(p)+'</td>'+(i===0?'<td rowspan="'+prices.length+'" style="font-size:12px">'+pkg+'</td>':'')+'</tr>';
   });
   tbody.innerHTML=rows;
 }
