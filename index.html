@@ -2163,9 +2163,9 @@ var B2B_PLANES={
 };
 
 var _CLAUSTRO_DATA={
-  hot:    {p:[4850,4850,4850,4850,4850], pkg:'P1.CLA.4.10.26'},
-  rmkt30: {p:[3900,3900,3900,3900,4850], pkg:'P2.CLA.4.10.26'},
-  rmkt60: {p:[3425,3425,3425,3425,4850], pkg:'P3.CLA.4.10.26'}
+  hot:    {price:4850, meses:12, pkg:'P1.CLA.4.10.26'},
+  rmkt30: {price:3900, meses:12, pkg:'P2.CLA.4.10.26'},
+  rmkt60: {price:3425, meses:12, pkg:'P3.CLA.4.10.26'}
 };
 
 function aliInit(){
@@ -2183,17 +2183,13 @@ function aliInit(){
 function rALI(){
   var lead=(g('alilead')||{}).value||'hot';
   var d=_CLAUSTRO_DATA[lead]||_CLAUSTRO_DATA.hot;
-  var prices=d.p; var pkg=d.pkg;
-  var total=prices.reduce(function(s,v){return s+v;},0);
+  var price=d.price; var meses=d.meses; var pkg=d.pkg;
+  var total=price*meses;
   var infoEl=g('alii');
-  if(infoEl) infoEl.innerHTML='<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span style="background:#7c3aed;color:#fff;border-radius:6px;padding:2px 10px;font-size:12px;font-weight:700">CLAUSTRO</span><span style="font-size:13px;color:var(--mu)">Especialidad · '+prices.length+' meses · Total: <strong style="color:var(--tx)">'+fmt(total)+'</strong></span></div>';
+  if(infoEl) infoEl.innerHTML='<div style="display:flex;gap:8px;flex-wrap:wrap;align-items:center"><span style="background:#7c3aed;color:#fff;border-radius:6px;padding:2px 10px;font-size:12px;font-weight:700">CLAUSTRO</span><span style="font-size:13px;color:var(--mu)">Especialidad · '+meses+' meses · Total: <strong style="color:var(--tx)">'+fmt(total)+'</strong></span></div>';
   var tbody=g('alib');
   if(!tbody) return;
-  var rows='';
-  prices.forEach(function(p,i){
-    rows+='<tr><td>'+(i+1)+'</td><td>'+fmt(p)+'</td>'+(i===0?'<td rowspan="'+prices.length+'" style="font-size:12px">'+pkg+'</td>':'')+'</tr>';
-  });
-  tbody.innerHTML=rows;
+  tbody.innerHTML='<tr><td>1 al '+meses+'</td><td>'+fmt(price)+'</td><td style="font-size:12px">'+pkg+'</td></tr>';
 }
 
 function b2bInit(){
