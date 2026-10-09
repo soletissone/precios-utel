@@ -4189,10 +4189,7 @@ function rL(){
   var durBadge='<span class="dur-badge">⏱ '+durStr+'</span>';
   var fechaBadge=SEL_INICIO['lic']?'<span class="dur-badge">📅 Inicio: '+SEL_INICIO['lic']+'</span>':'';
   var uniqBadgeLic=isMercadoUnico(progName)?'<span style="display:inline-block;background:#fef9c3;color:#854d0e;border-radius:8px;padding:3px 10px;font-size:11px;font-weight:700;margin:0 4px">🌟 Único en el mercado</span>':'';
-  var _licCat=CATALOG['LICENCIATURA']||[];
-  var _licEntry=null;for(var _lci=0;_lci<_licCat.length;_lci++){if(_licCat[_lci].p===progName){_licEntry=_licCat[_lci];break;}}
-  var campusBadge=(_licEntry&&_licEntry.ucamp===1)?'<span style="display:inline-block;background:#eff6ff;color:#1d4ed8;border-radius:8px;padding:3px 10px;font-size:11px;font-weight:700;margin:0 2px">🏫 Campus</span>':'';
-  g('li').innerHTML=nivelBadge+' '+nuevoBadge+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+platziBtn(progName)+uniqBadgeLic+campusBadge+jorBadge+durBadge+fechaBadge+LBG[lead];
+  g('li').innerHTML=nivelBadge+' '+nuevoBadge+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+platziBtn(progName)+uniqBadgeLic+jorBadge+durBadge+fechaBadge+LBG[lead];
   // Filter experiencia items based on program capabilities
   var _licProgs=CATALOG['LICENCIATURA']||[];
   var _progEntry=null;
@@ -5111,7 +5108,7 @@ function getAlianzaTag(item, nivelKey){
   if(nivelKey==='LICENCIATURA'){
     if(item.v==='unica') return ' · UNICA';
     if(item.v==='uve')   return ' · UVE';
-    if(item.ucamp===1)   return ' · Campus';
+    if(item.v==='unag')  return ' · UNAG';
   }
   if(nivelKey==='MAESTRÍA'||nivelKey==='MAESTRIA'){
     if(item.ali===1) return ' · CECIP';
@@ -5121,7 +5118,7 @@ function getAlianzaTag(item, nivelKey){
 function filterLArea(){
   var area=g('larea').value;
   var progs=CATALOG['LICENCIATURA']||[];
-  var filtered=(area==='__ali__'?progs.filter(function(p){return p.ucamp===1;}):area?progs.filter(function(p){return p.a===area;}):progs).slice().sort(function(a,b){var ap=(a.p||'').toLowerCase(),bp=(b.p||'').toLowerCase();return ap<bp?-1:ap>bp?1:0;});
+  var filtered=(area==='__ali__'?progs.filter(function(p){return p.v==='unica'||p.v==='uve'||p.v==='unag';}):area?progs.filter(function(p){return p.a===area;}):progs).slice().sort(function(a,b){var ap=(a.p||'').toLowerCase(),bp=(b.p||'').toLowerCase();return ap<bp?-1:ap>bp?1:0;});
   var sel=g('lprog'); sel.innerHTML='';
   filtered.forEach(function(item){
     var opt=document.createElement('option');
