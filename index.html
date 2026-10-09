@@ -4189,7 +4189,10 @@ function rL(){
   var durBadge='<span class="dur-badge">⏱ '+durStr+'</span>';
   var fechaBadge=SEL_INICIO['lic']?'<span class="dur-badge">📅 Inicio: '+SEL_INICIO['lic']+'</span>':'';
   var uniqBadgeLic=isMercadoUnico(progName)?'<span style="display:inline-block;background:#fef9c3;color:#854d0e;border-radius:8px;padding:3px 10px;font-size:11px;font-weight:700;margin:0 4px">🌟 Único en el mercado</span>':'';
-  g('li').innerHTML=nivelBadge+' '+nuevoBadge+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+platziBtn(progName)+uniqBadgeLic+jorBadge+durBadge+fechaBadge+LBG[lead];
+  var _licCat=CATALOG['LICENCIATURA']||[];
+  var _licEntry=null;for(var _lci=0;_lci<_licCat.length;_lci++){if(_licCat[_lci].p===progName){_licEntry=_licCat[_lci];break;}}
+  var campusBadge=(_licEntry&&_licEntry.ucamp===1)?'<span style="display:inline-block;background:#eff6ff;color:#1d4ed8;border-radius:8px;padding:3px 10px;font-size:11px;font-weight:700;margin:0 2px">🏫 Campus</span>':'';
+  g('li').innerHTML=nivelBadge+' '+nuevoBadge+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+platziBtn(progName)+uniqBadgeLic+campusBadge+jorBadge+durBadge+fechaBadge+LBG[lead];
   // Filter experiencia items based on program capabilities
   var _licProgs=CATALOG['LICENCIATURA']||[];
   var _progEntry=null;
@@ -4288,7 +4291,9 @@ function rM(){
   renderBeca('mbi',Math.max.apply(null,maeExpPrices),e.pkg);
   var nuevoBadgeM=isNuevo(progName)?'<span class="b-new">NUEVO</span> ':'';
   var durBadgeM='<span class="dur-badge">⏱ '+getDuracion('mae','maestria',progName)+'</span>';
-  g('mi').innerHTML=NB[nivel]+' '+nuevoBadgeM+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'MAE')+platziBtn(progName)+durBadgeM+LBG[lead];
+  var _maeCat=CATALOG['MAESTRÍA']||[];var _maeEntry=null;for(var _mei=0;_mei<_maeCat.length;_mei++){if(_maeCat[_mei].p===progName){_maeEntry=_maeCat[_mei];break;}}
+  var cecipBadge=(_maeEntry&&_maeEntry.ali===1)?'<span style="display:inline-block;background:#f5f3ff;color:#5b21b6;border-radius:8px;padding:3px 10px;font-size:11px;font-weight:700;margin:0 2px">🤝 CECIP</span>':'';
+  g('mi').innerHTML=NB[nivel]+' '+nuevoBadgeM+'<span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'MAE')+platziBtn(progName)+cecipBadge+durBadgeM+LBG[lead];
   updateFechaByProg('mae', progName); updateFechaByProg('ms', progName);
   renderAccs('mae-acc','mae',isOnline);
   renderTotal('mae-total',maeExpPrices[2],'mae',isOnline);
