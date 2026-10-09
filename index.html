@@ -559,7 +559,7 @@ Si pudieras sumarle una habilidad a tu perfil hoy mismo, ¿qué elegirías?</div
         <span style="font-size:22px">⚡</span>
       </div>
       <div class="filters">
-        <div class="fg"><label>Área</label><select id="larea" onchange="filterLArea()"><option value="">— Todas —</option><option value="Arquitectura y Urbanismo">Arquitectura y Urbanismo</option><option value="Capital Humano y Transformación Organizacional">Capital Humano y Transformación Organizacional</option><option value="Ciencias Sociales y Humanidades">Ciencias Sociales y Humanidades</option><option value="Ciencias de la Salud">Ciencias de la Salud</option><option value="Derecho y Justicia Digital">Derecho y Justicia Digital</option><option value="Diseño y Comunicación">Diseño y Comunicación</option><option value="Económico-Administrativas">Económico-Administrativas</option><option value="Finanzas y Economía">Finanzas y Economía</option><option value="Hospitalidad y Turismo">Hospitalidad y Turismo</option><option value="Ingeniería y Soluciones">Ingeniería y Soluciones</option><option value="Ingeniería y Tecnología">Ingeniería y Tecnología</option><option value="Negocios, Innovación y Liderazgo">Negocios, Innovación y Liderazgo</option></select></div><div class="fg"><label>Programa</label><select id="lprog" onchange="rL()"></select></div>
+        <div class="fg"><label>Área</label><select id="larea" onchange="filterLArea()"><option value="">— Todas —</option><option value="Arquitectura y Urbanismo">Arquitectura y Urbanismo</option><option value="Capital Humano y Transformación Organizacional">Capital Humano y Transformación Organizacional</option><option value="Ciencias Sociales y Humanidades">Ciencias Sociales y Humanidades</option><option value="Ciencias de la Salud">Ciencias de la Salud</option><option value="Derecho y Justicia Digital">Derecho y Justicia Digital</option><option value="Diseño y Comunicación">Diseño y Comunicación</option><option value="Económico-Administrativas">Económico-Administrativas</option><option value="Finanzas y Economía">Finanzas y Economía</option><option value="Hospitalidad y Turismo">Hospitalidad y Turismo</option><option value="Ingeniería y Soluciones">Ingeniería y Soluciones</option><option value="Ingeniería y Tecnología">Ingeniería y Tecnología</option><option value="Negocios, Innovación y Liderazgo">Negocios, Innovación y Liderazgo</option><option value="__ali__">🤝 Alianzas</option></select></div><div class="fg"><label>Programa</label><select id="lprog" onchange="rL()"></select></div>
         <div class="fg"><label>Jornada</label>
           <select id="ljor" onchange="rL()">
             <option value="intensiva">Jornada Intensiva</option>
@@ -5104,7 +5104,7 @@ function init(){
 function filterLArea(){
   var area=g('larea').value;
   var progs=CATALOG['LICENCIATURA']||[];
-  var filtered=(area?progs.filter(function(p){return p.a===area;}):progs).slice().sort(function(a,b){var ap=(a.p||'').toLowerCase(),bp=(b.p||'').toLowerCase();return ap<bp?-1:ap>bp?1:0;});
+  var filtered=(area==='__ali__'?progs.filter(function(p){return p.ucamp===1;}):area?progs.filter(function(p){return p.a===area;}):progs).slice().sort(function(a,b){var ap=(a.p||'').toLowerCase(),bp=(b.p||'').toLowerCase();return ap<bp?-1:ap>bp?1:0;});
   var sel=g('lprog'); sel.innerHTML='';
   filtered.forEach(function(item){
     var opt=document.createElement('option');
