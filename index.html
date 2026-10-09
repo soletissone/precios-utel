@@ -2608,7 +2608,8 @@ function fillSelect(selId, nivelKey, badgeId){
     opt.setAttribute('data-nivel',item.v);
     var isNew=NEW_PROGS.indexOf(item.p.toUpperCase())>=0;
     var isUniq=isMercadoUnico(item.p);
-    opt.textContent=(isUniq?'🌟 ':isNew?'⭐ ':'')+item.p.charAt(0)+item.p.slice(1).toLowerCase();
+    var _aTag=getAlianzaTag(item,nivelKey);
+    opt.textContent=(isUniq?'🌟 ':isNew?'⭐ ':'')+item.p.charAt(0)+item.p.slice(1).toLowerCase()+_aTag;
     if(isProx(item.p)){opt.style.color='#aaa';opt.disabled=true;opt.textContent+=' (próximamente)';}
     sel.appendChild(opt);
   });
@@ -5101,6 +5102,17 @@ function init(){
   rL();rM();rD();rPU();rDip();
 }
 
+function getAlianzaTag(item, nivelKey){
+  if(nivelKey==='LICENCIATURA'){
+    if(item.v==='unica') return ' · UNICA';
+    if(item.v==='uve')   return ' · UVE';
+    if(item.ucamp===1)   return ' · Campus';
+  }
+  if(nivelKey==='MAESTRÍA'||nivelKey==='MAESTRIA'){
+    if(item.ali===1) return ' · CECIP';
+  }
+  return '';
+}
 function filterLArea(){
   var area=g('larea').value;
   var progs=CATALOG['LICENCIATURA']||[];
@@ -5111,7 +5123,7 @@ function filterLArea(){
     opt.value=item.p;
     opt.setAttribute('data-nivel',item.v);
     var isNew=NEW_PROGS.indexOf(item.p.toUpperCase())>=0;
-    opt.textContent=(isNew?'⭐ ':'')+item.p;
+    opt.textContent=(isNew?'⭐ ':'')+item.p+getAlianzaTag(item,'LICENCIATURA');
     if(isProx(item.p)){opt.style.color='#aaa';opt.disabled=true;opt.textContent+=' (próximamente)';}
     sel.appendChild(opt);
   });
@@ -5132,7 +5144,7 @@ function filterMArea(){
     opt.value=item.p;
     opt.setAttribute('data-nivel',item.v);
     var isNew=NEW_PROGS.indexOf(item.p.toUpperCase())>=0;
-    opt.textContent=(isNew?'⭐ ':'')+item.p;
+    opt.textContent=(isNew?'⭐ ':'')+item.p+getAlianzaTag(item,'MAESTRÍA');
     if(isProx(item.p)){opt.style.color='#aaa';opt.disabled=true;opt.textContent+=' (próximamente)';}
     sel.appendChild(opt);
   });
