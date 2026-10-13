@@ -4616,7 +4616,7 @@ function downloadSummary(sec){
   var leadName=(g('lead-name-input')?g('lead-name-input').value.trim():'');
   var progSelId={lic:'lprog',mae:'mprog',ms:'sprog',doc:'dprog',en:'en-prog',hib:'hib-prog',ali:'aliprog'}[sec];
   var progSel=g(progSelId);
-  var progName=progSel&&progSel.options[progSel.selectedIndex]?progSel.options[progSel.selectedIndex].text:'-';
+  var progName=progSel&&progSel.value?progSel.value:'-';
   var infoEl=g({lic:'li',mae:'mi',ms:'si2',doc:'di',en:'en-info',hib:'hib-info',ali:'alii'}[sec]);
   var infoHTML=infoEl?infoEl.innerHTML:'';
 
