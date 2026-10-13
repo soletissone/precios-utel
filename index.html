@@ -4729,7 +4729,7 @@ function downloadSummary(sec){
   var baseNum=0;
   if(baseCell){var _t=baseCell.textContent.replace(/[$,.]/g,'').replace(/\s/g,'');baseNum=parseInt(_t)||0;}
   var accSum=0;
-  if(cats){
+  if(cats && !isUNICA && !isUVE && !isUNAG){
     // Incluidos con precio (ej. Platzi $100)
     var _incDownload=(realSec==='mae')?(cats.included_online||cats.included):cats.included;
     if(_incDownload) _incDownload.forEach(function(it){if(it.price) accSum+=it.price;});
