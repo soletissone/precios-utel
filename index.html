@@ -2183,6 +2183,7 @@ function aliInit(){
 }
 
 function rALI(){
+  var _gbAli=document.getElementById('tit0-global-banner'); if(_gbAli) _gbAli.style.display='none';
   var lead=(g('alilead')||{}).value||'hot';
   var d=_CLAUSTRO_DATA[lead]||_CLAUSTRO_DATA.hot;
   var price=d.price; var meses=d.meses; var pkg=d.pkg;
@@ -4686,7 +4687,7 @@ function downloadSummary(sec){
       +'<div style="font-size:10px;color:rgba(255,255,255,.35);max-width:280px;text-align:right;line-height:1.5;font-style:italic">Simulador de precio de colegiaturas. Valores orientativos sujetos a cambios.</div>'
       +'</div>'
       +'</div></body></html>';
-    var _aliWin=window.open('','_blank');
+    var _aliWin=window.open('','_blank','width=800,height=700');
     if(!_aliWin){alert('Permitir popups para poder descargar la propuesta.'); return;}
     _aliWin.document.write(_aliHtml);
     _aliWin.document.close();
