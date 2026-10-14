@@ -3650,8 +3650,15 @@ function renderAccs(panelId, sec, isOnline){
   IDIOM_IDS.forEach(function(id){ if(SEL[sec][id]) idiomCount++; });
   var maxCerts = (sec==='lic') ? 2 : 1;
 
+  // Detectar si el programa actual es alianza (no aplica Título Costo $0)
+  var _accProgSel=g({lic:'lprog',mae:'mprog',doc:'dprog'}[sec]||'');
+  var _accProgVal=_accProgSel?_accProgSel.value:'';
+  var _accCat=CATALOG[{lic:'LICENCIATURA',mae:'MAESTRÍA',doc:'DOCTORADO'}[sec]||'LICENCIATURA']||[];
+  var _accPE=null;for(var _apj=0;_apj<_accCat.length;_apj++){if(_accCat[_apj].p.toLowerCase()===_accProgVal.toLowerCase()){_accPE=_accCat[_apj];break;}}
+  var _isAlianzaAcc=_accPE&&(_accPE.v==='uve'||_accPE.v==='unica'||_accPE.v==='unag'||_accPE.ali===1);
+
   var html = '<div class="acc-section">';
-  if(isTit0Active() && ['lic','mae','doc'].indexOf(sec)>=0){
+  if(isTit0Active() && ['lic','mae','doc'].indexOf(sec)>=0 && !_isAlianzaAcc){
     html += '<div style="display:flex;align-items:center;gap:10px;background:linear-gradient(135deg,#16a34a,#22c55e);color:#fff;border-radius:8px;padding:10px 14px;margin-bottom:12px;font-size:13px;font-weight:700;box-shadow:0 3px 10px rgba(22,163,74,.3)">'
           + '<span style="font-size:18px">🎓</span>'
           + '<div><div style="font-size:14px;letter-spacing:.02em">PROMO TÍTULO COSTO $0</div>'
@@ -3724,7 +3731,7 @@ function renderAccs(panelId, sec, isOnline){
         html += ' data-sec="'+sec+'" data-id="'+item.id+'" data-panel="'+panelId+'" data-online="'+isOnline+'" onclick="handleChip(this)"';
       }
       html += '>';
-      var _tit0chip=isTit0Active()&&item.id==='tit';
+      var _tit0chip=isTit0Active()&&item.id==='tit'&&!_isAlianzaAcc;
       html += '<div class="chip-check">'+(blocked?'✕':'')+'</div>';
       html += '<span class="chip-name">'+item.name+(_tit0chip?' <span style="background:#16a34a;color:#fff;border-radius:4px;padding:1px 5px;font-size:9px;font-weight:700">GRATIS</span>':'')+'</span>';
       html += '<span class="chip-price">'+(blocked?blockReason:(_tit0chip?'<s style="opacity:.4">'+fmt(item.price)+'</s> $0':fmt(item.price))+'/mes')+'</span>';
@@ -4116,8 +4123,9 @@ function rL(){
       var ljorDivU=document.getElementById('ljor'); if(ljorDivU) ljorDivU.closest('.fg').style.display='none';
       var selDivU=g('alianza-variant-sel'); if(selDivU) selDivU.style.display='none';
       renderTable('lb',uveV.p,uveV.pkg,'—',0,0,3);
-      g('lbi').innerHTML='<span>Incluye: Asistencia, Platzi, 5% domiciliación</span>';
+      g('lbi').innerHTML='<span>Incluye: Voxy, Asistencia, Platzi, 5% domiciliación</span>';
       g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
+      renderRecursos('lic-recursos', progName, 'LIC');
       g('lic-total').innerHTML=''; return;
     } else if(uName==='UNICA'||uName==='ARTE DIGITAL Y MULTIMEDIA'||uName==='MARKETING Y PUBLICIDAD'||uName==='MEDIOS DIGITALES'||uName==='COMUNICACIÓN CORPORATIVA'){
       var unicaMap={'hot':{p:[629,1470,1995,2810,2810,2810,2810,2810,2810,2810,2810,2810],pkg:'ESC.LIC.UNICA.PLATZI.'},
@@ -4132,9 +4140,10 @@ function rL(){
       var ljorDiv2=document.getElementById('ljor'); if(ljorDiv2) ljorDiv2.closest('.fg').style.display='none';
       renderTable('lb',unicaV.p,unicaV.pkg,'—',0,0,3);
       DOMICILIACION=_domOrig; TITULO_COSTO_0=_tit0Orig;
-      g('lbi').innerHTML='<span>Incluye: Asistencia, Platzi, 5% domiciliación</span>';
+      g('lbi').innerHTML='<span>Incluye: Voxy, Asistencia, Platzi, 5% domiciliación</span>';
       g('li').innerHTML=NB['unico']+' <span class="badge b-mod">UNICA</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
       g('lic-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UNICA</div>';
+      renderRecursos('lic-recursos', progName, 'LIC');
       g('lic-total').innerHTML=''; return;
     } else if(uName.indexOf('UNAG')>=0 || nivelRaw==='unag'){
       g('lb').innerHTML='<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--mu)">Programa UNAG — consultar precio con el área comercial</td></tr>';
@@ -4688,6 +4697,9 @@ function downloadSummary(sec){
   var isUNICA = progEntry && progEntry.v==='unica';
   var isUVE   = progEntry && progEntry.v==='uve';
   var isUNAG  = progEntry && progEntry.v==='unag';
+  var isCECIP = progEntry && progEntry.ali===1;
+  var _hdrBg  = isUVE ? '#1B5FA8' : '#062A17';
+  var _hdrAcc = isUVE ? '#90CAF9' : '#63D471';
 
   // Get table rows
   var tbodyId={lic:'lb',mae:'mb',ms:'sb',doc:'db',en:'en-tbody',hib:'hib-tbody',ali:'alib'}[sec];
@@ -4784,8 +4796,9 @@ function downloadSummary(sec){
   // Build included chips
   var incChips='';
   if(isUNICA || isUVE || isUNAG){
-    // UNICA / UVE / UNAG: incluye Platzi
-    incChips='<span style="display:inline-block;background:#dcfce7;color:#06ba06;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Platzi</span>';
+    // UNICA / UVE / UNAG: incluye Voxy + Platzi
+    incChips='<span style="display:inline-block;background:#fefce8;color:#a16207;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Inglés Voxy</span>'
+            +'<span style="display:inline-block;background:#dcfce7;color:#06ba06;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Platzi</span>';
   } else {
     var incList2=(realSec==='mae')?(cats.included_online||cats.included):cats.included;
     if(cats) incList2.forEach(function(it){
@@ -4794,7 +4807,7 @@ function downloadSummary(sec){
     // Ejecutiva siempre incluida para sección en
     if(sec==='en') incChips+='<span style="display:inline-block;background:#edfcd8;color:#06ba06;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Sesión Ejecutiva</span>';
     // Título Costo $0 si está activado (aplica a lic, mae, doc — no UNICA ni UVE)
-    if(isTit0Active() && ['lic','mae','doc'].indexOf(realSec)>=0 && !isUVE){
+    if(isTit0Active() && ['lic','mae','doc'].indexOf(realSec)>=0 && !isUVE && !isUNICA && !isUNAG && !isCECIP){
       incChips+='<span style="display:inline-block;background:#dcfce7;color:#06ba06;border-radius:8px;padding:4px 12px;font-size:12px;font-weight:600;margin:3px">✓ Título Costo $0</span>';
     }
   }
@@ -4814,7 +4827,7 @@ function downloadSummary(sec){
     voxy: {label:'Inglés Voxy',color:'#fefce8',border:'#fef08a',icon:'🌐',desc:'Plataforma de aprendizaje de inglés en línea con contenido personalizado según el nivel y los objetivos del usuario. Permite desarrollar habilidades de conversación, comprensión, lectura y escritura mediante lecciones interactivas y flexibles.'},
     platzi:{label:'Platzi',color:'#00d369',border:'#00b356',icon:'🚀',desc:'Membresía incluida desde el primer día de clases con acceso a más de 1.000 cursos en inteligencia artificial, tecnología, marketing, inglés, liderazgo y negocios. Contenido práctico y actualizado para potenciar tu perfil profesional y destacar en el mercado laboral.',dark:true}
   };
-  var _accDescIncList=(isUNICA||isUVE||isUNAG)?[{id:'platzi'}]:((cats&&((realSec==='mae')?(cats.included_online||cats.included):cats.included))||[]);
+  var _accDescIncList=(isUNICA||isUVE||isUNAG)?[{id:'voxy'},{id:'platzi'}]:((cats&&((realSec==='mae')?(cats.included_online||cats.included):cats.included))||[]);
   var accDescCards='';
   _accDescIncList.forEach(function(it){
     var d=_ACC_DESCS[it.id];
@@ -4855,20 +4868,20 @@ function downloadSummary(sec){
     +'<div class="page">'
 
     // HEADER UNIFICADO
-    +'<div style="background:#062A17;padding:16px 24px;position:relative;overflow:hidden;">'
+    +'<div style="background:'+_hdrBg+';padding:16px 24px;position:relative;overflow:hidden;">'
     +'<svg style="position:absolute;inset:0;width:100%;height:100%;opacity:.07;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 680 200" preserveAspectRatio="none"><path d="M-20,120 Q170,30 360,100 Q550,170 710,70" fill="none" stroke="#00B140" stroke-width="2.5"/><path d="M-20,160 Q200,70 400,140 Q580,200 710,110" fill="none" stroke="#00B140" stroke-width="1.5"/></svg>'
     +'<div style="position:relative;z-index:2;display:flex;align-items:center;gap:18px;">'
     // Col izquierda: logo + etiqueta
     +'<div style="flex-shrink:0;display:flex;flex-direction:column;gap:7px;">'
     +'<svg height="32" style="width:auto;display:block;" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1056.63 416.2"><path fill="#ffffff" d="M205.62,0V160.83h0v25.84h0c0,2.13-.11,4.23-.3,6.32h0c-1.16,12.87-5.88,25.04-13.62,35.45-2.09,2.82-4.36,5.53-6.9,8.07-13.41,13.41-31.1,20.8-49.82,20.82h-.02c-18.71-.01-36.4-7.4-49.82-20.82-2.53-2.53-4.8-5.25-6.9-8.07-7.74-10.41-12.46-22.58-13.62-35.45h0c-.19-2.09-.3-4.19-.3-6.31h0v-25.85h0V0H0V186.65c0,2.13,.06,4.24,.16,6.34,1.1,23.48,8.28,45.43,19.97,64.33,4.68,7.57,10.13,14.6,16.16,21.09,8.27,8.88,17.67,16.69,28.03,23.11,20.58,12.74,44.79,20.13,70.64,20.14,25.85,0,50.06-7.39,70.64-20.14,10.36-6.42,19.76-14.23,28.03-23.11,6.03-6.48,11.48-13.52,16.16-21.09,11.7-18.9,18.87-40.85,19.97-64.33,.1-2.1,.16-4.22,.16-6.34V0h-64.33Z"/><path fill="#ffffff" d="M790.81,128.66h0c-1.1-23.48-8.28-45.43-19.98-64.33-4.68-7.57-10.13-14.6-16.16-21.09-8.26-8.88-17.67-16.69-28.03-23.11C706.06,7.41,681.81,0,655.97,0h-.04c-25.85,0-50.06,7.39-70.64,20.14-10.36,6.41-19.76,14.23-28.03,23.11-6.03,6.48-11.48,13.52-16.16,21.09-11.7,18.9-18.87,40.85-19.98,64.33h0c-.1,2.1-.16,4.22-.16,6.34v51.65c0,2,.06,3.98,.15,5.96h0l.02,.36v.05l.02,.31h0c1.15,23.35,8.31,45.19,19.95,63.99,4.68,7.57,10.13,14.6,16.16,21.09,8.27,8.88,17.67,16.69,28.03,23.11,20.58,12.74,44.79,20.13,70.64,20.14h.07c25.83,0,50.02-7.38,70.59-20.1,10.36-6.41,19.82-14.26,28.08-23.14l-17.7-21.09-10.38-12.36-13.87-16.52c-2.09,2.82-4.36,5.53-6.9,8.07-13.41,13.41-31.11,20.8-49.82,20.82h-.09c-18.71-.01-36.4-7.4-49.82-20.82-2.53-2.53-4.8-5.25-6.9-8.07-7.74-10.41-12.46-22.58-13.62-35.45h205.23c.1-2.1,.16-4.2,.16-6.32v-51.68c0-2.12-.06-4.23-.16-6.33Zm-134.88,32.21v-.09l.04,.04-.04,.04Zm17.51-32.21h-87.85c1.16-12.87,5.88-25.04,13.62-35.45,2.09-2.82,4.36-5.53,6.9-8.07,13.42-13.42,31.11-20.81,49.83-20.82h.04c18.73,0,36.44,7.39,49.86,20.82,2.53,2.53,4.8,5.25,6.9,8.07,7.74,10.41,12.46,22.58,13.62,35.45h-52.91Z"/><path fill="#ffffff" d="M1038.92,257.32l-10.33-12.3-13.92-16.58c-2.09,2.82-4.36,5.53-6.9,8.07-13.41,13.41-31.11,20.8-49.82,20.82h-.09c-18.71-.01-36.4-7.4-49.82-20.82-2.53-2.53-4.8-5.25-6.9-8.07-7.74-10.41-12.46-22.58-13.62-35.45h0c-.19-2.09-.3-4.19-.3-6.31h0V0h-64.33V186.65c0,2.13,.06,4.24,.16,6.34,1.1,23.48,8.28,45.43,19.97,64.33,4.68,7.57,10.13,14.6,16.16,21.09,8.27,8.88,17.67,16.69,28.03,23.11,20.58,12.74,44.79,20.13,70.64,20.14h.07c20.24,0,39.46-4.55,56.73-12.63,4.78-2.23,9.46-4.75,13.92-7.51,10.36-6.41,19.76-14.23,28.03-23.11l-17.7-21.09Z"/><path fill="#ffffff" d="M198,380.58c0,9.8-3.08,18.19-9.25,25.17-6.16,6.97-13.58,10.46-22.25,10.46s-16.09-3.49-22.25-10.46c-6.16-6.97-9.25-15.36-9.25-25.17v-28.66h11.17v28.66c0,6.32,2.02,11.76,5.97,16.23,3.95,4.47,8.76,6.75,14.35,6.75s10.4-2.29,14.35-6.75c3.95-4.47,5.97-9.91,5.97-16.23v-28.66h11.17v28.66Z"/><path fill="#ffffff" d="M233.56,372.63v43.58h-11.17v-64.28h7.9l41.7,43.58v-43.58h11.17v64.28h-7.8l-41.8-43.58Z"/><path fill="#ffffff" d="M318.95,351.93v64.28h-11.17v-64.28h11.17Z"/><path fill="#ffffff" d="M372.84,396.7l22.06-44.78h12.9l-31.59,64.28h-6.65l-31.69-64.28h12.91l22.06,44.78Z"/><path fill="#ffffff" d="M477.88,403.57v12.64h-51.15v-64.28h51.15v12.64h-39.97v13.18h31.3v12.64h-31.3v13.18h39.97Z"/><path fill="#ffffff" d="M513.67,393.65v22.55h-11.17v-64.28h38.72c5.11,0,9.53,2.07,13.1,6.1,3.56,4.03,5.39,9.04,5.39,14.82,0,9.48-5.59,17.43-13.39,20.05l16.18,23.31h-14.26l-15.6-22.55h-18.97Zm0-29.09v16.45h27.55c4.14,0,7.32-3.49,7.32-8.17s-3.18-8.28-7.32-8.28h-27.55Z"/><path fill="#ffffff" d="M630.07,413.37c-5.88,1.85-11.75,2.83-17.53,2.83-3.18,0-6.93-.44-11.17-1.42-4.14-.98-10.79-2.94-19.94-5.99l3.18-12.09c10.98,3.6,19.74,5.67,26.29,6.21,6.55,.55,11.85,0,15.99-1.75,2.6-.76,4.33-2.62,4.33-4.25,0-1.75-1.73-3.6-4.53-4.47-2.31-.55-7.51-1.31-15.7-2.07-8.19-.76-14.45-2.29-18.78-4.36-5.78-2.95-9.44-8.61-9.44-15.04,0-7.3,4.82-13.51,11.85-16.02,11.27-4.25,24.75-3.71,44.11,2.72l-3.28,12.09c-16.85-5.77-29.09-6.21-37.66-2.72-2.41,.87-3.85,2.51-3.85,3.92,0,1.31,.96,2.51,2.79,3.49,3.76,1.85,9.44,3.05,17.05,3.7,7.7,.65,12.9,1.31,15.6,2.07,7.71,2.18,12.91,8.82,12.91,16.67,0,7.41-4.91,13.95-12.23,16.45Z"/><path fill="#ffffff" d="M678.26,351.93v64.28h-11.17v-64.28h11.17Z"/><path fill="#ffffff" d="M702.87,416.2v-64.28h30.24c7.9,0,14.64,3.16,20.13,9.48,5.49,6.21,8.28,13.84,8.28,22.66s-2.79,16.45-8.28,22.77c-5.49,6.21-12.24,9.37-20.13,9.37h-30.24Zm11.17-51.64v39h19.07c4.72,0,8.76-1.85,12.14-5.66,3.37-3.82,5.1-8.5,5.1-13.84s-1.73-9.92-5.1-13.73c-3.37-3.81-7.42-5.77-12.14-5.77h-19.07Z"/><path fill="#ffffff" d="M826.02,397.57h-31.69l-10.02,18.63h-12.62l34.67-64.28h7.61l34.67,64.28h-12.62l-10.02-18.63Zm-6.55-12.2l-9.25-17.11-9.25,17.11h18.49Z"/><path fill="#ffffff" d="M862.38,416.2v-64.28h30.24c7.9,0,14.64,3.16,20.13,9.48,5.49,6.21,8.28,13.84,8.28,22.66s-2.79,16.45-8.28,22.77c-5.49,6.21-12.24,9.37-20.13,9.37h-30.24Zm11.17-51.64v39h19.07c4.72,0,8.76-1.85,12.14-5.66,3.37-3.82,5.1-8.5,5.1-13.84s-1.73-9.92-5.1-13.73c-3.37-3.81-7.42-5.77-12.14-5.77h-19.07Z"/><path fill="#ffffff" d="M512.9,273.07c-1.85-2.99-3.6-6.04-5.26-9.14-5.98-11.23-10.66-23.21-13.9-35.46l-.02-.03c-2.09,2.82-4.36,5.53-6.9,8.07-13.41,13.41-31.11,20.8-49.82,20.82h-.09c-18.71-.01-36.4-7.4-49.82-20.82-2.53-2.53-4.8-5.25-6.9-8.07-7.74-10.41-12.46-22.58-13.62-35.45-.19-2.09-.3-4.2-.3-6.32v-25.84h0v-32.17h104.9l-.03-64.33h-104.87V0h-64.33V186.65c0,2.13,.06,4.24,.16,6.34,1.1,23.48,8.28,45.43,19.97,64.33,4.68,7.57,10.13,14.6,16.16,21.09,8.27,8.88,17.67,16.69,28.03,23.11,20.58,12.74,44.79,20.13,70.64,20.14h.07c25.83,0,50.02-7.38,70.59-20.1,5.91-3.66,11.52-7.85,16.77-12.36-4.17-5.21-8.04-10.58-11.47-16.12Z"/></svg>'
     // label PROPUESTA COMERCIAL dentro col-izq
-    +'<div style="font-size:9px;font-weight:700;color:#63D471;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;">&#9658; PROPUESTA COMERCIAL</div>'
+    +'<div style="font-size:9px;font-weight:700;color:'+_hdrAcc+';letter-spacing:.1em;text-transform:uppercase;white-space:nowrap;">&#9658; PROPUESTA COMERCIAL</div>'
     +'</div>'
     // Separador vertical
     +'<div style="width:1px;align-self:stretch;background:rgba(255,255,255,.18);flex-shrink:0;"></div>'
     // Col derecha: nombre + badges
     +'<div style="flex:1;min-width:0;">'
-    +(leadName?'<div style="font-size:11px;font-weight:600;color:#63D471;letter-spacing:.04em;margin-bottom:5px;">Para: '+leadName+'</div>':'')
+    +(leadName?'<div style="font-size:11px;font-weight:600;color:'+_hdrAcc+';letter-spacing:.04em;margin-bottom:5px;">Para: '+leadName+'</div>':'')
     +'<div style="font-size:20px;font-weight:800;color:#fff;line-height:1.2;margin-bottom:8px;word-break:break-word;">'+progName.split(' ').map(function(w){return w.charAt(0).toUpperCase()+w.slice(1);}).join(' ')+'</div>'
     +'<div style="display:flex;flex-wrap:wrap;align-items:center;gap:5px">'
     +'<span style="display:inline-block;background:#00B140;color:#fff;border-radius:999px;padding:2px 10px;font-size:10px;font-weight:700">'+secLabel+'</span>'
@@ -4929,7 +4942,7 @@ function downloadSummary(sec){
     })():'')
 
     // NOTA LEGAL TÍTULO COSTO $0 (solo si está activo y aplica a la sección)
-    +(isTit0Active() && ['lic','mae','doc'].indexOf(realSec)>=0 && !isUNICA && !isUVE && !isUNAG ? (
+    +(isTit0Active() && ['lic','mae','doc'].indexOf(realSec)>=0 && !isUNICA && !isUVE && !isUNAG && !isCECIP ? (
       '<div style="margin:0 20px 10px;padding:10px 14px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:8px;">'
       +'<div style="font-size:11px;font-weight:700;color:#14532d;margin-bottom:4px;">🎓 Titulación Costo $0 — Exoneración de Pago por Titulación (EPPT)</div>'
       +'<div style="font-size:10px;color:#374151;line-height:1.6">'
