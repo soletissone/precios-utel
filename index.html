@@ -4126,6 +4126,7 @@ function rL(){
       g('lbi').innerHTML='<span>Incluye: Voxy, Asistencia, Platzi, 5% domiciliación</span>';
       g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
       renderRecursos('lic-recursos', progName, 'LIC');
+      var _gbUve=document.getElementById('tit0-global-banner'); if(_gbUve) _gbUve.style.display='none';
       g('lic-total').innerHTML=''; return;
     } else if(uName==='UNICA'||uName==='ARTE DIGITAL Y MULTIMEDIA'||uName==='MARKETING Y PUBLICIDAD'||uName==='MEDIOS DIGITALES'||uName==='COMUNICACIÓN CORPORATIVA'){
       var unicaMap={'hot':{p:[629,1470,1995,2810,2810,2810,2810,2810,2810,2810,2810,2810],pkg:'ESC.LIC.UNICA.PLATZI.'},
@@ -4144,11 +4145,13 @@ function rL(){
       g('li').innerHTML=NB['unico']+' <span class="badge b-mod">UNICA</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
       g('lic-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UNICA</div>';
       renderRecursos('lic-recursos', progName, 'LIC');
+      var _gbUnica=document.getElementById('tit0-global-banner'); if(_gbUnica) _gbUnica.style.display='none';
       g('lic-total').innerHTML=''; return;
     } else if(uName.indexOf('UNAG')>=0 || nivelRaw==='unag'){
       g('lb').innerHTML='<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--mu)">Programa UNAG — consultar precio con el área comercial</td></tr>';
       g('lbi').innerHTML='';g('li').innerHTML=NB['unico']+' <span class="badge b-mod">UNAG</span>';
       g('lic-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UNAG</div>';
+      var _gbUnag=document.getElementById('tit0-global-banner'); if(_gbUnag) _gbUnag.style.display='none';
       g('lic-total').innerHTML='';return;
     } else {
       g('lb').innerHTML='<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--mu)">Ver pestaña Pagos Únicos</td></tr>';
@@ -4158,6 +4161,7 @@ function rL(){
   }
 
   // Restaurar para programas normales
+  var _gbNorm=document.getElementById('tit0-global-banner'); if(_gbNorm) _gbNorm.style.display=isTit0Active()?'flex':'none';
   var _avs=g('alianza-variant-sel'); if(_avs) _avs.style.display='none';
   var _ljor=document.getElementById('ljor'); if(_ljor) _ljor.closest('.fg').style.display='';
   var _cb=g('lic-compl'); if(_cb) _cb.style.display='';
@@ -4258,6 +4262,7 @@ function rM(){
     g('mbi').innerHTML='<span style="font-size:12px;color:var(--mu)">Incluye: <strong>Voxy</strong></span>';
     g('mi').innerHTML=NB['unico']+' <span class="badge b-mod">UNAG</span> <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'MAE')+platziBtn(progName);
     g('mae-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales — Solo incluye Voxy</div>';
+    var _gbUnagMae=document.getElementById('tit0-global-banner'); if(_gbUnagMae) _gbUnagMae.style.display='none';
     g('mae-total').innerHTML='';return;
   }
   if(nivel==='unico'){
@@ -4276,6 +4281,8 @@ function rM(){
   var _maeProgEntry=null;
   for(var _mpi=0;_mpi<_maeProgs.length;_mpi++){if(_maeProgs[_mpi].p===progName){_maeProgEntry=_maeProgs[_mpi];break;}}
   renderExpSelectorMAE(_maeProgEntry||{});
+  var _gbMaeNorm=document.getElementById('tit0-global-banner');
+  if(_gbMaeNorm) _gbMaeNorm.style.display=(_maeProgEntry&&_maeProgEntry.ali===1)?'none':(isTit0Active()?'flex':'none');
   var expPriceMAE=SEL_EXP['mae']?(EXP_PRICES_MAE[SEL_EXP['mae']]||0):0;
   // ejeDiscount: cuando es ejecutiva (seseje) y Platzi está activo, descontar el Platzi que no incluye ejecutiva
   var ejeDiscountMAE=(SEL_EXP['mae']==='seseje' && isPlatziVisible())?-100:0;
