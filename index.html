@@ -4712,9 +4712,18 @@ function downloadSummary(sec){
   // Get table rows
   var tbodyId={lic:'lb',mae:'mb',ms:'sb',doc:'db',en:'en-tbody',hib:'hib-tbody',ali:'alib'}[sec];
   var tbody=g(tbodyId);
-  var tableHTML=tbody?'<table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px">'+
-    '<thead><tr style="background:#f0f1f4"><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">Mes</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">Cuota base</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">+ Accesorios</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">Total</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#06ba06">Dom. '+DOMICILIACION+'%</th></tr></thead>'+
-    '<tbody>'+tbody.innerHTML+'</tbody></table>':'';
+  var _dlDomActive=isDomActive()&&getEffectiveDom()>0;
+  var _dlDomPct=getEffectiveDom();
+  var _tbodyClone=tbody?tbody.cloneNode(true):null;
+  if(_tbodyClone&&!_dlDomActive){
+    _tbodyClone.querySelectorAll('tr').forEach(function(tr){
+      var tds=tr.querySelectorAll('td');
+      if(tds[4]) tds[4].textContent='—';
+    });
+  }
+  var tableHTML=_tbodyClone?'<table style="width:100%;border-collapse:collapse;font-size:13px;margin-bottom:16px">'+
+    '<thead><tr style="background:#f0f1f4"><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">Mes</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">Cuota base</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">+ Accesorios</th><th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#6b7280">Total</th>'+(_dlDomActive?'<th style="padding:8px 12px;text-align:left;font-size:11px;text-transform:uppercase;color:#06ba06">Con dom. '+_dlDomPct+'%</th>':'')+'</tr></thead>'+
+    '<tbody>'+_tbodyClone.innerHTML+'</tbody></table>':'';
 
   // Get total panel
   var totalEl=g(sec+'-total');
