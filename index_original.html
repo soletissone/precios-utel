@@ -4088,6 +4088,7 @@ function applyPromoFlash(progName){
     for(var i=0;i<leadSel.options.length;i++){
       leadSel.options[i].disabled = false;
     }
+    if(leadSel.value==='rmkt60') leadSel.value='hot';
     if(banner) banner.style.display='none';
   }
 }
