@@ -535,6 +535,10 @@ Si pudieras sumarle una habilidad a tu perfil hoy mismo, ¿qué elegirías?</div
       <span style="font-size:18px">🎓</span>
       <span>PROMO ACTIVA: Titulación Costo $0 — los chips de Titulación se muestran sin costo</span>
     </div>
+    <div id="dom10-global-banner" style="display:none;align-items:center;gap:10px;background:linear-gradient(135deg,#b45309,#92400e);color:#fff;padding:10px 20px;font-size:13px;font-weight:700;border-bottom:2px solid #d97706">
+      <span style="font-size:18px">💳</span>
+      <span>PROMO ACTIVA: Domiciliación 10% — descuento aplicado en todos los precios</span>
+    </div>
     <div class="tabs">
       <div class="tab active" onclick="sw('lic')">Licenciaturas</div>
       <div class="tab" onclick="sw('mae')">Maestrías</div>
@@ -5147,6 +5151,8 @@ function setSELInicio(sec, val){
 function updateDomIndicator(){
   var badge=document.getElementById('dom-pct-header');
   if(badge) badge.textContent=getEffectiveDom();
+  var dom10=document.getElementById('dom10-global-banner');
+  if(dom10) dom10.style.display=(getEffectiveDom()===10)?'flex':'none';
 }
 function init(){
   loadConfig();
