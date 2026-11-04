@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"><!-- redeploy -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculadora de Precios â€” UTEL</title>
+<title>Calculadora de Precios — UTEL</title>
 <style>
   :root {
     --bg: #f0f4f8;
@@ -152,7 +152,7 @@
   <p class="sub">Ingresá tu contraseña para continuar.</p>
   <label for="pwd">Contraseña</label>
   <div class="input-wrap">
-    <input type="password" id="pwd" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" autofocus autocomplete="current-password">
+    <input type="password" id="pwd" placeholder="••••••••••" autofocus autocomplete="current-password">
     <button class="eye" id="eyeBtn" type="button" title="Mostrar/ocultar">ðŸ‘</button>
   </div>
   <button class="btn" id="loginBtn">
@@ -183,7 +183,7 @@ async function doLogin() {
   if (!pwd) return;
 
   $('loginBtn').disabled = true;
-  $('btnTxt').textContent = 'Descifrandoâ€¦';
+  $('btnTxt').textContent = 'Descifrando…';
   $('spinner').style.display = 'inline-block';
   $('errMsg').style.display = 'none';
   $('prog').style.display = 'block';
