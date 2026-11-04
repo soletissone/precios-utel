@@ -145,12 +145,12 @@
     <div class="logo-icon">UTEL</div>
     <div class="logo-text">
       <strong>Propuestas Comerciales</strong>
-      <span>MÃ©xico</span>
+      <span>México</span>
     </div>
   </div>
   <h1>Acceso restringido</h1>
-  <p class="sub">IngresÃ¡ tu contraseÃ±a para continuar.</p>
-  <label for="pwd">ContraseÃ±a</label>
+  <p class="sub">Ingresá tu contraseña para continuar.</p>
+  <label for="pwd">Contraseña</label>
   <div class="input-wrap">
     <input type="password" id="pwd" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" autofocus autocomplete="current-password">
     <button class="eye" id="eyeBtn" type="button" title="Mostrar/ocultar">ðŸ‘</button>
@@ -159,12 +159,12 @@
     <span id="btnTxt">Ingresar</span>
     <span class="spinner" id="spinner"></span>
   </button>
-  <div class="err-msg" id="errMsg">ContraseÃ±a incorrecta. IntentÃ¡ de nuevo.</div>
+  <div class="err-msg" id="errMsg">Contraseña incorrecta. Intentá de nuevo.</div>
   <div class="progress" id="prog"><div class="progress-bar" id="progBar"></div></div>
 </div>
 
 <script>
-// ParÃ¡metros de cifrado (deben coincidir con encrypt_calc.py)
+// Parámetros de cifrado (deben coincidir con encrypt_calc.py)
 const ITERATIONS = 200000;
 const BLOB_PATH  = 'app.enc';
 
@@ -239,7 +239,7 @@ async function doLogin() {
     $('progBar').style.width = '0%';
     $('errMsg').style.display = 'block';
     if (err.message !== 'WRONG_PASSWORD') {
-      $('errMsg').textContent = 'Error al cargar la aplicaciÃ³n. RecargÃ¡ la pÃ¡gina.';
+      $('errMsg').textContent = 'Error al cargar la aplicación. Recargá la página.';
       console.error(err);
     }
     $('pwd').select();
