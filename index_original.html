@@ -40,7 +40,7 @@ body{background:var(--bg);color:var(--tx);font-family:'Segoe UI',system-ui,sans-
 
 /* APP */
 #app{display:none}
-header{background:#0d2b0d;border-bottom:1px solid var(--bd);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;min-height:unset}
+header{background:#0d2b0d;border-bottom:1px solid var(--bd);padding:10px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;min-height:160px;position:relative}
 .logo{font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--ac);text-transform:uppercase}
 .ht{font-size:14px;font-weight:500}
 .out{font-size:12px;color:#fff;background:rgba(0,0,0,.35);border:1px solid rgba(255,255,255,.4);border-radius:6px;padding:5px 12px;cursor:pointer}
@@ -524,7 +524,7 @@ Si pudieras sumarle una habilidad a tu perfil hoy mismo, ¿qué elegirías?</div
 
   <header>
     <img src="assets/utel-white.png" alt="UTEL" style="height:80px;object-fit:contain">
-    <img src="assets/buenfin-mipymes.png" alt="Buen Fin MIPYMES" style="height:120px;object-fit:contain">
+    <img src="assets/buenfin-mipymes.png" alt="Buen Fin" style="height:160px;object-fit:contain;position:absolute;left:50%;transform:translateX(-50%)">
     <div style="display:flex;align-items:center;gap:8px">
       <span style="font-size:11px;background:rgba(255,255,255,.15);color:#fff;padding:4px 10px;border-radius:999px;font-weight:600" id="dom-indicator">Domiciliación <span id="dom-pct-header">5</span>%</span>
       <button class="out" onclick="logout()">Salir</button>
