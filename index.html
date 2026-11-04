@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
+<meta charset="UTF-8"><!-- redeploy -->
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Calculadora de Precios — UTEL</title>
+<title>Calculadora de Precios â€” UTEL</title>
 <style>
   :root {
     --bg: #f0f4f8;
@@ -145,26 +145,26 @@
     <div class="logo-icon">UTEL</div>
     <div class="logo-text">
       <strong>Propuestas Comerciales</strong>
-      <span>México</span>
+      <span>MÃ©xico</span>
     </div>
   </div>
   <h1>Acceso restringido</h1>
-  <p class="sub">Ingresá tu contraseña para continuar.</p>
-  <label for="pwd">Contraseña</label>
+  <p class="sub">IngresÃ¡ tu contraseÃ±a para continuar.</p>
+  <label for="pwd">ContraseÃ±a</label>
   <div class="input-wrap">
-    <input type="password" id="pwd" placeholder="••••••••••" autofocus autocomplete="current-password">
-    <button class="eye" id="eyeBtn" type="button" title="Mostrar/ocultar">👁</button>
+    <input type="password" id="pwd" placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" autofocus autocomplete="current-password">
+    <button class="eye" id="eyeBtn" type="button" title="Mostrar/ocultar">ðŸ‘</button>
   </div>
   <button class="btn" id="loginBtn">
     <span id="btnTxt">Ingresar</span>
     <span class="spinner" id="spinner"></span>
   </button>
-  <div class="err-msg" id="errMsg">Contraseña incorrecta. Intentá de nuevo.</div>
+  <div class="err-msg" id="errMsg">ContraseÃ±a incorrecta. IntentÃ¡ de nuevo.</div>
   <div class="progress" id="prog"><div class="progress-bar" id="progBar"></div></div>
 </div>
 
 <script>
-// Parámetros de cifrado (deben coincidir con encrypt_calc.py)
+// ParÃ¡metros de cifrado (deben coincidir con encrypt_calc.py)
 const ITERATIONS = 200000;
 const BLOB_PATH  = 'app.enc';
 
@@ -183,7 +183,7 @@ async function doLogin() {
   if (!pwd) return;
 
   $('loginBtn').disabled = true;
-  $('btnTxt').textContent = 'Descifrando…';
+  $('btnTxt').textContent = 'Descifrandoâ€¦';
   $('spinner').style.display = 'inline-block';
   $('errMsg').style.display = 'none';
   $('prog').style.display = 'block';
@@ -196,7 +196,7 @@ async function doLogin() {
     const b64 = await resp.text();
     $('progBar').style.width = '40%';
 
-    // Decodificar base64 → ArrayBuffer
+    // Decodificar base64 â†’ ArrayBuffer
     const raw    = Uint8Array.from(atob(b64.trim()), c => c.charCodeAt(0));
     const salt   = raw.slice(0, 16);
     const iv     = raw.slice(16, 28);
@@ -239,7 +239,7 @@ async function doLogin() {
     $('progBar').style.width = '0%';
     $('errMsg').style.display = 'block';
     if (err.message !== 'WRONG_PASSWORD') {
-      $('errMsg').textContent = 'Error al cargar la aplicación. Recargá la página.';
+      $('errMsg').textContent = 'Error al cargar la aplicaciÃ³n. RecargÃ¡ la pÃ¡gina.';
       console.error(err);
     }
     $('pwd').select();
