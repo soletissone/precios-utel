@@ -2602,6 +2602,13 @@ function renderTable(tbodyId, prices, pkg, esc, accTotal, accTotal12, domStartId
     }
   }
 
+  // Omitir filas donde el precio base es menor que el de mes 3 (nunca mostrar bajas de precio)
+  var p3base=prices[2]||0;
+  rows=rows.filter(function(row,ri){
+    if(ri<2) return true; // mes 1 y 2 siempre se muestran
+    return row.p>=p3base;
+  });
+
   rows.forEach(function(row){
     var total=row.p+row.acc;
     var domVal=row.dom?fmt(Math.round(total*(1-pct))):'—';
