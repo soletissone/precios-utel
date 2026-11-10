@@ -4022,7 +4022,7 @@ function rHIB(){
       _hibLeadSel.options[_fi].disabled=_hibFlash&&(_hibLeadSel.options[_fi].value!=='rmkt60');
     }
     if(_hibFlash){ _hibLeadSel.value='rmkt60'; if(_hibFlashBanner) _hibFlashBanner.style.display='flex'; }
-    else{ for(var _fi2=0;_fi2<_hibLeadSel.options.length;_fi2++) _hibLeadSel.options[_fi2].disabled=false; if(_hibLeadSel.value==='rmkt60') _hibLeadSel.value='hot'; if(_hibFlashBanner) _hibFlashBanner.style.display='none'; }
+    else{ for(var _fi2=0;_fi2<_hibLeadSel.options.length;_fi2++) _hibLeadSel.options[_fi2].disabled=false; if(_hibFlashBanner) _hibFlashBanner.style.display='none'; }
   } else {
     if(_hibFlashBanner) _hibFlashBanner.style.display='none';
   }
@@ -4132,7 +4132,6 @@ function applyPromoFlash(progName){
     for(var i=0;i<leadSel.options.length;i++){
       leadSel.options[i].disabled = false;
     }
-    if(leadSel.value==='rmkt60') leadSel.value='hot';
     if(banner) banner.style.display='none';
   }
 }
