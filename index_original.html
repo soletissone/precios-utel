@@ -3098,7 +3098,7 @@ var ACCS = {
     included: [
       {id:'voxy',   name:'Inglés Voxy'},
       {id:'welbe',  name:'Asistencia Medica Integral'},
-      {id:'platzi', name:'Platzi', price:100},
+      {id:'platzi', name:'Platzi'},
       {id:'asist',  name:'Asistencia Plus'}
     ],
     optional: [
@@ -4356,11 +4356,9 @@ function rM(){
   // ejeDiscount: cuando es ejecutiva (seseje) y Platzi está activo, descontar el Platzi que no incluye ejecutiva
   var ejeDiscountMAE=(SEL_EXP['mae']==='seseje' && isPlatziVisible())?-100:0;
   // Si Platzi está deshabilitado, revertir a precios con Coursera: mes 3+ +120, mes 1-2 −100
-  var platziOff=!isPlatziVisible();
-  var platziAdd=(isPlatziVisible() && (progKey==='mae_online'||progKey==='arq_software'))?100:0;
   var maeExpPrices=e.p.map(function(v,i){
-    if(i>=2) return v+expPriceMAE+ejeDiscountMAE+(platziOff?120:0)+platziAdd;
-    // mes 1-2: Platzi no suma en los primeros 2 pagos (ninguna maestría)
+    if(i>=2) return v+expPriceMAE+ejeDiscountMAE;
+    // mes 1-2: precio almacenado con +100 de offset, mostrar sin ese offset
     return v-100;
   });
   var isHibridMAE=(SEL_EXP['mae']==='hibrid');
