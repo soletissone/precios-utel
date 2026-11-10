@@ -403,7 +403,7 @@ En UTEL contamos con un programa de recompensas por referir personas. Esto signi
 
 De las personas que conoces, ¿tienes a alguien en mente que también tenga interés en seguir estudiando o crecer profesionalmente?</div>
       </div>
-      <div class="script-card">
+      <div class="script-card" id="card-plat-main">
         <div class="script-card-head">
           <div class="script-card-title"><span class="script-badge sb-platzi">PLATZI</span></div>
           <button class="copy-btn" id="copy-plat" onclick="copyScript('plat')">
@@ -452,7 +452,7 @@ De las personas que conoces, ¿tienes a alguien en mente que también tenga inte
             Inscribir en Referidos
           </button>
         </div>
-        <div class="script-card">
+        <div class="script-card" id="card-plat-speech">
           <div class="script-card-head">
             <div class="script-card-title"><span class="script-badge sb-platzi">SPEECH PLATZI</span></div>
             <button class="copy-btn" id="copy-plat2" onclick="copyScript2('plat')">
@@ -1513,6 +1513,27 @@ function isTit0Active(){
 var PLATZI_PREVIEW = true;    // habilitado
 var PLATZI_LAUNCH  = new Date('2026-06-01'); // activo
 function isPlatziVisible(){ return PLATZI_PREVIEW || new Date() >= PLATZI_LAUNCH; }
+
+// ─── FLAGS POR PAQUETE ────────────────
+// false = feature NO disponible para ese pkg; ausente = sí disponible
+var PKG_FLAGS = {
+  'ESC.LIC.UNICA.PLATZI.':  {dom:0, titulo0:false, asist:false},
+  'ESC2.LIC.UNICA.PLATZI.': {dom:0, titulo0:false, asist:false},
+  'ESC3.LIC.UNICA.PLATZI.': {dom:0, titulo0:false, asist:false},
+  'ESC2.LIC.UVE.PLATZI.':   {titulo0:false, asist:false},
+  'ESC3.LIC.UVE.PLATZI.':   {titulo0:false, asist:false},
+  'MA.UNAG.ALTA.2.15.21':   {dom:0, platzi:false, titulo0:false, asist:false},
+  'MA.UNAG.BASICO.2.15.21': {dom:0, platzi:false, titulo0:false, asist:false}
+};
+var _activePkgFlags = {};
+function setActivePkg(pkg){
+  _activePkgFlags = PKG_FLAGS[pkg] || {};
+  var hasPlatzi = _activePkgFlags.platzi !== false;
+  var cm = document.getElementById('card-plat-main');
+  var cs = document.getElementById('card-plat-speech');
+  if(cm) cm.style.display = hasPlatzi ? '' : 'none';
+  if(cs) cs.style.display = hasPlatzi ? '' : 'none';
+}
 // ─────────────────────────────────────
 
 // JSONBin config
@@ -1826,6 +1847,7 @@ var PLATZI_RUTA_MAP={
 };
 function platziBtn(progName){
   if(!isPlatziVisible()) return '';
+  if(_activePkgFlags && _activePkgFlags.platzi === false) return '';
   var escapedName=(progName||'').replace(/\\/g,'\\\\').replace(/'/g,"\\'");
   return '<button class="plat-btn" onclick="showPlatziCard(event,\''+escapedName+'\')" title="Ruta Platzi"><svg width="13" height="13" viewBox="0 0 32 32" fill="currentColor"><path d="M4 16L16 4l4 4-8 8 8 8-4 4z"/><path d="M14 16l6-6 4 4-2 2-4-4-4 4 2 2z" opacity=".5"/></svg> Platzi</button>';
 }
@@ -3709,6 +3731,13 @@ function renderAccs(panelId, sec, isOnline){
     // Ejecutiva no incluye Platzi — ocultar chip (precio ya ajustado vía ejeDiscountMAE)
     incList = incList.filter(function(x){ return x.id!=='platzi'; });
   }
+  // Restricciones por programa (PKG_FLAGS)
+  if(_activePkgFlags && _activePkgFlags.platzi === false){
+    incList = incList.filter(function(x){ return x.id !== 'platzi'; });
+  }
+  if(_activePkgFlags && _activePkgFlags.asist === false){
+    incList = incList.filter(function(x){ return x.id !== 'asist' && x.id !== 'welbe'; });
+  }
   html += '<div class="acc-group">';
   html += '<div class="acc-group-label">Incluido en el paquete</div>';
   html += '<div class="acc-chips">';
@@ -4154,8 +4183,9 @@ function rL(){
       var _cbUve=g('lic-compl'); if(_cbUve) _cbUve.style.display='none';
       var ljorDivU=document.getElementById('ljor'); if(ljorDivU) ljorDivU.closest('.fg').style.display='none';
       var selDivU=g('alianza-variant-sel'); if(selDivU) selDivU.style.display='none';
+      setActivePkg(uveV.pkg);
       renderTable('lb',uveV.p,uveV.pkg,'—',0,0,3);
-      g('lbi').innerHTML='<span>Incluye: Voxy, Asistencia, Platzi, 5% domiciliación</span>';
+      g('lbi').innerHTML='<span>Incluye: Voxy, Platzi, 5% domiciliación</span>';
       g('li').innerHTML=NB['unico']+' <span class="badge b-mod">'+progName.charAt(0)+progName.slice(1).toLowerCase()+'</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
       renderRecursos('lic-recursos', progName, 'LIC');
       var _gbUve=document.getElementById('tit0-global-banner'); if(_gbUve) _gbUve.style.display='none';
@@ -4166,20 +4196,22 @@ function rL(){
                     'rmkt60':{p:[629,1470,1995,2449,2449,2449,2449,2449,2449,2449,2449,2449],pkg:'ESC3.LIC.UNICA.PLATZI.'}};
       var unicaLead=g('llead').value;
       var unicaV=unicaMap[unicaLead]||unicaMap['hot'];
-      var _domOrig=DOMICILIACION; DOMICILIACION=5;
+      var _domOrig=DOMICILIACION; DOMICILIACION=0;
       var _tit0Orig=TITULO_COSTO_0; TITULO_COSTO_0=false;
       var _complBanner=g('lic-compl'); if(_complBanner) _complBanner.style.display='none';
       var selDiv2=g('alianza-variant-sel'); if(selDiv2) selDiv2.style.display='none';
       var ljorDiv2=document.getElementById('ljor'); if(ljorDiv2) ljorDiv2.closest('.fg').style.display='none';
+      setActivePkg(unicaV.pkg);
       renderTable('lb',unicaV.p,unicaV.pkg,'—',0,0,3);
       DOMICILIACION=_domOrig; TITULO_COSTO_0=_tit0Orig;
-      g('lbi').innerHTML='<span>Incluye: Voxy, Asistencia, Platzi, 5% domiciliación</span>';
+      g('lbi').innerHTML='<span>Incluye: Voxy, Platzi</span>';
       g('li').innerHTML=NB['unico']+' <span class="badge b-mod">UNICA</span>'+codBadge(progName)+fichaBadge(progName,'LIC')+'<span class="dur-badge">⏱ 44 meses (3 años 8 meses)</span>';
       g('lic-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UNICA</div>';
       renderRecursos('lic-recursos', progName, 'LIC');
       var _gbUnica=document.getElementById('tit0-global-banner'); if(_gbUnica) _gbUnica.style.display='none';
       g('lic-total').innerHTML=''; return;
     } else if(uName.indexOf('UNAG')>=0 || nivelRaw==='unag'){
+      setActivePkg('MA.UNAG.BASICO.2.15.21');
       g('lb').innerHTML='<tr><td colspan="6" style="text-align:center;padding:20px;color:var(--mu)">Programa UNAG — consultar precio con el área comercial</td></tr>';
       g('lbi').innerHTML='';g('li').innerHTML=NB['unico']+' <span class="badge b-mod">UNAG</span>';
       g('lic-acc').innerHTML='<div style="padding:10px;color:var(--mu);font-size:12px;background:var(--sf);border:1px solid var(--bd);border-radius:8px">Sin accesorios adicionales para UNAG</div>';
@@ -4193,7 +4225,8 @@ function rL(){
   }
 
   // Restaurar para programas normales
-  var _gbNorm=document.getElementById('tit0-global-banner'); if(_gbNorm) _gbNorm.style.display=isTit0Active()?'flex':'none';
+  var _pkgTit0=(_activePkgFlags && _activePkgFlags.titulo0===false);
+  var _gbNorm=document.getElementById('tit0-global-banner'); if(_gbNorm) _gbNorm.style.display=(!_pkgTit0 && isTit0Active())?'flex':'none';
   var _avs=g('alianza-variant-sel'); if(_avs) _avs.style.display='none';
   var _ljor=document.getElementById('ljor'); if(_ljor) _ljor.closest('.fg').style.display='';
   var _cb=g('lic-compl'); if(_cb) _cb.style.display='';
@@ -4222,6 +4255,7 @@ function rL(){
   }
   var titLic=SEL['lic']&&(SEL['lic']['tit']||SEL['lic']['tit50']);
   if(titLic&&TITUL_ESC_MAP[licEscFinal]) licEscFinal=TITUL_ESC_MAP[licEscFinal];
+  setActivePkg(e.pkg);
   renderTable('lb',expPrices,e.pkg,licEscFinal,acc,acc12_lic);
   renderBeca('lbi',Math.max.apply(null,expPrices),e.pkg);
   // Programas con pricing especial muestran solo el nombre, sin badge de nivel
@@ -4284,6 +4318,7 @@ function rM(){
   else progKey='mae_online';
 
   if(nivelRaw==='unag'){
+    setActivePkg('MA.UNAG.BASICO.2.15.21');
     var _domOrigUnagMae=DOMICILIACION; DOMICILIACION=0;
     renderTable('mb',[3020,3020,3020,3020,3020,3020,3020,3020,3020,3020,3020,3020],'MA.UNAG.BASICO.2.15.21','—',0,0);
     DOMICILIACION=_domOrigUnagMae;
@@ -4314,7 +4349,8 @@ function rM(){
   for(var _mpi=0;_mpi<_maeProgs.length;_mpi++){if(_maeProgs[_mpi].p===progName){_maeProgEntry=_maeProgs[_mpi];break;}}
   renderExpSelectorMAE(_maeProgEntry||{});
   var _gbMaeNorm=document.getElementById('tit0-global-banner');
-  if(_gbMaeNorm) _gbMaeNorm.style.display=(_maeProgEntry&&_maeProgEntry.ali===1)?'none':(isTit0Active()?'flex':'none');
+  var _maeTit0Block=(_activePkgFlags && _activePkgFlags.titulo0===false);
+  if(_gbMaeNorm) _gbMaeNorm.style.display=(_maeTit0Block||(_maeProgEntry&&_maeProgEntry.ali===1))?'none':(isTit0Active()?'flex':'none');
   var expPriceMAE=SEL_EXP['mae']?(EXP_PRICES_MAE[SEL_EXP['mae']]||0):0;
   // ejeDiscount: cuando es ejecutiva (seseje) y Platzi está activo, descontar el Platzi que no incluye ejecutiva
   var ejeDiscountMAE=(SEL_EXP['mae']==='seseje' && isPlatziVisible())?-100:0;
@@ -4332,6 +4368,7 @@ function rM(){
   var titMae=SEL['mae']&&(SEL['mae']['tit']||SEL['mae']['tit50']);
   if(titMae&&TITUL_ESC_MAP[maeEscFinal]) maeEscFinal=TITUL_ESC_MAP[maeEscFinal];
   var _mcbR=g('mae-compl'); if(_mcbR) _mcbR.style.display='';
+  setActivePkg(maePkgFinal);
   renderTable('mb',maeExpPrices,maePkgFinal,maeEscFinal,acc,acc12_mae);
   renderBeca('mbi',Math.max.apply(null,maeExpPrices),e.pkg);
   var nuevoBadgeM=isNuevo(progName)?'<span class="b-new">NUEVO</span> ':'';
