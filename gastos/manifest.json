@@ -1,0 +1,13 @@
+{
+  "name": "Rendición de gastos UTEL",
+  "short_name": "Gastos UTEL",
+  "start_url": "./?app=1",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#06B706",
+  "theme_color": "#06B706",
+  "icons": [
+    { "src": "icono-256.png", "sizes": "256x256", "type": "image/png", "purpose": "any maskable" },
+    { "src": "icono-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
