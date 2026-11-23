@@ -4368,8 +4368,10 @@ function rM(){
     return v-100;
   });
   var isHibridMAE=(SEL_EXP['mae']==='hibrid');
-  var maePkgFinal=(isHibridMAE&&HIB_PKG_MAP[e.pkg])?HIB_PKG_MAP[e.pkg]:e.pkg;
-  var maeEscFinal=(isHibridMAE&&HIB_ESC_MAP[e.pkg])?HIB_ESC_MAP[e.pkg]:e.esc;
+  var isSesejeMAE=(SEL_EXP['mae']==='seseje');
+  var ejeMapMAE=(isSesejeMAE&&EJE_PKG_MAP[e.pkg])?EJE_PKG_MAP[e.pkg]:null;
+  var maePkgFinal=ejeMapMAE?ejeMapMAE.pkg:((isHibridMAE&&HIB_PKG_MAP[e.pkg])?HIB_PKG_MAP[e.pkg]:e.pkg);
+  var maeEscFinal=ejeMapMAE?ejeMapMAE.esc:((isHibridMAE&&HIB_ESC_MAP[e.pkg])?HIB_ESC_MAP[e.pkg]:e.esc);
   var titMae=SEL['mae']&&(SEL['mae']['tit']||SEL['mae']['tit50']);
   if(titMae&&TITUL_ESC_MAP[maeEscFinal]) maeEscFinal=TITUL_ESC_MAP[maeEscFinal];
   var _mcbR=g('mae-compl'); if(_mcbR) _mcbR.style.display='';
@@ -5437,14 +5439,14 @@ var EJE_PKG_MAP = {
   'P10.LI.INT.':{'pkg':'P10.LIEJE.INT.','esc':'P79.INT2M'},
   'P16.LI.INT.':{'pkg':'P13.LIEJE.INT.','esc':''},
   'P13.LI.INT.':{'pkg':'P13.LIEJE.INT.','esc':''},
-  'P6.MA.' :{'pkg':'P13.MAEJE.' ,'esc':'P25.MAE2M'},
-  'P8.MA.' :{'pkg':'P15.MAEJE.' ,'esc':'P25.MAE2M'},
-  'P10.MA.':{'pkg':'P17.MAEJE.' ,'esc':'P25.MAE2M'},
-  'P12.MA.':{'pkg':'P19.MAEJE.','esc':'P25.MAE2M'},
-  'P7.MA.' :{'pkg':'P14.MAEJE.' ,'esc':'P25.MAE2M'},
-  'P9.MA.' :{'pkg':'P16.MAEJE.' ,'esc':'P25.MAE2M'},
-  'P11.MA.':{'pkg':'P18.MAEJE.','esc':'P25.MAE2M'},
-  'P13.MA.':{'pkg':'P20.MAEJE.','esc':'P25.MAE2M'}
+  'P6.MA.' :{'pkg':'P13.MAEJE.' ,'esc':'P37.MAE2M'},
+  'P8.MA.' :{'pkg':'P15.MAEJE.' ,'esc':'P37.MAE2M'},
+  'P10.MA.':{'pkg':'P17.MAEJE.' ,'esc':'P37.MAE2M'},
+  'P12.MA.':{'pkg':'P19.MAEJE.','esc':'P37.MAE2M'},
+  'P7.MA.' :{'pkg':'P14.MAEJE.' ,'esc':'P37.MAE2M'},
+  'P9.MA.' :{'pkg':'P16.MAEJE.' ,'esc':'P37.MAE2M'},
+  'P11.MA.':{'pkg':'P18.MAEJE.','esc':'P37.MAE2M'},
+  'P13.MA.':{'pkg':'P20.MAEJE.','esc':'P37.MAE2M'}
 };
 
 var EN_PROGS = {
