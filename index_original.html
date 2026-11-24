@@ -4115,6 +4115,19 @@ function isPromoFlash(progName){
   if(!progName) return false;
   var activa = !PROMO_FLASH_FIN || new Date() <= PROMO_FLASH_FIN;
   if(!activa) return false;
+  // A partir del 25/11/2026, promo activa para todos salvo Claustro y alianzas
+  if(new Date() >= new Date(2026,10,25)){
+    if(CLAUSTRO_PROGS && CLAUSTRO_PROGS.indexOf(progName)>=0) return false;
+    var _licCat=CATALOG['LICENCIATURA']||[];
+    for(var _ci=0;_ci<_licCat.length;_ci++){
+      if(_licCat[_ci].p===progName){
+        var _v=_licCat[_ci].v;
+        if(_v==='uve'||_v==='unica'||_v==='unag'||_licCat[_ci].ali===1) return false;
+        break;
+      }
+    }
+    return true;
+  }
   return PROMO_FLASH_PROGS.some(function(p){ return p.toLowerCase()===progName.toLowerCase(); });
 }
 
@@ -5209,6 +5222,12 @@ function updateDomIndicator(){
   if(dom10) dom10.style.display=(pkgAllowsDom && getEffectiveDom()===10)?'flex':'none';
 }
 function init(){
+  // Calculadora deshabilitada 25–30 nov 2026
+  var _now=new Date(), _dStart=new Date(2026,10,25), _dEnd=new Date(2026,10,30,23,59,59);
+  if(_now>=_dStart && _now<=_dEnd){
+    document.body.innerHTML='<div style="display:flex;align-items:center;justify-content:center;min-height:100vh;background:#f8fafc;font-family:system-ui,sans-serif"><div style="text-align:center;padding:40px 32px;max-width:420px"><div style="font-size:52px;margin-bottom:16px">🛠️</div><h2 style="color:#1e293b;margin:0 0 12px;font-size:22px">Calculadora en actualización</h2><p style="color:#64748b;margin:0;line-height:1.5">Estamos actualizando precios y promociones.<br>Volvemos el <strong>1° de diciembre</strong> con todo listo.</p></div></div>';
+    return;
+  }
   loadConfig();
   updateTituloCosto0();
   updateDomIndicator();
