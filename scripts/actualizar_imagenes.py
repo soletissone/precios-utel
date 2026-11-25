@@ -85,8 +85,8 @@ def main():
     print(f"\nOK {len(results)} recursos guardados")
     print(f"  Carpetas: {cats}")
 
-    # Actualizar _galData embebido en index.html
-    html_path = os.path.join(os.path.dirname(OUTPUT_PATH), "index.html")
+    # Actualizar _galData embebido en index_original.html
+    html_path = os.path.join(os.path.dirname(OUTPUT_PATH), "index_original.html")
     if os.path.exists(html_path):
         print(f"\nActualizando _galData en index.html...")
         with open(html_path, "r", encoding="utf-8") as f:
