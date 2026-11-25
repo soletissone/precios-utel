@@ -5236,6 +5236,16 @@ function updateDomIndicator(){
   if(dom10) dom10.style.display=(pkgAllowsDom && getEffectiveDom()===10)?'flex':'none';
 }
 function init(){
+  // Deshabilitar Jornada Completa en todos los selectores 25–30 nov 2026
+  (function(){
+    var _n=new Date(),_s=new Date(2026,10,25),_e=new Date(2026,10,30,23,59,59);
+    if(_n<_s||_n>_e) return;
+    document.querySelectorAll('option[value="completa"]').forEach(function(opt){
+      opt.disabled=true;
+      var sel=opt.parentElement;
+      if(sel&&sel.value==='completa') sel.value='intensiva';
+    });
+  })();
   loadConfig();
   updateTituloCosto0();
   updateDomIndicator();
